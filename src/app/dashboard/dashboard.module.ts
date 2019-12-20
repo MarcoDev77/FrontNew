@@ -6,13 +6,15 @@ import {MainComponent} from './_main/main.component';
 import {SharedModule} from '../shared/shared.module';
 import { MediaFiliacionComponent } from './media-filiacion/media-filiacion.component';
 import { IngresoComponent } from '../ingreso/ingreso.component';
+import {DactiloscapiaComponent} from '../dactiloscapia/dactiloscapia.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
     MediaFiliacionComponent,
-    IngresoComponent
+    IngresoComponent,
+    DactiloscapiaComponent
   ],
   imports: [
     CommonModule,

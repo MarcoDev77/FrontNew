@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './_main/main.component';
 import { MediaFiliacionComponent } from '@dashboard/media-filiacion/media-filiacion.component';
 import { IngresoComponent } from '../ingreso/ingreso.component';
+import { DactiloscapiaComponent } from "../dactiloscapia/dactiloscapia.component";
 
 const routes: Routes = [
   {
@@ -11,7 +12,12 @@ const routes: Routes = [
       {
         path: 'mediafiliacion', component: MediaFiliacionComponent,
       },
-      { path: 'ingreso', component: IngresoComponent }
+      {
+        path: 'ingreso', component: IngresoComponent
+      },
+      {
+        path: 'dactiloscopia', component: DactiloscapiaComponent,
+      }
     ]
   },
 ];
