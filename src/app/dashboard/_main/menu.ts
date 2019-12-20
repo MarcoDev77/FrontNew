@@ -6,7 +6,7 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fa fa-arrow-circle-o-right'
   },
   {
-    path: '/dashboard/expediente',
+    path: '/dashboard/dactiloscopia',
     title: 'DACTILOSCOPIAS',
     type: 'link',
     icontype: ''
