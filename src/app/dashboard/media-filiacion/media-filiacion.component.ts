@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-media-filiacion',
@@ -7,9 +7,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MediaFiliacionComponent implements OnInit {
 
-  constructor() { }
+  complexion: any;
+  estatura: any;
+  peso: any;
+  tez: any;
+
+  constructor() {
+    this.complexion = '';
+    this.estatura = '';
+    this.peso = '';
+    this.tez = '';
+  }
 
   ngOnInit() {
   }
 
+  getComplexion(id) {
+    switch (id) {
+      case '1':
+        return 'Delgada';
+        break;
+      case '2':
+        return 'Regular';
+        break;
+      case '3':
+        return 'Atlética';
+        break;
+      case '4':
+        return 'Robusta';
+        break;
+      case '5':
+        return 'Obesa';
+        break;
+    }
+  }
 }

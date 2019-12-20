@@ -1,1 +1,76 @@
-<p>media-filiacion works!</p>
+<div class="row">
+  <div class="offset-md-1 col-8 col-md-10">
+    <div style="padding: 20px" class="card shadows">
+
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="d-inline-flex w-100 mb-5">
+            <label style="min-width: 5rem;" class="mr-3 mt-4">Estatura:</label>
+            <img style="height: 2.5rem; width: 1.3rem;" class="icons mt-auto ml-2" src="assets/img/img-thin.png"/>
+            <div class="form-group text-center w-100 mx-2 mt-2 mb-0">
+              <label class="rangeValue">{{estaturam.value + ' mts'}}</label>
+              <input class="slider" type="range" [(ngModel)]="estatura" #estaturam  min="1.4" max="2" step="0.01" name="estatura"/>
+            </div>
+            <img class="icons" src="assets/img/img-thin.png"/>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="d-inline-flex w-100 mb-5">
+            <label style="min-width: 5rem;" class="mr-3 mt-4">Complexión:</label>
+            <img class="icons" src="assets/img/img-thin.png"/>
+            <div class="form-group text-center w-100 mx-2 mt-2 mb-0">
+              <label class="rangeValue">{{getComplexion(complexionm.value)}}</label>
+              <input class="slider" type="range" [(ngModel)]="complexion" #complexionm min="1" max="5" step="1" name="complexion"/>
+            </div>
+            <img class="icons" src="assets/img/img-fat.png"/>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="d-inline-flex w-100 mb-5">
+            <label style="min-width: 5rem;" class="mr-3 mt-4">Peso:</label>
+            <img class="icons" src="assets/img/img-thin.png"/>
+            <div class="form-group text-center w-100 mx-2 mt-2 mb-0">
+              <label class="rangeValue">{{pesom.value + ' kg'}}</label>
+              <input class="slider" type="range" [(ngModel)]="peso" #pesom min="40" max="120" step="0.1" name="peso"/>
+            </div>
+            <img class="icons" src="assets/img/img-fat.png"/>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="d-inline-flex w-100 mb-5">
+            <label style="min-width: 6.5rem;" class="mr-3 mt-4">Color de piel:</label>
+
+            <div class="color-picker pt-3 pl-4">
+              <input type="radio" name="albino" id="albino" value="1" [(ngModel)]="tez"/>
+              <label for="albino" ngbTooltip="Albino"><span class="albino"></span></label>
+
+              <input type="radio" name="blanco" id="blanco" value="2" [(ngModel)]="tez"/>
+              <label for="blanco" ngbTooltip="Blanco"><span class="blanco"></span></label>
+
+              <input type="radio" name="amarillo" id="amarillo" value="3" [(ngModel)]="tez"/>
+              <label for="amarillo" ngbTooltip="Amarillo"><span class="amarillo"></span></label>
+
+              <input type="radio" name="morenoClaro" id="morenoClaro" value="4" [(ngModel)]="tez"/>
+              <label for="morenoClaro" ngbTooltip="Moreno claro"><span class="morenoClaro"></span></label>
+
+              <input type="radio" name="moreno" id="moreno" value="5" [(ngModel)]="tez"/>
+              <label for="moreno" ngbTooltip="Moreno"><span class="moreno"></span></label>
+
+              <input type="radio" name="morenoOscuro" id="morenoOscuro" value="6" [(ngModel)]="tez"/>
+              <label for="morenoOscuro" ngbTooltip="Moreno oscuro"><span class="morenoOscuro"></span></label>
+
+              <input type="radio" name="negro" id="negro" value="7" [(ngModel)]="tez"/>
+              <label for="negro" ngbTooltip="Negro"><span class="negro"></span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

@@ -1,9 +1,14 @@
 export const ROUTES: RouteInfo[] = [
   {
-    path: '/dashboard/expediente',
+    path: '/dashboard',
     title: 'INGRESOS',
-    type: 'link',
-    icontype: 'fa fa-arrow-circle-o-right'
+    type: 'sub',
+    icontype: 'fa fa-arrow-circle-o-right',
+    collapse: 'tables',
+    isCollapsed: true,
+    children: [
+      { path: 'mediafiliacion', title: 'Media filiación', ab: 'MF' },
+    ]
   },
   {
     path: '/dashboard/expediente',
