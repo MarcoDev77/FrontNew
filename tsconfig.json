@@ -6,6 +6,12 @@
       "@auth/*": [
         "src/app/auth/*"
       ],
+      "@dashboard/*": [
+        "src/app/dashboard/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
       "@environment/*": [
         "src/environments/*"
       ]

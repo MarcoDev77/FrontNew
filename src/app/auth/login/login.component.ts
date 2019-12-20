@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,15 +13,16 @@ export class LoginComponent implements OnInit {
   recover = true;
   email: any;
 
-  constructor() {
+  constructor(private router: Router) {
     this.user = {} as any;
+    this.user.rol = '';
   }
 
   ngOnInit() {
   }
 
   onSubmit() {
-
+    this.router.navigate(['/dashboard/']);
   }
 
   composeEmail() {

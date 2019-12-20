@@ -1,0 +1,30 @@
+.custom-file-input, .custom-file-label {
+  cursor: pointer !important;
+  color: grey !important;
+  margin-right: 1rem !important;
+  border-top-right-radius:  0.25rem !important;
+  border-bottom-right-radius:  0.25rem !important;
+}
+
+.custom-file-input ~ .custom-file-label::after {
+  content: '  ' !important;
+  background-image: url(~src/assets/img/svg/seach-document.svg) !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+  width: 50px;
+  background-size: 20px;
+  opacity: 0.6;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.custom-file-input:hover {
+  ~ .custom-file-label::after {
+    opacity: 0.8;
+  }
+}
+
+.input-group .input-group-append .btn {
+  border-top-left-radius:  0.25rem !important;
+  border-bottom-left-radius:  0.25rem !important;
+}
