@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ingreso.component.scss']
 })
 export class IngresoComponent implements OnInit {
+  public ingreso:any = {};
 
   constructor() { }
 
