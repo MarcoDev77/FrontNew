@@ -5,7 +5,6 @@ import {DatosAnexosComponent} from './datos-anexos/datos-anexos.component';
 const routes: Routes = [
   {path: '', redirectTo: 'auth', pathMatch: 'full'},
   {path: 'auth', loadChildren: '@auth/auth.module#AuthModule'},
-  {path: 'datosAnexos', component: DatosAnexosComponent},
   {path: 'dashboard', loadChildren: '@dashboard/dashboard.module#DashboardModule'},
 ];
 
