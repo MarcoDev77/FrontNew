@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import { IngresoComponent } from './ingreso/ingreso.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     IngresoComponent
   ],
   imports: [
+    FormsModule,
     RouterModule,
     BrowserModule,
     BrowserAnimationsModule,
