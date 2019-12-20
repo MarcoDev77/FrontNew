@@ -1,12 +1,12 @@
-<div class="container" style="padding: 30px;">
+<div class="" style="padding: 20px;">
     <form name="form1" (ngSubmit)="form1.form.valid && submit()" #form1="ngForm" novalidate>
         <!--Datos expediente-->
         <div>
             <div class="row" style="margin-bottom: 10px;">
-                <div class="col-md-3">
-                    <label><i class="fa fa-folder fa-lg" aria-hidden="true"></i> DATOS DEL EXPEDIENTE</label>
+                <div class="col-md-2">
+                    <label><i class="fa fa-folder fa-2x mr-2" aria-hidden="true"></i> DATOS DEL EXPEDIENTE</label>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
                 </div>
             </div>
@@ -55,10 +55,10 @@
         <!--Datos personales-->
         <div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
-                <div class="col-md-3">
-                    <label><i class="fa fa-male fa-lg" aria-hidden="true"></i> DATOS PERSONALES</label>
+                <div class="col-md-2">
+                    <label><i class="fa fa-male fa-2x mr-2" aria-hidden="true"></i> DATOS PERSONALES</label>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
                 </div>
             </div>
@@ -172,10 +172,10 @@
         <!--Datos del delito-->
         <div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
-                <div class="col-md-3">
-                    <label><i class="fa fa-file-text fa-lg" aria-hidden="true"></i> DATOS DEL DELITO</label>
+                <div class="col-md-2">
+                    <label><i class="fa fa-file-text fa-2x mr-2" aria-hidden="true"></i> DATOS DEL DELITO</label>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
                 </div>
             </div>
@@ -200,10 +200,10 @@
         <!--Alias-->
         <div>
             <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
-                <div class="col-md-3">
-                    <label><i class="fa fa-users fa-lg" aria-hidden="true"></i> ALIAS</label>
+                <div class="col-md-2">
+                    <label><i class="fa fa-users fa-2x mr-2" aria-hidden="true"></i> ALIAS</label>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
                 </div>
             </div>
@@ -232,7 +232,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <button class="btn btn-primary" style="width: 15rem" type="submit" disabled><i class="fa fa-plus fa-lg" aria-hidden="true"></i>+</button>
+                        <button class="btn btn-info" style="width: 15rem" type="submit" ><i class="fa fa-plus fa-2x mr-2" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -244,14 +244,4 @@
             </div>
         </div>
     </form>
-
-
-    <div class="row">
-        <form name="f2" (ngSubmit)="form2.f2.valid && submit()" #form2="ngForm" novalidate>
-            <div class="row">
-                <div class="col-md-6"><input required placeholder="Nombre"/></div>
-                <div class="col-md-6"><button type="submit" class="btn btn-success">Enviar</button></div>
-            </div>
-        </form>
-    </div>
 </div>
