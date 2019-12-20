@@ -7,12 +7,10 @@ import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { DactiloscapiaComponent } from './dactiloscapia/dactiloscapia.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DactiloscapiaComponent
+    AppComponent
   ],
   imports: [
     RouterModule,
