@@ -9,7 +9,7 @@
     vertical-align: middle;
 
     &:not(.btn):not(.dropdown-item) {
-      color: $white-color;
+      color: black;
     }
 
     &.dropdown-item {
@@ -172,7 +172,7 @@
     .nav-item .nav-link:not(.btn):active {
       background-color: $opacity-2;
       border-radius: $border-radius-small;
-      color: $white-color;
+      color: black;
     }
   }
 
