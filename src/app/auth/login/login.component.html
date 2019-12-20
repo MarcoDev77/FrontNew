@@ -1,1 +1,67 @@
-<p>login works!</p>
+<div class="login p-5">
+  <div class="row">
+    <div class="col-md-4 text-center first">
+      <img class="logo" src="assets/img/logo.png" />
+      <h3 class="title mt-5">Fiscalía Morelos</h3>
+
+      <div class="derechos">Todos los derechos reservados</div>
+    </div>
+    <div class="col-md-8">
+      <div class="form">
+        <div class="title pb-4">
+          Fiscalía Especializada en Combate al Secuestro y Extorsión
+        </div>
+        <br>
+
+        <form *ngIf="login" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <div class="form-group">
+            <input type="email" name="username" class="form-control" placeholder="Clave trabajador" [(ngModel)]="user.username" #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.invalid }" required>
+          </div>
+
+          <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Contraseña" [(ngModel)]="user.password" #password="ngModel" autocomplete="off" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="5" autocomplete>
+          </div>
+
+          <div (click)="switch()" class="recover pb-3">
+            Olvide mi contraseña
+            <div class="borde"></div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-success">
+              INGRESAR
+            </button>
+          </div>
+        </form>
+
+        <form *ngIf="!login && recover" name="recover" (ngSubmit)="r.form.valid && composeEmail()" #r="ngForm" novalidate>
+          <div class="form-group">
+            <input type="email" name="email" email="true" class="form-control" placeholder="Correo electrónico" [(ngModel)]="email" #e="ngModel" [ngClass]="{ 'is-invalid': r.submitted && e.invalid }" required>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-success">
+              Recuperar Contraseña
+            </button>
+          </div>
+
+          <div (click)="switch()" class="recover pt-3">
+            Iniciar sesión
+            <div class="borde"></div>
+          </div>
+        </form>
+
+        <div class="text-center" *ngIf="!recover">
+                    <span style="color: #f2f2f2;cursor: default;">
+            Se ha enviado un correo electrónico a su cuenta, abra el correo y siga las instrucciones para cambiar su contraseña.
+          </span>
+
+          <div (click)="switch()" class="recover pt-3">
+            Iniciar sesión
+            <div class="borde"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

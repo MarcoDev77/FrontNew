@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +7,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  public user: any;
+  login = true;
+  recover = true;
+  email: any;
+
+  constructor() {
+    this.user = {} as any;
+  }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+
+  }
+
+  composeEmail() {
+
+  }
+
+  switch(flag?) {
+    if (!flag) {
+      this.login = !this.login;
+      this.recover = true;
+    } else {
+      this.recover = !this.recover;
+    }
+
+    this.email = '';
+    this.user = {} as any;
+  }
 }
