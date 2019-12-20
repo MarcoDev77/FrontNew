@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute bg-white">
+  <div class="container-fluid">
+    <div class="navbar-wrapper">
+      <div class="navbar-toggle">
+        <button type="button" class="navbar-toggler" (click)="sidebarToggle()">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </button>
+      </div>
+      <!--<a class="navbar-brand fiscalia-title-top">Fiscalía Morelos</a>-->
+    </div>
+    <button class="navbar-toggler" type="button" (click)="collapse()" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="collapse" [ngbCollapse]="!isCollapsed">
+      <ul class="navbar-nav">
+        <a class="nav-link text-center">
+          <div class="d-inline-flex">
+            <div style="font-size: 12px;cursor: default">{{date | date: 'dd/MMM/yyyy'}}</div>
+            <i class="fa fa-calendar pl-2"></i>
+          </div>
+        </a>
+
+        <li class="nav-item dropdown text-center" ngbDropdown>
+          <a [routerLink]="" class="nav-link dropdown-toggle" id="dropdownBasic" ngbDropdownToggle>
+            <p class="pr-2">
+              <span class="d-md-block">
+                {{informationUser ? informationUser.name : ''}}
+                <br>
+                <div class="role">{{informationUser ? informationUser.role : ''}}</div>
+              </span>
+            </p>
+            <i style="top: -5px;left: 2px;" class="now-ui-icons users_single-02"></i>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right text-center" ngbDropdownMenu aria-labelledby="dropdownBasic">
+            <a class="dropdown-item" [routerLink]="" (click)="logout()">Cerrar sesión</a>
+          </div>
+        </li>
+
+        <li class="nav-item text-center">
+          <a class="nav-link">
+            <i class="fa fa-bell"></i>
+            <span *ngIf="activeNotficaciones > 0" class="badge badge-success">{{this.activeNotficaciones}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<ng-template #notifications let-notifications>
+  <div class="modal-body text-center pt-0">
+    <i (click)="notifications.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
+       class="fa fa-times-circle"></i>
+    <h3>Notificaciones</h3>
+    <hr>
+    <p *ngFor="let item of notficaciones">{{item}}</p>
+  </div>
+</ng-template>

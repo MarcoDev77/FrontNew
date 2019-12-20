@@ -1,0 +1,20 @@
+.sidebar-wrapper {
+  overflow-x: hidden;
+}
+
+.sidebar .nav li > a{
+  padding: 10px 8px;
+}
+
+.sidebar .sidebar-wrapper {
+  height: calc(100vh - 62px);
+}
+
+.sidebar .logo-img img {
+  width: 45px;
+  left: 19px;
+}
+
+.sidebar .navbar-minimize {
+  right: 8px;
+}
