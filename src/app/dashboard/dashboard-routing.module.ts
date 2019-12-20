@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: '', component: MainComponent, children: [
       {
-        path: 'usuario', component: MediaFiliacionComponent,
+        path: 'mediafiliacion', component: MediaFiliacionComponent,
       },
       {
         path: 'dactiloscopia', component: DactiloscapiaComponent,

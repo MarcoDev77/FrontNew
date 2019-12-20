@@ -1,0 +1,257 @@
+<div class="container" style="padding: 30px;">
+    <form name="form1" (ngSubmit)="form1.form.valid && submit()" #form1="ngForm" novalidate>
+        <!--Datos expediente-->
+        <div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-md-3">
+                    <label><i class="fa fa-folder fa-lg" aria-hidden="true"></i> DATOS DEL EXPEDIENTE</label>
+                </div>
+                <div class="col-md-9">
+                    <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control" id="tipoInputado" required>
+                            <option selected>Tipo de inputado</option>
+                            <option value="1">Federal</option>
+                            <option value="2">Estatal</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control" id="categoria" required>
+                            <option selected>Categoría</option>
+                            <option value="1">Primo delincuente</option>
+                            <option value="2">Reincidente</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Folio" type="text" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Número de expediente" type="number" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control" id="tipoIngreso" required>
+                            <option selected>Tipo de ingreso</option>
+                            <option value="1">Primo delincuente</option>
+                            <option value="2">Reincidente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Datos personales-->
+        <div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-md-3">
+                    <label><i class="fa fa-male fa-lg" aria-hidden="true"></i> DATOS PERSONALES</label>
+                </div>
+                <div class="col-md-9">
+                    <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="CURP" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="date" class="form-control" placeholder="Fecha de nacimiento" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Nombre" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Apellido paterno" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Apellido materno" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control" id="genero" required>
+                            <option selected>Género</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Nacionalidad" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Religión" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control" id="estadoCivil" required>
+                            <option selected>Estado civil</option>
+                            <option value="Soltero(a)">Soltero(a)</option>
+                            <option value="Comprometido(a)">Comprometido(a)</option>
+                            <option value="Casado(a)">Casado(a)</option>
+                            <option value="Union libre">Unión libre</option>
+                            <option value="Separado(a)">Separado(a)</option>
+                            <option value="Divorciado(a)">Divorciado(a)</option>
+                            <option value="Viudo(a)">Viudo(a)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control" id="numeroHijos" required>
+                            <option selected>Número de hijos</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="Más de 10">Más de 10</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Ocupación" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Escolaridad" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Nombre del padre" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Nombre de la madre" required/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Datos del delito-->
+        <div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-md-3">
+                    <label><i class="fa fa-file-text fa-lg" aria-hidden="true"></i> DATOS DEL DELITO</label>
+                </div>
+                <div class="col-md-9">
+                    <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Delito" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="date" placeholder="Fecha de detención" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="date" placeholder="Fecha de registro" required/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Alias-->
+        <div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                <div class="col-md-3">
+                    <label><i class="fa fa-users fa-lg" aria-hidden="true"></i> ALIAS</label>
+                </div>
+                <div class="col-md-9">
+                    <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Nombre" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Apellido paterno" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Apellido materno" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Otros nombres/alias" required/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button class="btn btn-primary" style="width: 15rem" type="submit" disabled><i class="fa fa-plus fa-lg" aria-hidden="true"></i>+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Footer-->
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button class="btn btn-success" style="width: 15rem;" type="submit">Continuar</button>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="row">
+        <form name="f2" (ngSubmit)="form2.f2.valid && submit()" #form2="ngForm" novalidate>
+            <div class="row">
+                <div class="col-md-6"><input required placeholder="Nombre"/></div>
+                <div class="col-md-6"><button type="submit" class="btn btn-success">Enviar</button></div>
+            </div>
+        </form>
+    </div>
+</div>
