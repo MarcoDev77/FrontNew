@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
+import { DactiloscapiaComponent } from './dactiloscapia/dactiloscapia.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DactiloscapiaComponent
   ],
   imports: [
     RouterModule,
