@@ -1,0 +1,335 @@
+@import "variables";
+$border-radius: 0.25rem;
+$color-basic-100: $fiscalia-color; // fondo
+$color-basic-200: $fiscalia-second-color;
+$color-basic-300: #f7f9fc;
+$color-basic-400: #1e2d3b;
+$color-basic-900: #f7f9fc;
+$color-primary-400: #598bff;
+$color-primary-500: #3366ff;
+$color-primary-600: #274bdb;
+$color-primary-700: #1a34b8;
+$color-danger-500: #ff3d71;
+$color-primary-default: $color-primary-500;
+$color-primary-hover: $color-primary-400;
+$color-primary-active: $color-primary-600;
+$color-basic-transparent-600: rgba(143, 155, 179, 0.48);
+$color-primary-focus: $color-primary-600;
+$font-family-primary: unquote('Open Sans, sans-serif');
+$text-button-font-family: $font-family-primary;
+$text-paragraph-font-family: $font-family-primary;
+$text-paragraph-font-size: 0.9375rem;
+$text-paragraph-font-weight: 400;
+$text-paragraph-line-height: 1.25rem;
+$text-button-medium-font-size: 0.85rem;
+$text-button-medium-line-height: 1rem;
+$text-basic-color: $color-basic-900;
+$text-disabled-color: $color-basic-transparent-600;
+$text-control-color: $color-basic-300;
+$text-primary-color: $color-primary-default;
+$text-primary-hover-color: $color-primary-hover;
+$text-primary-focus-color: $color-primary-focus;
+$button-text-font-family: $text-button-font-family;
+$background-basic-color-1: $color-basic-100;
+$background-basic-color-2: $color-basic-200;
+$background-basic-color-3: $fiscalia-second-color;
+$border-basic-color-3: $color-basic-200;
+$divider-color: $border-basic-color-3;
+$divider-width: 1px;
+$color-primary-default: $color-primary-500;
+$color-danger-default: $color-danger-500;
+$button-filled-primary-border-color: $color-primary-default;
+$button-filled-primary-background-color: $color-primary-default;
+$button-filled-primary-text-color: $text-control-color;
+$button-filled-primary-focus-border-color: $color-primary-700;
+$button-filled-primary-hover-background-color: $color-primary-hover;
+$button-filled-primary-hover-border-color: $color-primary-hover;
+$button-filled-primary-active-background-color: $color-primary-active;
+$button-filled-primary-active-border-color: $color-primary-active;
+$button-medium-text-font-size: $text-button-medium-font-size;
+$button-medium-text-line-height: $text-button-medium-line-height;
+$button-outline-primary-hover-border-color: $color-primary-hover;
+$button-outline-primary-hover-text-color: $text-primary-hover-color;
+$button-outline-primary-disabled-text-color: $text-disabled-color;
+$button-outline-primary-text-color: $text-primary-color;
+$button-outline-primary-focus-border-color: $color-primary-focus;
+$button-outline-primary-focus-text-color: $text-primary-focus-color;
+$smart-table-header-font-family: $text-paragraph-font-family;
+$smart-table-header-font-size: $text-paragraph-font-size;
+$smart-table-header-font-weight: $text-paragraph-font-weight;
+$smart-table-header-line-height: $text-paragraph-line-height;
+$smart-table-header-fg: $text-basic-color;
+$smart-table-header-bg: $background-basic-color-1;
+$smart-table-font-family: $text-paragraph-font-family;
+$smart-table-font-size: $text-paragraph-font-size;
+$smart-table-font-weight: $text-paragraph-font-weight;
+$smart-table-line-height: $text-paragraph-line-height;
+$smart-table-fg: $text-basic-color;
+$smart-table-bg: $background-basic-color-1;
+$smart-table-bg-even: $background-basic-color-2;
+$smart-table-fg-secondary: $text-basic-color;
+$smart-table-bg-active: $background-basic-color-3;
+$smart-table-padding: 0.875rem 1.25rem;
+$smart-table-filter-padding: 0.5rem 1rem;
+$smart-table-filter-padding: 0.5rem 1rem;
+$smart-table-plus-padding: 0.2rem 0.7rem;
+$smart-table-separator: $divider-color;
+$smart-table-border-radius: $border-radius;
+$smart-table-action-add-edit-hover-text-color: $color-primary-default;
+$smart-table-action-cancel-delete-hover-text-color: $color-danger-default;
+$smart-table-add-button-border-color: $button-filled-primary-border-color;
+$smart-table-add-button-background-color: $button-filled-primary-background-color;
+$smart-table-add-button-text-color: $button-filled-primary-text-color;
+$smart-table-add-button-focus-border-color: $button-filled-primary-focus-border-color;
+$smart-table-add-button-hover-background-color: $button-filled-primary-hover-background-color;
+$smart-table-add-button-hover-border-color: $button-filled-primary-hover-border-color;
+$smart-table-add-button-active-background-color: $button-filled-primary-active-background-color;
+$smart-table-add-button-active-border-color: $button-filled-primary-active-border-color;
+$smart-table-paging-font-family: $button-text-font-family;
+$smart-table-paging-font-size: $button-medium-text-font-size;
+$smart-table-paging-line-height: $button-medium-text-line-height;
+$smart-table-paging-border-color: $divider-color;
+$smart-table-paging-border-width: $divider-width;
+$smart-table-paging-fg-active: $text-control-color;
+$smart-table-paging-bg-active: $color-primary-default;
+$smart-table-paging-hover: transparent;
+$smart-table-paging-hover-border-color: $button-outline-primary-hover-border-color;
+$smart-table-paging-hover-text-color: $button-outline-primary-hover-text-color;
+$smart-table-paging-disabled-text-color: $button-outline-primary-disabled-text-color;
+$smart-table-paging-page-text-color: $button-outline-primary-text-color;
+$smart-table-paging-page-focus-border-color: $button-outline-primary-focus-border-color;
+$smart-table-paging-page-focus-text-color: $button-outline-primary-focus-text-color;
+table {
+    width: 100%;
+    border-color: $color-basic-900;
+    color: $color-basic-300;
+}
+
+table {
+    table tr th,
+    table tr th a {
+        font-family: $smart-table-header-font-family;
+        font-size: $smart-table-header-font-size;
+        font-weight: $smart-table-header-font-weight;
+        line-height: $smart-table-header-line-height;
+        color: $smart-table-header-fg;
+    }
+    table tr td {
+        font-family: $smart-table-font-family;
+        font-size: $smart-table-font-size;
+        font-weight: $smart-table-font-weight;
+        line-height: $smart-table-line-height;
+        color: $smart-table-fg;
+    }
+    table tr th,
+    table tr td {
+        position: relative;
+        padding: $smart-table-padding;
+        border: 1px solid $smart-table-separator !important;
+        vertical-align: middle;
+        text-align: center;
+    }
+    table tr.ng2-smart-titles {
+        th {
+            padding: $smart-table-padding;
+            padding-right: 1.75rem;
+            padding-left: 1.75rem;
+        }
+        th a {
+            &:hover,
+            &:active,
+            &:visited {
+                color: $smart-table-header-fg;
+                text-decoration: none;
+            }
+            &.sort.asc,
+            &.sort.desc {
+                font-weight: $smart-table-header-font-weight;
+                &::after {
+                    border-bottom-color: $smart-table-fg-secondary;
+                    border-width: 0.375rem;
+                    position: absolute;
+                    margin: 0;
+                    right: 0.75rem;
+                    left: 0.75rem;
+                    top: 50%;
+                    transform: translate(0, -50%);
+                }
+                &.desc::after {
+                    transform: translate(0, -50%) rotate(180deg);
+                }
+            }
+        }
+    }
+    thead tr {
+        background: $smart-table-header-bg;
+        &.ng2-smart-filters th {
+            padding: $smart-table-filter-padding;
+            .ng2-smart-filter input {
+                line-height: $smart-table-line-height;
+            }
+        }
+    }
+    tbody tr {
+        &.selected,
+        &:hover {
+            //background: unset !important;
+        }
+        &:nth-child(odd) {
+            background-color: $smart-table-bg-even;
+        }
+    }
+    // Actions
+    th.ng2-smart-actions-title-add {
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem !important;
+            padding: $smart-table-plus-padding;
+            border-color: $smart-table-add-button-border-color;
+            background-color: $smart-table-add-button-background-color;
+            color: $smart-table-add-button-text-color;
+            border-radius: 0.375rem;
+            &:focus {
+                border-color: $smart-table-add-button-focus-border-color;
+            }
+            &:hover {
+                text-decoration: none;
+                background-color: $smart-table-add-button-hover-background-color;
+                border-color: $smart-table-add-button-hover-border-color;
+            }
+            &:active {
+                background-color: $smart-table-add-button-active-background-color;
+                border-color: $smart-table-add-button-active-border-color;
+            }
+        }
+    }
+    .ng2-smart-actions {
+        padding: 0;
+        // fix for 100% height child
+        height: 1px;
+        ng2-st-tbody-edit-delete,
+        ng2-st-tbody-create-cancel,
+        ng2-st-actions {
+            display: flex;
+            height: 100%;
+        }
+        a.ng2-smart-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            font-size: 1rem !important;
+            color: $smart-table-fg-secondary;
+            &:not(:last-child) {
+                border-right: 1px solid $smart-table-separator;
+            }
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        .ng2-smart-action-add-create:hover,
+        .ng2-smart-action-edit-edit:hover,
+        .ng2-smart-action-edit-save:hover {
+            color: $smart-table-action-add-edit-hover-text-color;
+        }
+        .ng2-smart-action-add-cancel:hover,
+        .ng2-smart-action-delete-delete:hover,
+        .ng2-smart-action-edit-cancel:hover {
+            color: $smart-table-action-cancel-delete-hover-text-color;
+        }
+    }
+    // TODO: remove this hack, when it will be possible to identify the whole row in the edit state
+    table-cell-edit-mode {
+        display: block;
+        margin: -7.5px -12px;
+    }
+    ng2-smart-table-pager {
+        display: block;
+    }
+    //Paging
+    nav.ng2-smart-pagination-nav {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.25rem;
+        .ng2-smart-pagination {
+            display: flex;
+            padding: 0;
+            .page-item.disabled .page-link,
+            .page-item.disabled .page-link:focus,
+            .page-item.disabled .page-link:hover {
+                background-color: $smart-table-paging-hover;
+                color: $smart-table-paging-disabled-text-color;
+            }
+        }
+        .pagination {
+            font-family: $smart-table-paging-font-family;
+            font-size: $smart-table-paging-font-size;
+            line-height: $smart-table-paging-line-height;
+            border: $smart-table-paging-border-color solid $smart-table-paging-border-width;
+            border-radius: $smart-table-border-radius;
+            li {
+                overflow: hidden;
+                &:not(:last-child) {
+                    border-right: 1px solid $smart-table-separator;
+                    border-left: 1px solid $smart-table-separator;
+                }
+                a.page-link-prev,
+                a.page-link-next {
+                    font-size: $smart-table-paging-font-size;
+                    line-height: $smart-table-paging-line-height;
+                }
+                a,
+                >span {
+                    font-size: $smart-table-paging-font-size;
+                    line-height: $smart-table-paging-line-height;
+                    background-color: transparent;
+                    color: $smart-table-paging-page-text-color;
+                    padding: 0.75rem 1.25rem;
+                    border: none;
+                    &:focus {
+                        border-color: $smart-table-paging-page-focus-border-color;
+                        color: $smart-table-paging-page-focus-text-color;
+                    }
+                    &:hover {
+                        background-color: $smart-table-paging-hover;
+                        border-color: $smart-table-paging-hover-border-color;
+                        color: $smart-table-paging-hover-text-color;
+                        text-decoration: none;
+                    }
+                }
+                &:first-child {
+                    a,
+                    >span {
+                        border-top-left-radius: $smart-table-border-radius;
+                        border-bottom-left-radius: $smart-table-border-radius;
+                        border-top-right-radius: $smart-table-border-radius;
+                        border-bottom-right-radius: $smart-table-border-radius;
+                    }
+                }
+                &:last-child {
+                    a,
+                    >span {
+                        border-top-right-radius: $smart-table-border-radius;
+                        border-bottom-right-radius: $smart-table-border-radius;
+                        border-top-left-radius: $smart-table-border-radius;
+                        border-bottom-left-radius: $smart-table-border-radius;
+                    }
+                }
+                &.active {
+                    a,
+                    a:hover,
+                    a:focus,
+                    >span,
+                    >span:hover,
+                    >span:focus {
+                        color: $smart-table-paging-fg-active;
+                        background-color: $smart-table-paging-bg-active;
+                    }
+                }
+            }
+        }
+    }
+}

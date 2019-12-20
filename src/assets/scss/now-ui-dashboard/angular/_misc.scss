@@ -1,0 +1,80 @@
+.before-collapsing {
+  display: block !important;
+  overflow: hidden;
+}
+
+ngb-accordion {
+  .card {
+    box-shadow: none;
+    background: transparent;
+
+    .card-header {
+      padding: 0.75rem 0;
+      position: relative;
+      box-shadow: none !important;
+      margin-bottom: 0 !important;
+
+      [aria-expanded="true"] .arrows-1_minimal-down {
+        @include rotate-180();
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 0 !important;
+        background-color: $light-gray;
+      }
+
+      button {
+        display: block;
+        border-bottom: none !important;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        font-size: 14px;
+
+        .collapsed {
+          color: $success-color !important;
+        }
+
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          background: inherit !important;
+          color: #444 !important;
+        }
+
+        &:hover,
+        &:active {
+          //text-decoration: underline;
+        }
+
+        .arrows-1_minimal-down {
+          float: right;
+          color: $success-color;
+          @include transition($general-transition-time, $transition-ease);
+        }
+      }
+    }
+
+    .collapse {
+      display: block !important;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s cubic-bezier(0.6, 0.4, 0.36, 1);
+
+      &.show {
+        max-height: 500rem;
+      }
+
+      .card-body {
+        padding: 0;
+        padding-top: 1rem;
+      }
+    }
+  }
+}

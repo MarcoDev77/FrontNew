@@ -1,0 +1,237 @@
+.table {
+    color: $white-color;
+    .img-wrapper {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .img-row {
+        max-width: 60px;
+        width: 60px;
+    }
+    .form-check {
+        margin: 0;
+        & label .form-check-sign::before,
+        & label .form-check-sign::after {
+            top: -17px;
+            left: 4px;
+        }
+    }
+    .btn {
+        margin: 0;
+    }
+    small,
+    .small {
+        font-weight: 300;
+    }
+    .card-tasks .card-body & {
+        margin-bottom: 0;
+        >thead>tr>th,
+        >tbody>tr>th,
+        >tfoot>tr>th,
+        >thead>tr>td,
+        >tbody>tr>td,
+        >tfoot>tr>td {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+    .radio,
+    .checkbox {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 0;
+        width: 15px;
+        .icons {
+            position: relative;
+        }
+        label {
+            &:after,
+            &:before {
+                top: -17px;
+                left: -3px;
+            }
+        }
+    }
+    >thead>tr>th,
+    >tbody>tr>th,
+    >tfoot>tr>th,
+    >thead>tr>td,
+    >tbody>tr>td,
+    >tfoot>tr>td {
+        padding: 12px 7px;
+        vertical-align: middle;
+    }
+    .th-description {
+        max-width: 150px;
+    }
+    .td-price {
+        font-size: 26px;
+        font-weight: $font-weight-light;
+        margin-top: 5px;
+        position: relative;
+        top: 4px;
+        text-align: right;
+    }
+    .td-total {
+        font-weight: $font-weight-bold;
+        font-size: $font-size-h5;
+        padding-top: 20px;
+        text-align: right;
+    }
+    .td-actions .btn {
+        margin: 0px;
+    }
+    >tbody>tr {
+        position: relative;
+    }
+    .table {
+        background-color: $fiscalia-color !important;
+        margin-bottom: 0;
+        tr {
+            &.active {
+                border-bottom: unset !important;
+            }
+        }
+    }
+    tbody+tbody {
+        border-top: unset;
+    }
+    .tree-table {
+        background-color: transparent !important;
+        td .master-button {
+            background-color: transparent !important;
+            border: 0 !important;
+            color: $white-color !important;
+            padding: 0 5px 0 0 !important;
+            vertical-align: middle !important;
+        }
+    }
+}
+
+.table-shopping {
+    >thead>tr>th {
+        font-size: $font-size-h6;
+        text-transform: uppercase;
+    }
+    >tbody>tr>td {
+        font-size: $font-paragraph;
+        b {
+            display: block;
+            margin-bottom: 5px;
+        }
+    }
+    .td-name {
+        font-weight: $font-weight-normal;
+        font-size: 1.5em;
+        small {
+            color: $dark-gray;
+            font-size: 0.75em;
+            font-weight: $font-weight-light;
+        }
+    }
+    .td-number {
+        font-weight: $font-weight-light;
+        font-size: $font-size-h4;
+    }
+    .td-name {
+        min-width: 200px;
+    }
+    .td-number {
+        text-align: right;
+        min-width: 170px;
+        small {
+            margin-right: 3px;
+        }
+    }
+    .img-container {
+        width: 120px;
+        max-height: 160px;
+        overflow: hidden;
+        display: block;
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.table-responsive {
+    overflow: auto;
+    padding-bottom: 10px;
+}
+
+#tables {
+    margin-bottom: 30px;
+}
+
+.table-bordered {
+    border: 1px solid $fiscalia-three-color;
+    th,
+    td {
+        border: 1px solid $fiscalia-three-color !important;
+        cursor: default;
+    }
+    tbody tr {
+        &.active {
+          box-shadow: 0px 1px 0px 1px $fiscalia-title-color;
+        }
+        &:nth-child(odd) {
+          background-color: #757575;
+        }
+    }
+    td i {
+        cursor: pointer;
+    }
+}
+
+.bg-form {
+    background-color: $black-color !important;
+}
+
+.ngx-pagination {
+    margin-top: 2px !important;
+    margin-bottom: 0 !important;
+    li a:hover {
+        background: $black-color !important;
+        opacity: 0.5;
+    }
+}
+
+.ngx-pagination .current {
+    background: $black-color !important;
+    padding: 0.1875rem 0.625rem !important;
+    margin-top: -1px !important;
+    margin-right: 0 !important;
+}
+
+.ngx-pagination li,
+.ngx-pagination .current {
+    border: 2px solid $fiscalia-three-color !important;
+    margin-right: 0 !important;
+}
+
+.ngx-pagination .small-screen {
+    padding: 0.1875rem 0.625rem !important;
+}
+
+.ngx-pagination {
+    .pagination-previous {
+        margin-right: -2px !important;
+    }
+    .pagination-next {
+        margin-left: -2px !important;
+    }
+}
+
+.save {
+    background: transparent;
+    border: transparent;
+    color: $white-color;
+}
+
+.justify-content-center {
+    display: flex !important;
+    justify-content: center !important;
+}

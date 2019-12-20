@@ -1,0 +1,52 @@
+/*!
+
+=========================================================
+* Now UI Dashboard Pro Angular - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-angular
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
+@import "now-ui-dashboard/variables";
+@import "now-ui-dashboard/mixins";
+// Core CSS
+@import "now-ui-dashboard/buttons";;
+@import "now-ui-dashboard/misc";
+@import "now-ui-dashboard/navbar";
+@import "now-ui-dashboard/images";
+@import "now-ui-dashboard/footers";
+// components
+
+@import "now-ui-dashboard/sidebar-and-main-panel";
+
+// cards
+@import "now-ui-dashboard/cards";
+@import "now-ui-dashboard/cards/card-chart";
+@import "now-ui-dashboard/cards/card-user";
+@import "now-ui-dashboard/cards/card-plain";
+@import "now-ui-dashboard/cards/card-background";
+@import "now-ui-dashboard/cards/card-collapse";
+@import "now-ui-dashboard/cards/card-map";
+@import "now-ui-dashboard/cards/card-contributions";
+@import "now-ui-dashboard/cards/card-info-area";
+@import "now-ui-dashboard/cards/card-lock";
+@import "now-ui-dashboard/cards/card-pricing";
+@import "now-ui-dashboard/cards/card-profile";
+@import "now-ui-dashboard/cards/card-signup";
+@import "now-ui-dashboard/cards/card-stats-mini";
+@import "now-ui-dashboard/cards/card-stats";
+@import "now-ui-dashboard/cards/card-subcategories";
+@import "now-ui-dashboard/cards/card-testimonials";
+@import "now-ui-dashboard/cards/card-wizard";
+
+
+
+// example pages and sections
