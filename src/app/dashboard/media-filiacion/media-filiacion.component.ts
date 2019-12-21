@@ -11,12 +11,14 @@ export class MediaFiliacionComponent implements OnInit {
   estatura: any;
   peso: any;
   tez: any;
+  obj: any;
 
   constructor() {
     this.complexion = '';
     this.estatura = '';
     this.peso = '';
     this.tez = '';
+    this.obj = {} as any;
   }
 
   ngOnInit() {

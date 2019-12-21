@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 .shadows {
-  -webkit-box-shadow: 4px 11px 15px -4px rgba(0,0,0,0.36);
-  -moz-box-shadow: 4px 11px 15px -4px rgba(0,0,0,0.36);
-  box-shadow: 4px 11px 15px -4px rgba(0,0,0,0.36);
+  -webkit-box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
+  box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
 }
 
 .row {
@@ -17,7 +17,7 @@
   height: 0.1rem;
   outline: none;
   border-radius: 0.25rem;
-  background: #847b7b;
+  background: #d6cfcf;
 }
 
 .slider::-webkit-slider-thumb {
@@ -25,8 +25,8 @@
   appearance: none;
   width: 1.1rem;
   height: 1.1rem;
-  background-color: #847b7b;
-  border: 0.25rem solid #fff;
+  background-color: #8f2d94;;
+  border: 0.25rem solid #d6cfcf;
   border-radius: 1rem;
   cursor: pointer;
 }
@@ -109,8 +109,65 @@
       @each $name, $value in $colors {
         &.#{$name} {
           background: $value;
+          border: 1px solid #847b7b;
         }
       }
     }
   }
 }
+
+.form-check-inline .form-check-input {
+  position: absolute !important;
+}
+
+.form-check .form-check-label {
+  margin-right: 1rem !important;
+}
+
+#accordion .card, .card .card-header {
+  box-shadow: unset !important;
+  margin-bottom: 0 !important;
+}
+
+#accordion .card .card-header {
+  padding: 0px 15px 0;
+  padding-left: 0;
+
+  h5 button {
+    width: 5rem;
+    text-align: left;
+    font-size: 12px;
+  }
+}
+
+#accordion {
+  .card-body {
+    font-size: 12px;
+    padding-left: 75px;
+  }
+
+  .divisor {
+    border-bottom: 1px solid #ccc8c8;
+    position: absolute;
+    top: 26px;
+    width: 88%;
+    left: 85px;
+  }
+
+  .btn-link {
+    font-weight: bold;
+  }
+
+  .btn-link:after {
+    content: "v";
+    float: right;
+    font-weight: bold;
+  }
+
+  .btn-link.collapsed:after {
+    content: '>' !important;
+  }
+}
+
+
+
