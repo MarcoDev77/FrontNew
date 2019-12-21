@@ -7,15 +7,11 @@ export const ROUTES: RouteInfo[] = [
     collapse: 'tables',
     isCollapsed: true,
     children: [
-      { path: 'ingreso', title: 'Formulario de ingreso', ab: 'MF' },
+      { path: 'ingreso', title: 'Formulario de ingreso', ab: 'FI' },
+      { path: 'datosAnexos', title: 'Señas particulares', ab: 'SP' },
       { path: 'mediafiliacion', title: 'Características', ab: 'MF' },
+      { path: 'dactiloscopia', title: 'Dactiloscopia', ab: 'DP' },
     ]
-  },
-  {
-    path: '/dashboard/dactiloscopia',
-    title: 'DACTILOSCOPIAS',
-    type: 'link',
-    icontype: ''
   },
   {
     path: '/dashboard/denuncia',

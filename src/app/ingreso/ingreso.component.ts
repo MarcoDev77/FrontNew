@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-ingreso',
@@ -6,15 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ingreso.component.scss']
 })
 export class IngresoComponent implements OnInit {
-  public ingreso:any = {};
-  constructor() { }
+  public ingreso: any = {};
+
+  constructor() {
+    this.ingreso.tipoInputado = '';
+  }
 
   ngOnInit() {
   }
 
-  submit(){
-    console.log("entra al metodo")
-    console.log (this.ingreso);
+  submit() {
+    console.log(this.ingreso);
   }
 
 }

@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-12 text-center pb-5">
           <label class="pr-4" style="color: #8f2d94;">Formulario de ingreso</label>
-          <label class="pr-4">Característica</label>
           <label class="pr-4">Señas particulares</label>
+          <label class="pr-4">Característica</label>
           <label class="pr-4" >Dactiloscopia</label>
           <label class="pr-4">Referencias</label>
           <label>Situación penal</label>
@@ -25,8 +25,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control shadows" name="tipoInputado" required [(ngModel)]="ingreso.tipoInputado"> 
-                            <option selected>Tipo de inputado</option>
+                        <select class="form-control shadows" name="tipoInputado" required [(ngModel)]="ingreso.tipoInputado">
+                            <option [value]="''" disabled hidden>Tipo de inputado</option>
                             <option value="Federal">Federal</option>
                             <option value="Estatal">Estatal</option>
                         </select>
