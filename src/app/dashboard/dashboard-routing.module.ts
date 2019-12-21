@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 // App
 import {MainComponent} from './_main/main.component';
-import {DatosAnexosComponent} from '../datos-anexos/datos-anexos.component'
+import {DatosAnexosComponent} from '../datos-anexos/datos-anexos.component';
 import { MediaFiliacionComponent } from '@dashboard/media-filiacion/media-filiacion.component';
 import { IngresoComponent } from '../ingreso/ingreso.component';
-import { DactiloscapiaComponent } from "../dactiloscapia/dactiloscapia.component";
+import { DactiloscapiaComponent } from '../dactiloscapia/dactiloscapia.component';
 
 const routes: Routes = [
   {
@@ -14,8 +14,7 @@ const routes: Routes = [
         path: 'mediafiliacion', component: MediaFiliacionComponent,
       },
       {
-        path: 'datosAnexos', component:DatosAnexosComponent,
-       
+        path: 'datosAnexos', component: DatosAnexosComponent,
       },
       {
         path: 'ingreso', component: IngresoComponent
@@ -25,7 +24,7 @@ const routes: Routes = [
       }
     ]
   },
-  
+
 ];
 
 @NgModule({
