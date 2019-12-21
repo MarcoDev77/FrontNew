@@ -8,7 +8,7 @@ export const ROUTES: RouteInfo[] = [
     isCollapsed: true,
     children: [
       { path: 'ingreso', title: 'Formulario de ingreso', ab: 'FI' },
-      { path: 'datosAnexos', title: 'Señas particulares', ab: 'SP' },
+      /* { path: 'datosAnexos', title: 'Señas particulares', ab: 'SP' }, */
       { path: 'mediafiliacion', title: 'Características', ab: 'MF' },
       { path: 'dactiloscopia', title: 'Dactiloscopia', ab: 'DP' },
     ]

@@ -34,8 +34,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control shadows" id="categoria" required>
-                            <option selected>Categoría</option>
+                        <select class="form-control shadows" name="categoria" required [(ngModel)]="ingreso.categoria">
+                            <option [value]="''" disabled hidden>Categoría</option>
                             <option value="Primo delincuente">Primo delincuente</option>
                             <option value="Reincidente">Reincidente</option>
                         </select>
@@ -55,10 +55,10 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control shadows" id="tipoIngreso" required>
-                            <option selected>Tipo de ingreso</option>
-                            <option value="1">Primo delincuente</option>
-                            <option value="2">Reincidente</option>
+                        <select class="form-control shadows" name="tipoIngreso" [(ngModel)]="ingreso.tipoIngreso" required>
+                            <option [value]="''" disabled hidden>Tipo de ingreso</option>
+                            <option value="Primo delincuente">Primo delincuente</option>
+                            <option value="Reincidente">Reincidente</option>
                         </select>
                     </div>
                 </div>
@@ -106,8 +106,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control shadows" id="genero" required>
-                            <option selected>Género</option>
+                        <select class="form-control shadows" name="genero" [(ngModel)]="ingreso.genero" required>
+                            <option [value]="''" disabled hidden>Género</option>
                             <option value="Masculino">Masculino</option>
                             <option value="Femenino">Femenino</option>
                         </select>
@@ -127,8 +127,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control shadows" id="estadoCivil" required>
-                            <option selected>Estado civil</option>
+                        <select class="form-control shadows" name="estadoCivil" [(ngModel)]="ingreso.estadoCivil"required>
+                            <option [value]="''" disabled hidden>Estado civil</option>
                             <option value="Soltero(a)">Soltero(a)</option>
                             <option value="Comprometido(a)">Comprometido(a)</option>
                             <option value="Casado(a)">Casado(a)</option>
@@ -141,8 +141,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control shadows" id="numeroHijos" required>
-                            <option selected>Número de hijos</option>
+                        <select class="form-control shadows" name="numeroHijos" [(ngModel)]="ingreso.numeroHijos" required>
+                            <option [value]="''" disabled hidden>Número de hijos</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

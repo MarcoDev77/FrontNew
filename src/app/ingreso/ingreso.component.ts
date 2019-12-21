@@ -12,6 +12,11 @@ export class IngresoComponent implements OnInit {
 
   ngOnInit() {
     this.ingreso.tipoImputado = '';
+    this.ingreso.categoria='';
+    this.ingreso.tipoIngreso='';
+    this.ingreso.genero='';
+    this.ingreso.estadoCivil='';
+    this.ingreso.numeroHijos='';
   }
 
   submit(){

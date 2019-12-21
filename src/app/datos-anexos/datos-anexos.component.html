@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Reincidente</label>
+                    <label>{{ingreso.categoria}}</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -41,7 +41,7 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Reincidente</label>
+                    <label>{{ingreso.tipoIngreso}}</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -91,7 +91,7 @@
             <!-- Segunda parte -->
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>sexo</label>
+                    <label>{{ingreso.genero}}</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -101,18 +101,18 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>{{religion}}</label>
+                    <label>{{ingreso.religion}}</label>
                 </div>
             </div>
             <!-- Tercera parte -->
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Estado civil</label>
+                    <label>{{ingreso.estadoCivil}}</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>numero de hijo</label>
+                    <label>{{ingreso.numeroHijos}}</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -193,16 +193,20 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group ">
-                    <input type="date" class="form-control shadows"  placeholder="Fecha de puesta a disposición">
+                    <label for="">Fecha de puesta a disposición</label>
+                    <input type="date" class="form-control shadows"  placeholder="Fecha de puesta a disposición"
+                    data-toggle="tooltip" data-placement="top" title="Fecha de puesta a disposición">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
+                    <label for="">Fecha de anexo a la carpeta</label>
                     <input type="date" class="form-control shadows" placeholder="Fecha de anexo a la carpeta">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
+                    <label for="">Fecha de generación</label>
                     <input type="date" class="form-control shadows" placeholder="Fecha de generación">
                 </div>
             </div>
@@ -230,7 +234,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-right">
-                <button class="btn btn-success" style="width: 15rem;" type="submit">Continuar</button>
+                <button class="btn btn-success" style="width: 15rem;" type="submit" (click)="submit()">Guardar</button>
             </div>
         </div>
       </div>

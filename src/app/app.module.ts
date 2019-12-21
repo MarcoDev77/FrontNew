@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { IngresoComponent } from './ingreso/ingreso.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
+
 @NgModule({
   declarations: [
     AppComponent
