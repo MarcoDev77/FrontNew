@@ -25,8 +25,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control shadows" name="tipoInputado" required [(ngModel)]="ingreso.tipoImputado"> 
-                            <option selected >Tipo de imputado</option>
+                        <select class="form-control shadows" name="tipoInputado" required [(ngModel)]="ingreso.tipoImputado">
+                            <option [value]="''" disabled hidden>Tipo de imputado</option>
                             <option value="Federal">Federal</option>
                             <option value="Estatal">Estatal</option>
                         </select>

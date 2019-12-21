@@ -11,6 +11,7 @@ export class IngresoComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
+    this.ingreso.tipoImputado = '';
   }
 
   submit(){
