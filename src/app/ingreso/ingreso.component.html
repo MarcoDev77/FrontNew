@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-12 text-center pb-5">
           <label class="pr-4" style="color: #8f2d94;">Formulario de ingreso</label>
-          <label class="pr-4">Señas particulares</label>
           <label class="pr-4">Característica</label>
+          <label class="pr-4">Señas particulares</label>
           <label class="pr-4" >Dactiloscopia</label>
           <label class="pr-4">Referencias</label>
           <label>Situación penal</label>
@@ -25,8 +25,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control shadows" name="tipoInputado" required [(ngModel)]="ingreso.tipoInputado">
-                            <option [value]="''" disabled hidden>Tipo de inputado</option>
+                        <select class="form-control shadows" name="tipoInputado" required [(ngModel)]="ingreso.tipoImputado"> 
+                            <option selected >Tipo de imputado</option>
                             <option value="Federal">Federal</option>
                             <option value="Estatal">Estatal</option>
                         </select>
@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" placeholder="Número de expediente" type="number" required/>
+                        <input class="form-control shadows" placeholder="Número de expediente"  name="expediente" type="number" [(ngModel)]="ingreso.expediente" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -77,29 +77,29 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group shadows">
-                        <input class="form-control" type="text" placeholder="CURP" required/>
+                        <input class="form-control" type="text" placeholder="CURP"  name="curp" required [(ngModel)]="ingreso.curp"/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group shadows">
-                        <input type="date" class="form-control" placeholder="Fecha de nacimiento" required/>
+                        <input type="date" class="form-control" placeholder="Fecha de nacimiento" name="fechaNacimiento" [(ngModel)]="ingreso.fechaNacimiento"required/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group shadows">
-                        <input class="form-control" type="text" placeholder="Nombre" required/>
+                        <input class="form-control" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="ingreso.nombre" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group shadows">
-                        <input class="form-control" type="text" placeholder="Apellido paterno" required/>
+                        <input class="form-control" type="text" placeholder="Apellido paterno" name="apellidoPaterno" [(ngModel)]="ingreso.apellidoPaterno"required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group shadows">
-                        <input class="form-control" type="text" placeholder="Apellido materno" required/>
+                        <input class="form-control" type="text" placeholder="Apellido materno" name="apellidoMaterno" [(ngModel)]="ingreso.apelidoMaterno"required/>
                     </div>
                 </div>
             </div>
@@ -115,12 +115,12 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="text" placeholder="Nacionalidad" required/>
+                        <input class="form-control shadows" type="text" placeholder="Nacionalidad" name="nacionalidad" [(ngModel)]="ingreso.nacionalidad" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="text" placeholder="Religión" required/>
+                        <input class="form-control shadows" type="text" placeholder="Religión" name="religion"  [(ngModel)]="ingreso.religion"required/>
                     </div>
                 </div>
             </div>
@@ -159,24 +159,24 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="text" placeholder="Ocupación" required/>
+                        <input class="form-control shadows" type="text" placeholder="Ocupación" name="ocupacion" [(ngModel)]="ingreso.ocupacion"required/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="text" placeholder="Escolaridad" required/>
+                        <input class="form-control shadows" type="text" placeholder="Escolaridad" name="escolaridad" [(ngModel)]="ingreso.escolaridad" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="text" placeholder="Nombre del padre" required/>
+                        <input class="form-control shadows" type="text" placeholder="Nombre del padre" name="padre" [(ngModel)]="ingreso.padre"required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="text" placeholder="Nombre de la madre" required/>
+                        <input class="form-control shadows" type="text" placeholder="Nombre de la madre" name="madre" [(ngModel)]="ingreso.madre"required/>
                     </div>
                 </div>
             </div>
@@ -194,17 +194,17 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="text" placeholder="Delito" required/>
+                        <input class="form-control shadows" type="text" placeholder="Delito" name="delito" [(ngModel)]="ingreso.delito" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="date" placeholder="Fecha de detención" required/>
+                        <input class="form-control shadows" type="date" placeholder="Fecha de detención"  name="fechaDetencion"[(ngModel)]="ingreso.fechaDetencion"required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="date" placeholder="Fecha de registro" required/>
+                        <input class="form-control shadows" type="date" placeholder="Fecha de registro"  name="fechaRegistro" [(ngModel)]="ingreso.fechaRegistro" required/>
                     </div>
                 </div>
             </div>
@@ -222,17 +222,17 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="text" placeholder="Nombre" required/>
+                        <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias" [(ngModel)]="ingreso.nombreAlias" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="text" placeholder="Apellido paterno" required/>
+                        <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias" [(ngModel)]="ingreso.apellidoPaternoAlias" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control shadows" type="text" placeholder="Apellido materno" required/>
+                        <input class="form-control shadows" type="text" placeholder="Apellido materno" name="apellidoMaternoAlias" [(ngModel)]="ingreso.apellidoMaternoAlias"required/>
                     </div>
                 </div>
             </div>

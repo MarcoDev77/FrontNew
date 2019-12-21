@@ -13,15 +13,15 @@
           </div>
 
         <div class="row">
-            <div class="col-md-2 mb-3">
-                <h6> <i class="fa fa-folder fa-2x mr-2"> </i>DATOS OBTENIDOS</h6>
+            <div class="col-md-2">
+                <label><i class="fa fa-folder fa-2x mr-2" aria-hidden="true"></i> DATOS DEL EXPEDIENTE</label>
             </div>
-            <div class="col-md-10 align-text-bottom">
-                <hr style="background-color: #CE9ACB; height: 1px">
+            <div class="col-md-10">
+                <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>federal  </label>
+                    <label>{{ingreso.tipoImputado}}  </label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -31,12 +31,12 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Folio</label>
+                    <label>{{ingreso.folio}}</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Expediente</label>
+                    <label>{{ingreso.expediente}}</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -51,20 +51,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2  mb-3">
-                <h6> <i class="fa fa-male fa-2x mr-2"></i>DATOS GENERALES</h6>
+            <div class="col-md-2">
+                <label><i class="fa fa-male fa-2x mr-2" aria-hidden="true"></i> DATOS GENERALES</label>
             </div>
-            <div class="col-md-10 ">
-                <hr style="background-color: #CE9ACB; height: 1px">
+            <div class="col-md-10">
+                <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>CURP</label>
+                    <label>{{ingreso.curp}}</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>fecha <i class="fa fa-calendar ml-2 fa-sm"></i></label>
+                    <label>{{ingreso.fechaNacimiento}} <i class="fa fa-calendar ml-2 fa-sm"></i></label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -75,17 +75,17 @@
             <!-- Primera parte -->
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Juan</label>
+                    <label>{{ingreso.nombre}}</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Perez</label>
+                    <label>{{ingreso.apellidoPaterno}}</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Perez</label>
+                    <label>{{ingreso.apelidoMaterno}}</label>
                 </div>
             </div>
             <!-- Segunda parte -->
@@ -96,12 +96,12 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>nacionalidad</label>
+                    <label>{{ingreso.nacionalidad}}</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Religion</label>
+                    <label>{{religion}}</label>
                 </div>
             </div>
             <!-- Tercera parte -->
@@ -117,79 +117,79 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Ocupacion</label>
+                    <label>{{ingreso.ocupacion}}</label>
                 </div>
             </div>
 
             <!-- Cuarta parte -->
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Escolaridad</label>
+                    <label>{{ingreso.escolaridad}}</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Padre</label>
+                    <label>{{ingreso.padre}}</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Madre</label>
+                    <label>{{ingreso.madre}}</label>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2  mb-3">
-                <h6> <i class="fa fa-list-alt fa-2x mr-2"></i>DATOS DEL DELITO</h6>
+            <div class="col-md-2">
+                <label><i class="fa fa-file-text fa-2x mr-2" aria-hidden="true"></i> DATOS DEL DELITO</label>
             </div>
-            <div class="col-md-10 ">
-                <hr style="background-color: #CE9ACB; height: 1px">
+            <div class="col-md-10">
+                <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Delito</label>
+                    <label>{{ingreso.delito}}</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Fecha </label><i class="fa fa-calendar ml-2 fa-sm"></i>
+                    <label>{{ingreso.fechaDetencion}}</label><i class="fa fa-calendar ml-2 fa-sm"></i>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>FEcha <i class="fa fa-calendar ml-2 fa-sm"></i></label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2  mb-3">
-                <h6> <i class="fa fa-users fa-2x mr-2"></i>ALIAS</h6>
-            </div>
-            <div class="col-md-10 ">
-                <hr style="background-color: #CE9ACB; height: 1px">
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label>Pedro</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label>Lopez</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label>Lopez</label>
+                    <label>{{ingreso.fechaRegistro}} <i class="fa fa-calendar ml-2 fa-sm"></i></label>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2  mb-3">
-                <h6> <i class="fas fa-clipboard-check fa-2x mr-2"></i>DATOS A COMPLETAR</h6>
+              <div class="col-md-2">
+                    <label><i class="fa fa-users fa-2x mr-2" aria-hidden="true"></i> ALIAS</label>
+                </div>
+                <div class="col-md-10">
+                    <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
+                </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{ingreso.nombreAlias}}</label>
+                </div>
             </div>
-            <div class="col-md-10 ">
-                <hr style="background-color: #CE9ACB; height: 1px">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{ingreso.apellidoPaternoAlias}}</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{ingreso.apellidoMaternoAlias}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label><i class="fa fa-check fa-2x mr-2" aria-hidden="true"></i> DATOS A COMPLETAR</label>
+            </div>
+            <div class="col-md-10">
+                <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
             </div>
             <div class="col-md-4">
                 <div class="form-group ">
