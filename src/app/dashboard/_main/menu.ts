@@ -7,6 +7,7 @@ export const ROUTES: RouteInfo[] = [
     collapse: 'tables',
     isCollapsed: true,
     children: [
+      { path: 'ingreso', title: 'Formulario de ingreso', ab: 'MF' },
       { path: 'mediafiliacion', title: 'Características', ab: 'MF' },
     ]
   },

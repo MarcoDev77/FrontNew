@@ -7,12 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IngresoComponent implements OnInit {
   public ingreso:any = {};
-
   constructor() { }
 
   ngOnInit() {
   }
 
-  submit(){}
+  submit(){
+    console.log("entra al metodo")
+    console.log (this.ingreso);
+  }
 
 }

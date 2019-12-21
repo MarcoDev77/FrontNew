@@ -1,4 +1,16 @@
-<div class="" style="padding: 20px;">
+<div class="row">
+    <div class="offset-md-1 col-8 col-md-10">
+      <div style="padding: 20px" class="card shadows">
+    <div class="row">
+        <div class="col-12 text-center pb-5">
+          <label class="pr-4" style="color: #8f2d94;">Formulario de ingreso</label>
+          <label class="pr-4">Característica</label>
+          <label class="pr-4">Señas particulares</label>
+          <label class="pr-4" >Dactiloscopia</label>
+          <label class="pr-4">Referencias</label>
+          <label>Situación penal</label>
+        </div>
+      </div>
     <form >
         <!--Datos expediente-->
         <div>
@@ -13,37 +25,37 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control" id="tipoInputado" required>
+                        <select class="form-control shadows" name="tipoInputado" required [(ngModel)]="ingreso.tipoInputado"> 
                             <option selected>Tipo de inputado</option>
-                            <option value="1">Federal</option>
-                            <option value="2">Estatal</option>
+                            <option value="Federal">Federal</option>
+                            <option value="Estatal">Estatal</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control" id="categoria" required>
+                        <select class="form-control shadows" id="categoria" required>
                             <option selected>Categoría</option>
-                            <option value="1">Primo delincuente</option>
-                            <option value="2">Reincidente</option>
+                            <option value="Primo delincuente">Primo delincuente</option>
+                            <option value="Reincidente">Reincidente</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" placeholder="Folio" type="text" required/>
+                        <input class="form-control shadows" placeholder="Folio" name="folio" type="text"  [(ngModel)]="ingreso.folio"required/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" placeholder="Número de expediente" type="number" required/>
+                        <input class="form-control shadows" placeholder="Número de expediente" type="number" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control" id="tipoIngreso" required>
+                        <select class="form-control shadows" id="tipoIngreso" required>
                             <option selected>Tipo de ingreso</option>
                             <option value="1">Primo delincuente</option>
                             <option value="2">Reincidente</option>
@@ -64,29 +76,29 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group shadows">
                         <input class="form-control" type="text" placeholder="CURP" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group shadows">
                         <input type="date" class="form-control" placeholder="Fecha de nacimiento" required/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group shadows">
                         <input class="form-control" type="text" placeholder="Nombre" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group shadows">
                         <input class="form-control" type="text" placeholder="Apellido paterno" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group shadows">
                         <input class="form-control" type="text" placeholder="Apellido materno" required/>
                     </div>
                 </div>
@@ -94,7 +106,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control" id="genero" required>
+                        <select class="form-control shadows" id="genero" required>
                             <option selected>Género</option>
                             <option value="Masculino">Masculino</option>
                             <option value="Femenino">Femenino</option>
@@ -103,19 +115,19 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Nacionalidad" required/>
+                        <input class="form-control shadows" type="text" placeholder="Nacionalidad" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Religión" required/>
+                        <input class="form-control shadows" type="text" placeholder="Religión" required/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control" id="estadoCivil" required>
+                        <select class="form-control shadows" id="estadoCivil" required>
                             <option selected>Estado civil</option>
                             <option value="Soltero(a)">Soltero(a)</option>
                             <option value="Comprometido(a)">Comprometido(a)</option>
@@ -129,7 +141,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <select class="form-control" id="numeroHijos" required>
+                        <select class="form-control shadows" id="numeroHijos" required>
                             <option selected>Número de hijos</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -147,24 +159,24 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Ocupación" required/>
+                        <input class="form-control shadows" type="text" placeholder="Ocupación" required/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Escolaridad" required/>
+                        <input class="form-control shadows" type="text" placeholder="Escolaridad" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Nombre del padre" required/>
+                        <input class="form-control shadows" type="text" placeholder="Nombre del padre" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Nombre de la madre" required/>
+                        <input class="form-control shadows" type="text" placeholder="Nombre de la madre" required/>
                     </div>
                 </div>
             </div>
@@ -182,17 +194,17 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Delito" required/>
+                        <input class="form-control shadows" type="text" placeholder="Delito" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="date" placeholder="Fecha de detención" required/>
+                        <input class="form-control shadows" type="date" placeholder="Fecha de detención" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="date" placeholder="Fecha de registro" required/>
+                        <input class="form-control shadows" type="date" placeholder="Fecha de registro" required/>
                     </div>
                 </div>
             </div>
@@ -210,24 +222,24 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Nombre" required/>
+                        <input class="form-control shadows" type="text" placeholder="Nombre" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Apellido paterno" required/>
+                        <input class="form-control shadows" type="text" placeholder="Apellido paterno" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Apellido materno" required/>
+                        <input class="form-control shadows" type="text" placeholder="Apellido materno" required/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Otros nombres/alias" required/>
+                        <input class="form-control shadows" type="text" placeholder="Otros nombres/alias" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -240,11 +252,13 @@
         <!--Footer-->
         <div class="row">
             <div class="col-md-12 text-right">
-                <button class="btn btn-success" style="width: 15rem;" type="submit">Continuar</button>
+                <button class="btn btn-success" style="width: 15rem;" (click)="submit()" type="submit">Continuar</button>
             </div>
         </div>
     </form>
-</div>
 
+</div>
+</div>
+</div>
 
 <!--name="form1" (ngSubmit)="f1.form1.valid && submit()" #f1="ngForm" novalidate-->
