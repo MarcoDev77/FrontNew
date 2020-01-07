@@ -1,5 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthenticationService} from '@shared/services/authentication.service';
+import {User} from '@shared/models/user';
+import {first} from 'rxjs/operators';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -8,21 +12,63 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  public user: any;
+  isLoading = false;
+  returnUrl: string;
+  error = '';
+  user: User = new User();
+  email: any;
+  token: any;
   login = true;
   recover = true;
-  email: any;
+  @ViewChild('tokenModal', {static: false}) public tokenModal: NgbModal;
 
-  constructor(private router: Router) {
-    this.user = {} as any;
-    this.user.rol = '';
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/']);
+    }
   }
 
   ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
 
-  onSubmit() {
-    this.router.navigate(['/dashboard/ingreso']);
+  async onSubmit() {
+    // return console.log('USER', this.user);
+    // this.router.navigate(['/dashboard/ingreso']);
+    // this.loading = true;
+    // try {
+    //   this.isLoading = true;
+    //   const data = await this.authenticationService.login(this.user.username, this.user.password, this.token).pipe(first());
+    //   console.log(data);
+    // } catch (e) {
+    //   console.log(e);
+    // } finally {
+    //   this.isLoading = false;
+    // }
+    this.isLoading = true;
+    this.authenticationService.login(this.user.username, this.user.password, this.user.token).pipe(first()).subscribe(user => {
+        this.isLoading = false;
+        if (user) {
+
+          // for (let [key, value] of Object.entries(roles)) {
+          //   if ((user.roles[0] === value.role)) {
+          this.router.navigate(['/dashboard/' + 'mediafiliacion']);
+          //   }
+          // }
+        }
+      },
+      error => {
+        alert('Acceso denegado!');
+        console.log(error);
+        this.error = error;
+        this.isLoading = false;
+      }, () => {
+        console.log('complete');
+      });
   }
 
   composeEmail() {

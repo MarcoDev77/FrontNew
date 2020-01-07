@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {ROUTES} from '@dashboard/_main/menu';
+import {AuthenticationService} from '@shared/services/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -26,7 +27,9 @@ export class HeaderComponent implements OnInit {
   constructor(
     location: Location,
     private router: Router,
-    private element: ElementRef,) {
+    private element: ElementRef,
+    private authenticationService: AuthenticationService
+  ) {
     this.location = location;
     this.sidebarVisible = false;
     this.date = new Date();
@@ -153,6 +156,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigate(['/']);
+    this.authenticationService.logout();
   }
 }

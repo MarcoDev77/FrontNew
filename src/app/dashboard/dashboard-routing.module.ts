@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, Route } from '@angular/router';
+import {AuthGuard} from '@shared/helpers/auth.guard';
+import {roles as r} from '../shared/helpers/roles';
 // App
 import {MainComponent} from './_main/main.component';
 import {DatosAnexosComponent} from '../datos-anexos/datos-anexos.component';
@@ -11,16 +13,16 @@ const routes: Routes = [
   {
     path: '', component: MainComponent, children: [
       {
-        path: 'mediafiliacion', component: MediaFiliacionComponent,
+        path: 'mediafiliacion', component: MediaFiliacionComponent, data: {expectedRole: [r.test.role]}
       },
       {
-        path: 'datosAnexos', component: DatosAnexosComponent,
+        path: 'datosAnexos', component: DatosAnexosComponent, canActivate: [AuthGuard], data: {expectedRole: [r.admin.role]}
       },
       {
-        path: 'ingreso', component: IngresoComponent
+        path: 'ingreso', component: IngresoComponent, canActivate: [AuthGuard], data: {expectedRole: [r.test.role]}
       },
       {
-        path: 'dactiloscopia', component: DactiloscapiaComponent,
+        path: 'dactiloscopia', component: DactiloscapiaComponent, canActivate: [AuthGuard], data: {expectedRole: [r.test.role]}
       }
     ]
   },
