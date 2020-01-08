@@ -23,7 +23,10 @@ const routes: Routes = [
       },
       {
         path: 'dactiloscopia', component: DactiloscapiaComponent, canActivate: [AuthGuard], data: {expectedRole: [r.test.role]}
-      }
+      },
+      {
+        path: 'catalogo', loadChildren: './catalogos/catalogos.module#CatalogosModule'
+      },
     ]
   },
 

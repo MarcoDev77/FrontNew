@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ROUTES} from '../../dashboard/_main/menu';
+import {AuthenticationService} from '@shared/services/authentication.service';
 
 var misc: any = {
   sidebar_mini_active: false
@@ -16,16 +17,27 @@ export class SidebarComponent implements OnInit {
   public time: any;
   public currentUser: any;
 
-  constructor() {
+  constructor(
+    private authenticationService: AuthenticationService
+  ) {
     this.menuItems = [];
   }
 
   ngOnInit() {
+    const userRoles = this.authenticationService.getUser().roles;
+    console.table(userRoles);
     const items = ROUTES.filter(menuItem => menuItem);
     for (const item of items) {
-      this.menuItems.push(item);
+      if (item.roles && item.roles.includes('ALL')) {
+        this.menuItems.push(item);
+        continue;
+      }
+      for (const role of userRoles) {
+        if (item.roles && item.roles.includes(role)) {
+          this.menuItems.push(item);
+        }
+      }
     }
-
   }
 
   sleep(milliseconds) {

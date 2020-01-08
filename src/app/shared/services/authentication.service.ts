@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {EncrDecrService} from '@shared/helpers/encr-decr.service';
 import {environment} from '@environment/environment';
 import {Router} from '@angular/router';
+import {User} from '@shared/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -66,7 +67,7 @@ export class AuthenticationService {
     }));
   }
 
-  getUser() {
+  getUser(): User {
     try {
       return JSON.parse(this.kryptoService.get(sessionStorage.getItem('currentUser')));
     } catch (e) {

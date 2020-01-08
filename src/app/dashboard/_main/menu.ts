@@ -1,38 +1,62 @@
+import {roles as r} from '../../shared/helpers/roles';
 export const ROUTES: RouteInfo[] = [
+  // {
+  //   roles: [
+  //     r.test.role,
+  //     r.admin.role,
+  //   ],
+  //   path: '/dashboard',
+  //   title: 'INGRESOS',
+  //   type: 'sub',
+  //   icontype: 'fa fa-arrow-circle-o-right',
+  //   collapse: 'tables',
+  //   isCollapsed: true,
+  //   children: [
+  //     { path: 'ingreso', title: 'Formulario de ingreso', ab: 'FI' },
+  //     /* { path: 'datosAnexos', title: 'Señas particulares', ab: 'SP' }, */
+  //     { path: 'mediafiliacion', title: 'Características', ab: 'MF' },
+  //     { path: 'dactiloscopia', title: 'Dactiloscopia', ab: 'DP' },
+  //   ]
+  // },
+  // {
+  //   roles: [
+  //     r.consultor.role
+  //   ],
+  //   path: '/dashboard/denuncia',
+  //   title: 'JURIDICO',
+  //   type: 'sub',
+  //   icontype: 'now-ui-icons ui-1_zoom-bold',
+  //   collapse: 'tables',
+  //   isCollapsed: true,
+  //   children: [
+  //     { path: 'nuevas', title: 'FORMATOS', ab: 'FM' },
+  //   ]
+  // },
+  // {
+  //   roles: [
+  //     r.admin.role
+  //   ],
+  //   path: '/dashboard/expediente',
+  //   title: 'SERVICIO SOCIAL',
+  //   type: 'link',
+  //   icontype: 'now-ui-icons files_box'
+  // },
   {
-    path: '/dashboard',
-    title: 'INGRESOS',
-    type: 'sub',
-    icontype: 'fa fa-arrow-circle-o-right',
-    collapse: 'tables',
-    isCollapsed: true,
-    children: [
-      { path: 'ingreso', title: 'Formulario de ingreso', ab: 'FI' },
-      /* { path: 'datosAnexos', title: 'Señas particulares', ab: 'SP' }, */
-      { path: 'mediafiliacion', title: 'Características', ab: 'MF' },
-      { path: 'dactiloscopia', title: 'Dactiloscopia', ab: 'DP' },
-    ]
-  },
-  {
-    path: '/dashboard/denuncia',
-    title: 'JURIDICO',
+    roles: ['ALL'],
+    path: '/dashboard/catalogo',
+    title: 'CATALOGOS',
     type: 'sub',
     icontype: 'now-ui-icons ui-1_zoom-bold',
     collapse: 'tables',
     isCollapsed: true,
     children: [
-      { path: 'nuevas', title: 'FORMATOS', ab: 'FM' },
+      { path: 'centro-penitenciario', title: 'CENTROS PENITENCIARIOS', ab: 'CP' },
     ]
-  },
-  {
-    path: '/dashboard/expediente',
-    title: 'SERVICIO SOCIAL',
-    type: 'link',
-    icontype: 'now-ui-icons files_box'
   },
 ];
 
 export interface RouteInfo {
+  roles: string[];
   path: string;
   title: string;
   type: string;

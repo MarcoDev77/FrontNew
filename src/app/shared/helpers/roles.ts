@@ -9,5 +9,10 @@ export const roles = {
     name: 'Super Adminstrador',
     main: 'dactiloscopia'
   },
+  consultor: {
+    role: 'ROLE_CONSULTOR',
+    name: 'Consultor',
+    main: 'dactiloscopia'
+  },
 };
 

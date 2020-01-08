@@ -1,12 +1,12 @@
-  import {NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {MainComponent} from './_main/main.component';
-import {SharedModule} from '../shared/shared.module';
-import { MediaFiliacionComponent } from './media-filiacion/media-filiacion.component';
+import {SharedModule} from '@shared/shared.module';
+import {MediaFiliacionComponent} from './media-filiacion/media-filiacion.component';
 import {DatosAnexosComponent} from '../datos-anexos/datos-anexos.component';
-import { IngresoComponent } from '../ingreso/ingreso.component';
+import {IngresoComponent} from '../ingreso/ingreso.component';
 import {DactiloscapiaComponent} from '../dactiloscapia/dactiloscapia.component';
 
 
@@ -16,7 +16,7 @@ import {DactiloscapiaComponent} from '../dactiloscapia/dactiloscapia.component';
     MediaFiliacionComponent,
     DatosAnexosComponent,
     IngresoComponent,
-    DactiloscapiaComponent
+    DactiloscapiaComponent,
   ],
   imports: [
     CommonModule,

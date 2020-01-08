@@ -7,11 +7,22 @@ import {RouterModule} from '@angular/router';
 import {LoaderComponent} from './loader/loader.component';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SelectComponent } from './select/select.component';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {OrderModule} from 'ngx-order-pipe';
+import {SelectDropDownModule} from 'ngx-select-dropdown';
+import {NgxMaskModule} from 'ngx-mask';
 
 const MODULES = [
   FormsModule,
   RouterModule,
   NgbModule,
+  Ng2SearchPipeModule,
+  SelectDropDownModule,
+  NgxMaskModule,
+  OrderModule,
+  NgxPaginationModule
 ];
 
 const COMPONENTS = [
@@ -23,8 +34,8 @@ const COMPONENTS = [
 
 @NgModule({
   imports: [CommonModule, ...MODULES],
-  exports: [CommonModule, ...COMPONENTS, ...MODULES],
-  declarations: [...COMPONENTS],
+  exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent],
+  declarations: [...COMPONENTS, SelectComponent],
 })
 export class SharedModule {
 }
