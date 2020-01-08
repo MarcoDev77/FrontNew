@@ -5,11 +5,12 @@ import { CentroPenitenciarioComponent } from './centro-penitenciario/centro-peni
 import {SharedModule} from '@shared/shared.module';
 import {CatalogosRoutingModule} from '@dashboard/catalogos/catalogos-routing.module';
 import { FormsModule } from '@angular/forms';
+import { ModalidadDelitoComponent } from './modalidad-delito/modalidad-delito.component';
 
 
 
 @NgModule({
-  declarations: [RootComponent, CentroPenitenciarioComponent],
+  declarations: [RootComponent, CentroPenitenciarioComponent, ModalidadDelitoComponent],
   imports: [
     CommonModule,
     SharedModule,
