@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {RootComponent} from '@dashboard/catalogos/_root/root.component';
 import {CentroPenitenciarioComponent} from '@dashboard/catalogos/centro-penitenciario/centro-penitenciario.component';
 import {ModalidadDelitoComponent} from '@dashboard/catalogos/modalidad-delito/modalidad-delito.component';
+import {DelitoComponent} from '@dashboard/catalogos/delito/delito.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'centro-penitenciario', pathMatch: 'full' },
       {path: 'centro-penitenciario', component: CentroPenitenciarioComponent},
-      {path: 'modalidad-delito', component: ModalidadDelitoComponent}
+      {path: 'modalidad-delito', component: ModalidadDelitoComponent},
+      {path: 'delito', component: DelitoComponent}
     ]
   },
 ];

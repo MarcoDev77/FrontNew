@@ -1,23 +1,25 @@
 import {Component, OnInit} from '@angular/core';
-import {CatalogosService} from '@shared/services/catalogos.service';
-import {ModalidadDelito} from '@shared/models/ModalidadDelito';
 import Swal from 'sweetalert2';
+import {ModalidadDelito} from '@shared/models/ModalidadDelito';
+import {Delito} from '@shared/models/Delito';
+import {CatalogosService} from '@shared/services/catalogos.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
 
 @Component({
-  selector: 'app-modalidad-delito',
-  templateUrl: './modalidad-delito.component.html',
-  styleUrls: ['./modalidad-delito.component.scss']
+  selector: 'app-delito',
+  templateUrl: './delito.component.html',
+  styleUrls: ['./delito.component.scss']
 })
-export class ModalidadDelitoComponent implements OnInit {
+export class DelitoComponent implements OnInit {
 
   public isLoading = false;
   public item: any;
   public selectedRow: Number;
   public setClickedRow: Function;
-  public data: ModalidadDelito[];
-  public modalidadDelito: ModalidadDelito;
-  public roles: any;
+  public data: Delito[];
+  public delito: Delito;
+  public modalidadesDelito: any[];
 
   public date;
   public auxId: any;
@@ -29,10 +31,9 @@ export class ModalidadDelitoComponent implements OnInit {
   public reverse = true;
 
   constructor(private catalogosService: CatalogosService) {
-    this.modalidadDelito = {} as ModalidadDelito;
     this.data = [];
-    this.date = new Date();
-    this.roles = [];
+    this.delito = {} as Delito;
+    this.modalidadesDelito = [];
 
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
@@ -41,51 +42,36 @@ export class ModalidadDelitoComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
+    this.getModalidadDelito();
   }
 
-  delte(item) {
-    Swal.fire({
-      title: '¿Estas seguro?',
-      text: 'El registro se eliminará.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'Cancelar'
-    }).then(result => {
-      if (result.value) {
-        this.catalogosService.deleteModalidadDelito(item.id).subscribe((data: any) => {
-          console.log(data);
-          Swal.fire({
-            title: data.error ? 'Error!' : 'Eliminado',
-            text: data.mensaje,
-            icon: data.error ? 'error' : 'success',
-            timer: 1300,
-            showConfirmButton: false
-          }).finally(() => {
-            if (!data.error) {
-              this.cancel();
-              this.getData();
-            }
-          });
-        });
-      }
-    });
-  }
   getData() {
     this.isLoading = true;
-    this.catalogosService.listModalidadDelito().subscribe((data: any) => {
+    this.catalogosService.listDelito().subscribe((data: any) => {
       this.isLoading = false;
       console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
-        this.data = data.modalidadesDelito;
+        this.data = data.delitos;
       }
     });
   }
+
+  getModalidadDelito() {
+    this.catalogosService.listModalidadDelito().subscribe((data: any) => {
+      if (data.modalidadesDelito) {
+        for (const modalidad of data.modalidadesDelito) {
+          this.modalidadesDelito = [...this.modalidadesDelito, {value: modalidad.id, description: modalidad.nombre}];
+        }
+        console.log('Modalidades', this.modalidadesDelito);
+      }
+    });
+  }
+
   submit(array) {
     if (this.validateFiels(array)) {
-      this.catalogosService.saveModalidadDelito(this.modalidadDelito).subscribe((data: any) => {
+      this.catalogosService.saveDelito(this.delito).subscribe((data: any) => {
         console.log('ADD', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
@@ -132,8 +118,8 @@ export class ModalidadDelitoComponent implements OnInit {
 
   update(id, item) {
     this.isForm = true;
-    this.modalidadDelito = {...item};
-    // this.areaPericial.role = [{value: item.role, description: item.roleNombre}];
+    this.delito = {...item};
+    this.delito.modalidadDelitoSelect = [{value: item.modalidadDelito.id, description: item.modalidadDelito.nombre}];
 
     if (this.auxId && this.auxId !== id) {
       this.showTr();
@@ -153,7 +139,7 @@ export class ModalidadDelitoComponent implements OnInit {
   cancel() {
     this.showTr();
     this.isForm = false;
-    this.modalidadDelito = {} as ModalidadDelito;
+    this.delito = {} as Delito;
   }
 
   switch(e) {
@@ -186,27 +172,26 @@ export class ModalidadDelitoComponent implements OnInit {
     }
   }
 
-  toggleStatus(item: ModalidadDelito) {
+  toggleStatus(item: CentroPenitenciario) {
     Swal.fire({
       title: '¿Estas seguro?',
-      text: 'El registro se eliminará.',
+      text: 'El estatus del registro cambiará.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
     }).then(({value}) => {
       if (value) {
-        this.catalogosService.changeEstatusModalidadDelito(item.id).subscribe((data: any) => {
+        this.catalogosService.deleteDelito(item.id).subscribe((data: any) => {
           console.log(data);
           Swal.fire({
-            title: data.error ? 'Error!' : 'Eliminado',
+            title: data.error ? 'Error!' : 'Actualizado',
             text: data.mensaje,
             icon: data.error ? 'error' : 'success',
             timer: 1300,
             showConfirmButton: false
           }).finally(() => {
             if (!data.error) {
-              this.cancel();
               this.getData();
             }
           });
@@ -214,4 +199,5 @@ export class ModalidadDelitoComponent implements OnInit {
       }
     });
   }
+
 }

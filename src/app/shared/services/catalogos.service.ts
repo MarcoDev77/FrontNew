@@ -3,6 +3,7 @@ import {environment} from '@environment/environment';
 import {HttpClient} from '@angular/common/http';
 import {ModalidadDelito} from '@shared/models/ModalidadDelito';
 import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
+import {Delito} from '@shared/models/Delito';
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +65,23 @@ export class CatalogosService {
     return this.http.get(`${this.url}/api/listarEstados?region=${region}&paisId=${idPais}`);
   }
   listMunicipios(region, idEstado) {
-    console.log('URL', `${this.url}/api/listarMunicipios?region=${region}&estadoId=${idEstado}`);
     return this.http.get(`${this.url}/api/listarMunicipios?region=${region}&estadoId=${idEstado}`);
+  }
+  // DELITO
+  listDelito() {
+    return this.http.get(`${this.url}/api/listarTipoDelitos`);
+  }
+  saveDelito(model: Delito) {
+    model.id = model.id ? model.id : null;
+    model.estatus = model.estatus ? model.estatus : true;
+    model.modalidadDelito = {
+      id: model.modalidadDelitoSelect.value
+    };
+    this.data = model;
+    console.log('To server', this.data);
+    return this.http.post(`${this.url}/api/registrarTipoDelito`, this.data);
+  }
+  deleteDelito(id) {
+    return this.http.get(`${this.url}/api/actualizarEstatusTipoDelito?delitoId=${id}`);
   }
 }

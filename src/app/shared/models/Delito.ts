@@ -3,4 +3,5 @@ export class Delito {
   nombre: string;
   estatus: boolean;
   modalidadDelito: any;
+  modalidadDelitoSelect: any;
 }
