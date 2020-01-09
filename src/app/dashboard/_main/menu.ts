@@ -53,6 +53,9 @@ export const ROUTES: RouteInfo[] = [
       { path: 'centro-penitenciario', title: 'CENTROS PENITENCIARIOS', ab: 'CP' },
       { path: 'modalidad-delito', title: 'MODALIDAD DE DELITO', ab: 'MD' },
       { path: 'delito', title: 'DELITOS', ab: 'DE' },
+      { path: 'tipo-libertad', title: 'TIPO DE LIBERTAD', ab: 'TL' },
+      { path: 'clasificacion-juridica', title: 'CLASIFICACION JURIDICA', ab: 'CJ' },
+      { path: 'enfermedad-cronica', title: 'ENFERMEDAD CRONICA', ab: 'EC' }
     ]
   },
 ];

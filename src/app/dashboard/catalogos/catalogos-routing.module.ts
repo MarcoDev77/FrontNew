@@ -4,6 +4,9 @@ import {RootComponent} from '@dashboard/catalogos/_root/root.component';
 import {CentroPenitenciarioComponent} from '@dashboard/catalogos/centro-penitenciario/centro-penitenciario.component';
 import {ModalidadDelitoComponent} from '@dashboard/catalogos/modalidad-delito/modalidad-delito.component';
 import {DelitoComponent} from '@dashboard/catalogos/delito/delito.component';
+import { TipoLibertadComponent } from './tipo-libertad/tipo-libertad.component';
+import { ClasificacionJuridicaComponent } from './clasificacion-juridica/clasificacion-juridica.component';
+import { EnfermedadCronicaComponent } from './enfermedad-cronica/enfermedad-cronica.component';
 
 const routes: Routes = [
   {
@@ -12,7 +15,10 @@ const routes: Routes = [
       { path: '', redirectTo: 'centro-penitenciario', pathMatch: 'full' },
       {path: 'centro-penitenciario', component: CentroPenitenciarioComponent},
       {path: 'modalidad-delito', component: ModalidadDelitoComponent},
-      {path: 'delito', component: DelitoComponent}
+      {path: 'delito', component: DelitoComponent},
+      {path: 'tipo-libertad', component:TipoLibertadComponent},
+      {path: 'clasificacion-juridica', component: ClasificacionJuridicaComponent},
+      {path: 'enfermedad-cronica',component: EnfermedadCronicaComponent}
     ]
   },
 ];

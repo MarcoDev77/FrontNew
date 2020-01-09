@@ -4,6 +4,9 @@ import {HttpClient} from '@angular/common/http';
 import {ModalidadDelito} from '@shared/models/ModalidadDelito';
 import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
 import {Delito} from '@shared/models/Delito';
+import { TipoLibertad } from '@shared/models/TipoLibertdad';
+import { ClasificacionJuridica } from '@shared/models/ClasificacionJuridica';
+import { EnfermedadCronica } from '@shared/models/EnfermedadCronica';
 
 @Injectable({
   providedIn: 'root'
@@ -84,4 +87,46 @@ export class CatalogosService {
   deleteDelito(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusTipoDelito?delitoId=${id}`);
   }
+
+  //TIPO DE LIBERTDAD
+
+  listTipoLibertad(){
+    return this.http.get(`${this.url}/api/listarTipoLibertades`);
+  }
+
+  saveTipoLibertad(model: TipoLibertad){
+    return this.http.post(`${this.url}/api/registrarTipoLibertad`, model);
+  }
+
+  changeStatusTipoDelito(id){
+    return this.http.get(`${this.url}/api/actualizarEstatusTipoLibertad?tipoId=${id}`);
+  }
+
+  //CLASIFICACION JURIDICA
+
+  listClasificacionJuridica(){
+    return this.http.get(`${this.url}/api/listarClasificacionesJuridicas`);
+  }
+
+  saveClasificacionJuridica(model: ClasificacionJuridica){
+    return this.http.post(`${this.url}/api/registrarClasificacionJuridica`, model);
+  }
+
+  changeStatusClasificacionJuridica(id){
+    return this.http.get(`${this.url}/api/actualizarEstatusClasificacionJuridica?clasificacionId=${id}`);
+  }
+
+  //ENFERMEDAD CRONICA
+  listEnfermedadCronica(){
+    return this.http.get(`${this.url}/api/listarEnfermedadesCronicas`);
+  }
+
+  saveEnfermedadCronica(model: EnfermedadCronica){
+    return this.http.post(`${this.url}/api/registrarEnfermedadCronica  `, model);
+  }
+
+  changeStatusEnfermedadCronica(id){
+    return this.http.get(`${this.url}/api/actualizarEstatusEnfermedadCronica?enfermedadId=${id}`);
+  }
+
 }

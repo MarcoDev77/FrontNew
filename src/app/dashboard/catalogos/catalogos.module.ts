@@ -7,11 +7,14 @@ import {CatalogosRoutingModule} from '@dashboard/catalogos/catalogos-routing.mod
 import { FormsModule } from '@angular/forms';
 import { ModalidadDelitoComponent } from './modalidad-delito/modalidad-delito.component';
 import { DelitoComponent } from './delito/delito.component';
+import { TipoLibertadComponent } from './tipo-libertad/tipo-libertad.component';
+import { ClasificacionJuridicaComponent } from './clasificacion-juridica/clasificacion-juridica.component';
+import { EnfermedadCronicaComponent } from './enfermedad-cronica/enfermedad-cronica.component';
 
 
 
 @NgModule({
-  declarations: [RootComponent, CentroPenitenciarioComponent, ModalidadDelitoComponent, DelitoComponent],
+  declarations: [RootComponent, CentroPenitenciarioComponent, ModalidadDelitoComponent, DelitoComponent, TipoLibertadComponent, ClasificacionJuridicaComponent, EnfermedadCronicaComponent],
   imports: [
     CommonModule,
     SharedModule,
