@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '@shared/services/authentication.service';
-import {User} from '@shared/models/user';
+import {User} from '@shared/models/User';
 import {first} from 'rxjs/operators';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
           // for (let [key, value] of Object.entries(roles)) {
           //   if ((user.roles[0] === value.role)) {
-          this.router.navigate(['/dashboard/' + 'mediafiliacion']);
+          this.router.navigate(['dashboard/catalogo/centro-penitenciario']);
           //   }
           // }
         }

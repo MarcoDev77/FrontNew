@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {EncrDecrService} from '@shared/helpers/encr-decr.service';
 import {environment} from '@environment/environment';
 import {Router} from '@angular/router';
-import {User} from '@shared/models/user';
+import {User} from '@shared/models/User';
 
 @Injectable({
   providedIn: 'root'

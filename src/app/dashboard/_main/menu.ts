@@ -46,7 +46,7 @@ export const ROUTES: RouteInfo[] = [
     path: '/dashboard/catalogo',
     title: 'CATALOGOS',
     type: 'sub',
-    icontype: 'now-ui-icons ui-1_zoom-bold',
+    icontype: 'fa fa-files-o',
     collapse: 'tables',
     isCollapsed: true,
     children: [

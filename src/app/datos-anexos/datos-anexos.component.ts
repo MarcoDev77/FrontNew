@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 @Component({
   selector: 'app-datos-anexos',
   templateUrl: './datos-anexos.component.html',
@@ -15,13 +15,13 @@ export class DatosAnexosComponent implements OnInit {
 
   }
   submit(){
-    console.log(":)") 
-    Swal.fire(
-      'Guardado',
-      'Datos guardados con exito',
-      'success'
-      
-    );
+    console.log(":)")
+    // Swal.fire(
+    //   'Guardado',
+    //   'Datos guardados con exito',
+    //   'success'
+    //
+    // );
     this.router.navigate(['/dashboard/dactiloscopia/'])
   }
 }

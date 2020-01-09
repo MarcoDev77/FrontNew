@@ -22,7 +22,7 @@ const MODULES = [
   SelectDropDownModule,
   NgxMaskModule,
   OrderModule,
-  NgxPaginationModule
+  NgxPaginationModule,
 ];
 
 const COMPONENTS = [
