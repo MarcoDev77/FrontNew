@@ -86,6 +86,7 @@ export class AuthenticationService {
 
   logout() {
     sessionStorage.clear();
+    localStorage.clear();
     this.currentUserSubject.next(null);
     this.router.navigate(['/']);
   }

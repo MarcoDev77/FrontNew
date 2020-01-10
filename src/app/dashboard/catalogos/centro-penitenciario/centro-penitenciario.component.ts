@@ -47,6 +47,11 @@ export class CentroPenitenciarioComponent implements OnInit {
   }
 
   ngOnInit() {
+    const logged = localStorage.getItem('logged');
+    if (!logged) {
+      location.reload();
+      localStorage.setItem('logged', 'logged');
+    }
     this.getData();
     this.getEstados('mexico', null);
     // this.getMunicipios('morelos', null);
