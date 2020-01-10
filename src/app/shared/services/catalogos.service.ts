@@ -10,6 +10,7 @@ import {EnfermedadCronica} from '@shared/models/EnfermedadCronica';
 import {MotivoReubicacion} from '@shared/models/MotivoReubicacion';
 import {Dormitorio} from '@shared/models/Dormitorio';
 import {TipoActividad} from '@shared/models/TipoActividad';
+import {Actividad} from '@shared/models/Actividad';
 
 @Injectable({
   providedIn: 'root'
@@ -185,6 +186,19 @@ export class CatalogosService {
   }
   changeStatusTipoActividad(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusTipoActividad?tipoId=${id}`);
+  }
+
+  // ACTIVIDAD
+  listActividad(id) {
+    return this.http.get(`${this.url}/api/listarActividades?tipoId=${id}`);
+  }
+  saveActividad(model: Actividad) {
+    model.id = model.id ? model.id : null;
+    console.log('To server', model);
+    return this.http.post(`${this.url}/api/registrarActividad`, model);
+  }
+  changeStatusActividad(id) {
+    return this.http.get(`${this.url}/api/actualizarEstatusActividad?actividadId=${id}`);
   }
 }
 

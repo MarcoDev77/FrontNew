@@ -1,25 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {Dormitorio} from '@shared/models/Dormitorio';
+import { Component, OnInit } from '@angular/core';
+import {TipoActividad} from '@shared/models/TipoActividad';
 import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
 import {CatalogosService} from '@shared/services/catalogos.service';
 import {EncrDecrService} from '@shared/helpers/encr-decr.service';
-import Swal from 'sweetalert2';
-import {TipoActividad} from '@shared/models/TipoActividad';
 import {Router} from '@angular/router';
+import Swal from 'sweetalert2';
+import {Actividad} from '@shared/models/Actividad';
 
 @Component({
-  selector: 'app-tipo-actividad',
-  templateUrl: './tipo-actividad.component.html',
-  styleUrls: ['./tipo-actividad.component.scss']
+  selector: 'app-actividad',
+  templateUrl: './actividad.component.html',
+  styleUrls: ['./actividad.component.scss']
 })
-export class TipoActividadComponent implements OnInit {
+export class ActividadComponent implements OnInit {
 
   public isLoading = false;
   public item: any;
   public selectedRow: number;
   public setClickedRow: Function;
-  public data: TipoActividad[];
-  public tipoActividad: TipoActividad;
+  public data: Actividad[];
+  public actividad: Actividad;
 
   public date;
   public auxId: any;
@@ -29,12 +29,12 @@ export class TipoActividadComponent implements OnInit {
   public filter;
   public key = 'id'; // set default
   public reverse = true;
-  public centroPenitenciario: CentroPenitenciario;
+  public tipoActividad: TipoActividad;
 
-  constructor(private catalogosService: CatalogosService, private kryptoService: EncrDecrService, private router: Router) {
+  constructor(private catalogosService: CatalogosService, private kryptoService: EncrDecrService) {
     this.data = [];
-    this.tipoActividad = {} as TipoActividad;
-    this.centroPenitenciario = JSON.parse(this.kryptoService.get(sessionStorage.getItem('centroPenitenciario')));
+    this.actividad = {} as Actividad;
+    this.tipoActividad = JSON.parse(this.kryptoService.get(sessionStorage.getItem('tipoActividad')));
 
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
@@ -42,28 +42,28 @@ export class TipoActividadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getData(this.centroPenitenciario.id);
+    this.getData(this.tipoActividad.id);
   }
 
   getData(idCentro) {
     this.isLoading = true;
-    this.catalogosService.listTipoActividad(idCentro).subscribe((data: any) => {
+    this.catalogosService.listActividad(idCentro).subscribe((data: any) => {
       this.isLoading = false;
       console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
-        this.data = data.tipoActividades;
+        this.data = data.actividades;
       }
     });
   }
 
   submit(array) {
     if (this.validateFiels(array)) {
-      this.tipoActividad.centroPenitenciario = {
-        id: this.centroPenitenciario.id
+      this.actividad.tipoActividad = {
+        id: this.tipoActividad.id
       };
-      this.catalogosService.saveTipoActividad(this.tipoActividad).subscribe((data: any) => {
+      this.catalogosService.saveActividad(this.actividad).subscribe((data: any) => {
         console.log('ADD', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
@@ -74,7 +74,7 @@ export class TipoActividadComponent implements OnInit {
         });
         if (!data.error) {
           this.cancel();
-          this.getData(this.centroPenitenciario.id);
+          this.getData(this.tipoActividad.id);
         }
       });
     }
@@ -110,7 +110,7 @@ export class TipoActividadComponent implements OnInit {
 
   update(id, item) {
     this.isForm = true;
-    this.tipoActividad = {...item};
+    this.actividad = {...item};
 
     if (this.auxId && this.auxId !== id) {
       this.showTr();
@@ -130,7 +130,7 @@ export class TipoActividadComponent implements OnInit {
   cancel() {
     this.showTr();
     this.isForm = false;
-    this.tipoActividad = {} as TipoActividad;
+    this.actividad = {} as Actividad;
   }
 
   switch(e) {
@@ -173,7 +173,7 @@ export class TipoActividadComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then(({value}) => {
       if (value) {
-        this.catalogosService.changeStatusTipoActividad(item.id).subscribe((data: any) => {
+        this.catalogosService.changeStatusActividad(item.id).subscribe((data: any) => {
           console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Actualizado',
@@ -183,7 +183,7 @@ export class TipoActividadComponent implements OnInit {
             showConfirmButton: false
           }).finally(() => {
             if (!data.error) {
-              this.getData(this.centroPenitenciario.id);
+              this.getData(this.tipoActividad.id);
             }
           });
         });
@@ -191,8 +191,4 @@ export class TipoActividadComponent implements OnInit {
     });
   }
 
-  seeActividades(item: any) {
-    sessionStorage.setItem('tipoActividad', this.kryptoService.set(JSON.stringify(item)));
-    this.router.navigate(['/catalogo/centro-penitenciario/tipo-actividad/actividad']);
-  }
 }

@@ -1,8 +1,7 @@
 <div class="row">
   <div class="col-sm-3 text-center">
     <h5>Tipo de actividades</h5>
-    <h6>{{centroPenitenciario.clave}}</h6>
-    <h6>{{centroPenitenciario.nombre}}</h6>
+    <h6>{{tipoActividad.descripcion}}</h6>
   </div>
   <div class="col-sm-9">
     <hr style="background-color: #CE9ACB; height: 1px">
@@ -39,7 +38,7 @@
     <tr id="table-form" *ngIf="isForm">
 
       <td class="text-center">
-        <input name="descripcion" type="text" class="form-control" [(ngModel)]="tipoActividad.descripcion" placeholder="Clave"
+        <input name="descripcion" type="text" class="form-control" [(ngModel)]="actividad.descripcion" placeholder="Clave"
                #descripcion="ngModel" [ngClass]="{ 'is-invalid':  descripcion.touched && descripcion.invalid }" required>
       </td>
 
@@ -62,8 +61,7 @@
       <td class="text-center">{{item.descripcion}}</td>
       <td class="text-center">{{item.fechaActualizacion | date:'dd/MM/yy h:mm a'}}</td>
       <td class="text-center">
-        <i class="fa fa fa-bookmark" placement="top" ngbTooltip="Ver Actividades" (click)="seeActividades(item)"></i>
-        &nbsp;
+
         <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar" (click)="update('tr' + i , item)"></i>
         &nbsp;
         <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
