@@ -54,9 +54,9 @@ export const ROUTES: RouteInfo[] = [
       { path: 'modalidad-delito', title: 'MODALIDAD DE DELITO', ab: 'MD' },
       { path: 'delito', title: 'DELITOS', ab: 'DE' },
       { path: 'tipo-libertad', title: 'TIPO DE LIBERTAD', ab: 'TL' },
-      { path: 'clasificacion-juridica', title: 'CLASIFICACION JURIDICA', ab: 'CJ' },
-      { path: 'enfermedad-cronica', title: 'ENFERMEDAD CRONICA', ab: 'EC' },
-      { path: 'motivo-reubicacion', title: 'MOTIVO DE REUBICACION', ab: 'MR' }
+      { path: 'clasificacion-juridica', title: 'CLASIFICACIÓN JURÍDICA', ab: 'CJ' },
+      { path: 'enfermedad-cronica', title: 'ENFERMEDAD CRÓNICA', ab: 'EC' },
+      { path: 'motivo-reubicacion', title: 'MOTIVO DE REUBICACIÓN', ab: 'MR' }
     ]
   },
 ];
