@@ -189,7 +189,7 @@ export class ModalidadDelitoComponent implements OnInit {
   toggleStatus(item: ModalidadDelito) {
     Swal.fire({
       title: '¿Estas seguro?',
-      text: 'El registro se eliminará.',
+      text: 'El estatus del registro cambiará.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí',

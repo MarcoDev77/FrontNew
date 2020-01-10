@@ -163,7 +163,7 @@ export class TipoLibertadComponent implements OnInit {
   toggleStatus(item: TipoLibertad) {
     Swal.fire({
       title: '¿Estas seguro?',
-      text: 'El registro se eliminará.',
+      text: 'El estatus del registro cambiará.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí',
@@ -173,7 +173,7 @@ export class TipoLibertadComponent implements OnInit {
         this.catalogosService.changeStatusTipoDelito(item.id).subscribe((data: any) => {
           console.log(data);
           Swal.fire({
-            title: data.error ? 'Error!' : 'Eliminado',
+            title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
             icon: data.error ? 'error' : 'success',
             timer: 1300,

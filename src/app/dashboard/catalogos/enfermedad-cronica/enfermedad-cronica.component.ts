@@ -14,7 +14,7 @@ export class EnfermedadCronicaComponent implements OnInit {
   public item: any;
   public selectedRow: Number;
   public setClickedRow: Function;
-  public data: EnfermedadCronica[]; 
+  public data: EnfermedadCronica[];
   public enfermedadCronica : EnfermedadCronica
   public roles: any;
 
@@ -27,7 +27,7 @@ export class EnfermedadCronicaComponent implements OnInit {
   public filter;
   public key = 'id'; // set default
   public reverse = true;
-  constructor(private catalogosService: CatalogosService) { 
+  constructor(private catalogosService: CatalogosService) {
     this.enfermedadCronica = {} as EnfermedadCronica;
     this.data = [];
     this.date = new Date();
@@ -163,7 +163,7 @@ export class EnfermedadCronicaComponent implements OnInit {
     console.log(item)
     Swal.fire({
       title: '¿Estas seguro?',
-      text: 'El registro se eliminará.',
+      text: 'El estatus del registro cambiará.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí',
@@ -173,7 +173,7 @@ export class EnfermedadCronicaComponent implements OnInit {
         this.catalogosService.changeStatusEnfermedadCronica(item.id).subscribe((data: any) => {
           console.log(data);
           Swal.fire({
-            title: data.error ? 'Error!' : 'Eliminado',
+            title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
             icon: data.error ? 'error' : 'success',
             timer: 1300,

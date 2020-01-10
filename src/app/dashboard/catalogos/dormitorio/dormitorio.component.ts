@@ -175,7 +175,7 @@ export class DormitorioComponent implements OnInit {
         this.catalogosService.changeStatusDormitorio(item.id).subscribe((data: any) => {
           console.log(data);
           Swal.fire({
-            title: data.error ? 'Error!' : 'Actualizado',
+            title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
             icon: data.error ? 'error' : 'success',
             timer: 1300,
