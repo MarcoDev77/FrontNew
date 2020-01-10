@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import {CatalogosService} from '@shared/services/catalogos.service';
+import {Component, OnInit} from '@angular/core';
 import {TipoLibertad} from '@shared/models/TipoLibertdad';
-
+import {MotivoReubicacion} from '@shared/models/MotivoReubicacion';
+import {CatalogosService} from '@shared/services/catalogos.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-tipo-libertad',
-  templateUrl: './tipo-libertad.component.html',
-  styleUrls: ['./tipo-libertad.component.scss']
+  selector: 'app-motivo-reubicacion',
+  templateUrl: './motivo-reubicacion.component.html',
+  styleUrls: ['./motivo-reubicacion.component.scss']
 })
-export class TipoLibertadComponent implements OnInit {
+export class MotivoReubicacionComponent implements OnInit {
   public isLoading = false;
   public item: any;
   public selectedRow: Number;
   public setClickedRow: Function;
-  public data: TipoLibertad[];
-  public tipoLibertad: TipoLibertad
+  public data: MotivoReubicacion[];
+  public motivoReubicacion: MotivoReubicacion;
   public roles: any;
 
 
@@ -27,39 +27,35 @@ export class TipoLibertadComponent implements OnInit {
   public filter;
   public key = 'id'; // set default
   public reverse = true;
+
   constructor(private catalogosService: CatalogosService) {
-    this.tipoLibertad = {} as TipoLibertad;
     this.data = [];
-    this.date = new Date();
-    this.roles = [];
+    this.motivoReubicacion = {} as MotivoReubicacion;
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
-   }
+  }
 
   ngOnInit() {
     this.getData();
   }
 
-
-
-
   getData() {
     this.isLoading = true;
-    this.catalogosService.listTipoLibertad().subscribe((data: any) => {
+    this.catalogosService.listMotivoReubicacion().subscribe((data: any) => {
       this.isLoading = false;
       console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
-        this.data = data.tiposLibertad;
+        this.data = data.enfermedades;
       }
     });
   }
 
   submit(array) {
     if (this.validateFiels(array)) {
-      this.catalogosService.saveTipoLibertad(this.tipoLibertad).subscribe((data: any) => {
+      this.catalogosService.saveMotivoReubicacion(this.motivoReubicacion).subscribe((data: any) => {
         console.log('ADD', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
@@ -74,6 +70,25 @@ export class TipoLibertadComponent implements OnInit {
         }
       });
     }
+  }
+  update(id, item) {
+    this.isForm = true;
+    this.motivoReubicacion = {...item};
+    // this.areaPericial.role = [{value: item.role, description: item.roleNombre}];
+
+    if (this.auxId && this.auxId !== id) {
+      this.showTr();
+      this.auxId = id;
+    } else {
+      this.auxId = id;
+    }
+    setTimeout(() => {
+      this.hiddenTr();
+      const tr = document.getElementById(this.auxId);
+      const form = document.getElementById('table-form');
+
+      tr.insertAdjacentElement('afterend', form);
+    }, 50);
   }
 
   validateFiels(array: any[]): boolean {
@@ -104,30 +119,10 @@ export class TipoLibertadComponent implements OnInit {
     this.isForm = true;
   }
 
-  update(id, item) {
-    this.isForm = true;
-    this.tipoLibertad = {...item};
-    // this.areaPericial.role = [{value: item.role, description: item.roleNombre}];
-
-    if (this.auxId && this.auxId !== id) {
-      this.showTr();
-      this.auxId = id;
-    } else {
-      this.auxId = id;
-    }
-    setTimeout(() => {
-      this.hiddenTr();
-      const tr = document.getElementById(this.auxId);
-      const form = document.getElementById('table-form');
-
-      tr.insertAdjacentElement('afterend', form);
-    }, 50);
-  }
-
   cancel() {
     this.showTr();
     this.isForm = false;
-    this.tipoLibertad = {} as TipoLibertad;
+    this.motivoReubicacion = {} as MotivoReubicacion;
   }
 
   switch(e) {
@@ -160,7 +155,7 @@ export class TipoLibertadComponent implements OnInit {
     }
   }
 
-  toggleStatus(item: TipoLibertad) {
+  toggleStatus(item: MotivoReubicacion) {
     Swal.fire({
       title: '¿Estas seguro?',
       text: 'El registro se eliminará.',
@@ -170,7 +165,7 @@ export class TipoLibertadComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then(({value}) => {
       if (value) {
-        this.catalogosService.changeStatusTipoDelito(item.id).subscribe((data: any) => {
+        this.catalogosService.changeStatusMotivoReubicacion(item.id).subscribe((data: any) => {
           console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Eliminado',
@@ -188,5 +183,4 @@ export class TipoLibertadComponent implements OnInit {
       }
     });
   }
-
 }

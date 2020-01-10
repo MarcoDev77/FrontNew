@@ -7,6 +7,7 @@ import {Delito} from '@shared/models/Delito';
 import { TipoLibertad } from '@shared/models/TipoLibertdad';
 import { ClasificacionJuridica } from '@shared/models/ClasificacionJuridica';
 import { EnfermedadCronica } from '@shared/models/EnfermedadCronica';
+import {MotivoReubicacion} from '@shared/models/MotivoReubicacion';
 
 @Injectable({
   providedIn: 'root'
@@ -102,7 +103,7 @@ export class CatalogosService {
     return this.http.get(`${this.url}/api/actualizarEstatusTipoLibertad?tipoId=${id}`);
   }
 
-  //CLASIFICACION JURIDICA
+  // CLASIFICACION JURIDICA
 
   listClasificacionJuridica(){
     return this.http.get(`${this.url}/api/listarClasificacionesJuridicas`);
@@ -116,7 +117,7 @@ export class CatalogosService {
     return this.http.get(`${this.url}/api/actualizarEstatusClasificacionJuridica?clasificacionId=${id}`);
   }
 
-  //ENFERMEDAD CRONICA
+  // ENFERMEDAD CRONICA
   listEnfermedadCronica(){
     return this.http.get(`${this.url}/api/listarEnfermedadesCronicas`);
   }
@@ -129,4 +130,18 @@ export class CatalogosService {
     return this.http.get(`${this.url}/api/actualizarEstatusEnfermedadCronica?enfermedadId=${id}`);
   }
 
+  // MOTIVO REUBICACION
+  listMotivoReubicacion() {
+    return this.http.get(`${this.url}/api/listarMotivosReubicacion`);
+  }
+
+  saveMotivoReubicacion(model: MotivoReubicacion) {
+    model.id = model.id ? model.id : null;
+    console.log('To server', model);
+    return this.http.post(`${this.url}/api/registrarMotivoReubicacion`, model);
+  }
+
+  changeStatusMotivoReubicacion(id) {
+    return this.http.get(`${this.url}/api/actualizarEstatusMotivoReubicacion?motivoId=${id}`);
+  }
 }
