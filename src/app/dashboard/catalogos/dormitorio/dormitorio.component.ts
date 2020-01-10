@@ -30,7 +30,7 @@ export class DormitorioComponent implements OnInit {
   public reverse = true;
   public centroPenitenciario: CentroPenitenciario;
 
-  constructor(private catalogosService: CatalogosService, private kryptoService: EncrDecrService,) {
+  constructor(private catalogosService: CatalogosService, private kryptoService: EncrDecrService) {
     this.data = [];
     this.dormitorio = {} as Dormitorio;
     this.centroPenitenciario = JSON.parse(this.kryptoService.get(sessionStorage.getItem('centroPenitenciario')));
