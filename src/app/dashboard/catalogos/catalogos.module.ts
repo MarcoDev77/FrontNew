@@ -12,11 +12,12 @@ import { ClasificacionJuridicaComponent } from './clasificacion-juridica/clasifi
 import { EnfermedadCronicaComponent } from './enfermedad-cronica/enfermedad-cronica.component';
 import { MotivoReubicacionComponent } from './motivo-reubicacion/motivo-reubicacion.component';
 import { DormitorioComponent } from './dormitorio/dormitorio.component';
+import { TipoActividadComponent } from './tipo-actividad/tipo-actividad.component';
 
 
 
 @NgModule({
-  declarations: [RootComponent, CentroPenitenciarioComponent, ModalidadDelitoComponent, DelitoComponent, TipoLibertadComponent, ClasificacionJuridicaComponent, EnfermedadCronicaComponent, MotivoReubicacionComponent, DormitorioComponent],
+  declarations: [RootComponent, CentroPenitenciarioComponent, ModalidadDelitoComponent, DelitoComponent, TipoLibertadComponent, ClasificacionJuridicaComponent, EnfermedadCronicaComponent, MotivoReubicacionComponent, DormitorioComponent, TipoActividadComponent],
   imports: [
     CommonModule,
     SharedModule,

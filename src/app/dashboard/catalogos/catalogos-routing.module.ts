@@ -9,6 +9,7 @@ import { ClasificacionJuridicaComponent } from './clasificacion-juridica/clasifi
 import { EnfermedadCronicaComponent } from './enfermedad-cronica/enfermedad-cronica.component';
 import {MotivoReubicacionComponent} from '@dashboard/catalogos/motivo-reubicacion/motivo-reubicacion.component';
 import {DormitorioComponent} from '@dashboard/catalogos/dormitorio/dormitorio.component';
+import {TipoActividadComponent} from '@dashboard/catalogos/tipo-actividad/tipo-actividad.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'centro-penitenciario', pathMatch: 'full' },
       {path: 'centro-penitenciario', component: CentroPenitenciarioComponent},
       {path: 'centro-penitenciario/dormitorio', component: DormitorioComponent},
+      {path: 'centro-penitenciario/tipo-actividad', component: TipoActividadComponent},
       {path: 'modalidad-delito', component: ModalidadDelitoComponent},
       {path: 'delito', component: DelitoComponent},
       {path: 'tipo-libertad', component: TipoLibertadComponent},

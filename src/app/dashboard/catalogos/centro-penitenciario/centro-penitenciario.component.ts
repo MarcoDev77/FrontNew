@@ -195,9 +195,13 @@ export class CentroPenitenciarioComponent implements OnInit {
     }
   }
 
-  seeDormitorios(item: any) {
-    console.log('SEE', item);
+  seeDormitorios(item: CentroPenitenciario) {
     sessionStorage.setItem('centroPenitenciario', this.kryptoService.set(JSON.stringify(item)));
     this.router.navigate(['/catalogo/centro-penitenciario/dormitorio']);
+  }
+
+  seeActividades(item: CentroPenitenciario) {
+    sessionStorage.setItem('centroPenitenciario', this.kryptoService.set(JSON.stringify(item)));
+    this.router.navigate(['/catalogo/centro-penitenciario/tipo-actividad']);
   }
 }

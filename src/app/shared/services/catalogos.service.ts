@@ -9,6 +9,7 @@ import {ClasificacionJuridica} from '@shared/models/ClasificacionJuridica';
 import {EnfermedadCronica} from '@shared/models/EnfermedadCronica';
 import {MotivoReubicacion} from '@shared/models/MotivoReubicacion';
 import {Dormitorio} from '@shared/models/Dormitorio';
+import {TipoActividad} from '@shared/models/TipoActividad';
 
 @Injectable({
   providedIn: 'root'
@@ -172,4 +173,18 @@ export class CatalogosService {
     console.log('ID', id);
     return this.http.get(`${this.url}/api/actualizarEstatusDormitorio?dormitorioId=${id}`);
   }
+
+  // Tipo Actividad
+  listTipoActividad(id) {
+    return this.http.get(`${this.url}/api/listarTipoActividades?centroId=${id}`);
+  }
+  saveTipoActividad(model: TipoActividad) {
+    model.id = model.id ? model.id : null;
+    console.log('To server', model);
+    return this.http.post(`${this.url}/api/registrarTipoActividad`, model);
+  }
+  changeStatus(id) {
+    return this.http.get(`${this.url}/api/actualizarEstatusTipoActividad?tipoId=${id}`);
+  }
 }
+
