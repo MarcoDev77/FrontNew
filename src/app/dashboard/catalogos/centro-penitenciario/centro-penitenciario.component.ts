@@ -4,6 +4,8 @@ import {ModalidadDelito} from '@shared/models/ModalidadDelito';
 import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router';
+import {EncrDecrService} from '@shared/helpers/encr-decr.service';
 
 @Component({
   selector: 'app-centro-penitenciario',
@@ -28,7 +30,12 @@ export class CentroPenitenciarioComponent implements OnInit {
   public key = 'id'; // set default
   public reverse = true;
 
-  constructor(private catalogosService: CatalogosService, private modalService: NgbModal) {
+  constructor(
+    private catalogosService: CatalogosService,
+    private modalService: NgbModal,
+    private router: Router,
+    private kryptoService: EncrDecrService,
+  ) {
     this.centroPenitenciario = {} as CentroPenitenciario;
     this.data = [];
     this.estados = [];
@@ -186,5 +193,11 @@ export class CentroPenitenciarioComponent implements OnInit {
       console.log('isEstado', estado);
       this.getMunicipios('seleccionada', estado.value);
     }
+  }
+
+  seeDormitorios(item: any) {
+    console.log('SEE', item);
+    sessionStorage.setItem('centroPenitenciario', this.kryptoService.set(JSON.stringify(item)));
+    this.router.navigate(['/catalogo/centro-penitenciario/dormitorio']);
   }
 }

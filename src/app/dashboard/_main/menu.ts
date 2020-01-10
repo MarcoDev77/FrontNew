@@ -42,7 +42,9 @@ export const ROUTES: RouteInfo[] = [
   //   icontype: 'now-ui-icons files_box'
   // },
   {
-    roles: ['ALL'],
+    roles: [
+      r.test.role
+    ],
     path: '/dashboard/catalogo',
     title: 'CATALOGOS',
     type: 'sub',
@@ -56,7 +58,7 @@ export const ROUTES: RouteInfo[] = [
       { path: 'tipo-libertad', title: 'TIPO DE LIBERTAD', ab: 'TL' },
       { path: 'clasificacion-juridica', title: 'CLASIFICACIÓN JURÍDICA', ab: 'CJ' },
       { path: 'enfermedad-cronica', title: 'ENFERMEDAD CRÓNICA', ab: 'EC' },
-      { path: 'motivo-reubicacion', title: 'MOTIVO DE REUBICACIÓN', ab: 'MR' }
+      { path: 'motivo-reubicacion', title: 'MOTIVO DE REUBICACIÓN', ab: 'MR' },
     ]
   },
 ];

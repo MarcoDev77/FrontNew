@@ -4,10 +4,11 @@ import {HttpClient} from '@angular/common/http';
 import {ModalidadDelito} from '@shared/models/ModalidadDelito';
 import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
 import {Delito} from '@shared/models/Delito';
-import { TipoLibertad } from '@shared/models/TipoLibertdad';
-import { ClasificacionJuridica } from '@shared/models/ClasificacionJuridica';
-import { EnfermedadCronica } from '@shared/models/EnfermedadCronica';
+import {TipoLibertad} from '@shared/models/TipoLibertdad';
+import {ClasificacionJuridica} from '@shared/models/ClasificacionJuridica';
+import {EnfermedadCronica} from '@shared/models/EnfermedadCronica';
 import {MotivoReubicacion} from '@shared/models/MotivoReubicacion';
+import {Dormitorio} from '@shared/models/Dormitorio';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class CatalogosService {
     this.data = {};
     this.params = '';
   }
+
 // MODALIDAD DELITO
   listModalidadDelito() {
     return this.http.get(`${this.url}/api/listarModalidadesDelito`);
@@ -45,10 +47,12 @@ export class CatalogosService {
   changeEstatusModalidadDelito(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusModalidadDelito?modalidadId=${id}`);
   }
+
 // CENTRO PENITENCIARIO
   listCentroPenitenciario() {
     return this.http.get(`${this.url}/api/listarCentrosPenitenciarios`);
   }
+
   saveCentroPenitenciario(model: CentroPenitenciario) {
     model.id = model.id ? model.id : null;
     model.municipio = {
@@ -58,23 +62,29 @@ export class CatalogosService {
     console.log('To server', this.data);
     return this.http.post(`${this.url}/api/registrarCentroPenitenciario`, this.data);
   }
+
   deleteCentroPenitenciario(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusCentroPenitenciario?centroId=${id}`);
   }
+
   // PAISES, ESTADOS, MUNICIPIOS
   listPaises() {
     return this.http.get(`${this.url}/api/listarPaises`);
   }
+
   listEstados(region, idPais) {
     return this.http.get(`${this.url}/api/listarEstados?region=${region}&paisId=${idPais}`);
   }
+
   listMunicipios(region, idEstado) {
     return this.http.get(`${this.url}/api/listarMunicipios?region=${region}&estadoId=${idEstado}`);
   }
+
   // DELITO
   listDelito() {
     return this.http.get(`${this.url}/api/listarTipoDelitos`);
   }
+
   saveDelito(model: Delito) {
     model.id = model.id ? model.id : null;
     model.estatus = model.estatus ? model.estatus : true;
@@ -85,48 +95,49 @@ export class CatalogosService {
     console.log('To server', this.data);
     return this.http.post(`${this.url}/api/registrarTipoDelito`, this.data);
   }
+
   deleteDelito(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusTipoDelito?delitoId=${id}`);
   }
 
-  //TIPO DE LIBERTDAD
+  // TIPO DE LIBERTDAD
 
-  listTipoLibertad(){
+  listTipoLibertad() {
     return this.http.get(`${this.url}/api/listarTipoLibertades`);
   }
 
-  saveTipoLibertad(model: TipoLibertad){
+  saveTipoLibertad(model: TipoLibertad) {
     return this.http.post(`${this.url}/api/registrarTipoLibertad`, model);
   }
 
-  changeStatusTipoDelito(id){
+  changeStatusTipoDelito(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusTipoLibertad?tipoId=${id}`);
   }
 
   // CLASIFICACION JURIDICA
 
-  listClasificacionJuridica(){
+  listClasificacionJuridica() {
     return this.http.get(`${this.url}/api/listarClasificacionesJuridicas`);
   }
 
-  saveClasificacionJuridica(model: ClasificacionJuridica){
+  saveClasificacionJuridica(model: ClasificacionJuridica) {
     return this.http.post(`${this.url}/api/registrarClasificacionJuridica`, model);
   }
 
-  changeStatusClasificacionJuridica(id){
+  changeStatusClasificacionJuridica(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusClasificacionJuridica?clasificacionId=${id}`);
   }
 
   // ENFERMEDAD CRONICA
-  listEnfermedadCronica(){
+  listEnfermedadCronica() {
     return this.http.get(`${this.url}/api/listarEnfermedadesCronicas`);
   }
 
-  saveEnfermedadCronica(model: EnfermedadCronica){
+  saveEnfermedadCronica(model: EnfermedadCronica) {
     return this.http.post(`${this.url}/api/registrarEnfermedadCronica  `, model);
   }
 
-  changeStatusEnfermedadCronica(id){
+  changeStatusEnfermedadCronica(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusEnfermedadCronica?enfermedadId=${id}`);
   }
 
@@ -143,5 +154,22 @@ export class CatalogosService {
 
   changeStatusMotivoReubicacion(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusMotivoReubicacion?motivoId=${id}`);
+  }
+
+  // DORMITORIO
+  listDormitorio(id) {
+    return this.http.get(`${this.url}/api/listarDormitorios?centroId=${id}`);
+  }
+
+  saveDormitorio(model: Dormitorio) {
+    model.id = model.id ? model.id : null;
+    model.temporal = model.temporal ? model.temporal : false;
+    console.log('To server', model);
+    return this.http.post(`${this.url}/api/registrarDormitorio`, model);
+  }
+
+  changeStatusDormitorio(id) {
+    console.log('ID', id);
+    return this.http.get(`${this.url}/api/actualizarEstatusDormitorio?dormitorioId=${id}`);
   }
 }

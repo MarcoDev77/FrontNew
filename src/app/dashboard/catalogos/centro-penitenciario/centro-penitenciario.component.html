@@ -58,6 +58,9 @@
       <td class="text-center">{{item.capacidadInternos}}</td>
       <td class="text-center">{{item.numeroAdministrativos}}</td>
       <td class="text-center">
+
+        <i class="fa fa-bed" placement="top" ngbTooltip="Ver dormitorios" (click)="seeDormitorios(item)"></i>
+        &nbsp;&nbsp;
         <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar" (click)="update(item, formModal)"></i>
         &nbsp;
         <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
