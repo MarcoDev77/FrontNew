@@ -6,5 +6,5 @@ export class TipoActividad {
   estatus: boolean;
   fechaIngreso: Date;
   fechaActualizacion: Date;
-  centroPenitenciario: CentroPenitenciario;
+  centroPenitenciario: any;
 }

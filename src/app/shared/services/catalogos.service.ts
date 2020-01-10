@@ -183,7 +183,7 @@ export class CatalogosService {
     console.log('To server', model);
     return this.http.post(`${this.url}/api/registrarTipoActividad`, model);
   }
-  changeStatus(id) {
+  changeStatusTipoActividad(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusTipoActividad?tipoId=${id}`);
   }
 }
