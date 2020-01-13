@@ -30,6 +30,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {expectedRole: [r.test.role]}
       },
+      {
+        path: 'modulo-ingreso',
+        loadChildren: './ingreso/ingreso.module#IngresoModule',
+        canActivate: [AuthGuard],
+        data: {expectedRole: [r.test.role]}
+      },
     ]
   },
 

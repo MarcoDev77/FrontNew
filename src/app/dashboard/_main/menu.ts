@@ -61,6 +61,15 @@ export const ROUTES: RouteInfo[] = [
       { path: 'motivo-reubicacion', title: 'MOTIVO DE REUBICACIÓN', ab: 'MR' },
     ]
   },
+  {
+    roles: [
+      r.test.role
+    ],
+    path: '/dashboard/modulo-ingreso',
+    title: 'INGRESO',
+    type: 'link',
+    icontype: 'fa fa-files-o',
+  }
 ];
 
 export interface RouteInfo {
