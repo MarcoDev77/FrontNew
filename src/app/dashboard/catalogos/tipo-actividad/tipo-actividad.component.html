@@ -42,7 +42,7 @@
         <input name="descripcion" type="text" class="form-control" [(ngModel)]="tipoActividad.descripcion"
                placeholder="Clave"
                #descripcion="ngModel" [ngClass]="{ 'is-invalid':  descripcion.touched && descripcion.invalid }"
-               required>
+               maxlength="255" required>
       </td>
 
       <td class="text-center">

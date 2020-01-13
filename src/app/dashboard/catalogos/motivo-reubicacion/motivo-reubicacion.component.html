@@ -38,7 +38,7 @@
       <td class="text-center">
         <input name="nombre" type="text" class="form-control" [(ngModel)]="motivoReubicacion.descripcion"
                placeholder="Nombre" #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }"
-               required>
+               maxlength="255" required>
       </td>
       <td class="text-center">
 

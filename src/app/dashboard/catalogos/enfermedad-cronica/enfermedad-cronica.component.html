@@ -38,7 +38,7 @@
       <td class="text-center">
         <input name="nombre" type="text" class="form-control" [(ngModel)]="enfermedadCronica.nombre"
                placeholder="Nombre" #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }"
-               required>
+               maxlength="45" required>
       </td>
       <td class="text-center">
 

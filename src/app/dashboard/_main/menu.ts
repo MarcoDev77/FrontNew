@@ -68,7 +68,7 @@ export const ROUTES: RouteInfo[] = [
     path: '/dashboard/ingreso',
     title: 'INGRESO',
     type: 'link',
-    icontype: 'fa fa-files-o',
+    icontype: 'fa fa-sign-in',
   }
 ];
 

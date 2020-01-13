@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-formulario-ingreso',
@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormularioIngresoComponent implements OnInit {
 
-  constructor() { }
+  public ingreso: any;
+
+  constructor() {
+    this.ingreso = {} as any;
+  }
 
   ngOnInit() {
   }

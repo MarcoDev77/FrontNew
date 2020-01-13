@@ -55,25 +55,25 @@
 
       <td class="text-center">
         <input name="clave" type="text" class="form-control" [(ngModel)]="dormitorio.clave" placeholder="Clave"
-               #clave="ngModel" [ngClass]="{ 'is-invalid':  clave.touched && clave.invalid }" required>
+               #clave="ngModel" [ngClass]="{ 'is-invalid':  clave.touched && clave.invalid }" maxlength="3" required>
       </td>
 
       <td class="text-center">
         <input name="nombre" type="text" class="form-control" [(ngModel)]="dormitorio.nombre" placeholder="Nombre"
-               #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" required>
+               #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" maxlength="45" required>
       </td>
 
       <td class="text-center">
         <input name="capacidadInternos" type="number" class="form-control" [(ngModel)]="dormitorio.capacidadInternos"
                placeholder="Capacidad de internos"
                #capacidadInternos="ngModel"
-               [ngClass]="{ 'is-invalid':  capacidadInternos.touched && capacidadInternos.invalid }" required>
+               [ngClass]="{ 'is-invalid':  capacidadInternos.touched && capacidadInternos.invalid }" min="0" required>
       </td>
 
       <td class="text-center">
         <input name="ubicacion" type="text" class="form-control" [(ngModel)]="dormitorio.ubicacion"
                placeholder="Ubicación"
-               #ubicacion="ngModel" [ngClass]="{ 'is-invalid':  ubicacion.touched && ubicacion.invalid }" required>
+               #ubicacion="ngModel" [ngClass]="{ 'is-invalid':  ubicacion.touched && ubicacion.invalid }" maxlength="100" required>
       </td>
 
       <td class="text-center">

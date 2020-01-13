@@ -1,11 +1,19 @@
 <div class="row">
-  <div class="col-sm-3 text-center">
-    <h5>Actividades</h5>
-    <h6>{{tipoActividad.descripcion}}</h6>
+  <div class="col-md-2 text-center">
+    <label><i class="fa fa-bookmark fa-2x mr-2" aria-hidden="true"></i>ACTIVIDADES</label>
+    <br>
+    <label>{{tipoActividad.descripcion}}</label>
   </div>
-  <div class="col-sm-9">
-    <hr style="background-color: #CE9ACB; height: 1px">
+  <div class="col-md-10">
+    <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
   </div>
+<!--  <div class="col-sm-3 text-center">-->
+<!--    <h5>Actividades</h5>-->
+<!--    <h6></h6>-->
+<!--  </div>-->
+<!--  <div class="col-sm-9">-->
+<!--    <hr style="background-color: #CE9ACB; height: 1px">-->
+<!--  </div>-->
 </div>
 <br>
 <div class="row">
@@ -41,7 +49,7 @@
         <input name="descripcion" type="text" class="form-control" [(ngModel)]="actividad.descripcion"
                placeholder="Clave"
                #descripcion="ngModel" [ngClass]="{ 'is-invalid':  descripcion.touched && descripcion.invalid }"
-               required>
+               maxlength="255" required>
       </td>
 
       <td class="text-center">

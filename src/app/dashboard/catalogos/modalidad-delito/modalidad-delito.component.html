@@ -47,11 +47,11 @@
     <tr id="table-form" *ngIf="isForm">
       <td class="text-center">
         <input name="clave" type="text" class="form-control" [(ngModel)]="modalidadDelito.clave" placeholder="Clave"
-               #clave="ngModel" [ngClass]="{ 'is-invalid':  clave.touched && clave.invalid }" required>
+               #clave="ngModel" [ngClass]="{ 'is-invalid':  clave.touched && clave.invalid }" maxlength="45" required>
       </td>
       <td class="text-center">
         <input name="nombre" type="text" class="form-control" [(ngModel)]="modalidadDelito.nombre" placeholder="Nombre"
-               #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" required>
+               #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" maxlength="45" required>
       </td>
       <td class="text-center">
 

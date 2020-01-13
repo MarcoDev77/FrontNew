@@ -38,7 +38,7 @@
 
       <td class="text-center">
         <input name="nombre" type="text" class="form-control" [(ngModel)]="tipoLibertad.nombre" placeholder="Nombre"
-               #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" required>
+               #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" maxlength="45" required>
       </td>
       <td class="text-center">
 

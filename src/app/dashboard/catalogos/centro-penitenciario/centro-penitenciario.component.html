@@ -1,10 +1,16 @@
 <div class="row">
-  <div class="col-sm-3 text-center">
-    <h5>Centros Penitenciarios</h5>
+  <div class="col-md-2 text-center">
+    <label><i class="fa fa-building fa-2x mr-2" aria-hidden="true"></i>CENTROS PENITENCIARIOS</label>
   </div>
-  <div class="col-sm-9">
-    <hr style="background-color: #CE9ACB; height: 1px">
+  <div class="col-md-10">
+    <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
   </div>
+<!--  <div class="col-sm-3 text-center">-->
+<!--    <h5>Centros Penitenciarios</h5>-->
+<!--  </div>-->
+<!--  <div class="col-sm-9">-->
+<!--    <hr style="background-color: #CE9ACB; height: 1px">-->
+<!--  </div>-->
 </div>
 <br>
 <div class="row">
@@ -93,10 +99,10 @@
 
         <div class="col-sm-6">
           <div class="form-group">
-            <input name="clave" class="form-control" type="text" placeholder="Clave" ngbTooltip="Clave"
+            <input name="clave" class="form-control shadows" type="text" placeholder="Clave" ngbTooltip="Clave"
                    [(ngModel)]="centroPenitenciario.clave" #clave="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && clave.invalid}"
-                   required/>
+                   maxlength="45" required/>
           </div>
         </div>
 
@@ -105,7 +111,7 @@
             <input name="nombre" class="form-control" type="text" placeholder="Nombre" ngbTooltip="Nombre"
                    [(ngModel)]="centroPenitenciario.nombre" #nombre="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid}"
-                   required/>
+                   maxlength="45" required/>
           </div>
         </div>
 
@@ -115,12 +121,12 @@
                    ngbTooltip="Descripción"
                    [(ngModel)]="centroPenitenciario.descripcion" #descripcion="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && descripcion.invalid}"
-                   required/>
+                   maxlength="255" required/>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <app-select ngbTooltip="Estados" [options]="estados" [multiple]="false"
+            <app-select required ngbTooltip="Estados" [options]="estados" [multiple]="false"
                         [modelo]="centroPenitenciario.estadoSelect"
                         (getModel)="centroPenitenciario.estadoSelect = $event; onSelectEstado();"></app-select>
           </div>
@@ -128,11 +134,7 @@
 
         <div class="col-sm-6">
           <div class="form-group">
-            <!--            <input name="municipio" class="form-control" type="text" placeholder="Municipio" ngbTooltip="Municipio"-->
-            <!--                   [(ngModel)]="centroPenitenciario.municipio" #municipio="ngModel"-->
-            <!--                   [ngClass]="{ 'is-invalid': f.submitted && municipio.invalid}"-->
-            <!--                   required/>-->
-            <app-select ngbTooltip="Municipio" [options]="municipios" [multiple]="false"
+            <app-select required ngbTooltip="Municipio" [options]="municipios" [multiple]="false"
                         [modelo]="centroPenitenciario.municipioSelect"
                         (getModel)="centroPenitenciario.municipioSelect = $event;"></app-select>
           </div>
@@ -143,7 +145,7 @@
             <input name="colonia" class="form-control" type="text" placeholder="Colonia" ngbTooltip="Colonia"
                    [(ngModel)]="centroPenitenciario.colonia" #colonia="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && colonia.invalid}"
-                   required/>
+                   maxlength="45" required/>
           </div>
         </div>
 
@@ -153,7 +155,7 @@
                    ngbTooltip="Calle y número"
                    [(ngModel)]="centroPenitenciario.calleNumero" #calleNumero="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && calleNumero.invalid}"
-                   required/>
+                   maxlength="45" required/>
           </div>
         </div>
 
@@ -163,7 +165,7 @@
                    ngbTooltip="Capacidad de internos"
                    [(ngModel)]="centroPenitenciario.capacidadInternos" #capacidadInternos="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && capacidadInternos.invalid}"
-                   required/>
+                   min="0" required/>
           </div>
         </div>
 
@@ -174,7 +176,7 @@
                    ngbTooltip="Número de administrativos"
                    [(ngModel)]="centroPenitenciario.numeroAdministrativos" #numeroAdministrativos="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && numeroAdministrativos.invalid}"
-                   required/>
+                   min="0" required/>
           </div>
         </div>
 
@@ -185,7 +187,7 @@
                    ngbTooltip="Número de custodios"
                    [(ngModel)]="centroPenitenciario.numeroCustodios" #numeroCustodios="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && numeroCustodios.invalid}"
-                   required/>
+                   min="0" nrequired/>
           </div>
         </div>
       </div>
