@@ -69,11 +69,11 @@
            ngbTooltip="Deshabilitar"></i>
         <i *ngIf="!item.estatus" class="fa fa-toggle-off" placement="top" ngbTooltip="Habilitar"></i>
         &nbsp;
-<!--        <i (click)="delte(item)" placement="top" ngbTooltip="Eliminar" class="fa fa-trash-o"></i>-->
+        <!--        <i (click)="delte(item)" placement="top" ngbTooltip="Eliminar" class="fa fa-trash-o"></i>-->
       </td>
     </tr>
 
-    <tr *ngIf="data.length==0">
+    <tr *ngIf="data.length == 0">
       <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
     </tr>
     </tbody>

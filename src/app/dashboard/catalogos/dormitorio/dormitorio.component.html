@@ -64,12 +64,15 @@
       </td>
 
       <td class="text-center">
-        <input name="capacidadInternos" type="number" class="form-control" [(ngModel)]="dormitorio.capacidadInternos" placeholder="Capacidad de internos"
-               #capacidadInternos="ngModel" [ngClass]="{ 'is-invalid':  capacidadInternos.touched && capacidadInternos.invalid }" required>
+        <input name="capacidadInternos" type="number" class="form-control" [(ngModel)]="dormitorio.capacidadInternos"
+               placeholder="Capacidad de internos"
+               #capacidadInternos="ngModel"
+               [ngClass]="{ 'is-invalid':  capacidadInternos.touched && capacidadInternos.invalid }" required>
       </td>
 
       <td class="text-center">
-        <input name="ubicacion" type="text" class="form-control" [(ngModel)]="dormitorio.ubicacion" placeholder="Ubicación"
+        <input name="ubicacion" type="text" class="form-control" [(ngModel)]="dormitorio.ubicacion"
+               placeholder="Ubicación"
                #ubicacion="ngModel" [ngClass]="{ 'is-invalid':  ubicacion.touched && ubicacion.invalid }" required>
       </td>
 
@@ -99,13 +102,14 @@
         &nbsp;
         <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
            ngbTooltip="Deshabilitar"></i>
-        <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top" ngbTooltip="Habilitar"></i>
+        <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top"
+           ngbTooltip="Habilitar"></i>
         &nbsp;
         <!--        <i (click)="delte(item)" placement="top" ngbTooltip="Eliminar" class="fa fa-trash-o"></i>-->
       </td>
     </tr>
 
-    <tr *ngIf="data.length==0">
+    <tr *ngIf="data.length == 0">
       <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
     </tr>
     </tbody>

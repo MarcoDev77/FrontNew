@@ -11,7 +11,8 @@
   <div class="col text-right mb-3">
     <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
       class="fa fa-plus fa-lg"></i></button>
-    <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem" [(ngModel)]="filter" placeholder="Buscar">
+    <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
+           [(ngModel)]="filter" placeholder="Buscar">
   </div>
 </div>
 <div class="table-responsive">
@@ -20,10 +21,13 @@
     <tr>
 
       <th (click)="sort('descripcion')" class="text-center">
-        <span *ngIf="key == 'descripcion'" class="fa" [ngClass]="{'fa-chevron-circle-down': reverse, 'fa-chevron-circle-up': !reverse}"></span> Descripción
+        <span *ngIf="key == 'descripcion'" class="fa"
+              [ngClass]="{'fa-chevron-circle-down': reverse, 'fa-chevron-circle-up': !reverse}"></span> Descripción
       </th>
       <th (click)="sort('fechaActualizacion')" class="text-center">
-        <span *ngIf="key == 'fechaActualizacion'" class="fa" [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Fecha de actualización
+        <span *ngIf="key == 'fechaActualizacion'" class="fa"
+              [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Fecha de
+        actualización
       </th>
       <th class="text-center" style="min-width: 5rem">Acciones</th>
     </tr>
@@ -32,7 +36,9 @@
     <tr id="table-form" *ngIf="isForm">
 
       <td class="text-center">
-        <input name="nombre" type="text" class="form-control" [(ngModel)]="motivoReubicacion.descripcion" placeholder="Nombre" #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" required>
+        <input name="nombre" type="text" class="form-control" [(ngModel)]="motivoReubicacion.descripcion"
+               placeholder="Nombre" #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }"
+               required>
       </td>
       <td class="text-center">
 
@@ -45,19 +51,22 @@
 
     </tr>
 
-    <tr id="{{'tr' + i}}" *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+    <tr id="{{'tr' + i}}"
+        *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+        (click)="setClickedRow(i)" [class.active]="i == selectedRow">
 
       <td class="text-center">{{item.descripcion}}</td>
       <td class="text-center">{{item.fechaActualizacion | date:'dd/MM/yy h:mm a'}}</td>
       <td class="text-center">
         <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar" (click)="update('tr' + i , item)"></i> &nbsp;
-        <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top" ngbTooltip="Deshabilitar"></i>
+        <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
+           ngbTooltip="Deshabilitar"></i>
         <i *ngIf="!item.estatus" class="fa fa-toggle-off" placement="top" ngbTooltip="Habilitar"></i> &nbsp;
         <!--        <i (click)="delte(item)" placement="top" ngbTooltip="Eliminar" class="fa fa-trash-o"></i>-->
       </td>
     </tr>
 
-    <tr *ngIf="data.length==0">
+    <tr *ngIf="data.length == 0">
       <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
     </tr>
     </tbody>

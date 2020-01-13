@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TipoActividad} from '@shared/models/TipoActividad';
 import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
 import {CatalogosService} from '@shared/services/catalogos.service';

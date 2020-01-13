@@ -29,7 +29,7 @@
       <th (click)="sort('nombre')" class="text-center">
           <span *ngIf="key == 'nombre'" class="fa"
                 [ngClass]="{'fa-chevron-circle-down': reverse, 'fa-chevron-circle-up': !reverse}"></span>
-        Fecha Actualizacion
+        Fecha Actualización
       </th>
       <th class="text-center" style="min-width: 5rem">Acciones</th>
     </tr>
@@ -38,8 +38,10 @@
     <tr id="table-form" *ngIf="isForm">
 
       <td class="text-center">
-        <input name="descripcion" type="text" class="form-control" [(ngModel)]="actividad.descripcion" placeholder="Clave"
-               #descripcion="ngModel" [ngClass]="{ 'is-invalid':  descripcion.touched && descripcion.invalid }" required>
+        <input name="descripcion" type="text" class="form-control" [(ngModel)]="actividad.descripcion"
+               placeholder="Clave"
+               #descripcion="ngModel" [ngClass]="{ 'is-invalid':  descripcion.touched && descripcion.invalid }"
+               required>
       </td>
 
       <td class="text-center">
@@ -66,13 +68,14 @@
         &nbsp;
         <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
            ngbTooltip="Deshabilitar"></i>
-        <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top" ngbTooltip="Habilitar"></i>
+        <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top"
+           ngbTooltip="Habilitar"></i>
         &nbsp;
         <!--        <i (click)="delte(item)" placement="top" ngbTooltip="Eliminar" class="fa fa-trash-o"></i>-->
       </td>
     </tr>
 
-    <tr *ngIf="data.length==0">
+    <tr *ngIf="data.length == 0">
       <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
     </tr>
     </tbody>
