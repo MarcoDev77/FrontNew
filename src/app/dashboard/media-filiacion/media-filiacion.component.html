@@ -1,586 +1,934 @@
 <div class="row">
-  <div class="offset-md-1 col-8 col-md-10">
-    <div style="padding: 20px" class="card shadows">
+    <div class="offset-md-1 col-8 col-md-10">
+        <div style="padding: 20px" class="card shadows">
 
 
-      <div class="row">
-        <div class="col-12 text-center pb-5">
-        <label class="pr-4">Formulario de ingreso</label>
-        <label class="pr-4">Señas particulares</label>
-        <label class="pr-4" style="color: #8f2d94;">Característica</label>
-        <label class="pr-4">Dactiloscopia</label>
-        <label class="pr-4">Referencias</label>
-        <label>Situación penal</label>
-        </div>
+            <div class="row">
+                <div class="col-12 text-center pb-5">
+                    <label class="pr-4">Formulario de ingreso</label>
+                    <label class="pr-4">Señas particulares</label>
+                    <label class="pr-4" style="color: #8f2d94;">Característica</label>
+                    <label class="pr-4">Dactiloscopia</label>
+                    <label class="pr-4">Referencias</label>
+                    <label>Situación penal</label>
+                </div>
 
-        <div class="col-md-6">
-          <div class="d-inline-flex w-100 mb-5">
-            <label style="min-width: 5rem;" class="mr-3 mt-4">Estatura:</label>
-            <img style="height: 2.5rem; width: 1.3rem;" class="icons mt-auto" src="assets/img/img-thin.png"/>
-            <div class="form-group text-center w-100 mx-2 mt-2 mb-0">
-              <label class="rangeValue">{{estaturam.value + ' mts'}}</label>
-              <input class="slider" type="range" [(ngModel)]="estatura" #estaturam  min="1.4" max="2" step="0.01" name="estatura"/>
-            </div>
-            <img class="icons" src="assets/img/img-thin.png"/>
-          </div>
-        </div>
+                <div class="col-md-6">
+                    <div class="d-inline-flex w-100 mb-5">
+                        <label style="min-width: 5rem;" class="mr-3 mt-4">Estatura:</label>
+                        <img style="height: 2.5rem; width: 1.3rem;" class="icons mt-auto" src="assets/img/img-thin.png" />
+                        <div class="form-group text-center w-100 mx-2 mt-2 mb-0">
+                            <label class="rangeValue">{{estaturam.value + ' mts'}}</label>
+                            <input class="slider" type="range" [(ngModel)]="estatura" #estaturam min="1.4" max="2" step="0.01" name="estatura" />
+                        </div>
+                        <img class="icons" src="assets/img/img-thin.png" />
+                    </div>
+                </div>
 
-        <div class="col-md-6">
-          <div class="d-inline-flex w-100 mb-5">
-            <label style="min-width: 5rem;" class="mr-3 mt-4">Complexión:</label>
-            <img class="icons" src="assets/img/img-thin.png"/>
-            <div class="form-group text-center w-100 mx-2 mt-2 mb-0">
-              <label class="rangeValue">{{getComplexion(complexionm.value)}}</label>
-              <input class="slider" type="range" [(ngModel)]="complexion" #complexionm min="1" max="5" step="1" name="complexion"/>
-            </div>
-            <img class="icons" src="assets/img/img-fat.png"/>
-          </div>
-        </div>
+                <div class="col-md-6">
+                    <div class="d-inline-flex w-100 mb-5">
+                        <label style="min-width: 5rem;" class="mr-3 mt-4">Complexión:</label>
+                        <img class="icons" src="assets/img/img-thin.png" />
+                        <div class="form-group text-center w-100 mx-2 mt-2 mb-0">
+                            <label class="rangeValue">{{getComplexion(complexionm.value)}}</label>
+                            <input class="slider" type="range" [(ngModel)]="complexion" #complexionm min="1" max="5" step="1" name="complexion" />
+                        </div>
+                        <img class="icons" src="assets/img/img-fat.png" />
+                    </div>
+                </div>
 
-        <div class="col-md-6">
-          <div class="d-inline-flex w-100 mb-5">
-            <label style="min-width: 5rem;" class="mr-3 mt-4">Peso:</label>
-            <img class="icons" src="assets/img/img-thin.png"/>
-            <div class="form-group text-center w-100 mx-2 mt-2 mb-0">
-              <label class="rangeValue">{{pesom.value + ' kg'}}</label>
-              <input class="slider" type="range" [(ngModel)]="peso" #pesom min="40" max="120" step="0.1" name="peso"/>
-            </div>
-            <img class="icons" src="assets/img/img-fat.png"/>
-          </div>
-        </div>
+                <div class="col-md-6">
+                    <div class="d-inline-flex w-100 mb-5">
+                        <label style="min-width: 5rem;" class="mr-3 mt-4">Peso:</label>
+                        <img class="icons" src="assets/img/img-thin.png" />
+                        <div class="form-group text-center w-100 mx-2 mt-2 mb-0">
+                            <label class="rangeValue">{{pesom.value + ' kg'}}</label>
+                            <input class="slider" type="range" [(ngModel)]="peso" #pesom min="40" max="120" step="0.1" name="peso" />
+                        </div>
+                        <img class="icons" src="assets/img/img-fat.png" />
+                    </div>
+                </div>
 
-        <div class="col-6">
-          <div class="d-inline-flex w-100 mb-5">
-            <label style="min-width: 6.5rem;" class="mr-3 mt-4">Color de piel:</label>
+                <div class="col-6">
+                    <div class="d-inline-flex w-100 mb-5">
+                        <label style="min-width: 6.5rem;" class="mr-3 mt-4">Color de piel:</label>
 
-            <div class="color-picker pt-3 pl-4">
-              <input type="radio" name="albino" id="albino" value="1" [(ngModel)]="tez"/>
-              <label for="albino" ngbTooltip="Albino"><span class="albino"></span></label>
+                        <div class="color-picker pt-3 pl-4">
+                            <input type="radio" name="albino" id="albino" value="1" [(ngModel)]="tez" />
+                            <label for="albino" ngbTooltip="Albino"><span class="albino"></span></label>
 
-              <input type="radio" name="blanco" id="blanco" value="2" [(ngModel)]="tez"/>
-              <label for="blanco" ngbTooltip="Blanco"><span class="blanco"></span></label>
+                            <input type="radio" name="blanco" id="blanco" value="2" [(ngModel)]="tez" />
+                            <label for="blanco" ngbTooltip="Blanco"><span class="blanco"></span></label>
 
-              <input type="radio" name="amarillo" id="amarillo" value="3" [(ngModel)]="tez"/>
-              <label for="amarillo" ngbTooltip="Amarillo"><span class="amarillo"></span></label>
+                            <input type="radio" name="amarillo" id="amarillo" value="3" [(ngModel)]="tez" />
+                            <label for="amarillo" ngbTooltip="Amarillo"><span class="amarillo"></span></label>
 
-              <input type="radio" name="morenoClaro" id="morenoClaro" value="4" [(ngModel)]="tez"/>
-              <label for="morenoClaro" ngbTooltip="Moreno claro"><span class="morenoClaro"></span></label>
+                            <input type="radio" name="morenoClaro" id="morenoClaro" value="4" [(ngModel)]="tez" />
+                            <label for="morenoClaro" ngbTooltip="Moreno claro"><span class="morenoClaro"></span></label>
 
-              <input type="radio" name="moreno" id="moreno" value="5" [(ngModel)]="tez"/>
-              <label for="moreno" ngbTooltip="Moreno"><span class="moreno"></span></label>
+                            <input type="radio" name="moreno" id="moreno" value="5" [(ngModel)]="tez" />
+                            <label for="moreno" ngbTooltip="Moreno"><span class="moreno"></span></label>
 
-              <input type="radio" name="morenoOscuro" id="morenoOscuro" value="6" [(ngModel)]="tez"/>
-              <label for="morenoOscuro" ngbTooltip="Moreno oscuro"><span class="morenoOscuro"></span></label>
+                            <input type="radio" name="morenoOscuro" id="morenoOscuro" value="6" [(ngModel)]="tez" />
+                            <label for="morenoOscuro" ngbTooltip="Moreno oscuro"><span class="morenoOscuro"></span></label>
 
-              <input type="radio" name="negro" id="negro" value="7" [(ngModel)]="tez"/>
-              <label for="negro" ngbTooltip="Negro"><span class="negro"></span></label>
-            </div>
-          </div>
-        </div>
+                            <input type="radio" name="negro" id="negro" value="7" [(ngModel)]="tez" />
+                            <label for="negro" ngbTooltip="Negro"><span class="negro"></span></label>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="col-lg-5 mb-3">
-          <div class="form-check form-check-radio form-check-inline pb-4 w-100">
-            <label style="margin-right: 2rem;margin-top: 0.3rem;"><i class="fa fa-eye pr-2"></i>Usa anteojos:</label>
-            <label class="form-check-label media">
+                <div class="col-lg-5 mb-3">
+                    <div class="form-check form-check-radio form-check-inline pb-4 w-100">
+                        <label style="margin-right: 2rem;margin-top: 0.3rem;"><i class="fa fa-eye pr-2"></i>Usa anteojos:</label>
+                        <label class="form-check-label media">
               <input class="form-check-input" type="radio" [value]="1" name="tamanoCabello" #tamanoCabello="ngModel" [(ngModel)]="obj.tamanoCabello" required>
               Si
               <span class="form-check-sign"></span>
             </label>
 
-            <label class="form-check-label media">
+                        <label class="form-check-label media">
               <input class="form-check-input" type="radio" [value]="2" name="tamanoCabello" #tamanoCabello="ngModel" [(ngModel)]="obj.tamanoCabello" required>
               No
               <span class="form-check-sign"></span>
             </label>
-          </div>
-        </div>
+                    </div>
+                </div>
 
-        <div class="col-lg-7 mb-3">
-          <div class="row">
-            <div class="col-12">
-              <div class="form-check form-check-radio form-check-inline pb-4 w-100">
-                <label style="margin-right: 2rem;margin-top: 0.3rem;"><i class="fa fa-tint pr-2"></i>Tipo de sangre:</label>
-                <label class="form-check-label media">
+                <div class="col-lg-7 mb-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-check form-check-radio form-check-inline pb-4 w-100">
+                                <label style="margin-right: 2rem;margin-top: 0.3rem;"><i class="fa fa-tint pr-2"></i>Tipo de sangre:</label>
+                                <label class="form-check-label media">
                   <input class="form-check-input" type="radio" [value]="1" name="tipoSangre" #tipoSangre="ngModel" [(ngModel)]="obj.tipoSangre" required>
                   A
                   <span class="form-check-sign"></span>
                 </label>
 
-                <label class="form-check-label media">
+                                <label class="form-check-label media">
                   <input class="form-check-input" type="radio" [value]="2" name="tipoSangre" #tipoSangre="ngModel" [(ngModel)]="obj.tipoSangre" required>
                   B
                   <span class="form-check-sign"></span>
                 </label>
 
-                <label class="form-check-label media">
+                                <label class="form-check-label media">
                   <input class="form-check-input" type="radio" [value]="3" name="tipoSangre" #tipoSangre="ngModel" [(ngModel)]="obj.tipoSangre" required>
                   O
                   <span class="form-check-sign"></span>
                 </label>
 
-                <label class="form-check-label media">
+                                <label class="form-check-label media">
                   <input class="form-check-input" type="radio" [value]="4" name="tipoSangre" #tipoSangre="ngModel" [(ngModel)]="obj.tipoSangre" required>
                   AB
                   <span class="form-check-sign"></span>
                 </label>
-              </div>
-            </div>
+                            </div>
+                        </div>
 
-            <div class="col-12">
-              <div class="form-check form-check-radio form-check-inline pb-4 w-100">
-                <label style="margin-right: 2rem;margin-top: 0.3rem;margin-left: 4.9rem;">RH:</label>
-                <label class="form-check-label media">
+                        <div class="col-12">
+                            <div class="form-check form-check-radio form-check-inline pb-4 w-100">
+                                <label style="margin-right: 2rem;margin-top: 0.3rem;margin-left: 4.9rem;">RH:</label>
+                                <label class="form-check-label media">
                   <input class="form-check-input" type="radio" [value]="1" name="rh" #rh="ngModel" [(ngModel)]="obj.rh" required>
                   +
                   <span class="form-check-sign"></span>
                 </label>
 
-                <label class="form-check-label media">
+                                <label class="form-check-label media">
                   <input class="form-check-input" type="radio" [value]="2" name="rh" #rh="ngModel" [(ngModel)]="obj.rh" required>
                   -
                   <span class="form-check-sign"></span>
                 </label>
-              </div>
-            </div>
-          </div>
-        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div id="accordion" class="w-100">
-          <div class="card">
-            <div class="card-header" id="headingOne">
-              <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div id="accordion" class="w-100">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   Cara
                 </button>
-              </h5>
-              <div class="divisor"></div>
-            </div>
+                            </h5>
+                            <div class="divisor"></div>
+                        </div>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="card-body">
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
 
-                <div class="col-12">
-                  <div class="form-check form-check-radio form-check-inline pb-4 w-100">
-                    <label style="margin-right: 2rem;margin-top: 0.3rem;">Forma:</label>
-                    <label class="form-check-label media">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-4 w-100">
+                                        <label style="margin-right: 2rem;margin-top: 0.3rem;">Forma:</label>
+                                        <label class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="1" name="forma" #forma="ngModel" [(ngModel)]="obj.forma" required>
                       Cuadrada
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label class="form-check-label media">
+                                        <label class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="2" name="forma" #forma="ngModel" [(ngModel)]="obj.forma" required>
                       Redonda
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label class="form-check-label media">
+                                        <label class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="3" name="forma" #forma="ngModel" [(ngModel)]="obj.forma" required>
                       Ovalada
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label class="form-check-label media">
+                                        <label class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="4" name="forma" #forma="ngModel" [(ngModel)]="obj.forma" required>
                       Alargada
                       <span class="form-check-sign"></span>
                     </label>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
 
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header" id="headingTwo">
-              <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                   Cabello
                 </button>
-                <div class="divisor"></div>
-              </h5>
-            </div>
-            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
-              <div class="card-body">
+                                <div class="divisor"></div>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
 
-                <div class="col-12">
-                  <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
-                    <label style="margin-right: 2rem;margin-top: 0.3rem;">Cantidad:</label>
-                    <label style="width: 7rem;" class="form-check-label media">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 2rem;margin-top: 0.3rem;">Cantidad:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="1" name="cantidad" #cantidad="ngModel" [(ngModel)]="obj.cantidad" required>
                       Abundate
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="2" name="cantidad" #cantidad="ngModel" [(ngModel)]="obj.cantidad" required>
                       Escaso
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="3" name="cantidad" #cantidad="ngModel" [(ngModel)]="obj.cantidad" required>
                       Regular
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="4" name="cantidad" #cantidad="ngModel" [(ngModel)]="obj.cantidad" required>
                       Sin cabello
                       <span class="form-check-sign"></span>
                     </label>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
 
 
-                <div class="col-12">
-                  <div class="form-check form-check-radio form-check-inline pb-2 w-100">
-                    <label style="margin-right: 3rem;margin-top: 0.3rem;">Color:</label>
-                    <label style="width: 7rem;" class="form-check-label media">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100">
+                                        <label style="margin-right: 3rem;margin-top: 0.3rem;">Color:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="1" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
                       Albino
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="2" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
                       Cano total
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="3" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
                       Castaño claro
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="4" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
                       Castaño oscuro
                       <span class="form-check-sign"></span>
                     </label>
-                  </div>
+                                    </div>
 
-                  <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
-                    <label style="margin-left: 4.7rem;width: 7rem;" class="form-check-label media">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-left: 4.7rem;width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="5" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
                       Entrecano
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="6" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
                       Negro
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="7" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
                       Rubio
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="8" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
                       Pelirojo
                       <span class="form-check-sign"></span>
                     </label>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
 
 
-                <div class="col-12">
-                  <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
-                    <label style="margin-right: 2.7rem;margin-top: 0.3rem;">Forma:</label>
-                    <label style="width: 7rem;" class="form-check-label media">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 2.7rem;margin-top: 0.3rem;">Forma:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="1" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
                       Crespo
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="2" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
                       Lacio
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="3" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
                       Ondulado
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="4" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
                       Risado
                       <span class="form-check-sign"></span>
                     </label>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
 
 
-                <div class="col-12">
-                  <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
-                    <label style="margin-right: 2.3rem;margin-top: 0.3rem;">Calvicie:</label>
-                    <label style="width: 7rem;" class="form-check-label media">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 2.3rem;margin-top: 0.3rem;">Calvicie:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="1" name="calvicie" #calvicie="ngModel" [(ngModel)]="obj.calvicie" required>
                       Frontal
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="2" name="calvicie" #calvicie="ngModel" [(ngModel)]="obj.calvicie" required>
                       Tonsural
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="3" name="calvicie" #calvicie="ngModel" [(ngModel)]="obj.calvicie" required>
                       Frontal aretal
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="4" name="forma" #calvicie="ngModel" [(ngModel)]="obj.calvicie" required>
                       Total
                       <span class="form-check-sign"></span>
                     </label>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
 
 
 
-                <div class="col-12">
-                  <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
-                    <label style="margin-right: 2.4rem;margin-top: 0.3rem;">Implate:</label>
-                    <label style="width: 7rem;" class="form-check-label media">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 2.4rem;margin-top: 0.3rem;">Implate:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="1" name="implante" #implante="ngModel" [(ngModel)]="obj.implante" required>
                       Circular
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="2" name="implante" #implante="ngModel" [(ngModel)]="obj.implante" required>
                       Rectangular
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="3" name="implante" #implante="ngModel" [(ngModel)]="obj.implante" required>
                       En punta
                       <span class="form-check-sign"></span>
                     </label>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
 
 
 
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header" id="headingThree">
-              <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                   Frente
                 </button>
-                <div class="divisor"></div>
-              </h5>
-            </div>
-            <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
-              <div class="card-body">
+                                <div class="divisor"></div>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
 
 
-                <div class="col-12">
-                  <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
-                    <label style="margin-right: 2.9rem;margin-top: 0.3rem;">Altura:</label>
-                    <label style="width: 7rem;" class="form-check-label media">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 2.9rem;margin-top: 0.3rem;">Altura:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="1" name="altura" #altura="ngModel" [(ngModel)]="obj.altura" required>
                       Grande
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="2" name="altura" #altura="ngModel" [(ngModel)]="obj.altura" required>
                       Mediana
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="3" name="altura" #altura="ngModel" [(ngModel)]="obj.altura" required>
                       Pequeña
                       <span class="form-check-sign"></span>
                     </label>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
 
 
-                <div class="col-12">
-                  <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
-                    <label style="margin-right: 1.6rem;margin-top: 0.3rem;">Inclinación:</label>
-                    <label style="width: 7rem;" class="form-check-label media">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 1.6rem;margin-top: 0.3rem;">Inclinación:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="1" name="inclinacion" #inclinacion="ngModel" [(ngModel)]="obj.inclinacion" required>
                       Oblicua
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="2" name="inclinacion" #inclinacion="ngModel" [(ngModel)]="obj.inclinacion" required>
                       Intermedia
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="3" name="inclinacion" #inclinacion="ngModel" [(ngModel)]="obj.inclinacion" required>
                       Vertical
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="3" name="inclinacion" #inclinacion="ngModel" [(ngModel)]="obj.inclinacion" required>
                       Prominente
                       <span class="form-check-sign"></span>
                     </label>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
 
 
-                <div class="col-12">
-                  <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
-                    <label style="margin-right: 2.8rem;margin-top: 0.3rem;">Ancho:</label>
-                    <label style="width: 7rem;" class="form-check-label media">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 2.8rem;margin-top: 0.3rem;">Ancho:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="1" name="ancho" #ancho="ngModel" [(ngModel)]="obj.ancho" required>
                       Grande
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="2" name="ancho" #ancho="ngModel" [(ngModel)]="obj.ancho" required>
                       Mediano
                       <span class="form-check-sign"></span>
                     </label>
 
-                    <label style="width: 7rem;" class="form-check-label media">
+                                        <label style="width: 7rem;" class="form-check-label media">
                       <input class="form-check-input" type="radio" [value]="3" name="ancho" #ancho="ngModel" [(ngModel)]="obj.ancho" required>
                       Pequeña
                       <span class="form-check-sign"></span>
                     </label>
-                  </div>
-                </div>
+                                    </div>
+                                </div>
 
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header" id="heading4">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="heading4">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
                   Cejas
                 </button>
-                <div class="divisor"></div>
-              </h5>
-            </div>
-            <div id="collapse4" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div class="card-body">
-              </div>
-            </div>
-          </div>
+                                <div class="divisor"></div>
+                            </h5>
+                        </div>
+                        <div id="collapse4" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 1.2rem;margin-top: 0.3rem;">Implantación:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="1" name="implantacion" #implantacion="ngModel" [(ngModel)]="obj.implantacion" required>
+                          Altas
+                          <span class="form-check-sign"></span>
+                        </label>
 
-          <div class="card">
-            <div class="card-header" id="heading5">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="2" name="implantacion" #implantacion="ngModel" [(ngModel)]="obj.implantacion" required>
+                          Bajas
+                          <span class="form-check-sign"></span>
+                        </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="3" name="implantacion" #implantacion="ngModel" [(ngModel)]="obj.implantacion" required>
+                          Próximas
+                          <span class="form-check-sign"></span>
+                        </label>
+
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                            <input class="form-check-input" type="radio" [value]="4" name="implantacion" #implantacion="ngModel" [(ngModel)]="obj.implantacion" required>
+                            Separadas
+                            <span class="form-check-sign"></span>
+                          </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 3rem;margin-top: 0.3rem;">Forma:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="1" name="forma" #forma="ngModel" [(ngModel)]="obj.forma" required>
+                          Arqueadas
+                          <span class="form-check-sign"></span>
+                        </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="2" name="forma" #forma="ngModel" [(ngModel)]="obj.forma" required>
+                          Arqueadas sinuosas
+                          <span class="form-check-sign"></span>
+                        </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="3" name="forma" #forma="ngModel" [(ngModel)]="obj.forma" required>
+                          Rectilíneas
+                          <span class="form-check-sign"></span>
+                        </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                            <input class="form-check-input" type="radio" [value]="4" name="forma" #forma="ngModel" [(ngModel)]="obj.forma" required>
+                            Rectilíneas sinuosas
+                            <span class="form-check-sign"></span>
+                          </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 2.6rem;margin-top: 0.3rem;">Tamaño:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="1" name="tamano" #tamano="ngModel" [(ngModel)]="obj.tamano" required>
+                          Gruesas
+                          <span class="form-check-sign"></span>
+                        </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="2" name="tamano" #tamano="ngModel" [(ngModel)]="obj.tamano" required>
+                          Delgadas
+                          <span class="form-check-sign"></span>
+                        </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="3" name="tamano" #tamano="ngModel" [(ngModel)]="obj.tamano" required>
+                          Cortas
+                          <span class="form-check-sign"></span>
+                        </label>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="heading5">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
                   Ojos
                 </button>
-                <div class="divisor"></div>
-              </h5>
-            </div>
-            <div id="collapse5" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div class="card-body">
-              </div>
-            </div>
-          </div>
+                                <div class="divisor"></div>
+                            </h5>
+                        </div>
+                        <div id="collapse5" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
 
-          <div class="card">
-            <div class="card-header" id="heading6">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 3rem;margin-top: 0.3rem;">Color:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="1" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
+                          Azul
+                          <span class="form-check-sign"></span>
+                        </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="2" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
+                          Cafe claro
+                          <span class="form-check-sign"></span>
+                        </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="3" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
+                          Cafe oscuro
+                          <span class="form-check-sign"></span>
+                        </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                            <input class="form-check-input" type="radio" [value]="4" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
+                            Gris
+                            <span class="form-check-sign"></span>
+                          </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                              <input class="form-check-input" type="radio" [value]="5" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
+                              Verde
+                              <span class="form-check-sign"></span>
+                            </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                                <input class="form-check-input" type="radio" [value]="6" name="color" #color="ngModel" [(ngModel)]="obj.color" required>
+                                Otro
+                                <span class="form-check-sign"></span>
+                              </label>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 2.7rem;margin-top: 0.3rem;">Forma:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="1" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Alargados
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="2" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Redondos
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="3" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Ovales
+                      <span class="form-check-sign"></span>
+                    </label>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 2.6rem;margin-top: 0.3rem;">Tamaño:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="1" name="tamano" #tamano="ngModel" [(ngModel)]="obj.tamano" required>
+                          Grandes
+                          <span class="form-check-sign"></span>
+                        </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="2" name="tamano" #tamano="ngModel" [(ngModel)]="obj.tamano" required>
+                          Pequeños
+                          <span class="form-check-sign"></span>
+                        </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                          <input class="form-check-input" type="radio" [value]="3" name="tamano" #tamano="ngModel" [(ngModel)]="obj.tamano" required>
+                          Regulares
+                          <span class="form-check-sign"></span>
+                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="heading6">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
                   Nariz
                 </button>
-                <div class="divisor"></div>
-              </h5>
-            </div>
-            <div id="collapse6" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div class="card-body">
-              </div>
-            </div>
-          </div>
+                                <div class="divisor"></div>
+                            </h5>
+                        </div>
+                        <div id="collapse6" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 3rem;margin-top: 0.3rem;">Raíz:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="1" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Grande
+                      <span class="form-check-sign"></span>
+                    </label>
 
-          <div class="card">
-            <div class="card-header" id="heading7">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="2" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Mediana
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="3" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Pequeña
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 3rem;margin-top: 0.3rem;">Dorso:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="1" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Cóncavo
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="2" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Convexo
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="3" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Recto
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                        <input class="form-check-input" type="radio" [value]="3" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                        Sinuoso
+                        <span class="form-check-sign"></span>
+                      </label>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 3rem;margin-top: 0.3rem;">Ancho:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="1" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Grande
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="2" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Mediano
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="3" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Pequeño
+                      <span class="form-check-sign"></span>
+                    </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 3rem;margin-top: 0.3rem;">Base:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="1" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Abatida
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="2" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Horizontal
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="3" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Levantada
+                      <span class="form-check-sign"></span>
+                    </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                        <label style="margin-right: 3rem;margin-top: 0.3rem;">Altura:</label>
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="1" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Grande
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="2" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Mediana
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                        <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="3" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Pequeña
+                      <span class="form-check-sign"></span>
+                    </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="heading7">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
                   Boca
                 </button>
-                <div class="divisor"></div>
-              </h5>
-            </div>
-            <div id="collapse7" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div class="card-body">
-              </div>
-            </div>
-          </div>
+                                    <div class="divisor"></div>
+                                </h5>
+                            </div>
+                            <div id="collapse7" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="col-12">
+                                        <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                            <label style="margin-right: 3rem;margin-top: 0.3rem;">Tamaño:</label>
+                                            <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="1" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Grande
+                      <span class="form-check-sign"></span>
+                    </label>
 
-          <div class="card">
-            <div class="card-header" id="heading8">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                                            <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="2" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Mediana
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                            <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="3" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Pequeña
+                      <span class="form-check-sign"></span>
+                    </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                                            <label style="margin-right: 3rem;margin-top: 0.3rem;">Comisuras:</label>
+                                            <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="1" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Abatidas
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                            <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="2" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Elevadas
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                            <label style="width: 7rem;" class="form-check-label media">
+                      <input class="form-check-input" type="radio" [value]="3" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                      Simétricas
+                      <span class="form-check-sign"></span>
+                    </label>
+
+                                            <label style="width: 7rem;" class="form-check-label media">
+                        <input class="form-check-input" type="radio" [value]="3" name="formaC" #formaC="ngModel" [(ngModel)]="obj.formaC" required>
+                        Asimétricas
+                        <span class="form-check-sign"></span>
+                      </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="heading8">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
                   Labios
                 </button>
-                <div class="divisor"></div>
-              </h5>
-            </div>
-            <div id="collapse8" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div class="card-body">
-              </div>
-            </div>
-          </div>
+                                    <div class="divisor"></div>
+                                </h5>
+                            </div>
+                            <div id="collapse8" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
 
-          <div class="card">
-            <div class="card-header" id="heading9">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="heading9">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
                   Mentón
                 </button>
-                <div class="divisor"></div>
-              </h5>
-            </div>
-            <div id="collapse9" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div class="card-body">
-              </div>
-            </div>
-          </div>
+                                    <div class="divisor"></div>
+                                </h5>
+                            </div>
+                            <div id="collapse9" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
+                                </div>
+                            </div>
+                        </div>
 
-          <div class="card">
-            <div class="card-header" id="heading10">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                        <div class="card">
+                            <div class="card-header" id="heading10">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
                   Orejas
                 </button>
-                <div class="divisor"></div>
-              </h5>
-            </div>
-            <div id="collapse10" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div class="card-body">
-              </div>
-            </div>
-          </div>
+                                    <div class="divisor"></div>
+                                </h5>
+                            </div>
+                            <div id="collapse10" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
+
+                </div>
+
+
+            </div>
         </div>
-
-      </div>
-
-
     </div>
-  </div>
-</div>
