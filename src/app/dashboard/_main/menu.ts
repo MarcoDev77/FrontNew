@@ -65,7 +65,7 @@ export const ROUTES: RouteInfo[] = [
     roles: [
       r.test.role
     ],
-    path: '/dashboard/modulo-ingreso',
+    path: '/dashboard/ingreso',
     title: 'INGRESO',
     type: 'link',
     icontype: 'fa fa-files-o',

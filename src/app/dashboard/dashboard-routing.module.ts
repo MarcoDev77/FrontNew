@@ -19,7 +19,7 @@ const routes: Routes = [
         path: 'datosAnexos', component: DatosAnexosComponent, canActivate: [AuthGuard], data: {expectedRole: [r.admin.role]}
       },
       {
-        path: 'ingreso', component: IngresoComponent, canActivate: [AuthGuard], data: {expectedRole: [r.test.role]}
+        path: 'ingreso2', component: IngresoComponent, canActivate: [AuthGuard], data: {expectedRole: [r.test.role]}
       },
       {
         path: 'dactiloscopia', component: DactiloscapiaComponent, canActivate: [AuthGuard], data: {expectedRole: [r.test.role]}
@@ -31,7 +31,7 @@ const routes: Routes = [
         data: {expectedRole: [r.test.role]}
       },
       {
-        path: 'modulo-ingreso',
+        path: 'ingreso',
         loadChildren: './ingreso/ingreso.module#IngresoModule',
         canActivate: [AuthGuard],
         data: {expectedRole: [r.test.role]}
