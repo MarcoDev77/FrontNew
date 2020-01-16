@@ -37,7 +37,8 @@
 
       <td class="text-center">
         <input name="nombre" type="text" class="form-control" [(ngModel)]="tipoLibertad.nombre" placeholder="Nombre"
-               #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" maxlength="45" required>
+               #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" maxlength="45"
+               required>
       </td>
       <td class="text-center">
 
@@ -60,8 +61,8 @@
         <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar" (click)="update('tr' + i , item)"></i> &nbsp;
         <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
            ngbTooltip="Deshabilitar"></i>
-        <i *ngIf="!item.estatus" class="fa fa-toggle-off" placement="top" ngbTooltip="Habilitar"></i> &nbsp;
-        <!--        <i (click)="delte(item)" placement="top" ngbTooltip="Eliminar" class="fa fa-trash-o"></i>-->
+        <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top"
+           ngbTooltip="Habilitar"></i> &nbsp;
       </td>
     </tr>
 

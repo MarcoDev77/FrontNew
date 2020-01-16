@@ -63,9 +63,8 @@
         &nbsp;
         <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
            ngbTooltip="Deshabilitar"></i>
-        <i *ngIf="!item.estatus" class="fa fa-toggle-off" placement="top" ngbTooltip="Habilitar"></i>
-        &nbsp;
-        <!--        <i (click)="delte(item)" placement="top" ngbTooltip="Eliminar" class="fa fa-trash-o"></i>-->
+        <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top"
+           ngbTooltip="Habilitar"></i>
       </td>
     </tr>
 

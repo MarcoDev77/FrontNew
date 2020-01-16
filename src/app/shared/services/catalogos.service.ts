@@ -60,6 +60,9 @@ export class CatalogosService {
     model.municipio = {
       id: model.municipioSelect.value
     };
+    model.tipoCentro = {
+      id: model.tipoCentroSelect.value
+    };
     this.data = model;
     console.log('To server', this.data);
     return this.http.post(`${this.url}/api/registrarCentroPenitenciario`, this.data);
@@ -199,6 +202,11 @@ export class CatalogosService {
   }
   changeStatusActividad(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusActividad?actividadId=${id}`);
+  }
+
+  // Tipo centro
+  listTipoCentro() {
+    return this.http.get(`${this.url}/api/listarTipoCentros`);
   }
 }
 

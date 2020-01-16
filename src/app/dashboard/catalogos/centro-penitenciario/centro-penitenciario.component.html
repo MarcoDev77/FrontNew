@@ -67,8 +67,6 @@
         <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
            ngbTooltip="Deshabilitar"></i>
         <i *ngIf="!item.estatus" class="fa fa-toggle-off" placement="top" ngbTooltip="Habilitar"></i>
-        &nbsp;
-        <!--        <i (click)="delte(item)" placement="top" ngbTooltip="Eliminar" class="fa fa-trash-o"></i>-->
       </td>
     </tr>
 
@@ -92,19 +90,18 @@
 
         <div class="col-sm-6">
           <div class="form-group">
-            <input name="clave" class="form-control shadows" type="text" placeholder="Clave" ngbTooltip="Clave"
-                   [(ngModel)]="centroPenitenciario.clave" #clave="ngModel"
-                   [ngClass]="{ 'is-invalid': f.submitted && clave.invalid}"
+            <input name="nombre" class="form-control" type="text" placeholder="Nombre" ngbTooltip="Nombre"
+                   [(ngModel)]="centroPenitenciario.nombre" #nombre="ngModel"
+                   [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid}"
                    maxlength="45" required/>
           </div>
         </div>
 
         <div class="col-sm-6">
           <div class="form-group">
-            <input name="nombre" class="form-control" type="text" placeholder="Nombre" ngbTooltip="Nombre"
-                   [(ngModel)]="centroPenitenciario.nombre" #nombre="ngModel"
-                   [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid}"
-                   maxlength="45" required/>
+            <app-select required ngbTooltip="Tipo de Centro" [options]="tipoCentros" [multiple]="false"
+                        [modelo]="centroPenitenciario.tipoCentroSelect"
+                        (getModel)="centroPenitenciario.tipoCentroSelect = $event;"></app-select>
           </div>
         </div>
 

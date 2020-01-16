@@ -20,6 +20,7 @@ export class CentroPenitenciarioComponent implements OnInit {
   public data: CentroPenitenciario[];
   public estados: any[];
   public municipios: any[];
+  public tipoCentros: any[];
   public centroPenitenciario: CentroPenitenciario;
 
   public auxId: any;
@@ -40,6 +41,7 @@ export class CentroPenitenciarioComponent implements OnInit {
     this.data = [];
     this.estados = [];
     this.municipios = [];
+    this.tipoCentros = [];
 
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
@@ -47,6 +49,7 @@ export class CentroPenitenciarioComponent implements OnInit {
   }
 
   ngOnInit() {
+    // TODO: Arreglar el login
     const logged = localStorage.getItem('logged');
     if (!logged) {
       location.reload();
@@ -54,27 +57,8 @@ export class CentroPenitenciarioComponent implements OnInit {
     }
     this.getData();
     this.getEstados('mexico', null);
+    this.getTipoCentros();
     // this.getMunicipios('morelos', null);
-  }
-
-  delte(item) {
-    if (confirm('Eliminar?')) {
-      this.catalogosService.deleteCentroPenitenciario(item.id).subscribe((data: any) => {
-        console.log(data);
-        if (!data.error) {
-          this.getData();
-        } else {
-          alert('Error ' + data.mensaje.toString());
-          // swal(
-          //   'Error!',
-          //   data.mensaje,
-          //   'error'
-          // );
-        }
-      });
-    } else {
-      console.log('saved');
-    }
   }
 
   getData() {
@@ -86,6 +70,17 @@ export class CentroPenitenciarioComponent implements OnInit {
         alert('Error ' + data.mensaje.toString());
       } else {
         this.data = data.centros;
+      }
+    });
+  }
+
+  getTipoCentros() {
+    this.catalogosService.listTipoCentro().subscribe((data: any) => {
+      if (data.tipoCentros) {
+        for (const tipo of data.tipoCentros) {
+          this.tipoCentros = [...this.tipoCentros, {value: tipo.id, description: tipo.nombre}];
+        }
+        console.log('TIPO CENTROS', this.tipoCentros);
       }
     });
   }
@@ -115,8 +110,8 @@ export class CentroPenitenciarioComponent implements OnInit {
   }
 
   submit(array?) {
-    if (!this.centroPenitenciario.municipioSelect) {
-      return Swal.fire('Atención', 'Tienes que selecionar estado y municipio', 'warning');
+    if (!this.centroPenitenciario.municipioSelect || !this.centroPenitenciario.tipoCentroSelect) {
+      return Swal.fire('Atención', 'Tienes que selecionar estado, municipio y tipo de centro.', 'warning');
     }
     console.log('submit', this.centroPenitenciario);
     this.catalogosService.saveCentroPenitenciario(this.centroPenitenciario).subscribe((data: any) => {
@@ -160,6 +155,7 @@ export class CentroPenitenciarioComponent implements OnInit {
     this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
     this.centroPenitenciario.estadoSelect = [{value: item.municipio.estado.id, description: item.municipio.estado.nombre}];
     this.centroPenitenciario.municipioSelect = [{value: item.municipio.id, description: item.municipio.nombre}];
+    this.centroPenitenciario.tipoCentroSelect = [{value: item.tipoCentro.id, description: item.tipoCentro.nombre}];
   }
 
   switch(e) {
