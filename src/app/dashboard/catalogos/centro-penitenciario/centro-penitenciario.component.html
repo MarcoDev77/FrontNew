@@ -66,7 +66,7 @@
         &nbsp;
         <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
            ngbTooltip="Deshabilitar"></i>
-        <i *ngIf="!item.estatus" class="fa fa-toggle-off" placement="top" ngbTooltip="Habilitar"></i>
+        <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top" ngbTooltip="Habilitar"></i>
       </td>
     </tr>
 
@@ -93,6 +93,7 @@
             <input name="nombre" class="form-control" type="text" placeholder="Nombre" ngbTooltip="Nombre"
                    [(ngModel)]="centroPenitenciario.nombre" #nombre="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid}"
+                   minlength="3"
                    maxlength="45" required/>
           </div>
         </div>
