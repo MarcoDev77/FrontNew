@@ -115,6 +115,9 @@ export class CentroPenitenciarioComponent implements OnInit {
   }
 
   submit(array?) {
+    if (!this.centroPenitenciario.municipioSelect) {
+      return Swal.fire('Atención', 'Tienes que selecionar estado y municipio', 'warning');
+    }
     console.log('submit', this.centroPenitenciario);
     this.catalogosService.saveCentroPenitenciario(this.centroPenitenciario).subscribe((data: any) => {
       console.log(data);

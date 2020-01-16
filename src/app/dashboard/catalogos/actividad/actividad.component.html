@@ -1,21 +1,19 @@
 <div class="row">
-  <div class="col-md-2 text-center">
-    <label><i class="fa fa-bookmark fa-2x mr-2" aria-hidden="true"></i>ACTIVIDADES</label>
-    <br>
-    <label>{{tipoActividad.descripcion}}</label>
+  <div class="col-sm-1 text-center">
+    <i class="fa fa-arrow-left" ngbTooltip="Atrás" (click)="goBack()"></i>
   </div>
-  <div class="col-md-10">
+  <div class="col-sm-2">
+    <label><i class="fa fa-bookmark fa-2x mr-2" aria-hidden="true"></i>ACTIVIDADES</label>
+  </div>
+  <div class="col-sm-9">
     <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
   </div>
-<!--  <div class="col-sm-3 text-center">-->
-<!--    <h5>Actividades</h5>-->
-<!--    <h6></h6>-->
-<!--  </div>-->
-<!--  <div class="col-sm-9">-->
-<!--    <hr style="background-color: #CE9ACB; height: 1px">-->
-<!--  </div>-->
 </div>
-<br>
+<div class="row">
+  <div class="col-sm-12 offset-1">
+    <label>{{tipoActividad.descripcion}}</label>
+  </div>
+</div>
 <div class="row">
   <div class="col text-right mb-3">
     <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i

@@ -195,4 +195,8 @@ export class TipoActividadComponent implements OnInit {
     sessionStorage.setItem('tipoActividad', this.kryptoService.set(JSON.stringify(item)));
     this.router.navigate(['/catalogo/centro-penitenciario/tipo-actividad/actividad']);
   }
+
+  goBack() {
+    this.router.navigate(['/catalogo/centro-penitenciario']);
+  }
 }

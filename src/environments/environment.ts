@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://192.168.100.69:8090',
+  // ttp://167.172.158.44:8080/reinsercionapi/nameEndPoint
 };
 
 /*
