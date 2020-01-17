@@ -47,7 +47,7 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string, code: string) {
-    return this.http.post<any>(`${environment.apiUrl}/api/login?code=${code}`, {username, password}).pipe(map(user => {
+    return this.http.post<any>(`${environment.apiUrl}/api/login`, {username, password}).pipe(map(user => {
       console.log('USER', user);
       if (user && user.access_token) {
         sessionStorage.setItem('currentUser', this.kryptoService.set(JSON.stringify(user)));
