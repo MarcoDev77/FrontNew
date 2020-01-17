@@ -204,9 +204,15 @@ export class CatalogosService {
     return this.http.get(`${this.url}/api/actualizarEstatusActividad?actividadId=${id}`);
   }
 
-  // Tipo centro
-  listTipoCentro() {
-    return this.http.get(`${this.url}/api/listarTipoCentros`);
-  }
+  // CATALOGOS ESTATICOS
+  listTipoCentro = () => this.http.get(`${this.url}/api/listarTipoCentros`);
+
+  listGradoEstudio = () => this.http.get(`${this.url}/api/listarGradosEstudio`);
+
+  listReligiones = () => this.http.get(`${this.url}/api/listarReligiones`);
+
+  listEstadosCiviles = () => this.http.get(`${this.url}/api/listarEstadosCiviles`);
+
+  listOcupaciones = () => this.http.get(`${this.url}/api/listarOcupaciones`);
 }
 

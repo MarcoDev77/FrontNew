@@ -9,22 +9,15 @@
   </div>
 </div>
 
-<form >
+<form>
   <!--Datos expediente-->
   <div>
-    <div class="row" style="margin-bottom: 10px;">
-      <div class="col-md-2">
-        <label><i class="fa fa-folder fa-2x mr-2" aria-hidden="true"></i> DATOS DEL EXPEDIENTE</label>
-      </div>
-      <div class="col-md-10">
-        <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
-      </div>
-    </div>
+    <app-section-title icon="fa fa-folder" title="Datos del expesiente"></app-section-title>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <select class="form-control shadows" name="tipoInputado" required [(ngModel)]="ingreso.tipoImputado">
-            <option [value]="''" disabled hidden>Tipo de imputado</option>
+          <select ngbTooltip="Tipo inputado" class="form-control shadows" name="tipoInputado" required [(ngModel)]="ingreso.tipoImputado">
+            <option value="0" disabled selected>Tipo de imputado</option>
             <option value="Federal">Federal</option>
             <option value="Estatal">Estatal</option>
           </select>
@@ -41,14 +34,16 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" placeholder="Folio" name="folio" type="text"  [(ngModel)]="ingreso.folio"required/>
+          <input class="form-control shadows" placeholder="Folio" name="folio" type="text" [(ngModel)]="ingreso.folio"
+                 required/>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" placeholder="Número de expediente"  name="expediente" type="number" [(ngModel)]="ingreso.expediente" required/>
+          <input class="form-control shadows" placeholder="Número de expediente" name="expediente" type="number"
+                 [(ngModel)]="ingreso.expediente" required/>
         </div>
       </div>
       <div class="col-md-4">
@@ -64,40 +59,37 @@
   </div>
   <!--Datos personales-->
   <div>
-    <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
-      <div class="col-md-2">
-        <label><i class="fa fa-male fa-2x mr-2" aria-hidden="true"></i> DATOS PERSONALES</label>
-      </div>
-      <div class="col-md-10">
-        <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
-      </div>
-    </div>
+    <app-section-title icon="fa fa-male" title="Datos personales"></app-section-title>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group shadows">
-          <input class="form-control" type="text" placeholder="CURP"  name="curp" required [(ngModel)]="ingreso.curp"/>
+          <input class="form-control" type="text" placeholder="CURP" name="curp" required [(ngModel)]="ingreso.curp"/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group shadows">
-          <input type="date" class="form-control" placeholder="Fecha de nacimiento" name="fechaNacimiento" [(ngModel)]="ingreso.fechaNacimiento"required/>
+          <input type="date" class="form-control" placeholder="Fecha de nacimiento" name="fechaNacimiento"
+                 [(ngModel)]="ingreso.fechaNacimiento" required/>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group shadows">
-          <input class="form-control" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="ingreso.nombre" required/>
+          <input class="form-control" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="ingreso.nombre"
+                 required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group shadows">
-          <input class="form-control" type="text" placeholder="Apellido paterno" name="apellidoPaterno" [(ngModel)]="ingreso.apellidoPaterno"required/>
+          <input class="form-control" type="text" placeholder="Apellido paterno" name="apellidoPaterno"
+                 [(ngModel)]="ingreso.apellidoPaterno" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group shadows">
-          <input class="form-control" type="text" placeholder="Apellido materno" name="apellidoMaterno" [(ngModel)]="ingreso.apelidoMaterno"required/>
+          <input class="form-control" type="text" placeholder="Apellido materno" name="apellidoMaterno"
+                 [(ngModel)]="ingreso.apelidoMaterno" required/>
         </div>
       </div>
     </div>
@@ -113,19 +105,21 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Nacionalidad" name="nacionalidad" [(ngModel)]="ingreso.nacionalidad" required/>
+          <input class="form-control shadows" type="text" placeholder="Nacionalidad" name="nacionalidad"
+                 [(ngModel)]="ingreso.nacionalidad" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Religión" name="religion"  [(ngModel)]="ingreso.religion"required/>
+          <input class="form-control shadows" type="text" placeholder="Religión" name="religion"
+                 [(ngModel)]="ingreso.religion" required/>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <select class="form-control shadows" name="estadoCivil" [(ngModel)]="ingreso.estadoCivil"required>
+          <select class="form-control shadows" name="estadoCivil" [(ngModel)]="ingreso.estadoCivil" required>
             <option [value]="''" disabled hidden>Estado civil</option>
             <option value="Soltero(a)">Soltero(a)</option>
             <option value="Comprometido(a)">Comprometido(a)</option>
@@ -157,80 +151,103 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Ocupación" name="ocupacion" [(ngModel)]="ingreso.ocupacion"required/>
+          <input class="form-control shadows" type="text" placeholder="Ocupación" name="ocupacion"
+                 [(ngModel)]="ingreso.ocupacion" required/>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Escolaridad" name="escolaridad" [(ngModel)]="ingreso.escolaridad" required/>
+          <input class="form-control shadows" type="text" placeholder="Escolaridad" name="escolaridad"
+                 [(ngModel)]="ingreso.escolaridad" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Nombre del padre" name="padre" [(ngModel)]="ingreso.padre"required/>
+          <input class="form-control shadows" type="text" placeholder="Nombre del padre" name="padre"
+                 [(ngModel)]="ingreso.padre" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Nombre de la madre" name="madre" [(ngModel)]="ingreso.madre"required/>
+          <input class="form-control shadows" type="text" placeholder="Nombre de la madre" name="madre"
+                 [(ngModel)]="ingreso.madre" required/>
         </div>
       </div>
     </div>
   </div>
   <!--Datos del delito-->
   <div>
-    <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
-      <div class="col-md-2">
-        <label><i class="fa fa-file-text fa-2x mr-2" aria-hidden="true"></i> DATOS DEL DELITO</label>
-      </div>
-      <div class="col-md-10">
-        <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
-      </div>
-    </div>
+    <app-section-title icon="fa fa-file-text" title="Datos del delito"></app-section-title>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Delito" name="delito" [(ngModel)]="ingreso.delito" required/>
+          <input class="form-control shadows" type="text" placeholder="Delito" name="delito"
+                 [(ngModel)]="ingreso.delito" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="date" placeholder="Fecha de detención"  name="fechaDetencion"[(ngModel)]="ingreso.fechaDetencion"required/>
+          <input class="form-control shadows" type="date" placeholder="Fecha de detención" name="fechaDetencion"
+                 [(ngModel)]="ingreso.fechaDetencion" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="date" placeholder="Fecha de registro"  name="fechaRegistro" [(ngModel)]="ingreso.fechaRegistro" required/>
+          <input class="form-control shadows" type="date" placeholder="Fecha de registro" name="fechaRegistro"
+                 [(ngModel)]="ingreso.fechaRegistro" required/>
         </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <button class="btn btn-info btn-block btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table shadows">
+          <thead>
+          <tr>
+            <th class="text-center">Delito</th>
+            <th class="text-center">Fecha</th>
+            <th class="text-center">Fecha</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="text-center">1</td>
+            <td class="text-center">Andrew Mike</td>
+            <td class="text-center">Develop</td>
+            <td class="text-center">2013</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
   <!--Alias-->
   <div>
-    <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
-      <div class="col-md-2">
-        <label><i class="fa fa-users fa-2x mr-2" aria-hidden="true"></i> ALIAS</label>
-      </div>
-      <div class="col-md-10">
-        <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
-      </div>
-    </div>
+    <app-section-title icon="fa fa-users" title="Alias"></app-section-title>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias" [(ngModel)]="ingreso.nombreAlias" required/>
+          <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias"
+                 [(ngModel)]="ingreso.nombreAlias" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias" [(ngModel)]="ingreso.apellidoPaternoAlias" required/>
+          <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias"
+                 [(ngModel)]="ingreso.apellidoPaternoAlias" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Apellido materno" name="apellidoMaternoAlias" [(ngModel)]="ingreso.apellidoMaternoAlias"required/>
+          <input class="form-control shadows" type="text" placeholder="Apellido materno" name="apellidoMaternoAlias"
+                 [(ngModel)]="ingreso.apellidoMaternoAlias" required/>
         </div>
       </div>
     </div>
@@ -242,15 +259,39 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <button class="btn btn-info" style="width: 15rem" type="submit" ><i class="fa fa-plus fa-2x mr-2" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-info btn-block btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i></button>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table shadows">
+        <thead>
+        <tr>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Apellido Paterno</th>
+          <th class="text-center">Apellido Materno</th>
+          <th class="text-center">Alias</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="text-center">1</td>
+          <td class="text-center">Andrew Mike</td>
+          <td class="text-center">Develop</td>
+          <td class="text-center">2013</td>
+          <td class="text-center">2013</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <!--Footer-->
   <div class="row">
     <div class="col-md-12 text-right">
-      <button class="btn btn-success" style="width: 15rem;" (click)="submit()" type="submit">Continuar</button>
+      <button class="btn btn-success shadows" style="width: 15rem;" (click)="submit()" type="submit">Continuar</button>
     </div>
   </div>
 </form>
