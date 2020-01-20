@@ -16,7 +16,8 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <select ngbTooltip="Tipo inputado" class="form-control shadows" name="tipoInputado" required [(ngModel)]="ingreso.tipoImputado">
+          <select ngbTooltip="Tipo inputado" class="form-control shadows" name="tipoInputado" required
+                  [(ngModel)]="ingreso.tipoImputado">
             <option value="0" disabled selected>Tipo de imputado</option>
             <option value="Federal">Federal</option>
             <option value="Estatal">Estatal</option>
@@ -184,24 +185,30 @@
       <div class="col-md-4">
         <div class="form-group">
           <input class="form-control shadows" type="text" placeholder="Delito" name="delito"
-                 [(ngModel)]="ingreso.delito" required/>
+                 [(ngModel)]="datoDelito.delito" #delito="ngModel"
+                 [ngClass]="{ 'is-invalid':  delito.touched && delito.invalid }"
+                 ngbTooltip="Delito" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <input class="form-control shadows" type="date" placeholder="Fecha de detención" name="fechaDetencion"
-                 [(ngModel)]="ingreso.fechaDetencion" required/>
+                 [(ngModel)]="datoDelito.fechaDetencion" #fechaDetencion="ngModel"
+                 [ngClass]="{ 'is-invalid':  fechaDetencion.touched && fechaDetencion.invalid }"
+                 ngbTooltip="Fecha Detención" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <input class="form-control shadows" type="date" placeholder="Fecha de registro" name="fechaRegistro"
-                 [(ngModel)]="ingreso.fechaRegistro" required/>
+                 [(ngModel)]="datoDelito.fechaRegistro" #fechaRegistro="ngModel"
+                 [ngClass]="{ 'is-invalid':  fechaRegistro.touched && fechaRegistro.invalid }"
+                 ngbTooltip="Fecha de registro" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <button class="btn btn-info btn-block btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i></button>
+          <button (click)="addDatoDelito([delito, fechaDetencion, fechaRegistro])" class="btn btn-info btn-block btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i></button>
         </div>
       </div>
     </div>
@@ -211,17 +218,20 @@
           <thead>
           <tr>
             <th class="text-center">Delito</th>
-            <th class="text-center">Fecha</th>
-            <th class="text-center">Fecha</th>
+            <th class="text-center">Fecha detención</th>
+            <th class="text-center">Fecha de registro</th>
             <th class="text-center">Acciones</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td class="text-center">1</td>
-            <td class="text-center">Andrew Mike</td>
-            <td class="text-center">Develop</td>
-            <td class="text-center">2013</td>
+          <tr *ngFor="let item of arrayDatoDelito">
+            <td class="text-center">{{item.delito}}</td>
+            <td class="text-center">{{item.fechaDetencion}}</td>
+            <td class="text-center">{{item.fechaRegistro}}</td>
+            <td class="text-center">
+              <i class="fa fa-times mr-3" placement="top" ngbTooltip="Eliminar"
+                 (click)="deleteDatoDelito(item)"></i>
+            </td>
           </tr>
           </tbody>
         </table>
@@ -235,31 +245,41 @@
       <div class="col-md-4">
         <div class="form-group">
           <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias"
-                 [(ngModel)]="ingreso.nombreAlias" required/>
+                 [(ngModel)]="alias.nombre" #nombreAlias="ngModel"
+                 [ngClass]="{ 'is-invalid':  nombreAlias.touched && nombreAlias.invalid }"
+                 ngbTooltip="Nombre" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias"
-                 [(ngModel)]="ingreso.apellidoPaternoAlias" required/>
+                 [(ngModel)]="alias.apellidoPaterno" #apellidoPaternoAlias="ngModel"
+                 [ngClass]="{ 'is-invalid':  apellidoPaternoAlias.touched && apellidoPaternoAlias.invalid }"
+                 ngbTooltip="Apellido Paterno" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <input class="form-control shadows" type="text" placeholder="Apellido materno" name="apellidoMaternoAlias"
-                 [(ngModel)]="ingreso.apellidoMaternoAlias" required/>
+                 [(ngModel)]="alias.apellidoMaterno" #apellidoMaternoAlias="ngModel"
+                 [ngClass]="{ 'is-invalid':  apellidoMaternoAlias.touched && apellidoMaternoAlias.invalid }"
+                 ngbTooltip="Apellido Materno" required/>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Otros nombres/alias" required/>
+          <input class="form-control shadows" type="text" placeholder="Otros nombres/alias" name="aliasNombre"
+                 [(ngModel)]="alias.alias" #aliasNombre="ngModel"
+                 [ngClass]="{ 'is-invalid':  aliasNombre.touched && aliasNombre.invalid }"
+                 ngbTooltip="Alias/otro nombre" required/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <button type="button" class="btn btn-info btn-block btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i></button>
+          <button (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])" type="button" class="btn btn-info btn-block btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -277,12 +297,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td class="text-center">1</td>
-          <td class="text-center">Andrew Mike</td>
-          <td class="text-center">Develop</td>
-          <td class="text-center">2013</td>
-          <td class="text-center">2013</td>
+        <tr *ngFor="let item of arrayAlias">
+          <td class="text-center">{{item.nombre}}</td>
+          <td class="text-center">{{item.apellidoPaterno}}</td>
+          <td class="text-center">{{item.apellidoMaterno}}</td>
+          <td class="text-center">{{item.nombre}}</td>
+          <td class="text-center">
+            <i class="fa fa-times mr-3" placement="top" ngbTooltip="Eliminar"
+               (click)="deleteAlias(item)"></i>
+          </td>
         </tr>
         </tbody>
       </table>
