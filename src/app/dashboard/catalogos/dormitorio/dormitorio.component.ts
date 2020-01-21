@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
 import {Dormitorio} from '@shared/models/Dormitorio';
 import {EncrDecrService} from '@shared/helpers/encr-decr.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dormitorio',
@@ -30,7 +31,7 @@ export class DormitorioComponent implements OnInit {
   public reverse = true;
   public centroPenitenciario: CentroPenitenciario;
 
-  constructor(private catalogosService: CatalogosService, private kryptoService: EncrDecrService) {
+  constructor(private catalogosService: CatalogosService, private kryptoService: EncrDecrService, private router: Router) {
     this.data = [];
     this.dormitorio = {} as Dormitorio;
     this.centroPenitenciario = JSON.parse(this.kryptoService.get(sessionStorage.getItem('centroPenitenciario')));
@@ -188,5 +189,9 @@ export class DormitorioComponent implements OnInit {
         });
       }
     });
+  }
+
+  goBack() {
+    this.router.navigate(['/catalogo/centro-penitenciario']);
   }
 }

@@ -1,12 +1,11 @@
 <div class="row">
-  <div class="col-sm-3 text-center">
-    <h5>Modalidad de delito</h5>
+  <div class="col-md-2 text-center">
+    <label><i class="fa fa-gavel fa-2x mr-2" aria-hidden="true"></i>MODALIDAD DELITO</label>
   </div>
-  <div class="col-sm-9">
-    <hr style="background-color: #CE9ACB; height: 1px">
+  <div class="col-md-10">
+    <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
   </div>
 </div>
-<br>
 <div class="row">
   <div class="col text-right mb-3">
     <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
@@ -51,7 +50,8 @@
       </td>
       <td class="text-center">
         <input name="nombre" type="text" class="form-control" [(ngModel)]="modalidadDelito.nombre" placeholder="Nombre"
-               #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" maxlength="45" required>
+               #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" maxlength="45"
+               required>
       </td>
       <td class="text-center">
 
@@ -80,9 +80,8 @@
         &nbsp;
         <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
            ngbTooltip="Deshabilitar"></i>
-        <i *ngIf="!item.estatus" class="fa fa-toggle-off" placement="top" ngbTooltip="Habilitar"></i>
-        &nbsp;
-        <!--        <i (click)="delte(item)" placement="top" ngbTooltip="Eliminar" class="fa fa-trash-o"></i>-->
+        <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top"
+           ngbTooltip="Habilitar"></i>
       </td>
     </tr>
 

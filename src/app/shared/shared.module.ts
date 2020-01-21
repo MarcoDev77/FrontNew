@@ -13,6 +13,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {OrderModule} from 'ngx-order-pipe';
 import {SelectDropDownModule} from 'ngx-select-dropdown';
 import {NgxMaskModule} from 'ngx-mask';
+import { SectionTitleComponent } from './section-title/section-title.component';
 
 const MODULES = [
   FormsModule,
@@ -34,8 +35,8 @@ const COMPONENTS = [
 
 @NgModule({
   imports: [CommonModule, ...MODULES],
-  exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent],
-  declarations: [...COMPONENTS, SelectComponent],
+    exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent],
+  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent],
 })
 export class SharedModule {
 }

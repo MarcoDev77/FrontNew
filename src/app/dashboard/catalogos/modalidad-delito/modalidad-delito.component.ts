@@ -199,7 +199,7 @@ export class ModalidadDelitoComponent implements OnInit {
         this.catalogosService.changeEstatusModalidadDelito(item.id).subscribe((data: any) => {
           console.log(data);
           Swal.fire({
-            title: data.error ? 'Error!' : 'Eliminado',
+            title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
             icon: data.error ? 'error' : 'success',
             timer: 1300,

@@ -1,14 +1,21 @@
 <div class="row">
-  <div class="col-sm-3 text-center">
-    <h5>Dormitorios</h5>
-    <h6>{{centroPenitenciario.clave}}</h6>
-    <h6>{{centroPenitenciario.nombre}}</h6>
+  <div class="col-sm-1 text-center">
+    <i class="fa fa-arrow-left" ngbTooltip="Atrás" (click)="goBack()"></i>
+  </div>
+  <div class="col-sm-2">
+    <label><i class="fa fa-bed fa-2x mr-2" aria-hidden="true"></i>DORMITORIOS</label>
   </div>
   <div class="col-sm-9">
-    <hr style="background-color: #CE9ACB; height: 1px">
+    <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
   </div>
 </div>
-<br>
+<div class="row">
+  <div class="col-sm-12 offset-1">
+    <label>{{centroPenitenciario.clave}}</label>
+    &nbsp;
+    <label>{{centroPenitenciario.nombre}}</label>
+  </div>
+</div>
 <div class="row">
   <div class="col text-right mb-3">
     <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
@@ -67,6 +74,7 @@
         <input name="capacidadInternos" type="number" class="form-control" [(ngModel)]="dormitorio.capacidadInternos"
                placeholder="Capacidad de internos"
                #capacidadInternos="ngModel"
+               pattern='^[0-9]*$'
                [ngClass]="{ 'is-invalid':  capacidadInternos.touched && capacidadInternos.invalid }" min="0" required>
       </td>
 
@@ -77,7 +85,7 @@
       </td>
 
       <td class="text-center">
-        <input name="temporal" type="checkbox" class="form-control" [(ngModel)]="dormitorio.temporal">
+          <input name="temporal" type="checkbox" class="form-check-input" [(ngModel)]="dormitorio.temporal">
       </td>
 
       <td class="text-center">

@@ -1,6 +1,6 @@
 export class CentroPenitenciario {
   id?: number;
-  clave: string;
+  clave?: string;
   nombre: string;
   estatus: boolean;
   descripcion: string;
@@ -12,4 +12,6 @@ export class CentroPenitenciario {
   municipio: any;
   municipioSelect: any;
   estadoSelect: any;
+  tipoCentro: any;
+  tipoCentroSelect: any;
 }

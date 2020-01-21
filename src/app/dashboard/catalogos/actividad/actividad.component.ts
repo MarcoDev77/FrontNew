@@ -31,7 +31,7 @@ export class ActividadComponent implements OnInit {
   public reverse = true;
   public tipoActividad: TipoActividad;
 
-  constructor(private catalogosService: CatalogosService, private kryptoService: EncrDecrService) {
+  constructor(private catalogosService: CatalogosService, private kryptoService: EncrDecrService, private router: Router) {
     this.data = [];
     this.actividad = {} as Actividad;
     this.tipoActividad = JSON.parse(this.kryptoService.get(sessionStorage.getItem('tipoActividad')));
@@ -189,6 +189,10 @@ export class ActividadComponent implements OnInit {
         });
       }
     });
+  }
+
+  goBack() {
+    this.router.navigate(['/catalogo/centro-penitenciario/tipo-actividad']);
   }
 
 }
