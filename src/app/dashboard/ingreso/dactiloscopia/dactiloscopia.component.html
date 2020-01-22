@@ -1,15 +1,4 @@
-
-<div class="row">
-  <div class="col-12 text-center pb-5">
-    <label class="pr-4">Formulario de ingreso</label>
-    <label class="pr-4">Señas particulares</label>
-    <label class="pr-4">Característica</label>
-    <label class="pr-4" style="color: #8f2d94;">Dactiloscopia</label>
-    <label class="pr-4">Referencias</label>
-    <label>Situación penal</label>
-  </div>
-</div>
-
+<app-ingreso-navigation step="3"></app-ingreso-navigation>
 <div class="row">
   <div class="col-sm-3">ID.</div>
   <div class="col-sm-3">Morelos</div>
@@ -25,33 +14,19 @@
 </div>
 <br>
 <div class="row">
-  <div class="col">
-    <input class="form-control shadows" type="text" placeholder="Fuero">
+  <div class="col-sm-4">
+    <input ngbTooltip="Fuero" class="form-control shadows" type="text" placeholder="Fuero">
   </div>
-  <div class="col">
-    <input class="form-control shadows" type="text" placeholder="Lib.">
+  <div class="col-sm-4">
+    <input ngbTooltip="Lib." class="form-control shadows" type="text" placeholder="Lib.">
   </div>
-  <div class="col">
-    <input class="form-control shadows" type="text" placeholder="C.P.">
+  <div class="col-sm-4">
+    <input ngbTooltip="C.P." class="form-control shadows" type="text" placeholder="C.P.">
   </div>
 </div>
 <br>
-<div class="row">
-  <div class="col-sm-2">
-    <div class="row">
-      <div class="col-sm-2">
-        <i class="fa fa-camera fa-2x" aria-hidden="true"></i>
-      </div>
-      <div class="col-sm-10">
-        <p class="font-weight-light">IMAGENES</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-10">
-    <hr style="background-color: #CE9ACB; height: 1px">
-  </div>
-</div>
-
+<br>
+<app-section-title icon="fa fa-camera" title="imágenes"></app-section-title>
 <div class="row">
   <div class="col-sm-2">
     <button [disabled]="!isLoadingImages" (click)="showImages()" class="btn btn-primary">
@@ -61,7 +36,8 @@
   <div class="col-sm-10">
     <div class="row">
       <div class="col-sm-4 text-center">
-        <img src="assets/img/{{isLoadingImages ? 'no_image' : 'perfil_fren'}}.png" alt="frente" class="img-thumbnail shadows">
+        <img src="assets/img/{{isLoadingImages ? 'no_image' : 'perfil_fren'}}.png" alt="frente"
+             class="img-thumbnail shadows">
         <br>
         <br>
         <span>
@@ -69,7 +45,8 @@
         </span>
       </div>
       <div class="col-sm-4 text-center">
-        <img src="assets/img/{{isLoadingImages ? 'no_image' : 'pefil_der'}}.png" alt="perfil derecho" class="img-thumbnail shadows">
+        <img src="assets/img/{{isLoadingImages ? 'no_image' : 'pefil_der'}}.png" alt="perfil derecho"
+             class="img-thumbnail shadows">
         <br>
         <br>
         <span>
@@ -77,7 +54,8 @@
         </span>
       </div>
       <div class="col-sm-4 text-center">
-        <img src="assets/img/{{isLoadingImages ? 'no_image' : 'perfil_izq'}}.png" alt="perfil izquierdo" class="img-thumbnail shadows">
+        <img src="assets/img/{{isLoadingImages ? 'no_image' : 'perfil_izq'}}.png" alt="perfil izquierdo"
+             class="img-thumbnail shadows">
         <br>
         <br>
         <span>
@@ -89,20 +67,8 @@
 </div>
 <br>
 <br>
+<app-section-title title="DACTILOSCOPIA" icon="fa fa-hand-paper-o"></app-section-title>
 <div class="row">
-  <div class="col-sm-2">
-    <div class="row">
-      <div class="col-sm-2">
-        <i class="fa fa-2x fa-hand-paper-o" aria-hidden="true"></i>
-      </div>
-      <div class="col-sm-10">
-        <p class="font-weight-light">DACTILOSCOPIA</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-10">
-    <hr style="background-color: #CE9ACB; height: 1px">
-  </div>
   <div class="col-sm-12">
     <button [disabled]="!isLoadingDactiloscopia" (click)="showDatiloscopia()" class="btn btn-primary">
       Tomar Dactiloscopia
@@ -116,13 +82,22 @@
   </div>
 
   <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
-    <br>
-    <div class="text-right">
-      <div class="form-group">
-        <input type="checkbox" aria-label="Checkbox for following text input">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
+         class="img-thumbnail shadows">
+    <div class="row text-right mt-3">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
       </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
     </div>
     <p class="text-center">
       <small>Pulgares</small>
@@ -130,26 +105,46 @@
   </div>
 
   <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
-    <br>
-    <div class="text-right">
-      <input type="checkbox" aria-label="Checkbox for following text input">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
+         class="img-thumbnail shadows">
+    <div class="row text-right mt-3">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
     </div>
-    <br>
     <p class="text-center">
       <small>Indices</small>
     </p>
   </div>
 
   <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png"alt="frente" class="img-thumbnail shadows">
-    <br>
-    <div class="text-right">
-      <input type="checkbox" aria-label="Checkbox for following text input">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
+         class="img-thumbnail shadows">
+    <div class="row text-right mt-3">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
     </div>
-    <br>
     <p class="text-center">
       <small>
         Medios
@@ -160,12 +155,21 @@
   <div class="col-sm-2 text-center">
     <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
          class="img-thumbnail shadows">
-    <br>
-    <div class="text-right">
-      <input type="checkbox" aria-label="Checkbox for following text input">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+    <div class="row text-right mt-3">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
     </div>
-    <br>
     <p class="text-center">
       <small>
         Anulares
@@ -174,13 +178,23 @@
   </div>
 
   <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
-    <br>
-    <div class="text-right">
-      <input type="checkbox" aria-label="Checkbox for following text input">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
+         class="img-thumbnail shadows">
+    <div class="row text-right mt-3">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
     </div>
-    <br>
     <p class="text-center">
       <small>Meñiques</small>
     </p>
@@ -193,13 +207,22 @@
   </div>
 
   <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
-    <br>
-    <div class="text-right">
-      <div class="form-group">
-        <input type="checkbox" aria-label="Checkbox for following text input">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
+         class="img-thumbnail shadows">
+    <div class="row text-right mt-3">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
       </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
     </div>
     <p class="text-center">
       <small>Pulgares</small>
@@ -207,26 +230,46 @@
   </div>
 
   <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
-    <br>
-    <div class="text-right">
-      <input type="checkbox" aria-label="Checkbox for following text input">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
+         class="img-thumbnail shadows">
+    <div class="row text-right mt-3">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
     </div>
-    <br>
     <p class="text-center">
       <small>Indices</small>
     </p>
   </div>
 
   <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
-    <br>
-    <div class="text-right">
-      <input type="checkbox" aria-label="Checkbox for following text input">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
+         class="img-thumbnail shadows">
+    <div class="row text-right mt-3">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
     </div>
-    <br>
     <p class="text-center">
       <small>
         Medios
@@ -235,13 +278,23 @@
   </div>
 
   <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
-    <br>
-    <div class="text-right">
-      <input type="checkbox" aria-label="Checkbox for following text input">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
+         class="img-thumbnail shadows">
+    <div class="row text-right mt-3">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
     </div>
-    <br>
     <p class="text-center">
       <small>
         Anulares
@@ -250,13 +303,24 @@
   </div>
 
   <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
-    <br>
-    <div class="text-right">
-      <input type="checkbox" aria-label="Checkbox for following text input">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
+         class="img-thumbnail shadows">
+    <div class="row text-right mt-3">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input class="form-control">
+        </div>
+      </div>
+
     </div>
-    <br>
+
     <p class="text-center">
       <small>Meñiques</small>
     </p>
