@@ -14,6 +14,7 @@ import {OrderModule} from 'ngx-order-pipe';
 import {SelectDropDownModule} from 'ngx-select-dropdown';
 import {NgxMaskModule} from 'ngx-mask';
 import { SectionTitleComponent } from './section-title/section-title.component';
+import { IngresoNavigationComponent } from './ingreso-navigation/ingreso-navigation.component';
 
 const MODULES = [
   FormsModule,
@@ -35,8 +36,8 @@ const COMPONENTS = [
 
 @NgModule({
   imports: [CommonModule, ...MODULES],
-    exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent],
-  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent],
+    exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent],
+  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent],
 })
 export class SharedModule {
 }

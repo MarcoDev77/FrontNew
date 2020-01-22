@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-dactiloscapia',
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class DactiloscapiaComponent implements OnInit {
   public isLoadingImages: boolean;
   public isLoadingDactiloscopia: boolean;
-  public uriNoImage: string
+  public uriNoImage: string;
   public iconLoading: string;
 
   constructor() {
@@ -24,13 +24,13 @@ export class DactiloscapiaComponent implements OnInit {
   showImages = () => {
     setTimeout(() => {
       this.isLoadingImages = false;
-      }, 700);
-  }
+    }, 700);
+  };
 
   showDatiloscopia = () => {
     setTimeout(() => {
       this.isLoadingDactiloscopia = false;
     }, 700);
-  }
+  };
 
 }

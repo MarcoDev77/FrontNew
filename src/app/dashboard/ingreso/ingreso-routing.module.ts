@@ -4,6 +4,7 @@ import {RootComponent} from '@dashboard/ingreso/_root/root.component';
 import {FormularioIngresoComponent} from '@dashboard/ingreso/formulario-ingreso/formulario-ingreso.component';
 import {ListaIngresoComponent} from '@dashboard/ingreso/lista-ingreso/lista-ingreso.component';
 import {DactiloscopiaComponent} from '@dashboard/ingreso/dactiloscopia/dactiloscopia.component';
+import {ReferenciasComponent} from '@dashboard/ingreso/referencias/referencias.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
       {path: 'form-ingreso', component: FormularioIngresoComponent},
       {path: 'lista-ingreso', component: ListaIngresoComponent},
       {path: 'dactiloscopia', component: DactiloscopiaComponent},
+      {path: 'referencias', component: ReferenciasComponent},
     ]
   },
 ];
