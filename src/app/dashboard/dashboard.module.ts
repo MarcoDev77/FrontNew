@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {MainComponent} from './_main/main.component';
 import {SharedModule} from '@shared/shared.module';
@@ -22,6 +22,7 @@ import {DactiloscapiaComponent} from '../dactiloscapia/dactiloscapia.component';
     CommonModule,
     DashboardRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     SharedModule,
   ]
 })

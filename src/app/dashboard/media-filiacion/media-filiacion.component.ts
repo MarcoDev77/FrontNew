@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Mediafiliacion } from '@shared/models/MediaFiliacion';
 
 @Component({
   selector: 'app-media-filiacion',
@@ -12,13 +13,14 @@ export class MediaFiliacionComponent implements OnInit {
   peso: any;
   tez: any;
   obj: any;
-
+  public mediaFiliacion: Mediafiliacion;
   constructor() {
     this.complexion = '';
     this.estatura = '';
     this.peso = '';
     this.tez = '';
     this.obj = {} as any;
+    this.mediaFiliacion= {} as any;
   }
 
   ngOnInit() {
@@ -42,5 +44,9 @@ export class MediaFiliacionComponent implements OnInit {
         return 'Obesa';
         break;
     }
+  }
+
+  guardarMediaFiliacion(){
+    
   }
 }
