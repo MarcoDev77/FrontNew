@@ -9,6 +9,7 @@ import { ListaIngresoComponent } from './lista-ingreso/lista-ingreso.component';
 import { DactiloscopiaComponent } from './dactiloscopia/dactiloscopia.component';
 import { SituacionPenalComponent } from './situacion-penal/situacion-penal.component';
 import { ReferenciasComponent } from './referencias/referencias.component';
+import { CaracteristicasComponent } from './caracteristicas/caracteristicas.component';
 
 
 
@@ -19,7 +20,8 @@ import { ReferenciasComponent } from './referencias/referencias.component';
     ListaIngresoComponent,
     DactiloscopiaComponent,
     SituacionPenalComponent,
-    ReferenciasComponent
+    ReferenciasComponent,
+    CaracteristicasComponent
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,7 @@ import {ListaIngresoComponent} from '@dashboard/ingreso/lista-ingreso/lista-ingr
 import {DactiloscopiaComponent} from '@dashboard/ingreso/dactiloscopia/dactiloscopia.component';
 import { SituacionPenalComponent } from './situacion-penal/situacion-penal.component';
 import {ReferenciasComponent} from '@dashboard/ingreso/referencias/referencias.component';
+import {CaracteristicasComponent} from '@dashboard/ingreso/caracteristicas/caracteristicas.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       {path: 'dactiloscopia', component: DactiloscopiaComponent},
       {path: 'situacion-penal', component: SituacionPenalComponent},
       {path: 'referencias', component: ReferenciasComponent},
+      {path: 'caracteristicas', component: CaracteristicasComponent},
     ]
   },
 ];
