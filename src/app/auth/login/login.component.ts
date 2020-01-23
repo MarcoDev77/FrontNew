@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
 
           // for (let [key, value] of Object.entries(roles)) {
           //   if ((user.roles[0] === value.role)) {
-          this.router.navigate(['dashboard/catalogo/centro-penitenciario']);
+          this.router.navigateByUrl('/dashborad');
           //   }
           // }
         }
