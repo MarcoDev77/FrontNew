@@ -10,6 +10,7 @@ import { DactiloscopiaComponent } from './dactiloscopia/dactiloscopia.component'
 import { SituacionPenalComponent } from './situacion-penal/situacion-penal.component';
 import { ReferenciasComponent } from './referencias/referencias.component';
 import { CaracteristicasComponent } from './caracteristicas/caracteristicas.component';
+import { MediaAfiliacionComponent } from './media-afiliacion/media-afiliacion.component';
 
 
 
@@ -21,7 +22,8 @@ import { CaracteristicasComponent } from './caracteristicas/caracteristicas.comp
     DactiloscopiaComponent,
     SituacionPenalComponent,
     ReferenciasComponent,
-    CaracteristicasComponent
+    CaracteristicasComponent,
+    MediaAfiliacionComponent
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,7 @@ import {DactiloscopiaComponent} from '@dashboard/ingreso/dactiloscopia/dactilosc
 import { SituacionPenalComponent } from './situacion-penal/situacion-penal.component';
 import {ReferenciasComponent} from '@dashboard/ingreso/referencias/referencias.component';
 import {CaracteristicasComponent} from '@dashboard/ingreso/caracteristicas/caracteristicas.component';
+import {MediaAfiliacionComponent} from '@dashboard/ingreso/media-afiliacion/media-afiliacion.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       {path: 'situacion-penal', component: SituacionPenalComponent},
       {path: 'referencias', component: ReferenciasComponent},
       {path: 'caracteristicas', component: CaracteristicasComponent},
+      {path: 'media-afiliacion', component: MediaAfiliacionComponent},
     ]
   },
 ];
