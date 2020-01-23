@@ -46,7 +46,7 @@ export class AuthenticationService {
     return this.http.post(`${environment.apiUrl}/api/login/actualizaContrasena/`, params);
   }
 
-  login(username: string, password: string, code: string) {
+  login(username: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/api/login`, {username, password}).pipe(map(user => {
       console.log('USER', user);
       if (user && user.access_token) {
@@ -67,21 +67,8 @@ export class AuthenticationService {
     }));
   }
 
-  getUser(): User {
-    try {
-      return JSON.parse(this.kryptoService.get(sessionStorage.getItem('currentUser')));
-    } catch (e) {
-      return null;
-    }
-  }
-
-  private getInformation(username) {
-    const datos = {
-      accion: 'listarInformacionUsuario',
-      datos: {username}
-    };
-    const params = JSON.stringify(datos);
-    return this.http.post<any[]>(`${environment.apiUrl}/api/catalogo`, params);
+  getUser() {
+    return this.currentUser;
   }
 
   logout() {

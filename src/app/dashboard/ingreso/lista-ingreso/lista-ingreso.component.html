@@ -12,15 +12,20 @@
   <table class="table">
     <thead>
     <tr>
-      <th (click)="sort('clave')" class="text-center">
-          <span *ngIf="key == 'clave'" class="fa"
+      <th (click)="sort('folio')" class="text-center">
+          <span *ngIf="key == 'folio'" class="fa"
                 [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
-        Descripción
+        Folio
       </th>
-      <th (click)="sort('nombre')" class="text-center">
-          <span *ngIf="key == 'nombre'" class="fa"
+      <th (click)="sort('expediente')" class="text-center">
+          <span *ngIf="key == 'expediente'" class="fa"
                 [ngClass]="{'fa-chevron-circle-down': reverse, 'fa-chevron-circle-up': !reverse}"></span>
-        Fecha Actualización
+        Numero de Expediente
+      </th>
+      <th (click)="sort('tipo')" class="text-center">
+          <span *ngIf="key == 'tipo'" class="fa"
+                [ngClass]="{'fa-chevron-circle-down': reverse, 'fa-chevron-circle-up': !reverse}"></span>
+        Tipo de ingreso
       </th>
       <th class="text-center" style="min-width: 5rem">Acciones</th>
     </tr>
@@ -29,18 +34,16 @@
     <tr
         *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
         (click)="setClickedRow(i)" [class.active]="i == selectedRow">
-      <td class="text-center">{{item.descripcion}}</td>
-      <td class="text-center">{{item.fechaActualizacion | date:'dd/MM/yy h:mm a'}}</td>
+      <td class="text-center">{{item.folio}}</td>
+      <td class="text-center">{{item.numeroExpediente}}</td>
+      <td class="text-center">{{item.tipoIngreso}}</td>
       <td class="text-center">
-
-<!--        <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar" (click)="update('tr' + i , item)"></i>-->
-<!--        &nbsp;-->
-<!--        <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"-->
-<!--           ngbTooltip="Deshabilitar"></i>-->
-<!--        <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top"-->
-<!--           ngbTooltip="Habilitar"></i>-->
+        <i class="fa fa-eye" placement="top" ngbTooltip="Consultar Ingreso" (click)="goTo('form-ingreso', item)"></i>
         &nbsp;
-        <!--        <i (click)="delte(item)" placement="top" ngbTooltip="Eliminar" class="fa fa-trash-o"></i>-->
+        <i class="fa fa-male" placement="top" ngbTooltip="Referencias" (click)="goTo('referencias', item)"></i>
+        &nbsp;
+        <i class="fa fa-male" placement="top" ngbTooltip="Señas particulares" (click)="goTo('senas-particulares', item)"></i>
+        &nbsp;
       </td>
     </tr>
 

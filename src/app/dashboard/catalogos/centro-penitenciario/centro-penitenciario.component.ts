@@ -50,11 +50,11 @@ export class CentroPenitenciarioComponent implements OnInit {
 
   ngOnInit() {
     // TODO: Arreglar el login
-    const logged = localStorage.getItem('logged');
-    if (!logged) {
-      location.reload();
-      localStorage.setItem('logged', 'logged');
-    }
+    // const logged = localStorage.getItem('logged');
+    // if (!logged) {
+    //   location.reload();
+    //   localStorage.setItem('logged', 'logged');
+    // }
     this.getData();
     this.getEstados('mexico', null);
     this.getTipoCentros();
