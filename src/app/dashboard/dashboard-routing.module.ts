@@ -36,6 +36,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {expectedRole: [r.test.role]}
       },
+      {
+        path: 'bitacoras',
+        // loadChildren: './bitacoras/bitacoras.module#BitacorasModule',
+        loadChildren: './bitacoras/bitacoras.module#BitacorasModule',
+        canActivate: [AuthGuard],
+        data: {expectedRole: [r.test.role]}
+      },
     ]
   },
 
