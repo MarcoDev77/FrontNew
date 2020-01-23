@@ -27,9 +27,12 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
-    }
+    this.authenticationService.getUser().subscribe(user => {
+      console.log('USER', user);
+      if (user) {
+        this.router.navigate(['/dashboard']);
+      }
+    });
   }
 
   ngOnInit() {
@@ -50,7 +53,7 @@ export class LoginComponent implements OnInit {
     //   this.isLoading = false;
     // }
     this.isLoading = true;
-    this.authenticationService.login(this.user.username, this.user.password, this.user.token).pipe(first()).subscribe(user => {
+    this.authenticationService.login(this.user.username, this.user.password).pipe(first()).subscribe(user => {
         this.isLoading = false;
         if (user) {
 
