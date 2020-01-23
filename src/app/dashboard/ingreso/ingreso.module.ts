@@ -7,6 +7,7 @@ import {IngresoRoutingModule} from '@dashboard/ingreso/ingreso-routing.module';
 import { FormularioIngresoComponent } from './formulario-ingreso/formulario-ingreso.component';
 import { ListaIngresoComponent } from './lista-ingreso/lista-ingreso.component';
 import { DactiloscopiaComponent } from './dactiloscopia/dactiloscopia.component';
+import { SituacionPenalComponent } from './situacion-penal/situacion-penal.component';
 
 
 
@@ -15,7 +16,8 @@ import { DactiloscopiaComponent } from './dactiloscopia/dactiloscopia.component'
     RootComponent,
     FormularioIngresoComponent,
     ListaIngresoComponent,
-    DactiloscopiaComponent
+    DactiloscopiaComponent,
+    SituacionPenalComponent
   ],
   imports: [
     CommonModule,
