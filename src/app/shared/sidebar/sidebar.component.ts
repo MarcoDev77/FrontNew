@@ -24,23 +24,21 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authenticationService.getUser().subscribe(user => {
-      this.currentUser = user;
-      const userRoles = user.roles;
-      console.table(userRoles);
-      const items = ROUTES.filter(menuItem => menuItem);
-      for (const item of items) {
-        if (item.roles && item.roles.includes('ALL')) {
+    const user = this.authenticationService.getCurrentUser();
+    const userRoles = user.roles;
+    console.table(userRoles);
+    const items = ROUTES.filter(menuItem => menuItem);
+    for (const item of items) {
+      if (item.roles && item.roles.includes('ALL')) {
+        this.menuItems.push(item);
+        continue;
+      }
+      for (const role of userRoles) {
+        if (item.roles && item.roles.includes(role)) {
           this.menuItems.push(item);
-          continue;
-        }
-        for (const role of userRoles) {
-          if (item.roles && item.roles.includes(role)) {
-            this.menuItems.push(item);
-          }
         }
       }
-    });
+    }
   }
 
   sleep(milliseconds) {

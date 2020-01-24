@@ -66,7 +66,7 @@ export const ROUTES: RouteInfo[] = [
       r.test.role
     ],
     path: '/dashboard/ingreso',
-    title: 'INGRESO',
+    title: 'DACTILOSCAPIA',
     type: 'link',
     icontype: 'fa fa-sign-in',
   }
