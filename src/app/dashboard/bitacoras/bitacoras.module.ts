@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BitacoraIngresoImputadoComponent } from './bitacora-ingreso-imputado/bitacora-ingreso.component';
 import { BitacoraIngresoComponent } from './bitacora-ingreso/bitacora-ingreso.component';
 import { RootComponent } from './_root/root.component';
 import {SharedModule} from '@shared/shared.module';
@@ -9,7 +10,7 @@ import {BitacorasRoutingModule} from '@dashboard/bitacoras/bitacoras-routing.mod
 
 
 @NgModule({
-  declarations: [BitacoraIngresoComponent, RootComponent],
+  declarations: [BitacoraIngresoComponent,BitacoraIngresoImputadoComponent, RootComponent],
   imports: [
     CommonModule,
     SharedModule,

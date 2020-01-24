@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
 @Component({
   selector: 'app-bitacora-ingreso',
   templateUrl: './bitacora-ingreso.component.html',
   styleUrls: ['./bitacora-ingreso.component.scss']
 })
-export class BitacoraIngresoComponent implements OnInit {
+export class BitacoraIngresoImputadoComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal

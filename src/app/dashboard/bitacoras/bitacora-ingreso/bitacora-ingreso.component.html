@@ -1,1 +1,292 @@
-<p>bitacora-ingreso works!</p>
+<app-section-title icon="fa fa-address-book" title="BITACORA DE INGRESOS"></app-section-title>
+<div class="row">
+    <div class="col text-right mb-3">
+        <button class="btn btn-success m-0 pull-right" (click)="add(formModal)" [ngbTooltip]="'Nuevo Registro'"><i
+                class="fa fa-plus fa-lg"></i></button>
+        <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
+            placeholder="Buscar">
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    No.
+                </th>
+                <th class="text-center">
+                    Nombre
+                </th>
+
+                <th class="text-center">
+                    Fecha de ingreso
+                </th>
+                <th class="text-center">
+                    Carpeta de investigación
+                </th>
+                <th class="text-center">
+                    Delito
+                </th>
+                <th class="text-center">
+                    Causa penal
+                </th>
+                <th class="text-center">
+                    Juzgado
+                </th>
+                <th class="text-center">
+                    Tipo de libertad
+                </th>
+                <th class="text-center">
+                    Medida Cautelar
+                </th>
+                <th class="text-center">
+                    Tipo C-F-P-R
+                </th>
+                <th class="text-center" style="min-width: 5rem">Detalle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">658</td>
+                <td class="text-center">Roberto Lopez Lopez</td>
+                <td class="text-center">12/08/2019</td>
+                <td class="text-center">2365</td>
+                <td class="text-center">Ataque peligroso</td>
+                <td class="text-center">Causa penal</td>
+                <td class="text-center">250</td>
+                <td class="text-center">bajo fianza</td>
+                <td class="text-center">La prohibición de salir del país</td>
+                <td class="text-center">R</td>
+                <td class="text-center">
+                    <i class="fa fa-eye" (click)="add(formModal2)"></i>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<ng-template #formModal let-formModal>
+    <div class="modal-body text-center">
+        <h3>Bitácora de Ingresos</h3>
+        <br>
+        <form class="form-horizontal" name="form" #f="ngForm">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input name="nombreImputado" class="form-control" type="text"
+                            placeholder="Nombre del imputado" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Fecha de ingreso"
+                            onfocus="(this.type='date')" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="lugarNacimiento" class="form-control" type="text"
+                            placeholder="Lugar de nacimiento" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="carpetaInvestigacion" class="form-control" type="text"
+                            placeholder="Carpeta de investigación" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Hora de ingreso"
+                            onfocus="(this.type='time')" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Fecha y hora de detención"
+                            onfocus="(this.type='datetime-local')" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="juzgado" class="form-control" type="text" placeholder="Juzgado" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Fecha de ampliación"
+                            onfocus="(this.type='date')" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Fecha de vinculación"
+                            onfocus="(this.type='date')" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="Delito" class="form-control" type="text" placeholder="Delito" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="causaPenal" class="form-control" type="text" placeholder="Causa penal" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="quienOrdena" class="form-control" type="text" placeholder="Autoridad que ordena" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group shadows">
+                        <select class="form-control shadows" name="tipoPR">
+                            <option disabled selected>Tipo C-F-P-R</option>
+                            <option value="Cereso">Común</option>
+                            <option value="Cereso">Federal</option>
+                            <option value="Cereso">Primodelincuente</option>
+                            <option value="Cefereso">Reincidente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center text-sm-right">
+                    <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Aceptar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #formModal2 let-formModal>
+    <div class="modal-body text-center">
+        <h3>Bitácora de Ingresos</h3>
+        <br>
+
+        <form class="form-horizontal" name="form" #f="ngForm">
+            <div class="row">
+                <div class="col-sm-12" >
+                    <div class="float-left">
+                        <h5>Nombre del imputado</h5>
+                        <label>Roberto Lopez Lopez</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Fecha de ingreso"
+                            onfocus="(this.type='date')" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="lugarNacimiento" class="form-control" type="text"
+                            placeholder="Lugar de nacimiento" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="carpetaInvestigacion" class="form-control" type="text"
+                            placeholder="Carpeta de investigación" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Hora de ingreso"
+                            onfocus="(this.type='time')" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Fecha y hora de detención"
+                            onfocus="(this.type='datetime-local')" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="juzgado" class="form-control" type="text" placeholder="Juzgado" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Fecha de ampliación"
+                            onfocus="(this.type='date')" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Fecha de vinculación"
+                            onfocus="(this.type='date')" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="Delito" class="form-control" type="text" placeholder="Delito" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="causaPenal" class="form-control" type="text" placeholder="Causa penal" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input name="quienOrdena" class="form-control" type="text" placeholder="Autoridad que ordena" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group shadows">
+                        <select class="form-control shadows" name="tipoPR">
+                            <option disabled selected>Tipo C-F-P-R</option>
+                            <option value="Cereso">Común</option>
+                            <option value="Cereso">Federal</option>
+                            <option value="Cereso">Primodelincuente</option>
+                            <option value="Cefereso">Reincidente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center text-sm-right">
+                    <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Aceptar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</ng-template>
