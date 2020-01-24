@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-bitacora-ingreso-libreracion',
-  templateUrl: './bitacora-ingreso-libreracion.component.html',
-  styleUrls: ['./bitacora-ingreso-libreracion.component.scss']
+  selector: 'app-bitacora-imputado-liberacion',
+  templateUrl: './bitacora-imputado-liberacion.component.html',
+  styleUrls: ['./bitacora-imputado-liberacion.component.scss']
 })
-export class BitacoraIngresoLibreracionComponent implements OnInit {
+export class BitacoraImputadoLiberacionComponent implements OnInit {
 
   public data: any[] = [];
   public isLoading: boolean;
@@ -51,7 +50,6 @@ export class BitacoraIngresoLibreracionComponent implements OnInit {
           delito: 'Robo a mano armada',
           tipoLibertad: 'Condicional',
           tipo: 'primodelincuente',
-          ordena: 'LIC FAUSTO',
         }
       ];
       this.isLoading = false;
@@ -88,4 +86,5 @@ export class BitacoraIngresoLibreracionComponent implements OnInit {
     this.isDetails = true;
     this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
   }
+
 }

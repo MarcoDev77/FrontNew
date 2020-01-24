@@ -35,12 +35,7 @@
       <th (click)="sort('tipo')" class="text-center">
           <span *ngIf="key == 'tipo'" class="fa"
                 [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
-        Tipo C-F-P-R
-      </th>
-      <th (click)="sort('ordena')" class="text-center">
-          <span *ngIf="key == 'ordena'" class="fa"
-                [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
-        Quien ordena
+        Tipo R-P
       </th>
       <th class="text-center" style="min-width: 5rem">Acciones</th>
     </tr>
@@ -53,8 +48,7 @@
       <td class="text-center">{{item.nombreImputado}}</td>
       <td class="text-center">{{item.fechaLibertad | date:'dd/MM/yy'}}</td>
       <td class="text-center">{{item.delito}}</td>
-      <td class="text-center">{{item.tipo == 'primodelincuente' ? 'P' : item.tipo == 'comun' ? 'C' : item.tipo == 'federal' ? 'F' : 'R'}}</td>
-      <td class="text-center">{{item.ordena}}</td>
+      <td class="text-center">{{item.tipo == 'primodilincuente' ? 'P' : 'R'}}</td>
       <td class="text-center">
         &nbsp;
         <i class="fa fa-eye" placement="top" ngbTooltip="Ver detalles" (click)="seeDetails(item, formModal)"></i>
@@ -121,9 +115,7 @@
         </div>
 
         <div class="col-sm-4">
-          <input [readOnly]="isDetails" name="ordena" class="form-control" type="text" placeholder="Quien ordena"
-                 ngbTooltip="Quien ordena"
-                 required/>
+
         </div>
 
         <div class="col-sm-4">
