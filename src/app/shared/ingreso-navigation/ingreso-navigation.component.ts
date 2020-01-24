@@ -18,7 +18,7 @@ export class IngresoNavigationComponent {
   constructor() {
     this.steps = [
       {name: 'Formulario de ingreso', path: '/dashboard/ingreso/form-ingreso'},
-      {name: 'Señas particulares', path: '/dashboard/ingreso/senas-particulares'},
+      {name: 'Señas particulares', path: '/dashboard/ingreso/media-afiliacion'},
       {name: 'Característica', path: '/dashboard/ingreso/caracteristicas'},
       {name: 'Dactiloscopia', path: '/dashboard/ingreso/dactiloscopia'},
       // {name: 'Referencias'},

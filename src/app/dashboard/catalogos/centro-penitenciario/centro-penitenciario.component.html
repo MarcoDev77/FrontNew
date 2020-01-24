@@ -88,23 +88,23 @@
     <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
       <div class="row">
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <input name="nombre" class="form-control" type="text" placeholder="Nombre" ngbTooltip="Nombre"
-                   [(ngModel)]="centroPenitenciario.nombre" #nombre="ngModel"
-                   [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid}"
-                   minlength="3"
-                   maxlength="45" required/>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input name="nombre" class="form-control" type="text" placeholder="Nombre" ngbTooltip="Nombre"
+                     [(ngModel)]="centroPenitenciario.nombre" #nombre="ngModel"
+                     [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid}"
+                     minlength="3"
+                     maxlength="45" required/>
+            </div>
           </div>
-        </div>
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <app-select required ngbTooltip="Tipo de Centro" [options]="tipoCentros" [multiple]="false"
-                        [modelo]="centroPenitenciario.tipoCentroSelect"
-                        (getModel)="centroPenitenciario.tipoCentroSelect = $event;"></app-select>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <app-select required ngbTooltip="Tipo de Centro" [options]="tipoCentros" [multiple]="false"
+                          [modelo]="centroPenitenciario.tipoCentroSelect"
+                          (getModel)="centroPenitenciario.tipoCentroSelect = $event;"></app-select>
+            </div>
           </div>
-        </div>
 
         <div class="col-sm-12">
           <div class="form-group">

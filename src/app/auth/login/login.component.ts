@@ -27,16 +27,15 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    this.authenticationService.getUser().subscribe(user => {
-      console.log('USER', user);
-      if (user) {
-        this.router.navigate(['/dashboard']);
-      }
-    });
+    const user = authenticationService.getCurrentUser();
+    console.log('USER', user);
+    if (user) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+    // this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
 
   async onSubmit() {
@@ -56,12 +55,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.user.username, this.user.password).pipe(first()).subscribe(user => {
         this.isLoading = false;
         if (user) {
-
-          // for (let [key, value] of Object.entries(roles)) {
-          //   if ((user.roles[0] === value.role)) {
-          this.router.navigate(['dashboard/catalogo/centro-penitenciario']);
-          //   }
-          // }
+          this.router.navigate(['/dashboard']);
         }
       },
       error => {

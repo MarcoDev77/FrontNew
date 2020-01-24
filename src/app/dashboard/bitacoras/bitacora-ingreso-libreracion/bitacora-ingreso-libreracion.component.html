@@ -1,0 +1,162 @@
+<app-section-title icon="fa fa-unlock" title="liberación ingreso"></app-section-title>
+<div class="row">
+  <div class="col text-right mb-3">
+    <button class="btn btn-success m-0 pull-right" (click)="add(formModal)" [ngbTooltip]="'Nuevo Registro'"><i
+      class="fa fa-plus fa-lg"></i></button>
+    <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
+           [(ngModel)]="filter"
+           placeholder="Buscar">
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+    <tr>
+      <th (click)="sort('numero')" class="text-center">
+          <span *ngIf="key == 'numero'" class="fa"
+                [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+        Número
+      </th>
+      <th (click)="sort('nombre')" class="text-center">
+          <span *ngIf="key == 'nombre'" class="fa"
+                [ngClass]="{'fa-chevron-circle-down': reverse, 'fa-chevron-circle-up': !reverse}"></span>
+        Nombre Imputado
+      </th>
+      <th (click)="sort('libertad')" class="text-center">
+          <span *ngIf="key == 'libertad'" class="fa"
+                [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+        Fecha Libertad
+      </th>
+      <th (click)="sort('delito')" class="text-center">
+          <span *ngIf="key == 'delito'" class="fa"
+                [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+        Delito
+      </th>
+      <th (click)="sort('tipo')" class="text-center">
+          <span *ngIf="key == 'tipo'" class="fa"
+                [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+        Tipo C-F-P-R
+      </th>
+      <th (click)="sort('ordena')" class="text-center">
+          <span *ngIf="key == 'ordena'" class="fa"
+                [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+        Quien ordena
+      </th>
+      <th class="text-center" style="min-width: 5rem">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr id="{{'tr' + i}}"
+        *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+        (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+      <td class="text-center">{{item.numero}}</td>
+      <td class="text-center">{{item.nombreImputado}}</td>
+      <td class="text-center">{{item.fechaLibertad | date:'dd/MM/yy'}}</td>
+      <td class="text-center">{{item.delito}}</td>
+      <td class="text-center">{{item.tipo == 'primodelincuente' ? 'P' : item.tipo == 'comun' ? 'C' : item.tipo == 'federal' ? 'F' : 'R'}}</td>
+      <td class="text-center">{{item.ordena}}</td>
+      <td class="text-center">
+        &nbsp;
+        <i class="fa fa-eye" placement="top" ngbTooltip="Ver detalles" (click)="seeDetails(item, formModal)"></i>
+        &nbsp;
+      </td>
+    </tr>
+
+    <tr *ngIf="data.length == 0">
+      <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="text-center w-100">
+    <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
+    </pagination-controls>
+  </div>
+</div>
+
+<ng-template #formModal let-formModal>
+  <div class="modal-body text-center">
+    <h3>Liberación de ingreso</h3>
+    <br>
+    <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
+
+      <div class="row">
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input [readOnly]="isDetails" name="nombre" class="form-control" type="text" placeholder="Nombre imputado"
+                   ngbTooltip="Nombre imputado" required/>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input [readOnly]="isDetails" name="fechaLibertad" class="form-control" type="text"
+                   placeholder="Fecha de libertad"
+                   ngbTooltip="Fecha de libertad" required/>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input [readOnly]="isDetails" name="fechaIngreso" class="form-control" type="text"
+                   placeholder="Fecha de ingreso"
+                   ngbTooltip="Fecha de ingreso" required/>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input [readOnly]="isDetails" name="causaPenal" class="form-control" type="text" placeholder="Causa penal"
+                   ngbTooltip="Causa penal"
+                   required/>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input [readOnly]="isDetails" name="causaPenal" class="form-control" type="text" placeholder="Juzgado"
+                   ngbTooltip="Juzgado"
+                   required/>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <input [readOnly]="isDetails" name="ordena" class="form-control" type="text" placeholder="Quien ordena"
+                 ngbTooltip="Quien ordena"
+                 required/>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input [readOnly]="isDetails" name="delito" class="form-control" type="text" placeholder="delito"
+                   ngbTooltip="delito"
+                   required/>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input [readOnly]="isDetails" name="tipoLibertad" class="form-control" type="text"
+                   placeholder="Tipo de Libertad"
+                   ngbTooltip="Tipo de Libertad"
+                   required/>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <select class="form-control" name="tipo">
+            <option disabled selected>Tipo</option>
+            <option>primodelincuente</option>
+            <option>reincidente</option>
+          </select>
+        </div>
+
+
+      </div>
+
+      <div class="col-sm-12 text-center text-sm-right">
+        <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cancelar</button>
+        <button type="submit" class="btn btn-success">Aceptar</button>
+      </div>
+
+    </form>
+  </div>
+</ng-template>
