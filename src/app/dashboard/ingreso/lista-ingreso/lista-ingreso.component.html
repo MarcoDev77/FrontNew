@@ -3,9 +3,15 @@
   <div class="col text-right mb-3">
     <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
       class="fa fa-plus fa-lg"></i></button>
-    <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
-           [(ngModel)]="filter"
-           placeholder="Buscar">
+
+      <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" icon="fa fa-sign-in"></span>
+          </div>
+          <input type="text" class="form-control pull-right mr-2" style="max-width: 12rem">
+        </div>
+   
+         
   </div>
 </div>
 <div class="table-responsive">

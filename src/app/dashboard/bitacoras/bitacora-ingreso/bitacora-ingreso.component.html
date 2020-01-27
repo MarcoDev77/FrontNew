@@ -36,9 +36,7 @@
                 <th class="text-center">
                     Tipo de libertad
                 </th>
-                <th class="text-center">
-                    Medida Cautelar
-                </th>
+                
                 <th class="text-center">
                     Tipo C-F-P-R
                 </th>
@@ -55,7 +53,7 @@
                 <td class="text-center">Causa penal</td>
                 <td class="text-center">250</td>
                 <td class="text-center">bajo fianza</td>
-                <td class="text-center">La prohibición de salir del país</td>
+               
                 <td class="text-center">R</td>
                 <td class="text-center">
                     <i class="fa fa-eye" (click)="add(formModal2)"></i>
@@ -185,105 +183,99 @@
 
         <form class="form-horizontal" name="form" #f="ngForm">
             <div class="row">
-                <div class="col-sm-12" >
-                    <div class="float-left">
-                        <h5>Nombre del imputado</h5>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <h6>Nombre del imputado</h6>
                         <label>Roberto Lopez Lopez</label>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Fecha de ingreso"
-                            onfocus="(this.type='date')" />
+                        <h6>Fecha de ingreso</h6>
+                        <label>12/08/2019</label>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <input name="lugarNacimiento" class="form-control" type="text"
-                            placeholder="Lugar de nacimiento" />
+                        <h6>Lugar de nacimiento</h6>
+                        <label>Cuernavaca</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <h6>Carpeta de investigación</h6>
+                        <label>2365</label>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <input name="carpetaInvestigacion" class="form-control" type="text"
-                            placeholder="Carpeta de investigación" />
+                        <h6>Hora de ingreso</h6>
+                        <label>17:59 </label>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Hora de ingreso"
-                            onfocus="(this.type='time')" />
+                        <h6>Fecha y hora de detención</h6>
+                        <label>17:59 </label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <h6>Juzgado</h6>
+                        <label>250</label>
                     </div>
                 </div>
 
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Fecha y hora de detención"
-                            onfocus="(this.type='datetime-local')" />
+                        <h6>Fecha de ampliación</h6>
+                        <label>250</label>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <input name="juzgado" class="form-control" type="text" placeholder="Juzgado" />
+                        <h6>Fecha de vinculación</h6>
+                        <label>250</label>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Fecha de ampliación"
-                            onfocus="(this.type='date')" />
+                        <h6>Delito</h6>
+                        <label>Ataque peligroso</label>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Fecha de vinculación"
-                            onfocus="(this.type='date')" />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <input name="Delito" class="form-control" type="text" placeholder="Delito" />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <input name="causaPenal" class="form-control" type="text" placeholder="Causa penal" />
-                    </div>
-                </div>
-            </div>
 
+            </div>
             <div class="row">
-
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <input name="quienOrdena" class="form-control" type="text" placeholder="Autoridad que ordena" />
+                        <h6>Causa Penal</h6>
+                        <label>causa penal</label>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group shadows">
-                        <select class="form-control shadows" name="tipoPR">
-                            <option disabled selected>Tipo C-F-P-R</option>
-                            <option value="Cereso">Común</option>
-                            <option value="Cereso">Federal</option>
-                            <option value="Cereso">Primodelincuente</option>
-                            <option value="Cefereso">Reincidente</option>
-                        </select>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <h6>Autoridad que ordena</h6>
+                        <label>autoridad</label>
                     </div>
                 </div>
+                <div class="col-sm-4">
+                        <div class="form-group">
+                            <h6>Tipo C-F-P-R</h6>
+                            <label>Primodelincuente</label>
+                        </div>
+                    </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 text-center text-sm-right">
                     <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Aceptar</button>
+                    
                 </div>
             </div>
         </form>
