@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {Ingreso} from '@shared/models/Ingreso';
-import {IngresoService} from '@shared/services/ingreso.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Ingreso } from '@shared/models/Ingreso';
+import { IngresoService } from '@shared/services/ingreso.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-lista-ingreso',
@@ -19,9 +20,10 @@ export class ListaIngresoComponent implements OnInit {
   public selectedRow: number;
   public setClickedRow: Function;
 
-  constructor(private router: Router, private ingresoService: IngresoService) {
+  constructor(private router: Router, private ingresoService: IngresoService, private modalService: NgbModal) {
     this.data = [];
-    this.setClickedRow = function(index) {
+
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -64,6 +66,10 @@ export class ListaIngresoComponent implements OnInit {
 
   add() {
     this.router.navigate(['/dashboard/ingreso/form-ingreso']);
+
+  }
+  search(modal) {
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
   goTo(uri: string, ingreso: Ingreso) {

@@ -6,9 +6,9 @@
 
       <div class="input-group">
           <div class="input-group-prepend">
-            <span class="input-group-text" icon="fa fa-sign-in"></span>
+            <span class="input-group-text" (click)="search(formModal)" ><i class="fa fa-search"></i></span>
           </div>
-          <input type="text" class="form-control pull-right mr-2" style="max-width: 12rem">
+          <input type="text" class="form-control pull-right mr-2" placeholder="Buscar " style="max-width: 12rem">
         </div>
    
          
@@ -63,3 +63,36 @@
     </pagination-controls>
   </div>
 </div>
+<ng-template #formModal let-formModal>
+  <div class="modal-body text-center">
+      <h3>Búsqueda avanzada</h3>
+      <br>
+      <form class="form-horizontal" name="form" #f="ngForm">
+        <h6 >Búsqueda por ...</h6> 
+          <div class="row">
+            <div class="col-md-12">
+                       
+              <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="centro" name="DefaultRadios">
+                  <label class="custom-control-label" for="centro">Centro</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="nombre" name="DefaultRadios">
+                  <label class="custom-control-label" for="nombre">Nombre</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="alias" name="DefaultRadios">
+                <label class="custom-control-label" for="alias">Alias</label>
+            </div>
+          </div>
+          </div>
+          
+          <div class="row">
+              <div class="col-sm-12 text-center text-sm-right">
+                  <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cancelar</button>
+                  <button type="submit" class="btn btn-success">Aceptar</button>
+              </div>
+          </div>
+      </form>
+  </div>
+</ng-template>
