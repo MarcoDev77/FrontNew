@@ -1,0 +1,33 @@
+::ng-deep {
+  .iv-image-wrap {
+    iframe {
+      height: 652px !important;
+    }
+  }
+
+  .iv-loader {
+
+    border-top: 1.1em solid rgba(0, 0, 0, 0.4) !important;
+    border-right: 1.1em solid rgba(0, 0, 0, 0.4) !important;
+    border-bottom: 1.1em solid #1b2a38 !important;
+    border-left: 1.1em solid #242a2e !important;
+  }
+
+  .image-gallery-2 {
+    .prev, .next {
+      display: none !important;
+    }
+
+    background: unset !important;
+    margin-bottom: 0px;
+  }
+
+  .image-gallery-2 .footer-info {
+    display: none !important;
+  }
+
+  .minHeigh .image-gallery-2 {
+    //max-height: 30rem;
+  }
+}
+

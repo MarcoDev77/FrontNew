@@ -29,7 +29,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/scss/now-ui-dashboard.scss"
+              "src/assets/scss/now-ui-dashboard.scss",
+              "node_modules/ng2-image-viewer/imageviewer.scss"
             ],
             "scripts": []
           },

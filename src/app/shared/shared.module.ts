@@ -15,6 +15,8 @@ import {SelectDropDownModule} from 'ngx-select-dropdown';
 import {NgxMaskModule} from 'ngx-mask';
 import { SectionTitleComponent } from './section-title/section-title.component';
 import { IngresoNavigationComponent } from './ingreso-navigation/ingreso-navigation.component';
+import { WebViewerComponent } from './web-viewer/web-viewer.component';
+import {ImageViewerModule} from 'ng2-image-viewer';
 
 const MODULES = [
   FormsModule,
@@ -35,9 +37,9 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, ...MODULES],
-    exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent],
-  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent],
+    imports: [CommonModule, ...MODULES, ImageViewerModule],
+  exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent],
+  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent],
 })
 export class SharedModule {
 }
