@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://167.172.158.44:8080/reinsercionapi'
+  apiUrl: 'http://204.48.31.193:8080/reinsercionapi',
 };

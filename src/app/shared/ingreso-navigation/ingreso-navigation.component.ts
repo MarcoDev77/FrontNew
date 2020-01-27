@@ -3,10 +3,12 @@ import {Component, Input} from '@angular/core';
 @Component({
   selector: 'app-ingreso-navigation',
   template: `
-      <div class="col-12 text-center pb-5">
-        <a *ngFor="let item of steps; let i = index;" [routerLink]="[item.path]"
-           [ngClass]="{'active': i == step, 'tab-navigator': i != step}"
-           class="pr-4">{{item.name}}</a>
+      <div class="col-12 text-center">
+          <div class="btn-group btn-group-md" role="group">
+            <a *ngFor="let item of steps; let i = index;" [routerLink]="[item.path]"
+               [ngClass]="{'active': i == step}"
+               class="btn btn-secondary">{{item.name}}</a>
+          </div>
       </div>
   `,
   styleUrls: ['./ingreso-navigation.component.scss']
