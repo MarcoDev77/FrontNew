@@ -73,7 +73,9 @@ export const ROUTES: RouteInfo[] = [
     collapse: 'tables',
     children: [
       {path: 'ingreso/lista-ingreso', title: 'INGRESO', ab: 'IN'},
+      {path: 'bitacoras/ingreso-Imputado', title: 'BITACORA IN. IMPUTADO', ab: 'BINI'},
       {path: 'bitacoras/ingreso-imputado-liberacion', title: 'BITACORA LIB. IMPUTADO', ab: 'LI'},
+      {path: 'bitacoras/ingreso', title: 'BITACORA INGRESO', ab: 'BI'},
       {path: 'bitacoras/ingreso-liberacion', title: 'BITACORA LIB. INGRESO', ab: 'LIN'},
     ],
   }
