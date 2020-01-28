@@ -7,15 +7,15 @@ import {RouterModule} from '@angular/router';
 import {LoaderComponent} from './loader/loader.component';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { SelectComponent } from './select/select.component';
+import {SelectComponent} from './select/select.component';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {OrderModule} from 'ngx-order-pipe';
 import {SelectDropDownModule} from 'ngx-select-dropdown';
 import {NgxMaskModule} from 'ngx-mask';
-import { SectionTitleComponent } from './section-title/section-title.component';
-import { IngresoNavigationComponent } from './ingreso-navigation/ingreso-navigation.component';
-import { WebViewerComponent } from './web-viewer/web-viewer.component';
+import {SectionTitleComponent} from './section-title/section-title.component';
+import {IngresoNavigationComponent} from './ingreso-navigation/ingreso-navigation.component';
+import {WebViewerComponent} from './web-viewer/web-viewer.component';
 import {ImageViewerModule} from 'ng2-image-viewer';
 
 const MODULES = [
@@ -27,6 +27,7 @@ const MODULES = [
   NgxMaskModule,
   OrderModule,
   NgxPaginationModule,
+  ImageViewerModule,
 ];
 
 const COMPONENTS = [
@@ -37,7 +38,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-    imports: [CommonModule, ...MODULES, ImageViewerModule],
+  imports: [CommonModule, ...MODULES],
   exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent],
   declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent],
 })
