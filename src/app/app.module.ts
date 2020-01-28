@@ -10,6 +10,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {JwtInterceptor} from '@shared/helpers/jwt.interceptor';
 import {ErrorInterceptor} from '@shared/helpers/error.interceptor';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AuthModule } from '@auth/auth.module';
 
 
 @NgModule({
