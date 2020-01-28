@@ -11,7 +11,8 @@ import {DactiloscapiaComponent} from '../dactiloscapia/dactiloscapia.component';
 
 const routes: Routes = [
   {
-    path: '', component: MainComponent, children: [
+    path: '', component: MainComponent,
+    children: [
       {
         path: 'mediafiliacion', component: MediaFiliacionComponent, data: {expectedRole: [r.test.role]}
       },
