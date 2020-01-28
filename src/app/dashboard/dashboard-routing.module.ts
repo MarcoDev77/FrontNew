@@ -44,12 +44,6 @@ const routes: Routes = [
         data: {expectedRole: [r.test.role]}
       },
       {
-        path: 'formatos',
-        loadChildren: './formatos/formatos.module#FormatosModule',
-        canActivate: [AuthGuard],
-        data: {expectedRole: [r.test.role]}
-      },
-      {
         path: 'servicio-social',
         loadChildren: './servicio-social/servicio-social.module#ServicioSocialModule',
         canActivate: [AuthGuard],
