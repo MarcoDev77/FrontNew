@@ -1,80 +1,60 @@
 <div class="row">
-  <div class="col-md-2 text-center">
-    <label><i class="fa fa-ban fa-2x mr-2" aria-hidden="true"></i>DELITOS</label>
-  </div>
-  <div class="col-md-10">
-    <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
-  </div>
+    <div class="col-md-2 text-center">
+        <label><i class="fa fa-ban fa-2x mr-2" aria-hidden="true"></i>DELITOS</label>
+    </div>
+    <div class="col-md-10">
+        <hr style="margin-left: 5px; width: 100%; border: 1px solid #CE9ACB; size: 5; ">
+    </div>
 </div>
 <div class="row">
-  <div class="col text-right mb-3">
-    <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
+    <div class="col text-right mb-3">
+        <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
       class="fa fa-plus fa-lg"></i></button>
-    <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
-           [(ngModel)]="filter"
-           placeholder="Buscar">
-  </div>
+        <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem" [(ngModel)]="filter" placeholder="Buscar">
+    </div>
 </div>
 <div class="table-responsive">
-  <table class="table">
-    <thead>
-    <tr>
-      <th (click)="sort('clave')" class="text-center">
-          <span *ngIf="key == 'clave'" class="fa"
-                [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
-        Nombre
-      </th>
-      <th (click)="sort('nombre')" class="text-center">
-          <span *ngIf="key == 'nombre'" class="fa"
-                [ngClass]="{'fa-chevron-circle-down': reverse, 'fa-chevron-circle-up': !reverse}"></span>
-        Modalidad
-      </th>
-      <th class="text-center" style="min-width: 5rem">Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr id="table-form" *ngIf="isForm">
-      <td class="text-center">
-        <input name="nombre" type="text" class="form-control" [(ngModel)]="delito.nombre" placeholder="Nombre"
-               #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }"
-               maxlength="45" required>
-      </td>
-      <td class="text-center">
-        <app-select container="body" ngbTooltip="Modalidad" [multiple]="false" [options]="modalidadesDelito"
-                    [modelo]="delito.modalidadDelitoSelect"
-                    (getModel)="delito.modalidadDelitoSelect = $event;"></app-select>
-      </td>
-      <td class="text-center">
-        <i class="fa fa-times mr-3" placement="top" ngbTooltip="Cancelar"
-           (click)="cancel()"></i>
-        <i class="fa fa-check" placement="top" ngbTooltip="Guardar"
-           (click)="submit([nombre])"></i>
-      </td>
+    <table class="table">
+        <thead>
+            <tr>
+                <th (click)="sort('clave')" class="text-center">
+                    <span *ngIf="key == 'clave'" class="fa" [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Nombre
+                </th>
 
-    </tr>
+                <th class="text-center" style="min-width: 5rem">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="table-form" *ngIf="isForm">
+                <td class="text-center">
+                    <input name="nombre" type="text" class="form-control" [(ngModel)]="delito.nombre" placeholder="Nombre" #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }" maxlength="45" required>
+                </td>
 
-    <tr id="{{'tr' + i}}"
-        *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
-        (click)="setClickedRow(i)" [class.active]="i == selectedRow">
-      <td class="text-center">{{item.nombre}}</td>
-      <td class="text-center">{{item.modalidadDelito.nombre}}</td>
-      <td class="text-center">
-        <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar" (click)="update('tr' + i , item)"></i>
-        &nbsp;
-        <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
-           ngbTooltip="Deshabilitar"></i>
-        <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top"
-           ngbTooltip="Habilitar"></i>
-      </td>
-    </tr>
+                <td class="text-center">
+                    <i class="fa fa-times mr-3" placement="top" ngbTooltip="Cancelar" (click)="cancel()"></i>
+                    <i class="fa fa-check" placement="top" ngbTooltip="Guardar" (click)="submit([nombre])"></i>
+                </td>
 
-    <tr *ngIf="data.length == 0">
-      <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
-    </tr>
-    </tbody>
-  </table>
-  <div class="text-center w-100">
-    <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
-    </pagination-controls>
-  </div>
+            </tr>
+
+            <tr id="{{'tr' + i}}" *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+                <td class="text-center">{{item.nombre}}</td>
+
+                <td class="text-center">
+                    <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar" (click)="update('tr' + i , item)"></i> &nbsp;
+                    <i class="fa fa-book" (click)="modalidades(item)" placement="top" ngbTooltip="Ver modalidades"></i>&nbsp;
+                    <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top" ngbTooltip="Deshabilitar"></i>
+                    <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top" ngbTooltip="Habilitar"></i>
+                </td>
+            </tr>
+
+            <tr *ngIf="data.length == 0">
+                <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center w-100">
+        <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
+        </pagination-controls>
+    </div>
 </div>

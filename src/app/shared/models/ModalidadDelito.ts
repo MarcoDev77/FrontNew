@@ -5,4 +5,5 @@ export class ModalidadDelito {
   estatus: boolean;
   fechaIngreso?: Date;
   fechaActualizacion?: Date;
+  tipoDelito:any
 }

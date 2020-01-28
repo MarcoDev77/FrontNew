@@ -54,7 +54,7 @@ export const ROUTES: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {path: 'centro-penitenciario', title: 'CENTROS PENITENCIARIOS', ab: 'CP'},
-      {path: 'modalidad-delito', title: 'MODALIDAD DE DELITO', ab: 'MD'},
+     
       {path: 'delito', title: 'DELITOS', ab: 'DE'},
       {path: 'tipo-libertad', title: 'TIPO DE LIBERTAD', ab: 'TL'},
       {path: 'clasificacion-juridica', title: 'CLASIFICACIÓN JURÍDICA', ab: 'CJ'},

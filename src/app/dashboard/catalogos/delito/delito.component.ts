@@ -5,6 +5,7 @@ import {Delito} from '@shared/models/Delito';
 import {CatalogosService} from '@shared/services/catalogos.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-delito',
@@ -30,7 +31,7 @@ export class DelitoComponent implements OnInit {
   public key = 'id'; // set default
   public reverse = true;
 
-  constructor(private catalogosService: CatalogosService) {
+  constructor(private catalogosService: CatalogosService, private router:Router) {
     this.data = [];
     this.delito = {} as Delito;
     this.modalidadesDelito = [];
@@ -42,7 +43,7 @@ export class DelitoComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
-    this.getModalidadDelito();
+
   }
 
   getData() {
@@ -58,16 +59,7 @@ export class DelitoComponent implements OnInit {
     });
   }
 
-  getModalidadDelito() {
-    this.catalogosService.listModalidadDelito().subscribe((data: any) => {
-      if (data.modalidadesDelito) {
-        for (const modalidad of data.modalidadesDelito) {
-          this.modalidadesDelito = [...this.modalidadesDelito, {value: modalidad.id, description: modalidad.nombre}];
-        }
-        console.log('Modalidades', this.modalidadesDelito);
-      }
-    });
-  }
+ 
 
   submit(array) {
     if (this.validateFiels(array)) {
@@ -119,7 +111,7 @@ export class DelitoComponent implements OnInit {
   update(id, item) {
     this.isForm = true;
     this.delito = {...item};
-    this.delito.modalidadDelitoSelect = [{value: item.modalidadDelito.id, description: item.modalidadDelito.nombre}];
+ 
 
     if (this.auxId && this.auxId !== id) {
       this.showTr();
@@ -198,6 +190,12 @@ export class DelitoComponent implements OnInit {
         });
       }
     });
+  }
+
+  modalidades(delito) {
+   
+    sessionStorage.setItem('delito', JSON.stringify(delito));
+    this.router.navigate(['/dashboard/catalogo/modalidad-delito']);
   }
 
 }

@@ -3,6 +3,7 @@ import {CatalogosService} from '@shared/services/catalogos.service';
 import {ModalidadDelito} from '@shared/models/ModalidadDelito';
 import Swal from 'sweetalert2';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Delito } from '@shared/models/Delito';
 
 @Component({
   selector: 'app-modalidad-delito',
@@ -17,6 +18,7 @@ export class ModalidadDelitoComponent implements OnInit {
   public setClickedRow: Function;
   public data: ModalidadDelito[];
   public modalidadDelito: ModalidadDelito;
+  public delito: Delito;
   public roles: any;
 
   public date;
@@ -37,6 +39,10 @@ export class ModalidadDelitoComponent implements OnInit {
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
+
+    this.delito=JSON.parse(sessionStorage.getItem('delito'));
+    console.log(this.delito)
+    this.modalidadDelito.tipoDelito={id:this.delito.id};
   }
 
   ngOnInit() {
@@ -73,7 +79,7 @@ export class ModalidadDelitoComponent implements OnInit {
   }
   getData() {
     this.isLoading = true;
-    this.catalogosService.listModalidadDelito().subscribe((data: any) => {
+    this.catalogosService.listModalidadDelito(this.delito.id).subscribe((data: any) => {
       this.isLoading = false;
       console.log('DATA', data);
       if (data.error) {
