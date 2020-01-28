@@ -17,6 +17,7 @@ import {DactiloscapiaComponent} from '../dactiloscapia/dactiloscapia.component';
     DatosAnexosComponent,
     IngresoComponent,
     DactiloscapiaComponent,
+    ,
   ],
   imports: [
     CommonModule,
