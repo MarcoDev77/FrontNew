@@ -28,8 +28,8 @@ export class CatalogosService {
   }
 
 // MODALIDAD DELITO
-  listModalidadDelito() {
-    return this.http.get(`${this.url}/api/listarModalidadesDelito`);
+  listModalidadDelito(idDelito) {
+    return this.http.get(`${this.url}/api/listarModalidadesDelito?tipoDelitoId=${idDelito}`);
   }
 
   saveModalidadDelito(model: ModalidadDelito) {
