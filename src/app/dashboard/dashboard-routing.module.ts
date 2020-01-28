@@ -43,12 +43,6 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {expectedRole: [r.test.role]}
       },
-      {
-        path: 'formatos',
-        loadChildren: './formatos/formatos.module#FormatosModule',
-        canActivate: [AuthGuard],
-        data: {expectedRole: [r.test.role]}
-      },
     ]
   },
 

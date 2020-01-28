@@ -54,7 +54,7 @@ export const ROUTES: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {path: 'centro-penitenciario', title: 'CENTROS PENITENCIARIOS', ab: 'CP'},
-     
+
       {path: 'delito', title: 'DELITOS', ab: 'DE'},
       {path: 'tipo-libertad', title: 'TIPO DE LIBERTAD', ab: 'TL'},
       {path: 'clasificacion-juridica', title: 'CLASIFICACIÓN JURÍDICA', ab: 'CJ'},
@@ -77,7 +77,7 @@ export const ROUTES: RouteInfo[] = [
       {path: 'bitacoras/ingreso-imputado-liberacion', title: 'BITACORA LIB. IMPUTADO', ab: 'LI'},
       {path: 'bitacoras/ingreso', title: 'BITACORA INGRESO', ab: 'BI'},
       {path: 'bitacoras/ingreso-liberacion', title: 'BITACORA LIB. INGRESO', ab: 'LIN'},
-      {path: 'formatos/lista', title: 'FORMATOS', ab: 'FM'},
+      {path: 'bitacoras/ingreso-liberacion', title: 'BITACORA LIB. INGRESO', ab: 'LIN'},
     ],
   }
 ];
