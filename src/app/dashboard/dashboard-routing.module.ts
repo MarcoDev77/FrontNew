@@ -48,6 +48,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {expectedRole: [r.test.role]}
       },
+      {
+        path: 'servicio-social',
+        loadChildren: './servicio-social/servicio-social.module#ServicioSocialModule',
+        canActivate: [AuthGuard],
+        data: {expectedRole: [r.test.role]}
+      },
     ]
   },
 

@@ -79,6 +79,21 @@ export const ROUTES: RouteInfo[] = [
       {path: 'bitacoras/ingreso-liberacion', title: 'BITACORA LIB. INGRESO', ab: 'LIN'},
       {path: 'formatos/lista', title: 'FORMATOS', ab: 'FM'},
     ],
+  },
+  {
+    roles: [
+      r.test.role
+    ],
+    path: '/dashboard',
+    title: 'SERVICIO SOCIAL',
+    type: 'sub',
+    icontype: 'fa fa-sign-in',
+    collapse: 'tables',
+    children: [
+      {path: 'servicio-social/pase-mensual', title: 'PASE MENSUAL', ab: 'PM'},
+      {path: 'servicio-social/pase-unico', title: 'PASE UNICO', ab: 'PU'},
+  
+    ],
   }
 ];
 
