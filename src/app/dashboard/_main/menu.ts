@@ -77,7 +77,6 @@ export const ROUTES: RouteInfo[] = [
       {path: 'bitacoras/ingreso-imputado-liberacion', title: 'BITACORA LIB. IMPUTADO', ab: 'LI'},
       {path: 'bitacoras/ingreso', title: 'BITACORA INGRESO', ab: 'BI'},
       {path: 'bitacoras/ingreso-liberacion', title: 'BITACORA LIB. INGRESO', ab: 'LIN'},
-      {path: 'bitacoras/ingreso-liberacion', title: 'BITACORA LIB. INGRESO', ab: 'LIN'},
     ],
   },
   {
@@ -92,7 +91,7 @@ export const ROUTES: RouteInfo[] = [
     children: [
       {path: 'servicio-social/pase-mensual', title: 'PASE MENSUAL', ab: 'PM'},
       {path: 'servicio-social/pase-unico', title: 'PASE UNICO', ab: 'PU'},
-  
+
     ],
   }
 ];

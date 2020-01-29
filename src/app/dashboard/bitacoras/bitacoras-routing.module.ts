@@ -12,9 +12,9 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'ingreso', pathMatch: 'full'},
       {path: 'ingreso-Imputado', component: BitacoraIngresoImputadoComponent},
+      {path: 'ingreso-imputado-liberacion', component: BitacoraIngresoLibreracionComponent},
       {path: 'ingreso', component: BitacoraIngresoComponent},
       {path: 'ingreso-liberacion', component: BitacoraImputadoLiberacionComponent},
-      {path: 'ingreso-imputado-liberacion', component: BitacoraIngresoLibreracionComponent},
     ]
   },
 ];
