@@ -8,10 +8,13 @@ import {SharedModule} from '@shared/shared.module';
 import {FormsModule} from '@angular/forms';
 
 
+
 @NgModule({
   declarations: [PaseUnicoComponent, PaseMensualComponent, RootComponent],
   imports: [
-    CommonModule, ServicioSocialRoutingModule, SharedModule, FormsModule
+    CommonModule,
+    SharedModule,
+    FormsModule, ServicioSocialRoutingModule
   ]
 })
 export class ServicioSocialModule { }
