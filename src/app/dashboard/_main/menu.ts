@@ -91,6 +91,7 @@ export const ROUTES: RouteInfo[] = [
     children: [
       {path: 'servicio-social/pase-mensual', title: 'PASE MENSUAL', ab: 'PM'},
       {path: 'servicio-social/pase-unico', title: 'PASE UNICO', ab: 'PU'},
+      {path: 'servicio-social/registro-visita', title: 'REGISTRO DE VISITA', ab: 'RV  '},
 
     ],
   }

@@ -6,11 +6,12 @@ import { RootComponent } from './_root/root.component';
 import { ServicioSocialRoutingModule } from './servicio.social.routing.module';
 import {SharedModule} from '@shared/shared.module';
 import {FormsModule} from '@angular/forms';
+import {RegistroVisitaComponent} from './registro-visita/registro-visita.component';
 
 
 
 @NgModule({
-  declarations: [PaseUnicoComponent, PaseMensualComponent, RootComponent],
+  declarations: [PaseUnicoComponent, PaseMensualComponent, RootComponent, RegistroVisitaComponent],
   imports: [
     CommonModule,
     SharedModule,
