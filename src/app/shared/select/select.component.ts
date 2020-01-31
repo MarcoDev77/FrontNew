@@ -3,7 +3,9 @@ import {EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-select',
-  template: `<ngx-select-dropdown container="body" [disabled]="disabled" [ngClass]="isEmpty" [class]="class" name="roles" [config]="dropdownSettings" [options]="options" [(ngModel)]="modelo" (ngModelChange)="changeModel()"
+  template: `
+    <ngx-select-dropdown container="body" [disabled]="disabled" [ngClass]="isEmpty" [class]="class" name="roles" [config]="dropdownSettings"
+                         [options]="options" [(ngModel)]="modelo" (ngModelChange)="changeModel()"
                          [multiple]="multiple"></ngx-select-dropdown>
   `,
 })
@@ -17,21 +19,21 @@ export class SelectComponent {
   @Input() class;
   @Input() disabled;
   @Input() placeholder;
+  public dropdownSettings: any;
 
-
-  public dropdownSettings = {
-    displayKey: 'description',
-    search: true,
-    height: '300px',
-    placeholder: 'Seleccione...',
-    moreText: 'más',
-    noResultsFound: 'No se han encontrado resultados',
-    searchPlaceholder: 'Buscar',
-    searchOnKey: 'description',
-    limitTo: this.limite ? this.limite : 100,
-  };
 
   constructor() {
+    this.dropdownSettings = {
+      displayKey: 'description',
+      search: true,
+      height: '300px',
+      placeholder: this.placeholder,
+      moreText: 'más',
+      noResultsFound: 'No se han encontrado resultados',
+      searchPlaceholder: 'Buscar',
+      searchOnKey: 'description',
+      limitTo: this.limite ? this.limite : 100,
+    };
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -49,15 +51,15 @@ export class SelectComponent {
   }
 
   changeModel() {
-    if(this.modelo && this.modelo.length == 0){
-      this.modelo = undefined
+    if (this.modelo && this.modelo.length == 0) {
+      this.modelo = undefined;
     }
 
     this.getModel.emit(this.modelo);
   }
 
   get isEmpty() {
-    return this.modelo == '' || this.modelo == undefined ? 'placehorder':'';
+    return this.modelo == '' || this.modelo == undefined ? 'placehorder' : '';
   }
 
 }
