@@ -42,7 +42,8 @@ export class ListaIngresoComponent implements OnInit {
         tipoIngreso: 'Primo Delincuente',
         imputado: null,
         numeroControRenip: null,
-        tipoImputado: 'Ingreso'
+        tipoImputado: 'Ingreso',
+        clasificacion: 'Federal'
       },
     ];
   }

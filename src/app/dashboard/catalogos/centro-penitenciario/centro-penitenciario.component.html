@@ -100,7 +100,7 @@
 
           <div class="col-sm-6">
             <div class="form-group">
-              <app-select required ngbTooltip="Tipo de Centro" [options]="tipoCentros" [multiple]="false"
+              <app-select placeholder="Tipo de Centro" required ngbTooltip="Tipo de Centro" [options]="tipoCentros" [multiple]="false"
                           [modelo]="centroPenitenciario.tipoCentroSelect"
                           (getModel)="centroPenitenciario.tipoCentroSelect = $event;"></app-select>
             </div>
@@ -117,7 +117,7 @@
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <app-select required ngbTooltip="Estados" [options]="estados" [multiple]="false"
+            <app-select placeholder="Estados" required ngbTooltip="Estados" [options]="estados" [multiple]="false"
                         [modelo]="centroPenitenciario.estadoSelect"
                         (getModel)="centroPenitenciario.estadoSelect = $event; onSelectEstado();"></app-select>
           </div>
@@ -125,7 +125,7 @@
 
         <div class="col-sm-6">
           <div class="form-group">
-            <app-select required ngbTooltip="Municipio" [options]="municipios" [multiple]="false"
+            <app-select placeholder="Municipios" required ngbTooltip="Municipio" [options]="municipios" [multiple]="false"
                         [modelo]="centroPenitenciario.municipioSelect"
                         (getModel)="centroPenitenciario.municipioSelect = $event;"></app-select>
           </div>

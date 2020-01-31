@@ -9,4 +9,5 @@ export class Ingreso {
   categoria: string;
   tipoIngreso: string;
   imputado: Imputado;
+  clasificacion?: string;
 }
