@@ -1,335 +1,254 @@
 <app-ingreso-navigation step="3"></app-ingreso-navigation>
 <div class="row">
-  <div class="col-sm-3">ID.</div>
-  <div class="col-sm-3">Morelos</div>
-  <div class="col-sm-3">Juan Pérez Pérez</div>
-  <div class="col-sm-3">40</div>
+    <div class="col-sm-3">ID.</div>
+    <div class="col-sm-3">Morelos</div>
+    <div class="col-sm-3">Juan Pérez Pérez</div>
+    <div class="col-sm-3">40</div>
 </div>
 <br>
 <div class="row">
-  <div class="col-sm-3">Masculino</div>
-  <div class="col-sm-3">Robo</div>
-  <div class="col-sm-3"></div>
-  <div class="col-sm-3"></div>
+    <div class="col-sm-3">Masculino</div>
+    <div class="col-sm-3">Robo</div>
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3"></div>
 </div>
 <br>
 <div class="row">
-  <div class="col-sm-4">
-    <input ngbTooltip="Fuero" class="form-control shadows" type="text" placeholder="Fuero">
-  </div>
-  <div class="col-sm-4">
-    <input ngbTooltip="Lib." class="form-control shadows" type="text" placeholder="Lib.">
-  </div>
-  <div class="col-sm-4">
-    <input ngbTooltip="C.P." class="form-control shadows" type="text" placeholder="C.P.">
-  </div>
+    <div class="col-sm-4">
+        <input ngbTooltip="Fuero" class="form-control shadows" type="text" placeholder="Fuero">
+    </div>
+    <div class="col-sm-4">
+        <input ngbTooltip="Lib." class="form-control shadows" type="text" placeholder="Lib.">
+    </div>
+    <div class="col-sm-4">
+        <input ngbTooltip="C.P." class="form-control shadows" type="text" placeholder="C.P.">
+    </div>
 </div>
 <br>
 <br>
 <app-section-title icon="fa fa-camera" title="imágenes"></app-section-title>
 <div class="row">
-  <div class="col-sm-2">
-    <button [disabled]="!isLoadingImages" (click)="showImages()" class="btn btn-primary">
+    <div class="col-sm-2">
+        <button [disabled]="!isLoadingImages" (click)="showImages()" class="btn btn-primary">
       Tomar Fotos
     </button>
-  </div>
-  <div class="col-sm-10">
-    <div class="row">
-      <div class="col-sm-4 text-center">
-        <img src="assets/img/{{isLoadingImages ? 'no_image' : 'perfil_fren'}}.png" alt="frente"
-             class="img-thumbnail shadows">
-        <br>
-        <br>
-        <span>
+    </div>
+    <div class="col-sm-10">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <img src="assets/img/{{isLoadingImages ? 'no_image' : 'perfil_fren'}}.png" alt="frente" class="img-thumbnail shadows">
+                <br>
+                <br>
+                <span>
           <small>Frente</small>
         </span>
-      </div>
-      <div class="col-sm-4 text-center">
-        <img src="assets/img/{{isLoadingImages ? 'no_image' : 'pefil_der'}}.png" alt="perfil derecho"
-             class="img-thumbnail shadows">
-        <br>
-        <br>
-        <span>
+            </div>
+            <div class="col-sm-4 text-center">
+                <img src="assets/img/{{isLoadingImages ? 'no_image' : 'pefil_der'}}.png" alt="perfil derecho" class="img-thumbnail shadows">
+                <br>
+                <br>
+                <span>
           <small>Perfil derecho</small>
         </span>
-      </div>
-      <div class="col-sm-4 text-center">
-        <img src="assets/img/{{isLoadingImages ? 'no_image' : 'perfil_izq'}}.png" alt="perfil izquierdo"
-             class="img-thumbnail shadows">
-        <br>
-        <br>
-        <span>
+            </div>
+            <div class="col-sm-4 text-center">
+                <img src="assets/img/{{isLoadingImages ? 'no_image' : 'perfil_izq'}}.png" alt="perfil izquierdo" class="img-thumbnail shadows">
+                <br>
+                <br>
+                <span>
           <small>Perfil izquierdo</small>
         </span>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <br>
 <br>
 <app-section-title title="DACTILOSCOPIA" icon="fa fa-hand-paper-o"></app-section-title>
 <div class="row">
-  <div class="col-sm-12">
-    <button [disabled]="!isLoadingDactiloscopia" (click)="showDatiloscopia()" class="btn btn-primary">
+    <div class="col-sm-12">
+        <button [disabled]="!isLoadingDactiloscopia" (click)="showDatiloscopia()" class="btn btn-primary">
       Tomar Dactiloscopia
     </button>
-  </div>
+    </div>
 </div>
-
-<div class="row">
-  <div class="col-sm-2 align-text-bottom">
-    <p style="margin-top: 50%" class="text-sm-right">Serie</p>
-  </div>
-
-  <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
-         class="img-thumbnail shadows">
-    <div class="row text-right mt-3">
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-    </div>
-    <p class="text-center">
-      <small>Pulgares</small>
-    </p>
-  </div>
-
-  <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
-         class="img-thumbnail shadows">
-    <div class="row text-right mt-3">
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-    </div>
-    <p class="text-center">
-      <small>Indices</small>
-    </p>
-  </div>
-
-  <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
-         class="img-thumbnail shadows">
-    <div class="row text-right mt-3">
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-    </div>
-    <p class="text-center">
-      <small>
-        Medios
-      </small>
-    </p>
-  </div>
-
-  <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
-         class="img-thumbnail shadows">
-    <div class="row text-right mt-3">
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-    </div>
-    <p class="text-center">
-      <small>
-        Anulares
-      </small>
-    </p>
-  </div>
-
-  <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
-         class="img-thumbnail shadows">
-    <div class="row text-right mt-3">
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-    </div>
-    <p class="text-center">
-      <small>Meñiques</small>
-    </p>
-  </div>
+<div class=" align-text-bottom">
+    <label class="text-right">Serie</label>
 </div>
+<table class="table">
+    <tr>
+        <td colspan="2"> <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
+            <p class="text-center">
+                <small>Pulgares</small>
+            </p>
+        </td>
+        <td>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Clasificación">
+            </div>
 
-<div class="row">
-  <div class="col-sm-2 align-text-bottom">
-    <p style="margin-top: 50%" class="text-sm-right">Sección</p>
-  </div>
+        </td>
+        <td colspan="2"> <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
+            <p class="text-center">
+                <small>Indices</small>
+            </p>
+        </td>
 
-  <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
-         class="img-thumbnail shadows">
-    <div class="row text-right mt-3">
+        <td>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Clasificación">
+            </div>
 
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Subclasificación">
+            </div>
+        </td>
 
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
+        <td colspan="2"> <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
+            <p class="text-center">
+                <small>
+          Medios
+        </small>
+            </p>
+        </td>
 
-    </div>
-    <p class="text-center">
-      <small>Pulgares</small>
-    </p>
-  </div>
+        <td>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Clasificación">
+            </div>
 
-  <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
-         class="img-thumbnail shadows">
-    <div class="row text-right mt-3">
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Subclasificación">
+            </div>
+        </td>
 
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
+        <td colspan="2"> <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
+            <p class="text-center">
+                <small>
+          Anulares
+        </small>
+            </p>
+        </td>
 
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
+        <td>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Clasificación">
+            </div>
 
-    </div>
-    <p class="text-center">
-      <small>Indices</small>
-    </p>
-  </div>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Subclasificación">
+            </div>
+        </td>
 
-  <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
-         class="img-thumbnail shadows">
-    <div class="row text-right mt-3">
+        <td colspan="2"> <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
+            <p class="text-center">
+                <small>Meñiques</small>
+            </p>
+        </td>
 
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
+        <td>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Clasificación">
+            </div>
 
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Subclasificación">
+            </div>
+        </td>
+    </tr>
 
-    </div>
-    <p class="text-center">
-      <small>
-        Medios
-      </small>
-    </p>
-  </div>
-
-  <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
-         class="img-thumbnail shadows">
-    <div class="row text-right mt-3">
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-    </div>
-    <p class="text-center">
-      <small>
-        Anulares
-      </small>
-    </p>
-  </div>
-
-  <div class="col-sm-2 text-center">
-    <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente"
-         class="img-thumbnail shadows">
-    <div class="row text-right mt-3">
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <input class="form-control">
-        </div>
-      </div>
-
-    </div>
-
-    <p class="text-center">
-      <small>Meñiques</small>
-    </p>
-  </div>
+</table>
+<div class=" align-text-bottom">
+    <label class="text-sm-right">Sección</label>
 </div>
+<table class="table">
+    <tr>
+        <td colspan="2"> <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
+            <p class="text-center">
+                <small>Pulgares</small>
+            </p>
+        </td>
+        <td>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Clasificación">
+            </div>
+
+        </td>
+        <td colspan="2"> <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
+            <p class="text-center">
+                <small>Indices</small>
+            </p>
+        </td>
+
+        <td>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Clasificación">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Subclasificación">
+            </div>
+        </td>
+
+        <td colspan="2"> <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
+            <p class="text-center">
+                <small>
+          Medios
+        </small>
+            </p>
+        </td>
+
+        <td>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Clasificación">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Subclasificación">
+            </div>
+        </td>
+
+        <td colspan="2"> <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
+            <p class="text-center">
+                <small>
+          Anulares
+        </small>
+            </p>
+        </td>
+
+        <td>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Clasificación">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Subclasificación">
+            </div>
+        </td>
+
+        <td colspan="2"> <img src="assets/img/{{(isLoadingDactiloscopia ? 'no_image' : 'fingerprint')}}.png" alt="frente" class="img-thumbnail shadows">
+            <p class="text-center">
+                <small>Meñiques</small>
+            </p>
+        </td>
+
+        <td>
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Clasificación">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" ngbTooltip="Subclasificación">
+            </div>
+        </td>
+    </tr>
+
+</table>
+
 <br>
 <div class="row">
-  <div class="col-8 col-md-10"></div>
-  <div class="col-4 col-md-2">
-    <button type="button" class="float-right btn btn-success">Continuar</button>
-  </div>
+    <div class="col-8 col-md-10"></div>
+    <div class="col-4 col-md-2">
+        <button type="button" class="float-right btn btn-success">Continuar</button>
+    </div>
 </div>
