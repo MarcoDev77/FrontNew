@@ -5,6 +5,7 @@ import {FormularioIngresoComponent} from '@dashboard/ingreso/formulario-ingreso/
 import {ListaIngresoComponent} from '@dashboard/ingreso/lista-ingreso/lista-ingreso.component';
 import {DactiloscopiaComponent} from '@dashboard/ingreso/dactiloscopia/dactiloscopia.component';
 import { SituacionPenalComponent } from './situacion-penal/situacion-penal.component';
+import { SituacionJuridicaImputadoComponent } from './situacion-juridica-imputado/situacion-juridica-imputado.component';
 import {ReferenciasComponent} from '@dashboard/ingreso/referencias/referencias.component';
 import {CaracteristicasComponent} from '@dashboard/ingreso/caracteristicas/caracteristicas.component';
 import {MediaAfiliacionComponent} from '@dashboard/ingreso/media-afiliacion/media-afiliacion.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
       {path: 'lista-ingreso', component: ListaIngresoComponent},
       {path: 'dactiloscopia', component: DactiloscopiaComponent},
       {path: 'situacion-penal', component: SituacionPenalComponent},
+      {path: 'situacion-juridica-imputado', component: SituacionJuridicaImputadoComponent},
       {path: 'referencias', component: ReferenciasComponent},
       {path: 'caracteristicas', component: CaracteristicasComponent},
       {path: 'media-afiliacion', component: MediaAfiliacionComponent},

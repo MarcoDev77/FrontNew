@@ -11,6 +11,7 @@ import { SituacionPenalComponent } from './situacion-penal/situacion-penal.compo
 import { ReferenciasComponent } from './referencias/referencias.component';
 import { CaracteristicasComponent } from './caracteristicas/caracteristicas.component';
 import { MediaAfiliacionComponent } from './media-afiliacion/media-afiliacion.component';
+import { SituacionJuridicaImputadoComponent } from './situacion-juridica-imputado/situacion-juridica-imputado.component';
 
 
 
@@ -23,7 +24,8 @@ import { MediaAfiliacionComponent } from './media-afiliacion/media-afiliacion.co
     SituacionPenalComponent,
     ReferenciasComponent,
     CaracteristicasComponent,
-    MediaAfiliacionComponent
+    MediaAfiliacionComponent,
+    SituacionJuridicaImputadoComponent
   ],
   imports: [
     CommonModule,
