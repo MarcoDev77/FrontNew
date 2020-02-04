@@ -49,6 +49,14 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {expectedRole: [r.test.role]}
       },
+      {
+        path: 'archivo',
+        loadChildren: './archivo/archivo.module#ArchivoModule',
+        canActivate: [AuthGuard],
+        data: {expectedRole: [r.test.role]}
+      },
+
+
     ]
   },
 

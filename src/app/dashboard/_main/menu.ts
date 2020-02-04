@@ -86,13 +86,26 @@ export const ROUTES: RouteInfo[] = [
     path: '/dashboard',
     title: 'SERVICIO SOCIAL',
     type: 'sub',
-    icontype: 'fa fa-sign-in',
+    icontype: 'fa fa-group',
     collapse: 'tables',
     children: [
       {path: 'servicio-social/pase-mensual', title: 'PASE MENSUAL', ab: 'PM'},
       {path: 'servicio-social/pase-unico', title: 'PASE UNICO', ab: 'PU'},
       {path: 'servicio-social/registro-visita', title: 'REGISTRO DE VISITA', ab: 'RV  '},
 
+    ],
+  },
+  {
+    roles: [
+      r.test.role
+    ],
+    path: '/dashboard',
+    title: 'Archivo juridico',
+    type: 'sub',
+    icontype: 'fa fa-folder',
+    collapse: 'tables',
+    children: [
+      {path: 'archivo/archivo', title: 'ARCHIVO', ab: 'AR'},
     ],
   }
 ];
