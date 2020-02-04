@@ -23,6 +23,7 @@ export class FormularioIngresoComponent implements OnInit {
   public paises = [];
   public estados = [];
   public municipios = [];
+  private delitos: any[];
 
   constructor(private catalogosService: CatalogosService, private router: Router) {
     this.ingreso = {} as any;
@@ -34,6 +35,12 @@ export class FormularioIngresoComponent implements OnInit {
 
   ngOnInit() {
     this.getCatalogos();
+    this.delitos = [
+      {value: 1, description: 'Robo'},
+      {value: 2, description: 'Secuestro'},
+      {value: 2, description: 'Secuestro en grado 2'},
+      {value: 2, description: 'Secuestro en grado 3'},
+    ];
   }
 
   getCatalogos() {
@@ -70,9 +77,12 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   addDatoDelito(array) {
-    if (this.validateFiels(array)) {
-      this.arrayDatoDelito = [...this.arrayDatoDelito, this.datoDelito];
+    // TODO: Arreglar que desaparecen las opciones del select
+    if (this.validateFiels(array) && this.datoDelito.delitoSelect && this.arrayDatoDelito.length <= 10) {
+      // this.arrayDatoDelito = [...this.arrayDatoDelito, this.datoDelito];
+      this.arrayDatoDelito.push(this.datoDelito);
       this.datoDelito = {} as DatoDelito;
+      console.log(this.delitos);
     }
   }
 
@@ -81,14 +91,29 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   addAlias(array) {
-    if (this.validateFiels(array)) {
+    if (this.validateFiels(array) && this.arrayAlias.length <= 5) {
+      if (this.arrayAlias.length === 0) {
+        this.alias.esPrincipal = true;
+      }
       this.arrayAlias = [...this.arrayAlias, this.alias];
       this.alias = {} as Alias;
     }
   }
 
+  setPrincialAlias(item) {
+    this.arrayAlias.forEach(alias => {
+      if (alias === item) {
+        alias.esPrincipal = true;
+      } else {
+        alias.esPrincipal = false;
+      }
+    });
+  }
+
   deleteAlias(item) {
-    this.arrayAlias = this.arrayAlias.filter(alias => alias !== item);
+    if (!item.esPrincipal) {
+      this.arrayAlias = this.arrayAlias.filter(alias => alias !== item);
+    }
   }
 
   validateFiels(array: any[]): boolean {
@@ -110,8 +135,11 @@ export class FormularioIngresoComponent implements OnInit {
 class DatoDelito {
   id?: number;
   delito: string;
+  delitoSelect: any;
   fechaDetencion: Date;
   fechaRegistro: Date;
+  causaPenal: string;
+  carpeta: string;
 }
 
 class Alias {
@@ -120,4 +148,5 @@ class Alias {
   apellidoPaterno: string;
   apellidoMaterno: string;
   alias: string;
+  esPrincipal = false;
 }
