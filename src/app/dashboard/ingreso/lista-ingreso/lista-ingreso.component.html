@@ -48,8 +48,10 @@
           &nbsp;
           <i class="fa fa-male" placement="top" ngbTooltip="Referencias" (click)="goTo('referencias', item)"></i>
           &nbsp;
-          <i class="fa fa-pencil-square-o" placement="top" ngbTooltip="Situacion Penal"
-            (click)="goTo('situacion-penal', item)"></i>
+          <i *ngIf="item.tipoImputado == 'Imputado'" class="fa fa-pencil-square-o" placement="top"
+            ngbTooltip="Situacion Juridica" (click)="goTo('situacion-juridica-imputado', item)"></i>
+          <i *ngIf="item.tipoImputado == 'Ingreso'" class="fa fa-pencil-square-o" placement="top"
+            ngbTooltip="Situacion Juridica" (click)="goTo('situacion-penal', item)"></i>
           &nbsp;
           <i class="fa fa-file-archive-o" placement="top" ngbTooltip="Formatos" (click)="search(formModal2)"></i>
           &nbsp;
