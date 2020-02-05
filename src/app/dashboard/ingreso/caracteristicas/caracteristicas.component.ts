@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-caracteristicas',
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CaracteristicasComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    $('image-map').imageMapResize();
+  }
 
   ngOnInit() {
   }
+
 
 }
