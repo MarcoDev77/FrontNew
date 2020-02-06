@@ -18,9 +18,9 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" placeholder="Folio" name="folio" type="text"
+          <input class="form-control shadows" ngbTooltip="Folio" placeholder="Folio" name="folio" type="text"
                  #folio="ngModel" [ngClass]="{ 'is-invalid': f.submitted && folio.invalid}"
-                 [(ngModel)]="ingreso.folio" readonly required/>
+                 [(ngModel)]="ingreso.folio" readonly/>
         </div>
       </div>
       <div class="col-md-4" *ngIf="this.ingreso.tipoImputado === 'Imputado'">
@@ -39,7 +39,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" placeholder="Número de expediente" name="expediente" type="text"
+          <input class="form-control shadows" ngbTooltip="Número de expediente" placeholder="Número de expediente" name="expediente" type="text"
                  #expediente="ngModel" [ngClass]="{ 'is-invalid': f.submitted && expediente.invalid}"
                  [(ngModel)]="ingreso.numeroExpediente" required/>
         </div>
@@ -58,9 +58,9 @@
     </div>
     <div class="row">
       <div class="col-md-4">
-        <input class="form-control shadows" placeholder="Numero control RENIP" name="numeroRenip"
+        <input class="form-control shadows" ngbTooltip="Número control RENIP" placeholder="Número control RENIP" name="numeroRenip"
                #numeroRenip="ngModel" [ngClass]="{ 'is-invalid': f.submitted && numeroRenip.invalid}"
-               [(ngModel)]="ingreso.numeroControRenip" pattern='^[0-9]*$' required/>
+               [(ngModel)]="ingreso.numeroControlRenip" pattern='^[0-9]*$' required/>
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@
           <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias"
                  [(ngModel)]="alias.nombre" #nombreAlias="ngModel"
                  [ngClass]="{ 'is-invalid':  nombreAlias.touched && nombreAlias.invalid }"
-                 ngbTooltip="Nombre" required/>
+                 ngbTooltip="Nombre"/>
         </div>
       </div>
       <div class="col-md-4">
@@ -82,7 +82,7 @@
           <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias"
                  [(ngModel)]="alias.apellidoPaterno" #apellidoPaternoAlias="ngModel"
                  [ngClass]="{ 'is-invalid':  apellidoPaternoAlias.touched && apellidoPaternoAlias.invalid }"
-                 ngbTooltip="Apellido Paterno" required/>
+                 ngbTooltip="Apellido Paterno"/>
         </div>
       </div>
       <div class="col-md-4">
@@ -90,7 +90,7 @@
           <input class="form-control shadows" type="text" placeholder="Apellido materno" name="apellidoMaternoAlias"
                  [(ngModel)]="alias.apellidoMaterno" #apellidoMaternoAlias="ngModel"
                  [ngClass]="{ 'is-invalid':  apellidoMaternoAlias.touched && apellidoMaternoAlias.invalid }"
-                 ngbTooltip="Apellido Materno" required/>
+                 ngbTooltip="Apellido Materno"/>
         </div>
       </div>
     </div>
@@ -100,7 +100,7 @@
           <input class="form-control shadows" type="text" placeholder="Otros nombres/alias" name="aliasNombre"
                  [(ngModel)]="alias.alias" #aliasNombre="ngModel"
                  [ngClass]="{ 'is-invalid':  aliasNombre.touched && aliasNombre.invalid }"
-                 ngbTooltip="Alias/otro nombre" required/>
+                 ngbTooltip="Alias/otro nombre"/>
         </div>
       </div>
       <div class="col-md-4">
@@ -143,14 +143,14 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group shadows">
-          <input class="form-control" type="text" placeholder="CURP" name="curp" required
+          <input class="form-control" type="text" ngbTooltip="CURP" placeholder="CURP" name="curp" required
                  #curp="ngModel" [(ngModel)]="ingreso.imputado.curp"
                  [ngClass]="{ 'is-invalid': f.submitted && curp.invalid}"/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <input type="date" class="form-control" placeholder="Fecha de nacimiento" name="fechaNacimiento"
+          <input type="date" class="form-control" ngbTooltip="Fecha de Nacimiento" placeholder="Fecha de nacimiento" name="fechaNacimiento"
                  #fechaNacimiento="ngModel" [ngClass]="{ 'is-invalid': f.submitted && fechaNacimiento.invalid}"
                  [(ngModel)]="ingreso.imputado.fechaNacimiento" required/>
         </div>
@@ -292,7 +292,7 @@
 
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Nombre del padre" name="padre"
+          <input class="form-control shadows" type="text" ngbTooltip="Nombre del padre" placeholder="Nombre del padre" name="padre"
                  #padre="ngModel" [ngClass]="{ 'is-invalid': f.submitted && padre.invalid}"
                  [(ngModel)]="ingreso.imputado.nombrePadre"/>
         </div>
@@ -300,7 +300,7 @@
 
       <div class="col-md-4">
         <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Nombre de la madre" name="madre"
+          <input class="form-control shadows" type="text" ngbTooltip="Nombre de la madre" placeholder="Nombre de la madre" name="madre"
                  #madre="ngModel" [ngClass]="{ 'is-invalid': f.submitted && madre.invalid}"
                  [(ngModel)]="ingreso.imputado.nombreMadre"/>
         </div>

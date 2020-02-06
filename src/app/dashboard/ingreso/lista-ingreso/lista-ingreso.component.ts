@@ -41,9 +41,9 @@ export class ListaIngresoComponent implements OnInit {
         categoria: 'PrimoDelicinente',
         tipoIngreso: 'Primo Delincuente',
         imputado: null,
-        numeroControRenip: null,
+        numeroControlRenip: null,
         tipoImputado: 'Ingreso',
-       
+
         clasificacion: 'Federal'
       },{
         id: 2,
@@ -52,7 +52,7 @@ export class ListaIngresoComponent implements OnInit {
         categoria: 'PrimoDelicinente',
         tipoIngreso: 'Primo Delincuente',
         imputado: null,
-        numeroControRenip: null,
+        numeroControlRenip: null,
         tipoImputado: 'Imputado',
         clasificacion: 'Federal'
       }

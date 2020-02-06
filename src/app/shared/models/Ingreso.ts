@@ -4,7 +4,7 @@ export class Ingreso {
   id?: number;
   folio: string;
   numeroExpediente: string;
-  numeroControRenip: number;
+  numeroControlRenip: number;
   tipoImputado: string;
   categoria: string;
   tipoIngreso: string;
