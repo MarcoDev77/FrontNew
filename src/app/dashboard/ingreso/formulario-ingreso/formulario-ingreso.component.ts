@@ -23,7 +23,8 @@ export class FormularioIngresoComponent implements OnInit {
   public paises = [];
   public estados = [];
   public municipios = [];
-  private delitos: any[];
+  public delitos = [];
+  public centrosPenitenciarios = [];
 
   constructor(private catalogosService: CatalogosService, private router: Router) {
     this.ingreso = {} as any;
@@ -31,16 +32,15 @@ export class FormularioIngresoComponent implements OnInit {
     this.alias = {} as Alias;
     this.ingreso = {} as Ingreso;
     this.ingreso.imputado = {} as Imputado;
+
+    const ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
+    if (ingreso) {
+      this.ingreso = ingreso;
+    }
   }
 
   ngOnInit() {
     this.getCatalogos();
-    this.delitos = [
-      {value: 1, description: 'Robo'},
-      {value: 2, description: 'Secuestro'},
-      {value: 2, description: 'Secuestro en grado 2'},
-      {value: 2, description: 'Secuestro en grado 3'},
-    ];
   }
 
   getCatalogos() {
@@ -54,6 +54,10 @@ export class FormularioIngresoComponent implements OnInit {
       .subscribe((data: any) => this.ocupaciones = this.mapToSelect(data.ocupaciones));
     this.catalogosService.listPaises()
       .subscribe((data: any) => this.paises = this.mapToSelect(data.paises));
+    this.catalogosService.listCentroPenitenciario()
+      .subscribe((data: any) => this.centrosPenitenciarios = this.mapToSelect(data.centros));
+    this.catalogosService.listDelito()
+      .subscribe((data: any) => this.delitos = this.mapToSelect(data.delitos));
   }
 
   getEstado() {

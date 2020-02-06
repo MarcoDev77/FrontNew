@@ -4,10 +4,10 @@ import {Component, Input} from '@angular/core';
   selector: 'app-ingreso-navigation',
   template: `
       <div class="col-12 text-center">
-          <div class="btn-group btn-group-md" role="group">
+          <div class="btn-group btn-group-md bg main-container" role="group">
             <a *ngFor="let item of steps; let i = index;" [routerLink]="[item.path]"
-               [ngClass]="{'active': i == step}"
-               class="btn btn-secondary">{{item.name}}</a>
+               [ngClass]="{'active-nav': i == step}"
+               class="btn bg">{{item.name}}</a>
           </div>
       </div>
   `,
