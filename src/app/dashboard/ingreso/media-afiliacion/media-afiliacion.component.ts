@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Mediafiliacion} from '@shared/models/MediaFiliacion';
+import { IngresoService } from '@shared/services/ingreso.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-media-afiliacion',
@@ -14,7 +16,7 @@ export class MediaAfiliacionComponent implements OnInit {
   tez: any;
   obj: any;
   public mediaFiliacion: Mediafiliacion;
-  constructor() {
+  constructor(private ingresoService: IngresoService) {
     this.complexion = '';
     this.estatura = '';
     this.peso = '';
@@ -24,6 +26,7 @@ export class MediaAfiliacionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getData();
   }
 
   getComplexion(id) {
@@ -45,8 +48,36 @@ export class MediaAfiliacionComponent implements OnInit {
         break;
     }
   }
+  public getData(){
+    this.mediaFiliacion.imputado={
+      id:2
+    }
+    console.log(this.mediaFiliacion.imputado.id)
+     this.ingresoService.getMediafiliacion(this.mediaFiliacion.imputado.id).subscribe((data:any)=>{
+      console.log(data);
+      if(data.caracteristicas){
+      this.mediaFiliacion=data.caracteristicas;
+      }else{
+        
+      }
+    }) 
 
-  guardarMediaFiliacion(){
-      
+  }
+  public guardarMediaFiliacion(){
+   
+    this.mediaFiliacion.imputado= {
+        id:2
+    };
+    console.log(this.mediaFiliacion)
+      this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
+        this.mediaFiliacion.id=data.id;
+        Swal.fire({
+          title: data.error ? 'Error!' : 'Guardado',
+          text: data.mensaje,
+          icon: data.error ? 'error' : 'success',
+          timer: 1300,
+          showConfirmButton: false
+        });
+      })
   }
 }

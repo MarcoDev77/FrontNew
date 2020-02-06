@@ -26,6 +26,14 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/registrarCaracteristicasEspecificas`, this.data);
   }
 
+  getMediafiliacion(id){
+    this.data={
+      id:id
+    }
+    console.log(this.data)
+    return this.http.post(`${this.url}/api/findByCaracteristicasEspecificas`, this.data);
+  }
+
   listIngreso(id) {
     return this.http.get(`${this.url}/api/consultarIngresoImputado?imputadoId=${id}`);
   }

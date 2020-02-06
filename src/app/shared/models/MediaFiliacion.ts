@@ -1,5 +1,6 @@
 export class Mediafiliacion{
-    public estatura: String;
+    public id: number;
+    public estatura: number;
     public complexion: String
     public peso: Number;
     public piel: String;
@@ -44,4 +45,5 @@ export class Mediafiliacion{
     public sangreTipo: String;
     public sangreRH: String;
     public usaAnteojos: Boolean;
+    public imputado: any;
 }
