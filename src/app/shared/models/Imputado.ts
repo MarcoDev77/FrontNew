@@ -1,9 +1,6 @@
 export class Imputado {
   id?: number;
   curp: string;
-  nombre: string;
-  apellidoPaterno: string;
-  apellidoMaterno?: string;
   fechaNacimiento: Date;
   edadAparente: number;
   genero: string;
@@ -15,12 +12,19 @@ export class Imputado {
   nombreMadre?: string;
   etnia?: string;
   esIndigena: boolean;
-  hablaIndigena?: string;
+  hablaIndigena?: string | boolean;
   municipio: any;
+  municipioSelect: any;
   paisNacimiento: any;
+  paisNacimientoSelect: any;
   estado: any;
+  estadoSelect: any;
   religion: any;
+  religionSelect: any;
   estadoCivil: any;
+  estadoCivilSelect: any;
   ocupacion: any;
+  ocupacionSelect: any;
   gradoEstudio: any;
+  gradoEstudioSelect: any;
 }
