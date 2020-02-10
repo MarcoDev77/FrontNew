@@ -70,78 +70,6 @@
     <app-section-title icon="fa fa-male" title="Datos personales"></app-section-title>
     <div class="row">
       <div class="col-md-4">
-        <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias"
-                 [(ngModel)]="alias.nombre" #nombreAlias="ngModel"
-                 [ngClass]="{ 'is-invalid':  nombreAlias.touched && nombreAlias.invalid }"
-                 ngbTooltip="Nombre"/>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias"
-                 [(ngModel)]="alias.apellidoPaterno" #apellidoPaternoAlias="ngModel"
-                 [ngClass]="{ 'is-invalid':  apellidoPaternoAlias.touched && apellidoPaternoAlias.invalid }"
-                 ngbTooltip="Apellido Paterno"/>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Apellido materno" name="apellidoMaternoAlias"
-                 [(ngModel)]="alias.apellidoMaterno" #apellidoMaternoAlias="ngModel"
-                 [ngClass]="{ 'is-invalid':  apellidoMaternoAlias.touched && apellidoMaternoAlias.invalid }"
-                 ngbTooltip="Apellido Materno"/>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <input class="form-control shadows" type="text" placeholder="Otros nombres/alias" name="aliasNombre"
-                 [(ngModel)]="alias.alias" #aliasNombre="ngModel"
-                 [ngClass]="{ 'is-invalid':  aliasNombre.touched && aliasNombre.invalid }"
-                 ngbTooltip="Alias/otro nombre"/>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <button [disabled]="arrayAlias.length >= 5" (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])"
-                  type="button" class="btn btn-info btn-block btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <table class="table shadows">
-          <thead>
-          <tr>
-            <th class="text-center">Nombre</th>
-            <th class="text-center">Apellido Paterno</th>
-            <th class="text-center">Apellido Materno</th>
-            <th class="text-center">Alias</th>
-            <th class="text-center">Acciones</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of arrayAlias">
-            <td class="text-center">{{item.nombre}}</td>
-            <td class="text-center">{{item.apellidoPaterno}}</td>
-            <td class="text-center">{{item.apellidoMaterno}}</td>
-            <td class="text-center">{{item.nombre}}</td>
-            <td class="text-center">
-              <i class="fa fa-times mr-3" placement="top" ngbTooltip="Eliminar"
-                 (click)="deleteAlias(item)"></i>
-              <i *ngIf="!item.esPrincipal" class="fa fa-flag-o" ngbTooltip="Poner como princiapl" (click)="setPrincialAlias(item)"></i>
-              <i *ngIf="item.esPrincipal" class="fa fa-flag-checkered" ngbTooltip="Nombre principal"></i>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
         <div class="form-group shadows">
           <input class="form-control" type="text" ngbTooltip="CURP" placeholder="CURP" name="curp" required
                  #curp="ngModel" [(ngModel)]="ingreso.imputado.curp"
@@ -179,8 +107,8 @@
       <div class="col-md-4">
         <div class="form-group">
           <app-select placeholder="Religión" required ngbTooltip="Religión" [options]="religiones" [multiple]="false"
-                      [modelo]="ingreso.imputado.religion" aria-required="true"
-                      (getModel)="ingreso.imputado.religion = $event;"></app-select>
+                      [modelo]="ingreso.imputado.religionSelect" aria-required="true"
+                      (getModel)="ingreso.imputado.religionSelect = $event;"></app-select>
         </div>
       </div>
     </div>
@@ -189,16 +117,16 @@
         <div class="form-group">
           <app-select placeholder="País de Nacimiento" required ngbTooltip="País de Nacimiento" [options]="paises"
                       [multiple]="false"
-                      [modelo]="ingreso.imputado.paisNacimiento" aria-required="true"
-                      (getModel)="ingreso.imputado.paisNacimiento = $event; getEstado()"></app-select>
+                      [modelo]="ingreso.imputado.paisNacimientoSelect" aria-required="true"
+                      (getModel)="ingreso.imputado.paisNacimientoSelect = $event; getEstado()"></app-select>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <app-select placeholder="Estado de Nacimiento" required ngbTooltip="Estado de Nacimiento" [options]="estados"
                       [multiple]="false"
-                      [modelo]="ingreso.imputado.estado" aria-required="true"
-                      (getModel)="ingreso.imputado.estado = $event; getMunicipios()"></app-select>
+                      [modelo]="ingreso.imputado.eestadoCivilSelect" aria-required="true"
+                      (getModel)="ingreso.imputado.eestadoCivilSelect = $event; getMunicipios()"></app-select>
         </div>
       </div>
     </div>
@@ -207,8 +135,8 @@
         <div class="form-group">
           <app-select placeholder="Estado Civil" required ngbTooltip="Estado Civil" [options]="estadosCiviles"
                       [multiple]="false"
-                      [modelo]="ingreso.imputado.estadoCivil" aria-required="true"
-                      (getModel)="ingreso.imputado.estadoCivil = $event;"></app-select>
+                      [modelo]="ingreso.imputado.estadoCivilSelect" aria-required="true"
+                      (getModel)="ingreso.imputado.estadoCivilSelect = $event;"></app-select>
         </div>
       </div>
       <div class="col-md-4">
@@ -238,8 +166,8 @@
       <div class="col-md-4">
         <div class="form-group">
           <app-select placeholder="Ocupación" ngbTooltip="Ocupación" [options]="ocupaciones" [multiple]="false"
-                      [modelo]="ingreso.imputado.ocupacion" aria-required="true"
-                      (getModel)="ingreso.imputado.ocupacion = $event;"></app-select>
+                      [modelo]="ingreso.imputado.ocupacionSelect" aria-required="true"
+                      (getModel)="ingreso.imputado.ocupacionSelect = $event;"></app-select>
         </div>
       </div>
 
@@ -247,8 +175,8 @@
         <div class="form-group">
           <app-select placeholder="Grado de estudios" ngbTooltip="Grado de estudios" [options]="gradosdeEstudio"
                       [multiple]="false"
-                      [modelo]="ingreso.imputado.gradoEstudio" aria-required="true"
-                      (getModel)="ingreso.imputado.gradoEstudio = $event;"></app-select>
+                      [modelo]="ingreso.imputado.gradoEstudioSelect" aria-required="true"
+                      (getModel)="ingreso.imputado.gradoEstudioSelect = $event;"></app-select>
         </div>
       </div>
 
@@ -316,24 +244,24 @@
         <div class="form-group">
           <app-select placeholder="País" required ngbTooltip="País" [options]="paises"
                       [multiple]="false"
-                      [modelo]="ingreso.imputado.paisNacimiento" aria-required="true"
-                      (getModel)="ingreso.imputado.paisNacimiento = $event; getEstado()"></app-select>
+                      [modelo]="ingreso.imputado.paisNacimientoSelect" aria-required="true"
+                      (getModel)="ingreso.imputado.paisNacimientoSelect = $event; getEstado()"></app-select>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <app-select placeholder="Estado" required ngbTooltip="Estado" [options]="estados"
                       [multiple]="false"
-                      [modelo]="ingreso.imputado.estado" aria-required="true"
-                      (getModel)="ingreso.imputado.estado = $event; getMunicipios()"></app-select>
+                      [modelo]="ingreso.imputado.estadoSelect" aria-required="true"
+                      (getModel)="ingreso.imputado.estadoSelect = $event; getMunicipios()"></app-select>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <app-select placeholder="Minicipio de Nacimiento" required ngbTooltip="Municipio de Nacimiento"
                       [options]="municipios" [multiple]="false"
-                      [modelo]="ingreso.imputado.municipio" aria-required="true"
-                      (getModel)="ingreso.imputado.municipio = $event;"></app-select>
+                      [modelo]="ingreso.imputado.municipioSelect" aria-required="true"
+                      (getModel)="ingreso.imputado.municipioSelect = $event;"></app-select>
         </div>
       </div>
     </div>
@@ -372,6 +300,79 @@
     </div>
   </div>
 </form>
+<app-section-title icon="fa fa-user-circle-o" title="Nombres y Alias"></app-section-title>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias"
+             [(ngModel)]="alias.nombre" #nombreAlias="ngModel"
+             [ngClass]="{ 'is-invalid':  nombreAlias.touched && nombreAlias.invalid }"
+             ngbTooltip="Nombre"/>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias"
+             [(ngModel)]="alias.apellidoPaterno" #apellidoPaternoAlias="ngModel"
+             [ngClass]="{ 'is-invalid':  apellidoPaternoAlias.touched && apellidoPaternoAlias.invalid }"
+             ngbTooltip="Apellido Paterno"/>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input class="form-control shadows" type="text" placeholder="Apellido materno" name="apellidoMaternoAlias"
+             [(ngModel)]="alias.apellidoMaterno" #apellidoMaternoAlias="ngModel"
+             [ngClass]="{ 'is-invalid':  apellidoMaternoAlias.touched && apellidoMaternoAlias.invalid }"
+             ngbTooltip="Apellido Materno"/>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <input class="form-control shadows" type="text" placeholder="Otros nombres/alias" name="aliasNombre"
+             [(ngModel)]="alias.alias" #aliasNombre="ngModel"
+             [ngClass]="{ 'is-invalid':  aliasNombre.touched && aliasNombre.invalid }"
+             ngbTooltip="Alias/otro nombre"/>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <button [disabled]="arrayAlias.length >= 5" (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])"
+              type="button" class="btn btn-info btn-block btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table shadows">
+      <thead>
+      <tr>
+        <th class="text-center">Nombre</th>
+        <th class="text-center">Apellido Paterno</th>
+        <th class="text-center">Apellido Materno</th>
+        <th class="text-center">Alias</th>
+        <th class="text-center">Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of arrayAlias">
+        <td class="text-center">{{item.nombre}}</td>
+        <td class="text-center">{{item.apellidoPaterno}}</td>
+        <td class="text-center">{{item.apellidoMaterno}}</td>
+        <td class="text-center">{{item.nombre}}</td>
+        <td class="text-center">
+          <i class="fa fa-times mr-3" placement="top" ngbTooltip="Eliminar"
+             (click)="deleteAlias(item)"></i>
+          <i *ngIf="!item.esPrincipal" class="fa fa-flag-o" ngbTooltip="Poner como princiapl" (click)="setPrincialAlias(item)"></i>
+          <i *ngIf="item.esPrincipal" class="fa fa-flag-checkered" ngbTooltip="Nombre principal"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 <!--Datos del delito-->
 <div>
   <app-section-title icon="fa fa-file-text" title="Datos del delito"></app-section-title>

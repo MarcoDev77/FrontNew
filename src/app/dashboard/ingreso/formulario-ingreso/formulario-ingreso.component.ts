@@ -3,6 +3,8 @@ import {CatalogosService} from '@shared/services/catalogos.service';
 import {Router} from '@angular/router';
 import {Ingreso} from '@shared/models/Ingreso';
 import {Imputado} from '@shared/models/Imputado';
+import {IngresoService} from '@shared/services/ingreso.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-formulario-ingreso',
@@ -26,7 +28,11 @@ export class FormularioIngresoComponent implements OnInit {
   public delitos = [];
   public centrosPenitenciarios = [];
 
-  constructor(private catalogosService: CatalogosService, private router: Router) {
+  constructor(
+    private catalogosService: CatalogosService,
+    private router: Router,
+    private ingresoService: IngresoService
+  ) {
     this.ingreso = {} as any;
     this.datoDelito = {} as DatoDelito;
     this.alias = {} as Alias;
@@ -61,23 +67,66 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   getEstado() {
-    if (this.ingreso.imputado.paisNacimiento) {
-      this.catalogosService.listEstados('seleccionada', this.ingreso.imputado.paisNacimiento.value)
+    if (this.ingreso.imputado.paisNacimientoSelect) {
+      this.catalogosService.listEstados('seleccionada', this.ingreso.imputado.paisNacimientoSelect.value)
         .subscribe((data: any) => this.estados = this.mapToSelect(data.estados));
     }
   }
 
   getMunicipios() {
-    if (this.ingreso.imputado.estado) {
-      this.catalogosService.listMunicipios('seleccionada', this.ingreso.imputado.estado.value)
+    if (this.ingreso.imputado.estadoSelect) {
+      this.catalogosService.listMunicipios('seleccionada', this.ingreso.imputado.estadoSelect.value)
         .subscribe((data: any) => this.municipios = this.mapToSelect(data.estados));
     }
   }
 
+  getIngreso(id) {
+    this.ingresoService.getIngreso(id).subscribe((data: any) => {
+      console.log('new ingreso', data);
+      const {ingreso, error} = data;
+      ingreso.imputado.gradoEstudioSelect = {
+        value: ingreso.imputado.gradoEstudio.id,
+        description: ingreso.imputado.gradoEstudio.nombre
+      };
+      ingreso.imputado.ocupacionSelect = {
+        value: ingreso.imputado.ocupacion.id,
+        description: ingreso.imputado.ocupacion.nombre
+      };
+      ingreso.imputado.estadoCivilSelect = {
+        value: ingreso.imputado.estadoCivil.id,
+        description: ingreso.imputado.estadoCivil.nombre
+      };
+      ingreso.imputado.paisNacimientoSelect = {
+        value: ingreso.imputado.paisNacimiento.id,
+        description: ingreso.imputado.paisNacimiento.nombre
+      };
+      ingreso.imputado.religionSelect = {
+        value: ingreso.imputado.religion.id,
+        description: ingreso.imputado.religion.nombre
+      };
+      ingreso.imputado.municipioSelect = {
+        value: ingreso.imputado.municipio.id,
+        description: ingreso.imputado.municipio.nombre
+      };
+      ingreso.imputado.estadoSelect = {
+        value: ingreso.imputado.municipio.estado.id,
+        description: ingreso.imputado.municipio.estado.nombre
+      };
+      this.ingreso = ingreso;
+    });
+  }
+
   submit() {
     console.log('submit', this.ingreso);
-    // this.ingre
-    // this.router.navigate(['/dashboard/ingreso/dactiloscopia']);
+    this.ingreso.imputado.edadAparente = Number(this.ingreso.imputado.edadAparente);
+    this.ingreso.imputado.hablaIndigena = this.ingreso.imputado.hablaIndigena ? this.ingreso.imputado.hablaIndigena : false;
+    this.ingreso.imputado.esIndigena = this.ingreso.imputado.esIndigena ? this.ingreso.imputado.esIndigena : false;
+    this.ingresoService.saveIngreso(this.ingreso).subscribe((data: any) => {
+      console.log('saveIngreso', data);
+      if (!data.error) {
+        this.getIngreso(data.idRegistro);
+      }
+    });
   }
 
   addDatoDelito(array) {
@@ -133,6 +182,11 @@ export class FormularioIngresoComponent implements OnInit {
 
   mapToSelect(array: any[]) {
     return array.map((item: any) => ({value: item.id, description: item.nombre}));
+  }
+
+  mapProperties(propertie: any) {
+    const id = propertie.value;
+    return {id};
   }
 }
 

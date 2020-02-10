@@ -26,18 +26,26 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/registrarCaracteristicasEspecificas`, this.data);
   }
 
-  getMediafiliacion(id){
-    this.data={
-      id:id
-    }
-    console.log(this.data)
+  getMediafiliacion(id) {
+    this.data = {
+      id: id
+    };
+    console.log(this.data);
     return this.http.post(`${this.url}/api/findByCaracteristicasEspecificas`, this.data);
   }
 
-  listIngreso(id) {
+  getIngreso(id) {
     return this.http.get(`${this.url}/api/consultarIngresoImputado?imputadoId=${id}`);
   }
+
   saveIngreso(model: Ingreso) {
+    model.imputado.estado = {id: model.imputado.estadoSelect.value};
+    model.imputado.municipio = {id: model.imputado.municipioSelect.value};
+    model.imputado.paisNacimiento = {id: model.imputado.paisNacimientoSelect.value};
+    model.imputado.religion = {id: model.imputado.religionSelect.value};
+    model.imputado.estadoCivil = {id: model.imputado.estadoCivilSelect.value};
+    model.imputado.ocupacion = {id: model.imputado.ocupacionSelect.value};
+    model.imputado.gradoEstudio = {id: model.imputado.gradoEstudioSelect.value};
     this.data = model;
     return this.http.post(`${this.url}/api/registrarIngresoImputado`, this.data);
   }

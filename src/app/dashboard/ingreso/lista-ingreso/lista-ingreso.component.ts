@@ -77,6 +77,7 @@ export class ListaIngresoComponent implements OnInit {
   }
 
   add() {
+    sessionStorage.removeItem('ingreso');
     this.router.navigate(['/dashboard/ingreso/form-ingreso']);
 
   }
