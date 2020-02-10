@@ -39,8 +39,11 @@ export class IngresoService {
   }
 
   saveIngreso(model: Ingreso) {
-    model.imputado.estado = {id: model.imputado.estadoSelect.value};
-    model.imputado.municipio = {id: model.imputado.municipioSelect.value};
+    model.imputado.estado = {id: 1};
+    model.imputado.municipio = {id: 1};
+    model.imputado.calleNumero = 'Villa #3';
+    model.imputado.colonia = 'Villa Real';
+    model.imputado.codigoPostal = 62577;
     model.imputado.paisNacimiento = {id: model.imputado.paisNacimientoSelect.value};
     model.imputado.religion = {id: model.imputado.religionSelect.value};
     model.imputado.estadoCivil = {id: model.imputado.estadoCivilSelect.value};
@@ -48,6 +51,15 @@ export class IngresoService {
     model.imputado.gradoEstudio = {id: model.imputado.gradoEstudioSelect.value};
     this.data = model;
     return this.http.post(`${this.url}/api/registrarIngresoImputado`, this.data);
+  }
+
+  saveApodo(model) {
+    this.data = model;
+    return this.http.post(`${this.url}/api/registrarApodo`, this.data);
+  }
+
+  seleccionarApodoPrincipal(id) {
+    return this.http.get(`${this.url}/api/seleccionarApodoPrincipal?apodoId=${id}`);
   }
 
 }

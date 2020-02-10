@@ -237,63 +237,63 @@
     </div>
   </div>
 <!--  Domicilio-->
-  <div>
-    <app-section-title title="Domicilio" icon="fa fa-home"></app-section-title>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <app-select placeholder="País" required ngbTooltip="País" [options]="paises"
-                      [multiple]="false"
-                      [modelo]="ingreso.imputado.paisNacimientoSelect" aria-required="true"
-                      (getModel)="ingreso.imputado.paisNacimientoSelect = $event; getEstado()"></app-select>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <app-select placeholder="Estado" required ngbTooltip="Estado" [options]="estados"
-                      [multiple]="false"
-                      [modelo]="ingreso.imputado.estadoSelect" aria-required="true"
-                      (getModel)="ingreso.imputado.estadoSelect = $event; getMunicipios()"></app-select>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <app-select placeholder="Minicipio de Nacimiento" required ngbTooltip="Municipio de Nacimiento"
-                      [options]="municipios" [multiple]="false"
-                      [modelo]="ingreso.imputado.municipioSelect" aria-required="true"
-                      (getModel)="ingreso.imputado.municipioSelect = $event;"></app-select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
+<!--  <div>-->
+<!--    <app-section-title title="Domicilio" icon="fa fa-home"></app-section-title>-->
+<!--    <div class="row">-->
+<!--      <div class="col-md-4">-->
+<!--        <div class="form-group">-->
+<!--          <app-select placeholder="País" required ngbTooltip="País" [options]="paises"-->
+<!--                      [multiple]="false"-->
+<!--                      [modelo]="ingreso.imputado.paisNacimientoSelect" aria-required="true"-->
+<!--                      (getModel)="ingreso.imputado.paisNacimientoSelect = $event; getEstado()"></app-select>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-md-4">-->
+<!--        <div class="form-group">-->
+<!--          <app-select placeholder="Estado" required ngbTooltip="Estado" [options]="estados"-->
+<!--                      [multiple]="false"-->
+<!--                      [modelo]="ingreso.imputado.estadoSelect" aria-required="true"-->
+<!--                      (getModel)="ingreso.imputado.estadoSelect = $event; getMunicipios()"></app-select>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-md-4">-->
+<!--        <div class="form-group">-->
+<!--          <app-select placeholder="Minicipio de Nacimiento" required ngbTooltip="Municipio de Nacimiento"-->
+<!--                      [options]="municipios" [multiple]="false"-->
+<!--                      [modelo]="ingreso.imputado.municipioSelect" aria-required="true"-->
+<!--                      (getModel)="ingreso.imputado.municipioSelect = $event;"></app-select>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <input class="form-control" type="text" ngbTooltip="Colónia" placeholder="Colónia" name="colonia"
-                 #colonia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && colonia.invalid}"
-                 [(ngModel)]="ingreso.imputado.colonia"/>
-        </div>
-      </div>
+<!--      <div class="col-md-4">-->
+<!--        <div class="form-group">-->
+<!--          <input class="form-control" type="text" ngbTooltip="Colónia" placeholder="Colónia" name="colonia"-->
+<!--                 #colonia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && colonia.invalid}"-->
+<!--                 [(ngModel)]="ingreso.imputado.colonia"/>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <input class="form-control" type="text" ngbTooltip="Calle y número" placeholder="Calle y número"
-                 name="calleNumero"
-                 #calleNumero="ngModel" [ngClass]="{ 'is-invalid': f.submitted && calleNumero.invalid}"
-                 [(ngModel)]="ingreso.imputado.calleNumero"/>
-        </div>
-      </div>
+<!--      <div class="col-md-4">-->
+<!--        <div class="form-group">-->
+<!--          <input class="form-control" type="text" ngbTooltip="Calle y número" placeholder="Calle y número"-->
+<!--                 name="calleNumero"-->
+<!--                 #calleNumero="ngModel" [ngClass]="{ 'is-invalid': f.submitted && calleNumero.invalid}"-->
+<!--                 [(ngModel)]="ingreso.imputado.calleNumero"/>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <input class="form-control" type="text" ngbTooltip="C.P." placeholder="C.P." name="cp"
-                 #cp="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cp.invalid}"
-                 [(ngModel)]="ingreso.imputado.codigoPostal"/>
-        </div>
-      </div>
+<!--      <div class="col-md-4">-->
+<!--        <div class="form-group">-->
+<!--          <input class="form-control" type="text" ngbTooltip="C.P." placeholder="C.P." name="cp"-->
+<!--                 #cp="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cp.invalid}"-->
+<!--                 [(ngModel)]="ingreso.imputado.codigoPostal"/>-->
+<!--        </div>-->
+<!--      </div>-->
 
-    </div>
-  </div>
+<!--    </div>-->
+<!--  </div>-->
   <div class="row">
     <div class="col-md-12 text-right">
       <button class="btn btn-success shadows" style="width: 15rem;" type="submit">Guardar</button>
@@ -338,7 +338,7 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <button [disabled]="arrayAlias.length >= 5" (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])"
+      <button [disabled]="arrayAlias.length >= 5 || this.ingreso.id == null" (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])"
               type="button" class="btn btn-info btn-block btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i>
       </button>
     </div>
@@ -363,10 +363,10 @@
         <td class="text-center">{{item.apellidoMaterno}}</td>
         <td class="text-center">{{item.nombre}}</td>
         <td class="text-center">
-          <i class="fa fa-times mr-3" placement="top" ngbTooltip="Eliminar"
-             (click)="deleteAlias(item)"></i>
-          <i *ngIf="!item.esPrincipal" class="fa fa-flag-o" ngbTooltip="Poner como princiapl" (click)="setPrincialAlias(item)"></i>
-          <i *ngIf="item.esPrincipal" class="fa fa-flag-checkered" ngbTooltip="Nombre principal"></i>
+<!--          <i class="fa fa-times mr-3" placement="top" ngbTooltip="Eliminar"-->
+<!--             (click)="deleteAlias(item)"></i>-->
+          <i *ngIf="!item.principal" class="fa fa-flag-o" ngbTooltip="Poner como princiapl" (click)="setPrincialAlias(item)"></i>
+          <i *ngIf="item.principal" class="fa fa-flag-checkered" ngbTooltip="Nombre principal"></i>
         </td>
       </tr>
       </tbody>
@@ -456,6 +456,6 @@
 <!--Footer-->
 <div class="row">
   <div class="col-md-12 text-right">
-    <button class="btn btn-success shadows" style="width: 15rem;" type="submit">Continuar</button>
+    <button (click)="goToSenasParticulares()" class="btn btn-success shadows" style="width: 15rem;" type="submit">Continuar</button>
   </div>
 </div>

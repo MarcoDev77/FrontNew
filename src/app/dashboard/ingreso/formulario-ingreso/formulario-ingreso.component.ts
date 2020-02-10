@@ -113,6 +113,8 @@ export class FormularioIngresoComponent implements OnInit {
         description: ingreso.imputado.municipio.estado.nombre
       };
       this.ingreso = ingreso;
+      this.arrayAlias = ingreso.imputado.apodos;
+      this.arrayDatoDelito = ingreso.imputado.delitos;
     });
   }
 
@@ -123,6 +125,13 @@ export class FormularioIngresoComponent implements OnInit {
     this.ingreso.imputado.esIndigena = this.ingreso.imputado.esIndigena ? this.ingreso.imputado.esIndigena : false;
     this.ingresoService.saveIngreso(this.ingreso).subscribe((data: any) => {
       console.log('saveIngreso', data);
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
       if (!data.error) {
         this.getIngreso(data.idRegistro);
       }
@@ -145,20 +154,36 @@ export class FormularioIngresoComponent implements OnInit {
 
   addAlias(array) {
     if (this.validateFiels(array) && this.arrayAlias.length <= 5) {
-      if (this.arrayAlias.length === 0) {
-        this.alias.esPrincipal = true;
-      }
-      this.arrayAlias = [...this.arrayAlias, this.alias];
-      this.alias = {} as Alias;
+      this.alias.imputado = {id: this.ingreso.id};
+      this.ingresoService.saveApodo(this.alias).subscribe((data: any) => {
+        console.log(data);
+        Swal.fire({
+          title: data.error ? 'Error!' : 'Guardado',
+          text: data.mensaje,
+          icon: data.error ? 'error' : 'success',
+          timer: 1300,
+          showConfirmButton: false
+        });
+        if (!data.error) {
+          this.alias.id = data.idRegistro;
+          this.arrayAlias = [...this.arrayAlias, this.alias];
+        }
+      });
     }
   }
 
   setPrincialAlias(item) {
-    this.arrayAlias.forEach(alias => {
-      if (alias === item) {
-        alias.esPrincipal = true;
-      } else {
-        alias.esPrincipal = false;
+    this.ingresoService.seleccionarApodoPrincipal(item.id).subscribe((data: any) => {
+      console.log(data);
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
+      if (!data.error) {
+        item.principal = true;
       }
     });
   }
@@ -188,6 +213,21 @@ export class FormularioIngresoComponent implements OnInit {
     const id = propertie.value;
     return {id};
   }
+
+  checkMainAlias(): boolean {
+    for (const item of this.arrayAlias) {
+      if (item.principal) {
+        return true;
+      }
+    }
+  }
+
+  goToSenasParticulares() {
+    if (this.ingreso.id && this.arrayAlias.length > 0 && this.checkMainAlias()) {
+      sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
+    }
+    this.router.navigate(['/dashboard/ingreso/media-afiliacion']);
+  }
 }
 
 class DatoDelito {
@@ -206,5 +246,6 @@ class Alias {
   apellidoPaterno: string;
   apellidoMaterno: string;
   alias: string;
-  esPrincipal = false;
+  principal: boolean;
+  imputado?: any;
 }
