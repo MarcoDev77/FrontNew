@@ -33,30 +33,10 @@ export class ListaIngresoComponent implements OnInit {
   }
 
   getData() {
-    this.data = [
-      {
-        id: 1,
-        folio: '6546848EE',
-        numeroExpediente: 'NUM1',
-        categoria: 'PrimoDelicinente',
-        tipoIngreso: 'Primo Delincuente',
-        imputado: null,
-        numeroControlRenip: null,
-        tipoImputado: 'Ingreso',
-
-        clasificacion: 'Federal'
-      },{
-        id: 2,
-        folio: '6546848EE',
-        numeroExpediente: 'NUM1',
-        categoria: 'PrimoDelicinente',
-        tipoIngreso: 'Primo Delincuente',
-        imputado: null,
-        numeroControlRenip: null,
-        tipoImputado: 'Imputado',
-        clasificacion: 'Federal'
-      }
-    ];
+    this.ingresoService.listIngreso().subscribe((data: any) => {
+      console.log('getData', data.ingresos);
+      this.data = data.ingresos;
+    });
   }
 
   switch(e) {

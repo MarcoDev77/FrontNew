@@ -42,6 +42,7 @@ export class FormularioIngresoComponent implements OnInit {
     const ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
     if (ingreso) {
       this.ingreso = ingreso;
+      this.getIngreso(ingreso.id);
     }
   }
 
