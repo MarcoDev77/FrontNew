@@ -42,6 +42,7 @@ export class FormularioIngresoComponent implements OnInit {
     const ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
     if (ingreso) {
       this.ingreso = ingreso;
+      this.getIngreso(ingreso.id);
     }
   }
 
@@ -165,8 +166,7 @@ export class FormularioIngresoComponent implements OnInit {
           showConfirmButton: false
         });
         if (!data.error) {
-          this.alias.id = data.idRegistro;
-          this.arrayAlias = [...this.arrayAlias, this.alias];
+          this.arrayAlias = [...this.arrayAlias, data.apodo];
         }
       });
     }
@@ -183,6 +183,9 @@ export class FormularioIngresoComponent implements OnInit {
         showConfirmButton: false
       });
       if (!data.error) {
+        for (const apodo of this.arrayAlias) {
+          apodo.principal = false;
+        }
         item.principal = true;
       }
     });

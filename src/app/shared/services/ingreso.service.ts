@@ -34,6 +34,10 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/findByCaracteristicasEspecificas`, this.data);
   }
 
+  listIngreso() {
+    return this.http.get(`${this.url}/api/listarIngresos`);
+  }
+
   getIngreso(id) {
     return this.http.get(`${this.url}/api/consultarIngresoImputado?imputadoId=${id}`);
   }
