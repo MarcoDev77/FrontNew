@@ -50,7 +50,7 @@ export class MediaAfiliacionComponent implements OnInit {
   }
   public getData(){
     this.mediaFiliacion.imputado={
-      id:2
+      id:1
     }
     console.log(this.mediaFiliacion.imputado.id)
      this.ingresoService.getMediafiliacion(this.mediaFiliacion.imputado.id).subscribe((data:any)=>{
@@ -64,9 +64,9 @@ export class MediaAfiliacionComponent implements OnInit {
 
   }
   public guardarMediaFiliacion(){
-   
+   console.log("entra")
     this.mediaFiliacion.imputado= {
-        id:2
+        id:1
     };
     console.log(this.mediaFiliacion)
       this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {

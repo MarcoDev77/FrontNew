@@ -165,10 +165,7 @@
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                 <form name="form" (ngSubmit)="f.form.valid && guardarMediaFiliacion()" #f="ngForm" novalidate>
-
-
                     <div class="card-body">
-
                         <div class="col-12">
                             <div class="form-check form-check-radio form-check-inline pb-4 w-100">
                                 <label style="margin-right: 2rem;margin-top: 0.3rem;">Forma:</label>
@@ -223,10 +220,11 @@
                 </h5>
             </div>
             <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
-                <div class="card-body">
+              <form name="form" (ngSubmit)="f.form.valid && guardarMediaFiliacion()" #f="ngForm" novalidate>
+              <div class="card-body" >
 
-                    <div class="col-12">
-                        <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
+                    <div class="col-12 form-group" >
+                        <div class="form-check form-check-radio form-check-inline pb-2 w-100 " [ngClass]="{ 'has-danger': f.submitted && cantidadCabello.invalid }"style="border-bottom: 1px solid #ccc8c8;" >
                             <label style="margin-right: 2rem;margin-top: 0.3rem;">Cantidad:</label>
                             <label style="width: 7rem;" class="form-check-label media">
                 <input class="form-check-input" type="radio" [value]="'Abundante'" name="cantidadCabello"
@@ -260,7 +258,7 @@
 
 
                     <div class="col-12">
-                        <div class="form-check form-check-radio form-check-inline pb-2 w-100">
+                        <div class="form-check form-check-radio form-check-inline pb-2 w-100" >
                             <label style="margin-right: 3.26rem;margin-top: 0.3rem;">Color:</label>
                             <label style="width: 7rem;" class="form-check-label media">
                 <input class="form-check-input" type="radio" [value]="'Albino'" name="colorCabello"
@@ -356,7 +354,6 @@
                         </div>
                     </div>
 
-
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                             <label style="margin-right: 2.4rem;margin-top: 0.3rem;">Calvicie:</label>
@@ -416,7 +413,16 @@
               </label>
                         </div>
                     </div>
+                    <div class="row">
+                     <div class="col-sm-12 text-center text-sm-right">
+
+                         <button type="submit" class="btn btn-success mr-3">Guardar</button>
+                     </div>
+                 </div>
                 </div>
+                </form>
+
+
             </div>
         </div>
 
@@ -430,7 +436,9 @@
                 </h5>
             </div>
             <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body">
+              <form name="form" (ngSubmit)="f.form.valid && guardarMediaFiliacion()" #f="ngForm" novalidate>
+
+              <div class="card-body">
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                             <label style="margin-right: 2.9rem;margin-top: 0.3rem;">Altura:</label>
@@ -515,7 +523,14 @@
               </label>
                         </div>
                     </div>
+                    <div class="row">
+                     <div class="col-sm-12 text-center text-sm-right">
+
+                         <button type="submit" class="btn btn-success mr-3">Guardar</button>
+                     </div>
+                 </div>
                 </div>
+              </form>
             </div>
         </div>
 
@@ -529,7 +544,8 @@
                 </h5>
             </div>
             <div id="collapse4" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body">
+              <form name="form" (ngSubmit)="f.form.valid && guardarMediaFiliacion()" #f="ngForm" novalidate>  
+              <div class="card-body">
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                             <label style="margin-right: 1.2rem;margin-top: 0.3rem;">Implantación:</label>
@@ -622,7 +638,15 @@
               </label>
                         </div>
                     </div>
+
+                    <div class="row">
+                     <div class="col-sm-12 text-center text-sm-right">
+
+                         <button type="submit" class="btn btn-success mr-3">Guardar</button>
+                     </div>
+                 </div>
                 </div>
+              </form>
             </div>
         </div>
 
@@ -636,7 +660,8 @@
                 </h5>
             </div>
             <div id="collapse5" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body">
+              <form name="form" (ngSubmit)="f.form.valid && guardarMediaFiliacion()" #f="ngForm" novalidate>
+              <div class="card-body">
 
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
@@ -690,21 +715,21 @@
                             <label style="margin-right: 2.7rem;margin-top: 0.3rem;">Forma:</label>
                             <label style="width: 7rem;" class="form-check-label media">
                 <input class="form-check-input" type="radio" [value]="'Alargados'" name="ojoForma"
-                       #ojoForma="ngModel" [(ngModel)]="obj.ojoForma" required>
+                       #ojoForma="ngModel" [(ngModel)]="mediaFiliacion.ojoForma" required>
                 Alargados
                 <span class="form-check-sign"></span>
               </label>
 
                             <label style="width: 7rem;" class="form-check-label media">
                 <input class="form-check-input" type="radio" [value]="'Redondos'" name="ojoForma"
-                       #ojoForma="ngModel" [(ngModel)]="obj.ojoForma" required>
+                       #ojoForma="ngModel" [(ngModel)]="mediaFiliacion.ojoForma" required>
                 Redondos
                 <span class="form-check-sign"></span>
               </label>
 
                             <label style="width: 7rem;" class="form-check-label media">
                 <input class="form-check-input" type="radio" [value]="'Ovales'" name="ojoForma"
-                       #ojoForma="ngModel" [(ngModel)]="obj.ojoForma" required>
+                       #ojoForma="ngModel" [(ngModel)]="mediaFiliacion.ojoForma" required>
                 Ovales
                 <span class="form-check-sign"></span>
               </label>
@@ -736,7 +761,15 @@
               </label>
                         </div>
                     </div>
+
+                    <div class="row">
+                     <div class="col-sm-12 text-center text-sm-right">
+
+                         <button type="submit" class="btn btn-success mr-3">Guardar</button>
+                     </div>
+                 </div>
                 </div>
+              </form>
             </div>
         </div>
 
@@ -750,7 +783,9 @@
                 </h5>
             </div>
             <div id="collapse6" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body">
+              <form name="form" (ngSubmit)="f.form.valid && guardarMediaFiliacion()" #f="ngForm" novalidate>
+ 
+              <div class="card-body">
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                             <label style="margin-right: 3.5rem;margin-top: 0.3rem;">Raíz:</label>
@@ -888,7 +923,15 @@
               </label>
                         </div>
                     </div>
+
+                    <div class="row">
+                     <div class="col-sm-12 text-center text-sm-right">
+
+                         <button type="submit" class="btn btn-success mr-3">Guardar</button>
+                     </div>
+                 </div>
                 </div>
+              </form>
             </div>
         </div>
 
@@ -902,7 +945,8 @@
                 </h5>
             </div>
             <div id="collapse7" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body">
+              <form name="form" (ngSubmit)="f.form.valid && guardarMediaFiliacion()" #f="ngForm" novalidate>  
+              <div class="card-body">
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                             <label style="margin-right: 3rem;margin-top: 0.3rem;">Tamaño:</label>
@@ -960,7 +1004,15 @@
               </label>
                         </div>
                     </div>
+
+                    <div class="row">
+                     <div class="col-sm-12 text-center text-sm-right">
+
+                         <button type="submit" class="btn btn-success mr-3">Guardar</button>
+                     </div>
+                 </div>
                 </div>
+              </form>
             </div>
         </div>
 
@@ -974,7 +1026,8 @@
                 </h5>
             </div>
             <div id="collapse8" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body">
+              <form name="form" (ngSubmit)="f.form.valid && guardarMediaFiliacion()" #f="ngForm" novalidate>
+              <div class="card-body">
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                             <label style="margin-right: 4.2rem;margin-top: 0.3rem;">Espesor:</label>
@@ -1010,7 +1063,7 @@
 
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
-                            <label style="margin-right: 1.5rem;margin-top: 0.3rem;">Altura naso-labial:</label>
+                            <label style="margin-right: 1.3rem;margin-top: 0.3rem;">Altura naso-labial:</label>
                             <label style="width: 7rem;" class="form-check-label media">
                 <input class="form-check-input" type="radio" [value]="'Grande'" name="labiosAlturaNaso"
                        #labiosAlturaNaso="ngModel" [(ngModel)]="mediaFiliacion.labiosAlturaNaso" required>
@@ -1033,7 +1086,6 @@
               </label>
                         </div>
                     </div>
-
 
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
@@ -1060,7 +1112,15 @@
               </label>
                         </div>
                     </div>
+
+                    <div class="row">
+                     <div class="col-sm-12 text-center text-sm-right">
+
+                         <button type="submit" class="btn btn-success mr-3">Guardar</button>
+                     </div>
+                 </div>
                 </div>
+              </form>
             </div>
         </div>
 
@@ -1074,7 +1134,8 @@
                 </h5>
             </div>
             <div id="collapse9" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body">
+              <form name="form" (ngSubmit)="f.form.valid && guardarMediaFiliacion()" #f="ngForm" novalidate>
+              <div class="card-body">
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                             <label style="margin-right: 2.8rem;margin-top: 0.3rem;">Tipo:</label>
@@ -1133,7 +1194,7 @@
 
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
-                            <label style="margin-right: 1.1rem;margin-top: 0.3rem;">Inclinación:</label>
+                            <label style="margin-right: 0.8rem;margin-top: 0.3rem;">Inclinación:</label>
                             <label style="width: 7rem;" class="form-check-label media">
                 <input class="form-check-input" type="radio" [value]="'Huyente'" name="mentonInclinacion"
                        #mentonInclinacion="ngModel" [(ngModel)]="mediaFiliacion.mentonInclinacion" required>
@@ -1156,7 +1217,15 @@
 
                         </div>
                     </div>
+
+                    <div class="row">
+                     <div class="col-sm-12 text-center text-sm-right">
+
+                         <button type="submit" class="btn btn-success mr-3">Guardar</button>
+                     </div>
+                 </div>
                 </div>
+              </form>
             </div>
         </div>
 
@@ -1170,7 +1239,9 @@
                 </h5>
             </div>
             <div id="collapse10" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body">
+              <form name="form" (ngSubmit)="f.form.valid && guardarMediaFiliacion()" #f="ngForm" novalidate>
+ 
+              <div class="card-body">
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-4 w-100">
                             <label style="margin-right: 2rem;margin-top: 0.3rem;">Forma:</label>
@@ -1366,21 +1437,21 @@
                             <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                                 <label style="margin-right: 1rem;margin-top: 0.3rem;">Particularidad:</label>
                                 <label style="width: 7rem;" class="form-check-label media">
-                  <input class="form-check-input" type="radio" [value]="'Bilobado'" name="mentonTipo"
-                         #mentonTipo="ngModel" [(ngModel)]="mediaFiliacion.mentonTipo" required>
+                  <input class="form-check-input" type="radio" [value]="'Perforado'" name="lobuloParticularidad"
+                         #lobuloParticularidad="ngModel" [(ngModel)]="mediaFiliacion.lobuloParticularidad" required>
                          Perforado
 
                   <span class="form-check-sign"></span>
                 </label>
                                 <label style="width: 7rem;" class="form-check-label media">
-                  <input class="form-check-input" type="radio" [value]="'Foseta'" name="mentonTipo"
-                         #mentonTipo="ngModel" [(ngModel)]="mediaFiliacion.mentonTipo" required>
+                  <input class="form-check-input" type="radio" [value]="'Foseta'" name="lobuloParticularidad"
+                         #lobuloParticularidad="ngModel" [(ngModel)]="mediaFiliacion.lobuloParticularidad" required>
                          Foseta
                   <span class="form-check-sign"></span>
                 </label>
                                 <label style="width: 7rem;" class="form-check-label media">
-                  <input class="form-check-input" type="radio" [value]="'Borla'" name="mentonTipo"
-                         #mentonTipo="ngModel" [(ngModel)]="mediaFiliacion.mentonTipo" required>
+                  <input class="form-check-input" type="radio" [value]="'Islote'" name="lobuloParticularidad"
+                         #lobuloParticularidad="ngModel" [(ngModel)]="mediaFiliacion.lobuloParticularidad" required>
                          Islote
                   <span class="form-check-sign"></span>
                 </label>
@@ -1392,21 +1463,21 @@
                             <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                                 <label style="margin-right: 2.1rem;margin-top: 0.3rem;">Dimension:</label>
                                 <label style="width: 7rem;" class="form-check-label media">
-                  <input class="form-check-input" type="radio" [value]="'Bilobado'" name="mentonTipo"
-                         #mentonTipo="ngModel" [(ngModel)]="mediaFiliacion.mentonTipo" required>
+                  <input class="form-check-input" type="radio" [value]="'Grande'" name="lobuloDimension"
+                         #lobuloDimension="ngModel" [(ngModel)]="mediaFiliacion.lobuloDimension" required>
                   Grande
 
                   <span class="form-check-sign"></span>
                 </label>
                                 <label style="width: 7rem;" class="form-check-label media">
-                  <input class="form-check-input" type="radio" [value]="'Foseta'" name="mentonTipo"
-                         #mentonTipo="ngModel" [(ngModel)]="mediaFiliacion.mentonTipo" required>
+                  <input class="form-check-input" type="radio" [value]="'Mediana'" name="lobuloDimension"
+                         #lobuloDimension="ngModel" [(ngModel)]="mediaFiliacion.lobuloDimension" required>
                   Mediana
                   <span class="form-check-sign"></span>
                 </label>
                                 <label style="width: 7rem;" class="form-check-label media">
-                  <input class="form-check-input" type="radio" [value]="'Borla'" name="mentonTipo"
-                         #mentonTipo="ngModel" [(ngModel)]="mediaFiliacion.mentonTipo" required>
+                  <input class="form-check-input" type="radio" [value]="'Pequeña'" name="lobuloDimension"
+                         #lobuloDimension="ngModel" [(ngModel)]="mediaFiliacion.lobuloDimension" required>
                   Pequeña
                   <span class="form-check-sign"></span>
                 </label>
@@ -1418,21 +1489,21 @@
                             <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                                 <label style="margin-right: 1.9rem;margin-top: 0.3rem;">Adherencia:</label>
                                 <label style="width: 7rem;" class="form-check-label media">
-                  <input class="form-check-input" type="radio" [value]="'Bilobado'" name="mentonTipo"
-                         #mentonTipo="ngModel" [(ngModel)]="mediaFiliacion.mentonTipo" required>
+                  <input class="form-check-input" type="radio" [value]="'Unido'" name="lobuloAdherencia"
+                         #lobuloAdherencia="ngModel" [(ngModel)]="mediaFiliacion.lobuloAdherencia" required>
                   Unido
 
                   <span class="form-check-sign"></span>
                 </label>
                                 <label style="width: 7rem;" class="form-check-label media">
-                  <input class="form-check-input" type="radio" [value]="'Foseta'" name="mentonTipo"
-                         #mentonTipo="ngModel" [(ngModel)]="mediaFiliacion.mentonTipo" required>
+                  <input class="form-check-input" type="radio" [value]="'Separado'" name="lobuloAdherencia"
+                         #lobuloAdherencia="ngModel" [(ngModel)]="mediaFiliacion.lobuloAdherencia" required>
                   Separado
                   <span class="form-check-sign"></span>
                 </label>
                                 <label style="width: 7rem;" class="form-check-label media">
-                  <input class="form-check-input" type="radio" [value]="'Borla'" name="mentonTipo"
-                         #mentonTipo="ngModel" [(ngModel)]="mediaFiliacion.mentonTipo" required>
+                  <input class="form-check-input" type="radio" [value]="'Muy separado'" name="lobuloAdherencia"
+                         #lobuloAdherencia="ngModel" [(ngModel)]="mediaFiliacion.lobuloAdherencia" required>
                   Muy separado
                   <span class="form-check-sign"></span>
                 </label>
@@ -1440,7 +1511,15 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                     <div class="col-sm-12 text-center text-sm-right">
+
+                         <button type="submit" class="btn btn-success mr-3">Guardar</button>
+                     </div>
+                 </div>
                 </div>
+              </form>
             </div>
         </div>
     </div>
