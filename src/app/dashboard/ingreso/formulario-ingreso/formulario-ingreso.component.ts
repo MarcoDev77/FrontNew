@@ -165,8 +165,7 @@ export class FormularioIngresoComponent implements OnInit {
           showConfirmButton: false
         });
         if (!data.error) {
-          this.alias.id = data.idRegistro;
-          this.arrayAlias = [...this.arrayAlias, this.alias];
+          this.arrayAlias = [...this.arrayAlias, data.apodo];
         }
       });
     }
@@ -183,6 +182,9 @@ export class FormularioIngresoComponent implements OnInit {
         showConfirmButton: false
       });
       if (!data.error) {
+        for (const apodo of this.arrayAlias) {
+          apodo.principal = false;
+        }
         item.principal = true;
       }
     });
