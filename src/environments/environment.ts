@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://25.10.198.93:8090',
+  apiUrl: 'http://192.168.100.6:8090',
   // ttp://167.172.158.44:8080/reinsercionapi/nameEndPoint
 };
 
