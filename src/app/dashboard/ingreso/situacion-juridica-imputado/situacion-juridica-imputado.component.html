@@ -4,7 +4,7 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Numero</h6>
-                <label style="font-size: 15px;">123546</label>
+                <label>123546</label>
             </div>
         </div>
     </div>
@@ -12,19 +12,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Nombre:</h6>
-                <label style="font-size: 15px;">Juan</label>
+                <label>Juan</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Apellido Paterno:</h6>
-                <label style="font-size: 15px;">Ochoa</label>
+                <label>Ochoa</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Apellido Materno:</h6>
-                <label style="font-size: 15px;">Loza</label>
+                <label>Loza</label>
             </div>
         </div>
     </div>
@@ -32,19 +32,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Alias:</h6>
-                <label style="font-size: 15px;">Alias2</label>
+                <label>Alias2</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Fecha de ingreso:</h6>
-                <label style="font-size: 15px;">12/09/2018</label>
+                <label>12/09/2018</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Nacionalidad:</h6>
-                <label style="font-size: 15px;">Mexicano</label>
+                <label>Mexicano</label>
             </div>
         </div>
     </div>
@@ -52,19 +52,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Genereno:</h6>
-                <label style="font-size: 15px;">Masculino</label>
+                <label>Masculino</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Domicilio:</h6>
-                <label style="font-size: 15px;">Calle la paz colonia el capulin #23</label>
+                <label>Calle la paz colonia el capulin #23</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Estado civil:</h6>
-                <label style="font-size: 15px;">Soltero</label>
+                <label>Soltero</label>
             </div>
         </div>
     </div>
@@ -72,19 +72,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Lugar de origen:</h6>
-                <label style="font-size: 15px;">Emiliano Zapata</label>
+                <label>Emiliano Zapata</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Estado:</h6>
-                <label style="font-size: 15px;">Morelos</label>
+                <label>Morelos</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Ocupación:</h6>
-                <label style="font-size: 15px;">Carpintero</label>
+                <label>Carpintero</label>
             </div>
         </div>
     </div>
@@ -92,19 +92,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Edad:</h6>
-                <label style="font-size: 15px;">38</label>
+                <label>38</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Tipo de detenido:</h6>
-                <label style="font-size: 15px;">P</label>
+                <label>P</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Religion:</h6>
-                <label style="font-size: 15px;">Borgoñesa</label>
+                <label>Borgoñesa</label>
             </div>
         </div>
     </div>
@@ -160,11 +160,8 @@
                         <td class="text-center"></td>
                         <td class="text-center"></td>
                         <td class="text-center">
-                            <i class="fa fa-eye" placement="top" (click)="viewHistory(formModal2)"
-                                ngbTooltip="Ver Historial"></i>
-                            &nbsp;
-                            <i class="fa fa-cog" placement="top" (click)="delitoEdit(formModal)"
-                                ngbTooltip="Editar"></i>
+                            <i class="fa fa-eye" placement="top" (click)="viewHistory(formModal2)" ngbTooltip="Ver Historial"></i> &nbsp;
+                            <i class="fa fa-cog" placement="top" (click)="delitoEdit(formModal)" ngbTooltip="Editar"></i>
                         </td>
                     </tr>
                     <tr>
@@ -173,8 +170,7 @@
                 </tbody>
             </table>
             <div class="text-center w-100">
-                <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel=""
-                    (pageChange)="switch($event)">
+                <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
                 </pagination-controls>
             </div>
         </div>
@@ -203,8 +199,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <div class="form-group shadows">
-                    <input type="text" class="form-control" placeholder="Sentencia ejecutoriada"
-                        onfocus="(this.type='date')" />
+                    <input type="text" class="form-control" placeholder="Sentencia ejecutoriada" onfocus="(this.type='date')" />
                 </div>
             </div>
         </div>
@@ -234,8 +229,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group shadows">
-                <input type="text" class="form-control" placeholder="Posible fecha de compurga"
-                    onfocus="(this.type='date')" />
+                <input type="text" class="form-control" placeholder="Posible fecha de compurga" onfocus="(this.type='date')" />
             </div>
         </div>
     </div>
@@ -318,15 +312,13 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Fecha de detencion"
-                            onfocus="(this.type='date')" />
+                        <input type="text" class="form-control" placeholder="Fecha de detencion" onfocus="(this.type='date')" />
                         <!--<input type="date" class="form-control" placeholder="Fecha de consignación" name="fechaConsignacion" />-->
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Fecha de registro"
-                            onfocus="(this.type='date')" />
+                        <input type="text" class="form-control" placeholder="Fecha de registro" onfocus="(this.type='date')" />
                         <!--<input type="date" class="form-control" placeholder="Fecha de consignación" name="fechaConsignacion" />-->
                     </div>
                 </div>
