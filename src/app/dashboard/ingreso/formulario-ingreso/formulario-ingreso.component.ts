@@ -142,10 +142,10 @@ export class FormularioIngresoComponent implements OnInit {
   addDatoDelito(array) {
     // TODO: Arreglar que desaparecen las opciones del select
     if (this.validateFiels(array) && this.datoDelito.delitoSelect && this.arrayDatoDelito.length <= 10) {
-      // this.arrayDatoDelito = [...this.arrayDatoDelito, this.datoDelito];
-      this.arrayDatoDelito.push(this.datoDelito);
-      this.datoDelito = {} as DatoDelito;
-      console.log(this.delitos);
+      return console.log(this.datoDelito);
+     this.ingresoService.savePreDelito(this.datoDelito).subscribe((data: any) => {
+       console.log(data);
+     });
     }
   }
 
@@ -228,8 +228,16 @@ export class FormularioIngresoComponent implements OnInit {
   goToSenasParticulares() {
     if (this.ingreso.id && this.arrayAlias.length > 0 && this.checkMainAlias()) {
       sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
+      this.router.navigate(['/dashboard/ingreso/media-afiliacion']);
+    } else {
+      Swal.fire({
+        title: 'Cuidado',
+        text: 'Se debe completar el registro, y marcar como principal un nombre',
+        icon: 'warning',
+        timer: 1300,
+        showConfirmButton: false
+      });
     }
-    this.router.navigate(['/dashboard/ingreso/media-afiliacion']);
   }
 }
 

@@ -66,13 +66,35 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/seleccionarApodoPrincipal?apodoId=${id}`);
   }
 
+  savePreDelito(model) {
+    this.data = model;
+    return this.http.post(`${this.url}/api/registrarPreDelito`, this.data);
+  }
+
   //SITUACION JURIDICA;
-  getSituacionJuridica(id){
+  getSituacionJuridica(id) {
     return this.http.get(`${this.url}/api/consultarIngresoImputado?imputadoId=${id}`);
   }
 
   saveSituacionJuridica(model){
+  
     return this.http.post(`${this.url}/api/registrarSituacionJuridica`,model);
+  }
+  // CARACTERISTICAS
+  getCaracteristica(clave, imputadoId) {
+    return this.http.get(`${this.url}/api/consultarSenaParticular?clave=${clave}&imputadoId=${imputadoId}`);
+  }
+
+  saveCaracteritica(model) {
+    this.data = model;
+    console.log('To server', this.data);
+    return this.http.post(`${this.url}/api/registrarSenaParticular`, this.data);
+  }
+
+  // Datiloscopia
+  saveDatosDactiloscopia(model) {
+    this.data = model;
+    return this.http.post(`${this.url}/api/registrarApodo`, this.data);
   }
 
 }

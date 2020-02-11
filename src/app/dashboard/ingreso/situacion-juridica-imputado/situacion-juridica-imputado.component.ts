@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class SituacionJuridicaImputadoComponent implements OnInit {
   public ingreso: Ingreso;
+<<<<<<< HEAD
   public apodos:any[];
   public nombre;
   public primerApellido;
@@ -22,6 +23,11 @@ export class SituacionJuridicaImputadoComponent implements OnInit {
   constructor(private router: Router, private modalService: NgbModal, private ingresoService: IngresoService) { 
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
    this.situacionJuridica={} as any;
+=======
+  constructor(private router: Router, private modalService: NgbModal, private ingresoService: IngresoService) {
+    this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
+
+>>>>>>> 02f687f9ce84863146e873177cdbcc064c919e23
   }
 
   ngOnInit() {
@@ -49,6 +55,7 @@ export class SituacionJuridicaImputadoComponent implements OnInit {
     this.router.navigate([`dashboard/ingreso/${uri}`]);
   }
 
+<<<<<<< HEAD
   getNombrePrincipal(){
     console.log("entra")
     this.apodos.forEach(apodo => {
@@ -95,4 +102,13 @@ class SituacionJuridica{
   public fechaPurga: Date
   public causaPenal: String
   public imputado: any
+=======
+  add() {
+
+  }
+
+  switch($event: number) {
+    
+  }
+>>>>>>> 02f687f9ce84863146e873177cdbcc064c919e23
 }

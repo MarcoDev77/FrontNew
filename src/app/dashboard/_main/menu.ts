@@ -44,7 +44,8 @@ export const ROUTES: RouteInfo[] = [
   // },
   {
     roles: [
-      r.test.role
+      r.test.role,
+      r.site.role,
     ],
     path: '/dashboard/catalogo',
     title: 'CATALOGOS',
@@ -64,7 +65,8 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     roles: [
-      r.test.role
+      r.test.role,
+      r.dactiloscopia.role,
     ],
     path: '/dashboard',
     title: 'DACTILOSCAPIA',
@@ -81,7 +83,8 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     roles: [
-      r.test.role
+      r.test.role,
+      r.trabajoSocial.role
     ],
     path: '/dashboard',
     title: 'SERVICIO SOCIAL',
@@ -97,7 +100,8 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     roles: [
-      r.test.role
+      r.test.role,
+      r.juridico.role,
     ],
     path: '/dashboard',
     title: 'Archivo juridico',
