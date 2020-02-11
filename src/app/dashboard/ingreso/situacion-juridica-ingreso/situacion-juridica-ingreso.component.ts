@@ -37,4 +37,12 @@ export class SituacionJuridicaIngresoComponent implements OnInit {
     sessionStorage.setItem('ingreso', JSON.stringify(ingreso));
     this.router.navigate([`dashboard/ingreso/${uri}`]);
   }
+
+  add() {
+
+  }
+
+  switch($event: number) {
+    
+  }
 }

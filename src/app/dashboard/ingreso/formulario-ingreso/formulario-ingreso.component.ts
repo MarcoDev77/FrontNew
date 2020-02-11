@@ -142,10 +142,10 @@ export class FormularioIngresoComponent implements OnInit {
   addDatoDelito(array) {
     // TODO: Arreglar que desaparecen las opciones del select
     if (this.validateFiels(array) && this.datoDelito.delitoSelect && this.arrayDatoDelito.length <= 10) {
-      // this.arrayDatoDelito = [...this.arrayDatoDelito, this.datoDelito];
-      this.arrayDatoDelito.push(this.datoDelito);
-      this.datoDelito = {} as DatoDelito;
-      console.log(this.delitos);
+      return console.log(this.datoDelito);
+     this.ingresoService.savePreDelito(this.datoDelito).subscribe((data: any) => {
+       console.log(data);
+     });
     }
   }
 

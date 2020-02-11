@@ -10,9 +10,9 @@ import { IngresoService } from '@shared/services/ingreso.service';
 })
 export class SituacionJuridicaImputadoComponent implements OnInit {
   public ingreso: Ingreso;
-  constructor(private router: Router, private modalService: NgbModal, private ingresoService: IngresoService) { 
+  constructor(private router: Router, private modalService: NgbModal, private ingresoService: IngresoService) {
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
-   
+
   }
 
   ngOnInit() {
@@ -35,5 +35,13 @@ export class SituacionJuridicaImputadoComponent implements OnInit {
   goTo(uri: string, ingreso: Ingreso) {
     sessionStorage.setItem('ingreso', JSON.stringify(ingreso));
     this.router.navigate([`dashboard/ingreso/${uri}`]);
+  }
+
+  add() {
+
+  }
+
+  switch($event: number) {
+    
   }
 }

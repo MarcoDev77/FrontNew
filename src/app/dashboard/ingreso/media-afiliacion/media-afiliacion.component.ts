@@ -3,6 +3,7 @@ import {Mediafiliacion} from '@shared/models/MediaFiliacion';
 import { IngresoService } from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
 import { Ingreso } from '@shared/models/Ingreso';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-media-afiliacion',
@@ -17,10 +18,10 @@ export class MediaAfiliacionComponent implements OnInit {
   tez: any;
   obj: any;
   public ingreso:Ingreso;
-  
+
   public validador=[false,false,false,false,false,false,false,false,false,false,false];
   public mediaFiliacion: Mediafiliacion;
-  constructor(private ingresoService: IngresoService) {
+  constructor(private ingresoService: IngresoService, private router: Router) {
     this.complexion = '';
     this.estatura = '';
     this.peso = '';
@@ -28,7 +29,7 @@ export class MediaAfiliacionComponent implements OnInit {
     this.obj = {} as any;
     this.mediaFiliacion= {} as any;
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
- 
+
   }
 
   ngOnInit() {
@@ -61,23 +62,24 @@ export class MediaAfiliacionComponent implements OnInit {
     }
     console.log(this.mediaFiliacion.imputado.id)
      this.ingresoService.getMediafiliacion(this.mediaFiliacion.imputado.id).subscribe((data:any)=>{
+       debugger
       console.log(data);
       if(data.caracteristicas){
       this.mediaFiliacion=data.caracteristicas;
       }else{
-        
+
       }
-    }) 
+    })
 
   }
-  public guardarMediaFiliacion(flag){
+  public guardarMediaFiliacion(flag?){
    console.log("entra")
     this.mediaFiliacion.imputado= {
         id:this.ingreso.id
     };
     console.log(this.mediaFiliacion)
       this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
-       
+
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -91,7 +93,7 @@ export class MediaAfiliacionComponent implements OnInit {
       })
   }
 
-  
+
 
   public formularioCompleto(){
     for (let i = 0; i < this.validador.length; i++) {
@@ -100,5 +102,10 @@ export class MediaAfiliacionComponent implements OnInit {
       }
     }
     return true;
+  }
+
+  goToCaracteriticas() {
+    sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
+    this.router.navigate(['/dashboard/ingreso/caracteristicas']);
   }
 }
