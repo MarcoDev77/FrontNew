@@ -66,4 +66,9 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/seleccionarApodoPrincipal?apodoId=${id}`);
   }
 
+  //SITUACION JURIDICA;
+  getSituacionJuridica(id){
+    return this.http.get(`${this.url}/api/consultarIngresoImputado?imputadoId=${id}`);
+  }
+
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Mediafiliacion} from '@shared/models/MediaFiliacion';
 import { IngresoService } from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
+import { Ingreso } from '@shared/models/Ingreso';
 
 @Component({
   selector: 'app-media-afiliacion',
@@ -15,6 +16,9 @@ export class MediaAfiliacionComponent implements OnInit {
   peso: any;
   tez: any;
   obj: any;
+  public ingreso:Ingreso;
+  
+  public validador=[false,false,false,false,false,false,false,false,false,false,false];
   public mediaFiliacion: Mediafiliacion;
   constructor(private ingresoService: IngresoService) {
     this.complexion = '';
@@ -23,6 +27,8 @@ export class MediaAfiliacionComponent implements OnInit {
     this.tez = '';
     this.obj = {} as any;
     this.mediaFiliacion= {} as any;
+    this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
+ 
   }
 
   ngOnInit() {
@@ -49,8 +55,9 @@ export class MediaAfiliacionComponent implements OnInit {
     }
   }
   public getData(){
+    this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
     this.mediaFiliacion.imputado={
-      id:1
+      id:this.ingreso.id
     }
     console.log(this.mediaFiliacion.imputado.id)
      this.ingresoService.getMediafiliacion(this.mediaFiliacion.imputado.id).subscribe((data:any)=>{
@@ -63,14 +70,14 @@ export class MediaAfiliacionComponent implements OnInit {
     }) 
 
   }
-  public guardarMediaFiliacion(){
+  public guardarMediaFiliacion(flag){
    console.log("entra")
     this.mediaFiliacion.imputado= {
-        id:1
+        id:this.ingreso.id
     };
     console.log(this.mediaFiliacion)
       this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
-        this.mediaFiliacion.id=data.id;
+       
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -78,6 +85,20 @@ export class MediaAfiliacionComponent implements OnInit {
           timer: 1300,
           showConfirmButton: false
         });
+        if(!data.error){
+          this.mediaFiliacion.id=data.id;
+        }
       })
+  }
+
+  
+
+  public formularioCompleto(){
+    for (let i = 0; i < this.validador.length; i++) {
+      if(this.validador[i]==false){
+        return false;
+      }
+    }
+    return true;
   }
 }
