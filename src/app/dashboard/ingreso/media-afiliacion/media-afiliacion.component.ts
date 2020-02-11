@@ -27,7 +27,8 @@ export class MediaAfiliacionComponent implements OnInit {
     this.tez = '';
     this.obj = {} as any;
     this.mediaFiliacion= {} as any;
-        
+    this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
+ 
   }
 
   ngOnInit() {
@@ -56,7 +57,7 @@ export class MediaAfiliacionComponent implements OnInit {
   public getData(){
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
     this.mediaFiliacion.imputado={
-      id:1
+      id:this.ingreso.id
     }
     console.log(this.mediaFiliacion.imputado.id)
      this.ingresoService.getMediafiliacion(this.mediaFiliacion.imputado.id).subscribe((data:any)=>{
@@ -72,11 +73,11 @@ export class MediaAfiliacionComponent implements OnInit {
   public guardarMediaFiliacion(flag){
    console.log("entra")
     this.mediaFiliacion.imputado= {
-        id:1
+        id:this.ingreso.id
     };
     console.log(this.mediaFiliacion)
       this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
-        this.mediaFiliacion.id=data.id;
+       
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -85,7 +86,7 @@ export class MediaAfiliacionComponent implements OnInit {
           showConfirmButton: false
         });
         if(!data.error){
-
+          this.mediaFiliacion.id=data.id;
         }
       })
   }

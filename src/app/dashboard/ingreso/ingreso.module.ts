@@ -7,7 +7,7 @@ import {IngresoRoutingModule} from '@dashboard/ingreso/ingreso-routing.module';
 import { FormularioIngresoComponent } from './formulario-ingreso/formulario-ingreso.component';
 import { ListaIngresoComponent } from './lista-ingreso/lista-ingreso.component';
 import { DactiloscopiaComponent } from './dactiloscopia/dactiloscopia.component';
-import { SituacionPenalComponent } from './situacion-penal/situacion-penal.component';
+import { SituacionJuridicaIngresoComponent } from './situacion-juridica-ingreso/situacion-juridica-ingreso.component';
 import { ReferenciasComponent } from './referencias/referencias.component';
 import { CaracteristicasComponent } from './caracteristicas/caracteristicas.component';
 import { MediaAfiliacionComponent } from './media-afiliacion/media-afiliacion.component';
@@ -21,7 +21,7 @@ import { SituacionJuridicaImputadoComponent } from './situacion-juridica-imputad
     FormularioIngresoComponent,
     ListaIngresoComponent,
     DactiloscopiaComponent,
-    SituacionPenalComponent,
+    SituacionJuridicaIngresoComponent,
     ReferenciasComponent,
     CaracteristicasComponent,
     MediaAfiliacionComponent,
