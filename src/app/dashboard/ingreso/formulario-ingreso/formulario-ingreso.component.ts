@@ -228,8 +228,16 @@ export class FormularioIngresoComponent implements OnInit {
   goToSenasParticulares() {
     if (this.ingreso.id && this.arrayAlias.length > 0 && this.checkMainAlias()) {
       sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
+      this.router.navigate(['/dashboard/ingreso/media-afiliacion']);
+    } else {
+      Swal.fire({
+        title: 'Cuidado',
+        text: 'Se debe completar el registro, y marcar como principal un nombre',
+        icon: 'warning',
+        timer: 1300,
+        showConfirmButton: false
+      });
     }
-    this.router.navigate(['/dashboard/ingreso/media-afiliacion']);
   }
 }
 
