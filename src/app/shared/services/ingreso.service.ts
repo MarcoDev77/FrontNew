@@ -71,4 +71,8 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/consultarIngresoImputado?imputadoId=${id}`);
   }
 
+  saveSituacionJuridica(model){
+    return this.http.post(`${this.url}/api/registrarSituacionJuridica`,model);
+  }
+
 }

@@ -12,19 +12,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Nombre:</h6>
-                <label>Juan</label>
+                <label>{{nombre}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Apellido Paterno:</h6>
-                <label>Ochoa</label>
+                <label>{{primerApellido}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Apellido Materno:</h6>
-                <label>Loza</label>
+                <label>{{segundoApellido}}</label>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Alias:</h6>
-                <label>Alias2</label>
+                <label>{{alias}}</label>
             </div>
         </div>
         <div class="col-sm-4">
@@ -44,7 +44,9 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Nacionalidad:</h6>
-                <label>Mexicano</label>
+
+                <label *ngIf="ingreso.imputado.paisNacimiento.nombre==='México'">Mexicano</label>
+                <label *ngIf="!ingreso.imputado.paisNacimiento.nombre==='México'">Extranjero</label>
             </div>
         </div>
     </div>
@@ -58,7 +60,7 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Domicilio:</h6>
-                <label>Calle la paz colonia el capulin #23</label>
+                <label>{{ingreso.imputado.calleNumero}}, {{ingreso.imputado.colonia}}, {{ingreso.imputado.codigoPostal}}</label>
             </div>
         </div>
         <div class="col-sm-4">
@@ -436,4 +438,4 @@
             </div>
         </form>
     </div>
-</ng-template>
+</ng-template>0
