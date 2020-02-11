@@ -77,8 +77,14 @@ export class IngresoService {
   }
 
   saveSituacionJuridica(model){
-  
     return this.http.post(`${this.url}/api/registrarSituacionJuridica`,model);
+  }
+
+  listCausasPenales(id){
+    this.data={
+      id:id
+    }
+    return this.http.post(`${this.url}/api/listCausaPenal`,this.data);
   }
   // CARACTERISTICAS
   getCaracteristica(clave, imputadoId) {
