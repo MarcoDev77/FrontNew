@@ -22,18 +22,23 @@ export class MediaAfiliacionComponent implements OnInit {
   public validador=[false,false,false,false,false,false,false,false,false,false,false];
   public mediaFiliacion: Mediafiliacion;
   constructor(private ingresoService: IngresoService, private router: Router) {
-    this.complexion = '3';
-    this.estatura = '1.7';
-    this.peso = '80';
+    this.complexion = '';
+    this.estatura = '';
+    this.peso = '';
     this.tez = '';
     this.obj = {} as any;
     this.mediaFiliacion= {} as any;
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
     this.mediaFiliacionTerminada= false
+    this.mediaFiliacion.complexion="Atlética";
+    this.mediaFiliacion.estatura=1.7;
+    this.mediaFiliacion.peso=80;
+    
   }
 
   ngOnInit() {
     this.getData();
+  
   }
 
   getComplexion(id) {

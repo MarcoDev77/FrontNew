@@ -43,26 +43,26 @@
                     <label style="min-width: 6.5rem;" class="mr-3 mt-4">Color de piel:</label>
 
                     <div class="color-picker pt-3 pl-4">
-                        <input type="radio" name="colorPiel" id="albino" [value]="'albino'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" />
-                        <label for="albino" ngbTooltip="Albino"><span class="albino"></span></label>
+                        <input type="radio" name="colorPiel" id="albino" [value]="'albino'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" required/>
+                        <label for="albino" ngbTooltip="Albino"><span class="albino" [ngClass]="{'is-invalid': fGeneral.submitted && colorPiel.invalid}"></span></label>
 
-                        <input type="radio" name="colorPiel" id="blanco" [value]="'Blanco'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" />
-                        <label for="blanco" ngbTooltip="Blanco"><span class="blanco"></span></label>
+                        <input type="radio" name="colorPiel" id="blanco" [value]="'Blanco'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" required/>
+                        <label for="blanco" ngbTooltip="Blanco"><span class="blanco" [ngClass]="{'is-invalid': fGeneral.submitted && colorPiel.invalid}"></span></label>
 
-                        <input type="radio" name="colorPiel" id="amarillo" [value]="'Amarillo'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" />
-                        <label for="amarillo" ngbTooltip="Amarillo"><span class="amarillo"></span></label>
+                        <input type="radio" name="colorPiel" id="amarillo" [value]="'Amarillo'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" required/>
+                        <label for="amarillo" ngbTooltip="Amarillo"><span class="amarillo" [ngClass]="{'is-invalid': fGeneral.submitted && colorPiel.invalid}"></span></label>
 
-                        <input type="radio" name="colorPiel" id="morenoClaro" [value]="'Moreno claro'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" />
-                        <label for="morenoClaro" ngbTooltip="Moreno claro"><span class="morenoClaro"></span></label>
+                        <input type="radio" name="colorPiel" id="morenoClaro" [value]="'Moreno claro'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" required/>
+                        <label for="morenoClaro" ngbTooltip="Moreno claro"><span class="morenoClaro" [ngClass]="{'is-invalid': fGeneral.submitted && colorPiel.invalid}"></span></label>
 
-                        <input type="radio" name="colorPiel" id="moreno" [value]="'Moreno'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" />
-                        <label for="moreno" ngbTooltip="Moreno"><span class="moreno"></span></label>
+                        <input type="radio" name="colorPiel" id="moreno" [value]="'Moreno'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" required/>
+                        <label for="moreno" ngbTooltip="Moreno"><span class="moreno" [ngClass]="{'is-invalid': fGeneral.submitted && colorPiel.invalid}"></span></label>
 
-                        <input type="radio" name="colorPiel" id="morenoOscuro" [value]="'Moreno oscuro'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" />
-                        <label for="morenoOscuro" ngbTooltip="Moreno oscuro"><span class="morenoOscuro"></span></label>
+                        <input type="radio" name="colorPiel" id="morenoOscuro" [value]="'Moreno oscuro'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" required/>
+                        <label for="morenoOscuro" ngbTooltip="Moreno oscuro"><span class="morenoOscuro" [ngClass]="{'is-invalid': fGeneral.submitted && colorPiel.invalid}"></span></label>
 
-                        <input type="radio" name="colorPiel" id="negro" [value]="'Negro'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" />
-                        <label for="negro" ngbTooltip="Negro"><span class="negro"></span></label>
+                        <input type="radio" name="colorPiel" id="negro" [value]="'Negro'" [(ngModel)]="mediaFiliacion.colorPiel" #colorPiel="ngModel" required/>
+                        <label for="negro" ngbTooltip="Negro"><span class="negro" [ngClass]="{'is-invalid': fGeneral.submitted && colorPiel.invalid}"></span></label>
                     </div>
                 </div>
             </div>
