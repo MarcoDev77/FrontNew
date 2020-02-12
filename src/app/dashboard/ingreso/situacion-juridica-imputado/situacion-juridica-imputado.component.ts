@@ -21,9 +21,11 @@ export class SituacionJuridicaImputadoComponent implements OnInit {
   public situacionJuridica: SituacionJuridica;
   public causasPenales:[]
   public causaPenalSelected;
+  public delitos: any[];
   constructor(private router: Router, private modalService: NgbModal, private ingresoService: IngresoService) { 
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
    this.situacionJuridica={} as any;
+   this.delitos= [];
   }
 
   ngOnInit() {
@@ -43,7 +45,7 @@ export class SituacionJuridicaImputadoComponent implements OnInit {
   getCausasPenales(){
     this.ingresoService.listCausasPenales(this.ingreso.id).subscribe((data: any) => {
       this.causasPenales=data.causaPenal;
-      console.log(this.causaPenalSelected)
+      this.getDelitosByCausasPenales(this.causaPenalSelected);
     })
   }
 
@@ -60,7 +62,6 @@ export class SituacionJuridicaImputadoComponent implements OnInit {
   }
 
   getNombrePrincipal(){
-    console.log("entra")
     this.apodos.forEach(apodo => {
         if (apodo.principal){
           this.nombre=apodo.nombre;
@@ -72,7 +73,7 @@ export class SituacionJuridicaImputadoComponent implements OnInit {
   }
 
   saveSituacionJuridica(){
-    console.log(this.situacionJuridica)
+   
     this.situacionJuridica.causaPenal="causa penal1"
     this.situacionJuridica.imputado={
       id:this.ingreso.id
@@ -86,6 +87,17 @@ export class SituacionJuridicaImputadoComponent implements OnInit {
         timer: 1300,
         showConfirmButton: false
       });
+    })
+  }
+
+  getDelitosByCausasPenales(causaPenal?){
+    console.log("entra")
+    let modelo={
+      id: this.ingreso.id,
+      causaPenal: causaPenal
+    }
+    this.ingresoService.listDelitosByCausasPenales(modelo).subscribe((data: any) => {
+      console.log("delitos",data)
     })
   }
 }

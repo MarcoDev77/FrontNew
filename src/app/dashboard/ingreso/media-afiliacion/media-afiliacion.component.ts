@@ -18,18 +18,18 @@ export class MediaAfiliacionComponent implements OnInit {
   tez: any;
   obj: any;
   public ingreso:Ingreso;
-
+  public mediaFiliacionTerminada:boolean
   public validador=[false,false,false,false,false,false,false,false,false,false,false];
   public mediaFiliacion: Mediafiliacion;
   constructor(private ingresoService: IngresoService, private router: Router) {
-    this.complexion = '';
-    this.estatura = '';
-    this.peso = '';
+    this.complexion = '3';
+    this.estatura = '1.7';
+    this.peso = '80';
     this.tez = '';
     this.obj = {} as any;
     this.mediaFiliacion= {} as any;
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
-
+    this.mediaFiliacionTerminada= false
   }
 
   ngOnInit() {
@@ -72,14 +72,13 @@ export class MediaAfiliacionComponent implements OnInit {
     })
 
   }
-  public guardarMediaFiliacion(flag?){
+  public guardarMediaFiliacion(flag){
    console.log("entra")
     this.mediaFiliacion.imputado= {
         id:this.ingreso.id
     };
     console.log(this.mediaFiliacion)
       this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
-
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,

@@ -86,6 +86,12 @@ export class IngresoService {
     }
     return this.http.post(`${this.url}/api/listCausaPenal`,this.data);
   }
+
+  listDelitosByCausasPenales(model){
+    this.data=model;
+    return this.http.post(`${this.url}/api/delitosByImputadoAndCausaPenal`,this.data);
+
+  }
   // CARACTERISTICAS
   getCaracteristica(clave, imputadoId) {
     return this.http.get(`${this.url}/api/consultarSenaParticular?clave=${clave}&imputadoId=${imputadoId}`);
