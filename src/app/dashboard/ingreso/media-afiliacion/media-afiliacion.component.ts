@@ -61,16 +61,17 @@ export class MediaAfiliacionComponent implements OnInit {
     }
   }
   public getData(){
-    this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
     this.mediaFiliacion.imputado={
       id:this.ingreso.id
     }
-    console.log(this.mediaFiliacion.imputado.id)
      this.ingresoService.getMediafiliacion(this.mediaFiliacion.imputado.id).subscribe((data:any)=>{
        debugger
-      console.log(data);
+      console.log(data)
       if(data.caracteristicas){
       this.mediaFiliacion=data.caracteristicas;
+      this.validador=JSON.parse(data.caracteristicas.validador)
+      console.log(this.validador)
+      this.mediaFiliacionTerminada=this.formularioCompleto();
       }else{
 
       }
@@ -78,12 +79,15 @@ export class MediaAfiliacionComponent implements OnInit {
 
   }
   public guardarMediaFiliacion(flag){
-   console.log("entra")
+ 
     this.mediaFiliacion.imputado= {
         id:this.ingreso.id
     };
-    console.log(this.mediaFiliacion)
+    this.mediaFiliacion.posicion=flag;
+  
+
       this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
+        console.log(data)
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -93,6 +97,8 @@ export class MediaAfiliacionComponent implements OnInit {
         });
         if(!data.error){
           this.mediaFiliacion.id=data.id;
+          this.getData()
+          
         }
       })
   }

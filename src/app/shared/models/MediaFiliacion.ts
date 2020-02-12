@@ -46,4 +46,6 @@ export class Mediafiliacion{
     public sangreRH: String;
     public usaAnteojos: Boolean;
     public imputado: any;
+    public posicion: number;
+    public validador: any[];
 }
