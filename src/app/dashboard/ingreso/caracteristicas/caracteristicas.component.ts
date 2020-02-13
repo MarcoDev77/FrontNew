@@ -32,7 +32,7 @@ export class CaracteristicasComponent implements OnInit {
   }
 
   find(label?) {
-    console.log('Hola', label, this.ingreso);
+    return console.log('Hola', label, this.ingreso);
     this.ingresoService.getCaracteristica(label, this.ingreso.id).subscribe((data: any) => {
       console.log('DATA', data);
       this.caracteristica = data.senaParticular;
