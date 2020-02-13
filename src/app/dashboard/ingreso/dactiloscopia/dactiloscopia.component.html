@@ -36,7 +36,8 @@
   <div class="col-sm-10">
     <div class="row">
       <div class="col-sm-4 text-center">
-        <img (click)="openFinder(inputFile, nameImages.perfilFrente)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+        <img *ngIf="currentUploadImage ==! nameImages.perfilFrente" (click)="openFinder(inputFile, nameImages.perfilFrente)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+        <i *ngIf="currentUploadImage === nameImages.perfilFrente" class="fa fa-spinner fa-spin fa-5x" aria-hidden="true"></i>
         <br>
         <br>
         <span>
@@ -255,7 +256,9 @@
   </tr>
 
 </table>
-<input type="file" #inputFile name="ref" id="ref" style="display: none">
+<input #inputFile style="display: none" accept=".pdf, image/*" type="file" class="form-control-file"
+       ng2FileSelect aria-describedby="fileHelp"
+       [uploader]="uploader" (change)="uploadFile()"/>
 
 <br>
 <div class="row">

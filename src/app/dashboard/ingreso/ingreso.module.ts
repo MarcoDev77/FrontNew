@@ -12,6 +12,7 @@ import { ReferenciasComponent } from './referencias/referencias.component';
 import { CaracteristicasComponent } from './caracteristicas/caracteristicas.component';
 import { MediaAfiliacionComponent } from './media-afiliacion/media-afiliacion.component';
 import { SituacionJuridicaImputadoComponent } from './situacion-juridica-imputado/situacion-juridica-imputado.component';
+import {FileUploadModule} from 'ng2-file-upload';
 
 
 
@@ -27,11 +28,12 @@ import { SituacionJuridicaImputadoComponent } from './situacion-juridica-imputad
     MediaAfiliacionComponent,
     SituacionJuridicaImputadoComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    FormsModule,
-    IngresoRoutingModule,
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        FormsModule,
+        IngresoRoutingModule,
+        FileUploadModule,
+    ]
 })
 export class IngresoModule { }

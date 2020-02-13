@@ -39,6 +39,7 @@ export class IngresoService {
   }
 
   getIngreso(id) {
+    console.log('id', id);
     return this.http.get(`${this.url}/api/consultarIngresoImputado?imputadoId=${id}`);
   }
 
@@ -54,6 +55,7 @@ export class IngresoService {
     model.imputado.ocupacion = {id: model.imputado.ocupacionSelect.value};
     model.imputado.gradoEstudio = {id: model.imputado.gradoEstudioSelect.value};
     this.data = model;
+    console.log('To server', this.data);
     return this.http.post(`${this.url}/api/registrarIngresoImputado`, this.data);
   }
 
@@ -68,7 +70,8 @@ export class IngresoService {
 
   savePreDelito(model) {
     this.data = model;
-    return this.http.post(`${this.url}/api/registrarPreDelito`, this.data);
+    console.log('To server', this.data);
+    return this.http.post(`${this.url}/api/registarIngresoDelito`, this.data);
   }
 
   //SITUACION JURIDICA;

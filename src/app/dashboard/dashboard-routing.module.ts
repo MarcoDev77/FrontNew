@@ -29,13 +29,13 @@ const routes: Routes = [
         path: 'catalogo',
         loadChildren: './catalogos/catalogos.module#CatalogosModule',
         canActivate: [AuthGuard],
-        data: {expectedRole: [r.test.role]}
+        data: {expectedRole: [r.test.role, r.admin.role]}
       },
       {
         path: 'ingreso',
         loadChildren: './ingreso/ingreso.module#IngresoModule',
         canActivate: [AuthGuard],
-        data: {expectedRole: [r.test.role]}
+        data: {expectedRole: [r.test.role, r.dactiloscopia.role]}
       },
       {
         path: 'bitacoras',
@@ -47,7 +47,7 @@ const routes: Routes = [
         path: 'servicio-social',
         loadChildren: './servicio-social/servicio-social.module#ServicioSocialModule',
         canActivate: [AuthGuard],
-        data: {expectedRole: [r.test.role]}
+        data: {expectedRole: [r.test.role, r.trabajoSocial.role]}
       },
       {
         path: 'archivo',

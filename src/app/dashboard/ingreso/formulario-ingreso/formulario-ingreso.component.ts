@@ -5,6 +5,7 @@ import {Ingreso} from '@shared/models/Ingreso';
 import {Imputado} from '@shared/models/Imputado';
 import {IngresoService} from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-formulario-ingreso',
@@ -28,12 +29,13 @@ export class FormularioIngresoComponent implements OnInit {
   public delitos = [];
   public centrosPenitenciarios = [];
 
+
   constructor(
     private catalogosService: CatalogosService,
     private router: Router,
-    private ingresoService: IngresoService
+    private ingresoService: IngresoService,
+    private datePipe: DatePipe
   ) {
-    this.ingreso = {} as any;
     this.datoDelito = {} as DatoDelito;
     this.alias = {} as Alias;
     this.ingreso = {} as Ingreso;
@@ -116,11 +118,14 @@ export class FormularioIngresoComponent implements OnInit {
       this.ingreso = ingreso;
       this.arrayAlias = ingreso.imputado.apodos;
       this.arrayDatoDelito = ingreso.imputado.delitos;
+      console.log('FECHA', this.ingreso.imputado.fechaNacimiento, new Date(this.ingreso.imputado.fechaNacimiento));
+      this.ingreso.imputado.fechaNacimiento = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     });
   }
 
   submit() {
     console.log('submit', this.ingreso);
+    this.ingreso.imputado = {...this.ingreso.imputado, fechaNacimiento: new Date(this.ingreso.imputado.fechaNacimiento)};
     this.ingreso.imputado.edadAparente = Number(this.ingreso.imputado.edadAparente);
     this.ingreso.imputado.hablaIndigena = this.ingreso.imputado.hablaIndigena ? this.ingreso.imputado.hablaIndigena : false;
     this.ingreso.imputado.esIndigena = this.ingreso.imputado.esIndigena ? this.ingreso.imputado.esIndigena : false;
@@ -141,11 +146,28 @@ export class FormularioIngresoComponent implements OnInit {
 
   addDatoDelito(array) {
     // TODO: Arreglar que desaparecen las opciones del select
-    if (this.validateFiels(array) && this.datoDelito.delitoSelect && this.arrayDatoDelito.length <= 10) {
-      return console.log(this.datoDelito);
-     this.ingresoService.savePreDelito(this.datoDelito).subscribe((data: any) => {
-       console.log(data);
-     });
+    if (this.validateFiels(array) && this.datoDelito.tipoDelitoSelect && this.arrayDatoDelito.length <= 10) {
+      const model = {
+        tipoDelito: {id: this.datoDelito.tipoDelitoSelect.value},
+        imputado: {id: this.ingreso.id},
+        fechaRegistro: this.datoDelito.fechaRegistro,
+        fechaDetencion: this.datoDelito.fechaDetencion,
+        causaPenal: this.datoDelito.causaPenal,
+        carpetaInvestigacion: this.datoDelito.carpetaInvestigacion
+      };
+      this.ingresoService.savePreDelito(model).subscribe((data: any) => {
+        console.log('save predelito', data);
+        Swal.fire({
+          title: data.error ? 'Error!' : 'Guardado',
+          text: data.mensaje,
+          icon: data.error ? 'error' : 'success',
+          timer: 1300,
+          showConfirmButton: false
+        });
+        if (!data.error) {
+          this.getIngreso(this.ingreso.id);
+        }
+      });
     }
   }
 
@@ -166,7 +188,7 @@ export class FormularioIngresoComponent implements OnInit {
           showConfirmButton: false
         });
         if (!data.error) {
-          this.arrayAlias = [...this.arrayAlias, data.apodo];
+          this.getIngreso(this.ingreso.id);
         }
       });
     }
@@ -239,16 +261,22 @@ export class FormularioIngresoComponent implements OnInit {
       });
     }
   }
+
+  change($event: Event) {
+    console.log('event', $event);
+  }
 }
 
 class DatoDelito {
   id?: number;
-  delito: string;
-  delitoSelect: any;
   fechaDetencion: Date;
   fechaRegistro: Date;
   causaPenal: string;
-  carpeta: string;
+  carpetaInvestigacion: string;
+  tipoDelito: any;
+  tipoDelitoSelect: any;
+  imputado: any;
+  delito: string;
 }
 
 class Alias {
@@ -256,7 +284,7 @@ class Alias {
   nombre: string;
   apellidoPaterno: string;
   apellidoMaterno: string;
-  alias: string;
+  otro: string;
   principal: boolean;
   imputado?: any;
 }
