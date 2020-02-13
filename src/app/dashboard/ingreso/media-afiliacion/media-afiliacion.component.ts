@@ -18,7 +18,7 @@ export class MediaAfiliacionComponent implements OnInit {
   tez: any;
   obj: any;
   public ingreso:Ingreso;
-
+  public mediaFiliacionTerminada:boolean
   public validador=[false,false,false,false,false,false,false,false,false,false,false];
   public mediaFiliacion: Mediafiliacion;
   constructor(private ingresoService: IngresoService, private router: Router) {
@@ -29,11 +29,16 @@ export class MediaAfiliacionComponent implements OnInit {
     this.obj = {} as any;
     this.mediaFiliacion= {} as any;
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
-
+    this.mediaFiliacionTerminada= false
+    this.mediaFiliacion.complexion="Atlética";
+    this.mediaFiliacion.estatura=1.7;
+    this.mediaFiliacion.peso=80;
+    
   }
 
   ngOnInit() {
     this.getData();
+  
   }
 
   getComplexion(id) {
@@ -56,30 +61,33 @@ export class MediaAfiliacionComponent implements OnInit {
     }
   }
   public getData(){
-    this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
     this.mediaFiliacion.imputado={
       id:this.ingreso.id
     }
-    console.log(this.mediaFiliacion.imputado.id)
      this.ingresoService.getMediafiliacion(this.mediaFiliacion.imputado.id).subscribe((data:any)=>{
        debugger
-      console.log(data);
+      console.log(data)
       if(data.caracteristicas){
       this.mediaFiliacion=data.caracteristicas;
+      this.validador=JSON.parse(data.caracteristicas.validador)
+      console.log(this.validador)
+      this.mediaFiliacionTerminada=this.formularioCompleto();
       }else{
 
       }
     })
 
   }
-  public guardarMediaFiliacion(flag?){
-   console.log("entra")
+  public guardarMediaFiliacion(flag){
+ 
     this.mediaFiliacion.imputado= {
         id:this.ingreso.id
     };
-    console.log(this.mediaFiliacion)
-      this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
+    this.mediaFiliacion.posicion=flag;
+  
 
+      this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
+        console.log(data)
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -89,6 +97,8 @@ export class MediaAfiliacionComponent implements OnInit {
         });
         if(!data.error){
           this.mediaFiliacion.id=data.id;
+          this.getData()
+          
         }
       })
   }

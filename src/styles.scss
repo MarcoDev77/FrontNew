@@ -1,179 +1,153 @@
 /* You can add global styles to this file, and also import other style files */
+
 .form-control {
-  -webkit-box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
-  -moz-box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
-  box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
+    -webkit-box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
+    -moz-box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
+    box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
 }
 
 .row {
-  background-color: white;
+    background-color: white;
 }
 
 .slider {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 0.1rem;
-  outline: none;
-  border-radius: 0.25rem;
-  background: #d6cfcf;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 0.1rem;
+    outline: none;
+    border-radius: 0.25rem;
+    background: #d6cfcf;
 }
 
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 1.1rem;
-  height: 1.1rem;
-  background-color: #8f2d94;;
-  border: 0.25rem solid #d6cfcf;
-  border-radius: 1rem;
-  cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    background-color: #8f2d94;
+    ;
+    border: 0.25rem solid #d6cfcf;
+    border-radius: 1rem;
+    cursor: pointer;
 }
 
 .rangeValue {
-  border: 1px solid;
-  border-radius: 10px;
-  width: 4rem;
-  text-align: center;
+    border: 1px solid;
+    border-radius: 10px;
+    width: 4rem;
+    text-align: center;
 }
 
 .icons {
-  width: 6%;
-  background: #847b7b;
+    width: 6%;
+    background: #847b7b;
 }
 
 .color-picker {
-  min-width: 17rem;
-
-  $colors: (
-    albino: rgb(255, 254, 246),
-    blanco: #f5edc7,
-    amarillo: rgb(255, 241, 188),
-    morenoClaro: rgb(230, 201, 161),
-    moreno: rgb(204, 176, 140),
-    morenoOscuro: rgb(122, 106, 80),
-    negro: rgb(44, 35, 11),
-    canoTotal: white,
-    castañoClaro: #7c4941,
-    castañoOscuro: #4f2e2a,
-    entreCano: gray,
-    pelirojo: red,
-    rubio: yellow,
-    azul: #1bb4ff,
-    cafeClaro: #a05000,
-    cafeOscuro: #663300,
-    gris: gray,
-    verde: #31cd31,
-    otro: linear-gradient(135deg, black 55%, white 45%)
-  );
-
-  * {
-    box-sizing: border-box;
-  }
-
-  input[type="radio"] {
-    display: none;
-
-    &:checked + label {
-      span {
-        transform: scale(1.25);
-      }
-
-      @each $name, $value in $colors {
-        .#{$name} {
-          border: 2px solid darken(#ebecf1, 25%);
+    min-width: 17rem;
+    $colors: ( albino: rgb(255, 254, 246), blanco: #f5edc7, amarillo: rgb(255, 241, 188), morenoClaro: rgb(230, 201, 161), moreno: rgb(204, 176, 140), morenoOscuro: rgb(122, 106, 80), negro: rgb(44, 35, 11), canoTotal: white, castañoClaro: #7c4941, castañoOscuro: #4f2e2a, entreCano: gray, pelirojo: red, rubio: yellow, azul: #1bb4ff, cafeClaro: #a05000, cafeOscuro: #663300, gris: gray, verde: #31cd31, otro: linear-gradient(135deg, black 55%, white 45%));
+    * {
+        box-sizing: border-box;
+    }
+    input[type="radio"] {
+        display: none;
+        &:checked+label {
+            span {
+                transform: scale(1.25);
+            }
+            @each $name,
+            $value in $colors {
+                .#{$name} {
+                    border: 2px solid darken(#ebecf1, 25%);
+                }
+            }
         }
-      }
     }
-  }
-
-  label {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
-    cursor: pointer;
-
-    &:hover {
-      span {
-        transform: scale(1.25);
-      }
-    }
-
-    span {
-      display: block;
-      width: 100%;
-      height: 100%;
-      transition: transform .2s ease-in-out;
-      @each $name, $value in $colors {
-        &.#{$name} {
-          background: $value;
-          border: 1px solid #847b7b;
+    label {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        margin-right: 10px;
+        cursor: pointer;
+        &:hover {
+            span {
+                transform: scale(1.25);
+            }
         }
-      }
+        span {
+            display: block;
+            width: 100%;
+            height: 100%;
+            transition: transform .2s ease-in-out;
+            @each $name,
+            $value in $colors {
+                &.#{$name} {
+                    background: $value;
+                    border: 1px solid #847b7b;
+                }
+            }
+        }
     }
-  }
 }
 
 .form-check-inline .form-check-input {
-  position: absolute !important;
+    position: absolute !important;
 }
 
 .form-check .form-check-label {
-  margin-right: 1rem !important;
+    margin-right: 1rem !important;
 }
 
-#accordion .card, .card .card-header {
-  box-shadow: unset !important;
-  margin-bottom: 0 !important;
+#accordion .card,
+.card .card-header {
+    box-shadow: unset !important;
+    margin-bottom: 0 !important;
 }
 
 #accordion .card .card-header {
-  padding: 0px 15px 0;
-  padding-left: 0;
-
-  h5 button {
-    width: 5rem;
-    text-align: left;
-    font-size: 12px;
-  }
+    padding: 0px 15px 0;
+    padding-left: 0;
+    h5 button {
+        width: 5rem;
+        text-align: left;
+        font-size: 12px;
+    }
 }
 
 #accordion {
-  .card-body {
-    font-size: 12px;
-    padding-left: 75px;
-  }
-
-  .divisor {
-    border-bottom: 1px solid #ccc8c8;
-    position: absolute;
-    top: 26px;
-    width: 88%;
-    left: 85px;
-  }
-
-  .btn-link {
-    font-weight: bold;
-  }
-
-  .btn-link:after {
-    content: "v";
-    float: right;
-    font-weight: bold;
-  }
-
-  .btn-link.collapsed:after {
-    content: '>' !important;
-  }
+    .card-body {
+        font-size: 12px;
+        padding-left: 75px;
+    }
+    .divisor {
+        border-bottom: 1px solid #ccc8c8;
+        position: absolute;
+        top: 26px;
+        width: 88%;
+        left: 85px;
+    }
+    .btn-link {
+        font-weight: bold;
+    }
+    .btn-link:after {
+        content: "v";
+        float: right;
+        font-weight: bold;
+    }
+    .btn-link.collapsed:after {
+        content: '>' !important;
+    }
 }
 
 .ngx-dropdown-button {
-  -webkit-box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
-  -moz-box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
-  box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
+    -webkit-box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
+    -moz-box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
+    box-shadow: 4px 11px 15px -4px rgba(0, 0, 0, 0.36);
 }
 
-
-
+.is-invalid {
+    border-color: #dc3545 !important;
+    border: 1px solid;
+}
