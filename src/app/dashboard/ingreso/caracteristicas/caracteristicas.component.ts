@@ -5,6 +5,7 @@ import {Caracteristica} from '@shared/models/Caracteristica';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Imputado} from '@shared/models/Imputado';
 import Swal from "sweetalert2";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-caracteristicas',
@@ -17,6 +18,7 @@ export class CaracteristicasComponent implements OnInit {
 
   constructor(
     private ingresoService: IngresoService,
+    private router: Router,
     private modalService: NgbModal,
   ) {
     $('image-map').imageMapResize();
@@ -76,4 +78,8 @@ export class CaracteristicasComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
+  goToDactiloscopia() {
+    sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
+    this.router.navigate(['/dashboard/ingreso/dactiloscopia']);
+  }
 }

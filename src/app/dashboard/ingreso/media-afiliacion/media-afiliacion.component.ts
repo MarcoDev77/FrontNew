@@ -33,12 +33,12 @@ export class MediaAfiliacionComponent implements OnInit {
     this.mediaFiliacion.complexion="Atlética";
     this.mediaFiliacion.estatura=1.7;
     this.mediaFiliacion.peso=80;
-    
+
   }
 
   ngOnInit() {
     this.getData();
-  
+
   }
 
   getComplexion(id) {
@@ -65,7 +65,6 @@ export class MediaAfiliacionComponent implements OnInit {
       id:this.ingreso.id
     }
      this.ingresoService.getMediafiliacion(this.mediaFiliacion.imputado.id).subscribe((data:any)=>{
-       debugger
       console.log(data)
       if(data.caracteristicas){
       this.mediaFiliacion=data.caracteristicas;
@@ -79,12 +78,12 @@ export class MediaAfiliacionComponent implements OnInit {
 
   }
   public guardarMediaFiliacion(flag){
- 
+
     this.mediaFiliacion.imputado= {
         id:this.ingreso.id
     };
     this.mediaFiliacion.posicion=flag;
-  
+
 
       this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
         console.log(data)
@@ -98,7 +97,7 @@ export class MediaAfiliacionComponent implements OnInit {
         if(!data.error){
           this.mediaFiliacion.id=data.id;
           this.getData()
-          
+
         }
       })
   }

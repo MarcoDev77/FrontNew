@@ -1,7 +1,7 @@
 <app-section-title icon="fa fa-sign-in" title="Lista ingresos"></app-section-title>
 <div class="row">
     <div class="col text-right mb-3">
-        <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
+        <button class="btn btn-success btn-sm m-0 pull-right" (click)="showModalConfirmFolio(confirmFolio)" [ngbTooltip]="'Nuevo Registro'"><i
         class="fa fa-plus fa-lg"></i></button>
 
         <div class="input-group">
@@ -131,4 +131,11 @@
             </div>
         </form>
     </div>
+</ng-template>
+
+<ng-template #confirmFolio let-formModal>
+  <div class="modal-body text-center">
+    <h3>Folio</h3>
+
+  </div>
 </ng-template>
