@@ -4,4 +4,5 @@ export class User {
   password: string;
   roles: string[];
   token?: string;
+  enabled: boolean;
 }

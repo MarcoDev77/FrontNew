@@ -214,5 +214,16 @@ export class CatalogosService {
   listEstadosCiviles = () => this.http.get(`${this.url}/api/listarEstadosCiviles`);
 
   listOcupaciones = () => this.http.get(`${this.url}/api/listarOcupaciones`);
+  
+  //USUARIOS
+  listUsuarios(){
+  return null;
+  }
+
+  listRoles=() => this.http.get(`${this.url}/api/listarRoles`);
+
+  
+
 }
+
 

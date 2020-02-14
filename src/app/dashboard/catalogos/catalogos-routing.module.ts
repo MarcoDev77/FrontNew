@@ -11,6 +11,7 @@ import {MotivoReubicacionComponent} from '@dashboard/catalogos/motivo-reubicacio
 import {DormitorioComponent} from '@dashboard/catalogos/dormitorio/dormitorio.component';
 import {TipoActividadComponent} from '@dashboard/catalogos/tipo-actividad/tipo-actividad.component';
 import {ActividadComponent} from '@dashboard/catalogos/actividad/actividad.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       {path: 'clasificacion-juridica', component: ClasificacionJuridicaComponent},
       {path: 'enfermedad-cronica', component: EnfermedadCronicaComponent},
       {path: 'motivo-reubicacion', component: MotivoReubicacionComponent},
+      {path: 'usuario', component: UsuarioComponent}
     ]
   },
 ];
