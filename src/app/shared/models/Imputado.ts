@@ -1,7 +1,7 @@
 export class Imputado {
   id?: number;
   curp: string;
-  fechaNacimiento: Date;
+  fechaNacimiento: any;
   edadAparente: number;
   genero: string;
   codigoPostal: number;
@@ -27,4 +27,7 @@ export class Imputado {
   ocupacionSelect: any;
   gradoEstudio: any;
   gradoEstudioSelect: any;
+  apodos: any[];
+  delitos: any[];
+  mainName: any;
 }
