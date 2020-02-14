@@ -1,13 +1,16 @@
 <app-ingreso-navigation step="3"></app-ingreso-navigation>
+<br>
+<app-section-title icon="fa fa-id-card-o" title="datos"></app-section-title>
 <div class="row">
   <div class="col-sm-3">ID.</div>
   <div class="col-sm-3">Morelos</div>
-  <div class="col-sm-3">Juan Pérez Pérez</div>
+  <div
+    class="col-sm-3">{{this.ingreso.imputado.mainName.nombre}} {{this.ingreso.imputado.mainName.apellidoPaterno}} {{this.ingreso.imputado.mainName.apellidoMaterno}}</div>
   <div class="col-sm-3">40</div>
 </div>
 <br>
 <div class="row">
-  <div class="col-sm-3">Masculino</div>
+  <div class="col-sm-3">{{this.ingreso.imputado.genero}}</div>
   <div class="col-sm-3">Robo</div>
   <div class="col-sm-3"></div>
   <div class="col-sm-3"></div>
@@ -29,15 +32,12 @@
 <app-section-title icon="fa fa-camera" title="imágenes"></app-section-title>
 <div class="row">
   <div class="col-sm-2">
-    <button [disabled]="!isLoadingImages" (click)="showImages()" class="btn btn-primary">
-      Tomar Fotos
-    </button>
   </div>
   <div class="col-sm-10">
     <div class="row">
       <div class="col-sm-4 text-center">
-        <img *ngIf="currentUploadImage ==! nameImages.perfilFrente" (click)="openFinder(inputFile, nameImages.perfilFrente)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
-        <i *ngIf="currentUploadImage === nameImages.perfilFrente" class="fa fa-spinner fa-spin fa-5x" aria-hidden="true"></i>
+        <img (click)="openFinder(inputFile, nameImages.perfilFrente)" src="assets/img/no_image.png" alt="frente"
+             class="img-thumbnail shadows">
         <br>
         <br>
         <span>
@@ -45,7 +45,8 @@
         </span>
       </div>
       <div class="col-sm-4 text-center">
-        <img (click)="openFinder(inputFile, nameImages.perfilDerecho)" src="assets/img/no_image.png" alt="perfil derecho" class="img-thumbnail shadows">
+        <img (click)="openFinder(inputFile, nameImages.perfilDerecho)" src="assets/img/no_image.png"
+             alt="perfil derecho" class="img-thumbnail shadows">
         <br>
         <br>
         <span>
@@ -53,7 +54,8 @@
         </span>
       </div>
       <div class="col-sm-4 text-center">
-        <img (click)="openFinder(inputFile, nameImages.perfilIzquierdo)" src="assets/img/no_image.png" alt="perfil izquierdo"
+        <img (click)="openFinder(inputFile, nameImages.perfilIzquierdo)" src="assets/img/no_image.png"
+             alt="perfil izquierdo"
              class="img-thumbnail shadows">
         <br>
         <br>
@@ -69,9 +71,6 @@
 <app-section-title title="DACTILOSCOPIA" icon="fa fa-hand-paper-o"></app-section-title>
 <div class="row">
   <div class="col-sm-12">
-    <button [disabled]="!isLoadingDactiloscopia" (click)="showDatiloscopia()" class="btn btn-primary">
-      Tomar Dactiloscopia
-    </button>
   </div>
 </div>
 <div class=" align-text-bottom">
@@ -80,19 +79,25 @@
 <table class="table">
   <tr>
     <td colspan="2">
-      <img (click)="openFinder(inputFile, nameImages.pulgarDerecho)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+      <img (click)="openFinder(inputFile, nameImages.pulgarDerecho)"
+           src="{{huella.imgPulgar ? 'data:image/png;base64,' + huella.imgPulgar :'assets/img/no_image.png'}}"
+           alt="frente" class="img-thumbnail huella shadows btn">
       <p class="text-center">
         <small>Pulgares</small>
       </p>
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Clasificación">
+        <input class="form-control" name="clasificacionPulgar" maxlength="5"
+               [ngClass]="{ 'is-invalid':  clasificacionPulgar.touched && clasificacionPulgar.invalid }"
+               [(ngModel)]="huella.clasificacionPulgar" #clasificacionPulgar="ngModel" ngbTooltip="Clasificación">
       </div>
 
     </td>
     <td colspan="2">
-      <img (click)="openFinder(inputFile, nameImages.indiceDerecho)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+      <img (click)="openFinder(inputFile, nameImages.indiceDerecho)"
+           src="{{huella.imgIndice ? 'data:image/png;base64,' + huella.imgIndice :'assets/img/no_image.png'}}"
+           alt="frente" class="img-thumbnail huella shadows btn btn">
       <p class="text-center">
         <small>Indices</small>
       </p>
@@ -100,16 +105,23 @@
 
     <td>
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Clasificación">
+        <input class="form-control" name="clasificacionIndice" maxlength="5"
+               [ngClass]="{ 'is-invalid':  clasificacionIndice.touched && clasificacionIndice.invalid }"
+               [(ngModel)]="huella.clasificacionIndice" #clasificacionIndice="ngModel" ngbTooltip="Clasificación">
       </div>
 
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Subclasificación">
+        <input class="form-control" name="subclasificacionIndice" maxlength="5"
+               [ngClass]="{ 'is-invalid':  subclasificacionIndice.touched && subclasificacionIndice.invalid }"
+               [(ngModel)]="huella.subclasificacionIndice" #subclasificacionIndice="ngModel"
+               ngbTooltip="Subclasificación">
       </div>
     </td>
 
     <td colspan="2">
-      <img (click)="openFinder(inputFile, nameImages.medioDerecho)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+      <img (click)="openFinder(inputFile, nameImages.medioDerecho)"
+           src="{{huella.imgMedio ? 'data:image/png;base64,' + huella.imgMedio :'assets/img/no_image.png'}}"
+           alt="frente" class="img-thumbnail btn shadows huella">
       <p class="text-center">
         <small>
           Medios
@@ -119,16 +131,25 @@
 
     <td>
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Clasificación">
+        <div class="form-group">
+          <input class="form-control" name="clasificacionMedio" maxlength="5"
+                 [ngClass]="{ 'is-invalid':  clasificacionMedio.touched && clasificacionMedio.invalid }"
+                 [(ngModel)]="huella.clasificacionMedio" #clasificacionMedio="ngModel" ngbTooltip="Clasificación">
+        </div>
       </div>
 
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Subclasificación">
+        <input class="form-control" name="subclasificacionMedio" maxlength="5"
+               [ngClass]="{ 'is-invalid':  subclasificacionMedio.touched && subclasificacionMedio.invalid }"
+               [(ngModel)]="huella.subclasificacionMedio" #subclasificacionMedio="ngModel"
+               ngbTooltip="Subclasificación">
       </div>
     </td>
 
     <td colspan="2">
-      <img (click)="openFinder(inputFile, nameImages.anularDerecho)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+      <img (click)="openFinder(inputFile, nameImages.anularDerecho)"
+           src="{{huella.imgAnular ? 'data:image/png;base64,' + huella.imgAnular :'assets/img/no_image.png'}}"
+           alt="frente" class="img-thumbnail huella shadows btn">
       <p class="text-center">
         <small>
           Anulares
@@ -138,16 +159,22 @@
 
     <td>
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Clasificación">
+        <input class="form-control" name="clasificacionAnular" maxlength="5"
+               [ngClass]="{ 'is-invalid':  clasificacionAnular.touched && clasificacionAnular.invalid }"
+               [(ngModel)]="huella.clasificacionAnular" #clasificacionAnular="ngModel" ngbTooltip="Clasificación">
       </div>
 
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Subclasificación">
+        <input class="form-control" name="subclasificacionAnular" maxlength="5"
+               [ngClass]="{ 'is-invalid':  subclasificacionAnular.touched && subclasificacionAnular.invalid }"
+               [(ngModel)]="huella.subclasificacionAnular" #subclasificacionAnular="ngModel"
+               ngbTooltip="Subclasificación">
       </div>
-    </td>
 
     <td colspan="2">
-      <img (click)="openFinder(inputFile, nameImages.meniqueDerecho)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+      <img (click)="openFinder(inputFile, nameImages.meniqueDerecho)"
+           src="{{huella.imgMenique ? 'data:image/png;base64,' + huella.imgMenique :'assets/img/no_image.png'}}"
+           alt="frente" class="img-thumbnail huella shadows btn">
       <p class="text-center">
         <small>Meñiques</small>
       </p>
@@ -155,11 +182,16 @@
 
     <td>
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Clasificación">
+        <input class="form-control" name="clasificacionMenique" maxlength="5"
+               [ngClass]="{ 'is-invalid':  clasificacionMenique.touched && clasificacionMenique.invalid }"
+               [(ngModel)]="huella.clasificacionMenique" #clasificacionMenique="ngModel" ngbTooltip="Clasificación">
       </div>
 
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Subclasificación">
+        <input class="form-control" name="subclasificacionMenique" maxlength="5"
+               [ngClass]="{ 'is-invalid':  subclasificacionMenique.touched && subclasificacionMenique.invalid }"
+               [(ngModel)]="huella.subclasificacionMenique" #subclasificacionMenique="ngModel"
+               ngbTooltip="Subclasificación">
       </div>
     </td>
   </tr>
@@ -171,19 +203,25 @@
 <table class="table">
   <tr>
     <td colspan="2">
-      <img (click)="openFinder(inputFile, nameImages.pulgarIzquierdo)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+      <img (click)="openFinder(inputFile, nameImages.pulgarIzquierdo)"
+           src="{{huella.imgPulgar2 ? 'data:image/png;base64,' + huella.imgPulgar2 :'assets/img/no_image.png'}}"
+           alt="frente" class="img-thumbnail huella shadows btn">
       <p class="text-center">
         <small>Pulgares</small>
       </p>
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Clasificación">
+        <input class="form-control" name="clasificacionPulgar2" maxlength="5"
+               [ngClass]="{ 'is-invalid':  clasificacionPulgar2.touched && clasificacionPulgar2.invalid }"
+               [(ngModel)]="huella.clasificacionPulgar2" #clasificacionPulgar2="ngModel" ngbTooltip="Clasificación">
       </div>
 
     </td>
     <td colspan="2">
-      <img (click)="openFinder(inputFile, nameImages.indiceIzquierdo)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+      <img (click)="openFinder(inputFile, nameImages.indiceIzquierdo)"
+           src="{{huella.imgIndice2 ? 'data:image/png;base64,' + huella.imgIndice2 :'assets/img/no_image.png'}}"
+           alt="frente" class="img-thumbnail huella shadows btn">
       <p class="text-center">
         <small>Indices</small>
       </p>
@@ -191,16 +229,23 @@
 
     <td>
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Clasificación">
+        <input class="form-control" name="clasificacionIndice2" maxlength="5"
+               [ngClass]="{ 'is-invalid':  clasificacionIndice2.touched && clasificacionIndice2.invalid }"
+               [(ngModel)]="huella.clasificacionIndice2" #clasificacionIndice2="ngModel" ngbTooltip="Clasificación">
       </div>
 
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Subclasificación">
+        <input class="form-control" name="subclasificacionIndice2" maxlength="5"
+               [ngClass]="{ 'is-invalid':  subclasificacionIndice2.touched && subclasificacionIndice2.invalid }"
+               [(ngModel)]="huella.subclasificacionIndice2" #subclasificacionIndice2="ngModel"
+               ngbTooltip="Subclasificación">
       </div>
     </td>
 
     <td colspan="2">
-      <img (click)="openFinder(inputFile, nameImages.medioIzquierdo)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+      <img (click)="openFinder(inputFile, nameImages.medioIzquierdo)"
+           src="{{huella.imgMedio2 ? 'data:image/png;base64,' + huella.imgMedio2 :'assets/img/no_image.png'}}"
+           alt="frente" class="img-thumbnail huella shadows btn">
       <p class="text-center">
         <small>
           Medios
@@ -210,16 +255,25 @@
 
     <td>
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Clasificación">
+        <div class="form-group">
+          <input class="form-control" name="clasificacionMedio2" maxlength="5"
+                 [ngClass]="{ 'is-invalid':  clasificacionMedio2.touched && clasificacionMedio2.invalid }"
+                 [(ngModel)]="huella.clasificacionMedio2" #clasificacionMedio2="ngModel" ngbTooltip="Clasificación">
+        </div>
       </div>
 
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Subclasificación">
+        <input class="form-control" name="subclasificacionMedio2" maxlength="5"
+               [ngClass]="{ 'is-invalid':  subclasificacionMedio2.touched && subclasificacionMedio2.invalid }"
+               [(ngModel)]="huella.subclasificacionMedio2" #subclasificacionMedio2="ngModel"
+               ngbTooltip="Subclasificación">
       </div>
     </td>
 
     <td colspan="2">
-      <img (click)="openFinder(inputFile, nameImages.anularIzquierdo)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+      <img (click)="openFinder(inputFile, nameImages.anularIzquierdo)"
+           src="{{huella.imgAnular2 ? 'data:image/png;base64,' + huella.imgAnular2 :'assets/img/no_image.png'}}"
+           alt="frente" class="img-thumbnail huella shadows btn">
       <p class="text-center">
         <small>
           Anulares
@@ -229,16 +283,23 @@
 
     <td>
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Clasificación">
+        <input class="form-control" name="clasificacionAnular2" maxlength="5"
+               [ngClass]="{ 'is-invalid':  clasificacionAnular2.touched && clasificacionAnular2.invalid }"
+               [(ngModel)]="huella.clasificacionAnular2" #clasificacionAnular2="ngModel" ngbTooltip="Clasificación">
       </div>
 
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Subclasificación">
+        <input class="form-control" name="subclasificacionAnular2" maxlength="5"
+               [ngClass]="{ 'is-invalid':  subclasificacionAnular2.touched && subclasificacionAnular2.invalid }"
+               [(ngModel)]="huella.subclasificacionAnular2" #subclasificacionAnular2="ngModel"
+               ngbTooltip="Subclasificación">
       </div>
     </td>
 
     <td colspan="2">
-      <img (click)="openFinder(inputFile, nameImages.meniqueIzquierdo)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+      <img (click)="openFinder(inputFile, nameImages.meniqueIzquierdo)"
+           src="{{huella.imgMenique2 ? 'data:image/png;base64,' + huella.imgMenique2 :'assets/img/no_image.png'}}"
+           alt="frente" class="img-thumbnail huella shadows btn">
       <p class="text-center">
         <small>Meñiques</small>
       </p>
@@ -246,11 +307,16 @@
 
     <td>
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Clasificación">
+        <input class="form-control" name="clasificacionMenique2" maxlength="5"
+               [ngClass]="{ 'is-invalid':  clasificacionMenique2.touched && clasificacionMenique2.invalid }"
+               [(ngModel)]="huella.clasificacionMenique2" #clasificacionMenique2="ngModel" ngbTooltip="Clasificación">
       </div>
 
       <div class="form-group">
-        <input class="form-control" ngbTooltip="Subclasificación">
+        <input class="form-control" name="subclasificacionMenique2" maxlength="5"
+               [ngClass]="{ 'is-invalid':  subclasificacionMenique2.touched && subclasificacionMenique2.invalid }"
+               [(ngModel)]="huella.subclasificacionMenique2" #subclasificacionMenique2="ngModel"
+               ngbTooltip="Subclasificación">
       </div>
     </td>
   </tr>

@@ -260,102 +260,102 @@
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-            <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias" [(ngModel)]="alias.nombre" #nombreAlias="ngModel" [ngClass]="{ 'is-invalid':  nombreAlias.touched && nombreAlias.invalid }" ngbTooltip="Nombre" />
+            <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias" [(ngModel)]="alias.nombre" #nombreAlias="ngModel" maxlength="45" [ngClass]="{ 'is-invalid':  nombreAlias.touched && nombreAlias.invalid }" ngbTooltip="Nombre" />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias" [(ngModel)]="alias.apellidoPaterno" #apellidoPaternoAlias="ngModel" [ngClass]="{ 'is-invalid':  apellidoPaternoAlias.touched && apellidoPaternoAlias.invalid }"
+            <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias" [(ngModel)]="alias.apellidoPaterno" #apellidoPaternoAlias="ngModel" maxlength="45" [ngClass]="{ 'is-invalid':  apellidoPaternoAlias.touched && apellidoPaternoAlias.invalid }"
                 ngbTooltip="Apellido Paterno" />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <input class="form-control shadows" type="text" placeholder="Apellido materno" name="apellidoMaternoAlias" [(ngModel)]="alias.apellidoMaterno" #apellidoMaternoAlias="ngModel" [ngClass]="{ 'is-invalid':  apellidoMaternoAlias.touched && apellidoMaternoAlias.invalid }"
+            <input class="form-control shadows" type="text" placeholder="Apellido materno" name="apellidoMaternoAlias" [(ngModel)]="alias.apellidoMaterno" #apellidoMaternoAlias="ngModel" maxlength="45" [ngClass]="{ 'is-invalid':  apellidoMaternoAlias.touched && apellidoMaternoAlias.invalid }"
                 ngbTooltip="Apellido Materno" />
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <input class="form-control shadows" type="text" placeholder="Otros nombres/alias" name="aliasNombre" [(ngModel)]="alias.otro" #aliasNombre="ngModel" [ngClass]="{ 'is-invalid':  aliasNombre.touched && aliasNombre.invalid }" ngbTooltip="Alias/otro nombre"
-            />
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <button [disabled]="arrayAlias.length >= 5 || this.ingreso.id == null" class="btn btn-info btn-sm shadows" (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])">
-        Agregar
-      </button>
-            <!--      <button [disabled]="arrayAlias.length >= 5 || this.ingreso.id == null" (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])"-->
-            <!--              type="button" class="btn btn-info btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i>-->
-            <!--      </button>-->
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-12">
-        <table class="table shadows">
-            <thead>
-                <tr>
-                    <th class="text-center">Nombre</th>
-                    <th class="text-center">Apellido Paterno</th>
-                    <th class="text-center">Apellido Materno</th>
-                    <th class="text-center">Alias</th>
-                    <th class="text-center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of arrayAlias">
-                    <td class="text-center">{{item.nombre}}</td>
-                    <td class="text-center">{{item.apellidoPaterno}}</td>
-                    <td class="text-center">{{item.apellidoMaterno}}</td>
-                    <td class="text-center">{{item.otro}}</td>
-                    <td class="text-center">
-                        <!--          <i class="fa fa-times mr-3" placement="top" ngbTooltip="Eliminar"-->
-                        <!--             (click)="deleteAlias(item)"></i>-->
-                        <i *ngIf="!item.principal" class="fa fa-flag-o" ngbTooltip="Poner como princiapl" (click)="setPrincialAlias(item)"></i>
-                        <i *ngIf="item.principal" class="fa fa-flag-checkered" ngbTooltip="Nombre principal"></i>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<!--Datos del delito-->
-<div>
-    <app-section-title icon="fa fa-file-text" title="Datos del delito"></app-section-title>
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <app-select placeholder="Delito" ngbTooltip="Delito" [options]="delitos" [multiple]="false" [modelo]="datoDelito.tipoDelitoSelect" (getModel)="datoDelito.tipoDelitoSelect = $event;"></app-select>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <input class="form-control shadows" type="date" placeholder="Fecha de detención" name="fechaDetencion" [(ngModel)]="datoDelito.fechaDetencion" #fechaDetencion="ngModel" [ngClass]="{ 'is-invalid':  fechaDetencion.touched && fechaDetencion.invalid }" ngbTooltip="Fecha Detención"
+                <input class="form-control shadows" type="text" placeholder="Otros nombres/alias" name="aliasNombre" [(ngModel)]="alias.otro" #aliasNombre="ngModel" [ngClass]="{ 'is-invalid':  aliasNombre.touched && aliasNombre.invalid }" ngbTooltip="Alias/otro nombre"
                 />
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <input class="form-control shadows" type="date" placeholder="Fecha de registro" name="fechaRegistro" [(ngModel)]="datoDelito.fechaRegistro" #fechaRegistro="ngModel" [ngClass]="{ 'is-invalid':  fechaRegistro.touched && fechaRegistro.invalid }" ngbTooltip="Fecha de registro"
-                />
+                <button [disabled]="arrayAlias.length >= 5 || this.ingreso.id == null" class="btn btn-info btn-sm shadows" (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])">
+        Agregar
+      </button>
+                <!--      <button [disabled]="arrayAlias.length >= 5 || this.ingreso.id == null" (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])"-->
+                <!--              type="button" class="btn btn-info btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i>-->
+                <!--      </button>-->
             </div>
         </div>
-        <div class="col-md-4">
-            <input [required]="ingreso.tipoImputado == 'Imputado'" class="form-control shadows" placeholder="Causa Penal" name="causaPenal" [(ngModel)]="datoDelito.causaPenal" #causaPenal="ngModel" [ngClass]="{ 'is-invalid':  causaPenal.touched && causaPenal.invalid }"
-                ngbTooltip="Causa Penal" />
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table shadows">
+                <thead>
+                    <tr>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Apellido Paterno</th>
+                        <th class="text-center">Apellido Materno</th>
+                        <th class="text-center">Alias</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of arrayAlias">
+                        <td class="text-center">{{item.nombre}}</td>
+                        <td class="text-center">{{item.apellidoPaterno}}</td>
+                        <td class="text-center">{{item.apellidoMaterno}}</td>
+                        <td class="text-center">{{item.otro}}</td>
+                        <td class="text-center">
+                            <!--          <i class="fa fa-times mr-3" placement="top" ngbTooltip="Eliminar"-->
+                            <!--             (click)="deleteAlias(item)"></i>-->
+                            <i *ngIf="!item.principal" class="fa fa-flag-o" ngbTooltip="Poner como princiapl" (click)="setPrincialAlias(item)"></i>
+                            <i *ngIf="item.principal" class="fa fa-flag-checkered" ngbTooltip="Nombre principal"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="col-md-4">
-            <input [required]="ingreso.tipoImputado == 'Ingreso'" class="form-control shadows" placeholder="Carpeta de investigación" name="carpeta" [(ngModel)]="datoDelito.carpetaInvestigacion" #carpeta="ngModel" [ngClass]="{ 'is-invalid':  carpeta.touched && carpeta.invalid }"
-                ngbTooltip="Carpeta de investigación" />
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <button [disabled]="arrayDatoDelito.length >= 10 || this.ingreso.id == null" (click)="addDatoDelito([ fechaDetencion, fechaRegistro, carpeta, causaPenal])" class="btn btn-info btn-sm shadows">Agregar
+    </div>
+    <!--Datos del delito-->
+    <div>
+        <app-section-title icon="fa fa-file-text" title="Datos del delito"></app-section-title>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <app-select placeholder="Delito" ngbTooltip="Delito" [options]="delitos" [multiple]="false" [modelo]="datoDelito.tipoDelitoSelect" (getModel)="datoDelito.tipoDelitoSelect = $event;"></app-select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input class="form-control shadows" type="date" placeholder="Fecha de detención" name="fechaDetencion" [(ngModel)]="datoDelito.fechaDetencion" #fechaDetencion="ngModel" [ngClass]="{ 'is-invalid':  fechaDetencion.touched && fechaDetencion.invalid }" ngbTooltip="Fecha Detención"
+                    />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input class="form-control shadows" type="date" placeholder="Fecha de registro" name="fechaRegistro" [(ngModel)]="datoDelito.fechaRegistro" #fechaRegistro="ngModel" [ngClass]="{ 'is-invalid':  fechaRegistro.touched && fechaRegistro.invalid }" ngbTooltip="Fecha de registro"
+                    />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <input [required]="ingreso.tipoImputado == 'Imputado'" class="form-control shadows" placeholder="Causa Penal" name="causaPenal" maxlength="45" [(ngModel)]="datoDelito.causaPenal" #causaPenal="ngModel" [ngClass]="{ 'is-invalid':  causaPenal.touched && causaPenal.invalid }"
+                    ngbTooltip="Causa Penal" />
+            </div>
+            <div class="col-md-4">
+                <input [required]="ingreso.tipoImputado == 'Ingreso'" class="form-control shadows" maxlength="45" placeholder="Carpeta de investigación" name="carpeta" [(ngModel)]="datoDelito.carpetaInvestigacion" #carpeta="ngModel" [ngClass]="{ 'is-invalid':  carpeta.touched && carpeta.invalid }"
+                    ngbTooltip="Carpeta de investigación" />
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <button [disabled]="arrayDatoDelito.length >= 10 || this.ingreso.id == null" (click)="addDatoDelito([ fechaDetencion, fechaRegistro, carpeta, causaPenal])" class="btn btn-info btn-sm shadows">Agregar
         </button>
+                </div>
             </div>
         </div>
     </div>
@@ -365,11 +365,10 @@
                 <thead>
                     <tr>
                         <th class="text-center">Delito</th>
-                        <th *ngIf="ingreso.tipoImputado == 'Imputado'" class="text-center">Causa Penal</th>
-                        <th *ngIf="ingreso.tipoImputado == 'Imputado'" class="text-center">Carpera de investigación</th>
+                        <th class="text-center">Causa Penal</th>
+                        <th class="text-center">Carpera de investigación</th>
                         <th class="text-center">{{ingreso.tipoImputado == 'Imputado' ? 'Fecha imputado' : 'Fecha detención'}}</th>
                         <th class="text-center">{{ingreso.tipoImputado == 'Imputado' ? 'Fecha ingreso' : 'Fecha registro'}}</th>
-                        <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -377,8 +376,8 @@
                         <td class="text-center">{{item.delito}}</td>
                         <td class="text-center">{{item.causaPenal}}</td>
                         <td class="text-center">{{item.carpetaInvestigacion}}</td>
-                        <td class="text-center">{{item.fechaDetencion}}</td>
-                        <td class="text-center">{{item.fechaRegistro}}</td>
+                        <td class="text-center">{{item.fechaDetencion | date:'dd/MM/yy'}}</td>
+                        <td class="text-center">{{item.fechaRegistro | date:'dd/MM/yy '}}</td>
                         <td class="text-center">
                             <!--            <i class="fa fa-times mr-3" placement="top" ngbTooltip="Eliminar"-->
                             <!--               (click)="deleteDatoDelito(item)"></i>-->
@@ -388,13 +387,12 @@
             </table>
         </div>
     </div>
-</div>
 
-<!--Footer-->
-<div class="row">
-    <div class="col-md-12 text-right">
-        <button (click)="goToSenasParticulares()" class="btn btn-success shadows" style="width: 15rem;" type="submit">
+    <!--Footer-->
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button [disabled]="this.ingreso.id || this.arrayAlias.length > 0 || this.checkMainAlias() || this.arrayDatoDelito.length > 0" (click)="goToSenasParticulares()" class="btn btn-success shadows" style="width: 15rem;" type="submit">
       Continuar
     </button>
+        </div>
     </div>
-</div>

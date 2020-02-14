@@ -6,7 +6,7 @@ import {Component, Input} from '@angular/core';
       <div class="col-12 text-center">
           <div class="btn-group btn-group-md bg main-container" role="group">
             <a *ngFor="let item of steps; let i = index;" [routerLink]="[item.path]"
-               [ngClass]="{'active-nav': i == step}"
+               [ngClass]="{'active-nav': i == step, 'disabled': i > step}"
                class="btn bg">{{item.name}}</a>
           </div>
       </div>

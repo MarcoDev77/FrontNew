@@ -5,7 +5,7 @@ import {Ingreso} from '@shared/models/Ingreso';
 import {Imputado} from '@shared/models/Imputado';
 import {IngresoService} from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
-import { DatePipe } from '@angular/common';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-formulario-ingreso',
@@ -119,7 +119,7 @@ export class FormularioIngresoComponent implements OnInit {
       this.arrayAlias = ingreso.imputado.apodos;
       this.arrayDatoDelito = ingreso.imputado.delitos;
       console.log('FECHA', this.ingreso.imputado.fechaNacimiento, new Date(this.ingreso.imputado.fechaNacimiento));
-      this.ingreso.imputado.fechaNacimiento = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      this.ingreso.imputado.fechaNacimiento = this.datePipe.transform(this.ingreso.imputado.fechaNacimiento, 'yyyy-MM-dd');
     });
   }
 
@@ -248,16 +248,14 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   goToSenasParticulares() {
-    if (this.ingreso.id && this.arrayAlias.length > 0 && this.checkMainAlias()) {
+    if (this.ingreso.id && this.arrayAlias.length > 0 && this.checkMainAlias() && this.arrayDatoDelito.length > 0) {
       sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
       this.router.navigate(['/dashboard/ingreso/media-afiliacion']);
     } else {
       Swal.fire({
         title: 'Cuidado',
-        text: 'Se debe completar el registro, y marcar como principal un nombre',
+        text: 'Se debe completar el registro, marcar como principal un nombre y registrar delitos',
         icon: 'warning',
-        timer: 1300,
-        showConfirmButton: false
       });
     }
   }

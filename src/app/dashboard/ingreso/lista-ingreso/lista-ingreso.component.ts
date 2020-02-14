@@ -69,4 +69,7 @@ export class ListaIngresoComponent implements OnInit {
     sessionStorage.setItem('ingreso', JSON.stringify(ingreso));
     this.router.navigate([`dashboard/ingreso/${uri}`]);
   }
+  showModalConfirmFolio(modal) {
+    this.modalService.open(modal, {size: 'sm', windowClass: 'modal-primary mt-12'});
+  }
 }

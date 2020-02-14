@@ -12,3 +12,8 @@
   background-color: #fff;
   border-radius: 7px;
 }
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}

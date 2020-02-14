@@ -112,4 +112,8 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/registrarApodo`, this.data);
   }
 
+  getDactiloscopia(id) {
+    return this.http.get(`${this.url}/api/consultarInformacionDactiloscopia?imputadoId=${id}`);
+  }
+
 }
