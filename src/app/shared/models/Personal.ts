@@ -11,9 +11,12 @@ export class Personal{
      tipoSanguineo: String
      subArea: String
      foto: String
-     fechaIngreso: Date
-     fechaActualizacion: Date
-     idOrigen:number
+     fechaIngreso: Date;
+     fechaActualizacion: Date;
+     idOrigen:number;
      idUsuario:number
      user:User;
+     centroPenitenciario: any;
+     area:any;
+     
 }

@@ -116,4 +116,6 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/consultarInformacionDactiloscopia?imputadoId=${id}`);
   }
 
+  
+
 }

@@ -216,12 +216,20 @@ export class CatalogosService {
   listOcupaciones = () => this.http.get(`${this.url}/api/listarOcupaciones`);
   
   //USUARIOS
+  saveUsuario(model){
+    return this.http.post(`${this.url}/api/registrarPersonal`, model);
+  }
+
   listUsuarios(){
-  return null;
+  return this.http.get(`${this.url}/api/listPersonal?centroId=1`);;
+  }
+
+  toggleUsuario(model){
+    return this.http.put(`${this.url}/api/statusPersonal`,model);;
   }
 
   listRoles=() => this.http.get(`${this.url}/api/listarRoles`);
-
+  listAreas=() => this.http.get(`${this.url}/api/listAreas`);
   
 
 }
