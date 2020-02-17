@@ -69,6 +69,7 @@ export class DactiloscopiaComponent implements OnInit {
       console.log('info', data);
       const {dactiloscopia} = data;
       dactiloscopia.huellasDactilares.forEach(item => this.setParameters(item));
+      dactiloscopia.fotografias.forEach(item => this.setParameters(item));
     });
   }
 
@@ -80,17 +81,17 @@ export class DactiloscopiaComponent implements OnInit {
   }
 
   uploadFile() {
-    let esHuella = true;
+    let esHuella = 'huella';
     if (this.currentImage === this.nameImages.perfilFrente || this.currentImage === this.nameImages.perfilIzquierdo ||
       this.currentImage === this.nameImages.perfilDerecho) {
-      esHuella = false;
+      esHuella = 'foto';
     }
     const authToken = this.authenticationService.getCurrentUser().access_token;
     this.uo.authTokenHeader = 'Authorization';
     this.uo.authToken = `Bearer ${authToken}`;
-    if (esHuella) {
+    if (esHuella === 'huella') {
       this.uo.additionalParameter = this.chooseParameters(this.currentImage);
-      this.uo.additionalParameter.esHuella = esHuella;
+      this.uo.additionalParameter.esHuella = 'huella';
       if (!this.uo.additionalParameter.clasificacion) {
         return Swal.fire({
           title: 'Cuidado',
@@ -102,7 +103,7 @@ export class DactiloscopiaComponent implements OnInit {
       this.uo.additionalParameter = {
         claveFotografia: this.currentImage,
         ingresoId: this.ingreso.id,
-        esHuella: false,
+        esHuella: 'foto',
       };
     }
     this.uploader.setOptions(this.uo);
@@ -222,57 +223,72 @@ export class DactiloscopiaComponent implements OnInit {
   }
 
   setParameters(item) {
-    switch (item.claveHuella) {
-      case this.nameImages.pulgarDerecho.toLowerCase():
-        this.huella.imgPulgar = item.imagen64;
-        this.huella.clasificacionPulgar = item.clasificacion;
-        this.huella.subclasificacionPulgar = item.subclasificacion;
-        break;
-      case this.nameImages.pulgarIzquierdo.toLowerCase():
-        this.huella.imgPulgar2 = item.imagen64;
-        this.huella.clasificacionPulgar2 = item.clasificacion;
-        this.huella.subclasificacionPulgar2 = item.subclasificacion;
-        break;
-      case this.nameImages.indiceDerecho.toLowerCase():
-        this.huella.imgIndice = item.imagen64;
-        this.huella.clasificacionIndice = item.clasificacion;
-        this.huella.subclasificacionIndice = item.subclasificacion;
-        break;
-      case this.nameImages.indiceIzquierdo.toLowerCase():
-        this.huella.imgIndice2 = item.imagen64;
-        this.huella.clasificacionIndice2 = item.clasificacion;
-        this.huella.subclasificacionIndice2 = item.subclasificacion;
-        break;
-      case this.nameImages.medioDerecho.toLowerCase():
-        this.huella.imgMedio = item.imagen64;
-        this.huella.clasificacionMedio = item.clasificacion;
-        this.huella.subclasificacionMedio = item.subclasificacion;
-        break;
-      case this.nameImages.medioIzquierdo.toLowerCase():
-        this.huella.imgMedio2 = item.imagen64;
-        this.huella.clasificacionMedio2 = item.clasificacion;
-        this.huella.subclasificacionMedio2 = item.subclasificacion;
-        break;
-      case this.nameImages.anularDerecho.toLowerCase():
-        this.huella.imgAnular = item.imagen64;
-        this.huella.clasificacionAnular = item.clasificacion;
-        this.huella.subclasificacionAnular = item.subclasificacion;
-        break;
-      case this.nameImages.anularIzquierdo.toLowerCase():
-        this.huella.imgAnular2 = item.imagen64;
-        this.huella.clasificacionAnular2 = item.clasificacion;
-        this.huella.subclasificacionAnular2 = item.subclasificacion;
-        break;
-      case this.nameImages.meniqueDerecho.toLowerCase():
-        this.huella.imgMenique = item.imagen64;
-        this.huella.clasificacionMenique = item.clasificacion;
-        this.huella.subclasificacionMenique = item.subclasificacion;
-        break;
-      case this.nameImages.meniqueIzquierdo.toLowerCase():
-        this.huella.imgMenique2 = item.imagen64;
-        this.huella.clasificacionMenique2 = item.clasificacion;
-        this.huella.subclasificacionMenique2 = item.subclasificacion;
-        break;
+
+    if (item.claveFotografia) {
+      switch (item.claveFotografia) {
+        case this.nameImages.perfilDerecho.toLowerCase():
+          this.huella.imgCaraDerecho = item.imagen64;
+          break;
+        case this.nameImages.perfilIzquierdo.toLowerCase():
+          this.huella.imgCaraIzquierda = item.imagen64;
+          break;
+        case this.nameImages.perfilFrente.toLowerCase():
+          this.huella.imgCaraFrente = item.imagen64;
+          break;
+      }
+    } else {
+      switch (item.claveHuella) {
+        case this.nameImages.pulgarDerecho.toLowerCase():
+          this.huella.imgPulgar = item.imagen64;
+          this.huella.clasificacionPulgar = item.clasificacion;
+          this.huella.subclasificacionPulgar = item.subclasificacion;
+          break;
+        case this.nameImages.pulgarIzquierdo.toLowerCase():
+          this.huella.imgPulgar2 = item.imagen64;
+          this.huella.clasificacionPulgar2 = item.clasificacion;
+          this.huella.subclasificacionPulgar2 = item.subclasificacion;
+          break;
+        case this.nameImages.indiceDerecho.toLowerCase():
+          this.huella.imgIndice = item.imagen64;
+          this.huella.clasificacionIndice = item.clasificacion;
+          this.huella.subclasificacionIndice = item.subclasificacion;
+          break;
+        case this.nameImages.indiceIzquierdo.toLowerCase():
+          this.huella.imgIndice2 = item.imagen64;
+          this.huella.clasificacionIndice2 = item.clasificacion;
+          this.huella.subclasificacionIndice2 = item.subclasificacion;
+          break;
+        case this.nameImages.medioDerecho.toLowerCase():
+          this.huella.imgMedio = item.imagen64;
+          this.huella.clasificacionMedio = item.clasificacion;
+          this.huella.subclasificacionMedio = item.subclasificacion;
+          break;
+        case this.nameImages.medioIzquierdo.toLowerCase():
+          this.huella.imgMedio2 = item.imagen64;
+          this.huella.clasificacionMedio2 = item.clasificacion;
+          this.huella.subclasificacionMedio2 = item.subclasificacion;
+          break;
+        case this.nameImages.anularDerecho.toLowerCase():
+          this.huella.imgAnular = item.imagen64;
+          this.huella.clasificacionAnular = item.clasificacion;
+          this.huella.subclasificacionAnular = item.subclasificacion;
+          break;
+        case this.nameImages.anularIzquierdo.toLowerCase():
+          this.huella.imgAnular2 = item.imagen64;
+          this.huella.clasificacionAnular2 = item.clasificacion;
+          this.huella.subclasificacionAnular2 = item.subclasificacion;
+          break;
+        case this.nameImages.meniqueDerecho.toLowerCase():
+          this.huella.imgMenique = item.imagen64;
+          this.huella.clasificacionMenique = item.clasificacion;
+          this.huella.subclasificacionMenique = item.subclasificacion;
+          break;
+        case this.nameImages.meniqueIzquierdo.toLowerCase():
+          this.huella.imgMenique2 = item.imagen64;
+          this.huella.clasificacionMenique2 = item.clasificacion;
+          this.huella.subclasificacionMenique2 = item.subclasificacion;
+          break;
+      }
     }
   }
 
@@ -308,7 +324,7 @@ export class DactiloscopiaComponent implements OnInit {
       case this.nameImages.meniqueIzquierdo:
         this.huella.imgMenique2 = base64;
         break;
-        // FOTO
+      // FOTO
       case this.nameImages.perfilIzquierdo:
         this.huella.imgCaraIzquierda = base64;
         break;
@@ -318,6 +334,26 @@ export class DactiloscopiaComponent implements OnInit {
       case this.nameImages.perfilFrente:
         this.huella.imgCaraFrente = base64;
         break;
+    }
+  }
+
+  finishIngreso() {
+    if (this.huella.imgCaraIzquierda && this.huella.imgCaraDerecho && this.huella.imgCaraFrente) {
+      Swal.fire({
+        title: 'Terminado',
+        text: 'Se ha completado el reguistro.',
+        icon: 'success',
+        timer: 1000,
+        showConfirmButton: false,
+      }).then(() => {
+
+      });
+    } else {
+      Swal.fire({
+        title: 'Cuidado',
+        text: 'Se tienen que registrar todos los lados del perfil del PPL.',
+        icon: 'warning',
+      });
     }
   }
 }
