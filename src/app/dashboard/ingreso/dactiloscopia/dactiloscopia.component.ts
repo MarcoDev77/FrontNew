@@ -19,7 +19,7 @@ export class DactiloscopiaComponent implements OnInit {
   public iconLoading: string;
   public nameImages: DactiloscopiaImages;
   public ingreso: Ingreso;
-  public huella: Huella;
+  public huella: TipoImagenDactilocopia;
   public datosDactiloscopia: any;
   // Uploader
   public url: string;
@@ -27,6 +27,7 @@ export class DactiloscopiaComponent implements OnInit {
   public uo: FileUploaderOptions = {};
   public currentUploadImage: string;
   public currentImage: string;
+  public uploader2: FileUploader;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -43,10 +44,11 @@ export class DactiloscopiaComponent implements OnInit {
     this.currentUploadImage = '';
     this.nameImages = new DactiloscopiaImages();
     this.currentImage = '';
-    this.huella = new Huella();
+    this.huella = new TipoImagenDactilocopia();
     // Uploader
     this.url = environment.apiUrl;
     this.uploader = new FileUploader({url: this.url + '/api/registrarHuellaDactilar', itemAlias: 'image'});
+    this.uploader2 = new FileUploader({url: this.url + '/api/registrarFotografiaImputado', itemAlias: 'image'});
   }
 
   ngOnInit() {
@@ -78,16 +80,30 @@ export class DactiloscopiaComponent implements OnInit {
   }
 
   uploadFile() {
+    let esHuella = true;
+    if (this.currentImage === this.nameImages.perfilFrente || this.currentImage === this.nameImages.perfilIzquierdo ||
+      this.currentImage === this.nameImages.perfilDerecho) {
+      esHuella = false;
+    }
     const authToken = this.authenticationService.getCurrentUser().access_token;
     this.uo.authTokenHeader = 'Authorization';
     this.uo.authToken = `Bearer ${authToken}`;
-    this.uo.additionalParameter = this.chooseParameters(this.currentImage);
-    if (!this.uo.additionalParameter.clasificacion) {
-      return Swal.fire({
-        title: 'Cuidado',
-        text: 'Se debe ingresar la clasificion de la huella antes.',
-        icon: 'warning',
-      });
+    if (esHuella) {
+      this.uo.additionalParameter = this.chooseParameters(this.currentImage);
+      this.uo.additionalParameter.esHuella = esHuella;
+      if (!this.uo.additionalParameter.clasificacion) {
+        return Swal.fire({
+          title: 'Cuidado',
+          text: 'Se debe ingresar la clasificion de la huella antes.',
+          icon: 'warning',
+        });
+      }
+    } else {
+      this.uo.additionalParameter = {
+        claveFotografia: this.currentImage,
+        ingresoId: this.ingreso.id,
+        esHuella: false,
+      };
     }
     this.uploader.setOptions(this.uo);
     console.log(this.uo);
@@ -292,12 +308,22 @@ export class DactiloscopiaComponent implements OnInit {
       case this.nameImages.meniqueIzquierdo:
         this.huella.imgMenique2 = base64;
         break;
+        // FOTO
+      case this.nameImages.perfilIzquierdo:
+        this.huella.imgCaraIzquierda = base64;
+        break;
+      case this.nameImages.perfilDerecho:
+        this.huella.imgCaraDerecho = base64;
+        break;
+      case this.nameImages.perfilFrente:
+        this.huella.imgCaraFrente = base64;
+        break;
     }
   }
 }
 
 
-class Huella {
+class TipoImagenDactilocopia {
   imgPulgar: string;
   clasificacionPulgar: string;
   subclasificacionPulgar: string;
@@ -329,7 +355,10 @@ class Huella {
   imgMenique2: string;
   clasificacionMenique2: string;
   subclasificacionMenique2: string;
-
+  // CARA
+  imgCaraDerecho: string;
+  imgCaraFrente: string;
+  imgCaraIzquierda: string;
 }
 
 class DactiloscopiaImages {

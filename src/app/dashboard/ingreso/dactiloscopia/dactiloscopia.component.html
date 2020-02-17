@@ -15,18 +15,17 @@
   <div class="col-sm-3"></div>
   <div class="col-sm-3"></div>
 </div>
-<br>
-<div class="row">
-  <div class="col-sm-4">
-    <input ngbTooltip="Fuero" class="form-control shadows" type="text" placeholder="Fuero">
-  </div>
-  <div class="col-sm-4">
-    <input ngbTooltip="Lib." class="form-control shadows" type="text" placeholder="Lib.">
-  </div>
-  <div class="col-sm-4">
-    <input ngbTooltip="C.P." class="form-control shadows" type="text" placeholder="C.P.">
-  </div>
-</div>
+<!--<div class="row">-->
+<!--  <div class="col-sm-4">-->
+<!--    <input ngbTooltip="Fuero" class="form-control shadows" type="text" placeholder="Fuero">-->
+<!--  </div>-->
+<!--  <div class="col-sm-4">-->
+<!--    <input ngbTooltip="Lib." class="form-control shadows" type="text" placeholder="Lib.">-->
+<!--  </div>-->
+<!--  <div class="col-sm-4">-->
+<!--    <input ngbTooltip="C.P." class="form-control shadows" type="text" placeholder="C.P.">-->
+<!--  </div>-->
+<!--</div>-->
 <br>
 <br>
 <app-section-title icon="fa fa-camera" title="imágenes"></app-section-title>
@@ -36,8 +35,9 @@
   <div class="col-sm-10">
     <div class="row">
       <div class="col-sm-4 text-center">
-        <img (click)="openFinder(inputFile, nameImages.perfilFrente)" src="assets/img/no_image.png" alt="frente"
-             class="img-thumbnail shadows">
+        <img (click)="openFinder(inputFile, nameImages.perfilFrente)"
+             src="{{huella.imgCaraFrente ? 'data:image/png;base64,' + huella.imgCaraFrente :'assets/img/no_image.png'}}"
+             alt="frente" class="img-thumbnail shadows">
         <br>
         <br>
         <span>
@@ -45,7 +45,8 @@
         </span>
       </div>
       <div class="col-sm-4 text-center">
-        <img (click)="openFinder(inputFile, nameImages.perfilDerecho)" src="assets/img/no_image.png"
+        <img (click)="openFinder(inputFile, nameImages.perfilDerecho)"
+             src="{{huella.imgCaraDerecho ? 'data:image/png;base64,' + huella.imgCaraDerecho :'assets/img/no_image.png'}}"
              alt="perfil derecho" class="img-thumbnail shadows">
         <br>
         <br>
@@ -54,7 +55,8 @@
         </span>
       </div>
       <div class="col-sm-4 text-center">
-        <img (click)="openFinder(inputFile, nameImages.perfilIzquierdo)" src="assets/img/no_image.png"
+        <img (click)="openFinder(inputFile, nameImages.perfilIzquierdo)"
+             src="{{huella.imgCaraIzquierda ? 'data:image/png;base64,' + huella.imgCaraIzquierda :'assets/img/no_image.png'}}"
              alt="perfil izquierdo"
              class="img-thumbnail shadows">
         <br>
