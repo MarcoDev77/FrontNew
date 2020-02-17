@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from '@shared/services/authentication.service';
 import { User } from '@shared/models/User';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
@@ -25,6 +25,7 @@ export class UsuarioComponent implements OnInit {
   public roles: any[];
   public areas: any [];
   public rolSelected: any;
+  public areaSelected:any
   public currentUser: any;
 
   public persona: Personal;
@@ -82,7 +83,7 @@ export class UsuarioComponent implements OnInit {
     this.persona.centroPenitenciario = {
       id: 1
     }
-    this.persona.area={id:this.persona.area.value}
+    this.persona.area={id:this.areaSelected.value}
     this.user.roles=[{id: this.rolSelected.value}];
     
     let model={...this.persona};
@@ -92,6 +93,16 @@ export class UsuarioComponent implements OnInit {
     
     this.catalogosService.saveUsuario(model).subscribe((data: any) => {
       console.log(data);
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      }).then(()=>{
+        this.getData()
+      })
+
     });
   }
   openModal(modal) {
@@ -124,10 +135,31 @@ export class UsuarioComponent implements OnInit {
       tipoCambio:tipo,
       status:status
     }
+    console.log(model)
     this.catalogosService.toggleUsuario(model).subscribe((data: any) => {
       console.log(data)
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
       this.getData();
     })
+  }
+
+  updateUsuario(item,modal){
+    //this.persona=item;
+
+    this.user=item.user; 
+    this.persona=item
+    this.areaSelected={value:item.area.id, description:item.area.nombre}
+  //  this.persona.area={value:item.area.id, description:item.area.nombre}
+    this.rolSelected={value: this.user.roles[0].id,description:this.user.roles[0].authority};
+    console.log(this.rolSelected)
+    console.log(this.persona)
+  this.openModal(modal);
   }
 
  

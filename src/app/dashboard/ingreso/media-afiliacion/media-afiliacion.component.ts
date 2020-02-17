@@ -87,13 +87,13 @@ export class MediaAfiliacionComponent implements OnInit {
 
       this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
         console.log(data)
-        Swal.fire({
-          title: data.error ? 'Error!' : 'Guardado',
-          text: data.mensaje,
-          icon: data.error ? 'error' : 'success',
-          timer: 1300,
-          showConfirmButton: false
-        });
+          Swal.fire({
+            title: data.error ? 'Error!' : 'Guardado',
+            text: data.mensaje,
+            icon: data.error ? 'error' : 'success',
+            timer: 1300,
+            showConfirmButton: false
+          });
         if(!data.error){
           this.mediaFiliacion.id=data.id;
           this.getData()

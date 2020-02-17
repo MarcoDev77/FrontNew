@@ -1,6 +1,7 @@
 import { User } from './User'
 
 export class Personal{
+     id: number
      numeroEmpleado: number
      nombre: String
      direccion: String
