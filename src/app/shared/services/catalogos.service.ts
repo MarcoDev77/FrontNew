@@ -93,9 +93,6 @@ export class CatalogosService {
   saveDelito(model: Delito) {
     model.id = model.id ? model.id : null;
     model.estatus = model.estatus ? model.estatus : true;
-    model.modalidadDelito = {
-      id: model.modalidadDelitoSelect.value
-    };
     this.data = model;
     console.log('To server', this.data);
     return this.http.post(`${this.url}/api/registrarTipoDelito`, this.data);
