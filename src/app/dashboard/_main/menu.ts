@@ -54,8 +54,8 @@ export const ROUTES: RouteInfo[] = [
     collapse: 'tables',
     isCollapsed: true,
     children: [
+      {path: 'usuario', title: 'USUARIOS', ab: 'US'},
       {path: 'centro-penitenciario', title: 'CENTROS PENITENCIARIOS', ab: 'CP'},
-
       {path: 'delito', title: 'DELITOS', ab: 'DE'},
       {path: 'tipo-libertad', title: 'TIPO DE LIBERTAD', ab: 'TL'},
       {path: 'clasificacion-juridica', title: 'CLASIFICACIÓN JURÍDICA', ab: 'CJ'},
@@ -87,7 +87,7 @@ export const ROUTES: RouteInfo[] = [
       r.trabajoSocial.role
     ],
     path: '/dashboard',
-    title: 'SERVICIO SOCIAL',
+    title: 'TRABAJO SOCIAL',
     type: 'sub',
     icontype: 'fa fa-group',
     collapse: 'tables',
