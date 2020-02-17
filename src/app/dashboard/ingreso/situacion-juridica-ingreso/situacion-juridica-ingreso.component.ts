@@ -78,6 +78,9 @@ export class SituacionJuridicaIngresoComponent implements OnInit {
       });
     })
   }
+
+  add(){}
+  switch($event){}
 }
 
 class SituacionJuridica{

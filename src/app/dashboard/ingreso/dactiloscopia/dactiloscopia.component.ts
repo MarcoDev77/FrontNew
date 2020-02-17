@@ -5,6 +5,7 @@ import {AuthenticationService} from '@shared/services/authentication.service';
 import Swal from 'sweetalert2';
 import {Ingreso} from '@shared/models/Ingreso';
 import {IngresoService} from '@shared/services/ingreso.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dactiloscopia',
@@ -32,6 +33,7 @@ export class DactiloscopiaComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private ingresoService: IngresoService,
+    private router: Router,
   ) {
     const ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
     if (ingreso) {
@@ -346,7 +348,7 @@ export class DactiloscopiaComponent implements OnInit {
         timer: 1000,
         showConfirmButton: false,
       }).then(() => {
-
+        this.router.navigate(['dashboard/ingreso/lista-ingreso']);
       });
     } else {
       Swal.fire({

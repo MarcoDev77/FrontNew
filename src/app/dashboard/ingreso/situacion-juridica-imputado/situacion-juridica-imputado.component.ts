@@ -100,6 +100,9 @@ export class SituacionJuridicaImputadoComponent implements OnInit {
       console.log("delitos",data)
     })
   }
+
+  add(){}
+  switch($event){}
 }
 
 class SituacionJuridica{

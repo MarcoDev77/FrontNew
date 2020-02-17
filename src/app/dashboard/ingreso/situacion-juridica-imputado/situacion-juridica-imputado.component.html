@@ -52,7 +52,7 @@
             <div class="form-group">
                 <h6>Nacionalidad:</h6>
                 <label *ngIf="ingreso.imputado.paisNacimiento.nombre==='México'">Mexicano</label>
-                <label *ngIf="!ingreso.imputado.paisNacimiento.nombre==='México'">Extranjero</label>
+                <label *ngIf="ingreso.imputado.paisNacimiento.nombre !=='México'">Extranjero</label>
             </div>
         </div>
     </div>

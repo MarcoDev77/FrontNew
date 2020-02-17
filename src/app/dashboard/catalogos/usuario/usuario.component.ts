@@ -51,11 +51,12 @@ export class UsuarioComponent implements OnInit {
   }
 
   getData() {
-    console.log("entra");
     this.catalogosService.listUsuarios().subscribe((data: any) => {
       console.log('getData', data);
-      this.data = data.listPersonal
-      console.log(this.data)
+      if (data.listPersonal) {
+        this.data = data.listPersonal;
+      }
+      console.log(this.data);
     });
   }
 
