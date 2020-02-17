@@ -79,22 +79,23 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/consultarIngresoImputado?imputadoId=${id}`);
   }
 
-  saveSituacionJuridica(model){
-    return this.http.post(`${this.url}/api/registrarSituacionJuridica`,model);
+  saveSituacionJuridica(model) {
+    return this.http.post(`${this.url}/api/registrarSituacionJuridica`, model);
   }
 
-  listCausasPenales(id){
-    this.data={
-      id:id
-    }
-    return this.http.post(`${this.url}/api/listCausaPenal`,this.data);
+  listCausasPenales(id) {
+    this.data = {
+      id: id
+    };
+    return this.http.post(`${this.url}/api/listCausaPenal`, this.data);
   }
 
-  listDelitosByCausasPenales(model){
-    this.data=model;
-    return this.http.post(`${this.url}/api/delitosByImputadoAndCausaPenal`,this.data);
+  listDelitosByCausasPenales(model) {
+    this.data = model;
+    return this.http.post(`${this.url}/api/delitosByImputadoAndCausaPenal`, this.data);
 
   }
+
   // CARACTERISTICAS
   getCaracteristica(clave, imputadoId) {
     return this.http.get(`${this.url}/api/consultarSenaParticular?clave=${clave}&imputadoId=${imputadoId}`);
@@ -104,6 +105,10 @@ export class IngresoService {
     this.data = model;
     console.log('To server', this.data);
     return this.http.post(`${this.url}/api/registrarSenaParticular`, this.data);
+  }
+
+  listCaracteristicas(id) {
+    return this.http.get(`${this.url}/api/listarSenasParticulares?imputadoId=${id}`);
   }
 
   // Datiloscopia
@@ -116,6 +121,5 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/consultarInformacionDactiloscopia?imputadoId=${id}`);
   }
 
-  
 
 }
