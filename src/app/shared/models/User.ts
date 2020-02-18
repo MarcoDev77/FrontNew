@@ -2,7 +2,7 @@ export class User {
   id: number;
   username: string;
   password: string;
-  roles: any[];
+  roles: any;
   token?: string;
   enabled: boolean;
 }

@@ -57,57 +57,71 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="number" class="form-control" placeholder="N° de empleado" ngbTooltip="N° de empleado" maxlength="10" [(ngModel)]="persona.numeroEmpleado" #numeroEmpleado name="numeroEmpleado" required>
+                                <input type="text" class="form-control" placeholder="N° de empleado" ngbTooltip="N° de empleado" [(ngModel)]="persona.numeroEmpleado" #numeroEmpleado="ngModel" name="numeroEmpleado" [ngClass]="{ 'is-invalid': f.submitted && numeroEmpleado.invalid }" title="Solo se admiten números"
+                                    pattern="[0-9]{10}" maxlength="10" required>
+
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="CURP" ngbTooltip="CURP" maxlength="16" [(ngModel)]="persona.curp" #curp="ngModel" name="curp">
+                                <input type="text" class="form-control" placeholder="CURP" ngbTooltip="CURP" maxlength="15" [(ngModel)]="persona.curp" #curp="ngModel" name="curp">
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Nombre" ngbTooltip="Nombre" [(ngModel)]="persona.nombre" #nombre="ngModel" name="nombre" required>
+                                <input type="text" class="form-control" placeholder="Nombre" ngbTooltip="Nombre" [(ngModel)]="persona.nombre" #nombre="ngModel" name="nombre" [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid }" required>
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="number" class="form-control" placeholder="N° de seguro social" ngbTooltip="N° de seguro social" maxlength="10" [(ngModel)]="persona.numSeguroSocial" #numSeguroSocial="ngModel" name="numSeguroSocial" required>
+                                <input type="text" class="form-control" placeholder="N° de seguro social" ngbTooltip="N° de seguro social" pattern="[0-9]{10}" maxlength="10" [(ngModel)]="persona.numSeguroSocial" #numSeguroSocial="ngModel" name="numSeguroSocial" [ngClass]="{ 'is-invalid': f.submitted && numSeguroSocial.invalid }"
+                                    title="Solo se admiten números">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Tipo sanguineo" ngbTooltip="Tipo sanguineo" maxlength="16" [(ngModel)]="persona.tipoSanguineo" #tipoSanguineo name="tipoSanguineo" required>
+
+                                <select ngbTooltip="Tipo sanguineo" class="form-control shadows" name="tipoSanguineo" [(ngModel)]="persona.tipoSanguineo" #tipoSanguineo="ngModel" [ngClass]="{ 'is-invalid': f.submitted && tipoSanguineo.invalid}">
+                                    <option [value]="undefined" disabled hidden>Tipo sanguineo</option>
+                                    <option [value]="'A'">A</option>
+                                    <option [value]="'B'">B</option>
+                                    <option [value]="'AB'">AB</option>
+                                    <option [value]="'O'">O</option>
+                                    
+                                  </select>
                             </div>
+
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Teléfono fijo " ngbTooltip="Teléfono fijo " maxlength="10" [(ngModel)]="persona.telefonoFijo" #telefonoFijo name="telefonoFijo" required>
+                                <input type="tel" class="form-control" placeholder="Teléfono fijo " ngbTooltip="Teléfono fijo" [(ngModel)]="persona.telefonoFijo" #telefonoFijo="ngModel" name="telefonoFijo" [ngClass]="{ 'is-invalid': f.submitted && telefonoFijo.invalid }" title="Solo se admiten números"
+                                    pattern="[0-9]{10}" maxlength="10">
                             </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Teléfono celular" ngbTooltip="Teléfono celular" maxlength="10" [(ngModel)]="persona.telefonoCelular" #telefonoCelular name="telefonoCelular" required>
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <app-select placeholder="Área" required ngbTooltip="Área" [search]="false" [options]="areas" [multiple]="false" [modelo]="areaSelected" aria-required="true" (getModel)="areaSelected = $event; listAreas()" required></app-select>
-
-                            </div>
-
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Subárea" ngbTooltip="Subárea" [(ngModel)]="persona.subArea" #subArea name="subArea" required>
+                                <input type="tel" class="form-control" placeholder="Teléfono celular" ngbTooltip="Teléfono celular" maxlength="10" [(ngModel)]="persona.telefonoCelular" #telefonoCelular="ngModel" name="telefonoCelular" [ngClass]="{ 'is-invalid': f.submitted && telefonoCelular.invalid }"
+                                    title="Solo se admiten números" pattern="[0-9]{10}" maxlength="10">
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <app-select placeholder="Área" ngbTooltip="Área" [search]="false" [options]="areas" [multiple]="false" [modelo]="areaSelected" aria-required="true" (getModel)="areaSelected = $event; listAreas()"></app-select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Sub área" ngbTooltip="Sub área" [(ngModel)]="persona.subArea" #subArea name="subArea">
                             </div>
                         </div>
 
@@ -117,7 +131,7 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <img (click)="openFinder(inputFile, nameImages.anularIzquierdo)" src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
+                    <img src="assets/img/no_image.png" alt="frente" class="img-thumbnail shadows">
                 </div>
                 <div class="col-12">
                     <div class="form-group">
@@ -137,7 +151,8 @@
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                        <app-select placeholder="Rol" required ngbTooltip="Rol" [search]="false" [options]="roles" [multiple]="false" [modelo]="rolSelected" aria-required="true" (getModel)="rolSelected = $event; listRoles()" required></app-select>
+                        <input hidden name="roles" [(ngModel)]="user.roles" #roles="ngModel" />
+                        <app-select placeholder="Rol" ngbTooltip="Rol" [search]="false" [options]="rolesLista" [multiple]="false" [modelo]="user.roles" aria-required="true" (getModel)="user.roles = $event; listRoles()"></app-select>
                     </div>
                 </div>
             </div>

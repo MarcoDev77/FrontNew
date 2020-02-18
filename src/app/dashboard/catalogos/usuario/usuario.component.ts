@@ -22,7 +22,7 @@ export class UsuarioComponent implements OnInit {
   public selectedRow: number;
   public setClickedRow: Function;
 
-  public roles: any[];
+  public rolesLista: any[];
   public areas: any [];
   public rolSelected: any;
   public areaSelected:any
@@ -34,7 +34,7 @@ export class UsuarioComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private catalogosService: CatalogosService, private router: Router, private modalService: NgbModal) {
     this.data = [];
-    this.roles = [];
+    this.rolesLista = [];
     this.areas = [];
     this.persona = {} as any;
     this.user = {}as any
@@ -78,14 +78,15 @@ export class UsuarioComponent implements OnInit {
 
   savePersonal() {
     console.log('Save');
-    console.log(this.user);
+    ///console.log(this.user);
 
     this.persona.centroPenitenciario = {
       id: 1
     }
+    this.persona.numeroEmpleado=+this.persona.numeroEmpleado;
+    this.persona.numSeguroSocial=+this.persona.numSeguroSocial;
     this.persona.area={id:this.areaSelected.value}
-    this.user.roles=[{id: this.rolSelected.value}];
-    
+   
     let model={...this.persona};
     model.user=this.user;
 
@@ -101,9 +102,17 @@ export class UsuarioComponent implements OnInit {
         showConfirmButton: false
       }).then(()=>{
         this.getData()
+        if(!data.error){
+          this.modalService.dismissAll();
+          this.persona= {} as any;
+          this.user= {} as any
+        }
+
+       
+       
       })
 
-    });
+    }); 
   }
   openModal(modal) {
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
@@ -114,16 +123,22 @@ export class UsuarioComponent implements OnInit {
   }
 
   listRoles() {
+    
     this.catalogosService.listRoles().subscribe((data: any) => {
+      this.rolesLista=[]
       data.roles.forEach(role => {
-        this.roles.push({value: role.id, description: role.authority});
+       
+        this.rolesLista.push({value: role.id, description: role.authority});
       });
     });
   }
 
   listAreas() {
+    
     this.catalogosService.listAreas().subscribe((data: any) => {
+      this.areas=[]
       data.areas.forEach(area => {
+      
         this.areas.push({value: area.id, description: area.nombre});
       });
     });
@@ -156,8 +171,8 @@ export class UsuarioComponent implements OnInit {
     this.persona=item
     this.areaSelected={value:item.area.id, description:item.area.nombre}
   //  this.persona.area={value:item.area.id, description:item.area.nombre}
-    this.rolSelected={value: this.user.roles[0].id,description:this.user.roles[0].authority};
-    console.log(this.rolSelected)
+    this.user.roles={value: this.user.roles[0].id,description:this.user.roles[0].authority};
+   
     console.log(this.persona)
   this.openModal(modal);
   }
