@@ -42,7 +42,7 @@
 
                 <td class="text-center">
                     <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar" (click)="update('tr' + i , item)"></i> &nbsp;
-                    <i class="fa fa-book" (click)="modalidades(item)" placement="top" ngbTooltip="Ver modalidades"></i>&nbsp;
+                    <i *ngIf="from != 'component'" class="fa fa-book" (click)="modalidades(item)" placement="top" ngbTooltip="Ver modalidades"></i>&nbsp;
                     <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top" ngbTooltip="Deshabilitar"></i>
                     <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top" ngbTooltip="Habilitar"></i>
                 </td>

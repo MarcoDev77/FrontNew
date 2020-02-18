@@ -13,6 +13,7 @@ import { CaracteristicasComponent } from './caracteristicas/caracteristicas.comp
 import { MediaAfiliacionComponent } from './media-afiliacion/media-afiliacion.component';
 import { SituacionJuridicaImputadoComponent } from './situacion-juridica-imputado/situacion-juridica-imputado.component';
 import {FileUploadModule} from 'ng2-file-upload';
+import {CatalogosModule} from '@dashboard/catalogos/catalogos.module';
 
 
 
@@ -34,6 +35,7 @@ import {FileUploadModule} from 'ng2-file-upload';
         FormsModule,
         IngresoRoutingModule,
         FileUploadModule,
+        CatalogosModule,
     ]
 })
 export class IngresoModule { }
