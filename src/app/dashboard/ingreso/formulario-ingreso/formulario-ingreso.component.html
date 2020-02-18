@@ -40,7 +40,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <input class="form-control shadows" ngbTooltip="Número de expediente" placeholder="Número de expediente"
-                 name="expediente" type="text" #expediente="ngModel"
+                 name="expediente" type="text" #expediente="ngModel" maxlength="10" minlength="1"
                  [ngClass]="{ 'is-invalid': f.submitted && expediente.invalid}" [(ngModel)]="ingreso.numeroExpediente"
                  required/>
         </div>
@@ -60,6 +60,7 @@
     <div class="row">
       <div class="col-md-4">
         <input class="form-control shadows" ngbTooltip="Número control RENIP" placeholder="Número control RENIP"
+               maxlength="10" minlength="1"
                name="numeroRenip" #numeroRenip="ngModel" [ngClass]="{ 'is-invalid': f.submitted && numeroRenip.invalid}"
                [(ngModel)]="ingreso.numeroControlRenip"
                pattern='^[0-9]*$' required/>
@@ -74,7 +75,7 @@
       <div class="col-md-4">
         <div class="form-group shadows">
           <input class="form-control" type="text" ngbTooltip="CURP" placeholder="CURP" name="curp" required
-                 #curp="ngModel" [(ngModel)]="ingreso.imputado.curp" maxlength="18"
+                 #curp="ngModel" [(ngModel)]="ingreso.imputado.curp" maxlength="18" minlength="18"
                  [ngClass]="{ 'is-invalid': f.submitted && curp.invalid}"/>
         </div>
       </div>
@@ -185,7 +186,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <input ngbTooltip="Etnia" class="form-control shadows" type="text" placeholder="Etnia" name="etnia"
-                 #etnia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && etnia.invalid}" maxlength="45"
+                 #etnia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && etnia.invalid}" maxlength="20"
                  [(ngModel)]="ingreso.imputado.etnia"/>
         </div>
       </div>

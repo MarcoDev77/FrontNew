@@ -126,6 +126,15 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   submit() {
+    if (!this.validSelect()) {
+      return Swal.fire({
+        title: 'Cuidado',
+        text: 'Se deben llenar los campos de <<Religion>>, <<Pais de Nacimiento>>, <<Estado de nacimiento>>, <<Estado civil>>, <<Ocupación>> y <<Grado de estudios>>',
+        icon: 'warning',
+        timer: 1300,
+        showConfirmButton: false
+      });
+    }
     console.log('submit', this.ingreso);
     this.ingreso.imputado = {...this.ingreso.imputado, fechaNacimiento: new Date(this.ingreso.imputado.fechaNacimiento)};
     this.ingreso.imputado.edadAparente = Number(this.ingreso.imputado.edadAparente);
@@ -144,6 +153,14 @@ export class FormularioIngresoComponent implements OnInit {
         this.getIngreso(data.idRegistro);
       }
     });
+  }
+
+  validSelect(): boolean {
+    if (this.ingreso.imputado.religionSelect && this.ingreso.imputado.paisNacimientoSelect && this.ingreso.imputado.estadoSelect
+      && this.ingreso.imputado.estadoCivilSelect && this.ingreso.imputado.ocupacionSelect && this.ingreso.imputado.gradoEstudioSelect) {
+      return true;
+    }
+    return false;
   }
 
   addDatoDelito(array) {
@@ -225,6 +242,7 @@ export class FormularioIngresoComponent implements OnInit {
   mapToSelect(array: any[]) {
     return array.map((item: any) => ({value: item.id, description: item.nombre}));
   }
+
   checkMainAlias(): boolean {
     for (const item of this.arrayAlias) {
       if (item.principal) {
