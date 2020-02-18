@@ -206,6 +206,7 @@
           <div class="custom-control custom-checkbox">
             <input name="hablaIndigena" type="checkbox" class="custom-control-input" id="hablaIndigena"
                    [(ngModel)]="ingreso.imputado.hablaIndigena" #hablaIndigena="ngModel"
+                   [value]="ingreso.imputado.hablaIndigena"
                    [ngClass]="{ 'is-invalid': f.submitted && hablaIndigena.invalid}">
             <label class="custom-control-label" for="hablaIndigena">Habla indigena</label>
           </div>
@@ -424,6 +425,7 @@
                 (click)="addDatoDelito([ fechaDetencion, fechaRegistro, carpeta, causaPenal])"
                 class="btn btn-info btn-sm shadows">Agregar
         </button>
+        <button (click)="openCatalogo(delitoModal)" class="btn btn-info btn-sm shadows">Ver catalogo</button>
       </div>
     </div>
   </div>
@@ -465,3 +467,12 @@
     </button>
   </div>
 </div>
+
+<ng-template #delitoModal let-delitoModal>
+  <div class="modal-body text-center">
+    <app-delito from="component"></app-delito>
+    <div class="text-center pt-4">
+      <button class="btn-sm btn btn-danger" type="reset" (click)="delitoModal.close(true)">Cerrar</button>
+    </div>
+  </div>
+</ng-template>

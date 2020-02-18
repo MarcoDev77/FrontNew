@@ -6,6 +6,7 @@ import {Imputado} from '@shared/models/Imputado';
 import {IngresoService} from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
 import {DatePipe} from '@angular/common';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-formulario-ingreso',
@@ -33,6 +34,7 @@ export class FormularioIngresoComponent implements OnInit {
   constructor(
     private catalogosService: CatalogosService,
     private router: Router,
+    private modalService: NgbModal,
     private ingresoService: IngresoService,
     private datePipe: DatePipe
   ) {
@@ -127,8 +129,8 @@ export class FormularioIngresoComponent implements OnInit {
     console.log('submit', this.ingreso);
     this.ingreso.imputado = {...this.ingreso.imputado, fechaNacimiento: new Date(this.ingreso.imputado.fechaNacimiento)};
     this.ingreso.imputado.edadAparente = Number(this.ingreso.imputado.edadAparente);
-    this.ingreso.imputado.hablaIndigena = this.ingreso.imputado.hablaIndigena ? this.ingreso.imputado.hablaIndigena : false;
-    this.ingreso.imputado.esIndigena = this.ingreso.imputado.esIndigena ? this.ingreso.imputado.esIndigena : false;
+    this.ingreso.imputado.hablaIndigena = !!this.ingreso.imputado.hablaIndigena;
+    this.ingreso.imputado.esIndigena = !!this.ingreso.imputado.esIndigena;
     this.ingresoService.saveIngreso(this.ingreso).subscribe((data: any) => {
       console.log('saveIngreso', data);
       Swal.fire({
@@ -171,10 +173,6 @@ export class FormularioIngresoComponent implements OnInit {
     }
   }
 
-  deleteDatoDelito(item) {
-    this.arrayDatoDelito = this.arrayDatoDelito.filter(dato => dato !== item);
-  }
-
   addAlias(array) {
     if (this.validateFiels(array) && this.arrayAlias.length <= 5) {
       this.alias.imputado = {id: this.ingreso.id};
@@ -213,12 +211,6 @@ export class FormularioIngresoComponent implements OnInit {
     });
   }
 
-  deleteAlias(item) {
-    if (!item.esPrincipal) {
-      this.arrayAlias = this.arrayAlias.filter(alias => alias !== item);
-    }
-  }
-
   validateFiels(array: any[]): boolean {
     let pass = true;
     for (const field of array) {
@@ -233,12 +225,6 @@ export class FormularioIngresoComponent implements OnInit {
   mapToSelect(array: any[]) {
     return array.map((item: any) => ({value: item.id, description: item.nombre}));
   }
-
-  mapProperties(propertie: any) {
-    const id = propertie.value;
-    return {id};
-  }
-
   checkMainAlias(): boolean {
     for (const item of this.arrayAlias) {
       if (item.principal) {
@@ -262,6 +248,12 @@ export class FormularioIngresoComponent implements OnInit {
 
   change($event: Event) {
     console.log('event', $event);
+  }
+
+  openCatalogo(modal) {
+    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12', backdrop: 'static'}).result.then(() => {
+      this.getCatalogos();
+    });
   }
 }
 
