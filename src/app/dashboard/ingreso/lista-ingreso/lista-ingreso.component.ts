@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Ingreso } from '@shared/models/Ingreso';
 import { IngresoService } from '@shared/services/ingreso.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-lista-ingreso',
@@ -70,6 +71,18 @@ export class ListaIngresoComponent implements OnInit {
     this.router.navigate([`dashboard/ingreso/${uri}`]);
   }
   showModalConfirmFolio(modal) {
-    this.modalService.open(modal, {size: 'sm', windowClass: 'modal-primary mt-12'});
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: 'Se creará un registro de ingreso',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then(({value}) => {
+      if (value) {
+        this.router.navigate([`dashboard/ingreso/form-ingreso`]);
+        sessionStorage.removeItem('ingreso');
+      }
+    });
   }
 }

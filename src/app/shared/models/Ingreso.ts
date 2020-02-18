@@ -10,4 +10,5 @@ export class Ingreso {
   tipoIngreso: string;
   imputado: Imputado;
   clasificacion?: string;
+  edadAparente: number;
 }

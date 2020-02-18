@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
 import {ModalidadDelito} from '@shared/models/ModalidadDelito';
 import {Delito} from '@shared/models/Delito';
@@ -21,7 +21,6 @@ export class DelitoComponent implements OnInit {
   public data: Delito[];
   public delito: Delito;
   public modalidadesDelito: any[];
-
   public date;
   public auxId: any;
   public isForm = false;
@@ -30,6 +29,7 @@ export class DelitoComponent implements OnInit {
   public filter;
   public key = 'id'; // set default
   public reverse = true;
+  @Input() from;
 
   constructor(private catalogosService: CatalogosService, private router:Router) {
     this.data = [];
@@ -59,7 +59,7 @@ export class DelitoComponent implements OnInit {
     });
   }
 
- 
+
 
   submit(array) {
     if (this.validateFiels(array)) {
@@ -111,7 +111,7 @@ export class DelitoComponent implements OnInit {
   update(id, item) {
     this.isForm = true;
     this.delito = {...item};
- 
+
 
     if (this.auxId && this.auxId !== id) {
       this.showTr();
@@ -193,7 +193,7 @@ export class DelitoComponent implements OnInit {
   }
 
   modalidades(delito) {
-   
+
     sessionStorage.setItem('delito', JSON.stringify(delito));
     this.router.navigate(['/dashboard/catalogo/modalidad-delito']);
   }

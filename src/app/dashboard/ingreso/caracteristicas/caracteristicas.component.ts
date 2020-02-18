@@ -4,7 +4,7 @@ import {IngresoService} from '@shared/services/ingreso.service';
 import {Caracteristica} from '@shared/models/Caracteristica';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Imputado} from '@shared/models/Imputado';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 
 @Component({
@@ -15,6 +15,7 @@ import {Router} from '@angular/router';
 export class CaracteristicasComponent implements OnInit {
   public ingreso: Ingreso;
   public caracteristica: Caracteristica;
+  public caracteristicas: any[];
 
   constructor(
     private ingresoService: IngresoService,
@@ -31,10 +32,18 @@ export class CaracteristicasComponent implements OnInit {
 
   ngOnInit() {
     this.caracteristica = {} as Caracteristica;
+    this.getData(this.ingreso.id);
   }
 
-  find(label?) {
-    return console.log('Hola', label, this.ingreso);
+  getData(id) {
+    this.ingresoService.listCaracteristicas(id).subscribe((data: any) => {
+      console.log(data);
+      this.caracteristicas = data.senasParticulares;
+    });
+  }
+
+  find(modal, label?) {
+    this.modalService.open(modal, {size: 'sm', windowClass: 'modal-primary'});
     this.ingresoService.getCaracteristica(label, this.ingreso.id).subscribe((data: any) => {
       console.log('DATA', data);
       this.caracteristica = data.senaParticular;
@@ -44,7 +53,7 @@ export class CaracteristicasComponent implements OnInit {
 
   submit(array) {
     if (!this.validateFiels(array)) {
-       return;
+      return;
     }
     this.caracteristica.imputado = {} as Imputado;
     this.caracteristica.imputado.id = this.ingreso.id;
@@ -59,6 +68,7 @@ export class CaracteristicasComponent implements OnInit {
       });
       if (!data.error) {
         this.closeModals();
+        this.getData(this.ingreso.id);
       }
     });
   }

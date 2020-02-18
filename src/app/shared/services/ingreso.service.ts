@@ -54,6 +54,7 @@ export class IngresoService {
     model.imputado.estadoCivil = {id: model.imputado.estadoCivilSelect.value};
     model.imputado.ocupacion = {id: model.imputado.ocupacionSelect.value};
     model.imputado.gradoEstudio = {id: model.imputado.gradoEstudioSelect.value};
+    model.imputado.numeroHijos = Number(model.imputado.numeroHijos);
     this.data = model;
     console.log('To server', this.data);
     return this.http.post(`${this.url}/api/registrarIngresoImputado`, this.data);
@@ -79,22 +80,23 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/consultarIngresoImputado?imputadoId=${id}`);
   }
 
-  saveSituacionJuridica(model){
-    return this.http.post(`${this.url}/api/registrarSituacionJuridica`,model);
+  saveSituacionJuridica(model) {
+    return this.http.post(`${this.url}/api/registrarSituacionJuridica`, model);
   }
 
-  listCausasPenales(id){
-    this.data={
-      id:id
-    }
-    return this.http.post(`${this.url}/api/listCausaPenal`,this.data);
+  listCausasPenales(id) {
+    this.data = {
+      id: id
+    };
+    return this.http.post(`${this.url}/api/listCausaPenal`, this.data);
   }
 
-  listDelitosByCausasPenales(model){
-    this.data=model;
-    return this.http.post(`${this.url}/api/delitosByImputadoAndCausaPenal`,this.data);
+  listDelitosByCausasPenales(model) {
+    this.data = model;
+    return this.http.post(`${this.url}/api/delitosByImputadoAndCausaPenal`, this.data);
 
   }
+
   // CARACTERISTICAS
   getCaracteristica(clave, imputadoId) {
     return this.http.get(`${this.url}/api/consultarSenaParticular?clave=${clave}&imputadoId=${imputadoId}`);
@@ -104,6 +106,10 @@ export class IngresoService {
     this.data = model;
     console.log('To server', this.data);
     return this.http.post(`${this.url}/api/registrarSenaParticular`, this.data);
+  }
+
+  listCaracteristicas(id) {
+    return this.http.get(`${this.url}/api/listarSenasParticulares?imputadoId=${id}`);
   }
 
   // Datiloscopia
@@ -116,6 +122,5 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/consultarInformacionDactiloscopia?imputadoId=${id}`);
   }
 
-  
 
 }

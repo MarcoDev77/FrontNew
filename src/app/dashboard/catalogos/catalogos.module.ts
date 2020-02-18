@@ -19,12 +19,15 @@ import { UsuarioComponent } from './usuario/usuario.component';
 
 
 @NgModule({
-  declarations: [RootComponent, CentroPenitenciarioComponent, ModalidadDelitoComponent, DelitoComponent, TipoLibertadComponent, ClasificacionJuridicaComponent, EnfermedadCronicaComponent, MotivoReubicacionComponent, DormitorioComponent, TipoActividadComponent, ActividadComponent, UsuarioComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    CatalogosRoutingModule,
-    FormsModule,
-  ]
+    declarations: [RootComponent, CentroPenitenciarioComponent, ModalidadDelitoComponent, DelitoComponent, TipoLibertadComponent, ClasificacionJuridicaComponent, EnfermedadCronicaComponent, MotivoReubicacionComponent, DormitorioComponent, TipoActividadComponent, ActividadComponent, UsuarioComponent],
+    exports: [
+        DelitoComponent
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        CatalogosRoutingModule,
+        FormsModule,
+    ]
 })
 export class CatalogosModule { }

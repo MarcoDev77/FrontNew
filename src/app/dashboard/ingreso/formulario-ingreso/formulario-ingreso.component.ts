@@ -6,6 +6,7 @@ import {Imputado} from '@shared/models/Imputado';
 import {IngresoService} from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
 import {DatePipe} from '@angular/common';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-formulario-ingreso',
@@ -33,6 +34,7 @@ export class FormularioIngresoComponent implements OnInit {
   constructor(
     private catalogosService: CatalogosService,
     private router: Router,
+    private modalService: NgbModal,
     private ingresoService: IngresoService,
     private datePipe: DatePipe
   ) {
@@ -124,11 +126,20 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   submit() {
+    if (!this.validSelect()) {
+      return Swal.fire({
+        title: 'Cuidado',
+        text: 'Se deben llenar los campos de <<Religion>>, <<Pais de Nacimiento>>, <<Estado de nacimiento>>, <<Estado civil>>, <<Ocupación>> y <<Grado de estudios>>',
+        icon: 'warning',
+        timer: 1300,
+        showConfirmButton: false
+      });
+    }
     console.log('submit', this.ingreso);
     this.ingreso.imputado = {...this.ingreso.imputado, fechaNacimiento: new Date(this.ingreso.imputado.fechaNacimiento)};
     this.ingreso.imputado.edadAparente = Number(this.ingreso.imputado.edadAparente);
-    this.ingreso.imputado.hablaIndigena = this.ingreso.imputado.hablaIndigena ? this.ingreso.imputado.hablaIndigena : false;
-    this.ingreso.imputado.esIndigena = this.ingreso.imputado.esIndigena ? this.ingreso.imputado.esIndigena : false;
+    this.ingreso.imputado.hablaIndigena = !!this.ingreso.imputado.hablaIndigena;
+    this.ingreso.imputado.esIndigena = !!this.ingreso.imputado.esIndigena;
     this.ingresoService.saveIngreso(this.ingreso).subscribe((data: any) => {
       console.log('saveIngreso', data);
       Swal.fire({
@@ -142,6 +153,14 @@ export class FormularioIngresoComponent implements OnInit {
         this.getIngreso(data.idRegistro);
       }
     });
+  }
+
+  validSelect(): boolean {
+    if (this.ingreso.imputado.religionSelect && this.ingreso.imputado.paisNacimientoSelect && this.ingreso.imputado.estadoSelect
+      && this.ingreso.imputado.estadoCivilSelect && this.ingreso.imputado.ocupacionSelect && this.ingreso.imputado.gradoEstudioSelect) {
+      return true;
+    }
+    return false;
   }
 
   addDatoDelito(array) {
@@ -169,10 +188,6 @@ export class FormularioIngresoComponent implements OnInit {
         }
       });
     }
-  }
-
-  deleteDatoDelito(item) {
-    this.arrayDatoDelito = this.arrayDatoDelito.filter(dato => dato !== item);
   }
 
   addAlias(array) {
@@ -213,12 +228,6 @@ export class FormularioIngresoComponent implements OnInit {
     });
   }
 
-  deleteAlias(item) {
-    if (!item.esPrincipal) {
-      this.arrayAlias = this.arrayAlias.filter(alias => alias !== item);
-    }
-  }
-
   validateFiels(array: any[]): boolean {
     let pass = true;
     for (const field of array) {
@@ -232,11 +241,6 @@ export class FormularioIngresoComponent implements OnInit {
 
   mapToSelect(array: any[]) {
     return array.map((item: any) => ({value: item.id, description: item.nombre}));
-  }
-
-  mapProperties(propertie: any) {
-    const id = propertie.value;
-    return {id};
   }
 
   checkMainAlias(): boolean {
@@ -262,6 +266,12 @@ export class FormularioIngresoComponent implements OnInit {
 
   change($event: Event) {
     console.log('event', $event);
+  }
+
+  openCatalogo(modal) {
+    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12', backdrop: 'static'}).result.then(() => {
+      this.getCatalogos();
+    });
   }
 }
 
