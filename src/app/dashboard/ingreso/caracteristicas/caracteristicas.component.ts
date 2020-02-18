@@ -42,8 +42,8 @@ export class CaracteristicasComponent implements OnInit {
     });
   }
 
-  find(label?) {
-    console.log('Hola', label, this.ingreso);
+  find(modal, label?) {
+    this.modalService.open(modal, {size: 'sm', windowClass: 'modal-primary'});
     this.ingresoService.getCaracteristica(label, this.ingreso.id).subscribe((data: any) => {
       console.log('DATA', data);
       this.caracteristica = data.senaParticular;
