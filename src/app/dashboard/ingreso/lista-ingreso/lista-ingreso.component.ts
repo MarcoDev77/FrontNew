@@ -34,7 +34,7 @@ export class ListaIngresoComponent implements OnInit {
   }
 
   getData() {
-    this.ingresoService.listIngreso().subscribe((data: any) => {
+    this.ingresoService.listIngreso('listaTotal').subscribe((data: any) => {
       console.log('getData', data.ingresos);
       this.data = data.ingresos;
     });
