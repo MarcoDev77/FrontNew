@@ -167,7 +167,8 @@ export class UsuarioComponent implements OnInit {
 
   updateUsuario(item,modal){
     //this.persona=item;
-
+    this.persona={}as any;
+    this.user= {} as any
     this.user=item.user; 
     this.persona=item
     this.areaSelected={value:item.area.id, description:item.area.nombre}

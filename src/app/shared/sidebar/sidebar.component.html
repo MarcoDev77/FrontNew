@@ -1,48 +1,45 @@
 <div class="sidebar" data-color="fiscalia" style="width: 237px;">
-  <div class="logo" style="height: 5rem;">
-    <a class="simple-text logo-mini ml-5 pl-2" style="width: unset;">
-      <div class="logo-img">
-        <img style="width: 100px;" src="./assets/img/logo.png" height="50" width="auto"/>
-      </div>
-    </a>
-    <!--<div class="navbar-minimize">
+    <div class="logo" style="height: 5rem;">
+        <a class="simple-text logo-mini ml-1 pl-2" style="width: unset;">
+            <div class="logo-img">
+                <img style="width: 280px;" src="./assets/img/logo.png" height="50" width="auto" />
+            </div>
+        </a>
+        <!--<div class="navbar-minimize">
       <button id="minimizeSidebar" class="btn btn-simple btn-icon btn-neutral btn-round" (click)="minimizeSidebar()">
         <i class="now-ui-icons text_align-center visible-on-sidebar-regular"></i>
         <i class="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini"></i>
       </button>
     </div>-->
-  </div>
-  <div class="sidebar-wrapper">
-    <ul class="nav">
-      <li routerLinkActive="active" *ngFor="let menuitem of menuItems" style="width: 15rem;">
-        <!--If is a single link-->
-        <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
-          <i class="{{ menuitem.icontype }}"></i>
-          <p>{{ menuitem.title }}</p>
-        </a>
-
-        <!--If it have a submenu-->
-        <a data-toggle="collapse" href="#{{ menuitem.collapse }}" *ngIf="menuitem.type === 'sub'"
-           (click)="myFunc($event, menuitem);menuitem.isCollapsing === undefined && (menuitem.isCollapsed = !menuitem.isCollapsed)"
-           [attr.aria-expanded]="!menuitem.isCollapsed">
-          <i class="{{ menuitem.icontype }}"></i>
-          <p>{{ menuitem.title }}<b class="caret"></b></p>
-        </a>
-
-        <!--Display the submenu items-->
-        <div id="{{ menuitem.collapse }}" class="collapse" *ngIf="menuitem.type === 'sub'"
-             [ngbCollapse]="menuitem.isCollapsed">
-          <ul class="nav">
-            <li routerLinkActive="active" *ngFor="let childitem of menuitem.children">
-<!--              <a [routerLink]="[menuitem.path, childitem.path]">-->
-                <a [routerLink]="[menuitem.path + '/' + childitem.path]">
-                  <span class="sidebar-mini-icon">{{ childitem.ab }}</span>
-                  <span class="sidebar-normal">{{ childitem.title }}</span>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li routerLinkActive="active" *ngFor="let menuitem of menuItems" style="width: 15rem;">
+                <!--If is a single link-->
+                <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
+                    <i class="{{ menuitem.icontype }}"></i>
+                    <p>{{ menuitem.title }}</p>
                 </a>
+
+                <!--If it have a submenu-->
+                <a data-toggle="collapse" href="#{{ menuitem.collapse }}" *ngIf="menuitem.type === 'sub'" (click)="myFunc($event, menuitem);menuitem.isCollapsing === undefined && (menuitem.isCollapsed = !menuitem.isCollapsed)" [attr.aria-expanded]="!menuitem.isCollapsed">
+                    <i class="{{ menuitem.icontype }}"></i>
+                    <p>{{ menuitem.title }}<b class="caret"></b></p>
+                </a>
+
+                <!--Display the submenu items-->
+                <div id="{{ menuitem.collapse }}" class="collapse" *ngIf="menuitem.type === 'sub'" [ngbCollapse]="menuitem.isCollapsed">
+                    <ul class="nav">
+                        <li routerLinkActive="active" *ngFor="let childitem of menuitem.children">
+                            <!--              <a [routerLink]="[menuitem.path, childitem.path]">-->
+                            <a [routerLink]="[menuitem.path + '/' + childitem.path]">
+                                <span class="sidebar-mini-icon">{{ childitem.ab }}</span>
+                                <span class="sidebar-normal">{{ childitem.title }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
+        </ul>
+    </div>
 </div>
