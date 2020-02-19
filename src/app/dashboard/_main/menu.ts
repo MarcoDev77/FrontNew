@@ -48,7 +48,7 @@ export const ROUTES: RouteInfo[] = [
       r.site.role,
     ],
     path: '/dashboard/catalogo',
-    title: 'CATALOGOS',
+    title: 'CATÁLOGOS',
     type: 'sub',
     icontype: 'fa fa-files-o',
     collapse: 'tables',
