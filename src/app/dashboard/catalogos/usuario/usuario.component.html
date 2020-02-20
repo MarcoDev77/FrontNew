@@ -78,7 +78,7 @@
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="N° de seguro social" ngbTooltip="N° de seguro social" pattern="[0-9]{10}" maxlength="11" [(ngModel)]="persona.numSeguroSocial" #numSeguroSocial="ngModel" name="numSeguroSocial" [ngClass]="{ 'is-invalid': f.submitted && numSeguroSocial.invalid }"
+                                <input type="text" class="form-control" placeholder="N° de seguro social" ngbTooltip="N° de seguro social" pattern="[0-9]{11}" maxlength="11" [(ngModel)]="persona.numSeguroSocial" #numSeguroSocial="ngModel" name="numSeguroSocial" [ngClass]="{ 'is-invalid': f.submitted && numSeguroSocial.invalid }"
                                     title="Solo se admiten números">
                             </div>
                         </div>
