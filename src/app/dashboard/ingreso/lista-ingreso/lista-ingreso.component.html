@@ -44,7 +44,8 @@
       *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
       (click)="setClickedRow(i)" [class.active]="i == selectedRow">
       <td class="text-center">{{item.folio}}</td>
-      <td class="text-center">{{item.apodo.nombre}} {{item.apodo.apellidoPaterno}} {{item.apodo.apellidoMaterno}}</td>
+      <td *ngIf="item.apodo" class="text-center">{{item.apodo.nombre}} {{item.apodo.apellidoPaterno}} {{item.apodo.apellidoMaterno}}</td>
+      <td *ngIf="!item.apodo" class="text-center">Registro Incompleto</td>
       <td class="text-center">{{item.numeroExpediente}}</td>
       <td class="text-center">{{item.tipoIngreso}}</td>
       <td class="text-center">

@@ -214,9 +214,11 @@ export class CatalogosService {
   
   //USUARIOS
   saveUsuario(model){
-    model.user.roles=[{id: model.user.roles.value}];
+    let personal ={...model}
+    personal.user ={...model.user}
+    personal.user.roles=[{id: personal.user.roles.value}];
     console.log("model",model)
-    return this.http.post(`${this.url}/api/registrarPersonal`, model);
+    return this.http.post(`${this.url}/api/registrarPersonal`, personal);
   }
 
   listUsuarios(){

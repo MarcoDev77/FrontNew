@@ -31,8 +31,9 @@
                     <i class="fa fa-pencil-square-o" placement="top" ngbTooltip="Editar usuario" (click)="updateUsuario(item,registrarUsuario)"></i> &nbsp;
                     <i *ngIf="item.estadoPersonal" class="fa fa-toggle-on" (click)="togglePersonal(item.id,'personalYSesion',0)" placement="top" ngbTooltip="Deshabilitar usuario"></i>
                     <i *ngIf="!item.estadoPersonal" class="fa fa-toggle-off" (click)="togglePersonal(item.id,'activarSoloPersonal',1)" placement="top" ngbTooltip="Habilitar usuario"></i>&nbsp;
-                    <i *ngIf="item.user.enabled" class="fa fa-times-circle" (click)="togglePersonal(item.id,'sesion',0)" placement="top" ngbTooltip="Deshabilitar acceso"></i>
-                    <i *ngIf="!item.user.enabled" class="fa fa-check-circle" (click)="togglePersonal(item.id,'sesion',1)" placement="top" ngbTooltip="Habilitar acceso"></i>&nbsp;
+
+                    <i *ngIf="item.user.enabled && item.estadoPersonal" class="fa fa-times-circle" (click)="togglePersonal(item.id,'sesion',0)" placement="top" ngbTooltip="Deshabilitar acceso"></i>
+                    <i *ngIf="!item.user.enabled && item.estadoPersonal" class="fa fa-check-circle" (click)="togglePersonal(item.id,'sesion',1)" placement="top" ngbTooltip="Habilitar acceso"></i>&nbsp;
                 </td>
             </tr>
 
@@ -77,7 +78,7 @@
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="N° de seguro social" ngbTooltip="N° de seguro social" pattern="[0-9]{10}" maxlength="10" [(ngModel)]="persona.numSeguroSocial" #numSeguroSocial="ngModel" name="numSeguroSocial" [ngClass]="{ 'is-invalid': f.submitted && numSeguroSocial.invalid }"
+                                <input type="text" class="form-control" placeholder="N° de seguro social" ngbTooltip="N° de seguro social" pattern="[0-9]{11}" maxlength="11" [(ngModel)]="persona.numSeguroSocial" #numSeguroSocial="ngModel" name="numSeguroSocial" [ngClass]="{ 'is-invalid': f.submitted && numSeguroSocial.invalid }"
                                     title="Solo se admiten números">
                             </div>
                         </div>
@@ -87,10 +88,14 @@
 
                                 <select ngbTooltip="Tipo sanguineo" class="form-control shadows" name="tipoSanguineo" [(ngModel)]="persona.tipoSanguineo" #tipoSanguineo="ngModel" [ngClass]="{ 'is-invalid': f.submitted && tipoSanguineo.invalid}">
                                     <option [value]="undefined" disabled hidden>Tipo sanguineo</option>
-                                    <option [value]="'A'">A</option>
-                                    <option [value]="'B'">B</option>
-                                    <option [value]="'AB'">AB</option>
-                                    <option [value]="'O'">O</option>
+                                    <option [value]="'A+'">A+</option>
+                                    <option [value]="'A-'">A-</option>
+                                    <option [value]="'B+'">B+</option>
+                                    <option [value]="'B-'">B-</option>
+                                    <option [value]="'AB+'">AB+</option>
+                                    <option [value]="'AB-'">AB-</option>
+                                    <option [value]="'O+'">O+</option>
+                                    <option [value]="'O-'">O-</option>
                                     
                                   </select>
                             </div>

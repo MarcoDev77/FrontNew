@@ -1,87 +1,78 @@
 <div class="login">
-  <div class="row m-0">
-    <div class="col-md-12">
-      <div class="form text-center">
-        <img class="logo" src="assets/img/logo.png"/>
-        <div class="title pb-4">
-          Sistema Penitenciario Morelos
-        </div>
-        <br>
+    <div class="row m-0">
+        <div class="col-md-12">
+            <div class="form text-center">
+                <img class="logo" src="assets/img/logo.png" />
+                <div class="title pb-4">
+                    Sistema Penitenciario Morelos
+                </div>
+                <br>
 
-        <form *ngIf="login" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-          <!--          <div class="form-group">-->
-          <!--            <select class="form-control" name="rol" [(ngModel)]="user.rol" #rol="ngModel" [ngClass]="{ 'is-invalid': f.submitted && rol.invalid }" required>-->
-          <!--              <option [value]="''" disabled hidden>Rol</option>-->
-          <!--              <option>Administrador</option>-->
-          <!--              <option>Recepcionista</option>-->
-          <!--            </select>-->
-          <!--          </div>-->
+                <form *ngIf="login" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <!--          <div class="form-group">-->
+                    <!--            <select class="form-control" name="rol" [(ngModel)]="user.rol" #rol="ngModel" [ngClass]="{ 'is-invalid': f.submitted && rol.invalid }" required>-->
+                    <!--              <option [value]="''" disabled hidden>Rol</option>-->
+                    <!--              <option>Administrador</option>-->
+                    <!--              <option>Recepcionista</option>-->
+                    <!--            </select>-->
+                    <!--          </div>-->
 
-          <div class="form-group">
-            <input ngbTooltip="Usuario" type="email" name="username" class="form-control" placeholder="Usuario"
-                   [(ngModel)]="user.username" #username="ngModel"
-                   [ngClass]="{ 'is-invalid': f.submitted && username.invalid }" required>
-          </div>
+                    <div class="form-group">
+                        <input ngbTooltip="Usuario" type="email" name="username" class="form-control" placeholder="Usuario" [(ngModel)]="user.username" #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.invalid }" required>
+                    </div>
 
-          <div class="form-group">
-            <input type="password" name="password" class="form-control" placeholder="Contraseña"
-                   ngbTooltip="Contraseña"
-                   [(ngModel)]="user.password" #password="ngModel" autocomplete="off"
-                   [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="5" autocomplete>
-          </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Contraseña" ngbTooltip="Contraseña" [(ngModel)]="user.password" #password="ngModel" autocomplete="off" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="5"
+                            autocomplete>
+                    </div>
 
-          <!--          <div class="form-group">-->
-          <!--            <input type="password" name="token" class="form-control" placeholder="Segundo factor de seguridad"-->
-          <!--                   ngbTooltip="Segundo factor de seguridad"-->
-          <!--                   [(ngModel)]="user.token" #token="ngModel" autocomplete="off"-->
-          <!--                   [ngClass]="{ 'is-invalid': f.submitted && token.invalid }" required minlength="6" autocomplete>-->
-          <!--          </div>-->
+                    <!--          <div class="form-group">-->
+                    <!--            <input type="password" name="token" class="form-control" placeholder="Segundo factor de seguridad"-->
+                    <!--                   ngbTooltip="Segundo factor de seguridad"-->
+                    <!--                   [(ngModel)]="user.token" #token="ngModel" autocomplete="off"-->
+                    <!--                   [ngClass]="{ 'is-invalid': f.submitted && token.invalid }" required minlength="6" autocomplete>-->
+                    <!--          </div>-->
 
-          <div (click)="switch()" class="recover pb-3">
-            Olvide mi contraseña
-            <div class="borde"></div>
-          </div>
 
-          <div class="text-center">
-            <button class="btn btn-success" [disabled]="isLoading">
+
+                    <div class="text-center">
+                        <button class="btn btn-success" [disabled]="isLoading">
               <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               INGRESAR
             </button>
-          </div>
-        </form>
+                    </div>
+                </form>
 
-        <form *ngIf="!login && recover" name="recover" (ngSubmit)="r.form.valid && composeEmail()" #r="ngForm"
-              novalidate>
-          <div class="form-group">
-            <input type="email" name="email" email="true" class="form-control" placeholder="Correo electrónico"
-                   [(ngModel)]="email" #e="ngModel" [ngClass]="{ 'is-invalid': r.submitted && e.invalid }" required>
-          </div>
-
+                <form *ngIf="!login && recover" name="recover" (ngSubmit)="r.form.valid && composeEmail()" #r="ngForm" novalidate>
+                    <div class="form-group">
+                        <input type="email" name="email" email="true" class="form-control" placeholder="Correo electrónico" [(ngModel)]="email" #e="ngModel" [ngClass]="{ 'is-invalid': r.submitted && e.invalid }" required>
+                    </div>
+                    <!-- 
           <div class="text-center">
             <button class="btn btn-success">
               Recuperar Contraseña
             </button>
-          </div>
+          </div> -->
 
-          <div (click)="switch()" class="recover pt-3">
-            Iniciar sesión
-            <div class="borde"></div>
-          </div>
-        </form>
+                    <div (click)="switch()" class="recover pt-3">
+                        Iniciar sesión
+                        <div class="borde"></div>
+                    </div>
+                </form>
 
-        <div class="text-center" *ngIf="!recover">
+                <div class="text-center" *ngIf="!recover">
                     <span style="color: #f2f2f2;cursor: default;">
             Se ha enviado un correo electrónico a su cuenta, abra el correo y siga las instrucciones para cambiar su contraseña.
           </span>
 
-          <div (click)="switch()" class="recover pt-3">
-            Iniciar sesión
-            <div class="borde"></div>
-          </div>
-        </div>
-      </div>
+                    <div (click)="switch()" class="recover pt-3">
+                        Iniciar sesión
+                        <div class="borde"></div>
+                    </div>
+                </div>
+            </div>
 
-      <div class="derechos">© 2019 Coordinación del Sistema Penitenciario</div>
+            <div class="derechos">© 2019 Coordinación del Sistema Penitenciario</div>
+        </div>
     </div>
-  </div>
 </div>
