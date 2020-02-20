@@ -72,7 +72,7 @@
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Nombre" ngbTooltip="Nombre" [(ngModel)]="persona.nombre" #nombre="ngModel" name="nombre" [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid }" required>
+                                <input type="text" class="form-control" placeholder="Nombre" ngbTooltip="Nombre" [(ngModel)]="persona.nombre" #nombre="ngModel" name="nombre" maxlength="89" [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid }" required>
                             </div>
                         </div>
 
@@ -126,7 +126,7 @@
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Sub área" ngbTooltip="Sub área" [(ngModel)]="persona.subArea" #subArea name="subArea">
+                                <input type="text" class="form-control" placeholder="Sub área" ngbTooltip="Sub área" maxlength="30" [(ngModel)]="persona.subArea" #subArea name="subArea">
                             </div>
                         </div>
 
@@ -140,7 +140,7 @@
                 </div>
                 <div class="col-12">
                     <div class="form-group">
-                        <textarea class=" form-control" cols="80" placeholder="Dirección" rows="4" value="" ngbTooltip="Dirección" [(ngModel)]="persona.direccion" #direccion name="direccion"></textarea>
+                        <textarea class=" form-control" cols="80" placeholder="Dirección" rows="3" value="" maxlength="150" ngbTooltip="Dirección" [(ngModel)]="persona.direccion" #direccion name="direccion"></textarea>
 
                     </div>
                 </div>
@@ -156,8 +156,8 @@
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                        <input hidden name="roles" [(ngModel)]="user.roles" #roles="ngModel" />
-                        <app-select placeholder="Rol" ngbTooltip="Rol" [search]="false" [options]="rolesLista" [multiple]="false" [modelo]="user.roles" aria-required="true" (getModel)="user.roles = $event; listRoles()"></app-select>
+                        <input hidden name="roles" [(ngModel)]="user.roles" #roles="ngModel" required/>
+                        <app-select placeholder="Rol" ngbTooltip="Rol" [search]="false" [options]="rolesLista" [multiple]="false" [modelo]="user.roles" aria-required="true" (getModel)="user.roles = $event; listRoles()" [ngClass]="{ 'error-ngx-dropdown': f.submitted && roles.invalid}"></app-select>
                     </div>
                 </div>
             </div>

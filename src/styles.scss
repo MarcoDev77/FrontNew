@@ -152,7 +152,53 @@
     border: 1px solid;
 }
 
-.error-ngx-dropdown {
+.round-select .ngx-dropdown-container {
+    .ngx-dropdown-button {
+        border-radius: 20px !important;
+        padding: 10px !important;
+        padding-left: 2rem !important;
+        background: #1E2D3B !important;
+        border: #1E2D3B !important;
+        .c-angle-down svg,
+        .c-angle-up svg,
+        span {
+            fill: #ffffff !important;
+            color: #ffffff !important;
+        }
+    }
+    .ngx-dropdown-button:focus {
+        outline: unset;
+    }
+}
+
+.ngx-dropdown-container {
+    .ngx-dropdown-button {
+        height: calc(2.25rem + 2px) !important;
+        border-radius: 5px !important;
+        span {
+            font-weight: bold;
+        }
+        span:first-of-type {
+            text-overflow: ellipsis !important;
+            overflow: hidden !important;
+            max-width: 80% !important;
+            text-align: left !important;
+            font-size: 12px !important;
+            padding-left: 6px !important;
+        }
+    }
+    .ngx-dropdown-button:focus {
+        outline: unset;
+    }
+}
+
+.placehorder .ngx-dropdown-container .ngx-dropdown-button,
+.placehorder {
+    color: #8e8e8e !important;
+}
+
+.error-ngx-dropdown .ngx-dropdown-container,
+.error-date-picker dp-date-picker {
     border: 1px solid #db3445;
     border-radius: 6px;
 }
