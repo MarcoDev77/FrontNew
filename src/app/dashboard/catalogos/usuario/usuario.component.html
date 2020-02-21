@@ -50,7 +50,7 @@
 
 <ng-template #registrarUsuario let-registroUsuarioModal>
     <div class="modal-body text-center">
-        <h3>Registrar usuario</h3>
+        <h3>{{tituloModal}}</h3>
         <br>
         <form class="form-horizontal" name="form" #f="ngForm" (ngSubmit)="f.form.valid && savePersonal()" novalidate>
             <div class="row">
@@ -117,8 +117,9 @@
 
 
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <app-select placeholder="Área" ngbTooltip="Área" [search]="false" [options]="areas" [multiple]="false" [modelo]="areaSelected" aria-required="true" (getModel)="areaSelected = $event; listAreas()"></app-select>
+                            <div class="form-group" ngbTooltip="Área">
+                                <input hidden name="area" [(ngModel)]="areaSelected" #area="ngModel" required/>
+                                <app-select placeholder="Seleccione un área" [search]="false" [options]="areas" [multiple]="false" [modelo]="areaSelected" aria-required="true" (getModel)="areaSelected = $event; listAreas()" [ngClass]="{ 'error-ngx-dropdown': f.submitted && area.invalid}"></app-select>
 
                             </div>
 
@@ -155,9 +156,9 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="form-group">
+                    <div class="form-group" ngbTooltip="Rol">
                         <input hidden name="roles" [(ngModel)]="user.roles" #roles="ngModel" required/>
-                        <app-select placeholder="Rol" ngbTooltip="Rol" [search]="false" [options]="rolesLista" [multiple]="false" [modelo]="user.roles" aria-required="true" (getModel)="user.roles = $event; listRoles()" [ngClass]="{ 'error-ngx-dropdown': f.submitted && roles.invalid}"></app-select>
+                        <app-select placeholder="Seleccione un Rol" [search]="false" [options]="rolesLista" [multiple]="false" [modelo]="user.roles" aria-required="true" (getModel)="user.roles = $event; listRoles()" [ngClass]="{ 'error-ngx-dropdown': f.submitted && roles.invalid}"></app-select>
                     </div>
                 </div>
             </div>

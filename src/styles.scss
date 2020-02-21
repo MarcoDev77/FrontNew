@@ -199,6 +199,13 @@
 
 .error-ngx-dropdown .ngx-dropdown-container,
 .error-date-picker dp-date-picker {
+    .ngx-dropdown-button {
+        border: 1px solid #db3445 !important;
+        border-radius: 6px !important;
+    }
+}
+
+.error-image .thumbnail img {
     border: 1px solid #db3445;
-    border-radius: 6px;
+    //border-radius: 11px;
 }
