@@ -126,19 +126,21 @@
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-4 w-100">
                             <label style="margin-right: 2rem;margin-top: 0.3rem;margin-left: 5.6rem;">RH:</label>
+
                             <label class="form-check-label media" [ngClass]="{ 'has-danger': fGeneral.submitted && sangreRH.invalid }">
-                                <input class="form-check-input" type="radio" [value]="'positivo'" name="sangreRH"
+                                <input class="form-check-input" type="radio" [value]="'+'" name="sangreRH"
                                     #sangreRH="ngModel" [(ngModel)]="mediaFiliacion.sangreRH" required>
-                                <b> +</b>
+                                +
                                 <span class="form-check-sign"></span>
                             </label>
 
                             <label class="form-check-label media" [ngClass]="{ 'has-danger': fGeneral.submitted && sangreRH.invalid }">
-                                <input class="form-check-input" type="radio" [value]="'negativo'" name="sangreRH"
+                                <input class="form-check-input" type="radio" [value]="'-'" name="sangreRH"
                                     #sangreRH="ngModel" [(ngModel)]="mediaFiliacion.sangreRH" required>
-                                <b>-</b>
+                                -
                                 <span class="form-check-sign"></span>
                             </label>
+
                         </div>
                     </div>
                 </div>

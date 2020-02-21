@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from '@shared/services/authentication.service';
 import { User } from '@shared/models/User';
 import Swal from 'sweetalert2';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
@@ -31,7 +32,7 @@ export class UsuarioComponent implements OnInit {
   public persona: Personal;
   public user: User;
 
-
+  public tituloModal: String;
   constructor(private authenticationService: AuthenticationService, private catalogosService: CatalogosService, private router: Router, private modalService: NgbModal) {
     this.data = [];
     this.rolesLista = [];
@@ -55,6 +56,7 @@ export class UsuarioComponent implements OnInit {
       console.log('getData', data);
       if (data.listPersonal) {
         this.data = data.listPersonal;
+      
       }
       console.log(this.data);
     });
@@ -80,21 +82,15 @@ export class UsuarioComponent implements OnInit {
   savePersonal() {
     console.log('Save');
     ///console.log(this.user);
-
-    this.persona.centroPenitenciario = {
-      id: 1
-    }
-    this.persona.numeroEmpleado=+this.persona.numeroEmpleado;
-    this.persona.numSeguroSocial=+this.persona.numSeguroSocial;
-    this.persona.area={id:this.areaSelected.value}
    
-    let model={...this.persona};
-    model.user=this.user;
-
-      console.log(model);
+    if(this.areaSelected){
+    this.persona.area={id:this.areaSelected.value}
+    }
+    this.persona.user=this.user;
+      
     
-    this.catalogosService.saveUsuario(model).subscribe((data: any) => {
-      console.log(data);
+    this.catalogosService.saveUsuario(this.persona).subscribe((data: any) => {
+      
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -102,20 +98,22 @@ export class UsuarioComponent implements OnInit {
         timer: 1300,
         showConfirmButton: false
       }).then(()=>{
-        this.getData()
+        //
         if(!data.error){
+          this.getData()
           this.modalService.dismissAll();
           this.persona= {} as any;
           this.user= {} as any
         }
-
-       
-       
       })
+      
 
     }); 
   }
   openModal(modal) {
+    this.persona= {} as any;
+    this.user= {} as any;
+    this.tituloModal="Registrar usuario"
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
@@ -124,11 +122,10 @@ export class UsuarioComponent implements OnInit {
   }
 
   listRoles() {
-    
     this.catalogosService.listRoles().subscribe((data: any) => {
       this.rolesLista=[]
+      console.log(this.user)
       data.roles.forEach(role => {
-       
         this.rolesLista.push({value: role.id, description: role.authority});
       });
     });
@@ -139,7 +136,6 @@ export class UsuarioComponent implements OnInit {
     this.catalogosService.listAreas().subscribe((data: any) => {
       this.areas=[]
       data.areas.forEach(area => {
-      
         this.areas.push({value: area.id, description: area.nombre});
       });
     });
@@ -167,16 +163,19 @@ export class UsuarioComponent implements OnInit {
 
   updateUsuario(item,modal){
     //this.persona=item;
-    this.persona={}as any;
-    this.user= {} as any
+    console.log("item",item.user.roles)
+ 
     this.user=item.user; 
     this.persona=item
     this.areaSelected={value:item.area.id, description:item.area.nombre}
   //  this.persona.area={value:item.area.id, description:item.area.nombre}
+    console.log("user",item.user)
+    
     this.user.roles={value: this.user.roles[0].id,description:this.user.roles[0].authority};
-   
+    this.tituloModal="Modificar usuario";
     console.log(this.persona)
-  this.openModal(modal);
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
+    this.getData();
   }
 
  

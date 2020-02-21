@@ -69,7 +69,7 @@ export const ROUTES: RouteInfo[] = [
       r.dactiloscopia.role,
     ],
     path: '/dashboard',
-    title: 'DACTILOSCAPIA',
+    title: 'DACTILOSCOPÍA',
     type: 'sub',
     icontype: 'fa fa-sign-in',
     collapse: 'tables',
