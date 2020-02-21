@@ -55,13 +55,22 @@ export class CatalogosService {
     return this.http.get(`${this.url}/api/listarCentrosPenitenciarios`);
   }
 
-  saveCentroPenitenciario(model: CentroPenitenciario) {
+  validAdminCentroPenitenciario(model) {
+    this.data = model;
+    console.log('To server', this.data);
+    return this.http.post(`${this.url}/api/registrarCentroPenitenciario`, this.data);
+  }
+
+  saveCentroPenitenciario(model: any) {
     model.id = model.id ? model.id : null;
     model.municipio = {
       id: model.municipioSelect.value
     };
     model.tipoCentro = {
       id: model.tipoCentroSelect.value
+    };
+    model.personal.area = {
+      id: model.personal.areaSelect.value,
     };
     this.data = model;
     console.log('To server', this.data);
@@ -179,11 +188,13 @@ export class CatalogosService {
   listTipoActividad(id) {
     return this.http.get(`${this.url}/api/listarTipoActividades?centroId=${id}`);
   }
+
   saveTipoActividad(model: TipoActividad) {
     model.id = model.id ? model.id : null;
     console.log('To server', model);
     return this.http.post(`${this.url}/api/registrarTipoActividad`, model);
   }
+
   changeStatusTipoActividad(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusTipoActividad?tipoId=${id}`);
   }
@@ -192,11 +203,13 @@ export class CatalogosService {
   listActividad(id) {
     return this.http.get(`${this.url}/api/listarActividades?tipoId=${id}`);
   }
+
   saveActividad(model: Actividad) {
     model.id = model.id ? model.id : null;
     console.log('To server', model);
     return this.http.post(`${this.url}/api/registrarActividad`, model);
   }
+
   changeStatusActividad(id) {
     return this.http.get(`${this.url}/api/actualizarEstatusActividad?actividadId=${id}`);
   }
@@ -211,25 +224,27 @@ export class CatalogosService {
   listEstadosCiviles = () => this.http.get(`${this.url}/api/listarEstadosCiviles`);
 
   listOcupaciones = () => this.http.get(`${this.url}/api/listarOcupaciones`);
-  
+
   //USUARIOS
-  saveUsuario(model){
-    model.user.roles=[{id: model.user.roles.value}];
-    console.log("model",model)
+  saveUsuario(model) {
+    model.user.roles = [{id: model.user.roles.value}];
+    console.log('model', model);
     return this.http.post(`${this.url}/api/registrarPersonal`, model);
   }
 
-  listUsuarios(){
-  return this.http.get(`${this.url}/api/listPersonal?centroId=1`);;
+  listUsuarios() {
+    return this.http.get(`${this.url}/api/listPersonal?centroId=1`);
+    ;
   }
 
-  toggleUsuario(model){
-    return this.http.put(`${this.url}/api/statusPersonal`,model);;
+  toggleUsuario(model) {
+    return this.http.put(`${this.url}/api/statusPersonal`, model);
+    ;
   }
 
-  listRoles=() => this.http.get(`${this.url}/api/listarRoles`);
-  listAreas=() => this.http.get(`${this.url}/api/listAreas`);
-  
+  listRoles = () => this.http.get(`${this.url}/api/listarRoles`);
+  listAreas = () => this.http.get(`${this.url}/api/listAreas`);
+
 
 }
 
