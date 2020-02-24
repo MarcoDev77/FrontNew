@@ -131,8 +131,6 @@ export class FormularioIngresoComponent implements OnInit {
         title: 'Cuidado',
         text: 'Se deben llenar los campos de <<Religion>>, <<Pais de Nacimiento>>, <<Estado de nacimiento>>, <<Estado civil>>, <<Ocupación>> y <<Grado de estudios>>',
         icon: 'warning',
-        timer: 1300,
-        showConfirmButton: false
       });
     }
     console.log('submit', this.ingreso);
@@ -164,7 +162,6 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   addDatoDelito(array) {
-    // TODO: Arreglar que desaparecen las opciones del select
     if (this.validateFiels(array) && this.datoDelito.tipoDelitoSelect && this.arrayDatoDelito.length <= 10) {
       const model = {
         tipoDelito: {id: this.datoDelito.tipoDelitoSelect.value},

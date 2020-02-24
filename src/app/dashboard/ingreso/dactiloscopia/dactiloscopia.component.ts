@@ -97,8 +97,10 @@ export class DactiloscopiaComponent implements OnInit {
       if (!this.uo.additionalParameter.clasificacion) {
         return Swal.fire({
           title: 'Cuidado',
-          text: 'Se debe ingresar la clasificion de la huella antes.',
+          text: 'Se debe ingresar la clasificación de la huella antes.',
           icon: 'warning',
+          timer: 1300,
+          showConfirmButton: false
         });
       }
     } else {
