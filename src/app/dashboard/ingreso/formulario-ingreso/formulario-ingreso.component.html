@@ -3,7 +3,7 @@
 <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
   <!--Datos expediente-->
   <div>
-    <app-section-title icon="fa fa-folder" title="Datos del expediente"></app-section-title>
+    <app-section-title [goBack]="true" icon="fa fa-folder" title="Datos del expediente"></app-section-title>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
@@ -197,7 +197,7 @@
             <input name="esIndigena" type="checkbox" class="custom-control-input" id="esIndigena"
                    [(ngModel)]="ingreso.imputado.esIndigena" #esIndigena="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && esIndigena.invalid}">
-            <label class="custom-control-label" for="esIndigena">Es indigena</label>
+            <label class="custom-control-label" for="esIndigena">Es indígena</label>
           </div>
         </div>
       </div>
@@ -209,7 +209,7 @@
                    [(ngModel)]="ingreso.imputado.hablaIndigena" #hablaIndigena="ngModel"
                    [value]="ingreso.imputado.hablaIndigena"
                    [ngClass]="{ 'is-invalid': f.submitted && hablaIndigena.invalid}">
-            <label class="custom-control-label" for="hablaIndigena">Habla indigena</label>
+            <label class="custom-control-label" for="hablaIndigena">Habla indígena</label>
           </div>
         </div>
       </div>
