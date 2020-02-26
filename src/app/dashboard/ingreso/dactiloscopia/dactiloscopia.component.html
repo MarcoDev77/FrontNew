@@ -6,7 +6,7 @@
   <div class="col-sm-3">Morelos</div>
   <div
     class="col-sm-3">{{this.ingreso.imputado.mainName.nombre}} {{this.ingreso.imputado.mainName.apellidoPaterno}} {{this.ingreso.imputado.mainName.apellidoMaterno}}</div>
-<div class="col-sm-3">{{this.ingreso.edadAparente}}</div>
+  <div class="col-sm-3">{{this.ingreso.edadAparente}}</div>
 </div>
 <br>
 <div class="row">
@@ -331,7 +331,9 @@
     <button class="btn btn-primary" (click)="searchFingerprint(searchModal)">Búsqueda</button>
   </div>
   <div class="col-4 col-md-2">
-    <button (click)="finishIngreso()" type="button" class="float-right btn btn-success">Terminar</button>
+    <button [disabled]="isLoading" (click)="finishIngreso()" type="button" class="float-right btn btn-success">
+      Terminar
+    </button>
   </div>
 </div>
 
