@@ -10,13 +10,9 @@ import Swal from 'sweetalert2';
   templateUrl: './situacion-juridica-ingreso.component.html',
   styleUrls: ['./situacion-juridica-ingreso.component.scss']
 })
-export class SituacionJuridicaIngresoComponent implements OnInit {
+export class SituacionJuridicaComponent implements OnInit {
   public ingreso:Ingreso
-  public apodos:any[];
-  public nombre;
-  public primerApellido;
-  public segundoApellido;
-  public alias;
+
   public situacionJuridica: SituacionJuridica
   constructor(private router: Router,private modalService: NgbModal, private ingresoService: IngresoService) {
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
@@ -25,17 +21,36 @@ export class SituacionJuridicaIngresoComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.getData();
+   // this.getData();
   }
 
   getData(){
     this.ingresoService.getSituacionJuridica(this.ingreso.id).subscribe((data: any) => {
       this.ingreso=data.ingreso;
-      this.apodos=data.ingreso.imputado.apodos;
-     console.log(this.ingreso)
-     this.getNombrePrincipal();
-
+      console.log(this.ingreso)
     })
+  }
+  //TODO: cambiar por el metodo correcto
+  submit(){
+    let model={
+      imputadoId: this.ingreso.id,
+      esTraslado: this.ingreso.esTraslado,
+      centroOrigen: this.ingreso.centroOrigen
+    }
+    console.log(model)
+    this.ingresoService.editTraslado(model).subscribe((data: any) => {
+      console.log('saveIngreso', data);
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
+      if (!data.error) {
+ 
+      }
+    });
   }
   viewHistory(modal) {
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
@@ -50,17 +65,7 @@ export class SituacionJuridicaIngresoComponent implements OnInit {
     this.router.navigate([`dashboard/ingreso/${uri}`]);
   }
 
-  getNombrePrincipal(){
-    console.log("entra")
-    this.apodos.forEach(apodo => {
-        if (apodo.principal){
-          this.nombre=apodo.nombre;
-          this.primerApellido=apodo.apellidoPaterno;
-          this.segundoApellido=apodo.apellidoMaterno;
-          this.alias=apodo.otro
-        }
-    });
-  }
+
   saveSituacionJuridica(){
     console.log(this.situacionJuridica)
     this.situacionJuridica.causaPenal="causa penal1"

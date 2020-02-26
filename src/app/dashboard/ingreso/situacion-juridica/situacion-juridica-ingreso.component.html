@@ -1,9 +1,23 @@
-<form class="form-horizontal" name="form" novalidate>
+<form class="form-horizontal" name="f" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
     <app-section-title icon="fa fa-address-card-o" title="Datos Generales"></app-section-title>
-    <div class="row">
+    <div class="row" *ngIf="ingreso.tipoImputado==='Ingreso'">
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Expediente</h6>
+                <label>{{ingreso.numeroExpediente}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="ingreso.tipoImputado==='Imputado'">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Folio</h6>
+                <label>{{ingreso.folio}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Numero de expediente</h6>
                 <label>{{ingreso.numeroExpediente}}</label>
             </div>
         </div>
@@ -12,19 +26,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Nombre:</h6>
-                <label>{{nombre}}</label>
+                <label>{{ingreso.apodo.nombre}} </label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Apellido Paterno:</h6>
-                <label>{{primerApellido}}</label>
+                <label>{{ingreso.apodo.apellidoPaterno}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Apellido Materno:</h6>
-                <label>{{segundoApellido}}</label>
+                <label>{{ingreso.apodo.apellidoMaterno}}</label>
             </div>
         </div>
     </div>
@@ -32,21 +46,14 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Alias:</h6>
-                <label>{{alias}}</label>
+                <label>{{ingreso.apodo.otro? ingreso.apodo.otro: 'Sin alias'}}</label>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <h6>Fecha de ingreso:</h6>
-                <label>12/09/2018</label>
-            </div>
-        </div>
+
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Nacionalidad:</h6>
-
-                <label *ngIf="ingreso.imputado.paisNacimiento.nombre==='México'">Mexicano</label>
-                <label *ngIf="ingreso.imputado.paisNacimiento.nombre !=='México'">Extranjero</label>
+                <label> {{ingreso.paisNacimiento.nombre? 'Mexicano': 'Extranjero'}}</label>
             </div>
         </div>
     </div>
@@ -54,19 +61,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Genero:</h6>
-                <label>{{ingreso.imputado.genero}}</label>
+                <label>{{ingreso.genero}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Domicilio:</h6>
-                <label>{{ingreso.imputado.calleNumero}}, {{ingreso.imputado.colonia}}, {{ingreso.imputado.codigoPostal}}</label>
+                <label>{{ingreso.calleNumero}}, {{ingreso.colonia}}, {{ingreso.codigoPostal}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Estado civil:</h6>
-                <label>{{ingreso.imputado.estadoCivil.nombre}}</label>
+                <label>{{ingreso.estadoCivil.nombre}}</label>
             </div>
         </div>
     </div>
@@ -74,19 +81,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Lugar de origen:</h6>
-                <label>{{ingreso.imputado.municipio.nombre}}</label>
+                <label>{{ingreso.municipio.nombre}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Estado:</h6>
-                <label>{{ingreso.imputado.municipio.estado.nombre}}</label>
+                <label>{{ingreso.estado.nombre}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Ocupación:</h6>
-                <label>{{ingreso.imputado.ocupacion.nombre}}</label>
+                <label>{{ingreso.ocupacion.nombre}}</label>
             </div>
         </div>
     </div>
@@ -94,19 +101,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Edad:</h6>
-                <label>{{ingreso.imputado.edadAparente}}</label>
+                <label>{{ingreso.edadAparente}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
-                <h6>Tipo de detenido:</h6>
+                <h6>Tipo de ingreso:</h6>
                 <label>{{ingreso.tipoIngreso}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Religion:</h6>
-                <label>{{ingreso.imputado.religion.nombre}}</label>
+                <label>{{ingreso.religion.nombre}}</label>
             </div>
         </div>
     </div>
@@ -114,198 +121,215 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Grupo étnico:</h6>
-                <label>{{ingreso.imputado.etnia}}</label>
+                <label>{{ingreso.etnia? ingreso.imputado.etnia: 'Sin grupo étnico'}}</label>
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Fecha de nacimiento:</h6>
-                <label>{{ingreso.imputado.fechaNacimiento|date: 'dd/MM/yyyy'}}</label>
+                <label>{{ingreso.fechaNacimiento|date: 'dd/MM/yyyy'}}</label>
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Educación:</h6>
-                <label>{{ingreso.imputado.gradoEstudio.nombre}}</label>
+                <label>{{ingreso.gradoEstudio.nombre}}</label>
             </div>
         </div>
 
-    </div>
-
-    <app-section-title icon="fa fa-thumbs-down" title="Delitos"></app-section-title>
-    <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <select class="form-control shadows" name="causaPenal">
+                <div class="custom-control custom-checkbox">
+                    <input name="esTraslado" type="checkbox" class="custom-control-input" id="esIndigena" [(ngModel)]="ingreso.esTraslado" #esTraslado="ngModel">
+                    <label class="custom-control-label" for="esIndigena">Es traslado</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-8" *ngIf="ingreso.esTraslado">
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Centro de origen" name="centroOrigen" [(ngModel)]="ingreso.centroOrigen" #centroOrigen="ngModel" [ngbTooltip]="'Centro penitenciario de origen'" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 text-center text-sm-right">
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </div>
+</form>
+
+<app-section-title icon="fa fa-thumbs-down" title="Delitos"></app-section-title>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <select class="form-control shadows" name="causaPenal">
                     <option disabled selected>Causa Penal</option>
                     <option value="">Causa penal 1</option>
                     <option value="">Causa penal 2</option>
                     <option value="">Causa penal 3</option>
                 </select>
-            </div>
         </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <button class="btn btn-info btn-sm m-0" (click)="add()" [ngbTooltip]="'Descargar'"><i
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <button class="btn btn-info btn-sm m-0" (click)="add()" [ngbTooltip]="'Descargar'"><i
                         class="fa fa-print "></i></button>
-            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="text-center">
-                            No.
-                        </th>
-                        <th class="text-center">
-                            Causa Penal
-                        </th>
-                        <th class="text-center">
-                            Delito
-                        </th>
-                        <th class="text-center">
-                            Fecha de liberación
-                        </th>
-                        <th class="text-center">
-                            Juez
-                        </th>
-                        <th class="text-center" style="min-width: 5rem">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center">
-                            <i class="fa fa-eye" placement="top" (click)="viewHistory(formModal2)" ngbTooltip="Ver Historial"></i> &nbsp;
-                            <i class="fa fa-cog" placement="top" (click)="delitoEdit(formModal)" ngbTooltip="Editar"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="6"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="text-center w-100">
-                <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
-                </pagination-controls>
-            </div>
+</div>
+<div class="row">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        No.
+                    </th>
+                    <th class="text-center">
+                        Causa Penal
+                    </th>
+                    <th class="text-center">
+                        Delito
+                    </th>
+                    <th class="text-center">
+                        Fecha de liberación
+                    </th>
+                    <th class="text-center">
+                        Juez
+                    </th>
+                    <th class="text-center" style="min-width: 5rem">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center">
+                        <i class="fa fa-eye" placement="top" (click)="viewHistory(formModal2)" ngbTooltip="Ver Historial"></i> &nbsp;
+                        <i class="fa fa-cog" placement="top" (click)="delitoEdit(formModal)" ngbTooltip="Editar"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center w-100">
+            <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
+            </pagination-controls>
         </div>
     </div>
-    <div class="row">
+</div>
+<div class="row">
 
-        <div class="col-md-4">
-            <div class="form-group shadows">
-                <input class="form-control" type="text" placeholder="Victima o agravio" name="noAveriguacion" />
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="A partir" onfocus="(this.type='date')" />
-                <!--<input type="date" class="form-control" placeholder="Fecha de consignación" name="fechaConsignacion" />-->
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group shadows">
-                <input class="form-control" type="text" placeholder="Juzgado" name="juzgado" />
-            </div>
+    <div class="col-md-4">
+        <div class="form-group shadows">
+            <input class="form-control" type="text" placeholder="Victima o agravio" name="noAveriguacion" />
         </div>
     </div>
-    <div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="A partir" onfocus="(this.type='date')" />
+            <!--<input type="date" class="form-control" placeholder="Fecha de consignación" name="fechaConsignacion" />-->
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group shadows">
+            <input class="form-control" type="text" placeholder="Juzgado" name="juzgado" />
+        </div>
+    </div>
+</div>
+<div class="row">
 
-        <div class="col-md-4">
-            <div class="form-group shadows">
-                <input class="form-control" type="text" placeholder="Multa" name="multa" />
-            </div>
+    <div class="col-md-4">
+        <div class="form-group shadows">
+            <input class="form-control" type="text" placeholder="Multa" name="multa" />
         </div>
-        <div class="col-md-4">
-            <div class="form-group shadows">
-                <input class="form-control" type="text" placeholder="Reparacion del daño" name="sentidoDeterminacion" />
-            </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group shadows">
+            <input class="form-control" type="text" placeholder="Reparacion del daño" name="sentidoDeterminacion" />
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <div class="form-group shadows">
-                    <input type="text" class="form-control" placeholder="Sentencia ejecutoriada" onfocus="(this.type='date')" />
-                </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="form-group shadows">
+                <input type="text" class="form-control" placeholder="Sentencia ejecutoriada" onfocus="(this.type='date')" />
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-2 form-group shadows">
-            <div>
-                <h6>Penalidad</h6>
-            </div>
+</div>
+<div class="row">
+    <div class="col-md-2 form-group shadows">
+        <div>
+            <h6>Penalidad</h6>
         </div>
-        <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+        <div class="form-group shadows">
+            <input class="form-control" type="text" placeholder="Año" name="sentidoDeterminacion" />
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group shadows">
+            <input class="form-control" type="text" placeholder="Mes" name="sentidoDeterminacion" />
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
             <div class="form-group shadows">
-                <input class="form-control" type="text" placeholder="Año" name="sentidoDeterminacion" />
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group shadows">
-                <input class="form-control" type="text" placeholder="Mes" name="sentidoDeterminacion" />
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <div class="form-group shadows">
-                    <input class="form-control" type="text" placeholder="Dia" name="sentidoDeterminacion" />
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group shadows">
-                <input type="text" class="form-control" placeholder="Posible fecha de compurga" onfocus="(this.type='date')" />
+                <input class="form-control" type="text" placeholder="Dia" name="sentidoDeterminacion" />
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-2 form-group shadows">
-            <h6>Tipo de proceso</h6>
-        </div>
-        <div class="col-md-8 form-group shadows">
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="procesoComun" name="DefaultRadios">
-                <label class="custom-control-label" for="procesoComun" style="font-size: 15px;">PC</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="sentidoFueroComun" name="DefaultRadios">
-                <label class="custom-control-label" for="sentidoFueroComun" style="font-size: 15px;">SFC</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="procesoFederal" name="DefaultRadios">
-                <label class="custom-control-label" for="procesoFederal" style="font-size: 15px;">PF</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="sentidoFueroGeneral" name="DefaultRadios">
-                <label class="custom-control-label" for="sentidoFueroGeneral" style="font-size: 15px;">SFG</label>
-            </div>
+    <div class="col-md-4">
+        <div class="form-group shadows">
+            <input type="text" class="form-control" placeholder="Posible fecha de compurga" onfocus="(this.type='date')" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <textarea class="form-control" placeholder="Observaciones" rows="7"></textarea>
+</div>
+<div class="row">
+    <div class="col-md-2 form-group shadows">
+        <h6>Tipo de proceso</h6>
+    </div>
+    <div class="col-md-8 form-group shadows">
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="procesoComun" name="DefaultRadios">
+            <label class="custom-control-label" for="procesoComun" style="font-size: 15px;">PC</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="sentidoFueroComun" name="DefaultRadios">
+            <label class="custom-control-label" for="sentidoFueroComun" style="font-size: 15px;">SFC</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="procesoFederal" name="DefaultRadios">
+            <label class="custom-control-label" for="procesoFederal" style="font-size: 15px;">PF</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="sentidoFueroGeneral" name="DefaultRadios">
+            <label class="custom-control-label" for="sentidoFueroGeneral" style="font-size: 15px;">SFG</label>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <textarea class="form-control" placeholder="Observaciones" rows="7"></textarea>
 
-            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12 text-center text-sm-right">
-            <button type="button" (click)="goTo('lista-ingreso', null)" class="btn btn-danger mr-3">Cancelar</button>
-            <button type="submit" class="btn btn-success">Guardar</button>
-        </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center text-sm-right">
+        <button type="button" (click)="goTo('lista-ingreso', null)" class="btn btn-danger mr-3">Cancelar</button>
+        <button type="submit" class="btn btn-success">Guardar</button>
     </div>
-
-</form>
+</div>
 
 
 <ng-template #formModal let-formModal>

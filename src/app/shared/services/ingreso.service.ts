@@ -75,6 +75,9 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/registarIngresoDelito`, this.data);
   }
 
+  editTraslado(model){
+    return this.http.put(`${this.url}/api/edicionImputadoTraslado`, model);
+  }
   //SITUACION JURIDICA;
   getSituacionJuridica(id) {
     return this.http.get(`${this.url}/api/consultarIngresoImputado?imputadoId=${id}`);
@@ -126,6 +129,8 @@ export class IngresoService {
     console.log('To server, imputadoId', imputadoId, 'imputadoCopiarId', imputadoCopiarId);
     return this.http.get(`${this.url}/api/seleccionarHuellasIngresoImportar?imputadoId=${imputadoId}&imputadoCopiarId=${imputadoCopiarId}`);
   }
+
+
 
 
 }
