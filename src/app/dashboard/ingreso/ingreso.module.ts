@@ -14,6 +14,7 @@ import { MediaAfiliacionComponent } from './media-afiliacion/media-afiliacion.co
 import { SituacionJuridicaImputadoComponent } from './situacion-juridica-imputado/situacion-juridica-imputado.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {CatalogosModule} from '@dashboard/catalogos/catalogos.module';
+import { BusquedaHuellasComponent } from './busqueda-huellas/busqueda-huellas.component';
 
 
 
@@ -27,7 +28,8 @@ import {CatalogosModule} from '@dashboard/catalogos/catalogos.module';
     ReferenciasComponent,
     CaracteristicasComponent,
     MediaAfiliacionComponent,
-    SituacionJuridicaImputadoComponent
+    SituacionJuridicaImputadoComponent,
+    BusquedaHuellasComponent
   ],
     imports: [
         CommonModule,
