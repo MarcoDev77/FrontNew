@@ -234,14 +234,10 @@ export class CatalogosService {
     return this.http.post(`${this.url}/api/registrarPersonal`, personal);
   }
 
-  listUsuarios() {
-    return this.http.get(`${this.url}/api/listPersonal`);
-    ;
-  }
+  listUsuarios = () => this.http.get(`${this.url}/api/listPersonal`);
 
   toggleUsuario(model) {
     return this.http.put(`${this.url}/api/statusPersonal`, model);
-    ;
   }
 
   listRoles = () => this.http.get(`${this.url}/api/listarRoles`);

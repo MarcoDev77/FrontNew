@@ -45,7 +45,6 @@ export class FormularioIngresoComponent implements OnInit {
 
     const ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
     if (ingreso) {
-      this.ingreso = ingreso;
       this.getIngreso(ingreso.id);
     }
   }
@@ -65,8 +64,8 @@ export class FormularioIngresoComponent implements OnInit {
       .subscribe((data: any) => this.ocupaciones = this.mapToSelect(data.ocupaciones));
     this.catalogosService.listPaises()
       .subscribe((data: any) => this.paises = this.mapToSelect(data.paises));
-    this.catalogosService.listCentroPenitenciario()
-      .subscribe((data: any) => this.centrosPenitenciarios = this.mapToSelect(data.centros));
+    // this.catalogosService.listCentroPenitenciario()
+    //   .subscribe((data: any) => this.centrosPenitenciarios = this.mapToSelect(data.centros));
     this.catalogosService.listDelito()
       .subscribe((data: any) => this.delitos = this.mapToSelect(data.delitos));
   }
@@ -120,7 +119,6 @@ export class FormularioIngresoComponent implements OnInit {
       this.ingreso = ingreso;
       this.arrayAlias = ingreso.imputado.apodos;
       this.arrayDatoDelito = ingreso.imputado.delitos;
-      console.log('FECHA', this.ingreso.imputado.fechaNacimiento, new Date(this.ingreso.imputado.fechaNacimiento));
       this.ingreso.imputado.fechaNacimiento = this.datePipe.transform(this.ingreso.imputado.fechaNacimiento, 'yyyy-MM-dd');
     });
   }

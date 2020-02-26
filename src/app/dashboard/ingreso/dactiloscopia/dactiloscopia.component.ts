@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import {Ingreso} from '@shared/models/Ingreso';
 import {IngresoService} from '@shared/services/ingreso.service';
 import { Router } from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dactiloscopia',
@@ -33,6 +34,7 @@ export class DactiloscopiaComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private ingresoService: IngresoService,
+    private modalService: NgbModal,
     private router: Router,
   ) {
     const ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
@@ -359,6 +361,10 @@ export class DactiloscopiaComponent implements OnInit {
         icon: 'warning',
       });
     }
+  }
+
+  searchFingerprint(modal) {
+    this.modalService.open(modal, {size: 'xl', windowClass: 'modal-primary mt-12'});
   }
 }
 
