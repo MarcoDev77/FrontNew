@@ -1,1 +1,34 @@
-<p>busqueda-huellas works!</p>
+<app-section-title icon="fa fa-search" title="Busqueda por huella"></app-section-title>
+<br>
+<div *ngIf="!finished" class="text-center">
+  <img (click)="openFinder(inputFile)" width="200"
+       src="{{index != null ? images[index]:'assets/img/no_image.png'}}"
+       alt="frente" class="img-thumbnail huella shadows"><br>
+  <span *ngIf="index != null">Buscando...</span>
+  <input #inputFile style="display: none" accept="image/png" type="file" class="form-control-file"
+         ng2FileSelect aria-describedby="fileHelp"
+         [uploader]="uploader" (change)="uploadFile()"/>
+</div>
+<div *ngIf="finished">
+  <div class="row row-cols-1 row-cols-md-3">
+    <div *ngFor="let item of results" class="col mb-4" (click)="selectIngreso(item)">
+      <div class="card">
+        <img src="{{item.imagen64 ? 'data:image/png;base64,' + item.imagen64 :'assets/img/no_image.png'}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{item.folio}}</h5>
+          <h6 class="card-title">{{item.curp}}</h6>
+          <p class="card-text text-left">
+            {{item.nombre}}<br>
+            {{item.apellidoPaterno}}<br>
+            {{item.apellidoMaterno}}<br>
+            {{item.fechaNacimiento | date:'dd/MM/yy'}}<br>
+            {{item.genero}}
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">{{item.fechaRegistro | date:'dd/MM/yy h:mm a'}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -122,5 +122,10 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/consultarInformacionDactiloscopia?imputadoId=${id}`);
   }
 
+  selectIngresoDactiloscopia(imputadoId, imputadoCopiarId) {
+    console.log('To server, imputadoId', imputadoId, 'imputadoCopiarId', imputadoCopiarId);
+    return this.http.get(`${this.url}/api/seleccionarHuellasIngresoImportar?imputadoId=${imputadoId}&imputadoCopiarId=${imputadoCopiarId}`);
+  }
+
 
 }
