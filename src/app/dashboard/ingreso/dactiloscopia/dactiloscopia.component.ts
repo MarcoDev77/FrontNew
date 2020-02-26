@@ -22,6 +22,7 @@ export class DactiloscopiaComponent implements OnInit {
   public nameImages: DactiloscopiaImages;
   public ingreso: Ingreso;
   public huella: TipoImagenDactilocopia;
+  public isLoading: boolean;
   public datosDactiloscopia: any;
   // Uploader
   public url: string;
@@ -49,6 +50,7 @@ export class DactiloscopiaComponent implements OnInit {
     this.nameImages = new DactiloscopiaImages();
     this.currentImage = '';
     this.huella = new TipoImagenDactilocopia();
+    this.isLoading = false;
     // Uploader
     this.url = environment.apiUrl;
     this.uploader = new FileUploader({url: this.url + '/api/registrarHuellaDactilar', itemAlias: 'image'});
@@ -345,14 +347,21 @@ export class DactiloscopiaComponent implements OnInit {
 
   finishIngreso() {
     if (this.huella.imgCaraIzquierda && this.huella.imgCaraDerecho && this.huella.imgCaraFrente) {
-      Swal.fire({
-        title: 'Terminado',
-        text: 'Se ha completado el reguistro.',
-        icon: 'success',
-        timer: 1000,
-        showConfirmButton: false,
-      }).then(() => {
-        this.router.navigate(['dashboard/ingreso/lista-ingreso']);
+      this.isLoading = true;
+      this.ingresoService.finishIngreso(this.ingreso.id).subscribe((data: any) => {
+        this.isLoading = false;
+        console.log(data);
+        if (!data.error) {
+          Swal.fire({
+            title: 'Terminado',
+            text: 'Se ha completado el reguistro.',
+            icon: 'success',
+            timer: 1000,
+            showConfirmButton: false,
+          }).then(() => {
+            this.router.navigate(['dashboard/ingreso/lista-ingreso']);
+          });
+        }
       });
     } else {
       Swal.fire({

@@ -127,5 +127,10 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/seleccionarHuellasIngresoImportar?imputadoId=${imputadoId}&imputadoCopiarId=${imputadoCopiarId}`);
   }
 
+  finishIngreso(id) {
+    console.log('To server', id);
+    return this.http.get(`${this.url}/api/marcarIngresoTerminado?imputadoId=${id}`);
+  }
+
 
 }
