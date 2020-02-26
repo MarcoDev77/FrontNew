@@ -227,14 +227,14 @@ export class CatalogosService {
 
   //USUARIOS
   saveUsuario(model) {
-    model.user.roles = [{id: model.user.roles.value}];
-    console.log('model', model);
-    return this.http.post(`${this.url}/api/registrarPersonal`, model);
+    let personal ={...model}
+    personal.user ={...model.user}
+    personal.user.roles=[{id: personal.user.roles.value}];
+   
+    return this.http.post(`${this.url}/api/registrarPersonal`, personal);
   }
 
-  listUsuarios() {
-    return this.http.get(`${this.url}/api/listPersonal?centroId=1`);
-  }
+  listUsuarios = () => this.http.get(`${this.url}/api/listPersonal`);
 
   toggleUsuario(model) {
     return this.http.put(`${this.url}/api/statusPersonal`, model);

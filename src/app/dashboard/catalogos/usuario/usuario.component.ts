@@ -56,7 +56,6 @@ export class UsuarioComponent implements OnInit {
       console.log('getData', data);
       if (data.listPersonal) {
         this.data = data.listPersonal;
-      
       }
       console.log(this.data);
     });
