@@ -5,8 +5,8 @@ export const roles = {
     main: 'dactiloscopia'
   },
   admin: {
-    role: 'ROLE_ADMINISTRADOR',
-    name: 'Adminstrador',
+    role: 'ROLE_SUPERADMINISTRADOR',
+    name: 'Super Administrador',
     main: 'dactiloscopia'
   },
   director: {

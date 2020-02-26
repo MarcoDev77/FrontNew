@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
   private mobile_menu_visible: any = 0;
   private toggleButton: any;
   public currentUser: any;
+  public currentPersonal: any;
   public date: Date;
   public intervalo: any;
   public informationUser: any;
@@ -46,12 +47,12 @@ export class HeaderComponent implements OnInit {
     console.log("usaer", this.currentUser)
       for (let [key, value] of Object.entries(roles)) {
         if (this.currentUser && value.role === this.currentUser.roles[0]) {
-          console.log(this.currentUser);
+         
           this.informationUser = {name: this.currentUser.nombre, role: value.name, foto: this.currentUser.foto}
-          console.log(this.informationUser);
+        
         }
       }
-    
+      this.getCurrentPersonal();
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -167,5 +168,13 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
+  }
+
+  getCurrentPersonal(){
+    this.authenticationService.getCurrentPersonal().subscribe((data:any)=>{
+      console.log(data);
+      this.currentPersonal=data;
+      this.informationUser.name=this.currentPersonal.personal.nombre
+    })
   }
 }
