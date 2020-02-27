@@ -88,38 +88,43 @@ export class FormularioIngresoComponent implements OnInit {
     this.ingresoService.getIngreso(id).subscribe((data: any) => {
       console.log('new ingreso', data);
       const {ingreso, error} = data;
-      ingreso.imputado.gradoEstudioSelect = {
-        value: ingreso.imputado.gradoEstudio.id,
-        description: ingreso.imputado.gradoEstudio.nombre
-      };
-      ingreso.imputado.ocupacionSelect = {
-        value: ingreso.imputado.ocupacion.id,
-        description: ingreso.imputado.ocupacion.nombre
-      };
-      ingreso.imputado.estadoCivilSelect = {
-        value: ingreso.imputado.estadoCivil.id,
-        description: ingreso.imputado.estadoCivil.nombre
-      };
-      ingreso.imputado.paisNacimientoSelect = {
-        value: ingreso.imputado.paisNacimiento.id,
-        description: ingreso.imputado.paisNacimiento.nombre
-      };
-      ingreso.imputado.religionSelect = {
-        value: ingreso.imputado.religion.id,
-        description: ingreso.imputado.religion.nombre
-      };
-      ingreso.imputado.municipioSelect = {
-        value: ingreso.imputado.municipio.id,
-        description: ingreso.imputado.municipio.nombre
-      };
-      ingreso.imputado.estadoSelect = {
-        value: ingreso.imputado.municipio.estado.id,
-        description: ingreso.imputado.municipio.estado.nombre
-      };
-      this.ingreso = ingreso;
-      this.arrayAlias = ingreso.imputado.apodos;
-      this.arrayDatoDelito = ingreso.imputado.delitos;
-      this.ingreso.imputado.fechaNacimiento = this.datePipe.transform(this.ingreso.imputado.fechaNacimiento, 'yyyy-MM-dd');
+      if (!ingreso.registroNuevo) {
+        ingreso.imputado.gradoEstudioSelect = {
+          value: ingreso.imputado.gradoEstudio.id,
+          description: ingreso.imputado.gradoEstudio.nombre
+        };
+        ingreso.imputado.ocupacionSelect = {
+          value: ingreso.imputado.ocupacion.id,
+          description: ingreso.imputado.ocupacion.nombre
+        };
+        ingreso.imputado.estadoCivilSelect = {
+          value: ingreso.imputado.estadoCivil.id,
+          description: ingreso.imputado.estadoCivil.nombre
+        };
+        ingreso.imputado.paisNacimientoSelect = {
+          value: ingreso.imputado.paisNacimiento.id,
+          description: ingreso.imputado.paisNacimiento.nombre
+        };
+        ingreso.imputado.religionSelect = {
+          value: ingreso.imputado.religion.id,
+          description: ingreso.imputado.religion.nombre
+        };
+        ingreso.imputado.municipioSelect = {
+          value: ingreso.imputado.municipio.id,
+          description: ingreso.imputado.municipio.nombre
+        };
+        ingreso.imputado.estadoSelect = {
+          value: ingreso.imputado.municipio.estado.id,
+          description: ingreso.imputado.municipio.estado.nombre
+        };
+        this.ingreso = ingreso;
+        this.arrayAlias = ingreso.imputado.apodos;
+        this.arrayDatoDelito = ingreso.imputado.delitos;
+        this.ingreso.imputado.fechaNacimiento = this.datePipe.transform(this.ingreso.imputado.fechaNacimiento, 'yyyy-MM-dd');
+      } else {
+        this.ingreso.id = ingreso.id;
+        this.ingreso.folio = ingreso.folio;
+      }
     });
   }
 
