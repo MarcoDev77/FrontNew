@@ -132,5 +132,7 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/marcarIngresoTerminado?imputadoId=${id}`);
   }
 
+  generateFolio = () => this.http.get(`${this.url}/api/generarFolioImputado`);
+
 
 }
