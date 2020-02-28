@@ -17,9 +17,13 @@ import {SectionTitleComponent} from './section-title/section-title.component';
 import {IngresoNavigationComponent} from './ingreso-navigation/ingreso-navigation.component';
 import {WebViewerComponent} from './web-viewer/web-viewer.component';
 import {ImageViewerModule} from 'ng2-image-viewer';
+
+import { CarpetaInvestigacionImputadoComponent } from './carpeta-investigacion-imputado/carpeta-investigacion-imputado.component';
+
 import { CausaPenalIngresoComponent } from './causa-penal-ingreso/causa-penal-ingreso.component';
 import { DelitoIngresoComponent } from './delito-ingreso/delito-ingreso.component';
 import { DelitoComponent } from '@dashboard/catalogos/delito/delito.component';
+
 
 const MODULES = [
   FormsModule,
@@ -38,7 +42,11 @@ const COMPONENTS = [
   FooterComponent,
   SidebarComponent,
   LoaderComponent,
+
+  CarpetaInvestigacionImputadoComponent,
+
   CausaPenalIngresoComponent
+
 ];
 
 @NgModule({

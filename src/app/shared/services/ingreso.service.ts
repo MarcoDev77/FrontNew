@@ -137,6 +137,16 @@ export class IngresoService {
 
   generateFolio = () => this.http.get(`${this.url}/api/generarFolioImputado`);
 
+  listCarpetasInvestigacion = imputadoId => this.http.get(`${this.url}/api/listarCarpetasPorImputado?imputadoId=${imputadoId}`);
+
+  saveCarpetaInvestigacion = model => {
+    this.data = model;
+    return this.http.post(`${this.url}/api/registrarCarpetaInvestigacion`, this.data);
+  }
+  deleteCarpetaInvestigacion = carpetaId => {
+    console.log('carpetaId', carpetaId);
+    return this.http.delete(`${this.url}/api/eliminarCarpetaInvestigacion?carpetaId=${carpetaId}`);
+  }
 
 
 
