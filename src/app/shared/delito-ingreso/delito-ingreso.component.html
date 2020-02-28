@@ -1,36 +1,79 @@
-<div class="table-responsive" [hidden]="false">
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="text-center">
-                    Delito
-                </th>
-                <th class="text-center">
-                    Juez
-                </th>
-                <th class="text-center" style="min-width: 5rem">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center">
-                    <i class="fa fa-history" placement="top" (click)="viewHistory(formModal2)" ngbTooltip="Ver Historial"></i> &nbsp;
-                    <i class="fa fa-cog" placement="top" (click)="delitoEdit(formModal)" ngbTooltip="Editar"></i>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="6"></td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="text-center w-100">
-        <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
-        </pagination-controls>
+<div class="row" [hidden]="isForm">
+    <div class="col text-right mb-3">
+        <button class="btn btn-success btn-sm m-0 pull-right" (click)="toggleForm(true)" [ngbTooltip]="'Agregar delito'"><i
+          class="fa fa-plus fa-lg"></i></button>
     </div>
+
+    <div class="table-responsive">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Delito
+                    </th>
+                    <th class="text-center">
+                        Juez
+                    </th>
+                    <th class="text-center" style="min-width: 5rem">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of data">
+                    <td class="text-center">{{item.nombre}}</td>
+                    <td class="text-center">{{item.juez}}</td>
+                    <td class="text-center">
+                        <i class="fa fa-history" placement="top" (click)="viewHistory(formModal2)" ngbTooltip="Ver Historial"></i> &nbsp;
+                        <i class="fa fa-cog" placement="top" (click)="delitoEdit(item): toogleForm(true)" ngbTooltip="Editar"></i>
+                    </td>
+                </tr>
+                <tr *ngIf="data.length == 0">
+                    <td colspan="3">Sin registros...</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center w-100">
+            <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
+            </pagination-controls>
+        </div>
+    </div>
+
 </div>
+<div [hidden]="!isForm">
 
-<ng-template #name>
+    <form action="">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group shadows">
+                    <app-select placeholder="Seleccione un Delito" [search]="true" [options]="tipoDelitoLista" [multiple]="false" [modelo]="tipoDelitoSelected" aria-required="true" (getModel)="tipoDelitoSelected = $event; getTipDelitos()" [disabled]="delitoAdicional"></app-select>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group shadows">
+                    <div class="custom-control custom-checkbox">
+                        <input name="otro" type="checkbox" class="custom-control-input" [(ngModel)]="delitoAdicional" id="otro" #otro="ngModel">
+                        <label class="custom-control-label" for="otro"> <b>Otro</b></label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="delitoAdicional">
+                <div class="form-group shadows">
+                    <input class="form-control" type="text" placeholder="Especifique" name="delitoAdicional" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group shadows">
+                    <input class="form-control" type="text" placeholder="Juez" name="juez" [(ngModel)]="delito.juez" #juez="ngModel" required/>
+                </div>
+            </div>
 
-</ng-template>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center text-sm-right">
+                <button type="button" (click)="toggleForm(false)" class="btn btn-danger mr-3">Cancelar</button>
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>
