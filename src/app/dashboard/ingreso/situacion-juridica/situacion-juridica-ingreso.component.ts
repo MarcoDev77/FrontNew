@@ -30,7 +30,7 @@ export class SituacionJuridicaComponent implements OnInit {
       console.log(this.ingreso)
     })
   }
-  //TODO: cambiar por el metodo correcto
+ 
   submit(){
     let model={
       imputadoId: this.ingreso.id,

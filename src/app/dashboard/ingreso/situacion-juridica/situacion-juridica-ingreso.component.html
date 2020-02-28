@@ -159,8 +159,33 @@
         <button type="submit" class="btn btn-success">Guardar</button>
     </div>
 </form>
+<app-section-title icon="fa fa-folder" title="Carpetas de investigación"></app-section-title>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <select class="form-control shadows" name="causaPenal">
+                        <option disabled selected>Carpetas de investigacion</option>
+                        <option value="">Carpeta 1</option>
+                        <option value="">Carpeta 2</option>
+                        <option value="">Carpeta 3</option>
+                    </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <button class="btn btn-info btn-sm m-0 mr-3" [ngbTooltip]="'Descargar'"><i
+                            class="fa fa-print"></i></button>
+            <button class="btn btn-warning btn-sm m-0 mr-3" [ngbTooltip]="'Ver historial'"><i
+                            class="fa fa-history"></i></button>
 
-<app-section-title icon="fa fa-thumbs-down" title="Delitos"></app-section-title>
+            <button class="btn btn-success btn-sm m-0" [ngbTooltip]="'Registrar carpeta de investigacion'"><i
+                            class="fa fa-plus fa-lg"></i></button>
+        </div>
+    </div>
+
+</div>
+<app-section-title icon="fa fa-balance-scale" title="Causas Penales"></app-section-title>
+<app-causa-penal-ingreso [hidden]="true" #causaPenal></app-causa-penal-ingreso>
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
@@ -172,13 +197,20 @@
                 </select>
         </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-6">
         <div class="form-group">
-            <button class="btn btn-info btn-sm m-0" (click)="add()" [ngbTooltip]="'Descargar'"><i
-                        class="fa fa-print "></i></button>
+            <button class="btn btn-info btn-sm m-0 mr-3" [ngbTooltip]="'Descargar'"><i
+                        class="fa fa-print"></i></button>
+            <button class="btn btn-warning btn-sm m-0 mr-3" [ngbTooltip]="'Ver historial'"><i
+                        class="fa fa-history"></i></button>
+
+            <button class="btn btn-success btn-sm m-0" (click)="causaPenal.openModal()" [ngbTooltip]="'Registrar causa peanl'"><i
+                        class="fa fa-plus fa-lg"></i></button>
         </div>
     </div>
+
 </div>
+
 <div class="row">
     <div class="table-responsive">
         <table class="table">
