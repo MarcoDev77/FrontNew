@@ -11,7 +11,9 @@ export class DelitoIngresoComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  toogle(){
+    
+  }
   //Obtiene los delitos relacionados al imputado por causa penal o por carpeta de investigación
   getDelitosImputado(){
 

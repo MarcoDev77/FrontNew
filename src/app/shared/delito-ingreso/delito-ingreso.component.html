@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive" [hidden]="false">
     <table class="table">
         <thead>
             <tr>
@@ -16,7 +16,7 @@
                 <td class="text-center"></td>
                 <td class="text-center"></td>
                 <td class="text-center">
-                    <i class="fa fa-eye" placement="top" (click)="viewHistory(formModal2)" ngbTooltip="Ver Historial"></i> &nbsp;
+                    <i class="fa fa-history" placement="top" (click)="viewHistory(formModal2)" ngbTooltip="Ver Historial"></i> &nbsp;
                     <i class="fa fa-cog" placement="top" (click)="delitoEdit(formModal)" ngbTooltip="Editar"></i>
                 </td>
             </tr>
@@ -30,3 +30,7 @@
         </pagination-controls>
     </div>
 </div>
+
+<ng-template #name>
+
+</ng-template>

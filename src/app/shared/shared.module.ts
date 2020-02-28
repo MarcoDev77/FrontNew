@@ -38,7 +38,8 @@ const COMPONENTS = [
   FooterComponent,
   SidebarComponent,
   LoaderComponent,
-  CausaPenalIngresoComponent
+  CausaPenalIngresoComponent,
+  DelitoIngresoComponent
 ];
 
 @NgModule({
