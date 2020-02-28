@@ -30,4 +30,5 @@ export class Imputado {
   apodos: any[];
   delitos: any[];
   mainName: any;
+
 }
