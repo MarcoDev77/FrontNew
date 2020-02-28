@@ -49,8 +49,45 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   }
 
   // Table Methods
-  add() {
-    this.isForm = true;
+  toggleForm() {
+    this.isForm = !this.isForm;
+  }
+
+  update(item: any) {
+    this.carpeta = {...item};
+    this.toggleForm();
+  }
+
+  SeeDelitos(item: any) {
+    console.log(item);
+  }
+
+  delete(item: any) {
+    console.log(item);
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: 'El estatus del registro cambiará.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then(({value}) => {
+      if (value) {
+        this.ingresoService.deleteCarpetaInvestigacion(item.id).subscribe((data: any) => {
+          console.log(data);
+          Swal.fire({
+            title: data.error ? 'Error!' : 'Cambio exitoso.',
+            text: data.mensaje,
+            icon: data.error ? 'error' : 'success',
+            timer: 1300,
+            showConfirmButton: false
+          });
+          if (!data.error) {
+            this.getData(this.ingreso.id);
+          }
+        });
+      }
+    });
   }
 
   sort(key: string) {
@@ -72,29 +109,22 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
     this.carpeta = {} as any;
   }
 
-  submit(array) {
-    if (this.validateFields(array)) {
-      this.carpeta = {...this.carpeta, imputado: {id: this.ingresoId}};
-      this.ingresoService.saveCarpetaInvestigacion(this.carpeta).subscribe((data: any) => {
-        console.log('save carpeta', data);
-        Swal.fire({
-          title: data.error ? 'Error!' : 'Guardado',
-          text: data.mensaje,
-          icon: data.error ? 'error' : 'success',
-          timer: 1300,
-          showConfirmButton: false
-        });
-        if (!data.error) {
-          this.cancel();
-          this.getData(this.ingreso.id);
-        }
+  submit(array?) {
+    this.carpeta = {...this.carpeta, imputado: {id: this.ingresoId}};
+    this.ingresoService.saveCarpetaInvestigacion(this.carpeta).subscribe((data: any) => {
+      console.log('save carpeta', data);
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
       });
-    }
-  }
-
-  update(id, item) {
-    this.carpeta = {...item};
-
+      if (!data.error) {
+        this.cancel();
+        this.getData(this.ingreso.id);
+      }
+    });
   }
 
   switch(e) {
