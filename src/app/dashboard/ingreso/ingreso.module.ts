@@ -7,11 +7,10 @@ import {IngresoRoutingModule} from '@dashboard/ingreso/ingreso-routing.module';
 import { FormularioIngresoComponent } from './formulario-ingreso/formulario-ingreso.component';
 import { ListaIngresoComponent } from './lista-ingreso/lista-ingreso.component';
 import { DactiloscopiaComponent } from './dactiloscopia/dactiloscopia.component';
-import { SituacionJuridicaIngresoComponent } from './situacion-juridica-ingreso/situacion-juridica-ingreso.component';
 import { ReferenciasComponent } from './referencias/referencias.component';
 import { CaracteristicasComponent } from './caracteristicas/caracteristicas.component';
 import { MediaAfiliacionComponent } from './media-afiliacion/media-afiliacion.component';
-import { SituacionJuridicaImputadoComponent } from './situacion-juridica-imputado/situacion-juridica-imputado.component';
+import { SituacionJuridicaComponent } from './situacion-juridica/situacion-juridica-ingreso.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {CatalogosModule} from '@dashboard/catalogos/catalogos.module';
 import { BusquedaHuellasComponent } from './busqueda-huellas/busqueda-huellas.component';
@@ -24,11 +23,11 @@ import { BusquedaHuellasComponent } from './busqueda-huellas/busqueda-huellas.co
     FormularioIngresoComponent,
     ListaIngresoComponent,
     DactiloscopiaComponent,
-    SituacionJuridicaIngresoComponent,
+    SituacionJuridicaComponent,
     ReferenciasComponent,
     CaracteristicasComponent,
     MediaAfiliacionComponent,
-    SituacionJuridicaImputadoComponent,
+    
     BusquedaHuellasComponent
   ],
     imports: [
