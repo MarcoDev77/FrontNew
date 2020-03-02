@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewChild, Input} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit, Input} from '@angular/core';
 import {IngresoService} from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
+import {roles} from '@shared/helpers/roles';
 
 @Component({
   selector: 'app-causa-penal-ingreso',
@@ -15,6 +15,7 @@ export class CausaPenalIngresoComponent implements OnInit {
   public causaPenal: any;
   public data = [];
   public ingreso: any;
+  public ROLE_ARCHIVO = roles.archivo.role;
 
   // Table
   public p;
@@ -34,7 +35,6 @@ export class CausaPenalIngresoComponent implements OnInit {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
-    this.role = 'ARCHIVO';
   }
 
   ngOnInit() {
