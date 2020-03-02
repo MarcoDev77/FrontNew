@@ -55,7 +55,7 @@ export class BusquedaHuellasComponent {
     const data = JSON.parse(response);
     console.log(data);
     this.clearIntetval();
-    if (data.coincidenciasEncontradas && data.coincidenciasEncontradas.length > 0) {
+    if (!data.coincidenciasEncontradas && data.coincidenciasEncontradas.length > 0) {
       this.modalService.dismissAll();
       return Swal.fire({
         title: 'Resultados',
@@ -64,7 +64,7 @@ export class BusquedaHuellasComponent {
       });
     }
     Swal.fire({
-      title: data.error ? 'Error!' : 'Guardado',
+      title: data.error ? 'Error!' : 'Resultados',
       text: data.mensaje,
       icon: data.error ? 'error' : 'success',
       timer: 1000,
