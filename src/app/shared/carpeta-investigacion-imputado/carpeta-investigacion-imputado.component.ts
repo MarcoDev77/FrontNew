@@ -36,7 +36,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getData(this.ingreso.id);
+    this.getData(this.ingresoId);
   }
 
   getData(ingresoId) {
@@ -83,7 +83,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
             showConfirmButton: false
           });
           if (!data.error) {
-            this.getData(this.ingreso.id);
+            this.getData(this.ingresoId);
           }
         });
       }
@@ -122,7 +122,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
       });
       if (!data.error) {
         this.cancel();
-        this.getData(this.ingreso.id);
+        this.getData(this.ingresoId);
       }
     });
   }

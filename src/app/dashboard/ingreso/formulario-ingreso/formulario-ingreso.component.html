@@ -459,7 +459,7 @@
 <!--    </table>-->
 <!--  </div>-->
 <!--</div>-->
-<app-carpeta-investigacion-imputado [ingresoId]="ingreso.id"></app-carpeta-investigacion-imputado>
+<app-carpeta-investigacion-imputado *ngIf="ingreso?.id" [ingresoId]="ingreso.id"></app-carpeta-investigacion-imputado>
 <!--Footer-->
 <div class="row">
   <div class="col-md-12 text-right">
