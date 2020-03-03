@@ -94,11 +94,18 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/listCausaPenal`, this.data);
   }
 
-  listDelitosByCausasPenales(model) {
-    this.data = model;
-    return this.http.post(`${this.url}/api/delitosByImputadoAndCausaPenal`, this.data);
-
+  listDelitosByCausasPenales(id) {
+    return this.http.get(`${this.url}/api/listarDelitosPorCausa?causaId=${id}`);
   }
+
+  listDelitosByCarpetaInvestigacion(id){
+    return this.http.get(`${this.url}/api/listarDelitosPorCarpeta?carpetaId=${id}`);
+  }
+
+  saveDelito(model){
+    return this.http.post(`${this.url}/api/registrarDelitosCausaOCarpeta`, model);
+  }
+  
 
   // CARACTERISTICAS
   getCaracteristica(clave, imputadoId) {

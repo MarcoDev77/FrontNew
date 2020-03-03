@@ -20,11 +20,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let item of data">
-                    <td class="text-center">{{item.nombre}}</td>
+                    <td class="text-center">{{item.tipoDelito.nombre}}</td>
                     <td class="text-center">{{item.juez}}</td>
                     <td class="text-center">
                         <i class="fa fa-history" placement="top" (click)="viewHistory(formModal2)" ngbTooltip="Ver Historial"></i> &nbsp;
-                        <i class="fa fa-cog" placement="top" (click)="delitoEdit(item): toogleForm(true)" ngbTooltip="Editar"></i>
+                        <i class="fa fa-cog" placement="top" (click)="delitoEdit(item) ; toggleForm(true)" ngbTooltip="Editar"></i>
                     </td>
                 </tr>
                 <tr *ngIf="data.length == 0">
@@ -41,11 +41,11 @@
 </div>
 <div [hidden]="!isForm">
 
-    <form action="">
+    <form name="f" (ngSubmit)="f.form.valid && saveDelito()" #f="ngForm" novalidate>
         <div class="row">
             <div class="col-md-5">
                 <div class="form-group shadows">
-                    <app-select placeholder="Seleccione un Delito" [search]="true" [options]="tipoDelitoLista" [multiple]="false" [modelo]="tipoDelitoSelected" aria-required="true" (getModel)="tipoDelitoSelected = $event; getTipDelitos()" [disabled]="delitoAdicional"></app-select>
+                    <app-select placeholder="Seleccione un Delito" [search]="true" [options]="tipoDelitoLista" [multiple]="false" [modelo]="tipoDelitoSelected" aria-required="true" (getModel)="tipoDelitoSelected = $event; getTipoDelitos()" [disabled]="delitoAdicional"></app-select>
                 </div>
             </div>
             <div class="col-md-1">
@@ -58,12 +58,12 @@
             </div>
             <div class="col-md-6" *ngIf="delitoAdicional">
                 <div class="form-group shadows">
-                    <input class="form-control" type="text" placeholder="Especifique" name="delitoAdicional" />
+                    <input class="form-control" type="text" placeholder="Especifique" name="delitoAdicional" [(ngModel)]="delito.delitoAdicional" #delitoAdicional="ngModel" />
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" *ngIf="role">
                 <div class="form-group shadows">
-                    <input class="form-control" type="text" placeholder="Juez" name="juez" [(ngModel)]="delito.juez" #juez="ngModel" required/>
+                    <input class="form-control" type="text" placeholder="Juez" name="juez" [(ngModel)]="delito.juez" #juez="ngModel" />
                 </div>
             </div>
 
