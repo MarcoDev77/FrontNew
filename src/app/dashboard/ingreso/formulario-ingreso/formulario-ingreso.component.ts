@@ -252,13 +252,13 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   goToSenasParticulares() {
-    if (this.ingreso.id && this.arrayAlias.length > 0 && this.checkMainAlias() && this.arrayDatoDelito.length > 0) {
+    if (this.ingreso.id && this.arrayAlias.length > 0 && this.checkMainAlias()) {
       sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
       this.router.navigate(['/dashboard/ingreso/media-afiliacion']);
     } else {
       Swal.fire({
         title: 'Cuidado',
-        text: 'Se debe completar el registro, marcar como principal un nombre y registrar delitos',
+        text: 'Se debe completar el registro, marcar como principal un nombre',
         icon: 'warning',
       });
     }

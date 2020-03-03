@@ -1,21 +1,19 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Delito} from '@shared/models/Delito';
 import {IngresoService} from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
-import {roles} from '@shared/helpers/roles';
 
 @Component({
-  selector: 'app-causa-penal-ingreso',
-  templateUrl: './causa-penal-ingreso.component.html',
-  styleUrls: ['./causa-penal-ingreso.component.scss']
+  selector: 'app-carpeta-investigacion-imputado',
+  templateUrl: './carpeta-investigacion-imputado.component.html',
+  styleUrls: ['./carpeta-investigacion-imputado.component.scss']
 })
-export class CausaPenalIngresoComponent implements OnInit {
+export class CarpetaInvestigacionImputadoComponent implements OnInit {
 
   @Input() ingresoId;
-  @Input() role;
-  public causaPenal: any;
+  public carpeta: any;
   public data = [];
   public ingreso: any;
-  public ROLE_ARCHIVO = roles.archivo.role;
 
   // Table
   public p;
@@ -29,7 +27,7 @@ export class CausaPenalIngresoComponent implements OnInit {
   public auxId: any;
 
   constructor(private ingresoService: IngresoService) {
-    this.causaPenal = {} as any;
+    this.carpeta = {} as any;
     // Table
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
@@ -38,15 +36,14 @@ export class CausaPenalIngresoComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ID', this.ingresoId);
-    this.getData(this.ingreso.id);
+    this.getData(this.ingresoId);
   }
 
   getData(ingresoId) {
-    this.ingresoService.listCausaPenal(ingresoId).subscribe((data: any) => {
+    this.ingresoService.listCarpetasInvestigacion(ingresoId).subscribe((data: any) => {
       console.log(data);
       if (!data.error) {
-        this.data = data.listaCausaPenal;
+        this.data = data.carpetaInvestigacion;
       }
     });
   }
@@ -57,7 +54,7 @@ export class CausaPenalIngresoComponent implements OnInit {
   }
 
   update(item: any) {
-    this.causaPenal = {...item};
+    this.carpeta = {...item};
     this.toggleForm();
   }
 
@@ -76,8 +73,8 @@ export class CausaPenalIngresoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then(({value}) => {
       if (value) {
-        this.ingresoService.deleteCausaPenal(item.id).subscribe((data: any) => {
-          console.log('deleteCausaPenal', data);
+        this.ingresoService.deleteCarpetaInvestigacion(item.id).subscribe((data: any) => {
+          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
@@ -86,7 +83,7 @@ export class CausaPenalIngresoComponent implements OnInit {
             showConfirmButton: false
           });
           if (!data.error) {
-            this.getData(this.ingreso.id);
+            this.getData(this.ingresoId);
           }
         });
       }
@@ -109,15 +106,12 @@ export class CausaPenalIngresoComponent implements OnInit {
   cancel() {
     this.showTr();
     this.isForm = false;
-    this.causaPenal = {} as any;
+    this.carpeta = {} as any;
   }
 
   submit(array?) {
-    if (!this.causaPenal.nombre) {
-      return;
-    }
-    this.causaPenal = {...this.causaPenal, imputado: {id: this.ingreso.id}};
-    this.ingresoService.saveCausaPenal(this.causaPenal).subscribe((data: any) => {
+    this.carpeta = {...this.carpeta, imputado: {id: this.ingresoId}};
+    this.ingresoService.saveCarpetaInvestigacion(this.carpeta).subscribe((data: any) => {
       console.log('save carpeta', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
@@ -128,7 +122,7 @@ export class CausaPenalIngresoComponent implements OnInit {
       });
       if (!data.error) {
         this.cancel();
-        this.getData(this.ingreso.id);
+        this.getData(this.ingresoId);
       }
     });
   }
