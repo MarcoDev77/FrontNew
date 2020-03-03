@@ -124,6 +124,7 @@ export class FormularioIngresoComponent implements OnInit {
       } else {
         this.ingreso.id = ingreso.id;
         this.ingreso.folio = ingreso.folio;
+        this.arrayAlias = ingreso.imputado.apodos;
       }
     });
   }
