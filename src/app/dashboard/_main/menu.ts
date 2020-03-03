@@ -46,15 +46,16 @@ export const ROUTES: RouteInfo[] = [
     roles: [
       r.test.role,
       r.site.role,
+      r.superadmin.role
     ],
     path: '/dashboard/catalogo',
     title: 'CATÁLOGOS',
     type: 'sub',
     icontype: 'fa fa-files-o',
     collapse: 'tables',
-    isCollapsed: true,
+    isCollapsed: false,
     children: [
-      {path: 'usuario', title: 'USUARIOS', ab: 'US'},
+      // {path: 'usuario', title: 'USUARIOS', ab: 'US'},
       {path: 'centro-penitenciario', title: 'CENTROS PENITENCIARIOS', ab: 'CP'},
       {path: 'delito', title: 'DELITOS', ab: 'DE'},
       {path: 'tipo-libertad', title: 'TIPO DE LIBERTAD', ab: 'TL'},
@@ -62,6 +63,17 @@ export const ROUTES: RouteInfo[] = [
       {path: 'enfermedad-cronica', title: 'ENFERMEDAD CRÓNICA', ab: 'EC'},
       {path: 'motivo-reubicacion', title: 'MOTIVO DE REUBICACIÓN', ab: 'MR'},
     ]
+  },
+  {
+    roles: [
+      r.admin.role
+    ],
+    path: '/dashboard/catalogo/usuario',
+    title : 'USUARIOS',
+    type: 'link',
+    icontype : 'fa fa-user',
+    collapse : 'tables',
+    isCollapsed: false,
   },
   {
     roles: [
