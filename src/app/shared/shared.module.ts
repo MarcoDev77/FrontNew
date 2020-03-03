@@ -43,7 +43,7 @@ const COMPONENTS = [
   SidebarComponent,
   LoaderComponent,
   CausaPenalIngresoComponent,
-  DelitoIngresoComponent
+  DelitoIngresoComponent,
   CarpetaInvestigacionImputadoComponent,
 ];
 

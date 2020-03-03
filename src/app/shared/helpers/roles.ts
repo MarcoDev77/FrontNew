@@ -4,10 +4,15 @@ export const roles = {
     name: 'Prueba',
     main: 'dactiloscopia'
   },
-  admin: {
+  superadmin: {
     role: 'ROLE_SUPERADMINISTRADOR',
     name: 'Super Administrador',
-    main: 'dactiloscopia'
+    main: 'dashboard/catalogo/'
+  },
+  admin: {
+    role: 'ROLE_ADMINISTRADOR',
+    name: 'Administrador',
+    main: 'dashboard/catalogo/usuario'
   },
   director: {
     role: 'ROLE_DIRECTOR',
@@ -16,8 +21,8 @@ export const roles = {
   },
   dactiloscopia: {
     role: 'ROLE_DACTILOSCOPIA',
-    name: 'Consultor',
-    main: 'dactiloscopia'
+    name: 'Dactilocopia',
+    main: 'dashboard/ingreso/lista-ingreso'
   },
   juridico: {
     role: 'ROLE_JURIDICO',
