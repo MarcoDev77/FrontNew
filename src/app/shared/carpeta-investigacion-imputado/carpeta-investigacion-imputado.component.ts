@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Delito} from '@shared/models/Delito';
 import {IngresoService} from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-carpeta-investigacion-imputado',
@@ -26,7 +27,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   public setClickedRow: Function;
   public auxId: any;
 
-  constructor(private ingresoService: IngresoService) {
+  constructor(private ingresoService: IngresoService, private modalService: NgbModal) {
     this.carpeta = {} as any;
     // Table
     this.setClickedRow = function(index) {
@@ -58,8 +59,9 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
     this.toggleForm();
   }
 
-  SeeDelitos(item: any) {
-    console.log(item);
+  seeDelitosCarpeta(item: any,modal) {
+    this.carpeta=item
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
   }
 
   delete(item: any) {
@@ -167,4 +169,6 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
       }
     }
   }
+
+  
 }

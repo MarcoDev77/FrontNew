@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {IngresoService} from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
 import {roles} from '@shared/helpers/roles';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-causa-penal-ingreso',
@@ -28,7 +29,7 @@ export class CausaPenalIngresoComponent implements OnInit {
   public setClickedRow: Function;
   public auxId: any;
 
-  constructor(private ingresoService: IngresoService) {
+  constructor(private ingresoService: IngresoService, private modalService: NgbModal) {
     this.causaPenal = {} as any;
     // Table
     this.setClickedRow = function(index) {
@@ -61,8 +62,9 @@ export class CausaPenalIngresoComponent implements OnInit {
     this.toggleForm();
   }
 
-  SeeDelitos(item: any) {
-    console.log(item);
+  seeDelitosCausa(item: any,modal) {
+    this.causaPenal=item
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
   }
 
   delete(item: any) {

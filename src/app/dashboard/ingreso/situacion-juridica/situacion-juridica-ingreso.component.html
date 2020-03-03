@@ -159,13 +159,14 @@
         <button type="submit" class="btn btn-success">Guardar</button>
     </div>
 </form>
-<app-section-title icon="fa fa-folder" title="Carpetas de investigación"></app-section-title>
 
-<app-section-title icon="fa fa-balance-scale" title="Causas Penales"></app-section-title>
+<app-carpeta-investigacion-imputado *ngIf="ingreso?.id" [ingresoId]="ingreso.id" [ingresoId]="ingreso.id"></app-carpeta-investigacion-imputado>
+
+<app-causa-penal-ingreso *ngIf="ingreso?.id" role="ARCHIVO" [ingresoId]="ingreso.id"></app-causa-penal-ingreso>
 <app-causa-penal-ingreso [hidden]="true" #causaPenal></app-causa-penal-ingreso>
 
 
-<app-delito-ingreso [causaPenalId]="1"></app-delito-ingreso>
+
 
 <div class="row">
 
