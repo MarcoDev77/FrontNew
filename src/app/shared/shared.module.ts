@@ -42,11 +42,9 @@ const COMPONENTS = [
   FooterComponent,
   SidebarComponent,
   LoaderComponent,
-
+  CausaPenalIngresoComponent,
+  DelitoIngresoComponent
   CarpetaInvestigacionImputadoComponent,
-
-  CausaPenalIngresoComponent
-
 ];
 
 @NgModule({
