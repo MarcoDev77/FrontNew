@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
 
    
       this.currentUser = this.authenticationService.getCurrentUser(); 
-    console.log("usaer", this.currentUser)
+   
       for (let [key, value] of Object.entries(roles)) {
         if (this.currentUser && value.role === this.currentUser.roles[0]) {
          
@@ -172,7 +172,6 @@ export class HeaderComponent implements OnInit {
 
   getCurrentPersonal(){
     this.authenticationService.getCurrentPersonal().subscribe((data:any)=>{
-      console.log(data);
       this.currentPersonal=data;
       this.informationUser.name=this.currentPersonal.personal.nombre
     })
