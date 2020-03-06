@@ -89,9 +89,11 @@ export class CentroPenitenciarioComponent implements OnInit {
   getEstados(region, idPais) {
     this.catalogosService.listEstados(region, idPais).subscribe((data: any) => {
       if (data.estados) {
+        this.estados = [];
         for (const estado of data.estados) {
           this.estados = [...this.estados, {value: estado.id, description: estado.nombre}];
         }
+        this.estados = [...this.estados].sort();
         console.log('ESTADOS', this.estados);
       }
     });
@@ -102,6 +104,7 @@ export class CentroPenitenciarioComponent implements OnInit {
     this.catalogosService.listMunicipios(region, idEstado).subscribe((data: any) => {
       console.log('Municipios', data);
       if (data.estados) {
+        this.municipios = [];
         for (const municipio of data.estados) {
           this.municipios = [...this.municipios, {value: municipio.id, description: municipio.nombre}];
         }
@@ -167,6 +170,7 @@ export class CentroPenitenciarioComponent implements OnInit {
 
   add(modal) {
     this.centroPenitenciario = {} as CentroPenitenciario;
+    this.persona = {} as Personal;
     this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
   }
 

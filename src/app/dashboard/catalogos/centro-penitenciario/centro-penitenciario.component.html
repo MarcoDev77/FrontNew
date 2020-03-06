@@ -118,15 +118,15 @@
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <app-select placeholder="Estados" required ngbTooltip="Estados" [options]="estados" [multiple]="false"
+            <app-select placeholder="Seleccione estado" required ngbTooltip="Seleccione estado" [options]="estados" [multiple]="false"
                         [modelo]="centroPenitenciario.estadoSelect"
-                        (getModel)="centroPenitenciario.estadoSelect = $event; onSelectEstado();"></app-select>
+                        (getModel)="centroPenitenciario.estadoSelect = $event; onSelectEstado(); getEstados('mexico',null)"></app-select>
           </div>
         </div>
 
         <div class="col-sm-6">
           <div class="form-group">
-            <app-select placeholder="Municipios" required ngbTooltip="Municipio" [options]="municipios" [multiple]="false"
+            <app-select placeholder="Seleccione municipio" required ngbTooltip="Seleccione municipio" [options]="municipios" [multiple]="false"
                         [modelo]="centroPenitenciario.municipioSelect"
                         (getModel)="centroPenitenciario.municipioSelect = $event;"></app-select>
           </div>
@@ -158,7 +158,9 @@
                    [(ngModel)]="centroPenitenciario.capacidadInternos" #capacidadInternos="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && capacidadInternos.invalid}"
                    pattern='^[0-9]*$'
-                   min="0" required/>
+                   min="0"
+                   max="999999"
+                   required/>
           </div>
         </div>
 
@@ -170,7 +172,8 @@
                    pattern='^[0-9]*$'
                    [(ngModel)]="centroPenitenciario.numeroAdministrativos" #numeroAdministrativos="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && numeroAdministrativos.invalid}"
-                   min="0" required/>
+                   min="0"
+                   max="999999" required/>
           </div>
         </div>
 
@@ -182,7 +185,8 @@
                    [(ngModel)]="centroPenitenciario.numeroCustodios" #numeroCustodios="ngModel"
                    [ngClass]="{ 'is-invalid': f.submitted && numeroCustodios.invalid}"
                    pattern='^[0-9]*$'
-                   min="0" required/>
+                   min="0"
+                   maxlength="6" required/>
           </div>
         </div>
       </div>
@@ -200,7 +204,7 @@
 
             <div class="col-sm-6">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="CURP" ngbTooltip="CURP" maxlength="15" [(ngModel)]="persona.curp" #curp="ngModel" name="curp">
+                <input type="text" class="form-control" placeholder="CURP" ngbTooltip="CURP" maxlength="18" [(ngModel)]="persona.curp" #curp="ngModel" name="curp">
               </div>
             </div>
 
@@ -212,7 +216,7 @@
 
             <div class="col-sm-6">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="N° de seguro social" ngbTooltip="N° de seguro social" pattern="[0-9]{10}" maxlength="11" [(ngModel)]="persona.numSeguroSocial" #numSeguroSocial="ngModel" name="numSeguroSocial" [ngClass]="{ 'is-invalid': f.submitted && numSeguroSocial.invalid }"
+                <input type="text" class="form-control" placeholder="N° de seguro social" ngbTooltip="N° de seguro social" pattern="[0-9]{11}" maxlength="11" [(ngModel)]="persona.numSeguroSocial" #numSeguroSocial="ngModel" name="numSeguroSocial" [ngClass]="{ 'is-invalid': f.submitted && numSeguroSocial.invalid }"
                        title="Solo se admiten números">
               </div>
             </div>
@@ -274,7 +278,9 @@
         </div>
         <div class="col-12">
           <div class="form-group">
-            <textarea class=" form-control" cols="80" placeholder="Dirección" rows="4" value="" ngbTooltip="Dirección" [(ngModel)]="persona.direccion" #direccion name="direccion"></textarea>
+            <textarea class=" form-control" cols="80" placeholder="Dirección" rows="4" value="" ngbTooltip="Dirección" [(ngModel)]="persona.direccion" #direccion name="direccion"
+                      maxlength="255 "
+            ></textarea>
 
           </div>
         </div>

@@ -44,11 +44,8 @@ export class IngresoService {
   }
 
   saveIngreso(model: Ingreso) {
-    model.imputado.estado = {id: 1};
-    model.imputado.municipio = {id: 1};
-    model.imputado.calleNumero = 'Villa #3';
-    model.imputado.colonia = 'Villa Real';
-    model.imputado.codigoPostal = 62577;
+    model.imputado.estado = {id: model.imputado.estadoSelect.value};
+    model.imputado.municipio = {id: model.imputado.municipioSelect.value};
     model.imputado.paisNacimiento = {id: model.imputado.paisNacimientoSelect.value};
     model.imputado.religion = {id: model.imputado.religionSelect.value};
     model.imputado.estadoCivil = {id: model.imputado.estadoCivilSelect.value};
@@ -105,7 +102,7 @@ export class IngresoService {
   saveDelito(model){
     return this.http.post(`${this.url}/api/registrarDelitosCausaOCarpeta`, model);
   }
-  
+
 
   // CARACTERISTICAS
   getCaracteristica(clave, imputadoId) {

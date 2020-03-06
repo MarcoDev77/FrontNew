@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./situacion-juridica-ingreso.component.scss']
 })
 export class SituacionJuridicaComponent implements OnInit {
-  public ingreso:Ingreso
+  public ingreso:any
 
   public situacionJuridica: SituacionJuridica
   constructor(private router: Router,private modalService: NgbModal, private ingresoService: IngresoService) {
@@ -30,7 +30,7 @@ export class SituacionJuridicaComponent implements OnInit {
       console.log(this.ingreso)
     })
   }
- 
+
   submit(){
     let model={
       imputadoId: this.ingreso.id,
@@ -48,7 +48,7 @@ export class SituacionJuridicaComponent implements OnInit {
         showConfirmButton: false
       });
       if (!data.error) {
- 
+
       }
     });
   }
