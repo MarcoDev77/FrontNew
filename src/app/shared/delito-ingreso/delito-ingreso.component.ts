@@ -111,7 +111,7 @@ export class DelitoIngresoComponent implements OnInit {
         this.toggleForm(false);
         this.getDelitos();
       })
-    
+
   }
 
   getHistorial(delitoId) {
@@ -123,6 +123,14 @@ export class DelitoIngresoComponent implements OnInit {
     this.tipoDelitoSelected = { value: delito.tipoDelito.id, description: delito.tipoDelito.nombre }
     this.delito.juez = delito.juez;
     console.log(delito)
+  }
+
+  viewHistory(formModal2?: any) {
+
+  }
+
+  switch($event: number) {
+
   }
 }
 

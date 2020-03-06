@@ -63,22 +63,26 @@ export class FormularioIngresoComponent implements OnInit {
     this.catalogosService.listOcupaciones()
       .subscribe((data: any) => this.ocupaciones = this.mapToSelect(data.ocupaciones));
     this.catalogosService.listPaises()
-      .subscribe((data: any) => this.paises = this.mapToSelect(data.paises));
+      .subscribe((data: any) => this.paises = this.mapToSelect(data.paises, true));
     // this.catalogosService.listCentroPenitenciario()
     //   .subscribe((data: any) => this.centrosPenitenciarios = this.mapToSelect(data.centros));
     this.catalogosService.listDelito()
       .subscribe((data: any) => this.delitos = this.mapToSelect(data.delitos));
+    this.getEstado();
   }
 
   getEstado() {
-    if (this.ingreso.imputado.paisNacimientoSelect) {
-      this.catalogosService.listEstados('seleccionada', this.ingreso.imputado.paisNacimientoSelect.value)
-        .subscribe((data: any) => this.estados = this.mapToSelect(data.estados));
-    }
+    this.catalogosService.listEstados('mexico', null)
+      .subscribe((data: any) => {
+        console.log('ESTADOS', data);
+        this.estados = this.mapToSelect(data.estados);
+      });
   }
 
   getMunicipios() {
     if (this.ingreso.imputado.estadoSelect) {
+      console.log(this.ingreso.imputado.estadoSelect);
+      this.municipios = [];
       this.catalogosService.listMunicipios('seleccionada', this.ingreso.imputado.estadoSelect.value)
         .subscribe((data: any) => this.municipios = this.mapToSelect(data.estados));
     }
@@ -88,6 +92,7 @@ export class FormularioIngresoComponent implements OnInit {
     this.ingresoService.getIngreso(id).subscribe((data: any) => {
       console.log('new ingreso', data);
       const {ingreso, error} = data;
+      console.log('GET ingreso', ingreso);
       if (!ingreso.registroNuevo) {
         ingreso.imputado.gradoEstudioSelect = {
           value: ingreso.imputado.gradoEstudio.id,
@@ -124,6 +129,7 @@ export class FormularioIngresoComponent implements OnInit {
       } else {
         this.ingreso.id = ingreso.id;
         this.ingreso.folio = ingreso.folio;
+        this.ingreso.numeroExpediente = ingreso.numeroExpediente;
         this.arrayAlias = ingreso.imputado.apodos;
       }
     });
@@ -133,7 +139,8 @@ export class FormularioIngresoComponent implements OnInit {
     if (!this.validSelect()) {
       return Swal.fire({
         title: 'Cuidado',
-        text: 'Se deben llenar los campos de <<Religion>>, <<Pais de Nacimiento>>, <<Estado de nacimiento>>, <<Estado civil>>, <<Ocupación>> y <<Grado de estudios>>',
+        text: 'Se deben llenar los campos de <<Religion>>, <<Nacionalidad>>, <<Estado civil>>, <<Ocupación>>, <<Grado de estudios>>' +
+          '<<Estado>> y <<Municipio>>',
         icon: 'warning',
       });
     }
@@ -159,7 +166,8 @@ export class FormularioIngresoComponent implements OnInit {
 
   validSelect(): boolean {
     if (this.ingreso.imputado.religionSelect && this.ingreso.imputado.paisNacimientoSelect && this.ingreso.imputado.estadoSelect
-      && this.ingreso.imputado.estadoCivilSelect && this.ingreso.imputado.ocupacionSelect && this.ingreso.imputado.gradoEstudioSelect) {
+    && this.ingreso.imputado.estadoCivilSelect && this.ingreso.imputado.ocupacionSelect && this.ingreso.imputado.gradoEstudioSelect
+    && this.ingreso.imputado.estadoSelect, this.ingreso.imputado.municipioSelect) {
       return true;
     }
     return false;
@@ -240,7 +248,10 @@ export class FormularioIngresoComponent implements OnInit {
     return pass;
   }
 
-  mapToSelect(array: any[]) {
+  mapToSelect(array: any[], isPaises?) {
+    if (isPaises) {
+      return array.map((item: any) => ({value: item.id, description: item.nacionalidad}));
+    }
     return array.map((item: any) => ({value: item.id, description: item.nombre}));
   }
 

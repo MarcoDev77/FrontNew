@@ -50,6 +50,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   }
 
   // Table Methods
+  nombreV: any;
   toggleForm() {
     this.isForm = !this.isForm;
   }
