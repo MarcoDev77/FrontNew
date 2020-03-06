@@ -266,7 +266,7 @@ export class FormularioIngresoComponent implements OnInit {
   goToSenasParticulares() {
     if (this.ingreso.id && this.arrayAlias.length > 0 && this.checkMainAlias()) {
       sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
-      this.router.navigate(['/dashboard/ingreso/media-afiliacion']);
+      this.router.navigate(['/dashboard/ingreso/dactiloscopia']);
     } else {
       Swal.fire({
         title: 'Cuidado',

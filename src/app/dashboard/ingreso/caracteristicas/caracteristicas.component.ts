@@ -90,6 +90,6 @@ export class CaracteristicasComponent implements OnInit {
 
   goToDactiloscopia() {
     sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
-    this.router.navigate(['/dashboard/ingreso/dactiloscopia']);
+    this.router.navigate(['/dashboard/ingreso/media-afiliacion']);
   }
 }

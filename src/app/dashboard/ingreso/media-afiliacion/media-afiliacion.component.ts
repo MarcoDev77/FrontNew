@@ -114,7 +114,7 @@ export class MediaAfiliacionComponent implements OnInit {
   }
 
   goToCaracteriticas() {
-    sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
-    this.router.navigate(['/dashboard/ingreso/caracteristicas']);
+    //sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
+    this.router.navigate(['/dashboard/ingreso/lista-ingreso']);
   }
 }

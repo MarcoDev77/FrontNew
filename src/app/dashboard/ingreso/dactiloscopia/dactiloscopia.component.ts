@@ -352,14 +352,15 @@ export class DactiloscopiaComponent implements OnInit {
         this.isLoading = false;
         console.log(data);
         if (!data.error) {
+
           Swal.fire({
             title: 'Terminado',
-            text: 'Se ha completado el reguistro.',
+            text: 'Se ha completado el registro de dactiloscopia.',
             icon: 'success',
             timer: 1000,
             showConfirmButton: false,
           }).then(() => {
-            this.router.navigate(['dashboard/ingreso/lista-ingreso']);
+            this.router.navigate(['dashboard/ingreso/caracteristicas']);
           });
         }
       });

@@ -26,9 +26,10 @@ export class IngresoNavigationComponent {
       ? JSON.parse(sessionStorage.getItem('ingreso')) : {};
     this.steps = [
       {name: 'Formulario de ingreso', path: '/dashboard/ingreso/form-ingreso'},
-      {name: 'Señas particulares', path: '/dashboard/ingreso/media-afiliacion'},
-      {name: 'Característica', path: '/dashboard/ingreso/caracteristicas'},
       {name: 'Dactiloscopia', path: '/dashboard/ingreso/dactiloscopia'},
+      {name: 'Característica', path: '/dashboard/ingreso/caracteristicas'},
+      {name: 'Señas particulares', path: '/dashboard/ingreso/media-afiliacion'},
+
       // {name: 'Referencias'},
       // {name: 'Situación penal'},
     ];
