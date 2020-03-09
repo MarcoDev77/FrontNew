@@ -13,4 +13,5 @@ export class Ingreso {
   edadAparente: number;
   esTraslado: boolean;
   centroOrigen: string;
+  registroTerminado: boolean;
 }

@@ -132,6 +132,7 @@ export class FormularioIngresoComponent implements OnInit {
         this.ingreso.numeroExpediente = ingreso.numeroExpediente;
         this.arrayAlias = ingreso.imputado.apodos;
       }
+      this.ingreso.registroTerminado = ingreso.registroTerminado;
     });
   }
 
