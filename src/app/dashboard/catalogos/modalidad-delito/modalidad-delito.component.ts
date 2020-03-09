@@ -4,6 +4,7 @@ import {ModalidadDelito} from '@shared/models/ModalidadDelito';
 import Swal from 'sweetalert2';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Delito } from '@shared/models/Delito';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-modalidad-delito',
@@ -30,7 +31,7 @@ export class ModalidadDelitoComponent implements OnInit {
   public key = 'id'; // set default
   public reverse = true;
 
-  constructor(private catalogosService: CatalogosService) {
+  constructor(private catalogosService: CatalogosService, private router: Router) {
     this.modalidadDelito = {} as ModalidadDelito;
     this.data = [];
     this.date = new Date();
@@ -219,5 +220,9 @@ export class ModalidadDelitoComponent implements OnInit {
         });
       }
     });
+  }
+
+  goBack() {
+    this.router.navigate(['/catalogo/delito']);
   }
 }
