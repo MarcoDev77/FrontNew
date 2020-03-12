@@ -49,8 +49,6 @@ export class IngresoService {
     model.imputado.paisNacimiento = {id: model.imputado.paisNacimientoSelect.value};
     model.imputado.religion = {id: model.imputado.religionSelect.value};
     model.imputado.estadoCivil = {id: model.imputado.estadoCivilSelect.value};
-    model.imputado.ocupacion = {id: model.imputado.ocupacionSelect.value};
-    model.imputado.gradoEstudio = {id: model.imputado.gradoEstudioSelect.value};
     model.imputado.numeroHijos = Number(model.imputado.numeroHijos);
     this.data = model;
     console.log('To server', this.data);
