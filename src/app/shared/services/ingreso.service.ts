@@ -163,6 +163,8 @@ export class IngresoService {
   deleteCausaPenal = id => {
     return this.http.put(`${this.url}/api/bajaLogicaCausaPenal?id=${id}`, {});
   }
+
+  getHistorialDelito = id => this.http.get(`${this.url}/api/historicoDelitos?delitoId=${id}`);
 }
 
 

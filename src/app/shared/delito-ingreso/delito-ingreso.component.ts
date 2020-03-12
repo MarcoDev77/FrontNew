@@ -3,6 +3,7 @@ import { CatalogosService } from '@shared/services/catalogos.service';
 import { IngresoService } from '@shared/services/ingreso.service';
 import { AuthenticationService } from '@shared/services/authentication.service';
 import Swal from 'sweetalert2';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-delito-ingreso',
@@ -12,12 +13,14 @@ import Swal from 'sweetalert2';
 export class DelitoIngresoComponent implements OnInit {
   public delito: Delito;
   public isForm: boolean;
+  public isRecord: boolean = false;
   public data: any;
   public tipoDelitoLista: any[];
   public tipoDelitoSelected: any;
   public delitoAdicional: boolean
   public role: boolean = false;
   public user: any
+  public hitorialDelitos = [];
   @Input() carpetaInvestigacionId?: number;
   @Input() causaPenalId?: number;
 
@@ -125,8 +128,21 @@ export class DelitoIngresoComponent implements OnInit {
     console.log(delito)
   }
 
-  viewHistory(formModal2?: any) {
-
+  viewHistory(item) {
+    console.log(item);
+    this.isRecord = true;
+    this.ingresoService.getHistorialDelito(item.id).subscribe((data: any) => {
+      console.log(data);
+      if (!data.error) {
+        this.hitorialDelitos = data.historicoDelitos.map(delito => {
+          return ({
+            ...delito,
+            informacionNueva: JSON.parse(delito.informacionNueva),
+          });
+        });
+        console.log(this.hitorialDelitos);
+      }
+    });
   }
 
   switch($event: number) {

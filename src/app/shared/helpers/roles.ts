@@ -28,14 +28,16 @@ export const roles = {
     role: 'ROLE_JURIDICO',
     name: 'Consultor',
     main: 'dactiloscopia'
-  }, archivo: {
+  },
+  archivo: {
     role: 'ROLE_ARCHIVO',
     name: 'Consultor',
-    main: 'dactiloscopia'
-  }, trabajoSocial: {
+    main: 'dashboard/ingreso/lista-ingreso'
+  },
+  trabajoSocial: {
     role: 'ROLE_TRABAJO_SOCIAL',
-    name: 'Consultor',
-    main: 'dactiloscopia'
+    name: 'Trabajo social',
+    main: 'dashboard/servicio-social/registro-visita'
   }, seguridadCustodia: {
     role: 'ROLE_SEGURIDAD_CUSTODIA',
     name: 'Consultor',

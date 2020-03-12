@@ -130,6 +130,9 @@ export class BusquedaHuellasComponent {
   }
 
   selectIngreso(item) {
+    if (!this.ingresoId) {
+      return;
+    }
     Swal.fire({
       title: '¿Estas seguro?',
       text: 'Se importaran las huellas de ese ingreso.',
