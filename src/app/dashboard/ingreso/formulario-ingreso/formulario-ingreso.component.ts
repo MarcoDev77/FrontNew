@@ -54,14 +54,14 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.catalogosService.listGradoEstudio()
-      .subscribe((data: any) => this.gradosdeEstudio = this.mapToSelect(data.gradosEstudio));
+    // this.catalogosService.listGradoEstudio()
+    //   .subscribe((data: any) => this.gradosdeEstudio = this.mapToSelect(data.gradosEstudio));
     this.catalogosService.listReligiones()
       .subscribe((data: any) => this.religiones = this.mapToSelect(data.religiones));
     this.catalogosService.listEstadosCiviles()
       .subscribe((data: any) => this.estadosCiviles = this.mapToSelect(data.estadosCiviles));
-    this.catalogosService.listOcupaciones()
-      .subscribe((data: any) => this.ocupaciones = this.mapToSelect(data.ocupaciones));
+    // this.catalogosService.listOcupaciones()
+    //   .subscribe((data: any) => this.ocupaciones = this.mapToSelect(data.ocupaciones));
     this.catalogosService.listPaises()
       .subscribe((data: any) => this.paises = this.mapToSelect(data.paises, true));
     // this.catalogosService.listCentroPenitenciario()
@@ -166,42 +166,12 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   validSelect(): boolean {
-    if (this.ingreso.imputado.religionSelect && this.ingreso.imputado.paisNacimientoSelect && this.ingreso.imputado.estadoSelect
-    && this.ingreso.imputado.estadoCivilSelect && this.ingreso.imputado.ocupacionSelect && this.ingreso.imputado.gradoEstudioSelect
-    && this.ingreso.imputado.estadoSelect, this.ingreso.imputado.municipioSelect) {
-      return true;
-    }
-    return false;
-  }
-
-  addDatoDelito(array) {
-    if (this.validateFiels(array) && this.datoDelito.tipoDelitoSelect && this.arrayDatoDelito.length <= 10) {
-      const model = {
-        tipoDelito: {id: this.datoDelito.tipoDelitoSelect.value},
-        imputado: {id: this.ingreso.id},
-        fechaRegistro: this.datoDelito.fechaRegistro,
-        fechaDetencion: this.datoDelito.fechaDetencion,
-        causaPenal: this.datoDelito.causaPenal,
-        carpetaInvestigacion: this.datoDelito.carpetaInvestigacion
-      };
-      this.ingresoService.savePreDelito(model).subscribe((data: any) => {
-        console.log('save predelito', data);
-        Swal.fire({
-          title: data.error ? 'Error!' : 'Guardado',
-          text: data.mensaje,
-          icon: data.error ? 'error' : 'success',
-          timer: 1300,
-          showConfirmButton: false
-        });
-        if (!data.error) {
-          this.getIngreso(this.ingreso.id);
-        }
-      });
-    }
+    return !!(this.ingreso.imputado.religionSelect && this.ingreso.imputado.paisNacimientoSelect && this.ingreso.imputado.estadoSelect
+    && this.ingreso.imputado.estadoCivilSelect && this.ingreso.imputado.estadoSelect, this.ingreso.imputado.municipioSelect);
   }
 
   addAlias(array) {
-    if (this.validateFiels(array) && this.arrayAlias.length <= 5) {
+    if (this.validateFiels(array)) {
       this.alias.imputado = {id: this.ingreso.id};
       this.ingresoService.saveApodo(this.alias).subscribe((data: any) => {
         console.log(data);
