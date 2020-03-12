@@ -17,10 +17,10 @@ export class BitacoraService {
   }
 
   listBitacoraIngreso() {
-    return this.http.get(`${this.url}/api/listarModalidadesDelito`);
+    return this.http.get(`${this.url}/api/bitacoraIngresos`);
   }
 
   listBitacoraIngresoImputado() {
-    return this.http.get(`${this.url}/api/listarModalidadesDelito`);
+    return this.http.get(`${this.url}/api/bitacoraImputado`);
   }
 }

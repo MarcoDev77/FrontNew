@@ -1,4 +1,4 @@
-<app-ingreso-navigation step="3"></app-ingreso-navigation>
+<app-ingreso-navigation [freeMenu]="true" step="1"></app-ingreso-navigation>
 <br>
 <app-section-title icon="fa fa-id-card-o" title="datos"></app-section-title>
 <div class="row">
@@ -332,7 +332,7 @@
   </div>
   <div class="col-4 col-md-2">
     <button [disabled]="isLoading" (click)="finishIngreso()" type="button" class="float-right btn btn-success">
-      Terminar
+      Continuar
     </button>
   </div>
 </div>

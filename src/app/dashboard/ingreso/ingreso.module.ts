@@ -27,7 +27,6 @@ import { BusquedaHuellasComponent } from './busqueda-huellas/busqueda-huellas.co
     ReferenciasComponent,
     CaracteristicasComponent,
     MediaAfiliacionComponent,
-    
     BusquedaHuellasComponent
   ],
     imports: [

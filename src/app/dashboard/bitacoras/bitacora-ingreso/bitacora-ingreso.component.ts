@@ -14,7 +14,7 @@ export class BitacoraIngresoComponent implements OnInit {
   public reverse: any;
   public filter: any;
   public p: any;
-
+  public isLoading = false;
   constructor(
     private modalService: NgbModal,
     private bitacoraService: BitacoraService,
@@ -25,9 +25,10 @@ export class BitacoraIngresoComponent implements OnInit {
   }
 
   getData() {
-   this.bitacoraService.listBitacoraIngreso().subscribe((data: any) => {
-     console.log('getData', data);
-   });
+      this.bitacoraService.listBitacoraIngreso().subscribe((data: any) => {
+        console.log('getData', data);
+        this.data = data.ingresos;
+      });
   }
 
   add(modal) {

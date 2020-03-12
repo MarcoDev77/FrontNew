@@ -8,6 +8,7 @@ import { SituacionJuridicaComponent } from './situacion-juridica/situacion-jurid
 import {ReferenciasComponent} from '@dashboard/ingreso/referencias/referencias.component';
 import {CaracteristicasComponent} from '@dashboard/ingreso/caracteristicas/caracteristicas.component';
 import {MediaAfiliacionComponent} from '@dashboard/ingreso/media-afiliacion/media-afiliacion.component';
+import {BusquedaHuellasComponent} from '@dashboard/ingreso/busqueda-huellas/busqueda-huellas.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       {path: 'referencias', component: ReferenciasComponent},
       {path: 'caracteristicas', component: CaracteristicasComponent},
       {path: 'media-afiliacion', component: MediaAfiliacionComponent},
+      {path: 'busqueda-huella', component: BusquedaHuellasComponent}
     ]
   },
 ];

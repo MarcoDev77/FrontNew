@@ -1,8 +1,7 @@
 <app-section-title icon="fa fa-book" title="BITACORA DE IMPUTADOS"></app-section-title>
 <div class="row">
     <div class="col text-right mb-3">
-        <button class="btn btn-success m-0 pull-right" (click)="add(formModal)" [ngbTooltip]="'Nuevo Registro'"><i
-                class="fa fa-plus fa-lg"></i></button>
+
         <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
             placeholder="Buscar">
     </div>
@@ -12,33 +11,11 @@
         <thead>
             <tr>
                 <th class="text-center">
-                    No.
+                    Folio
                 </th>
                 <th class="text-center">
                     Nombre
                 </th>
-
-                <th class="text-center">
-                    Fecha y hora de ingreso
-                </th>
-                <th class="text-center">
-                    Fecha de libertad
-                </th>
-                <th class="text-center">
-                    Delito
-                </th>
-                <th class="text-center">
-                    Causa penal
-                </th>
-                <th class="text-center">
-                    Juzgado
-                </th>
-                <th class="text-center">
-                    Tipo de libertad
-                </th>
-                <th class="text-center">
-                        Medida Cautelar
-                    </th>
                 <th class="text-center">
                     Tipo P-R
                 </th>
@@ -46,22 +23,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="text-center">658</td>
-                <td class="text-center">Roberto Lopez Lopez</td>
-                <td class="text-center">12/08/2019 17:25</td>
-                <td class="text-center">20/12/2022</td>
-                <td class="text-center">Ataque peligroso</td>
-                <td class="text-center">Causa penal</td>
-                <td class="text-center">250</td>
-                <td class="text-center">bajo fianza</td>
-                <td class="text-center">La prohibición de salir del país</td>
-                <td class="text-center">R</td>
+        <tr *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p };">
+          <td class="text-center"> {{item.folio}}</td>
+          <td class="text-center">{{item.apodo.nombre}} {{item.apodo.apellidoPaterno}} {{item.apodo.apellidoPaterno}} </td>
                 <td class="text-center">
                     <i class="fa fa-eye"></i>
 
                 </td>
             </tr>
+        <tr *ngIf="data.length == 0">
+          <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
+        </tr>
         </tbody>
     </table>
 

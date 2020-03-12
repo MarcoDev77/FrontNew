@@ -1,4 +1,4 @@
-<app-ingreso-navigation step="1"></app-ingreso-navigation>
+<app-ingreso-navigation [freeMenu]="true" step="3"></app-ingreso-navigation>
 <div class="row">
     <form class="card-body" name="form" (ngSubmit)="fGeneral.form.valid && guardarMediaFiliacion(0)" #fGeneral="ngForm" novalidate>
         <div class="row">
@@ -594,7 +594,7 @@
                                 </label>
 
 
-                                <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCejas.submitted && cejasImplantacion.invalid }"> 
+                                <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCejas.submitted && cejasImplantacion.invalid }">
                                     <input class="form-check-input" type="radio" [value]="'Separadas'"
                                         name="cejasImplantacion" #cejasImplantacion="ngModel"
                                         [(ngModel)]="mediaFiliacion.cejasImplantacion" required>
@@ -935,7 +935,7 @@
                                     <span class="form-check-sign"></span>
                                 </label>
 
-                                <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fNariz.submitted && alturaNariz.invalid }"> 
+                                <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fNariz.submitted && alturaNariz.invalid }">
                                     <input class="form-check-input" type="radio" [value]="'Mediana'" name="alturaNariz"
                                         #alturaNariz="ngModel" [(ngModel)]="mediaFiliacion.alturaNariz" required>
                                     Mediana
@@ -1193,7 +1193,7 @@
                                     Foseta
                                     <span class="form-check-sign"></span>
                                 </label>
-                                <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fMenton.submitted && mentonTipo.invalid }"> 
+                                <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fMenton.submitted && mentonTipo.invalid }">
                                     <input class="form-check-input" type="radio" [value]="'Borla'" name="mentonTipo"
                                         #mentonTipo="ngModel" [(ngModel)]="mediaFiliacion.mentonTipo" required>
                                     Borla
@@ -1597,6 +1597,6 @@
 <!--Footer-->
 <div class="row">
     <div class="col-md-12 text-right">
-        <button (click)="goToCaracteriticas()" class="btn btn-success shadows" style="width: 15rem;" [disabled]="!mediaFiliacionTerminada" type="submit">Continuar</button>
+        <button (click)="goToCaracteriticas()" class="btn btn-success shadows" style="width: 15rem;"  type="submit">Terminar</button>
     </div>
 </div>
