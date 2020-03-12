@@ -23,7 +23,7 @@
                  [(ngModel)]="ingreso.folio" readonly/>
         </div>
       </div>
-      <div class="col-md-4" *ngIf="this.ingreso.tipoImputado === 'Imputado'">
+      <div class="col-md-4">
         <div class="form-group">
           <select ngbTooltip="Clasificación" class="form-control shadows" name="clasificacion" required
                   #clasificacion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && clasificacion.invalid}"
@@ -71,17 +71,11 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias" [(ngModel)]="alias.nombre"
-               #nombreAlias="ngModel" maxlength="45"
-               [ngClass]="{ 'is-invalid':  nombreAlias.touched && nombreAlias.invalid }" ngbTooltip="Nombre"/>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
         <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias"
                [(ngModel)]="alias.apellidoPaterno" #apellidoPaternoAlias="ngModel" maxlength="45"
                [ngClass]="{ 'is-invalid':  apellidoPaternoAlias.touched && apellidoPaternoAlias.invalid }"
                ngbTooltip="Apellido Paterno"/>
+
       </div>
     </div>
     <div class="col-md-4">
@@ -92,19 +86,27 @@
                ngbTooltip="Apellido Materno"/>
       </div>
     </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias"
+               [(ngModel)]="alias.nombre"
+               #nombreAlias="ngModel" maxlength="45"
+               [ngClass]="{ 'is-invalid':  nombreAlias.touched && nombreAlias.invalid }" ngbTooltip="Nombre"/>
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <input class="form-control shadows" type="text" placeholder="Otros nombres/alias" name="aliasNombre"
+        <input class="form-control shadows" type="text" placeholder="Apodo" name="aliasNombre"
                [(ngModel)]="alias.otro" #aliasNombre="ngModel"
-               [ngClass]="{ 'is-invalid':  aliasNombre.touched && aliasNombre.invalid }" ngbTooltip="Alias/otro nombre"
+               [ngClass]="{ 'is-invalid':  aliasNombre.touched && aliasNombre.invalid }" ngbTooltip="Apodo"
         />
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <button type="button" [disabled]="arrayAlias.length >= 5 || this.ingreso.id == null" class="btn btn-info btn-sm shadows"
+        <button type="button" [disabled]="this.ingreso.id == null" class="btn btn-info btn-sm shadows"
                 (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])">
           Agregar
         </button>
@@ -212,22 +214,11 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <select ngbTooltip="Número de hijos" class="form-control shadows" name="numeroHijos"
-                  [(ngModel)]="ingreso.imputado.numeroHijos" #numeroHijos="ngModel"
-                  [ngClass]="{ 'is-invalid': f.submitted && numeroHijos.invalid}" required>
-            <option [value]="undefined" disabled hidden>Número de hijos</option>
-            <option [value]="0">0</option>
-            <option [value]="1">1</option>
-            <option [value]="2">2</option>
-            <option [value]="3">3</option>
-            <option [value]="4">4</option>
-            <option [value]="5">5</option>
-            <option [value]="6">6</option>
-            <option [value]="7">7</option>
-            <option [value]="8">8</option>
-            <option [value]="9">9</option>
-            <option [value]="10">10</option>
-          </select>
+          <input class="form-control shadows" ngbTooltip="Número de hijos" placeholder="Número de hijos"
+                 max="22" min="0"
+                 name="numeroHijos" #numeroHijos="ngModel" [ngClass]="{ 'is-invalid': f.submitted && numeroHijos.invalid}"
+                 [(ngModel)]="ingreso.imputado.numeroHijos"
+                 pattern='^[0-9]*$'/>
         </div>
       </div>
     </div>
@@ -235,17 +226,19 @@
 
       <div class="col-md-4">
         <div class="form-group">
-          <app-select placeholder="Ocupación" ngbTooltip="Ocupación" [options]="ocupaciones" [multiple]="false"
-                      [modelo]="ingreso.imputado.ocupacionSelect" aria-required="true"
-                      (getModel)="ingreso.imputado.ocupacionSelect = $event;"></app-select>
+          <input class="form-control shadows" ngbTooltip="Ocupación" placeholder="Ocupación"
+                 maxlength="150"
+                 name="ocuacion" #ocupacion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && ocupacion.invalid}"
+                 [(ngModel)]="ingreso.imputado.ocupacion"/>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-group">
-          <app-select placeholder="Grado de estudios" ngbTooltip="Grado de estudios" [options]="gradosdeEstudio"
-                      [multiple]="false" [modelo]="ingreso.imputado.gradoEstudioSelect" aria-required="true"
-                      (getModel)="ingreso.imputado.gradoEstudioSelect = $event;"></app-select>
+          <input class="form-control shadows" ngbTooltip="Grado de estudios" placeholder="Grado de estudios"
+                 maxlength="150" name="ocuacion" #gradoEstudio="ngModel"
+                 [ngClass]="{ 'is-invalid': f.submitted && gradoEstudio.invalid}"
+                 [(ngModel)]="ingreso.imputado.gradoEstudio"/>
         </div>
       </div>
 
@@ -307,25 +300,49 @@
       </div>
 
     </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <div class="custom-control custom-checkbox">
+            <input name="finadoPadre" type="checkbox" class="custom-control-input" id="finadoPadre"
+                   [(ngModel)]="ingreso.imputado.finadoPadre" #finadoPadre="ngModel"
+                   [value]="ingreso.imputado.finadoPadre"
+                   [ngClass]="{ 'is-invalid': f.submitted && finadoPadre.invalid}">
+            <label class="custom-control-label" for="finadoPadre">Padre finado</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <div class="custom-control custom-checkbox">
+            <input name="finadoMadre" type="checkbox" class="custom-control-input" id="finadoMadre"
+                   [(ngModel)]="ingreso.imputado.finadoMadre" #finadoMadre="ngModel"
+                   [value]="ingreso.imputado.finadoMadre"
+                   [ngClass]="{ 'is-invalid': f.submitted && finadoMadre.invalid}">
+            <label class="custom-control-label" for="finadoMadre">Madre finado</label>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <app-section-title title="Domicilio" icon="fa fa-home"></app-section-title>
   <div class="row">
     <div class="col-md-4">
-        <app-select placeholder="Seleccione estado" ngbTooltip="Seleccione estado" [options]="estados"
-                    [multiple]="false"
-                    [modelo]="ingreso.imputado.estadoSelect" aria-required="true"
-                    (getModel)="ingreso.imputado.estadoSelect = $event; getMunicipios()"></app-select>
+      <app-select placeholder="Seleccione estado" ngbTooltip="Seleccione estado" [options]="estados"
+                  [multiple]="false"
+                  [modelo]="ingreso.imputado.estadoSelect" aria-required="true"
+                  (getModel)="ingreso.imputado.estadoSelect = $event; getMunicipios()"></app-select>
     </div>
     <div class="col-md-4">
-        <app-select placeholder="Seleccione municipio" ngbTooltip="Seleccione municipio"
-                    [options]="municipios" [multiple]="false"
-                    [modelo]="ingreso.imputado.municipioSelect" aria-required="true"
-                    (getModel)="ingreso.imputado.municipioSelect = $event;"></app-select>
+      <app-select placeholder="Seleccione municipio" ngbTooltip="Seleccione municipio"
+                  [options]="municipios" [multiple]="false"
+                  [modelo]="ingreso.imputado.municipioSelect" aria-required="true"
+                  (getModel)="ingreso.imputado.municipioSelect = $event;"></app-select>
     </div>
     <div class="col-md-4">
       <input class="form-control" type="text" ngbTooltip=" Colonia" placeholder="Colonia" name="colonia"
-                       #colonia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && colonia.invalid}"
-                       [(ngModel)]="ingreso.imputado.colonia"/>
+             #colonia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && colonia.invalid}"
+             [(ngModel)]="ingreso.imputado.colonia"/>
     </div>
   </div>
   <br>
@@ -337,9 +354,9 @@
              [(ngModel)]="ingreso.imputado.calleNumero"/>
     </div>
     <div class="col-md-4">
-                <input class="form-control" type="text" ngbTooltip="C.P." placeholder="C.P." name="cp" pattern='^[0-9]*$'
-                       #cp="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cp.invalid}" maxlength="5"
-                       [(ngModel)]="ingreso.imputado.codigoPostal"/>
+      <input class="form-control" type="text" ngbTooltip="C.P." placeholder="C.P." name="cp" pattern='^[0-9]*$'
+             #cp="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cp.invalid}" maxlength="5"
+             [(ngModel)]="ingreso.imputado.codigoPostal"/>
     </div>
   </div>
   <div class="row">
@@ -349,7 +366,8 @@
   </div>
 </form>
 
-<app-carpeta-investigacion-imputado *ngIf="ingreso?.id" [ingresoId]="ingreso.id" [ingresoId]="ingreso.id"></app-carpeta-investigacion-imputado>
+<app-carpeta-investigacion-imputado *ngIf="ingreso?.id" [ingresoId]="ingreso.id"
+                                    [ingresoId]="ingreso.id"></app-carpeta-investigacion-imputado>
 <app-causa-penal-ingreso *ngIf="ingreso?.id" role="DACTILOSCOPIA" [ingresoId]="ingreso.id"></app-causa-penal-ingreso>
 <!--Footer-->
 <div class="row">
