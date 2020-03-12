@@ -54,14 +54,14 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.catalogosService.listGradoEstudio()
-      .subscribe((data: any) => this.gradosdeEstudio = this.mapToSelect(data.gradosEstudio));
+ /*    this.catalogosService.listGradoEstudio()
+      .subscribe((data: any) => this.gradosdeEstudio = this.mapToSelect(data.gradosEstudio)); */
     this.catalogosService.listReligiones()
       .subscribe((data: any) => this.religiones = this.mapToSelect(data.religiones));
     this.catalogosService.listEstadosCiviles()
       .subscribe((data: any) => this.estadosCiviles = this.mapToSelect(data.estadosCiviles));
-    this.catalogosService.listOcupaciones()
-      .subscribe((data: any) => this.ocupaciones = this.mapToSelect(data.ocupaciones));
+   /*  this.catalogosService.listOcupaciones()
+      .subscribe((data: any) => this.ocupaciones = this.mapToSelect(data.ocupaciones)); */
     this.catalogosService.listPaises()
       .subscribe((data: any) => this.paises = this.mapToSelect(data.paises, true));
     // this.catalogosService.listCentroPenitenciario()
