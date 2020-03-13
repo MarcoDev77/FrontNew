@@ -1,20 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {CatalogosService} from '@shared/services/catalogos.service';
-import {Router} from '@angular/router';
-import {Ingreso} from '@shared/models/Ingreso';
-import {Imputado} from '@shared/models/Imputado';
-import {IngresoService} from '@shared/services/ingreso.service';
+import { Component, OnInit } from '@angular/core';
+import { CatalogosService } from '@shared/services/catalogos.service';
+import { Router } from '@angular/router';
+import { Ingreso } from '@shared/models/Ingreso';
+import { Imputado } from '@shared/models/Imputado';
+import { IngresoService } from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
-import {DatePipe} from '@angular/common';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-formulario-ingreso',
   templateUrl: './formulario-ingreso.component.html',
   styleUrls: ['./formulario-ingreso.component.scss']
 })
-export class FormularioIngresoComponent implements OnInit {
 
+export class FormularioIngresoComponent implements OnInit {
+  public model : any;
   public ingreso: Ingreso;
   public datoDelito: DatoDelito;
   public arrayDatoDelito: DatoDelito[] = [];
@@ -29,7 +34,8 @@ export class FormularioIngresoComponent implements OnInit {
   public municipios = [];
   public delitos = [];
   public centrosPenitenciarios = [];
-
+  public arrayToFilter =[]
+  
 
   constructor(
     private catalogosService: CatalogosService,
@@ -53,75 +59,46 @@ export class FormularioIngresoComponent implements OnInit {
     this.getCatalogos();
   }
 
+
   getCatalogos() {
-    // this.catalogosService.listGradoEstudio()
-    //   .subscribe((data: any) => this.gradosdeEstudio = this.mapToSelect(data.gradosEstudio));
     this.catalogosService.listReligiones()
-      .subscribe((data: any) => this.religiones = this.mapToSelect(data.religiones));
+      .subscribe((data: any) => this.religiones=data.religiones);
     this.catalogosService.listEstadosCiviles()
-      .subscribe((data: any) => this.estadosCiviles = this.mapToSelect(data.estadosCiviles));
-    // this.catalogosService.listOcupaciones()
-    //   .subscribe((data: any) => this.ocupaciones = this.mapToSelect(data.ocupaciones));
+      .subscribe((data: any) => this.estadosCiviles = data.estadosCiviles);
     this.catalogosService.listPaises()
-      .subscribe((data: any) => this.paises = this.mapToSelect(data.paises, true));
-    // this.catalogosService.listCentroPenitenciario()
-    //   .subscribe((data: any) => this.centrosPenitenciarios = this.mapToSelect(data.centros));
+      .subscribe((data: any) => this.paises =data.paises);
     this.catalogosService.listDelito()
-      .subscribe((data: any) => this.delitos = this.mapToSelect(data.delitos));
+      .subscribe((data: any) => this.delitos =data.delitos);
     this.getEstado();
   }
+
+ 
 
   getEstado() {
     this.catalogosService.listEstados('mexico', null)
       .subscribe((data: any) => {
         console.log('ESTADOS', data);
-        this.estados = this.mapToSelect(data.estados);
+        this.estados = data.estados;
       });
   }
 
   getMunicipios() {
-    if (this.ingreso.imputado.estadoSelect) {
-      console.log(this.ingreso.imputado.estadoSelect);
+    if (this.ingreso.imputado.estado) {
+      console.log(this.ingreso.imputado.estado);
       this.municipios = [];
-      this.catalogosService.listMunicipios('seleccionada', this.ingreso.imputado.estadoSelect.value)
-        .subscribe((data: any) => this.municipios = this.mapToSelect(data.estados));
+      this.catalogosService.listMunicipios('seleccionada', this.ingreso.imputado.estado.id)
+        .subscribe((data: any) => this.municipios = data.estados);
     }
   }
 
   getIngreso(id) {
     this.ingresoService.getIngreso(id).subscribe((data: any) => {
       console.log('new ingreso', data);
-      const {ingreso, error} = data;
+      const { ingreso, error } = data;
       console.log('GET ingreso', ingreso);
       if (!ingreso.registroNuevo) {
-        ingreso.imputado.gradoEstudioSelect = {
-          value: ingreso.imputado.gradoEstudio.id,
-          description: ingreso.imputado.gradoEstudio.nombre
-        };
-        ingreso.imputado.ocupacionSelect = {
-          value: ingreso.imputado.ocupacion.id,
-          description: ingreso.imputado.ocupacion.nombre
-        };
-        ingreso.imputado.estadoCivilSelect = {
-          value: ingreso.imputado.estadoCivil.id,
-          description: ingreso.imputado.estadoCivil.nombre
-        };
-        ingreso.imputado.paisNacimientoSelect = {
-          value: ingreso.imputado.paisNacimiento.id,
-          description: ingreso.imputado.paisNacimiento.nombre
-        };
-        ingreso.imputado.religionSelect = {
-          value: ingreso.imputado.religion.id,
-          description: ingreso.imputado.religion.nombre
-        };
-        ingreso.imputado.municipioSelect = {
-          value: ingreso.imputado.municipio.id,
-          description: ingreso.imputado.municipio.nombre
-        };
-        ingreso.imputado.estadoSelect = {
-          value: ingreso.imputado.municipio.estado.id,
-          description: ingreso.imputado.municipio.estado.nombre
-        };
+      
+     
         this.ingreso = ingreso;
         this.arrayAlias = ingreso.imputado.apodos;
         this.arrayDatoDelito = ingreso.imputado.delitos;
@@ -137,16 +114,8 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   submit() {
-    if (!this.validSelect()) {
-      return Swal.fire({
-        title: 'Cuidado',
-        text: 'Se deben llenar los campos de <<Religion>>, <<Nacionalidad>>, <<Estado civil>>, <<Ocupación>>, <<Grado de estudios>>' +
-          '<<Estado>> y <<Municipio>>',
-        icon: 'warning',
-      });
-    }
     console.log('submit', this.ingreso);
-    this.ingreso.imputado = {...this.ingreso.imputado, fechaNacimiento: new Date(this.ingreso.imputado.fechaNacimiento)};
+    this.ingreso.imputado = { ...this.ingreso.imputado, fechaNacimiento: new Date(this.ingreso.imputado.fechaNacimiento) };
     this.ingreso.imputado.edadAparente = Number(this.ingreso.imputado.edadAparente);
     this.ingreso.imputado.hablaIndigena = !!this.ingreso.imputado.hablaIndigena;
     this.ingreso.imputado.esIndigena = !!this.ingreso.imputado.esIndigena;
@@ -165,14 +134,11 @@ export class FormularioIngresoComponent implements OnInit {
     });
   }
 
-  validSelect(): boolean {
-    return !!(this.ingreso.imputado.religionSelect && this.ingreso.imputado.paisNacimientoSelect && this.ingreso.imputado.estadoSelect
-    && this.ingreso.imputado.estadoCivilSelect && this.ingreso.imputado.estadoSelect, this.ingreso.imputado.municipioSelect);
-  }
+
 
   addAlias(array) {
     if (this.validateFiels(array)) {
-      this.alias.imputado = {id: this.ingreso.id};
+      this.alias.imputado = { id: this.ingreso.id };
       this.ingresoService.saveApodo(this.alias).subscribe((data: any) => {
         console.log(data);
         Swal.fire({
@@ -219,12 +185,6 @@ export class FormularioIngresoComponent implements OnInit {
     return pass;
   }
 
-  mapToSelect(array: any[], isPaises?) {
-    if (isPaises) {
-      return array.map((item: any) => ({value: item.id, description: item.nacionalidad}));
-    }
-    return array.map((item: any) => ({value: item.id, description: item.nombre}));
-  }
 
   checkMainAlias(): boolean {
     for (const item of this.arrayAlias) {
@@ -252,10 +212,39 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   openCatalogo(modal) {
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12', backdrop: 'static'}).result.then(() => {
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12', backdrop: 'static' }).result.then(() => {
       this.getCatalogos();
     });
   }
+
+  selectArrayTofilter(array){
+    console.log("array",this.arrayToFilter)
+    console.log(array)
+    this.arrayToFilter=array;
+  }
+
+  
+    search = (text$: Observable<string>) =>{
+      return text$.pipe(
+        
+        debounceTime(200),
+        map(term => term === '' ? []
+          : this.arrayToFilter.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+      )
+    }
+    formatter = (x: {nombre: string}) => x.nombre;
+
+    searchNacionalidad = (text$: Observable<string>) =>{
+      return text$.pipe(
+        
+        debounceTime(200),
+        map(term => term === '' ? []
+          : this.arrayToFilter.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+      )
+    }
+    formatterNacionalidad = (x: {nacionalidad: string}) => x.nacionalidad;
+ 
+
 }
 
 class DatoDelito {

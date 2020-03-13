@@ -7,6 +7,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
+          <label>Tipo de imputado:</label>
           <select ngbTooltip="Tipo imputado" class="form-control shadows" name="tipoimputado" required
                   #tipoImputado="ngModel" [ngClass]="{ 'is-invalid': f.submitted && tipoImputado.invalid}"
                   [(ngModel)]="ingreso.tipoImputado">
@@ -18,6 +19,7 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
+          <label>Folio:</label>
           <input class="form-control shadows" ngbTooltip="Folio" placeholder="Folio" name="folio" type="text"
                  #folio="ngModel" [ngClass]="{ 'is-invalid': f.submitted && folio.invalid}" maxlength="45"
                  [(ngModel)]="ingreso.folio" readonly/>
@@ -25,6 +27,7 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
+          <label>Clasificación:</label>
           <select ngbTooltip="Clasificación" class="form-control shadows" name="clasificacion" required
                   #clasificacion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && clasificacion.invalid}"
                   [(ngModel)]="ingreso.clasificacion">
@@ -39,6 +42,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
+          <label>Número de expediente:</label>
           <input class="form-control shadows" ngbTooltip="Número de expediente" placeholder="Número de expediente"
                  name="expediente" type="text" #expediente="ngModel" maxlength="10" minlength="1"
                  [ngClass]="{ 'is-invalid': f.submitted && expediente.invalid}" [(ngModel)]="ingreso.numeroExpediente"
@@ -47,6 +51,7 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
+          <label>Tipo de ingreso:</label>
           <select ngbTooltip="Tipo de ingreso" class="form-control shadows" name="tipoIngreso" #tipoIngreso="ngModel"
                   [ngClass]="{ 'is-invalid': f.submitted && tipoIngreso.invalid}" [(ngModel)]="ingreso.tipoIngreso"
                   required>
@@ -59,11 +64,15 @@
     </div>
     <div class="row">
       <div class="col-md-4">
-        <input class="form-control shadows" ngbTooltip="Número control RENIP" placeholder="Número control RENIP"
-               maxlength="10" minlength="1"
-               name="numeroRenip" #numeroRenip="ngModel" [ngClass]="{ 'is-invalid': f.submitted && numeroRenip.invalid}"
-               [(ngModel)]="ingreso.numeroControlRenip"
-               pattern='^[0-9]*$'/>
+        <div  class="form-group">
+          <label >Número control RENIP:</label>
+          <input class="form-control shadows" ngbTooltip="Número control RENIP" placeholder="Número control RENIP"
+          maxlength="10" minlength="1"
+          name="numeroRenip" #numeroRenip="ngModel" [ngClass]="{ 'is-invalid': f.submitted && numeroRenip.invalid}"
+          [(ngModel)]="ingreso.numeroControlRenip"
+          pattern='^[0-9]*$'/>
+        </div>
+        
       </div>
     </div>
   </div>
@@ -71,6 +80,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
+        <label >Apellido paterno:</label>
         <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias"
                [(ngModel)]="alias.apellidoPaterno" #apellidoPaternoAlias="ngModel" maxlength="45"
                [ngClass]="{ 'is-invalid':  apellidoPaternoAlias.touched && apellidoPaternoAlias.invalid }"
@@ -80,6 +90,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
+        <label >Apellido materno:</label>
         <input class="form-control shadows" type="text" placeholder="Apellido materno" name="apellidoMaternoAlias"
                [(ngModel)]="alias.apellidoMaterno" #apellidoMaternoAlias="ngModel" maxlength="45"
                [ngClass]="{ 'is-invalid':  apellidoMaternoAlias.touched && apellidoMaternoAlias.invalid }"
@@ -88,6 +99,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
+        <label >Nombre:</label>
         <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias"
                [(ngModel)]="alias.nombre"
                #nombreAlias="ngModel" maxlength="45"
@@ -98,6 +110,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
+        <label >Apodo:</label>
         <input class="form-control shadows" type="text" placeholder="Apodo" name="aliasNombre"
                [(ngModel)]="alias.otro" #aliasNombre="ngModel"
                [ngClass]="{ 'is-invalid':  aliasNombre.touched && aliasNombre.invalid }" ngbTooltip="Apodo"
@@ -121,18 +134,20 @@
       <table class="table shadows">
         <thead>
         <tr>
-          <th class="text-center">Nombre</th>
+
           <th class="text-center">Apellido Paterno</th>
           <th class="text-center">Apellido Materno</th>
-          <th class="text-center">Alias</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Apodo</th>
           <th class="text-center">Acciones</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let item of arrayAlias">
-          <td class="text-center">{{item.nombre}}</td>
+       
           <td class="text-center">{{item.apellidoPaterno}}</td>
           <td class="text-center">{{item.apellidoMaterno}}</td>
+          <td class="text-center">{{item.nombre}}</td>
           <td class="text-center">{{item.otro}}</td>
           <td class="text-center">
             <!--          <i class="fa fa-times mr-3" placement="top" ngbTooltip="Eliminar"-->
@@ -152,6 +167,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group shadows">
+          <label >Fecha de nacimiento:</label>
           <input type="date" class="form-control" ngbTooltip="Fecha de Nacimiento" placeholder="Fecha de nacimiento"
                  name="fechaNacimiento" (change)='change($event)' #fechaNacimiento="ngModel"
                  [ngClass]="{ 'is-invalid': f.submitted && fechaNacimiento.invalid}"
@@ -160,6 +176,7 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
+          <label >Edad aparente:</label>
           <input class="form-control" placeholder="Edad aparente" ngbTooltip="Edad aparente" name="edadAparente" min="5"
                  max="120" pattern='^[0-9]*$' #edadAparente="ngModel"
                  [ngClass]="{ 'is-invalid': f.submitted && edadAparente.invalid}"
@@ -176,6 +193,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
+          <label >Genero:</label>
           <select ngbTooltip="Género" class="form-control shadows" name="genero" [(ngModel)]="ingreso.imputado.genero"
                   #genero="ngModel" [ngClass]="{ 'is-invalid': f.submitted && genero.invalid}" required>
             <option [value]="undefined" disabled hidden>Género</option>
@@ -186,18 +204,19 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <app-select placeholder="Religión" required ngbTooltip="Religión" [options]="religiones" [multiple]="false"
-                      [modelo]="ingreso.imputado.religionSelect" aria-required="true"
-                      (getModel)="ingreso.imputado.religionSelect = $event;"></app-select>
+          <label>Religion:</label>
+          <input type="text"  class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" (focus)="selectArrayTofilter(religiones)" [resultTemplate]="rt"
+          [inputFormatter]="formatter" name="model"/>   
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <app-select placeholder="Nacionalidad" required ngbTooltip="Nacionalidad" [options]="paises"
-                      [multiple]="false" [modelo]="ingreso.imputado.paisNacimientoSelect" aria-required="true"
-                      (getModel)="ingreso.imputado.paisNacimientoSelect = $event; getEstado()"></app-select>
+          <label >Nacionalidad:</label>
+          <input type="text"  class="form-control" [(ngModel)]="ingreso.imputado.paisNacimiento" [ngbTypeahead]="searchNacionalidad" (focus)="selectArrayTofilter(paises)" [resultTemplate]="nacionalidad"
+          [inputFormatter]="formatterNacionalidad" name="nacionalidad"/>
+     
         </div>
       </div>
       <div class="col-md-4">
@@ -207,13 +226,14 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <app-select placeholder="Estado Civil" required ngbTooltip="Estado Civil" [options]="estadosCiviles"
-                      [multiple]="false" [modelo]="ingreso.imputado.estadoCivilSelect" aria-required="true"
-                      (getModel)="ingreso.imputado.estadoCivilSelect = $event;"></app-select>
+          <label >Estado civil:</label>
+          <input type="text"  class="form-control" [(ngModel)]="ingreso.imputado.estadoCivil" [ngbTypeahead]="searchNacionalidad" (focus)="selectArrayTofilter(estadosCiviles)" [resultTemplate]="rt"
+          [inputFormatter]="formatter" name="estadosCiviles"/>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
+          <label >Número de hijos:</label>
           <input class="form-control shadows" ngbTooltip="Número de hijos" placeholder="Número de hijos"
                  max="22" min="0"
                  name="numeroHijos" #numeroHijos="ngModel" [ngClass]="{ 'is-invalid': f.submitted && numeroHijos.invalid}"
@@ -226,6 +246,7 @@
 
       <div class="col-md-4">
         <div class="form-group">
+          <label >Ocupación:</label>
           <input class="form-control shadows" ngbTooltip="Ocupación" placeholder="Ocupación"
                  maxlength="150"
                  name="ocuacion" #ocupacion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && ocupacion.invalid}"
@@ -235,6 +256,7 @@
 
       <div class="col-md-4">
         <div class="form-group">
+          <label >Grado de estudios:</label>
           <input class="form-control shadows" ngbTooltip="Grado de estudios" placeholder="Grado de estudios"
                  maxlength="150" name="ocuacion" #gradoEstudio="ngModel"
                  [ngClass]="{ 'is-invalid': f.submitted && gradoEstudio.invalid}"
@@ -248,6 +270,7 @@
 
       <div class="col-md-4">
         <div class="form-group">
+          <label >Etnia:</label>
           <input ngbTooltip="Etnia" class="form-control shadows" type="text" placeholder="Etnia" name="etnia"
                  #etnia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && etnia.invalid}" maxlength="20"
                  [(ngModel)]="ingreso.imputado.etnia"/>
@@ -283,6 +306,7 @@
 
       <div class="col-md-4">
         <div class="form-group">
+          <label >Nombre del padre:</label>
           <input class="form-control shadows" type="text" ngbTooltip="Nombre del padre" placeholder="Nombre del padre"
                  name="padre" maxlength="80" #padre="ngModel" [ngClass]="{ 'is-invalid': f.submitted && padre.invalid}"
                  [(ngModel)]="ingreso.imputado.nombrePadre"
@@ -292,6 +316,7 @@
 
       <div class="col-md-4">
         <div class="form-group">
+          <label >Nombre de la madre:</label>
           <input class="form-control shadows" type="text" ngbTooltip="Nombre de la madre"
                  placeholder="Nombre de la madre" name="madre" maxlength="80" #madre="ngModel"
                  [ngClass]="{ 'is-invalid': f.submitted && madre.invalid}" [(ngModel)]="ingreso.imputado.nombreMadre"
@@ -328,35 +353,50 @@
   <app-section-title title="Domicilio" icon="fa fa-home"></app-section-title>
   <div class="row">
     <div class="col-md-4">
-      <app-select placeholder="Seleccione estado" ngbTooltip="Seleccione estado" [options]="estados"
-                  [multiple]="false"
-                  [modelo]="ingreso.imputado.estadoSelect" aria-required="true"
-                  (getModel)="ingreso.imputado.estadoSelect = $event; getMunicipios()"></app-select>
+      <div class="form-group">
+        <label >Estado:</label>
+        <input type="text"  class="form-control" [(ngModel)]="ingreso.imputado.estado" [ngbTypeahead]="search" (focus)="selectArrayTofilter(estados)" (change)="getMunicipios()" [resultTemplate]="rt"
+        [inputFormatter]="formatter" name="estado"/>   
+      </div>
+    
     </div>
     <div class="col-md-4">
-      <app-select placeholder="Seleccione municipio" ngbTooltip="Seleccione municipio"
-                  [options]="municipios" [multiple]="false"
-                  [modelo]="ingreso.imputado.municipioSelect" aria-required="true"
-                  (getModel)="ingreso.imputado.municipioSelect = $event;"></app-select>
+      <div class="form-group">
+        <label >Municipio:</label>
+        <input type="text"  class="form-control" [(ngModel)]="ingreso.imputado.municipio" [ngbTypeahead]="search" (focus)="selectArrayTofilter(municipios)" [resultTemplate]="rt"
+        [inputFormatter]="formatter" name="municipio"/>   
+      </div>
+     
     </div>
     <div class="col-md-4">
-      <input class="form-control" type="text" ngbTooltip=" Colonia" placeholder="Colonia" name="colonia"
+      <div class="form-group">
+        <label >Colonia:</label>
+         <input class="form-control" type="text" ngbTooltip=" Colonia" placeholder="Colonia" name="colonia"
              #colonia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && colonia.invalid}"
              [(ngModel)]="ingreso.imputado.colonia"/>
+      </div>
+     
     </div>
   </div>
   <br>
   <div class="row">
     <div class="col-md-4">
+      <div class="form-group">
+         <label >Calle y número:</label>
       <input class="form-control" type="text" ngbTooltip="Calle y número" placeholder="Calle y número"
              name="calleNumero" maxlength="60"
              #calleNumero="ngModel" [ngClass]="{ 'is-invalid': f.submitted && calleNumero.invalid}"
              [(ngModel)]="ingreso.imputado.calleNumero"/>
+      </div>
     </div>
     <div class="col-md-4">
-      <input class="form-control" type="text" ngbTooltip="C.P." placeholder="C.P." name="cp" pattern='^[0-9]*$'
+      <div class="form-group">
+        <label >Codigo postal:</label>
+        <input class="form-control" type="text" ngbTooltip="C.P." placeholder="C.P." name="cp" pattern='^[0-9]*$'
              #cp="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cp.invalid}" maxlength="5"
              [(ngModel)]="ingreso.imputado.codigoPostal"/>
+      </div>
+      
     </div>
   </div>
   <div class="row">
@@ -385,4 +425,13 @@
       <button class="btn-sm btn btn-danger" type="reset" (click)="delitoModal.close(true)">Cerrar</button>
     </div>
   </div>
+</ng-template>
+
+<ng-template #rt let-r="result" let-t="term">
+        
+  <ngb-highlight [result]="r.nombre" [term]="t"></ngb-highlight>
+</ng-template>
+
+<ng-template #nacionalidad let-r="result" let-t="term">
+  <ngb-highlight [result]="r.nacionalidad" [term]="t"></ngb-highlight>
 </ng-template>
