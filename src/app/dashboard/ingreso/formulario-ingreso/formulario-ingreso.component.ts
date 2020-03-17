@@ -26,6 +26,7 @@ export class FormularioIngresoComponent implements OnInit {
   public ocupaciones = [];
   public paises = [];
   public estados = [];
+  public estadosDimicilio = [];
   public municipios = [];
   public delitos = [];
   public centrosPenitenciarios = [];
@@ -75,15 +76,24 @@ export class FormularioIngresoComponent implements OnInit {
     this.catalogosService.listEstados('mexico', null)
       .subscribe((data: any) => {
         console.log('ESTADOS', data);
-        this.estados = this.mapToSelect(data.estados);
+        this.estadosDimicilio = this.mapToSelect(data.estados);
       });
   }
 
+  getEstadoNacimiento() {
+    if (this.ingreso.imputado.paisNacimientoSelect) {
+      console.log('Estado domicilio', this.ingreso.imputado.paisNacimientoSelect);
+      this.estados = [];
+      this.catalogosService.listEstados('seleccionada', this.ingreso.imputado.paisNacimientoSelect.value)
+        .subscribe((data: any) => this.estados = this.mapToSelect(data.estados));
+    }
+  }
+
   getMunicipios() {
-    if (this.ingreso.imputado.estadoSelect) {
-      console.log(this.ingreso.imputado.estadoSelect);
+    if (this.ingreso.imputado.estadoDomicilioSelect) {
+      console.log(this.ingreso.imputado.estadoDomicilioSelect);
       this.municipios = [];
-      this.catalogosService.listMunicipios('seleccionada', this.ingreso.imputado.estadoSelect.value)
+      this.catalogosService.listMunicipios('seleccionada', this.ingreso.imputado.estadoDomicilioSelect.value)
         .subscribe((data: any) => this.municipios = this.mapToSelect(data.estados));
     }
   }
@@ -94,21 +104,13 @@ export class FormularioIngresoComponent implements OnInit {
       const {ingreso, error} = data;
       console.log('GET ingreso', ingreso);
       if (!ingreso.registroNuevo) {
-        ingreso.imputado.gradoEstudioSelect = {
-          value: ingreso.imputado.gradoEstudio.id,
-          description: ingreso.imputado.gradoEstudio.nombre
-        };
-        ingreso.imputado.ocupacionSelect = {
-          value: ingreso.imputado.ocupacion.id,
-          description: ingreso.imputado.ocupacion.nombre
-        };
         ingreso.imputado.estadoCivilSelect = {
           value: ingreso.imputado.estadoCivil.id,
           description: ingreso.imputado.estadoCivil.nombre
         };
         ingreso.imputado.paisNacimientoSelect = {
           value: ingreso.imputado.paisNacimiento.id,
-          description: ingreso.imputado.paisNacimiento.nombre
+          description: ingreso.imputado.paisNacimiento.nacionalidad
         };
         ingreso.imputado.religionSelect = {
           value: ingreso.imputado.religion.id,
@@ -118,9 +120,13 @@ export class FormularioIngresoComponent implements OnInit {
           value: ingreso.imputado.municipio.id,
           description: ingreso.imputado.municipio.nombre
         };
-        ingreso.imputado.estadoSelect = {
-          value: ingreso.imputado.municipio.estado.id,
-          description: ingreso.imputado.municipio.estado.nombre
+        ingreso.imputado.estadoNacimientoSelect = {
+          value: ingreso.imputado.estadoNacimiento.id,
+          description: ingreso.imputado.estadoNacimiento.nombre
+        };
+        ingreso.imputado.estadoDomicilioSelect = {
+          value: ingreso.imputado.municipio.estadoDomicilio.id,
+          description: ingreso.imputado.municipio.estadoDomicilio.nombre
         };
         this.ingreso = ingreso;
         this.arrayAlias = ingreso.imputado.apodos;
@@ -166,8 +172,8 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   validSelect(): boolean {
-    return !!(this.ingreso.imputado.religionSelect && this.ingreso.imputado.paisNacimientoSelect && this.ingreso.imputado.estadoSelect
-    && this.ingreso.imputado.estadoCivilSelect && this.ingreso.imputado.estadoSelect, this.ingreso.imputado.municipioSelect);
+    return !!(this.ingreso.imputado.religionSelect && this.ingreso.imputado.paisNacimientoSelect && this.ingreso.imputado.estadoDomicilioSelect
+    && this.ingreso.imputado.estadoCivilSelect && this.ingreso.imputado.estadoDomicilioSelect, this.ingreso.imputado.municipioSelect);
   }
 
   addAlias(array) {

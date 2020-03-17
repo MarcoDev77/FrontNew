@@ -44,7 +44,8 @@ export class IngresoService {
   }
 
   saveIngreso(model: Ingreso) {
-    model.imputado.estado = {id: model.imputado.estadoSelect.value};
+    model.imputado.estadoNacimiento = {id: model.imputado.estadoNacimientoSelect.value};
+    model.imputado.estadoDomicilio = {id: model.imputado.estadoDomicilioSelect.value};
     model.imputado.municipio = {id: model.imputado.municipioSelect.value};
     model.imputado.paisNacimiento = {id: model.imputado.paisNacimientoSelect.value};
     model.imputado.religion = {id: model.imputado.religionSelect.value};
