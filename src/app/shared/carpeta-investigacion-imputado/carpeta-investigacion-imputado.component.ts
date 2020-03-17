@@ -15,6 +15,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   public carpeta: any;
   public data = [];
   public ingreso: any;
+  @Input() role;
 
   // Table
   public p;
@@ -171,5 +172,5 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
     }
   }
 
-  
+
 }
