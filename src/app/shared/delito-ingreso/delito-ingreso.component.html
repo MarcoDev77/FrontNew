@@ -78,30 +78,30 @@
     </form>
 </div>
 <div *ngIf="!isForm && isRecord" class="row">
-  <div class="col">
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-        <tr>
-          <th class="text-center">
-            Información
-          </th>
-          <th class="text-center" style="min-width: 5rem">Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of hitorialDelitos">
-          <td class="text-center">{{item.tipoDelito.nombre}}</td>
-          <td class="text-center">
-            <i class="fa fa-history" placement="top" (click)="viewHistory(item)" ngbTooltip="Ver Historial"></i> &nbsp;
-            <i class="fa fa-cog" placement="top" (click)="delitoEdit(item) ; toggleForm(true)" ngbTooltip="Editar"></i>
-          </td>
-        </tr>
-        <tr *ngIf="data.length == 0">
-          <td colspan="3">Sin registros...</td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            Información
+                        </th>
+                        <th class="text-center" style="min-width: 5rem">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of hitorialDelitos">
+                        <td class="text-center">{{item.tipoDelito.nombre}}</td>
+                        <td class="text-center">
+                            <i class="fa fa-history" placement="top" (click)="viewHistory(item)" ngbTooltip="Ver Historial"></i> &nbsp;
+                            <i class="fa fa-cog" placement="top" (click)="delitoEdit(item) ; toggleForm(true)" ngbTooltip="Editar"></i>
+                        </td>
+                    </tr>
+                    <tr *ngIf="data.length == 0">
+                        <td colspan="3">Sin registros...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
 </div>

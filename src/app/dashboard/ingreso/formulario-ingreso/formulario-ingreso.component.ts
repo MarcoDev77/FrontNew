@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
+import {catchError, distinctUntilChanged, tap, switchMap} from 'rxjs/operators';
 
 
 
@@ -35,7 +36,8 @@ export class FormularioIngresoComponent implements OnInit {
   public delitos = [];
   public centrosPenitenciarios = [];
   public arrayToFilter =[]
-  
+  public searching=false
+  public   searchFailed = false;
 
   constructor(
     private catalogosService: CatalogosService,
@@ -88,6 +90,7 @@ export class FormularioIngresoComponent implements OnInit {
       this.municipios = [];
       this.catalogosService.listMunicipios('seleccionada', this.ingreso.imputado.estado.id)
         .subscribe((data: any) => this.municipios = data.estados);
+        return this.municipios;
     }
   }
 
@@ -218,16 +221,14 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   selectArrayTofilter(array){
-    console.log("array",this.arrayToFilter)
-    console.log(array)
+    
     this.arrayToFilter=array;
+    console.log("Array To filter",this.arrayToFilter)
   }
 
   
     search = (text$: Observable<string>) =>{
       return text$.pipe(
-        
-        debounceTime(200),
         map(term => term === '' ? []
           : this.arrayToFilter.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
       )
@@ -236,15 +237,13 @@ export class FormularioIngresoComponent implements OnInit {
 
     searchNacionalidad = (text$: Observable<string>) =>{
       return text$.pipe(
-        
-        debounceTime(200),
         map(term => term === '' ? []
           : this.arrayToFilter.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
       )
     }
     formatterNacionalidad = (x: {nacionalidad: string}) => x.nacionalidad;
  
-
+   
 }
 
 class DatoDelito {
