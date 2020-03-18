@@ -3,7 +3,7 @@ import {ROUTES} from '../../dashboard/_main/menu';
 import {AuthenticationService} from '@shared/services/authentication.service';
 
 var misc: any = {
-  sidebar_mini_active: false
+  sidebar_mini_active: true
 };
 
 @Component({
@@ -104,6 +104,7 @@ export class SidebarComponent implements OnInit {
   }
 
   minimizeSidebar() {
+    this.isCollapsed = !this.isCollapsed;
     if (this.time) {
       clearTimeout(this.time);
     }
