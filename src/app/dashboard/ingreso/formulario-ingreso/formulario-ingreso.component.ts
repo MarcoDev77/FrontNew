@@ -32,6 +32,7 @@ export class FormularioIngresoComponent implements OnInit {
   public ocupaciones = [];
   public paises = [];
   public estados = [];
+  public estadosDimicilio = [];
   public municipios = [];
   public delitos = [];
   public centrosPenitenciarios = [];
@@ -82,6 +83,15 @@ export class FormularioIngresoComponent implements OnInit {
         console.log('ESTADOS', data);
         this.estados = data.estados;
       });
+  }
+
+  getEstadoNacimiento() {
+    if (this.ingreso.imputado.paisNacimientoSelect) {
+      console.log('Estado domicilio', this.ingreso.imputado.paisNacimientoSelect);
+      this.estados = [];
+      this.catalogosService.listEstados('seleccionada', this.ingreso.imputado.paisNacimientoSelect.value)
+        .subscribe((data: any) => this.estados = this.mapToSelect(data.estados));
+    }
   }
 
   getMunicipios() {
