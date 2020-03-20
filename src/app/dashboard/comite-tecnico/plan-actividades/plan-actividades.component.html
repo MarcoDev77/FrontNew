@@ -1,0 +1,148 @@
+<app-section-title icon="fa fa-tasks" title="PLAN DE ACTIVIDADES"></app-section-title>
+<div class="row">
+    <!-- <div class="col-md-12 text-center mb-1">
+        <h5>CERESO "MORELOS" DEPARTAMENTO DE PEDAGOGÍA PROPUESTA DE PLAN DE ACTIVIDADES PRELIMINAR</h5>
+    </div> -->
+    <div class="col-md-8"></div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Folio:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Folio" />
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="">Persona privada de su libertad:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Persona privada de su libertad" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Dormitorio:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Dormitorio" />
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Fecha de nacimiento:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="fecha de nacimiento" />
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="">Escolaridad:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Escolaridad" />
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Fecha de ingreso:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Fecha de ingreso" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Delito:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Delito" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Sentencia:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Sentencia" />
+        </div>
+    </div>
+</div>
+
+<app-section-title icon="fa fa-tablets" title="ANTECEDENTES DE CONSUMO"></app-section-title>
+<div class="row">
+    <div class="col text-right mb-3">
+        <button class="btn btn-success btn-sm m-0 pull-right" [ngbTooltip]="'Nuevo Registro'"><i
+      class="fa fa-plus fa-lg"></i></button>
+
+
+
+
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    Sustancia que consumia
+                </th>
+                <th class="text-center">
+                    Edad de inicio
+                </th>
+                <th class="text-center">
+                    Frecuencia de consumo
+                </th>
+                <th class="text-center">
+                    Grado de consumo
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center"></td>
+                <td class="text-center"> </td>
+
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+
+            </tr>
+
+            <tr *ngIf="data.length == 0">
+                <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center w-100">
+        <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
+        </pagination-controls>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+
+        <div class="col-md-12 text-center">
+            <h6>Canalización</h6>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Grupo:</label>
+                <input type="text" class="form-control" name="duenoMedio" placeholder="Grupo" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Área:</label>
+                <input type="text" class="form-control" name="duenoMedio" placeholder="Área" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Alias:</label>
+                <input type="text" class="form-control" name="duenoMedio" placeholder="Alias" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-12 text-center">
+            <h6>Observaciones</h6>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <textarea class=" form-control" cols="100" placeholder="Observaciones" rows="9" value=""></textarea>
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -124,6 +124,20 @@ export const ROUTES: RouteInfo[] = [
     children: [
       {path: 'archivo/archivo', title: 'ARCHIVO', ab: 'AR'},
     ],
+  },
+  {
+    roles: [
+      r.comiteTecnico.role,
+      r.test.role,
+    ],
+    path: '/dashboard',
+    title: 'Comité tecnico',
+    type: 'sub',
+    icontype: 'fa fa-folder',
+    collapse: 'tables',
+    children: [
+      {path: 'comite-tecnico/plan-actividades', title: 'Plan de actividades', ab: 'PA'},
+    ],
   }
 ];
 
