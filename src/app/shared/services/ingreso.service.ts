@@ -93,6 +93,8 @@ export class IngresoService {
   }
 
   saveDelito(model){
+    console.log("To server",model);
+    
     return this.http.post(`${this.url}/api/registrarDelitosCausaOCarpeta`, model);
   }
 
