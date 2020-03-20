@@ -1,12 +1,12 @@
 <div class="sidebar" data-color="fiscalia">
     <div class="logo" style="height: 5rem;">
         <a class="simple-text logo-mini ml-1 pl-2" style="width: unset;">
-            <div class="logo-img">
-                <img style="width: 280px;" src="./assets/img/logo.png" height="50" width="auto" />
-            </div>
-        </a>
-        <a [routerLink]="" style="cursor: default" class="simple-text logo-normal">
-            Fiscalía Morelos
+          <div *ngIf="isCollapsed" class="logo-img">
+              <img style="width: 280px;" src="./assets/img/logo.png" height="50" width="auto" />
+          </div>
+          <div *ngIf="!isCollapsed" class="simple-text logo-mini">
+            MOR.
+          </div>
         </a>
     </div>
     <div class="sidebar-wrapper">
