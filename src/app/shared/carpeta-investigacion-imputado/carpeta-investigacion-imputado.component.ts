@@ -30,6 +30,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
 
   constructor(private ingresoService: IngresoService, private modalService: NgbModal) {
     this.carpeta = {} as any;
+    
     // Table
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
@@ -43,9 +44,11 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
 
   getData(ingresoId) {
     this.ingresoService.listCarpetasInvestigacion(ingresoId).subscribe((data: any) => {
+
       console.log(data);
       if (!data.error) {
-        this.data = data.carpetaInvestigacion;
+        console.log(data)
+        this.data = data.listaCarpeta;
       }
     });
   }

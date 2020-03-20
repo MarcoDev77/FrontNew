@@ -99,40 +99,11 @@
                 <button type="button" [disabled]="this.ingreso.id == null" class="btn btn-info btn-sm shadows" (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])">
           Agregar
         </button>
-        <!--      <button [disabled]="arrayAlias.length >= 5 || this.ingreso.id == null" (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])"-->
-        <!--              type="button" class="btn btn-info btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i>-->
-        <!--      </button>-->
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <table class="table shadows">
-        <thead>
-        <tr>
-          <th class="text-center">Apellido Paterno</th>
-          <th class="text-center">Apellido Materno</th>
-          <th class="text-center">Nombre</th>
-          <th class="text-center">Apodo</th>
-          <th class="text-center">Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of arrayAlias">
-          <td class="text-center">{{item.apellidoPaterno}}</td>
-          <td class="text-center">{{item.apellidoMaterno}}</td>
-          <td class="text-center">{{item.nombre}}</td>
-          <td class="text-center">{{item.otro}}</td>
-          <td class="text-center">
-            <!--          <i class="fa fa-times mr-3" placement="top" ngbTooltip="Eliminar"-->
-            <!--             (click)="deleteAlias(item)"></i>-->
-            <i *ngIf="!item.principal" class="fa fa-flag-o" ngbTooltip="Poner como princiapl"
-               (click)="setPrincialAlias(item)"></i>
-            <i *ngIf="item.principal" class="fa fa-flag-checkered" ngbTooltip="Nombre principal"></i>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+                <!--      <button [disabled]="arrayAlias.length >= 5 || this.ingreso.id == null" (click)="addAlias([nombreAlias, apellidoPaternoAlias, apellidoMaternoAlias, aliasNombre])"-->
+                <!--              type="button" class="btn btn-info btn-sm shadows"><i class="fa fa-plus fa-2x mr-2"></i>-->
+                <!--      </button>-->
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
@@ -203,19 +174,12 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Religion:</label>
-                    <input type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" (focus)="selectArrayTofilter(religiones)" [resultTemplate]="rt" [inputFormatter]="formatter" name="model" />
+                    <input type="text" class="form-control" [(ngModel)]="ingreso.imputado.religion" [ngbTypeahead]="search" (focus)="selectArrayTofilter(religiones)" [resultTemplate]="rt" [inputFormatter]="formatter" name="model" />
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label>Nacionalidad:</label>
-                    <input type="text" class="form-control" [(ngModel)]="ingreso.imputado.paisNacimiento" [ngbTypeahead]="searchNacionalidad" (focus)="selectArrayTofilter(paises)" [resultTemplate]="nacionalidad" [inputFormatter]="formatterNacionalidad" name="nacionalidad"
-                    />
 
-                </div>
-            </div>
             <div class="col-md-4">
 
             </div>
@@ -321,19 +285,38 @@
             </div>
         </div>
     </div>
+    <app-section-title title="Lugar de Nacimiento" icon="fa fa-info"></app-section-title>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Nacionalidad:</label>
+                <input type="text" class="form-control" [(ngModel)]="ingreso.imputado.paisNacimiento" [ngbTypeahead]="searchNacionalidad" (focus)="selectArrayTofilter(paises)" [resultTemplate]="nacionalidad" [inputFormatter]="formatterNacionalidad" name="nacionalidad"
+                />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label>Estado:</label>
+            <input type="text" class="form-control" [(ngModel)]="ingreso.imputado.estadoNacimiento" [ngbTypeahead]="search" (focus)="selectArrayTofilter(estados)" [resultTemplate]="rt" [inputFormatter]="formatter" name="estado" />
+        </div>
+        <div class="col-md-4">
+            <label>Municipio:</label>
+            <input ngbTooltip="Municipio" class="form-control shadows" type="text" placeholder="Municipio" name="municipioNacimiento" #municipioNacimiento="ngModel" [ngClass]="{ 'is-invalid': f.submitted && municipioNacimiento.invalid}" maxlength="45" [(ngModel)]="ingreso.imputado.municipioNacimiento"
+            />
+        </div>
+    </div>
     <app-section-title title="Domicilio" icon="fa fa-home"></app-section-title>
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label>Estado:</label>
-                <input type="text" class="form-control" [(ngModel)]="ingreso.imputado.estado" [ngbTypeahead]="search" (focus)="selectArrayTofilter(estados)" (change)="getMunicipios()" [resultTemplate]="rt" [inputFormatter]="formatter" name="estado" />
+                <input type="text" class="form-control" [(ngModel)]="ingreso.imputado.estadoDomicilio" [ngbTypeahead]="search" (focus)="selectArrayTofilter(estados)" [resultTemplate]="rt" [inputFormatter]="formatter" name="estado" />
             </div>
 
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label>Municipio:</label>
-                <input type="text" class="form-control" [(ngModel)]="ingreso.imputado.municipio" name="municipio" />
+                <input type="text" class="form-control" [(ngModel)]="ingreso.imputado.municipioDomicilio" name="municipio" />
             </div>
 
         </div>
@@ -362,67 +345,14 @@
 
         </div>
     </div>
-  </div>
-  <app-section-title title="Lugar de Nacimiento" icon="fa fa-info"></app-section-title>
-  <div class="row">
-    <div class="col-md-4">
-      <app-select placeholder="Nacionalidad" required ngbTooltip="Nacionalidad" [options]="paises"
-                  [multiple]="false" [modelo]="ingreso.imputado.paisNacimientoSelect" aria-required="true"
-                  (getModel)="ingreso.imputado.paisNacimientoSelect = $event; getEstadoNacimiento()"></app-select>
-    </div>
-    <div class="col-md-4">
-      <app-select placeholder="Estado" required ngbTooltip="Estado" [options]="estados"
-                  [multiple]="false" [modelo]="ingreso.imputado.estadoNacimientoSelect" aria-required="true"
-                  (getModel)="ingreso.imputado.estadoNacimientoSelect = $event;"></app-select>
-    </div>
-    <div class="col-md-4">
-      <input ngbTooltip="Municipio" class="form-control shadows" type="text" placeholder="Municipio" name="municipioNacimiento"
-             #municipioNacimiento="ngModel" [ngClass]="{ 'is-invalid': f.submitted && municipioNacimiento.invalid}" maxlength="45"
-             [(ngModel)]="ingreso.imputado.municipioNacimiento"/>
-    </div>
-  </div>
-  <app-section-title title="Domicilio" icon="fa fa-home"></app-section-title>
-  <div class="row">
-    <div class="col-md-4">
-      <app-select placeholder="Seleccione estado" ngbTooltip="Seleccione estado" [options]="estadosDimicilio"
-                  [multiple]="false"
-                  [modelo]="ingreso.imputado.estadoDomicilioSelect" aria-required="true"
-                  (getModel)="ingreso.imputado.estadoDomicilioSelect = $event; getMunicipios()"></app-select>
-    </div>
-    <div class="col-md-4">
-      <app-select placeholder="Seleccione municipio" ngbTooltip="Seleccione municipio"
-                  [options]="municipios" [multiple]="false"
-                  [modelo]="ingreso.imputado.municipioSelect" aria-required="true"
-                  (getModel)="ingreso.imputado.municipioSelect = $event;"></app-select>
-    </div>
-    <div class="col-md-4">
-      <input class="form-control" type="text" ngbTooltip=" Colonia" placeholder="Colonia" name="colonia"
-             #colonia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && colonia.invalid}"
-             [(ngModel)]="ingreso.imputado.colonia"/>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-md-4">
-      <input class="form-control" type="text" ngbTooltip="Calle y número" placeholder="Calle y número"
-             name="calleNumero" maxlength="60"
-             #calleNumero="ngModel" [ngClass]="{ 'is-invalid': f.submitted && calleNumero.invalid}"
-             [(ngModel)]="ingreso.imputado.calleNumero"/>
-    </div>
-    <div class="col-md-4">
-      <input class="form-control" type="text" ngbTooltip="C.P." placeholder="C.P." name="cp" pattern='^[0-9]*$'
-             #cp="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cp.invalid}" maxlength="5"
-             [(ngModel)]="ingreso.imputado.codigoPostal"/>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 text-right">
-      <button class="btn btn-success shadows" style="width: 15rem;" type="submit">Guardar</button>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button class="btn btn-success shadows" style="width: 15rem;" type="submit">Guardar</button>
+        </div>
     </div>
 </form>
 
-<app-carpeta-investigacion-imputado *ngIf="ingreso?.id" [ingresoId]="ingreso.id"
-                                    [ingresoId]="ingreso.id" role="DACTILOSCOPIA"></app-carpeta-investigacion-imputado>
+<app-carpeta-investigacion-imputado *ngIf="ingreso?.id" [ingresoId]="ingreso.id"></app-carpeta-investigacion-imputado>
 <app-causa-penal-ingreso *ngIf="ingreso?.id" role="DACTILOSCOPIA" [ingresoId]="ingreso.id"></app-causa-penal-ingreso>
 <!--Footer-->
 <div class="row">

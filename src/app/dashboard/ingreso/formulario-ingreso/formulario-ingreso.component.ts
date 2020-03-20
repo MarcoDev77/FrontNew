@@ -85,24 +85,6 @@ export class FormularioIngresoComponent implements OnInit {
       });
   }
 
-  getEstadoNacimiento() {
-    if (this.ingreso.imputado.paisNacimientoSelect) {
-      console.log('Estado domicilio', this.ingreso.imputado.paisNacimientoSelect);
-      this.estados = [];
-      this.catalogosService.listEstados('seleccionada', this.ingreso.imputado.paisNacimientoSelect.value)
-        .subscribe((data: any) => this.estados = this.mapToSelect(data.estados));
-    }
-  }
-
-  getMunicipios() {
-    if (this.ingreso.imputado.estado) {
-      console.log(this.ingreso.imputado.estado);
-      this.municipios = [];
-      this.catalogosService.listMunicipios('seleccionada', this.ingreso.imputado.estado.id)
-        .subscribe((data: any) => this.municipios = data.estados);
-        return this.municipios;
-    }
-  }
 
   getIngreso(id) {
     this.ingresoService.getIngreso(id).subscribe((data: any) => {

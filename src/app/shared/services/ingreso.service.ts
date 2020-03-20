@@ -44,9 +44,6 @@ export class IngresoService {
   }
 
   saveIngreso(model: Ingreso) {
-    model.imputado.estadoNacimiento = {id: model.imputado.estadoNacimientoSelect.value};
-    model.imputado.estadoDomicilio = {id: model.imputado.estadoDomicilioSelect.value};
-    model.imputado.municipio = {id: model.imputado.municipioSelect.value};
     model.imputado.numeroHijos = Number(model.imputado.numeroHijos);
     this.data = model;
     console.log('To server', this.data);
@@ -96,6 +93,8 @@ export class IngresoService {
   }
 
   saveDelito(model){
+    console.log("To server",model);
+    
     return this.http.post(`${this.url}/api/registrarDelitosCausaOCarpeta`, model);
   }
 

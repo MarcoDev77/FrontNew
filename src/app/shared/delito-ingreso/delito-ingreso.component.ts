@@ -2,8 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CatalogosService } from '@shared/services/catalogos.service';
 import { IngresoService } from '@shared/services/ingreso.service';
 import { AuthenticationService } from '@shared/services/authentication.service';
+import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import {map} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-delito-ingreso',
@@ -11,7 +13,7 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./delito-ingreso.component.scss']
 })
 export class DelitoIngresoComponent implements OnInit {
-  public delito: Delito;
+  public delito: any;
   public isForm: boolean;
   public isRecord: boolean = false;
   public data: any;
@@ -19,7 +21,7 @@ export class DelitoIngresoComponent implements OnInit {
   public tipoDelitoSelected: any;
   public delitoAdicional: boolean
   public role: boolean = false;
-  public user: any
+  public user: any 
   public hitorialDelitos = [];
   @Input() carpetaInvestigacionId?: number;
   @Input() causaPenalId?: number;
@@ -28,16 +30,18 @@ export class DelitoIngresoComponent implements OnInit {
 
     this.data = [];
     this.tipoDelitoLista = [];
-    this.isForm = false;
+    this.isForm = true;
     this.delitoAdicional = false
     this.delito = {} as any;
+
   }
 
   ngOnInit() {
     this.getTipoDelitos();
     this.getDelitos();
     this.user = this.authenticationService.getCurrentUser();
-
+    console.log("carpeta",this.carpetaInvestigacionId)
+    console.log("causa",this.causaPenalId)
   }
   toggleForm(flag: boolean) {
 
@@ -51,7 +55,7 @@ export class DelitoIngresoComponent implements OnInit {
 
     if (this.carpetaInvestigacionId != undefined) {
       this.ingresoService.listDelitosByCarpetaInvestigacion(this.carpetaInvestigacionId).subscribe((data: any) => {
-        console.log("getInvestigacion", data)
+      
         if (data.listaDelitos) {
           this.data = data.listaDelitos
         }
@@ -60,7 +64,7 @@ export class DelitoIngresoComponent implements OnInit {
 
     } else {
       this.ingresoService.listDelitosByCausasPenales(this.causaPenalId).subscribe((data: any) => {
-        console.log("getCausas", data)
+      
         if (data.listaDelitos) {
           this.data = data.listaDelitos
         }
@@ -72,23 +76,27 @@ export class DelitoIngresoComponent implements OnInit {
 
   getTipoDelitos() {
     this.catalogosService.listDelito().subscribe((data: any) => {
-      this.tipoDelitoLista = [];
-      data.delitos.forEach(delito => {
-        this.tipoDelitoLista.push({ value: delito.id, description: delito.nombre })
-      });
-
+      this.tipoDelitoLista=data.delitos
     })
   }
 
   saveDelito() {
-    console.log("entra")
-    if (this.delito.otro) {
-      this.delito.tipoDelito = {
-        nombre: this.delito.delitoAdicional
+    console.log(this.delito)
+    if (this.delito.idTipoDelito==null) {
+      console.log("null")
+      let tipoDelito={
+        nombre: this.delito
       }
+      let delitoNuevo={
+        nombre: this.delito,
+        tipoDelito: tipoDelito
+      }
+      this.delito=delitoNuevo;
     } else {
+      console.log("else");
+      
       this.delito.tipoDelito = {
-        id: this.tipoDelitoSelected.value
+        id: this.delito.idTipoDelito
       }
     }
 
@@ -111,6 +119,7 @@ export class DelitoIngresoComponent implements OnInit {
           timer: 1300,
           showConfirmButton: false
         });
+        this.delito={}
         this.toggleForm(false);
         this.getDelitos();
       })
@@ -148,17 +157,26 @@ export class DelitoIngresoComponent implements OnInit {
   switch($event: number) {
 
   }
+
+  search = (text$: Observable<string>) =>{
+    return text$.pipe(
+      map(term => term === '' ? []
+        : this.tipoDelitoLista.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    )
+  }
+  formatter = (x: {nombre: string}) => x.nombre;
 }
 
 class Delito {
   public id?: number;
-  public nombre: String;
-  public juez: String;
-  public tipoId: String; 4
-  public carpetaInvestigacion: any;
-  public causaPenal: any;
-  public otro: boolean;
-  public tipoDelito: any;
-  public delitoAdicional: string;
+  public nombre?: String;
+  public juez?: String;
+  public tipoId?: String; 
+  public carpetaInvestigacion?: any;
+  public causaPenal?: any;
+  public otro?: boolean;
+  public tipoDelito?: any;
+  public delitoAdicional?: string;
+  public idTipoDelito?:any
 }
 
