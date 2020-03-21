@@ -30,6 +30,9 @@
                 <th (click)="sort('fecha')" class="text-center">
                     <span *ngIf="key == 'fecha'" class="fa" [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Fecha de Registro
                 </th>
+                <th (click)="sort('listaDelitos')" class="text-center">
+                    <span *ngIf="key == 'listaDelitos'" class="fa" [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Deitos
+                </th>
 
                 <th class="text-center" style="min-width: 5rem">Acciones</th>
             </tr>
@@ -38,6 +41,7 @@
             <tr id="{{'tr' + i}}" *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
                 <td class="text-center">{{item.nombre}}</td>
                 <td class="text-center">{{item.fechaRegistro | date:'dd/MM/yy h:mm a'}}</td>
+                <td class="text-center">{{item.listaDelitos}}</td>
                 <td class="text-center">
                     <i *ngIf="role === 'ARCHIVO'" class="fa fa-pencil" placement="top" ngbTooltip="Actiualizar" (click)="update(item)"></i> &nbsp;
                     <i class="fa fa-trash" placement="top" ngbTooltip="Eliminar" (click)="delete(item)"></i> &nbsp;
