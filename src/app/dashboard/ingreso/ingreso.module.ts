@@ -18,17 +18,20 @@ import { BusquedaHuellasComponent } from './busqueda-huellas/busqueda-huellas.co
 
 
 @NgModule({
-  declarations: [
-    RootComponent,
-    FormularioIngresoComponent,
-    ListaIngresoComponent,
-    DactiloscopiaComponent,
-    SituacionJuridicaComponent,
-    ReferenciasComponent,
-    CaracteristicasComponent,
-    MediaAfiliacionComponent,
-    BusquedaHuellasComponent
-  ],
+    declarations: [
+        RootComponent,
+        FormularioIngresoComponent,
+        ListaIngresoComponent,
+        DactiloscopiaComponent,
+        SituacionJuridicaComponent,
+        ReferenciasComponent,
+        CaracteristicasComponent,
+        MediaAfiliacionComponent,
+        BusquedaHuellasComponent
+    ],
+    exports: [
+        BusquedaHuellasComponent
+    ],
     imports: [
         CommonModule,
         SharedModule,

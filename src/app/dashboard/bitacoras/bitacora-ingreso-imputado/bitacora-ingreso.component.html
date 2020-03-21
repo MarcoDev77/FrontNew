@@ -1,10 +1,11 @@
 <app-section-title icon="fa fa-book" title="BITACORA DE IMPUTADOS"></app-section-title>
 <div class="row">
-    <div class="col text-right mb-3">
-
-        <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
-            placeholder="Buscar">
-    </div>
+  <div class="col text-right mb-3">
+    <button (click)="openSearchModal(searchModal)" class="btn btn-primary m-0 pull-right">Busqueda</button>
+    <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
+           [(ngModel)]="filter"
+           placeholder="Buscar">
+  </div>
 </div>
 <div class="table-responsive">
     <table class="table">
@@ -38,6 +39,12 @@
     </table>
 
 </div>
+
+<ng-template #searchModal let-searchModal>
+  <div class="modal-body text-center">
+    <app-busqueda-huellas></app-busqueda-huellas>
+  </div>
+</ng-template>
 
 <ng-template #formModal let-formModal>
     <div class="modal-body text-center">
