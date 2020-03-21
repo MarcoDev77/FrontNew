@@ -11,10 +11,12 @@ const routes: Routes = [
     path: '', component: RootComponent,
     children: [
       {path: '', redirectTo: 'ingreso', pathMatch: 'full'},
-      {path: 'ingreso-Imputado', component: BitacoraIngresoImputadoComponent},
-      {path: 'ingreso-imputado-liberacion', component: BitacoraIngresoLibreracionComponent},
+      // Ingreso
       {path: 'ingreso', component: BitacoraIngresoComponent},
-      {path: 'ingreso-liberacion', component: BitacoraImputadoLiberacionComponent},
+      {path: 'ingreso-liberacion', component: BitacoraIngresoLibreracionComponent},
+      // Imputado
+      {path: 'ingreso-Imputado', component: BitacoraIngresoImputadoComponent},
+      {path: 'ingreso-imputado-liberacion', component: BitacoraImputadoLiberacionComponent},
     ]
   },
 ];
