@@ -88,10 +88,12 @@ export const ROUTES: RouteInfo[] = [
     children: [
       {path: 'ingreso/lista-ingreso', title: 'INGRESO', ab: 'IN'},
       {path: 'ingreso/busqueda-huella', title: 'BUSQUEDA HUELLAS', ab: 'BH'},
-      {path: 'bitacoras/ingreso-Imputado', title: 'BITACORA IN. IMPUTADO', ab: 'BINI'},
-      {path: 'bitacoras/ingreso-imputado-liberacion', title: 'BITACORA LIB. IMPUTADO', ab: 'LI'},
+      // Bitacoras Ingreso
       {path: 'bitacoras/ingreso', title: 'BITACORA INGRESO', ab: 'BI'},
       {path: 'bitacoras/ingreso-liberacion', title: 'BITACORA LIB. INGRESO', ab: 'LIN'},
+      // Bitacoras Imputado
+      {path: 'bitacoras/ingreso-Imputado', title: 'BITACORA IN. IMPUTADO', ab: 'BINI'},
+      {path: 'bitacoras/ingreso-imputado-liberacion', title: 'BITACORA LIB. IMPUTADO', ab: 'LI'},
     ],
   },
   {
