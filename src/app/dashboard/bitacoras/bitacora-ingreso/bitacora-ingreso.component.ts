@@ -34,4 +34,8 @@ export class BitacoraIngresoComponent implements OnInit {
   add(modal) {
     this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
   }
+
+  openSearchModal(modal) {
+    this.modalService.open(modal, {size: 'xl', windowClass: 'modal-primary mt-12'});
+  }
 }
