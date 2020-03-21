@@ -145,6 +145,7 @@
                 <td class="text-center">
                     <i class="fa fa-pencil" placement="top" ngbTooltip="Actiualizar" (click)="update(item)"></i> &nbsp;
                     <i class="fa fa-trash" placement="top" ngbTooltip="Eliminar" (click)="delete(item)"></i> &nbsp;
+                    <i class="fa fa-cubes" placement="top" ngbTooltip="Recursos" (click)="seeRecursos(item, delitoModal)"></i> &nbsp;
                     <i class="fa fa-th-list" placement="top" ngbTooltip="Ver delitos" (click)="seeDelitosCausa(item, delito)"></i> &nbsp;
                 </td>
             </tr>
@@ -168,3 +169,10 @@
         <app-delito-ingreso [causaPenalId]="causaPenal.id"></app-delito-ingreso>
     </div>
 </ng-template>
+
+<ng-template #delitoModal let-delitoModal class="modal fade">
+  <div class="modal-body text-center">
+    <app-recursos-probatorios [causaPenal]="causaPenal"></app-recursos-probatorios>
+  </div>
+</ng-template>
+

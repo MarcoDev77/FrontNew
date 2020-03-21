@@ -94,8 +94,15 @@ export class IngresoService {
 
   saveDelito(model){
     console.log("To server",model);
-    
+
     return this.http.post(`${this.url}/api/registrarDelitosCausaOCarpeta`, model);
+  }
+
+  listRecursos = id => this.http.get(`${this.url}/api/consultarRecursosProbatorios?causaPenalId=${id}`);
+
+  saveRecurso = model => {
+    console.log('To server', model);
+    return this.http.post(`${this.url}/api/registrarRecursoProbatorio`, model);
   }
 
 

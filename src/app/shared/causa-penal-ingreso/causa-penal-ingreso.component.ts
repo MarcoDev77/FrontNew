@@ -67,6 +67,12 @@ export class CausaPenalIngresoComponent implements OnInit {
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
   }
 
+  seeRecursos(item, modal) {
+    console.log(item);
+    this.causaPenal = item;
+    this.modalService.open(modal, { size: 'xl', windowClass: 'modal-primary' });
+  }
+
   delete(item: any) {
     console.log(item);
     Swal.fire({

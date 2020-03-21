@@ -16,6 +16,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   public data = [];
   public ingreso: any;
   @Input() role;
+  public nombreV: any;
 
   // Table
   public p;
@@ -30,7 +31,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
 
   constructor(private ingresoService: IngresoService, private modalService: NgbModal) {
     this.carpeta = {} as any;
-    
+
     // Table
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
@@ -54,7 +55,6 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   }
 
   // Table Methods
-  nombreV: any;
   toggleForm() {
     this.isForm = !this.isForm;
   }
