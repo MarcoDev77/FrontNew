@@ -11,7 +11,7 @@
 </div>
 <div *ngIf="finished">
   <div class="row row-cols-1 row-cols-md-3">
-    <div *ngFor="let item of results" class="col mb-4" (click)="selectIngreso(item)">
+    <div *ngFor="let item of results" class="col mb-4" (click)="handleAction(item)">
       <div class="card">
         <img src="{{item.imagen64 ? 'data:image/png;base64,' + item.imagen64 :'assets/img/no_image.png'}}" class="card-img-top" alt="...">
         <div class="card-body">

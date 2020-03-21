@@ -71,32 +71,6 @@ export class ListaIngresoComponent implements OnInit {
     this.router.navigate([`dashboard/ingreso/${uri}`]);
   }
   showModalConfirmFolio(modal) {
-    Swal.fire({
-      title: '¿Estas seguro?',
-      text: 'Se creará un registro de ingreso',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
-      if (value) {
-        this.ingresoService.generateFolio().subscribe((data: any) => {
-          console.log('generateFolio', data);
-          Swal.fire({
-            title: data.error ? 'Error!' : 'Folio generado',
-            text: data.mensaje,
-            icon: data.error ? 'error' : 'success',
-            timer: 1000,
-            showConfirmButton: false
-          }).then(() => {
-            if (!data.error) {
-              const ingreso = {id: data.imputadoId, folio: data.folioGenerado};
-              sessionStorage.setItem('ingreso', JSON.stringify(ingreso));
-              this.router.navigate([`dashboard/ingreso/form-ingreso`]);
-            }
-          });
-        });
-      }
-    });
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 }

@@ -94,7 +94,7 @@ export class IngresoService {
 
   saveDelito(model){
     console.log("To server",model);
-    
+
     return this.http.post(`${this.url}/api/registrarDelitosCausaOCarpeta`, model);
   }
 
@@ -134,7 +134,7 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/marcarIngresoTerminado?imputadoId=${id}`);
   }
 
-  generateFolio = () => this.http.get(`${this.url}/api/generarFolioImputado`);
+  generateFolio = (id = null) => this.http.get(`${this.url}/api/generarFolioImputado?personaIngresadaId=${id}`);
 
   listCarpetasInvestigacion = imputadoId => this.http.get(`${this.url}/api/listarCarpetasPorImputado?imputadoId=${imputadoId}`);
 
