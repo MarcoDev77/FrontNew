@@ -15,6 +15,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class BusquedaHuellasComponent {
 
   @Input() ingresoId;
+  @Input() from;
+  public action;
   // Uploader
   public url: string;
   public uploader: FileUploader;
@@ -47,7 +49,31 @@ export class BusquedaHuellasComponent {
     this.huella = {} as any;
     // Uploader
     this.url = environment.apiUrl;
-    this.uploader = new FileUploader({url: this.url + '/api/buscarHuellaDactilar', itemAlias: 'image'});
+    this.uploader = new FileUploader({url: this.url + '/api/buscarPersonaIngresadaHuella', itemAlias: 'image'});
+  }
+
+  handleResults(data) {
+    Swal.fire({
+      title: data.error ? 'Error!' : 'Resultados',
+      text: data.mensaje,
+      icon: data.error ? 'error' : 'success',
+      timer: 1000,
+      showConfirmButton: false
+    });
+    if (!data.error) {
+      this.results = data.coincidenciasEncontradas;
+    } else {
+      console.log('hay error');
+    }
+    if (location.href.includes('lista-ingreso')) {
+      this.action = 'ADD';
+      if (data.coincidenciasEncontradas.length === 0) {
+        this.action = 'CREATE';
+        this.handleAction();
+      }
+    } else {
+      return;
+    }
   }
 
   onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
@@ -55,23 +81,7 @@ export class BusquedaHuellasComponent {
     const data = JSON.parse(response);
     console.log(data);
     this.clearIntetval();
-    if (!data.coincidenciasEncontradas && data.coincidenciasEncontradas.length > 0) {
-      this.modalService.dismissAll();
-      return Swal.fire({
-        title: 'Resultados',
-        text: 'No se encontraron coincidencias',
-        icon: 'warning'
-      });
-    }
-    Swal.fire({
-      title: data.error ? 'Error!' : 'Resultados',
-      text: data.mensaje,
-      icon: data.error ? 'error' : 'success',
-      timer: 1000,
-      showConfirmButton: false
-    }).then(() => {
-      this.results = data.coincidenciasEncontradas;
-    });
+    this.handleResults(data);
     this.uploader.progress = 0;
     this.uploader.clearQueue();
   }
@@ -111,6 +121,80 @@ export class BusquedaHuellasComponent {
     this.finished = true;
   }
 
+  handleAction(item?) {
+    this.modalService.dismissAll();
+    switch (this.action) {
+      case 'ADD':
+        console.log('se crea un nuevo ingreso para ese imputado', item);
+        this.addIngresoToPersona(item.id);
+        break;
+      case 'CREATE':
+        console.log('Se crea nuevo registro de persoana');
+        this.createPersona();
+        break;
+    }
+  }
+
+  createPersona() {
+    Swal.fire({
+      title: 'No se encontraron coincidencias',
+      text: 'Se creará un registro de una nueva persona',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Crear',
+      cancelButtonText: 'Cancelar'
+    }).then(({value}) => {
+      if (value) {
+        this.ingresoService.generateFolio().subscribe((data: any) => {
+          console.log('generateFolio', data);
+          Swal.fire({
+            title: data.error ? 'Error!' : 'Folio generado',
+            text: data.mensaje,
+            icon: data.error ? 'error' : 'success',
+            timer: 1000,
+            showConfirmButton: false
+          }).then(() => {
+            if (!data.error) {
+              const ingreso = {id: data.imputadoId, folio: data.folioGenerado};
+              sessionStorage.setItem('ingreso', JSON.stringify(ingreso));
+              this.router.navigate([`dashboard/ingreso/form-ingreso`]);
+            }
+          });
+        });
+      }
+    });
+  }
+
+  addIngresoToPersona(idPersona) {
+    Swal.fire({
+      title: 'Registrar nuevo ingreso',
+      text: 'Se creará un registro de ingreso a esa persona',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then(({value}) => {
+      if (value) {
+        this.ingresoService.generateFolio(idPersona).subscribe((data: any) => {
+          console.log('generateFolio', data);
+          Swal.fire({
+            title: data.error ? 'Error!' : 'Folio generado',
+            text: data.mensaje,
+            icon: data.error ? 'error' : 'success',
+            timer: 1000,
+            showConfirmButton: false
+          }).then(() => {
+            if (!data.error) {
+              const ingreso = {id: data.imputadoId, folio: data.folioGenerado};
+              sessionStorage.setItem('ingreso', JSON.stringify(ingreso));
+              this.router.navigate([`dashboard/ingreso/form-ingreso`]);
+            }
+          });
+        });
+      }
+    });
+  }
+
   setupInterval() {
     this.intervalId = setInterval(() => {
       this.index = this.getRandomInt(0, this.images.length - 1);
@@ -127,38 +211,5 @@ export class BusquedaHuellasComponent {
 
   getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  selectIngreso(item) {
-    if (!this.ingresoId) {
-      return;
-    }
-    Swal.fire({
-      title: '¿Estas seguro?',
-      text: 'Se importaran las huellas de ese ingreso.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
-      if (value) {
-        console.log(item);
-        this.ingresoService.selectIngresoDactiloscopia(this.ingresoId, item.id).subscribe((data: any) => {
-          console.log('DATA', data);
-          Swal.fire({
-            title: data.error ? 'Error!' : 'Guardado',
-            text: data.mensaje,
-            icon: data.error ? 'error' : 'success',
-            timer: 1000,
-            showConfirmButton: false
-          }).then(() => {
-            if (!data.error) {
-              this.modalService.dismissAll();
-              this.router.navigate(['dashboard/ingreso/dactiloscopia']);
-            }
-          });
-        });
-      }
-    });
   }
 }
