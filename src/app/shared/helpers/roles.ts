@@ -44,8 +44,8 @@ export const roles = {
     main: 'dactiloscopia'
   }, comiteTecnico: {
     role: 'ROLE_COMITE_TECNICO',
-    name: 'Consultor',
-    main: 'dactiloscopia'
+    name: 'Comité tecnico',
+    main: 'comite-tecnico'
   }, direccionTecnica: {
     role: 'ROLE_DIRECCION_TECNICA',
     name: 'Consultor',

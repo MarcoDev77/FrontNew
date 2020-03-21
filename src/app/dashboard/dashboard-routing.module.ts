@@ -42,6 +42,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {expectedRole: [r.test.role]}
       },
+      {
+        path: 'comite-tecnico',
+        loadChildren: './comite-tecnico/comite-tecnico.module#ComiteTecnicoModule',
+        canActivate: [AuthGuard],
+        data: {expectedRole: [r.test.role, r.comiteTecnico.role]}
+      },
+
 
 
     ]
