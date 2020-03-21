@@ -27,6 +27,9 @@ export class BusquedaHuellasComponent {
   public index: number;
   public finished: boolean;
   public results = [];
+  // paginador
+  public max = 1;
+  public offset = 0;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -71,6 +74,8 @@ export class BusquedaHuellasComponent {
         this.action = 'CREATE';
         this.handleAction();
       }
+    } else if (location.href.includes('busqueda-huella')) {
+      this.action = 'SEARCH';
     } else {
       return;
     }
@@ -132,6 +137,12 @@ export class BusquedaHuellasComponent {
         console.log('Se crea nuevo registro de persoana');
         this.createPersona();
         break;
+      case 'SEARCH':
+        console.log('Busqueda');
+        this.seeHuellas(item.id);
+        break;
+      default:
+        return;
     }
   }
 
@@ -192,6 +203,12 @@ export class BusquedaHuellasComponent {
           });
         });
       }
+    });
+  }
+
+  seeHuellas(idPersona) {
+    this.ingresoService.listHuellasPersona(idPersona, this.offset, this.max).subscribe((data: any) => {
+      console.log('huellas', data);
     });
   }
 
