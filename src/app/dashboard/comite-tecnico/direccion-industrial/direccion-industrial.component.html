@@ -1,0 +1,545 @@
+<app-section-title icon="fa fa-tasks" title="DIRECCIÓN INDUSTRIAL"></app-section-title>
+<div class="row">
+    <div class="col-md-8">
+        <h3>Generales de la PPL</h3>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Folio" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Nombre de la PPL :</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Persona privada de su libertad" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Dormitorio:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Dormitorio" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Fecha de nacimiento:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Fecha de nacimiento" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Edad:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Edad" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Estado civil:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Estado civil" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Escolaridad:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Escolaridad" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Delito:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Delito" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Sentencia:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Sentencia" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Fecha y lugar de ingreso:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Fecha y lugar de ingreso" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Dependiente:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Dependientes" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Originario:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Originario" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Fecha de nacimiento:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Fecha de nacimiento" />
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 mt-4">
+        <h3>Diagnóstico de experiencia laboral y/o cursos</h3>
+    </div>
+    <div class="col text-right mb-3 mt-4">
+        <button class="btn btn-success btn-sm m-0 pull-right" [ngbTooltip]="'Nuevo Registro'"><i
+      class="fa fa-plus fa-lg"></i></button>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    Trabajos realizados
+                </th>
+                <th class="text-center">
+                    Tiempo
+                </th>
+                <th class="text-center">
+                    Motivo de separación
+                </th>
+                <th class="text-center">
+                    Acciones
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center"></td>
+                <td class="text-center"> </td>
+
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+
+            </tr>
+
+            <tr *ngIf="data.length == 0">
+                <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center w-100">
+        <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
+        </pagination-controls>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Trabaja actualmente:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Trabaja actualmente" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">¿Qué realiza?:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="¿Qué realiza?" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">¿Por qué no?:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="¿Por qué no?" />
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+
+    <div class="col-md-8">
+        <h3>Actividades que puede realizar</h3>
+    </div>
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-3 mt-4">
+        <h6>Artesanias</h6>
+    </div>
+    <div class="col-md-1 mt-4">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Observaciones:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Horario:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+
+
+    <div class="col-md-3">
+        <h6>Bolas de Hilo Macrame</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+
+    <div class="col-md-3">
+        <h6>Bolsas de plástico</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck2">
+            <label class="custom-control-label" for="customCheck2"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+
+    <div class="col-md-3">
+        <h6>Calado</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+
+    <div class="col-md-3">
+        <h6>Carpintería</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+
+    <div class="col-md-3">
+        <h6>Cocina</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+
+    <div class="col-md-3">
+        <h6>Huarachería</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+
+    <div class="col-md-3">
+        <h6>Imprenta</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+    <div class="col-md-3">
+        <h6>Mosaico</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+
+    <div class="col-md-3">
+        <h6>Panadería</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+    <div class="col-md-3">
+        <h6>Papiroflexia</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+    <div class="col-md-3">
+        <h6>Pintura textil</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+    <div class="col-md-3">
+        <h6>Piteado</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+
+    <div class="col-md-3">
+        <h6>Repujado</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+    <div class="col-md-3">
+        <h6>Servicios</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+
+    <div class="col-md-3">
+        <h6>Tallado</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+    <div class="col-md-3">
+        <h6>Taller de cubrebocas</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+    <div class="col-md-3">
+        <h6>Taller de Tokal</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+    <div class="col-md-3">
+        <h6>Tienda</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+
+    <div class="col-md-3">
+        <h6>Otras (Especificar)</h6>
+    </div>
+    <div class="col-md-1">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="duenoMedio" placeholder="" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 text-center text-sm-right">
+        <button type="button" class="btn btn-success mr-3">Guardar</button>
+        <button type="submit" class="btn btn-success mr-3">Imprimir</button>
+    </div>
+</div>
