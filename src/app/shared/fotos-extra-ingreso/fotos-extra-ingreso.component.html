@@ -1,0 +1,12 @@
+<app-section-title icon="fa fa-film" title="fotos extra"></app-section-title>
+<div class="row">
+  <div class="col-4">
+    <img src="assets/img/no_image.png" alt="">
+  </div>
+  <div class="col-4">
+    <button class="btn btn-primary" (click)="openFinder(inputFile)">Agregar Foto</button>
+  </div>
+</div>
+<input #inputFile style="display: none" accept="image/png, image/jpeg, image/jpg" type="file" class="form-control-file"
+       ng2FileSelect aria-describedby="fileHelp"
+       [uploader]="uploader" (change)="uploadFile()"/>

@@ -23,6 +23,8 @@ import { CarpetaInvestigacionImputadoComponent } from './carpeta-investigacion-i
 import { CausaPenalIngresoComponent } from './causa-penal-ingreso/causa-penal-ingreso.component';
 import { DelitoIngresoComponent } from './delito-ingreso/delito-ingreso.component';
 import { DelitoComponent } from '@dashboard/catalogos/delito/delito.component';
+import { FotosExtraIngresoComponent } from './fotos-extra-ingreso/fotos-extra-ingreso.component';
+import {FileUploadModule} from 'ng2-file-upload';
 
 
 const MODULES = [
@@ -48,9 +50,9 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, ...MODULES],
-  exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent],
-  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, CausaPenalIngresoComponent, DelitoIngresoComponent],
+  imports: [CommonModule, ...MODULES, FileUploadModule],
+    exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, FotosExtraIngresoComponent],
+  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, CausaPenalIngresoComponent, DelitoIngresoComponent, FotosExtraIngresoComponent],
 })
 export class SharedModule {
 }
