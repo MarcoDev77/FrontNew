@@ -6,6 +6,8 @@ import { DireccionIndustrialComponent } from './direccion-industrial/direccion-i
 import { CentroEscolarComponent } from './centro-escolar/centro-escolar.component';
 import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.component';
 import { PsicologiaComponent } from './psicologia/psicologia.component';
+import { DeportesComponent } from './deportes/deportes.component';
+import { OdontologiaComponent } from './odontologia/odontologia.component';
 
 
 const routes: Routes = [
@@ -17,7 +19,9 @@ const routes: Routes = [
       {path: 'direccion-industrial', component: DireccionIndustrialComponent},
       {path: 'centro-escolar',component: CentroEscolarComponent},
       {path: 'trabajo-social',component: TrabajoSocialComponent},
-      {path: 'psicologia', component: PsicologiaComponent}
+      {path: 'psicologia', component: PsicologiaComponent},
+      {path: 'deportes', component: DeportesComponent},
+      {path: 'odontologia', component: OdontologiaComponent}
   
 
     ]
