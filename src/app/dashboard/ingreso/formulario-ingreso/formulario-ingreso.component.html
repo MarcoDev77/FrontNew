@@ -353,7 +353,7 @@
 </form>
 
 <app-carpeta-investigacion-imputado *ngIf="ingreso?.id" [ingresoId]="ingreso.id" [personaId]="ingreso.personaIngresada.id"></app-carpeta-investigacion-imputado>
-<app-causa-penal-ingreso *ngIf="ingreso?.id" role="DACTILOSCOPIA" [ingresoId]="ingreso.id"></app-causa-penal-ingreso>
+<app-causa-penal-ingreso *ngIf="ingreso?.id" role="DACTILOSCOPIA" [ingresoId]="ingreso.id" [personaId]="ingreso.personaIngresada.id"></app-causa-penal-ingreso>
 <!--Footer-->
 <div class="row">
     <div class="col-md-12 text-right">

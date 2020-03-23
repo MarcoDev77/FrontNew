@@ -12,6 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class CausaPenalIngresoComponent implements OnInit {
 
   @Input() ingresoId;
+  @Input() personaId;
   @Input() role;
   public causaPenal: any;
   public data = [];
@@ -40,11 +41,11 @@ export class CausaPenalIngresoComponent implements OnInit {
 
   ngOnInit() {
     console.log('ID', this.ingresoId);
-    this.getData(this.ingreso.id);
+    this.getData();
   }
 
-  getData(ingresoId) {
-    this.ingresoService.listCausaPenal(ingresoId).subscribe((data: any) => {
+  getData() {
+    this.ingresoService.listCausaPenal(this.personaId).subscribe((data: any) => {
       console.log(data);
       if (!data.error) {
         this.data = data.listaCausaPenal;
@@ -88,7 +89,7 @@ export class CausaPenalIngresoComponent implements OnInit {
             showConfirmButton: false
           });
           if (!data.error) {
-            this.getData(this.ingreso.id);
+            this.getData();
           }
         });
       }
@@ -118,7 +119,7 @@ export class CausaPenalIngresoComponent implements OnInit {
     if (!this.causaPenal.nombre) {
       return;
     }
-    this.causaPenal = {...this.causaPenal, imputado: {id: this.ingreso.id}};
+    this.causaPenal = {...this.causaPenal, imputado: {id: this.ingreso.id}, personaIngresada: { id: this.personaId}};
     this.ingresoService.saveCausaPenal(this.causaPenal).subscribe((data: any) => {
       console.log('save carpeta', data);
       Swal.fire({
@@ -130,7 +131,7 @@ export class CausaPenalIngresoComponent implements OnInit {
       });
       if (!data.error) {
         this.cancel();
-        this.getData(this.ingreso.id);
+        this.getData();
       }
     });
   }
