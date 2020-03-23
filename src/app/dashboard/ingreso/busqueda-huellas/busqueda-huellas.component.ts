@@ -53,6 +53,12 @@ export class BusquedaHuellasComponent {
     // Uploader
     this.url = environment.apiUrl;
     this.uploader = new FileUploader({url: this.url + '/api/buscarPersonaIngresadaHuella', itemAlias: 'image'});
+    // Ver resultados anteriores
+    if (location.href.includes('busqueda-huella') && JSON.parse(localStorage.getItem('results'))) {
+      this.results = JSON.parse(localStorage.getItem('results'));
+      this.finished = true;
+      this.action = 'SEARCH';
+    }
   }
 
   handleResults(data) {
@@ -65,8 +71,10 @@ export class BusquedaHuellasComponent {
     });
     if (!data.error) {
       this.results = data.coincidenciasEncontradas;
+      this.saveResults();
     } else {
       console.log('hay error');
+      this.finished = false;
     }
     if (location.href.includes('lista-ingreso')) {
       this.action = 'ADD';
@@ -127,6 +135,7 @@ export class BusquedaHuellasComponent {
   }
 
   handleAction(item?) {
+    console.log('entrea', this.action);
     this.modalService.dismissAll();
     switch (this.action) {
       case 'ADD':
@@ -139,7 +148,7 @@ export class BusquedaHuellasComponent {
         break;
       case 'SEARCH':
         console.log('Busqueda');
-        this.seeHuellas(item.id);
+        this.seeHuellas(item);
         break;
       default:
         return;
@@ -206,10 +215,19 @@ export class BusquedaHuellasComponent {
     });
   }
 
-  seeHuellas(idPersona) {
-    this.ingresoService.listHuellasPersona(idPersona, this.offset, this.max).subscribe((data: any) => {
-      console.log('huellas', data);
-    });
+  seeHuellas(item) {
+    localStorage.setItem('resultado', JSON.stringify(item));
+    this.router.navigate(['dashboard/ingreso/busqueda-huella-detalle']);
+  }
+
+  saveResults() {
+    localStorage.setItem('results', JSON.stringify(this.results));
+  }
+
+  clearResults() {
+    this.results = [];
+    localStorage.removeItem('results');
+    this.finished = false;
   }
 
   setupInterval() {

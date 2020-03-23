@@ -134,6 +134,10 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/marcarIngresoTerminado?imputadoId=${id}`);
   }
 
+  listHuellasPersona = (id, offset, max) => {
+    return this.http.get(`${this.url}/api/listarHuellasIngresoPersona?personaIngresadaId=${id}&offset=${offset}&max=${max}`);
+  }
+
   generateFolio = (id = null) => this.http.get(`${this.url}/api/generarFolioImputado?personaIngresadaId=${id}`);
 
   listCarpetasInvestigacion = imputadoId => this.http.get(`${this.url}/api/listarCarpetasPorImputado?imputadoId=${imputadoId}`);
