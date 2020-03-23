@@ -136,7 +136,10 @@ export class IngresoService {
 
   generateFolio = (id = null) => this.http.get(`${this.url}/api/generarFolioImputado?personaIngresadaId=${id}`);
 
-  listCarpetasInvestigacion = imputadoId => this.http.get(`${this.url}/api/listarCarpetasPorImputado?imputadoId=${imputadoId}`);
+  listCarpetasInvestigacion = id => {
+    console.log('listCarpetasInvestigacion', id);
+    return this.http.get(`${this.url}/api/listarCarpetasPorImputado?personaIngresadaId=${id}`);
+  }
 
   saveCarpetaInvestigacion = model => {
     this.data = model;
