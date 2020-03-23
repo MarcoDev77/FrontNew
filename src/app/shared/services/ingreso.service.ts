@@ -150,7 +150,7 @@ export class IngresoService {
     return this.http.delete(`${this.url}/api/eliminarCarpetaInvestigacion?carpetaId=${carpetaId}`);
   }
 
-  listCausaPenal = id => this.http.get(`${this.url}/api/listarCausaPenalPorImputado?imputadoId=${id}`);
+  listCausaPenal = id => this.http.get(`${this.url}/api/listarCausaPenalPorImputado?personaIngresadaId=${id}`);
 
   saveCausaPenal = model => {
     console.log('To server', model);
