@@ -11,15 +11,17 @@ import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.componen
 import { PsicologiaComponent } from './psicologia/psicologia.component';
 import { DeportesComponent } from './deportes/deportes.component';
 import { OdontologiaComponent } from './odontologia/odontologia.component';
+import { ResultadosExamenesComponent } from './resultados-examenes/resultados-examenes.component';
 
 
 
 @NgModule({
-  declarations: [RootComponent,PlanActividadesComponent,DireccionIndustrialComponent, CentroEscolarComponent
-  ,TrabajoSocialComponent,
+  declarations: [RootComponent, PlanActividadesComponent, DireccionIndustrialComponent, CentroEscolarComponent
+    , TrabajoSocialComponent,
     PsicologiaComponent,
     DeportesComponent,
-  OdontologiaComponent],
+    OdontologiaComponent,
+    ResultadosExamenesComponent],
   imports: [
     CommonModule,
     SharedModule,

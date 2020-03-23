@@ -8,6 +8,7 @@ import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.componen
 import { PsicologiaComponent } from './psicologia/psicologia.component';
 import { DeportesComponent } from './deportes/deportes.component';
 import { OdontologiaComponent } from './odontologia/odontologia.component';
+import { ResultadosExamenesComponent } from './resultados-examenes/resultados-examenes.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
       {path: 'trabajo-social',component: TrabajoSocialComponent},
       {path: 'psicologia', component: PsicologiaComponent},
       {path: 'deportes', component: DeportesComponent},
-      {path: 'odontologia', component: OdontologiaComponent}
+      {path: 'odontologia', component: OdontologiaComponent},
+      {path: 'examenes', component: ResultadosExamenesComponent}
   
 
     ]
