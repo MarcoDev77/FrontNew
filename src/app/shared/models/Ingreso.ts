@@ -14,4 +14,5 @@ export class Ingreso {
   esTraslado: boolean;
   centroOrigen: string;
   registroTerminado: boolean;
+  personaIngresada: any;
 }

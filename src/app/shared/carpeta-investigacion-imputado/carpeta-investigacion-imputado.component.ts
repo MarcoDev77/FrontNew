@@ -12,6 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class CarpetaInvestigacionImputadoComponent implements OnInit {
 
   @Input() ingresoId;
+  @Input() personaId;
   public carpeta: any;
   public data = [];
   public ingreso: any;
@@ -30,7 +31,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
 
   constructor(private ingresoService: IngresoService, private modalService: NgbModal) {
     this.carpeta = {} as any;
-    
+
     // Table
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
@@ -39,11 +40,11 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getData(this.ingresoId);
+    this.getData();
   }
 
-  getData(ingresoId) {
-    this.ingresoService.listCarpetasInvestigacion(ingresoId).subscribe((data: any) => {
+  getData() {
+    this.ingresoService.listCarpetasInvestigacion(this.personaId).subscribe((data: any) => {
 
       console.log(data);
       if (!data.error) {
@@ -90,7 +91,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
             showConfirmButton: false
           });
           if (!data.error) {
-            this.getData(this.ingresoId);
+            this.getData();
           }
         });
       }
@@ -117,7 +118,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   }
 
   submit(array?) {
-    this.carpeta = {...this.carpeta, imputado: {id: this.ingresoId}};
+    this.carpeta = {...this.carpeta, imputado: {id: this.ingresoId}, personaIngresada: { id: this.personaId}};
     this.ingresoService.saveCarpetaInvestigacion(this.carpeta).subscribe((data: any) => {
       console.log('save carpeta', data);
       Swal.fire({
@@ -129,7 +130,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
       });
       if (!data.error) {
         this.cancel();
-        this.getData(this.ingresoId);
+        this.getData();
       }
     });
   }
