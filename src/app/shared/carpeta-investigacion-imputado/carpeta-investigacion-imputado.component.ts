@@ -17,6 +17,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   public data = [];
   public ingreso: any;
   @Input() role;
+  public nombreV: any;
 
   // Table
   public p;
@@ -55,7 +56,6 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   }
 
   // Table Methods
-  nombreV: any;
   toggleForm() {
     this.isForm = !this.isForm;
   }
