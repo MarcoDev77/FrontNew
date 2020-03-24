@@ -56,8 +56,12 @@ export class BusquedaHuellasComponent {
     // Ver resultados anteriores
     if (location.href.includes('busqueda-huella') && JSON.parse(localStorage.getItem('results'))) {
       this.results = JSON.parse(localStorage.getItem('results'));
-      this.finished = true;
-      this.action = 'SEARCH';
+      if (this.results.length > 0) {
+        this.finished = true;
+        this.action = 'SEARCH';
+      } else {
+        this.clearResults();
+      }
     }
   }
 
@@ -70,8 +74,13 @@ export class BusquedaHuellasComponent {
       showConfirmButton: false
     });
     if (!data.error) {
-      this.results = data.coincidenciasEncontradas;
-      this.saveResults();
+      if (data.coincidenciasEncontradas && data.coincidenciasEncontradas.length > 0) {
+        this.results = data.coincidenciasEncontradas;
+        this.saveResults();
+      } else {
+        this.finished = false;
+        this.index = null;
+      }
     } else {
       console.log('hay error');
       this.finished = false;

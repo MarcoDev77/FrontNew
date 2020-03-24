@@ -11,11 +11,12 @@ export class BusquedaHuellasDetalleComponent implements OnInit {
   public resultado: any;
   public isLoading: boolean;
   public areMore: boolean;
-  public list = [];
+  public list: any;
   public max = 1;
   public offset = 0;
 
   constructor(private ingresoService: IngresoService) {
+    this.list = {} as any;
     this.resultado = JSON.parse(localStorage.getItem('resultado'));
   }
 
@@ -30,7 +31,7 @@ export class BusquedaHuellasDetalleComponent implements OnInit {
       console.log('huellas', data);
       this.isLoading = false;
       if (!data.error) {
-        this.list = data.ingresos;
+        this.list = data.ingresos[0];
         this.areMore = data.existenRegistros;
       }
     });
