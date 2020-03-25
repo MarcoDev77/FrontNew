@@ -376,6 +376,10 @@ export class DactiloscopiaComponent implements OnInit {
   searchFingerprint(modal) {
     this.modalService.open(modal, {size: 'xl', windowClass: 'modal-primary mt-12'});
   }
+
+  openModalExtraPhotos(modal) {
+    this.modalService.open(modal, {size: 'xl', windowClass: 'modal-primary mt-12'});
+  }
 }
 
 

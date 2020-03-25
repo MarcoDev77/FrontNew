@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
 import {environment} from '@environment/environment';
 import Swal from 'sweetalert2';
 import {AuthenticationService} from '@shared/services/authentication.service';
+import {IngresoService} from '@shared/services/ingreso.service';
 
 @Component({
   selector: 'app-fotos-extra-ingreso',
@@ -10,32 +11,51 @@ import {AuthenticationService} from '@shared/services/authentication.service';
   styleUrls: ['./fotos-extra-ingreso.component.scss']
 })
 export class FotosExtraIngresoComponent implements OnInit {
+  @Input() ingresoId;
+  public photos = [];
+  public isLoading: boolean;
 
   // Uploader
   public url: string;
   public uo: FileUploaderOptions = {};
   public uploader: FileUploader;
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService, private ingresoService: IngresoService) {
     // Uploader
     this.url = environment.apiUrl;
-    this.uploader = new FileUploader({url: this.url + '/api/', itemAlias: 'image'});
+    this.uploader = new FileUploader({url: this.url + '/api/registrarHuellaDactilar', itemAlias: 'image'});
   }
 
   ngOnInit() {
+    this.getData();
+  }
+
+  getData() {
+    this.isLoading = true;
+    this.ingresoService.getForografiasImputado(this.ingresoId).subscribe((data: any) => {
+      this.isLoading = false;
+      console.log('getForografiasImputado', data);
+      if (!data.error) {
+        this.photos = data.fotografias;
+      }
+    });
   }
 
   openFinder(inputFile) {
     inputFile.click();
   }
 
-  uploadFile() {
+  uploadFile(inptuFile?) {
     const authToken = this.authenticationService.getCurrentUser().access_token;
     this.uo.authTokenHeader = 'Authorization';
     this.uo.authToken = `Bearer ${authToken}`;
-    this.uo.additionalParameter = {};
+    this.uo.additionalParameter = {
+      esHuella: 'fotografia',
+      ingresoId: this.ingresoId,
+      claveFotografia: 'FOTO_EXTRA_' + (this.photos.length + 1),
+      tipoImagen: inptuFile.files[0].type.split('/')[1],
+    };
     this.uploader.setOptions(this.uo);
-    console.log(this.uo);
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
@@ -58,6 +78,7 @@ export class FotosExtraIngresoComponent implements OnInit {
       timer: 1000,
       showConfirmButton: false
     }).then(() => {
+      this.getData();
     });
     this.uploader.progress = 0;
     this.uploader.clearQueue();

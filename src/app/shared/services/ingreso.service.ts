@@ -163,6 +163,8 @@ export class IngresoService {
   }
 
   getHistorialDelito = id => this.http.get(`${this.url}/api/historicoDelitos?delitoId=${id}`);
+
+  getForografiasImputado = id => this.http.get(`${this.url}/api/consultarFotografiasImputado?imputadoId=${id}`);
 }
 
 
