@@ -5,7 +5,7 @@ import {FooterComponent} from './footer/footer.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {RouterModule} from '@angular/router';
 import {LoaderComponent} from './loader/loader.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SelectComponent} from './select/select.component';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
@@ -25,6 +25,7 @@ import { DelitoIngresoComponent } from './delito-ingreso/delito-ingreso.componen
 import { DelitoComponent } from '@dashboard/catalogos/delito/delito.component';
 import { FotosExtraIngresoComponent } from './fotos-extra-ingreso/fotos-extra-ingreso.component';
 import {FileUploadModule} from 'ng2-file-upload';
+import { RecursosProbatoriosComponent } from './recursos-probatorios/recursos-probatorios.component';
 
 
 const MODULES = [
@@ -52,7 +53,7 @@ const COMPONENTS = [
 @NgModule({
   imports: [CommonModule, ...MODULES, FileUploadModule],
     exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, FotosExtraIngresoComponent],
-  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, CausaPenalIngresoComponent, DelitoIngresoComponent, FotosExtraIngresoComponent],
+  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, CausaPenalIngresoComponent, DelitoIngresoComponent, FotosExtraIngresoComponent, RecursosProbatoriosComponent],
 })
 export class SharedModule {
 }

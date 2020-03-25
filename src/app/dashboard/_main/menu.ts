@@ -138,7 +138,21 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fa fa-folder',
     collapse: 'tables',
     children: [
+      {path: 'comite-tecnico/examenes', title: 'Resultado examenes', ab: 'RE'},
       {path: 'comite-tecnico/plan-actividades', title: 'Plan de actividades', ab: 'PA'},
+      {path: 'comite-tecnico/direccion-industrial', title: 'Dirección industrial', ab: 'DI'},
+      {path: 'comite-tecnico/plan-actividades', title: 'Pedagogía', ab: 'PE'},
+      {path: 'comite-tecnico/psicologia', title: 'Psicología', ab: 'PS'},
+      {path: 'comite-tecnico/deportes', title: 'Deportes', ab: 'DE'},
+      {path: 'comite-tecnico/deportes', title: 'Médico', ab: 'ME'},
+      {path: 'comite-tecnico/odontologia', title: 'Odontología', ab: 'OD'},
+      {path: 'comite-tecnico/centro-escolar', title: 'Centro Escolar', ab: 'CE'},
+      {path: 'comite-tecnico/trabajo-social', title: 'Trabajo social', ab: 'TS'},
+      
+      
+
+
+
     ],
   }
 ];

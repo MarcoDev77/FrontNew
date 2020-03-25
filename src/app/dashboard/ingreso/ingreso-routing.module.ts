@@ -9,6 +9,7 @@ import {ReferenciasComponent} from '@dashboard/ingreso/referencias/referencias.c
 import {CaracteristicasComponent} from '@dashboard/ingreso/caracteristicas/caracteristicas.component';
 import {MediaAfiliacionComponent} from '@dashboard/ingreso/media-afiliacion/media-afiliacion.component';
 import {BusquedaHuellasComponent} from '@dashboard/ingreso/busqueda-huellas/busqueda-huellas.component';
+import {BusquedaHuellasDetalleComponent} from '@dashboard/ingreso/busqueda-huellas-detalle/busqueda-huellas-detalle.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
       {path: 'referencias', component: ReferenciasComponent},
       {path: 'caracteristicas', component: CaracteristicasComponent},
       {path: 'media-afiliacion', component: MediaAfiliacionComponent},
-      {path: 'busqueda-huella', component: BusquedaHuellasComponent}
+      {path: 'busqueda-huella', component: BusquedaHuellasComponent},
+      {path: 'busqueda-huella-detalle', component: BusquedaHuellasDetalleComponent}
     ]
   },
 ];

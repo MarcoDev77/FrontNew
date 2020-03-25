@@ -27,6 +27,9 @@ export class BusquedaHuellasComponent {
   public index: number;
   public finished: boolean;
   public results = [];
+  // paginador
+  public max = 1;
+  public offset = 0;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -50,6 +53,16 @@ export class BusquedaHuellasComponent {
     // Uploader
     this.url = environment.apiUrl;
     this.uploader = new FileUploader({url: this.url + '/api/buscarPersonaIngresadaHuella', itemAlias: 'image'});
+    // Ver resultados anteriores
+    if (location.href.includes('busqueda-huella') && JSON.parse(localStorage.getItem('results'))) {
+      this.results = JSON.parse(localStorage.getItem('results'));
+      if (this.results.length > 0) {
+        this.finished = true;
+        this.action = 'SEARCH';
+      } else {
+        this.clearResults();
+      }
+    }
   }
 
   handleResults(data) {
@@ -61,9 +74,16 @@ export class BusquedaHuellasComponent {
       showConfirmButton: false
     });
     if (!data.error) {
-      this.results = data.coincidenciasEncontradas;
+      if (data.coincidenciasEncontradas && data.coincidenciasEncontradas.length > 0) {
+        this.results = data.coincidenciasEncontradas;
+        this.saveResults();
+      } else {
+        this.finished = false;
+        this.index = null;
+      }
     } else {
       console.log('hay error');
+      this.finished = false;
     }
     if (location.href.includes('lista-ingreso')) {
       this.action = 'ADD';
@@ -71,6 +91,8 @@ export class BusquedaHuellasComponent {
         this.action = 'CREATE';
         this.handleAction();
       }
+    } else if (location.href.includes('busqueda-huella')) {
+      this.action = 'SEARCH';
     } else {
       return;
     }
@@ -122,6 +144,7 @@ export class BusquedaHuellasComponent {
   }
 
   handleAction(item?) {
+    console.log('entrea', this.action);
     this.modalService.dismissAll();
     switch (this.action) {
       case 'ADD':
@@ -132,6 +155,12 @@ export class BusquedaHuellasComponent {
         console.log('Se crea nuevo registro de persoana');
         this.createPersona();
         break;
+      case 'SEARCH':
+        console.log('Busqueda');
+        this.seeHuellas(item);
+        break;
+      default:
+        return;
     }
   }
 
@@ -193,6 +222,21 @@ export class BusquedaHuellasComponent {
         });
       }
     });
+  }
+
+  seeHuellas(item) {
+    localStorage.setItem('resultado', JSON.stringify(item));
+    this.router.navigate(['dashboard/ingreso/busqueda-huella-detalle']);
+  }
+
+  saveResults() {
+    localStorage.setItem('results', JSON.stringify(this.results));
+  }
+
+  clearResults() {
+    this.results = [];
+    localStorage.removeItem('results');
+    this.finished = false;
   }
 
   setupInterval() {

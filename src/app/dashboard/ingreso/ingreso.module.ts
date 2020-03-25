@@ -14,6 +14,7 @@ import { SituacionJuridicaComponent } from './situacion-juridica/situacion-jurid
 import {FileUploadModule} from 'ng2-file-upload';
 import {CatalogosModule} from '@dashboard/catalogos/catalogos.module';
 import { BusquedaHuellasComponent } from './busqueda-huellas/busqueda-huellas.component';
+import { BusquedaHuellasDetalleComponent } from './busqueda-huellas-detalle/busqueda-huellas-detalle.component';
 
 
 
@@ -27,7 +28,8 @@ import { BusquedaHuellasComponent } from './busqueda-huellas/busqueda-huellas.co
         ReferenciasComponent,
         CaracteristicasComponent,
         MediaAfiliacionComponent,
-        BusquedaHuellasComponent
+        BusquedaHuellasComponent,
+        BusquedaHuellasDetalleComponent
     ],
     exports: [
         BusquedaHuellasComponent

@@ -98,6 +98,13 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/registrarDelitosCausaOCarpeta`, model);
   }
 
+  listRecursos = id => this.http.get(`${this.url}/api/consultarRecursosProbatorios?causaPenalId=${id}`);
+
+  saveRecurso = model => {
+    console.log('To server', model);
+    return this.http.post(`${this.url}/api/registrarRecursoProbatorio`, model);
+  }
+
 
   // CARACTERISTICAS
   getCaracteristica(clave, imputadoId) {
@@ -132,6 +139,10 @@ export class IngresoService {
   finishIngreso(id) {
     console.log('To server', id);
     return this.http.get(`${this.url}/api/marcarIngresoTerminado?imputadoId=${id}`);
+  }
+
+  listHuellasPersona = (id, offset, max) => {
+    return this.http.get(`${this.url}/api/listarHuellasIngresoPersona?personaIngresadaId=${id}&offset=${offset}&max=${max}`);
   }
 
   generateFolio = (id = null) => this.http.get(`${this.url}/api/generarFolioImputado?personaIngresadaId=${id}`);
