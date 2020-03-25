@@ -51,7 +51,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, ...MODULES, FileUploadModule],
+  imports: [CommonModule, ...MODULES, FileUploadModule, ReactiveFormsModule],
     exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, FotosExtraIngresoComponent],
   declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, CausaPenalIngresoComponent, DelitoIngresoComponent, FotosExtraIngresoComponent, RecursosProbatoriosComponent],
 })
