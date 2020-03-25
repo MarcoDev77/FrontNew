@@ -323,7 +323,7 @@
 </table>
 <input #inputFile style="display: none" accept="image/png, image/jpeg, image/jpg" type="file" class="form-control-file"
        ng2FileSelect aria-describedby="fileHelp"
-       [uploader]="uploader" (change)="uploadFile()"/>
+       [uploader]="uploader" (change)="uploadFile(inputFile)"/>
 
 <br>
 <div class="row">

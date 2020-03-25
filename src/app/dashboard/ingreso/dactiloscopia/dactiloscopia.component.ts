@@ -5,7 +5,7 @@ import {AuthenticationService} from '@shared/services/authentication.service';
 import Swal from 'sweetalert2';
 import {Ingreso} from '@shared/models/Ingreso';
 import {IngresoService} from '@shared/services/ingreso.service';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -86,7 +86,10 @@ export class DactiloscopiaComponent implements OnInit {
     this.currentImage = name;
   }
 
-  uploadFile() {
+  uploadFile(inputFile?) {
+    if (!inputFile.files[0]) {
+      return console.log('esta vacio');
+    }
     let esHuella = 'huella';
     if (this.currentImage === this.nameImages.perfilFrente || this.currentImage === this.nameImages.perfilIzquierdo ||
       this.currentImage === this.nameImages.perfilDerecho) {
@@ -108,11 +111,24 @@ export class DactiloscopiaComponent implements OnInit {
         });
       }
     } else {
+      // TODO: Se cambiara, se va a mandar el tipo de imagen en lugar de la validacion
+      // if (inputFile.files[0].type.split('/')[1])
+      const tipo = inputFile.files[0].type.split('/')[1];
+      if (tipo !== 'jpg' && tipo !== 'jpeg') {
+        return Swal.fire({
+          title: 'Cuidado',
+          text: 'La extencion de la fotografía debe de ser .jpg',
+          icon: 'warning',
+          timer: 1300,
+          showConfirmButton: false
+        });
+      }
       this.uo.additionalParameter = {
         claveFotografia: this.currentImage,
         ingresoId: this.ingreso.id,
         esHuella: 'foto',
       };
+
     }
     this.uploader.setOptions(this.uo);
     console.log(this.uo);
