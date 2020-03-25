@@ -1,0 +1,24 @@
+<app-section-title icon="fa fa-film" title="fotos extra"></app-section-title>
+<div *ngIf="isLoading" class="col-12 text-center">
+  <i class="fa fa-spinner fa-spin"></i>
+  Cargando...
+  <hr>
+</div>
+<div class="row">
+  <div *ngIf="photos.length === 0 && !isLoading" class="col text-center">
+    <p>No hay fotos extra</p>
+  </div>
+</div>
+<div *ngIf="photos.length > 0 && !isLoading" class="row">
+  <div *ngFor="let photo of photos" class="col-4">
+    <img src="{{'data:image/png;base64,' + photo.imagen64}}">
+  </div>
+</div>
+<div class="row">
+  <div class="col text-center">
+    <button class="btn btn-primary" (click)="openFinder(inputFile)">Agregar Foto</button>
+  </div>
+</div>
+<input #inputFile style="display: none" accept="image/png, image/jpeg, image/jpg" type="file" class="form-control-file"
+       ng2FileSelect aria-describedby="fileHelp"
+       [uploader]="uploader" (change)="uploadFile(inputFile)"/>
