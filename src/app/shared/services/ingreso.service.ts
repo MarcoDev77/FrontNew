@@ -105,6 +105,9 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/registrarRecursoProbatorio`, model);
   }
 
+  deleteRecurso = id => this.http.get(`${this.url}/api/eliminarRecursoProbatorio?recursoId=${id}`);
+
+  setRecursoAgotado = id => this.http.get(`${this.url}/api/marcarRecursoProbatorioAgotado?recursoId=${id}`);
 
   // CARACTERISTICAS
   getCaracteristica(clave, imputadoId) {
