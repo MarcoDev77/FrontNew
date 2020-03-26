@@ -15,4 +15,6 @@ export class Ingreso {
   centroOrigen: string;
   registroTerminado: boolean;
   personaIngresada: any;
+  municipioDomicilio: any;
+  
 }
