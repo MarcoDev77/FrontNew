@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanActividadesComponent implements OnInit {
   public data = [];
-  constructor() { }
-
+  public isLoading :boolean
+  constructor() { 
+    this.isLoading=false
+  }
+  
   ngOnInit() {
+  }
+
+  switch($event){
+    
   }
 
 }
