@@ -179,6 +179,18 @@ export class IngresoService {
   getHistorialDelito = id => this.http.get(`${this.url}/api/historicoDelitos?delitoId=${id}`);
 
   getForografiasImputado = id => this.http.get(`${this.url}/api/consultarFotografiasImputado?imputadoId=${id}`);
+
+
+  listRefencias = id => this.http.get(`${this.url}/api/listarReferenciasPersonales?imputadoId=${id}`);
+
+  saveReferencia(model){
+    return this.http.post(`${this.url}/api/registrarReferenciaPersonal`, model);
+  }
+
+  deleteReferencia(id){
+    return this.http.delete(`${this.url}/api/eliminarReferenciaPersonal?idReferencia=${id}`);
+  }
+
 }
 
 
