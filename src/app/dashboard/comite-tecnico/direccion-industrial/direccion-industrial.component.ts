@@ -16,6 +16,8 @@ export class DireccionIndustrialComponent implements OnInit {
   constructor(private comiteTecnicoService: ComiteTecnicoService) {
     this.isLoading = false;
     this.generalidadesPPL = {} as GeneralidadesPPL;
+    this.actividades = new ListaActividades();
+    console.log(this.actividades);
   }
 
   ngOnInit() {
@@ -34,7 +36,20 @@ export class DireccionIndustrialComponent implements OnInit {
         showConfirmButton: false
       });
       if (!data.error) {
-        this.generalidadesPPL = data.imputado[0];
+        this.generalidadesPPL = data.imputado;
+        const imputado = {id: this.generalidadesPPL.imputadoId};
+
+        if (data.imputado.listaActividades) {
+          this.parceListaActividades(data.imputado.listaActividades);
+          this.actividades = {imputado, ...data.imputado.listaActividades};
+        } else {
+          this.actividades = new ListaActividades();
+          this.actividades = {imputado, ...this.actividades};
+        }
+
+        console.log('ddd', this.actividades);
+      } else {
+        this.handleError();
       }
     }, error => {
       console.log(error);
@@ -46,7 +61,14 @@ export class DireccionIndustrialComponent implements OnInit {
         timer: 1000,
         showConfirmButton: false
       });
+      this.handleError();
     });
+  }
+
+  handleError() {
+    this.isLoading = false;
+    this.generalidadesPPL = {} as GeneralidadesPPL;
+    this.actividades = new ListaActividades();
   }
 
   switch($event) {
@@ -56,6 +78,40 @@ export class DireccionIndustrialComponent implements OnInit {
     if (this.generalidadesPPL.folio.length >= 6) {
       console.log('Entra');
       this.getData();
+    }
+  }
+
+  submit() {
+    console.log('Lista Actividades', this.actividades);
+    this.comiteTecnicoService.savePlandeActividades(this.actividades).subscribe((data: any) => {
+      console.log('savePlandeActividades', data);
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Actualización',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1000,
+        showConfirmButton: false
+      });
+    }, error => {
+      console.log(error);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Actualización fallida',
+        icon: 'error',
+        timer: 1000,
+        showConfirmButton: false
+      });
+    });
+  }
+
+  parceListaActividades(list) {
+    if (list) {
+      for (const key of Object.keys(list)) {
+        if (key === 'trabajoactual' || key === 'queRealiza' || key === 'porQueNo') {
+          continue;
+        }
+        list[key] = JSON.parse(list[key]);
+      }
     }
   }
 }
@@ -77,29 +133,34 @@ class GeneralidadesPPL {
 
 class Actividad {
   realizada = false;
-  observaciones: string;
-  horario: string;
+  observaciones = '';
+  horario = '';
 }
 
 class ListaActividades {
-  artesanias: Actividad;
-  bolasHiloMacrame: Actividad;
-  bolsasPlastico: Actividad;
-  calado: Actividad;
-  carpinteria: Actividad;
-  cocina: Actividad;
-  huaracheria: Actividad;
-  imprenta: Actividad;
-  mosaico: Actividad;
-  panaderia: Actividad;
-  papiroflexia: Actividad;
-  pinturaTextil: Actividad;
-  piteado: Actividad;
-  repujado: Actividad;
-  servicios: Actividad;
-  tallado: Actividad;
-  tallerCubrebocas: Actividad;
-  tallerTokal: Actividad;
-  tienda: Actividad;
-  otras: Actividad;
+  id: number;
+  trabajoactual: string;
+  queRealiza: string;
+  porQueNo: string;
+  artesanias = {} as Actividad;
+  bolasHiloMacrame = {} as Actividad;
+  bolsasPlastico = {} as Actividad;
+  calado = {} as Actividad;
+  carpinteria = {} as Actividad;
+  cocina = {} as Actividad;
+  huaracheria = {} as Actividad;
+  imprenta = {} as Actividad;
+  mosaico = {} as Actividad;
+  panaderia = {} as Actividad;
+  papiroflexia = {} as Actividad;
+  pinturaTextil = {} as Actividad;
+  piteado = {} as Actividad;
+  repujado = {} as Actividad;
+  servicios = {} as Actividad;
+  tallado = {} as Actividad;
+  tallerCubrebocas = {} as Actividad;
+  tallerTokal = {} as Actividad;
+  tienda = {} as Actividad;
+  otras = {} as Actividad;
+  imputado: any;
 }

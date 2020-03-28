@@ -160,24 +160,24 @@
     </pagination-controls>
   </div>
 </div>
-
+<app-section-title icon="fa fa-list-alt" title="Plan de actividades"></app-section-title>
 <div class="row">
   <div class="col-md-4">
     <div class="form-group">
       <label>Trabaja actualmente:</label>
-      <input type="text" class="form-control" name="duenoMedio" placeholder="Trabaja actualmente"/>
+      <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.trabajoactual" name="trabajoactual" placeholder="Trabaja actualmente"/>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>¿Qué realiza?:</label>
-      <input type="text" class="form-control" name="duenoMedio" placeholder="¿Qué realiza?"/>
+      <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.queRealiza" name="queRealiza" placeholder="¿Qué realiza?"/>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>¿Por qué no?:</label>
-      <input type="text" class="form-control" name="duenoMedio" placeholder="¿Por qué no?"/>
+      <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.porQueNo" name="porQueNo" placeholder="¿Por qué no?"/>
     </div>
   </div>
 </div>
@@ -204,14 +204,14 @@
   <div class="col-md-4">
     <div class="form-group">
       <label>Observaciones:</label>
-      <input [(ngModel)]="actividades.artesanias.observaciones" type="text" class="form-control" name="duenoMedio"
+      <input maxlength="250" [(ngModel)]="actividades.artesanias.observaciones" type="text" class="form-control" name="duenoMedio"
              placeholder=""/>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>Horario:</label>
-      <input [(ngModel)]="actividades.artesanias.horario" type="text" class="form-control" name="duenoMedio"
+      <input maxlength="150" [(ngModel)]="actividades.artesanias.horario" type="text" class="form-control" name="duenoMedio"
              placeholder=""/>
     </div>
   </div>
@@ -222,17 +222,19 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox">
-      <input [(ngModel)]="actividades.bolasHiloMacrame.realizada" type="checkbox" class="custom-control-input">
+      <input [(ngModel)]="actividades.bolasHiloMacrame.realizada" id="bolasHiloMacrame" type="checkbox"
+             class="custom-control-input">
+      <label class="custom-control-label" for="bolasHiloMacrame"></label>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" [(ngModel)]="actividades.bolasHiloMacrame.observaciones" class="form-control"/>
+      <input maxlength="250" type="text" [(ngModel)]="actividades.bolasHiloMacrame.observaciones" class="form-control"/>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.bolasHiloMacrame.horario"/>
+      <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.bolasHiloMacrame.horario"/>
     </div>
   </div>
 
@@ -242,16 +244,18 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox">
-      <input type="checkbox" [(ngModel)]="actividades.bolsasPlastico.realizada" class="custom-control-input">
+      <input type="checkbox" [(ngModel)]="actividades.bolsasPlastico.realizada" id="bolsasPlastico"
+             class="custom-control-input">
+      <label class="custom-control-label" for="bolsasPlastico"></label>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.bolsasPlastico.observaciones"/>
+      <input maxlength="250" type="text" class="form-control" [(ngModel)]="actividades.bolsasPlastico.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.bolsasPlastico.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.bolsasPlastico.horario"/>
   </div>
 
 
@@ -260,16 +264,17 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox">
-      <input type="checkbox" [(ngModel)]="actividades.calado.realizada" class="custom-control-input">
+      <input type="checkbox" id="calado" [(ngModel)]="actividades.calado.realizada" class="custom-control-input">
+      <label class="custom-control-label" for="calado"></label>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.calado.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.calado.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.calado.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.calado.horario"/>
   </div>
 
 
@@ -278,16 +283,18 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox">
-      <input type="checkbox" [(ngModel)]="actividades.carpinteria.realizada" class="custom-control-input">
+      <input type="checkbox" id="carpinteria" [(ngModel)]="actividades.carpinteria.realizada"
+             class="custom-control-input">
+      <label class="custom-control-label" for="carpinteria"></label>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.calado.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.carpinteria.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.calado.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.carpinteria.horario"/>
   </div>
 
 
@@ -296,16 +303,17 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" [(ngModel)]="actividades.cocina.realizada">
+      <input type="checkbox" class="custom-control-input" id="cocina" [(ngModel)]="actividades.cocina.realizada">
+      <label class="custom-control-label" for="cocina"></label>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.cocina.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.cocina.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.cocina.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.cocina.horario"/>
   </div>
 
 
@@ -314,16 +322,18 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" [(ngModel)]="actividades.huaracheria.realizada">
+      <input type="checkbox" id="huaracheria" class="custom-control-input"
+             [(ngModel)]="actividades.huaracheria.realizada">
+      <label class="custom-control-label" for="huaracheria"></label>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.huaracheria.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.huaracheria.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.huaracheria.horario"/>
+    <input type="text" maxlength="1 maxlength="250"50" class="form-control" [(ngModel)]="actividades.huaracheria.horario"/>
   </div>
 
 
@@ -338,11 +348,11 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.imprenta.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.imprenta.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.imprenta.horario"/>
+    <input type="text" maxlength="1 maxlength="250"50" class="form-control" [(ngModel)]="actividades.imprenta.horario"/>
   </div>
 
   <div class="col-md-3">
@@ -356,11 +366,11 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.mosaico.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.mosaico.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.mosaico.horario"/>
+    <input type="text" maxlength="1 maxlength="250"50" class="form-control" [(ngModel)]="actividades.mosaico.horario"/>
   </div>
 
 
@@ -375,11 +385,11 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.panaderia.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.panaderia.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.panaderia.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.panaderia.horario"/>
   </div>
 
   <div class="col-md-3">
@@ -394,11 +404,11 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.papiroflexia.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.papiroflexia.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.papiroflexia.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.papiroflexia.horario"/>
   </div>
 
   <div class="col-md-3">
@@ -413,11 +423,11 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.pinturaTextil.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.pinturaTextil.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.pinturaTextil.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.pinturaTextil.horario"/>
   </div>
 
   <div class="col-md-3">
@@ -431,11 +441,11 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.piteado.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.piteado.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" ç/>
+    <input type="text" maxlength="150" class="form-control" ç/>
   </div>
 
 
@@ -450,11 +460,11 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.repujado.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.repujado.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.repujado.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.repujado.horario"/>
   </div>
 
   <div class="col-md-3">
@@ -468,11 +478,11 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.servicios.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.servicios.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.servicios.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.servicios.horario"/>
   </div>
 
 
@@ -487,11 +497,11 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.tallado.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.tallado.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.tallado.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.tallado.horario"/>
   </div>
 
   <div class="col-md-3">
@@ -506,11 +516,11 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.tallerCubrebocas.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.tallerCubrebocas.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.tallerCubrebocas.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.tallerCubrebocas.horario"/>
   </div>
 
   <div class="col-md-3">
@@ -543,11 +553,11 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.tienda.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.tienda.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.tienda.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.tienda.horario"/>
   </div>
 
   <div class="col-md-3">
@@ -561,17 +571,17 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.otras.observaciones"/>
+      <input type="text" maxlength="250" class="form-control" [(ngModel)]="actividades.otras.observaciones"/>
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" class="form-control" [(ngModel)]="actividades.otras.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.otras.horario"/>
   </div>
 </div>
 
 <div class="row">
   <div class="col-sm-12 text-center text-sm-right">
-    <button type="button" class="btn btn-success mr-3">Guardar</button>
-    <button type="submit" class="btn btn-success mr-3">Imprimir</button>
+    <button type="button" [disabled]="!actividades.id || !actividades.imputado" class="btn btn-success mr-3">Imprimir</button>
+    <button type="button" [disabled]="!actividades.id || !actividades.imputado" (click)="submit()" class="btn btn-success mr-3">Guardar</button>
   </div>
 </div>
