@@ -3,7 +3,9 @@
     <div *ngIf="isForm" class="col-md-12 animated flipInX">
         <div class="row">
             <div class="col-md-4">
-                <input name="nombre" type="text" class="form-control" [(ngModel)]="causaPenal.nombre" placeholder="Nombre carpeta" #nombreV="ngModel" [ngClass]="{ 'is-invalid': !causaPenal.nombre }" maxlength="45" required>
+                <input name="nombre" type="text" class="form-control" [(ngModel)]="causaPenal.nombre"
+                    placeholder="Nombre carpeta" #nombreV="ngModel" [ngClass]="{ 'is-invalid': !causaPenal.nombre }"
+                    maxlength="45" required>
             </div>
         </div>
         <br>
@@ -35,13 +37,15 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group shadows">
-                    <input class="form-control" type="text" placeholder="Reparacion del daño" name="sentidoDeterminacion" />
+                    <input class="form-control" type="text" placeholder="Reparacion del daño"
+                        name="sentidoDeterminacion" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-group shadows">
-                        <input type="text" class="form-control" placeholder="Sentencia ejecutoriada" onfocus="(this.type='date')" />
+                        <input type="text" class="form-control" placeholder="Sentencia ejecutoriada"
+                            onfocus="(this.type='date')" />
                     </div>
                 </div>
             </div>
@@ -71,7 +75,8 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group shadows">
-                    <input type="text" class="form-control" placeholder="Posible fecha de compurga" onfocus="(this.type='date')" />
+                    <input type="text" class="form-control" placeholder="Posible fecha de compurga"
+                        onfocus="(this.type='date')" />
                 </div>
             </div>
         </div>
@@ -109,19 +114,20 @@
     </div>
     <div *ngIf="isForm" class="col-md-4 animated flipInX">
         <button class="btn btn-info btn-sm shadows" (click)="submit([])">
-      Agregar
-    </button>
+            Agregar
+        </button>
         <button class="btn btn-danger btn-sm shadows" (click)="toggleForm()">
-      Cerrar
-    </button>
+            Cerrar
+        </button>
     </div>
     <div *ngIf="!isForm" class="col-md-4">
         <button class="btn btn-info btn-sm shadows" (click)="toggleForm()">
-      Agregar
-    </button>
+            Agregar
+        </button>
     </div>
     <div class="col text-right mb-3">
-        <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem" [(ngModel)]="filter" placeholder="Buscar">
+        <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
+            [(ngModel)]="filter" placeholder="Buscar">
     </div>
 </div>
 <div *ngIf="!isForm" [ngClass]="{'': isForm}" class="table-responsive ">
@@ -129,27 +135,36 @@
         <thead>
             <tr>
                 <th (click)="sort('clave')" class="text-center">
-                    <span *ngIf="key == 'clave'" class="fa" [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Nombre causa penal
+                    <span *ngIf="key == 'clave'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Nombre
+                    causa penal
                 </th>
                 <th (click)="sort('fecha')" class="text-center">
-                    <span *ngIf="key == 'fecha'" class="fa" [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Fecha de Registro
+                    <span *ngIf="key == 'fecha'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Fecha de
+                    Registro
                 </th>
                 <th (click)="sort('listaDelitos')" class="text-center">
-                    <span *ngIf="key == 'listaDelitos'" class="fa" [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Deitos
+                    <span *ngIf="key == 'listaDelitos'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Deitos
                 </th>
                 <th class="text-center" style="min-width: 5rem">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr id="{{'tr' + i}}" *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+            <tr id="{{'tr' + i}}"
+                *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+                (click)="setClickedRow(i)" [class.active]="i == selectedRow">
                 <td class="text-center">{{item.nombre}}</td>
                 <td class="text-center">{{item.fechaRegistro | date:'dd/MM/yy h:mm a'}}</td>
                 <td class="text-center">{{item.listaDelitos}}</td>
                 <td class="text-center">
                     <i class="fa fa-pencil" placement="top" ngbTooltip="Actiualizar" (click)="update(item)"></i> &nbsp;
                     <i class="fa fa-trash" placement="top" ngbTooltip="Eliminar" (click)="delete(item)"></i> &nbsp;
-                    <i class="fa fa-cubes" placement="top" ngbTooltip="Recursos" (click)="seeRecursos(item, delitoModal)"></i> &nbsp;
-                    <i class="fa fa-th-list" placement="top" ngbTooltip="Ver delitos" (click)="seeDelitosCausa(item, delito)"></i> &nbsp;
+                    <i class="fa fa-cubes" placement="top" ngbTooltip="Recursos"
+                        (click)="seeRecursos(item, delitoModal)"></i> &nbsp;
+                    <i class="fa fa-th-list" placement="top" ngbTooltip="Ver delitos"
+                        (click)="seeDelitosCausa(item, addDelitoModal)"></i> &nbsp;
                 </td>
             </tr>
 
@@ -159,23 +174,98 @@
         </tbody>
     </table>
     <div class="text-center w-100">
-        <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
+        <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel=""
+            (pageChange)="switch($event)">
         </pagination-controls>
     </div>
 </div>
 
 
-<ng-template #delito let-delitoModal class="modal fade">
-    <div class="modal-body text-center">
-        <h3>Delitos</h3>
-        <br>
-        <app-delito-ingreso [causaPenalId]="causaPenal.id"></app-delito-ingreso>
+<ng-template #addDelitoModal let-delitoModal class="modal fade">
+    <div class="modal-body">
+        <div class="col-md-12 text-center">
+            <h3>Delitos</h3>
+        </div>
+        <!--         <app-delito-ingreso [personaId]="personaId" [refresh]="getData" [causaPenalId]="causaPenal.id"></app-delito-ingreso>
+
+ -->
+        <form name="f" (ngSubmit)="f.form.valid && saveDelito()" #f="ngForm" novalidate>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Delito:</label>
+                        <input type="text" class="form-control shadows" placeholder="Delito" [(ngModel)]="delito"
+                            [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter"
+                            name="delitoNombre" />
+
+                    </div>
+                </div>
+                <div class="col-md-12" *ngIf="role === ROLE_ARCHIVO">
+                    <div class="form-group shadows">
+                        <input class="form-control" type="text" placeholder="Juez" name="juez" [(ngModel)]="delito.juez"
+                            #juez="ngModel" />
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center text-sm-right">
+                    <button type="button" (click)="closeModal()" class="btn btn-danger mr-3">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+      
+            <div class="table-responsive">
+        
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">
+                                Delito
+                            </th>
+                            <th class="text-center" *ngIf="role">
+                                Juez
+                            </th>
+                            <th class="text-center" style="min-width: 5rem">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of delitosData">
+                            <td class="text-center">{{item.tipoDelito.nombre}}</td>
+                            <td *ngIf="role" class="text-center">{{item.juez}}</td>
+                            <td class="text-center">
+                                <i class="fa fa-history" placement="top" (click)="viewHistory(formModal2)" ngbTooltip="Ver Historial"></i> &nbsp;
+                                <i class="fa fa-cog" placement="top" (click)="delitoEdit(item)" ngbTooltip="Editar"></i>
+                            </td>
+                        </tr>
+                        <tr *ngIf="delitosData.length == 0">
+                            <td colspan="3">Sin registros...</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center w-100">
+                    <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
+                    </pagination-controls>
+                </div>
+            </div>
+        
+        </div>
     </div>
+
+   
 </ng-template>
 
 <ng-template #delitoModal let-delitoModal class="modal fade">
-  <div class="modal-body text-center">
-    <app-recursos-probatorios [causaPenal]="causaPenal"></app-recursos-probatorios>
-  </div>
+    <div class="modal-body text-center">
+        <app-recursos-probatorios [causaPenal]="causaPenal"></app-recursos-probatorios>
+    </div>
 </ng-template>
 
+<ng-template #rt let-r="result" let-t="term">
+
+    <ngb-highlight [result]="r.nombre" [term]="t"></ngb-highlight>
+</ng-template>
