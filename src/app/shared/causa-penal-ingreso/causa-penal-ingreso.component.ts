@@ -1,9 +1,12 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectorRef} from '@angular/core';
 import {IngresoService} from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
 import {roles} from '@shared/helpers/roles';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { toTypeScript } from '@angular/compiler';
+import { Observable } from 'rxjs';
+import {map} from 'rxjs/operators';
+import { CatalogosService } from '@shared/services/catalogos.service';
 @Component({
   selector: 'app-causa-penal-ingreso',
   templateUrl: './causa-penal-ingreso.component.html',
@@ -16,8 +19,14 @@ export class CausaPenalIngresoComponent implements OnInit {
   @Input() role;
   public causaPenal: any;
   public data = [];
+  public delitosData = [];
   public ingreso: any;
   public ROLE_ARCHIVO = roles.archivo.role;
+
+  public delito: any
+  public tipoDelitoLista: any[];
+  public delitoUpdate:any
+
 
   // Table
   public p;
@@ -30,9 +39,14 @@ export class CausaPenalIngresoComponent implements OnInit {
   public setClickedRow: Function;
   public auxId: any;
 
-  constructor(private ingresoService: IngresoService, private modalService: NgbModal) {
+  constructor(private ingresoService: IngresoService, private modalService: NgbModal,
+     private detector: ChangeDetectorRef,private catalogosService: CatalogosService) {
     this.causaPenal = {} as any;
+    this.delito= {} as any;
+    this.delitoUpdate= {} as any;
+    this.tipoDelitoLista=[];
     // Table
+    this.getTipoDelitos();
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
@@ -44,11 +58,12 @@ export class CausaPenalIngresoComponent implements OnInit {
     this.getData();
   }
 
-  getData() {
-    this.ingresoService.listCausaPenal(this.personaId).subscribe((data: any) => {
+  getData(personaId?) {
+    this.ingresoService.listCausaPenal(this.personaId?this.personaId:personaId).subscribe((data: any) => {
       console.log(data);
       if (!data.error) {
-        this.data = data.listaCausaPenal;
+        this.data = data.listaCausaPenal; 
+       
       }
     });
   }
@@ -66,6 +81,7 @@ export class CausaPenalIngresoComponent implements OnInit {
   seeDelitosCausa(item: any,modal) {
     this.causaPenal=item
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
+    this.getDelitos()
   }
 
   seeRecursos(item, modal) {
@@ -182,4 +198,89 @@ export class CausaPenalIngresoComponent implements OnInit {
       }
     }
   }
+
+  //Delito 
+
+  search = (text$: Observable<string>) =>{
+    return text$.pipe(
+      map(term => term === '' ? []
+        : this.tipoDelitoLista.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    )
+  }
+  formatter = (x: {nombre: string}) => x.nombre;
+
+  closeModal(){
+    this.modalService.dismissAll()
+  }
+
+  getTipoDelitos() {
+    this.catalogosService.listDelito().subscribe((data: any) => {
+      this.tipoDelitoLista=data.delitos
+    })
+  }
+
+
+  saveDelito() {
+     console.log("save",this.delito)
+    
+    if (this.delito.idTipoDelito==null) {
+      console.log("null")
+      let tipoDelito={
+        nombre: this.delito
+      }
+      let delitoNuevo={
+        nombre: this.delito,
+        tipoDelito: tipoDelito
+      }
+      this.delito=delitoNuevo;
+    } else {
+      console.log("else");
+      
+      this.delito.tipoDelito = {
+        id: this.delito.idTipoDelito
+      }
+      this.delito.id=this.delitoUpdate.id
+    }
+      this.delito.causaPenal={
+        id: this.causaPenal.id
+      }
+
+       console.log("almost save",this.delito)
+      this.ingresoService.saveDelito(this.delito).subscribe((data: any) => {
+        console.log(data)
+
+        Swal.fire({
+          title: data.error ? 'Error!' : 'Guardado',
+          text: data.mensaje,
+          icon: data.error ? 'error' : 'success',
+          timer: 1300,
+          showConfirmButton: false
+        });
+        this.delito={}
+        this.delitoUpdate={}
+      this.getDelitos()
+       this.getData()
+      })
+
+  }
+
+  getDelitos() {
+      this.ingresoService.listDelitosByCausasPenales(this.causaPenal.id).subscribe((data: any) => {
+        if (data.listaDelitos) {
+          this.delitosData = data.listaDelitos
+        }
+      })
+    }
+
+    delitoEdit(delito) {
+      
+      this.delito.id = delito.id
+      this.delito = delito
+      this.delito.nombre=delito.tipoDelito.nombre
+      this.delito.juez = delito.juez;
+      this.delitoUpdate=delito
+      console.log(this.delito)
+    }
+  
+   
 }

@@ -5,6 +5,7 @@ import { AuthenticationService } from '@shared/services/authentication.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import {map} from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -25,8 +26,11 @@ export class DelitoIngresoComponent implements OnInit {
   public hitorialDelitos = [];
   @Input() carpetaInvestigacionId?: number;
   @Input() causaPenalId?: number;
+  @Input() personaId?:number
+  @Input() refresh:(id?)=> void;
 
-  constructor(private catalogosService: CatalogosService, private ingresoService: IngresoService, private authenticationService: AuthenticationService) {
+  constructor(private catalogosService: CatalogosService, private ingresoService: IngresoService, private authenticationService: AuthenticationService,
+    private modalService: NgbModal) {
 
     this.data = [];
     this.tipoDelitoLista = [];
@@ -81,7 +85,7 @@ export class DelitoIngresoComponent implements OnInit {
   }
 
   saveDelito() {
-    console.log(this.delito)
+    console.log("save",this.delito)
     if (this.delito.idTipoDelito==null) {
       console.log("null")
       let tipoDelito={
@@ -120,8 +124,9 @@ export class DelitoIngresoComponent implements OnInit {
           showConfirmButton: false
         });
         this.delito={}
-        this.toggleForm(false);
+      
         this.getDelitos();
+        this.refresh(this.personaId)
       })
 
   }
@@ -165,6 +170,10 @@ export class DelitoIngresoComponent implements OnInit {
     )
   }
   formatter = (x: {nombre: string}) => x.nombre;
+
+  closeModal(){
+    this.modalService.dismissAll()
+  }
 }
 
 class Delito {
