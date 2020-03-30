@@ -18,4 +18,9 @@ export class ComiteTecnicoService {
     console.log('To server.savePlandeActividades', model);
     return this.http.post(`${this.url}/api/registrarPlanActividades`, model);
   };
+
+  saveExperienciaLaboral = model => this.http.post(`${this.url}/api/registrarExperienciaLAboral`, model);
+
+  deleteExperienciaLaboral = id => this.http.delete(`${this.url}/api/eliminarExperienciaLAboral?idExperiencia=${id}`);
+
 }

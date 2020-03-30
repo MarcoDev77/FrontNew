@@ -117,7 +117,7 @@
     <h3>Diagnóstico de experiencia laboral y/o cursos</h3>
   </div>
   <div class="col text-right mb-3 mt-4">
-    <button class="btn btn-success btn-sm m-0 pull-right" [ngbTooltip]="'Nuevo Registro'"><i
+    <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
       class="fa fa-plus fa-lg"></i></button>
   </div>
 </div>
@@ -125,13 +125,19 @@
   <table class="table">
     <thead>
     <tr>
-      <th class="text-center">
+      <th (click)="sort('realizados')" class="text-center">
+        <span *ngIf="key == 'realizados'" class="fa"
+              [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
         Trabajos realizados
       </th>
-      <th class="text-center">
+      <th (click)="sort('tiempo')" class="text-center">
+        <span *ngIf="key == 'tiempo'" class="fa"
+              [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
         Tiempo
       </th>
-      <th class="text-center">
+      <th (click)="sort('motivo')" class="text-center">
+        <span *ngIf="key == 'motivo'" class="fa"
+              [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
         Motivo de separación
       </th>
       <th class="text-center">
@@ -141,16 +147,45 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td class="text-center"></td>
-      <td class="text-center"></td>
-
-      <td class="text-center"></td>
-      <td class="text-center"></td>
+    <tr id="table-form" *ngIf="isForm">
+      <td class="text-center">
+        <input name="trabajoRealizado" type="text" class="form-control" [(ngModel)]="experiencia.trabajoRealizado"
+               placeholder="Trabajo Realizado"
+               #trabajoRealizado="ngModel"
+               [ngClass]="{ 'is-invalid':  trabajoRealizado.touched && trabajoRealizado.invalid }" maxlength="45"
+               required>
+      </td>
+      <td class="text-center">
+        <input name="tiempo" type="text" class="form-control" [(ngModel)]="experiencia.tiempo" placeholder="Tiempo"
+               #tiempo="ngModel" [ngClass]="{ 'is-invalid':  tiempo.touched && tiempo.invalid }" maxlength="45"
+               required>
+      </td>
+      <td class="text-center">
+        <input name="motivoSeparacion" type="text" class="form-control" [(ngModel)]="experiencia.motivoSeparacion"
+               placeholder="Motivo Separación"
+               #motivoSeparacion="ngModel" [ngClass]="{ 'is-invalid':  motivoSeparacion.touched && motivoSeparacion.invalid }"
+               required>
+      </td>
+      <td>
+        <i class="fa fa-times mr-3" placement="top" ngbTooltip="Cancelar" (click)="cancel()"></i>
+        <i class="fa fa-check" placement="top" ngbTooltip="Guardar"
+           (click)="saveExperienciaLaboral([trabajoRealizado])"></i>
+      </td>
+    </tr>
+    <tr id="{{'tr' + i}}"
+        *ngFor="let item of listExperienciaLaboral | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+        (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+      <td class="text-center">{{item.trabajoRealizado}}</td>
+      <td class="text-center">{{item.tiempo}}</td>
+      <td class="text-center">{{item.motivoSeparacion}}</td>
+      <td class="text-center">
+        <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar" (click)="updateExperienciaLaboral('tr' + i , item)"></i> &nbsp;
+        <i class="fa fa-trash"  placement="top" ngbTooltip="Eliminar" (click)="deleteExpeienciaLaboral(item)"></i>
+      </td>
 
     </tr>
 
-    <tr *ngIf="data.length == 0">
+    <tr *ngIf="listExperienciaLaboral.length == 0">
       <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
     </tr>
     </tbody>
@@ -165,19 +200,22 @@
   <div class="col-md-4">
     <div class="form-group">
       <label>Trabaja actualmente:</label>
-      <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.trabajoactual" name="trabajoactual" placeholder="Trabaja actualmente"/>
+      <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.trabajoactual"
+             name="trabajoactual" placeholder="Trabaja actualmente"/>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>¿Qué realiza?:</label>
-      <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.queRealiza" name="queRealiza" placeholder="¿Qué realiza?"/>
+      <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.queRealiza" name="queRealiza"
+             placeholder="¿Qué realiza?"/>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>¿Por qué no?:</label>
-      <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.porQueNo" name="porQueNo" placeholder="¿Por qué no?"/>
+      <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.porQueNo" name="porQueNo"
+             placeholder="¿Por qué no?"/>
     </div>
   </div>
 </div>
@@ -204,14 +242,16 @@
   <div class="col-md-4">
     <div class="form-group">
       <label>Observaciones:</label>
-      <input maxlength="250" [(ngModel)]="actividades.artesanias.observaciones" type="text" class="form-control" name="duenoMedio"
+      <input maxlength="250" [(ngModel)]="actividades.artesanias.observaciones" type="text" class="form-control"
+             name="duenoMedio"
              placeholder=""/>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>Horario:</label>
-      <input maxlength="150" [(ngModel)]="actividades.artesanias.horario" type="text" class="form-control" name="duenoMedio"
+      <input maxlength="150" [(ngModel)]="actividades.artesanias.horario" type="text" class="form-control"
+             name="duenoMedio"
              placeholder=""/>
     </div>
   </div>
@@ -333,7 +373,7 @@
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" maxlength="1 maxlength="250"50" class="form-control" [(ngModel)]="actividades.huaracheria.horario"/>
+    <input type="text" maxlength="105" class="form-control" [(ngModel)]="actividades.huaracheria.horario"/>
   </div>
 
 
@@ -352,7 +392,7 @@
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" maxlength="1 maxlength="250"50" class="form-control" [(ngModel)]="actividades.imprenta.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.imprenta.horario"/>
   </div>
 
   <div class="col-md-3">
@@ -370,7 +410,7 @@
     </div>
   </div>
   <div class="col-md-4">
-    <input type="text" maxlength="1 maxlength="250"50" class="form-control" [(ngModel)]="actividades.mosaico.horario"/>
+    <input type="text" maxlength="150" class="form-control" [(ngModel)]="actividades.mosaico.horario"/>
   </div>
 
 
@@ -581,7 +621,10 @@
 
 <div class="row">
   <div class="col-sm-12 text-center text-sm-right">
-    <button type="button" [disabled]="!actividades.id || !actividades.imputado" class="btn btn-success mr-3">Imprimir</button>
-    <button type="button" [disabled]="!actividades.id || !actividades.imputado" (click)="submit()" class="btn btn-success mr-3">Guardar</button>
+    <button type="button" [disabled]="!actividades.id || !actividades.imputado" class="btn btn-success mr-3">Imprimir
+    </button>
+    <button type="button" [disabled]="!actividades.id || !actividades.imputado" (click)="submit()"
+            class="btn btn-success mr-3">Guardar
+    </button>
   </div>
 </div>
