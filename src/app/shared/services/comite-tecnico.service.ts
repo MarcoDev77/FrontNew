@@ -23,4 +23,10 @@ export class ComiteTecnicoService {
 
   deleteExperienciaLaboral = id => this.http.delete(`${this.url}/api/eliminarExperienciaLAboral?idExperiencia=${id}`);
 
+  getImputadoByFolioPsicologia = folio => this.http.get(`${this.url}/api/listarImputadoPsicologia?folioImputado=${folio}`);
+
+  saveFichaPsicologica = model => {
+    console.log('To server.savePlandeActividades', model);
+    return this.http.post(`${this.url}/api/registrarFicha`, model);
+  };
 }
