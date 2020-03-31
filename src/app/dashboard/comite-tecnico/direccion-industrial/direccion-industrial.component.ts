@@ -8,33 +8,46 @@ import Swal from 'sweetalert2';
   styleUrls: ['./direccion-industrial.component.scss']
 })
 export class DireccionIndustrialComponent implements OnInit {
-  public data = [];
+  public listExperienciaLaboral = [];
   public isLoading: boolean;
   public generalidadesPPL: GeneralidadesPPL;
   public actividades: ListaActividades;
+  public experiencia: ExperienciaLaboral;
+  // Table attributes
+  public p;
+  public filter: any;
+  public reverse = true;
+  public key = 'id'; // set default
+  public isForm: boolean;
+  public selectedRow: Number;
+  public setClickedRow: (i) => void;
+  public auxId: any;
 
   constructor(private comiteTecnicoService: ComiteTecnicoService) {
     this.isLoading = false;
     this.generalidadesPPL = {} as GeneralidadesPPL;
     this.actividades = new ListaActividades();
-    console.log(this.actividades);
+    this.experiencia = {} as ExperienciaLaboral;
   }
 
   ngOnInit() {
   }
 
-  getData() {
+  getData(showMessage = true) {
     this.isLoading = true;
     this.comiteTecnicoService.getImputadoByFolio(this.generalidadesPPL.folio).subscribe((data: any) => {
       this.isLoading = false;
       console.log('data', data);
-      Swal.fire({
-        title: data.error ? 'Error!' : 'Busqueda',
-        text: data.mensaje,
-        icon: data.error ? 'error' : 'success',
-        timer: 1000,
-        showConfirmButton: false
-      });
+      if (showMessage) {
+        Swal.fire({
+          title: data.error ? 'Error!' : 'Busqueda',
+          text: data.mensaje,
+          icon: data.error ? 'error' : 'success',
+          timer: 1000,
+          showConfirmButton: false
+        });
+      }
+
       if (!data.error) {
         this.generalidadesPPL = data.imputado;
         const imputado = {id: this.generalidadesPPL.imputadoId};
@@ -46,8 +59,10 @@ export class DireccionIndustrialComponent implements OnInit {
           this.actividades = new ListaActividades();
           this.actividades = {imputado, ...this.actividades};
         }
-
-        console.log('ddd', this.actividades);
+        // Agregando datos al arreglo de experiencia loboral
+        if (data.imputado.experienciaLaboral) {
+          this.listExperienciaLaboral = data.imputado.experienciaLaboral;
+        }
       } else {
         this.handleError();
       }
@@ -69,9 +84,6 @@ export class DireccionIndustrialComponent implements OnInit {
     this.isLoading = false;
     this.generalidadesPPL = {} as GeneralidadesPPL;
     this.actividades = new ListaActividades();
-  }
-
-  switch($event) {
   }
 
   searchImputado() {
@@ -111,6 +123,142 @@ export class DireccionIndustrialComponent implements OnInit {
           continue;
         }
         list[key] = JSON.parse(list[key]);
+      }
+    }
+  }
+
+  saveExperienciaLaboral(array: any[]) {
+    if (this.validateFiels(array)) {
+      this.experiencia.imputado = {id: this.generalidadesPPL.imputadoId};
+      console.log('To server', this.experiencia);
+      this.comiteTecnicoService.saveExperienciaLaboral(this.experiencia).subscribe((data: any) => {
+        console.log(data);
+        Swal.fire({
+          title: data.error ? 'Error!' : 'Guardado',
+          text: data.mensaje,
+          icon: data.error ? 'error' : 'success',
+          timer: 1300,
+          showConfirmButton: false
+        });
+        if (!data.error) {
+          this.getData(false);
+          this.isForm = false;
+        }
+      });
+    }
+  }
+
+  deleteExpeienciaLaboral(item) {
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: 'El estatus del registro cambiará.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then(({value}) => {
+      if (value) {
+        this.comiteTecnicoService.deleteExperienciaLaboral(item.id).subscribe((data: any) => {
+          console.log(data);
+          Swal.fire({
+            title: data.error ? 'Error!' : 'Cambio exitoso.',
+            text: data.mensaje,
+            icon: data.error ? 'error' : 'success',
+            timer: 1300,
+            showConfirmButton: false
+          }).finally(() => {
+            if (!data.error) {
+              this.cancel();
+              this.getData(false);
+            }
+          });
+        });
+      }
+    });
+  }
+
+  // Table methods
+
+  validateFiels(array: any[]): boolean {
+    let pass = true;
+    for (const field of array) {
+      if (!field.valid) {
+        pass = false;
+        field.control.markAsTouched();
+      }
+    }
+    return pass;
+  }
+
+  updateExperienciaLaboral(id, item) {
+    this.isForm = true;
+    this.experiencia = {...item};
+
+    if (this.auxId && this.auxId !== id) {
+      this.showTr();
+      this.auxId = id;
+    } else {
+      this.auxId = id;
+    }
+    setTimeout(() => {
+      this.hiddenTr();
+      const tr = document.getElementById(this.auxId);
+      const form = document.getElementById('table-form');
+
+      tr.insertAdjacentElement('afterend', form);
+    }, 50);
+  }
+
+  sort(key) {
+    if (key === this.key) {
+      this.reverse = !this.reverse;
+      if (this.reverse === false) {
+        this.key = 'id';
+        this.reverse = true;
+      }
+    } else {
+      this.key = key;
+      this.reverse = false;
+    }
+  }
+
+  cancel() {
+    this.showTr();
+    this.isForm = false;
+    this.experiencia = {} as ExperienciaLaboral;
+  }
+
+  switch(e) {
+    this.p = e;
+    this.cancel();
+  }
+
+  add() {
+    this.experiencia = {} as ExperienciaLaboral;
+    this.isForm = true;
+  }
+
+  showTr() {
+    if (this.auxId) {
+      const tr = document.getElementById(this.auxId);
+      const array: any = tr.childNodes;
+
+      if (array) {
+        for (const td of array) {
+          td.style.display = 'table-cell';
+        }
+        this.auxId = '';
+      }
+    }
+  }
+
+  hiddenTr() {
+    const tr = document.getElementById(this.auxId);
+    const array: any = tr.childNodes;
+
+    if (array) {
+      for (const td of array) {
+        td.style.display = 'none';
       }
     }
   }
@@ -162,5 +310,13 @@ class ListaActividades {
   tallerTokal = {} as Actividad;
   tienda = {} as Actividad;
   otras = {} as Actividad;
+  imputado: any;
+}
+
+class ExperienciaLaboral {
+  id: number;
+  trabajoRealizado: string;
+  tiempo: string;
+  motivoSeparacion: string;
   imputado: any;
 }
