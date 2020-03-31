@@ -6,13 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pase-unico.component.scss']
 })
 export class PaseUnicoComponent implements OnInit {
-  public isMenores: boolean
-  constructor() { 
-    this.isMenores=false
-  }
+
+  constructor() { }
 
   ngOnInit() {
   }
-  
 
 }

@@ -1,8 +1,10 @@
 <app-section-title icon="fa fa-address-book" title="PASE UNICO"></app-section-title>
 <div class="row">
+    <div class="col-md-12 text-center mb-1">
+        <h5>CENTRO ESTATAL DE REINSERCION SOCIAL "MORELOS" PASE UNICO</h5>
+    </div>
     <div class="col-sm-6">
         <div class="form-group" container="body" ngbTooltip="Nombre del visitante">
-            <label for="">Visitante:</label>
             <input type="text" class="form-control" name="" placeholder="Nombre del visitante" required/>
         </div>
     </div>
@@ -10,7 +12,6 @@
     <div class="col-md-6">
         <div class="form-group shadows">
             <div class="form-group" ngbTooltip="Dormitorio">
-                <label for="">Parentesco:</label>
                 <select class="form-control shadows" name="tipoDelito">
                     <option disabled selected>Parentesco...</option>
                     <option value="">Abogado(a)</option>
@@ -27,64 +28,58 @@
         </div>
     </div>
     <div class="col-sm-6">
-        <div class="form-group" container="body">
-            <label for="">PPL:</label>
+        <div class="form-group" container="body" ngbTooltip="Nombre del PPL">
             <input type="text" class="form-control" name="" placeholder="Nombre del PPL" required/>
         </div>
     </div>
 
+    <div class="col-md-6">
+        <div class="form-group shadows">
+            <div class="form-group" ngbTooltip="Dormitorio">
+                <select class="form-control shadows" name="tipoDelito">
+                    <option disabled selected>Dormitorio...</option>
+                    <option value="">Dormitorio 1</option>
+                    <option value="">Dormitorio 2</option>
+                    <option value="">Dormitorio 3</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
     <div class="col-sm-6">
-        <div class="form-group" container="body">
-            <label for="">Área:</label>
-            <input type="text" class="form-control" name="" placeholder="Área" required/>
+        <div class="form-group" container="body" ngbTooltip="Fecha de expedición">
+            <input type="tel" class="form-control" name="duenoMedio" placeholder="Fecha de expedición" required/>
         </div>
     </div>
 
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Dirección:</label>
-            <textarea class=" form-control" cols="100" placeholder="Dirección" rows="4" value=""></textarea>
+    <div class="col-sm-6">
+        <div class="form-group" container="body" ngbTooltip="Folio">
+            <input type="text" class="form-control" name="" placeholder="Folio" required/>
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="custom-control custom-checkbox text-center">
-            <input type="checkbox" class="custom-control-input" id="customCheck23" [(ngModel)]="isMenores">
-            <label class="custom-control-label" for="customCheck23">¿Viene con menores</label>
+    <div class="col-sm-6">
+        <div class="form-group" container="body" ngbTooltip="Nombre del menor">
+            <input type="tel" class="form-control" name="duenoMedio" placeholder="Nombre del menor" required/>
         </div>
     </div>
 
-    <ng-container *ngIf="isMenores">
-        <h4>Datos del menor</h4>
-        <div class="col-sm-6">
-            <div class="form-group" container="body" ngbTooltip="Nombre del visitante">
-                <label for="">Nombre:</label>
-                <input type="text" class="form-control" name="" placeholder="Nombre del menor" required/>
-            </div>
-        </div>
 
-        <div class="col-md-6">
-            <div class="form-group shadows">
-                <div class="form-group" ngbTooltip="Dormitorio">
-                    <label for="">Parentesco:</label>
-                    <select class="form-control shadows" name="tipoDelito">
-                        <option disabled selected>Parentesco...</option>
-                        <option value="">Abogado(a)</option>
-                        <option value="">Abuelo(a)</option>
-                        <option value="">Abuelo(a) político</option>
-                        <option value="">Amigo(a)</option>
-                        <option value="">Bisabuelo(a)</option>
-                        <option value="">Comadre</option>
-                        <option value="">Compadre</option>
-                        <option value="">Concubino(a)</option>
-                        <option value="">Consuegro(a)</option>
-                    </select>
-                </div>
-            </div>
+    <div class="col-sm-6">
+        <div class="form-group" container="body" ngbTooltip="Area">
+            <input type="text" class="form-control" name="" placeholder="Area" required/>
         </div>
-    </ng-container>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="form-group" container="body" ngbTooltip="Domicilio">
+            <textarea class="form-control" placeholder="Domicilio" required>
+              </textarea>
+        </div>
+    </div>
 
     <div class="col-md-12 text-right">
         <button container="body" ngbTooltip="Guardar e imprimir" type="submit" class="btn btn-success">Guardar</button>
     </div>
+
 </div>

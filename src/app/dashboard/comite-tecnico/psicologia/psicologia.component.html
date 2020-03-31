@@ -4,110 +4,77 @@
         <h3>Ficha para la implementación de actividades</h3>
     </div>
     <div class="col-md-4">
-        <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
-            <div class="input-group">
-                <div claºss="input-group-prepend">
-                    <span (click)="searchImputado()" class="input-group-text"><i
-                            class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
-                </div>
-                <input name="folio" required [(ngModel)]="generalidadesPPL.folio" type="text"
-                    class="form-control pull-right mr-2" placeholder="Buscar por Folio">
-            </div>
-        </form>
+        <div class="form-group">
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Folio" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Nombre de la PPL :</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Persona privada de su libertad" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Dormitorio:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Dormitorio" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Edad y fecha de nacimiento:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Edad y fecha de nacimiento" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Fecha de ingreso:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Fecha de ingreso" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Motivo de ingreso:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Motivo de ingreso" />
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Sentencia:</label>
+            <input type="text" class="form-control" name="duenoMedio" placeholder="Sentencia" />
+        </div>
     </div>
 </div>
 
-<form name="search" (ngSubmit)="saveFicha()" #formSearch="ngForm" novalidate>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Nombre de la PPL :</label>
-                <input type="text" class="form-control" name="nombre" [(ngModel)]="generalidadesPPL.nombre"
-                    placeholder="Persona privada de su libertad" disabled />
-            </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="">Diagnóstico (DSM):</label>
+            <textarea class=" form-control" cols="100" placeholder="Diagnóstico (DSM)" rows="9" value=""></textarea>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Dormitorio:</label>
-                <input type="text" class="form-control" name="dormitorio" placeholder="Dormitorio"
-                    [(ngModel)]="generalidadesPPL.dormitorio" disabled />
-            </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="">Problemática a trabajar:</label>
+            <textarea class=" form-control" cols="100" placeholder="Problemática a trabajar" rows="9" value=""></textarea>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Edad y fecha de nacimiento:</label>
-                <div class="row">
-                    <div class="col-md-4">
-                        <input type="" class="form-control" name="edad" placeholder="Edad"
-                            [(ngModel)]="generalidadesPPL.edad" disabled />
-                    </div>
-                    <div class="col-md-8">
-                        <input type="" class="form-control" name="fechaNacimiento" placeholder="Fecha"
-                            [ngModel]="generalidadesPPL.fechaNacimiento | date:'yyyy-MM-dd'"
-                            (ngModelChange)="generalidadesPPL.fechaNacimiento = $event" disabled />
-                    </div>
-                </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="">Actividad sugerida:</label>
+            <textarea class=" form-control" cols="100" placeholder="Actividad sugerida" rows="9" value=""></textarea>
+        </div>
+    </div>
+</div>
 
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Fecha de ingreso:</label>
-                <input type="text" class="form-control" name="duenoMedio" placeholder="Fecha de ingreso"
-                    [ngModel]="generalidadesPPL.fechaIngreso | date:'yyyy-MM-dd'"
-                    (ngModelChange)="generalidadesPPL.fechaIngreso = $event" disabled />
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Motivo de ingreso:</label>
-                <input type="text" class="form-control" name="listaDelitos" placeholder="Motivo de ingreso"
-                    [(ngModel)]="generalidadesPPL.listaDelitos" disabled />
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Sentencia:</label>
-                <input type="text" class="form-control" name="sentencia" placeholder="Sentencia"
-                    [(ngModel)]="generalidadesPPL.sentencia" disabled />
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="">Diagnóstico (DSM):</label>
-                <textarea class=" form-control" cols="100" placeholder="Diagnóstico (DSM)" rows="9" value=""
-                    name="diagnostico" [(ngModel)]="generalidadesPPL.ficha.diagnostico"></textarea>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="">Problemática a trabajar:</label>
-                <textarea class=" form-control" cols="100" placeholder="Problemática a trabajar" rows="9" value=""
-                    name="problematicaTrabajar" [(ngModel)]="generalidadesPPL.ficha.problematicaTrabajar"></textarea>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="">Actividad sugerida:</label>
-                <textarea class=" form-control" cols="100" placeholder="Actividad sugerida" rows="9" value=""
-                    name="actividadSugerida" [(ngModel)]="generalidadesPPL.ficha.actividadSugerida"></textarea>
-            </div>
-        </div>
-    </div>
 <div class="row">
     <div class="col-sm-12 text-center text-sm-right">
-        <button type="submit" class="btn btn-success mr-3">Guardar</button>
-        <button type="button" class="btn btn-success mr-3">Imprimir</button>
+        <button type="button" class="btn btn-success mr-3">Guardar</button>
+        <button type="submit" class="btn btn-success mr-3">Imprimir</button>
     </div>
 </div>
-       
-</form>
-    
