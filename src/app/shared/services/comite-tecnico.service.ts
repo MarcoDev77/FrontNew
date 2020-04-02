@@ -27,4 +27,8 @@ export class ComiteTecnicoService {
 
   saveActividadesEscolares = model => this.http.post(`${this.url}/api/registrarActividadesEscolar`, model);
 
+  getComiteDeportes = folio => this.http.get(`${this.url}/api/listarImputadoPorFolioDeportivo?folioImputado=${folio}`);
+
+  saveComiteDeporte = model => this.http.post(`${this.url}/api/registrarInformacionDeportiva`, model);
+
 }
