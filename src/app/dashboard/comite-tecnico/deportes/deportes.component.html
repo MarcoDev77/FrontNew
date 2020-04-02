@@ -1,143 +1,164 @@
 <app-section-title icon="fa fa-tasks" title="DEPORTES"></app-section-title>
 <div class="row">
-    <div class="col-md-8">
-        <h3>Encuesta de información deportiva</h3>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Folio" />
+  <div class="col-md-8">
+    <h3>Encuesta de información deportiva</h3>
+  </div>
+  <div class="col-md-4">
+    <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
+      <div class="input-group">
+        <div class="input-group-prepend">
+        <span (click)="searchImputado()" class="input-group-text"><i
+          class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
         </div>
+        <input name="folio" required [(ngModel)]="generalidades.folio" type="text"
+               class="form-control pull-right mr-2"
+               placeholder="Buscar por Folio">
+      </div>
+    </form>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Nombre de la PPL :</label>
+      <input type="text" readonly value="{{generalidades.nombre}}" class="form-control" name="duenoMedio"
+             placeholder="Persona privada de su libertad"/>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Nombre de la PPL :</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Persona privada de su libertad" />
-        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Peso:</label>
+      <input type="text" readonly value="{{generalidades.peso}}" class="form-control" name="duenoMedio"
+             placeholder="Peso"/>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Peso:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Peso" />
-        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Estatura:</label>
+      <input type="text" class="form-control" readonly value="{{generalidades.estatura}}" name="duenoMedio"
+             placeholder="Estatura"/>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Estatura:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Estatura" />
-        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Tipo de sangre:</label>
+      <input type="text" class="form-control" readonly value="{{generalidades.peso}}" name="duenoMedio"
+             placeholder="Tipo de sangre"/>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Tipo de sangre:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Tipo de sangre" />
-        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Edad:</label>
+      <input type="text" class="form-control" name="duenoMedio" readonly value="{{generalidades.peso}}"
+             placeholder="Edad"/>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Edad:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Edad" />
-        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Escolaridad:</label>
+      <input type="text" class="form-control" readonly value="{{generalidades.escolaridad}}" name="duenoMedio"
+             placeholder="Escolaridad"/>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Escolaridad:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Escolaridad" />
-        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Fecha de ingreso:</label>
+      <input type="text" class="form-control" name="duenoMedio" readonly value="{{generalidades.fechaIngreso}}"
+             placeholder="Fecha de ingreso"/>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Fecha de ingreso:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Fecha de ingreso" />
-        </div>
-    </div>
+  </div>
 
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Delito:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Delito" />
-        </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Delito:</label>
+      <input type="text" class="form-control" readonly value="{{generalidades.listaDelitos}}" name="duenoMedio" placeholder="Delito"/>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Sentencia:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Sentencia" />
-        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Sentencia:</label>
+      <input type="text" class="form-control" readonly value="{{generalidades.sentencia}}" name="duenoMedio" placeholder="Sentencia"/>
     </div>
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Antecedentes familiares deportivos:</label>
-            <textarea class=" form-control" cols="100" placeholder="Antecedentes familiares deportivos" rows="9" value=""></textarea>
-        </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">Antecedentes familiares deportivos:</label>
+      <textarea class=" form-control" cols="100" [(ngModel)]="informacionDeportiva.antecedentesFamiliaresDeportivos" placeholder="Antecedentes familiares deportivos" rows="9"
+                value=""></textarea>
     </div>
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Lesiones deportivas y/o enfermedades degenerativas, ¿Cual?:</label>
-            <textarea class=" form-control" cols="100" placeholder="Lesiones deportivas y/o enfermedades degenerativas" rows="9" value=""></textarea>
-        </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">Lesiones deportivas y/o enfermedades degenerativas, ¿Cual?:</label>
+      <textarea class=" form-control" cols="100" [(ngModel)]="informacionDeportiva.lesionesEnfermedades" placeholder="Lesiones deportivas y/o enfermedades degenerativas"
+                rows="9" value=""></textarea>
     </div>
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Antecedentes heredo familiares:</label>
-            <textarea class=" form-control" cols="100" placeholder="Antecedentes heredo familiares" rows="9" value=""></textarea>
-        </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">Antecedentes heredo familiares:</label>
+      <textarea class=" form-control" cols="100" [(ngModel)]="informacionDeportiva.antecedentesHeredo" placeholder="Antecedentes heredo familiares" rows="9"
+                value=""></textarea>
     </div>
+  </div>
 </div>
 
 
 <div class="row">
-    <div class="col-md-12 mt-4">
-        <h3>Cronograma deportivo</h3>
-    </div>
+  <div class="col-md-12 mt-4">
+    <h3>Cronograma deportivo</h3>
+  </div>
 
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Preescolar:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Preescolar" />
-        </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">Preescolar:</label>
+      <input type="text" [(ngModel)]="informacionDeportiva.cronogramaPreescolar" class="form-control" name="duenoMedio" placeholder="Preescolar"/>
     </div>
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Primaria:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Primaria" />
-        </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">Primaria:</label>
+      <input type="text" class="form-control" [(ngModel)]="informacionDeportiva.cronogramaPrimaria" name="duenoMedio" placeholder="Primaria"/>
     </div>
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Secundaria:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Secundaria" />
-        </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">Secundaria:</label>
+      <input type="text" class="form-control" [(ngModel)]="informacionDeportiva.cronogramaSecundaria" name="duenoMedio" placeholder="Secundaria"/>
     </div>
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Preparatoria:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Preparatoria" />
-        </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">Preparatoria:</label>
+      <input type="text" class="form-control" [(ngModel)]="informacionDeportiva.cronogramaPreparatoria" name="duenoMedio" placeholder="Preparatoria"/>
     </div>
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Profesional:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Profesional" />
-        </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">Profesional:</label>
+      <input type="text" class="form-control" [(ngModel)]="informacionDeportiva.cronogramaProfesional" name="duenoMedio" placeholder="Profesional"/>
     </div>
+  </div>
 
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Logros deportivos:</label>
-            <textarea class=" form-control" cols="100" placeholder="Logros deportivos" rows="5" value=""></textarea>
-        </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">Logros deportivos:</label>
+      <textarea class=" form-control" cols="100" [(ngModel)]="informacionDeportiva.logrosDeportivos" placeholder="Logros deportivos" rows="5" value=""></textarea>
     </div>
+  </div>
 
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Practiva deportiva, recreativo, estudiantil, federado y/o alta competencia:</label>
-            <textarea class=" form-control" cols="100" placeholder="Practiva deportiva, recreativo, estudiantil, federado y/o alta competencia" rows="9" value=""></textarea>
-        </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="">Practiva deportiva, recreativo, estudiantil, federado y/o alta competencia:</label>
+      <textarea class=" form-control" cols="100"
+                [(ngModel)]="informacionDeportiva.practicaDeportivaRecreativo"
+                placeholder="Practiva deportiva, recreativo, estudiantil, federado y/o alta competencia" rows="9"
+                value=""></textarea>
     </div>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col-sm-12 text-center text-sm-right">
-        <button type="button" class="btn btn-success mr-3">Guardar</button>
-        <button type="submit" class="btn btn-success mr-3">Imprimir</button>
-    </div>
+  <div class="col-sm-12 text-center text-sm-right">
+    <button type="button" (click)="submit()" [disabled]="!generalidades.imputadoId" class="btn btn-success mr-3">Guardar</button>
+    <button type="submit" class="btn btn-success mr-3">Imprimir</button>
+  </div>
 </div>
