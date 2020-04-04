@@ -621,10 +621,18 @@
 
 <div class="row">
   <div class="col-sm-12 text-center text-sm-right">
-    <button type="button" [disabled]="!actividades.id || !actividades.imputado" class="btn btn-success mr-3">Imprimir
+    <button type="button" [disabled]="!generalidadesPPL.imputadoId" (click)="generatePDF(view)" class="btn btn-success mr-3">Imprimir
     </button>
-    <button type="button" [disabled]="!actividades.id || !actividades.imputado" (click)="submit()"
+    <button type="button" [disabled]="!generalidadesPPL.imputadoId" (click)="submit()"
             class="btn btn-success mr-3">Guardar
     </button>
   </div>
 </div>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i (click)="view.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
+       class="fa fa-times-circle"></i>
+    <app-web-viewer [file]="file" [name]="'acta-de-entrevista'"></app-web-viewer>
+  </div>
+</ng-template>
