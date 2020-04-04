@@ -19,6 +19,11 @@ export class ComiteTecnicoService {
     return this.http.post(`${this.url}/api/registrarPlanActividades`, model);
   };
 
+  generatePDFDireccionIndustrial = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfComiteTecnico?imputadoId=${id}`, {responseType});
+  }
+
   saveExperienciaLaboral = model => this.http.post(`${this.url}/api/registrarExperienciaLAboral`, model);
 
   deleteExperienciaLaboral = id => this.http.delete(`${this.url}/api/eliminarExperienciaLAboral?idExperiencia=${id}`);
