@@ -28,10 +28,8 @@ export class ComiteTecnicoService {
   saveActividadesEscolares = model => this.http.post(`${this.url}/api/registrarActividadesEscolar`, model);
 
   generatePDFCentroEscolar = id => {
-    const httpHeaders = {
-      responseType: 'arraybuffer' as 'json'
-    };
-    return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadCentroEscolar?imputadoId=${id}`, {headers: httpHeaders});
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadCentroEscolar?imputadoId=${id}`, {responseType});
   };
 
   getComiteDeportes = folio => this.http.get(`${this.url}/api/listarImputadoPorFolioDeportivo?folioImputado=${folio}`);

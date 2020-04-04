@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {GeneralidadesPPL} from '@shared/models/GeneralidadesPPL';
 import {ComiteTecnicoService} from '@shared/services/comite-tecnico.service';
 import Swal from 'sweetalert2';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-centro-escolar',
@@ -12,8 +13,10 @@ export class CentroEscolarComponent implements OnInit {
   public isLoading: boolean;
   public generalidadesPPL: GeneralidadesPPL;
   public actividades: ActividadesEscolares;
+  // FilePreview
+  public file: any;
 
-  constructor(private comiteTecnicoService: ComiteTecnicoService) {
+  constructor(private comiteTecnicoService: ComiteTecnicoService, private modalService: NgbModal) {
     this.generalidadesPPL = {} as GeneralidadesPPL;
     this.actividades = new ActividadesEscolares();
   }
@@ -91,6 +94,49 @@ export class CentroEscolarComponent implements OnInit {
     this.isLoading = false;
     this.generalidadesPPL = {} as GeneralidadesPPL;
     this.actividades = new ActividadesEscolares();
+  }
+
+  generatePDF(modal) {
+    console.log('generatePDF');
+    this.comiteTecnicoService.generatePDFCentroEscolar(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
+      console.log('PDF', data);
+      this.isLoading = false;
+      const file = new Blob([data], {type: 'application/*'});
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadstart = ev => this.isLoading = true;
+      reader.onloadend = () => {
+        this.isLoading = false;
+        let dataUrl: any;
+        dataUrl = reader.result;
+        const base64 = dataUrl.split(',')[1];
+        this.modalService.dismissAll();
+        if (base64) {
+          this.file = base64;
+          this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+        }
+      };
+      reader.onerror = () => {
+        this.isLoading = false;
+        Swal.fire({
+          title: 'Error',
+          text: 'Error al generar el archivo',
+          icon: 'error',
+          timer: 1500,
+          showConfirmButton: false
+        });
+        this.modalService.dismissAll();
+      };
+    }, error => {
+      console.log(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al generar el archivo',
+        icon: 'error',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    });
   }
 }
 
