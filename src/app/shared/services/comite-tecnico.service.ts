@@ -50,4 +50,9 @@ export class ComiteTecnicoService {
 
   saveComiteOdontolofia = model => this.http.post(`${this.url}/api/registrarHistoriaClinica`, model);
 
+  generatePDFOdontologia = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfHistoriaClinicaOdontologica?imputadoId=${id}`, {responseType});
+  };
+
 }
