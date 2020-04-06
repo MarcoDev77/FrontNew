@@ -40,7 +40,7 @@
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Tipo de sangre:</label>
-      <input type="text" class="form-control" readonly value="{{generalidades.peso}}" name="duenoMedio"
+      <input type="text" class="form-control" readonly value="{{generalidades.tipoSangre}}" name="duenoMedio"
              placeholder="Tipo de sangre"/>
     </div>
   </div>
@@ -159,6 +159,14 @@
 <div class="row">
   <div class="col-sm-12 text-center text-sm-right">
     <button type="button" (click)="submit()" [disabled]="!generalidades.imputadoId" class="btn btn-success mr-3">Guardar</button>
-    <button type="submit" class="btn btn-success mr-3">Imprimir</button>
+    <button type="submit" (click)="generatePDF(view)" [disabled]="!generalidades.imputadoId" class="btn btn-success mr-3">Imprimir</button>
   </div>
 </div>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i (click)="view.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
+       class="fa fa-times-circle"></i>
+    <app-web-viewer [file]="file" [name]="'acta-de-entrevista'"></app-web-viewer>
+  </div>
+</ng-template>
