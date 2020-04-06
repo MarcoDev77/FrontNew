@@ -41,6 +41,11 @@ export class ComiteTecnicoService {
 
   saveComiteDeporte = model => this.http.post(`${this.url}/api/registrarInformacionDeportiva`, model);
 
+  generatePDFDeportes = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfEncuestaDeportiva?imputadoId=${id}`, {responseType});
+  };
+
   getDataComiteOdontoligia = folio => this.http.get(`${this.url}/api/listarImputadoPorFolioOdontologica?folioImputado=${folio}`);
 
   saveComiteOdontolofia = model => this.http.post(`${this.url}/api/registrarHistoriaClinica`, model);
