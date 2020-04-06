@@ -1,5 +1,5 @@
 export class Delito {
-  id?: number;
+  idTipoDelito?: number;
   nombre: string;
   estatus: boolean;
   modalidadDelito: any;
