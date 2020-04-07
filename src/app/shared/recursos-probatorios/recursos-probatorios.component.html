@@ -137,6 +137,11 @@
                     [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
               Multa
             </th>
+            <th (click)="sort('status')" class="text-center">
+              <span *ngIf="key == 'status'" class="fa"
+                    [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+              Multa
+            </th>
 
             <th class="text-center" style="min-width: 5rem">Acciones</th>
           </tr>
@@ -152,7 +157,11 @@
             <td class="text-center">{{item.penalidadDia}}</td>
             <td class="text-center">{{item.multa}}</td>
             <td class="text-center">
-<!--              <i class="fa fa-pencil" placement="top" ngbTooltip="Actiualizar" (click)="update(item)"></i> &nbsp;-->
+              <span *ngIf="!item.estaAgotado" class="badge badge-secondary">Disponible</span>
+              <span *ngIf="item.estaAgotado" class="badge badge-warning">Agotado</span>
+            </td>
+            <td class="text-center">
+              <i class="fa fa-pencil" placement="top" ngbTooltip="Actiualizar" (click)="update(item)"></i> &nbsp;
               <i class="fa fa-trash-o" placement="top" ngbTooltip="Eliminar" (click)="delete(item)"></i> &nbsp;
               <i *ngIf="!item.estaAgotado" class="fa fa-level-down" placement="top" ngbTooltip="Marcar como agotado" (click)="setAgotado(item)"></i>
             </td>
