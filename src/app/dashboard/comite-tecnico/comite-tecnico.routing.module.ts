@@ -9,6 +9,7 @@ import { PsicologiaComponent } from './psicologia/psicologia.component';
 import { DeportesComponent } from './deportes/deportes.component';
 import { OdontologiaComponent } from './odontologia/odontologia.component';
 import { ResultadosExamenesComponent } from './resultados-examenes/resultados-examenes.component';
+import { ResolucionPruebasComponent } from './resolucion-pruebas/resolucion-pruebas.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
       {path: 'psicologia', component: PsicologiaComponent},
       {path: 'deportes', component: DeportesComponent},
       {path: 'odontologia', component: OdontologiaComponent},
-      {path: 'examenes', component: ResultadosExamenesComponent}
+      {path: 'examenes', component: ResultadosExamenesComponent},
+      {path: 'resolucion-pruebas', component: ResolucionPruebasComponent}
   
 
     ]
