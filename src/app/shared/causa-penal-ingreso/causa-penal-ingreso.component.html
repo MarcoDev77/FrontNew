@@ -22,7 +22,9 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label >A partir de:</label>
-                    <input type="date" class="form-control"  name="apartirDe"  [(ngModel)]="causaPenal.apartirDe"/>
+                    <input type="date" class="form-control"  name="apartirDe"  
+                    #apartirDe="ngModel"
+                    [(ngModel)] ="causaPenal.apartirDe" (change)="change($event)"/>
                     <!--<input type="date" class="form-control" placeholder="Fecha de consignación" name="fechaConsignacion" />-->
                 </div>
             </div>
@@ -51,7 +53,9 @@
                 <div class="form-group">
                     <div class="form-group shadows">
                         <label for="">Sentencia ejecutoriada: </label>
-                        <input type="date" class="form-control" name="fechaEjecucionSentencia" [(ngModel)]="causaPenal.fechaEjecucionSentencia"  />
+                        <input type="date" class="form-control" name="fechaEjecucionSentencia" 
+                        #fechaEjecucionSentencia="ngModel"
+                        [(ngModel)] ="causaPenal.fechaEjecucionSentencia" (change)="change($event)"/>
                     </div>
                 </div>
             </div>
