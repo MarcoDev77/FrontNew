@@ -3,9 +3,12 @@
     <div *ngIf="isForm" class="col-md-12 animated flipInX">
         <div class="row">
             <div class="col-md-4">
+              <div class="form-group">
+                <label>Nombre Cause Penal:</label>
                 <input name="nombre" type="text" class="form-control" [(ngModel)]="causaPenal.nombre"
-                    placeholder="Nombre carpeta" #nombreV="ngModel" [ngClass]="{ 'is-invalid': !causaPenal.nombre }"
-                    maxlength="45" required>
+                       #nombreV="ngModel" [ngClass]="{ 'is-invalid': !causaPenal.nombre }"
+                       maxlength="45" required>
+              </div>
             </div>
         </div>
         <br>
@@ -217,9 +220,9 @@
         </form>
 
         <div class="row">
-      
+
             <div class="table-responsive">
-        
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -251,11 +254,11 @@
                     </pagination-controls>
                 </div>
             </div>
-        
+
         </div>
     </div>
 
-   
+
 </ng-template>
 
 <ng-template #delitoModal let-delitoModal class="modal fade">

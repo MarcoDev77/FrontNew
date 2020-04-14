@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-md-12">
-  
+
     <div class="text-center">
       <img class="img" id="map-front" src="assets/img/human-body-front.png" usemap="#image-front-map">
       <map name="image-front-map">
@@ -248,7 +248,7 @@
 
       </map>
     </div>
-  <div class="text-center">
+    <div class="text-center">
       <img class="img" id="map" src="assets/img/human-body-back.png" usemap="#image-map">
       <!--Parte trasera-->
       <map name="image-map">
@@ -528,29 +528,32 @@
 <ng-template #addModal let-addModal>
   <div class="modal-content text-center">
     <div class="modal-body">
-      <div class="row">
-        <div class="col-md-12">
-          <h3>Seña Particular</h3>
-          <div class="form-group">
-            <input type="text" name="folio" class="form-control"  placeholder="Seña particular"
-                   [ngClass]="{ 'is-invalid':  folio.touched && folio.invalid }" [(ngModel)]="caracteristica.folio"
-                   #folio="ngModel">
-          </div>
-          <div class=" form-group">
-              <textarea [(ngModel)]="caracteristica.descripcion" #descripcion="ngModel"
+      <form (ngSubmit)="submit([descripcion, folio])">
+        <div class="row">
+          <div class="col-md-12">
+            <h3>Seña Particular</h3>
+            <div class="form-group">
+              <label for="">Seña Particular</label>
+              <input type="text" required name="folio" class="form-control" maxlength="50" placeholder="Seña particular"
+                     [ngClass]="{ 'is-invalid':  folio.touched && folio.invalid }" [(ngModel)]="caracteristica.folio"
+                     #folio="ngModel">
+            </div>
+            <div class=" form-group">
+              <label for="">Descripción</label>
+              <textarea [(ngModel)]="caracteristica.descripcion" #descripcion="ngModel" name="descripcion"
                         [ngClass]="{ 'is-invalid':  descripcion.touched && descripcion.invalid }" class=" form-control"
-                        cols="80" placeholder="Descripción" rows="4" value=""
-                        ></textarea>
+                        cols="80" placeholder="Descripción" rows="4" value="" required
+              ></textarea>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 text-center text-sm-right">
-          <button type="button" class="btn btn-danger" (click)="closeModals()">Cerrar</button>
-          <button type="button" (click)="submit([descripcion, folio])" class="btn btn-success shadows">Guardar
-          </button>
+        <div class="row">
+          <div class="col-sm-12 text-center text-sm-right">
+            <button type="submit" class="btn btn-success shadows">Guardar</button>
+            <button type="button" class="btn btn-danger" (click)="closeModals()">Cerrar</button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </ng-template>
