@@ -12,4 +12,5 @@ export class RedesFamiliaresComponent implements OnInit {
   ngOnInit() {
   }
 
+  openModal(modal?){}
 }

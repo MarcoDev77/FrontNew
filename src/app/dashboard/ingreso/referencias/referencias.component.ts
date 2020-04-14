@@ -23,6 +23,7 @@ export class ReferenciasComponent implements OnInit {
   public paises: any
   public arrayToFilter: any
   public estados: any
+  public parentescos: any[]
   constructor( private catalogosService: CatalogosService,
     private router: Router,
     private modalService: NgbModal,
@@ -34,6 +35,8 @@ export class ReferenciasComponent implements OnInit {
       this.arrayToFilter=[];
       this.data=[];
       this.referencia= {} as any;
+      this.parentescos=[];
+      this.referencia.parentesco={} as any;
       this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
 
       if (this.ingreso) {
@@ -46,6 +49,7 @@ export class ReferenciasComponent implements OnInit {
   this.catalogosService.listPaises()
   .subscribe((data: any) => this.paises =data.paises);
   this.getEstado();
+  this.getParentescos()
   }
 
 
@@ -118,5 +122,15 @@ export class ReferenciasComponent implements OnInit {
   }
   formatter = (x: {nombre: string}) => x.nombre;
 
+  switch($event){
+    
+  }
+
+  getParentescos(){
+    this.ingresoService.getParentescos().subscribe((data:any)=>{
+      this.parentescos=data.parentescos;
+      console.log(this.parentescos)
+    })
+  }
 
 }

@@ -142,7 +142,7 @@ export class DelitoIngresoComponent implements OnInit {
     console.log(delito)
   }
 
-  viewHistory(item) {
+  viewHistory(item?) {
     console.log(item);
     this.isRecord = true;
     this.ingresoService.getHistorialDelito(item.id).subscribe((data: any) => {
