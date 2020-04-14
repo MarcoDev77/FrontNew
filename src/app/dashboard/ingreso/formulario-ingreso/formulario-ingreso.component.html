@@ -5,22 +5,20 @@
   <div class="col-md-4">
     <div class="form-group">
       <label>Apellido paterno:</label>
-      <input class="form-control shadows" type="text" placeholder="Apellido paterno" name="apellidoPaternoAlias" [(ngModel)]="alias.apellidoPaterno" #apellidoPaternoAlias="ngModel" maxlength="45" [ngClass]="{ 'is-invalid':  apellidoPaternoAlias.touched && apellidoPaternoAlias.invalid }"
-             ngbTooltip="Apellido Paterno" />
+      <input class="form-control shadows" type="text" name="apellidoPaternoAlias" [(ngModel)]="alias.apellidoPaterno" #apellidoPaternoAlias="ngModel" maxlength="45" [ngClass]="{ 'is-invalid':  apellidoPaternoAlias.touched && apellidoPaternoAlias.invalid }"/>
 
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>Apellido materno:</label>
-      <input class="form-control shadows" type="text" placeholder="Apellido materno" name="apellidoMaternoAlias" [(ngModel)]="alias.apellidoMaterno" #apellidoMaternoAlias="ngModel" maxlength="45" [ngClass]="{ 'is-invalid':  apellidoMaternoAlias.touched && apellidoMaternoAlias.invalid }"
-             ngbTooltip="Apellido Materno" />
+      <input class="form-control shadows" type="text" name="apellidoMaternoAlias" [(ngModel)]="alias.apellidoMaterno" #apellidoMaternoAlias="ngModel" maxlength="45" [ngClass]="{ 'is-invalid':  apellidoMaternoAlias.touched && apellidoMaternoAlias.invalid }"/>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>Nombre:</label>
-      <input class="form-control shadows" type="text" placeholder="Nombre" name="nombreAlias" [(ngModel)]="alias.nombre" #nombreAlias="ngModel" maxlength="45" [ngClass]="{ 'is-invalid':  nombreAlias.touched && nombreAlias.invalid }" ngbTooltip="Nombre" />
+      <input class="form-control shadows" type="text" name="nombreAlias" [(ngModel)]="alias.nombre" #nombreAlias="ngModel" maxlength="45" [ngClass]="{ 'is-invalid':  nombreAlias.touched && nombreAlias.invalid }" />
     </div>
   </div>
 </div>
@@ -28,7 +26,7 @@
   <div class="col-md-4">
     <div class="form-group">
       <label>Apodo:</label>
-      <input class="form-control shadows" type="text" placeholder="Apodo" name="aliasNombre" [(ngModel)]="alias.otro" #aliasNombre="ngModel" [ngClass]="{ 'is-invalid':  aliasNombre.touched && aliasNombre.invalid }" ngbTooltip="Apodo" />
+      <input class="form-control shadows" type="text" name="aliasNombre" [(ngModel)]="alias.otro" #aliasNombre="ngModel" [ngClass]="{ 'is-invalid':  aliasNombre.touched && aliasNombre.invalid }" />
     </div>
   </div>
   <div class="col-md-4">
@@ -92,13 +90,13 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Folio:</label>
-                    <input class="form-control shadows" ngbTooltip="Folio" placeholder="Folio" name="folio" type="text" #folio="ngModel" [ngClass]="{ 'is-invalid': f.submitted && folio.invalid}" maxlength="45" [(ngModel)]="ingreso.folio" readonly/>
+                    <input class="form-control shadows" name="folio" type="text" #folio="ngModel" [ngClass]="{ 'is-invalid': f.submitted && folio.invalid}" maxlength="45" [(ngModel)]="ingreso.folio" readonly/>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Clasificación:</label>
-                    <select ngbTooltip="Clasificación" class="form-control shadows" name="clasificacion" required #clasificacion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && clasificacion.invalid}" [(ngModel)]="ingreso.clasificacion">
+                    <select class="form-control shadows" name="clasificacion" required #clasificacion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && clasificacion.invalid}" [(ngModel)]="ingreso.clasificacion">
             <option [value]="undefined" disabled hidden>Clasificación</option>
             <option value="Federal">Federal</option>
             <option value="Estatal">Estatal</option>
@@ -111,7 +109,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Número de expediente:</label>
-                    <input class="form-control shadows" ngbTooltip="Número de expediente" placeholder="Número de expediente" name="expediente" type="text" #expediente="ngModel" maxlength="10" minlength="1" [ngClass]="{ 'is-invalid': f.submitted && expediente.invalid}" [(ngModel)]="ingreso.numeroExpediente"
+                    <input class="form-control shadows" name="expediente" type="text" #expediente="ngModel" maxlength="10" minlength="1" [ngClass]="{ 'is-invalid': f.submitted && expediente.invalid}" [(ngModel)]="ingreso.numeroExpediente"
                         required readonly>
                 </div>
             </div>
@@ -130,7 +128,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Número control RENIP:</label>
-                    <input class="form-control shadows" ngbTooltip="Número control RENIP" placeholder="Número control RENIP" maxlength="10" minlength="1" name="numeroRenip" #numeroRenip="ngModel" [ngClass]="{ 'is-invalid': f.submitted && numeroRenip.invalid}" [(ngModel)]="ingreso.numeroControlRenip"
+                    <input class="form-control shadows" maxlength="10" minlength="1" name="numeroRenip" #numeroRenip="ngModel" [ngClass]="{ 'is-invalid': f.submitted && numeroRenip.invalid}" [(ngModel)]="ingreso.numeroControlRenip"
                         pattern='^[0-9]*$' />
                 </div>
 
@@ -144,14 +142,14 @@
             <div class="col-md-4">
                 <div class="form-group shadows">
                     <label>Fecha de nacimiento:</label>
-                    <input type="date" class="form-control" ngbTooltip="Fecha de Nacimiento" placeholder="Fecha de nacimiento" name="fechaNacimiento" (change)='change($event)' #fechaNacimiento="ngModel" [ngClass]="{ 'is-invalid': f.submitted && fechaNacimiento.invalid}"
+                    <input type="date" class="form-control" name="fechaNacimiento" (change)='change($event)' #fechaNacimiento="ngModel" [ngClass]="{ 'is-invalid': f.submitted && fechaNacimiento.invalid}"
                         [(ngModel)]="ingreso.imputado.fechaNacimiento" required/>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Edad aparente:</label>
-                    <input class="form-control" placeholder="Edad aparente" ngbTooltip="Edad aparente" name="edadAparente" min="5" max="120" pattern='^[0-9]*$' #edadAparente="ngModel" [ngClass]="{ 'is-invalid': f.submitted && edadAparente.invalid}" [(ngModel)]="ingreso.imputado.edadAparente"
+                    <input class="form-control" name="edadAparente" min="5" max="120" pattern='^[0-9]*$' #edadAparente="ngModel" [ngClass]="{ 'is-invalid': f.submitted && edadAparente.invalid}" [(ngModel)]="ingreso.imputado.edadAparente"
                         required/>
                 </div>
             </div>
@@ -195,7 +193,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Número de hijos:</label>
-                    <input class="form-control shadows" ngbTooltip="Número de hijos" placeholder="Número de hijos" max="22" min="0" name="numeroHijos" #numeroHijos="ngModel" [ngClass]="{ 'is-invalid': f.submitted && numeroHijos.invalid}" [(ngModel)]="ingreso.imputado.numeroHijos"
+                    <input class="form-control shadows" max="22" min="0" name="numeroHijos" #numeroHijos="ngModel" [ngClass]="{ 'is-invalid': f.submitted && numeroHijos.invalid}" [(ngModel)]="ingreso.imputado.numeroHijos"
                         pattern='^[0-9]*$' />
                 </div>
             </div>
@@ -205,14 +203,14 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Ocupación:</label>
-                    <input class="form-control shadows" ngbTooltip="Ocupación" placeholder="Ocupación" maxlength="150" name="ocuacion" #ocupacion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && ocupacion.invalid}" [(ngModel)]="ingreso.imputado.ocupacion" />
+                    <input class="form-control shadows" maxlength="150" name="ocuacion" #ocupacion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && ocupacion.invalid}" [(ngModel)]="ingreso.imputado.ocupacion" />
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Grado de estudios:</label>
-                    <input class="form-control shadows" ngbTooltip="Grado de estudios" placeholder="Grado de estudios" maxlength="150" name="ocuacion" #gradoEstudio="ngModel" [ngClass]="{ 'is-invalid': f.submitted && gradoEstudio.invalid}" [(ngModel)]="ingreso.imputado.gradoEstudio"
+                    <input class="form-control shadows" maxlength="150" name="ocuacion" #gradoEstudio="ngModel" [ngClass]="{ 'is-invalid': f.submitted && gradoEstudio.invalid}" [(ngModel)]="ingreso.imputado.gradoEstudio"
                     />
                 </div>
             </div>
@@ -224,7 +222,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Etnia:</label>
-                    <input ngbTooltip="Etnia" class="form-control shadows" type="text" placeholder="Etnia" name="etnia" #etnia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && etnia.invalid}" maxlength="20" [(ngModel)]="ingreso.imputado.etnia" />
+                    <input class="form-control shadows" type="text" name="etnia" #etnia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && etnia.invalid}" maxlength="20" [(ngModel)]="ingreso.imputado.etnia" />
                 </div>
             </div>
 
@@ -253,7 +251,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Nombre del padre:</label>
-                    <input class="form-control shadows" type="text" ngbTooltip="Nombre del padre" placeholder="Nombre del padre" name="padre" maxlength="80" #padre="ngModel" [ngClass]="{ 'is-invalid': f.submitted && padre.invalid}" [(ngModel)]="ingreso.imputado.nombrePadre"
+                    <input class="form-control shadows" type="text" name="padre" maxlength="80" #padre="ngModel" [ngClass]="{ 'is-invalid': f.submitted && padre.invalid}" [(ngModel)]="ingreso.imputado.nombrePadre"
                     />
                 </div>
             </div>
@@ -261,7 +259,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Nombre de la madre:</label>
-                    <input class="form-control shadows" type="text" ngbTooltip="Nombre de la madre" placeholder="Nombre de la madre" name="madre" maxlength="80" #madre="ngModel" [ngClass]="{ 'is-invalid': f.submitted && madre.invalid}" [(ngModel)]="ingreso.imputado.nombreMadre"
+                    <input class="form-control shadows" type="text" name="madre" maxlength="80" #madre="ngModel" [ngClass]="{ 'is-invalid': f.submitted && madre.invalid}" [(ngModel)]="ingreso.imputado.nombreMadre"
                     />
                 </div>
             </div>
@@ -301,7 +299,7 @@
         </div>
         <div class="col-md-4">
             <label>Municipio:</label>
-            <input ngbTooltip="Municipio" class="form-control shadows" type="text" placeholder="Municipio" name="municipioNacimiento" #municipioNacimiento="ngModel" [ngClass]="{ 'is-invalid': f.submitted && municipioNacimiento.invalid}" maxlength="45" [(ngModel)]="ingreso.imputado.municipioNacimiento"
+            <input class="form-control shadows" type="text" name="municipioNacimiento" #municipioNacimiento="ngModel" [ngClass]="{ 'is-invalid': f.submitted && municipioNacimiento.invalid}" maxlength="45" [(ngModel)]="ingreso.imputado.municipioNacimiento"
             />
         </div>
     </div>
@@ -324,7 +322,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label>Colonia:</label>
-                <input class="form-control" type="text" ngbTooltip=" Colonia" placeholder="Colonia" name="colonia" #colonia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && colonia.invalid}" [(ngModel)]="ingreso.imputado.colonia" />
+                <input class="form-control" type="text" name="colonia" #colonia="ngModel" [ngClass]="{ 'is-invalid': f.submitted && colonia.invalid}" [(ngModel)]="ingreso.imputado.colonia" />
             </div>
 
         </div>
@@ -334,14 +332,14 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label>Calle y número:</label>
-                <input class="form-control" type="text" ngbTooltip="Calle y número" placeholder="Calle y número" name="calleNumero" maxlength="60" #calleNumero="ngModel" [ngClass]="{ 'is-invalid': f.submitted && calleNumero.invalid}" [(ngModel)]="ingreso.imputado.calleNumero"
+                <input class="form-control" type="text" name="calleNumero" maxlength="60" #calleNumero="ngModel" [ngClass]="{ 'is-invalid': f.submitted && calleNumero.invalid}" [(ngModel)]="ingreso.imputado.calleNumero"
                 />
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label>Codigo postal:</label>
-                <input class="form-control" type="text" ngbTooltip="C.P." placeholder="C.P." name="cp" pattern='^[0-9]*$' #cp="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cp.invalid}" maxlength="5" [(ngModel)]="ingreso.imputado.codigoPostal" />
+                <input class="form-control" type="text" name="cp" pattern='^[0-9]*$' #cp="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cp.invalid}" maxlength="5" [(ngModel)]="ingreso.imputado.codigoPostal" />
             </div>
 
         </div>

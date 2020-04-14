@@ -1,7 +1,10 @@
 <app-section-title icon="fa fa-folder-open" title="carpetas investigación"></app-section-title>
 <div class="row">
     <div *ngIf="isForm" class="col-md-4 animated flipOutX">
-        <input name="nombre" type="text" class="form-control" [(ngModel)]="carpeta.nombre" placeholder="Nombre carpeta" #nombreV="ngModel" [ngClass]="{ 'is-invalid':  nombreV.touched && nombreV.invalid }" maxlength="45" required>
+      <div class="form-group">
+        <label>Nombre de Carpeta:</label>
+        <input name="nombre" type="text" class="form-control" [(ngModel)]="carpeta.nombre" #nombreV="ngModel" [ngClass]="{ 'is-invalid':  nombreV.touched && nombreV.invalid }" maxlength="45" required>
+      </div>
     </div>
     <div *ngIf="isForm" class="col-md-4">
         <button class="btn btn-info btn-sm shadows" (click)="submit([nombreV])">
@@ -97,9 +100,9 @@
         </form>
 
         <div class="row">
-      
+
             <div class="table-responsive">
-        
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -131,7 +134,7 @@
                     </pagination-controls>
                 </div>
             </div>
-        
+
         </div>
     </div>
 </ng-template>
