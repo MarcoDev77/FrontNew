@@ -21,7 +21,7 @@ export class SituacionJuridicaComponent implements OnInit {
    }
 
   ngOnInit() {
-   // this.getData();
+   // this.getIngreso();
   }
 
   getData(){
@@ -83,6 +83,19 @@ export class SituacionJuridicaComponent implements OnInit {
       });
     })
   }
+
+ /*  getIngreso(){
+    this.ingresoService.getIngreso(this.ingreso.id).subscribe((data:any)=>{
+      console.log("getData", data)
+      this.ingreso=data.ingreso;
+      this.ingreso.apodo.nombre= this.ingreso.imputado.apodo[0].nombre;
+      this.ingreso.apodo.apellidoPaterno= this.ingreso.imputado.apodo[0].apellidoPaterno;
+      this.ingreso.apodo.apellidoMaterno= this.ingreso.imputado.apodo[0].apellidoMaterno;
+
+      console.log("ingreso", this.ingreso)
+
+    })
+  } */
 
   add(){}
   switch($event){}

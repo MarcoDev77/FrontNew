@@ -9,108 +9,107 @@
             </div>
         </div>
         <br>
-        <div *ngIf="role === ROLE_ARCHIVO" class="row">
+    
+      
+        <div class="row" *ngIf="role == 'ARCHIVO'">
 
             <div class="col-md-4">
                 <div class="form-group shadows">
-                    <input class="form-control" type="text" placeholder="Victima o agravio" name="noAveriguacion" />
+                    <label >Victima o agravio:</label>
+                    <input class="form-control" type="text" name="victimaAgravio" [(ngModel)]="causaPenal.victimaAgravio"/>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="A partir" onfocus="(this.type='date')" />
+                    <label >A partir de:</label>
+                    <input type="date" class="form-control"  name="apartirDe"  [(ngModel)]="causaPenal.apartirDe"/>
                     <!--<input type="date" class="form-control" placeholder="Fecha de consignación" name="fechaConsignacion" />-->
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group shadows">
-                    <input class="form-control" type="text" placeholder="Juzgado" name="juzgado" />
+                    <label >Juzgado:</label>
+                    <input class="form-control" type="text" name="juzgadoProcedencia"  [(ngModel)]="causaPenal.juzgadoProcedencia"/>
                 </div>
             </div>
         </div>
-        <div *ngIf="role === ROLE_ARCHIVO" class="row">
-
+        <div class="row" *ngIf="role == 'ARCHIVO'">
+        
             <div class="col-md-4">
                 <div class="form-group shadows">
-                    <input class="form-control" type="text" placeholder="Multa" name="multa" />
+                    <label >Multa:</label>
+                    <input class="form-control" type="text" name="multa"  [(ngModel)]="causaPenal.multa" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group shadows">
-                    <input class="form-control" type="text" placeholder="Reparacion del daño"
-                        name="sentidoDeterminacion" />
+                    <label >Reparacion del daño:</label>
+                    <input class="form-control" type="text" name="reparacionDano"  [(ngModel)]="causaPenal.reparacionDano"/>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <div class="form-group shadows">
-                        <input type="text" class="form-control" placeholder="Sentencia ejecutoriada"
-                            onfocus="(this.type='date')" />
+                        <label for="">Sentencia ejecutoriada: </label>
+                        <input type="date" class="form-control" name="fechaEjecucionSentencia" [(ngModel)]="causaPenal.fechaEjecucionSentencia"  />
                     </div>
                 </div>
             </div>
         </div>
-        <div *ngIf="role === ROLE_ARCHIVO" class="row">
+        <div class="row" *ngIf="role == 'ARCHIVO'">
             <div class="col-md-2 form-group shadows">
-                <div>
+                <div class="mt-4">
                     <h6>Penalidad</h6>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group shadows">
-                    <input class="form-control" type="text" placeholder="Año" name="sentidoDeterminacion" />
+                    <label for="">Año:</label>
+                    <input class="form-control" type="number"  name="penalidadAnio"  [(ngModel)]="causaPenal.penalidadAnio" min="1969" />
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group shadows">
-                    <input class="form-control" type="text" placeholder="Mes" name="sentidoDeterminacion" />
+                    <label for="">Mes:</label>
+                    <input class="form-control" type="number" name="penalidadMes" [(ngModel)]="causaPenal.penalidadMes" min="1" max="12"/>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <div class="form-group shadows">
-                        <input class="form-control" type="text" placeholder="Dia" name="sentidoDeterminacion" />
+                        <label for="">Día:</label>
+                        <input class="form-control" type="number"  name="penalidadDia" [(ngModel)]="causaPenal.penalidadDia" min="1" max="31"/>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group shadows">
-                    <input type="text" class="form-control" placeholder="Posible fecha de compurga"
-                        onfocus="(this.type='date')" />
+                    <label for="">Posible fecha de compurga:</label>
+                    <input type="date" class="form-control" name="fechaPosibleCompurga"  #fechaPosibleCompurga="ngModel"
+                    [(ngModel)] ="causaPenal.fechaPosibleCompurga" (change)="change($event)"/>
                 </div>
             </div>
         </div>
-        <div *ngIf="role === ROLE_ARCHIVO" class="row">
+        <div class="row" *ngIf="role == 'ARCHIVO'">
             <div class="col-md-2 form-group shadows">
                 <h6>Tipo de proceso</h6>
             </div>
-            <div class="col-md-8 form-group shadows">
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" id="procesoComun" name="DefaultRadios">
-                    <label class="custom-control-label" for="procesoComun" style="font-size: 15px;">PC</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" id="sentidoFueroComun" name="DefaultRadios">
-                    <label class="custom-control-label" for="sentidoFueroComun" style="font-size: 15px;">SFC</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" id="procesoFederal" name="DefaultRadios">
-                    <label class="custom-control-label" for="procesoFederal" style="font-size: 15px;">PF</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" id="sentidoFueroGeneral" name="DefaultRadios">
-                    <label class="custom-control-label" for="sentidoFueroGeneral" style="font-size: 15px;">SFG</label>
-                </div>
+            <div class="col-md-4 form-group shadows">
+              <select  class="form-control shadows"  [(ngModel)]="causaPenal.tipoProceso.id">
+                  <option  *ngFor="let item of tipoProcesos" [value]="item.id"> {{item.nombre}}</option>
+              </select>
             </div>
         </div>
-        <div *ngIf="role === ROLE_ARCHIVO" class="row">
+        <div class="row" *ngIf="role == 'ARCHIVO'">
             <div class="col-md-12">
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Observaciones" rows="7"></textarea>
-
+                    <label for="">Observaciones:</label>
+                    <textarea class="form-control"  rows="7" name="observaciones" [(ngModel)]="causaPenal.observaciones"></textarea>
+        
                 </div>
             </div>
         </div>
+       
     </div>
     <div *ngIf="isForm" class="col-md-4 animated flipInX">
         <button class="btn btn-info btn-sm shadows" (click)="submit([])">
@@ -125,7 +124,7 @@
             Agregar
         </button>
     </div>
-    <div class="col text-right mb-3">
+    <div class="col text-right mb-3" *ngIf="!isForm">
         <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
             [(ngModel)]="filter" placeholder="Buscar">
     </div>
