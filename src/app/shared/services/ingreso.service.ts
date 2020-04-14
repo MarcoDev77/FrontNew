@@ -192,6 +192,10 @@ export class IngresoService {
     return this.http.delete(`${this.url}/api/eliminarReferenciaPersonal?idReferencia=${id}`);
   }
 
+  getTipoProceso = () => this.http.get(`${this.url}/api/listaTipoProceso`);
+    
+  
+
   filterBusquedaListaIngresos = (filter, criteria) =>
     this.http.get(`${this.url}/api/busquedaConfiltro?filtro=${filter}&criterio=${criteria}`);
 

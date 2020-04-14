@@ -17,7 +17,7 @@
         </div>
         <div class="col-sm-4">
             <div class="form-group">
-                <h6>Numero de expediente</h6>
+                <h6>Número de expediente</h6>
                 <label>{{ingreso.numeroExpediente}}</label>
             </div>
         </div>
@@ -81,13 +81,13 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Lugar de origen:</h6>
-                <label>{{ingreso.municipio.nombre}}</label>
+                <label>{{ingreso.municipioNacimiento ? ingreso.municipioNacimiento: 'Dato desconocido'}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Estado:</h6>
-                <label>{{ingreso.estado.nombre}}</label>
+                <label>{{ingreso.estadoNacimiento.nombre}}</label>
             </div>
         </div>
         <div class="col-sm-4">
@@ -112,7 +112,7 @@
         </div>
         <div class="col-sm-4">
             <div class="form-group">
-                <h6>Religion:</h6>
+                <h6>Religión:</h6>
                 <label>{{ingreso.religion.nombre}}</label>
             </div>
         </div>
@@ -160,119 +160,13 @@
     </div>
 </form>
 
-<app-carpeta-investigacion-imputado *ngIf="ingreso?.id" [ingresoId]="ingreso.id" [ingresoId]="ingreso.id"></app-carpeta-investigacion-imputado>
+<app-carpeta-investigacion-imputado *ngIf="ingreso?.id && ingreso.personaIngresada.id"  [ingresoId]="ingreso.id" [personaId]="ingreso.personaIngresada.id"></app-carpeta-investigacion-imputado>
 
-<app-causa-penal-ingreso *ngIf="ingreso?.id" role="ARCHIVO" [ingresoId]="ingreso.id"></app-causa-penal-ingreso>
+<app-causa-penal-ingreso *ngIf="ingreso?.id && ingreso.personaIngresada.id" role="ARCHIVO" [ingresoId]="ingreso.id" [personaId]="ingreso.personaIngresada.id"></app-causa-penal-ingreso>
 <app-causa-penal-ingreso [hidden]="true" #causaPenal></app-causa-penal-ingreso>
 
 
 
-
-<div class="row">
-
-    <div class="col-md-4">
-        <div class="form-group shadows">
-            <input class="form-control" type="text" placeholder="Victima o agravio" name="noAveriguacion" />
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="A partir" onfocus="(this.type='date')" />
-            <!--<input type="date" class="form-control" placeholder="Fecha de consignación" name="fechaConsignacion" />-->
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group shadows">
-            <input class="form-control" type="text" placeholder="Juzgado" name="juzgado" />
-        </div>
-    </div>
-</div>
-<div class="row">
-
-    <div class="col-md-4">
-        <div class="form-group shadows">
-            <input class="form-control" type="text" placeholder="Multa" name="multa" />
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group shadows">
-            <input class="form-control" type="text" placeholder="Reparacion del daño" name="sentidoDeterminacion" />
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <div class="form-group shadows">
-                <input type="text" class="form-control" placeholder="Sentencia ejecutoriada" onfocus="(this.type='date')" />
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-2 form-group shadows">
-        <div>
-            <h6>Penalidad</h6>
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group shadows">
-            <input class="form-control" type="text" placeholder="Año" name="sentidoDeterminacion" />
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group shadows">
-            <input class="form-control" type="text" placeholder="Mes" name="sentidoDeterminacion" />
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group">
-            <div class="form-group shadows">
-                <input class="form-control" type="text" placeholder="Dia" name="sentidoDeterminacion" />
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group shadows">
-            <input type="text" class="form-control" placeholder="Posible fecha de compurga" onfocus="(this.type='date')" />
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-2 form-group shadows">
-        <h6>Tipo de proceso</h6>
-    </div>
-    <div class="col-md-8 form-group shadows">
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="procesoComun" name="DefaultRadios">
-            <label class="custom-control-label" for="procesoComun" style="font-size: 15px;">PC</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="sentidoFueroComun" name="DefaultRadios">
-            <label class="custom-control-label" for="sentidoFueroComun" style="font-size: 15px;">SFC</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="procesoFederal" name="DefaultRadios">
-            <label class="custom-control-label" for="procesoFederal" style="font-size: 15px;">PF</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="sentidoFueroGeneral" name="DefaultRadios">
-            <label class="custom-control-label" for="sentidoFueroGeneral" style="font-size: 15px;">SFF</label>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <textarea class="form-control" placeholder="Observaciones" rows="7"></textarea>
-
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-12 text-center text-sm-right">
-        <button type="button" (click)="goTo('lista-ingreso', null)" class="btn btn-danger mr-3">Cancelar</button>
-        <button type="submit" class="btn btn-success">Guardar</button>
-    </div>
-</div>
 
 
 <ng-template #formModal let-formModal>

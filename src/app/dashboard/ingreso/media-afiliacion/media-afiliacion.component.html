@@ -6,7 +6,7 @@
                 <div class="d-inline-flex w-100 mb-5">
                     <div class="form-group col-12">
                         <label class="mr-3 mt-4">Estatura:</label>
-                        <input class="form-control shadows" type="text" [(ngModel)]="mediaFiliacion.estatura" #estatura name="estatura" />
+                        <input class="form-control shadows" type="number" [(ngModel)]="mediaFiliacion.estatura" #estatura name="estatura" />
                     </div>
 
                 </div>
@@ -1356,7 +1356,7 @@
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                             <label style="margin-right: 2.5rem;margin-top: 0.3rem;">Contorno:</label>
-                            <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && lobuloContorno.invalid }">
+                            <label style="width: 8rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && lobuloContorno.invalid }">
                                     <input class="form-check-input" type="radio" [value]="'Descendiente'"
                                         name="lobuloContorno" #lobuloContorno="ngModel"
                                         [(ngModel)]="mediaFiliacion.lobuloContorno" required>
@@ -1364,7 +1364,7 @@
 
                                     <span class="form-check-sign"></span>
                                 </label>
-                            <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && lobuloContorno.invalid }">
+                            <label style="width: 8rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && lobuloContorno.invalid }">
                                     <input class="form-check-input" type="radio" [value]="'En escuadra'"
                                         name="lobuloContorno" #lobuloContorno="ngModel"
                                         [(ngModel)]="mediaFiliacion.lobuloContorno" required>
