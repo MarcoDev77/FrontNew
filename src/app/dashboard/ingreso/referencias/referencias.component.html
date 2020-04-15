@@ -29,7 +29,7 @@
                         <i  class="fa fa-times" (click)="deleteReferencia(item.id)" placement="top" ngbTooltip="Elminar referencia"></i>
                   &nbsp;
                   <i class="fa fa-id-card-o" placement="top" ngbTooltip="Generar pase único"
-                     (click)="generatePaseUnico(item)"></i> &nbsp;
+                     (click)="generatePaseUnico(item, view)"></i> &nbsp;
 
                 </td>
             </tr>
@@ -202,6 +202,15 @@
                     </div>
                 </div>
 
+              <div class="col-sm-4">
+                <div class="custom-control custom-checkbox mt-4">
+                  <input type="checkbox" class="custom-control-input" id="mayorEdad"
+                         name="mayorEdad"
+                         [(ngModel)]="referencia.esMayorEdad">
+                  <label class="custom-control-label" for="mayorEdad">¿Es mayor de edad?</label>
+                </div>
+              </div>
+
                 <div  class="form-group ml-4" *ngIf="referencia.extranjero" >
                     <label for="">Lada internacional:</label>
                     <input  type="tel" class="form-control" name="lada"
@@ -224,4 +233,13 @@
 <ng-template #rt let-r="result" let-t="term">
 
     <ngb-highlight [result]="r.nombre" [term]="t"></ngb-highlight>
+</ng-template>
+
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i (click)="view.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
+       class="fa fa-times-circle"></i>
+    <app-web-viewer [file]="file" [name]="'acta-de-entrevista'"></app-web-viewer>
+  </div>
 </ng-template>
