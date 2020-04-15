@@ -21,43 +21,45 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Nombre de la PPL :</label>
-            <input type="text" class="form-control" name="duenoMedio" />
+            <input type="text" class="form-control" name="nombre"  [(ngModel)]="generalidadesPPL.nombre" disabled/>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Fecha de ingreso:</label>
-            <input type="text" class="form-control" name="duenoMedio" />
+            <input type="date" class="form-control" name="fechaIngreso"  #fechaIngreso="ngModel"
+            [ngModel]="generalidadesPPL.fechaIngreso | date:'yyyy-MM-dd'"
+            (ngModelChange)="generalidadesPPL.fechaIngreso = $event" disabled />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Edad:</label>
-            <input type="text" class="form-control" name="duenoMedio" />
+            <input type="text" class="form-control" name="edad" [(ngModel)]="generalidadesPPL.edad" disabled/>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Dormitorio:</label>
-            <input type="text" class="form-control" name="duenoMedio" />
+            <input type="text" class="form-control" name="dormitorio" [(ngModel)]="generalidadesPPL.dormitorio" disabled />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Delito:</label>
-            <input type="text" class="form-control" name="duenoMedio"  />
+            <input type="text" class="form-control" name="listaDelitos"  [(ngModel)]="generalidadesPPL.listaDelitos"  disabled/>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Sentencia:</label>
-            <input type="text" class="form-control" name="duenoMedio"  />
+            <input type="text" class="form-control" name="sentencia"  [(ngModel)]="generalidadesPPL.sentencia" disabled/>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Estado civil:</label>
-            <input type="text" class="form-control" name="duenoMedio"  />
+            <input type="text" class="form-control" name="estadoCivil" [(ngModel)]="generalidadesPPL.estadoCivil.nombre" disabled />
         </div>
     </div>
     <div class="col-md-4">

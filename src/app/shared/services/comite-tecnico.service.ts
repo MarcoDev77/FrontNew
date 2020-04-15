@@ -25,8 +25,10 @@ export class ComiteTecnicoService {
 
   getImputadoByFolioPsicologia = folio => this.http.get(`${this.url}/api/listarImputadoPsicologia?folioImputado=${folio}`);
 
+  getImputadoByFolioTrabajoSocial= folio => this.http.get(`${this.url}/api/listarImputadoTrabajoSocial?folioImputado=${folio}`);
   saveFichaPsicologica = model => {
     console.log('To server.savePlandeActividades', model);
     return this.http.post(`${this.url}/api/registrarFicha`, model);
   };
+
 }
