@@ -7,7 +7,7 @@ export class Referencia{
     estaVivo: boolean;
     telefono: String;
     numeroDependientes: number;
-    calleNumero: String; 
+    calleNumero: String;
     colonia: String;
     codigoPostal: String;
     paisNacimiento: any;
@@ -18,7 +18,5 @@ export class Referencia{
     extranjero: boolean;
     estado:any
     lada:any;
-
-
-
+    esMayorEdad = false;
 }

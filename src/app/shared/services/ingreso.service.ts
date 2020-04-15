@@ -159,7 +159,7 @@ export class IngresoService {
     this.data = model;
     return this.http.post(`${this.url}/api/registrarCarpetaInvestigacion`, this.data);
   }
-  
+
   deleteCarpetaInvestigacion = carpetaId => {
     console.log('carpetaId', carpetaId);
     return this.http.delete(`${this.url}/api/bajaLogicaCarpetaInvestigacion?id=${carpetaId}`);
@@ -193,12 +193,17 @@ export class IngresoService {
   }
 
   getTipoProceso = () => this.http.get(`${this.url}/api/listaTipoProceso`);
-    
+
   filterBusquedaListaIngresos = (filter, criteria) =>
     this.http.get(`${this.url}/api/busquedaConfiltro?filtro=${filter}&criterio=${criteria}`);
 
 
   getParentescos = () => this.http.get(`${this.url}/api/listarParentescos`);
+
+  savePaseProvisional = (model) => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.post(`${this.url}/api/registrarPaseProvisional`, model, {responseType});
+  }
 
 }
 
