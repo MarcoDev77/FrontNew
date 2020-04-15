@@ -27,6 +27,9 @@
                     <i class="fa fa-eye" placement="top" ngbTooltip="Consultar detalles"
                         (click)="showModal(addModal,item)"></i> &nbsp;
                         <i  class="fa fa-times" (click)="deleteReferencia(item.id)" placement="top" ngbTooltip="Elminar referencia"></i>
+                  &nbsp;
+                  <i class="fa fa-id-card-o" placement="top" ngbTooltip="Generar pase único"
+                     (click)="generatePaseUnico(item)"></i> &nbsp;
 
                 </td>
             </tr>
@@ -118,7 +121,7 @@
                         <input  type="tel" class="form-control" name="telefono"
                             #telefono="ngModel" [(ngModel)]="referencia.telefono" maxlength="10" pattern='^[0-9]*$'>
                     </div>
-                </div> 
+                </div>
 
                 <div class="col-sm-4">
                     <div class="form-group">
@@ -126,7 +129,7 @@
                         <input type="text" class="form-control" [(ngModel)]="referencia.paisNacimiento" (focus)="selectArrayTofilter(paises)"  [ngbTypeahead]="search"  [resultTemplate]="rt" [inputFormatter]="formatter" name="paisNacimiento"/>
 
                     </div>
-                </div> 
+                </div>
 
 
                 <div class="col-sm-4">
@@ -205,7 +208,7 @@
                         #lada="ngModel" [(ngModel)]="referencia.lada" maxlength="3" pattern='^[0-9]*$'>
                 </div>
 
-               
+
             </div>
 
             <div class="row">

@@ -16,7 +16,7 @@ import {  map } from 'rxjs/operators';
   styleUrls: ['./referencias.component.scss']
 })
 export class ReferenciasComponent implements OnInit {
-  public referencia: Referencia 
+  public referencia: Referencia
   public ingreso: Ingreso
   public data: any;
   public isLoading: boolean
@@ -27,7 +27,7 @@ export class ReferenciasComponent implements OnInit {
   constructor( private catalogosService: CatalogosService,
     private router: Router,
     private modalService: NgbModal,
-    private ingresoService: IngresoService,) { 
+    private ingresoService: IngresoService,) {
       this.isLoading=false;
       this.ingreso = {} as Ingreso;
       this.paises=[];
@@ -43,7 +43,7 @@ export class ReferenciasComponent implements OnInit {
         this.listReferencias(this.ingreso.id);
       }
     }
-   
+
   ngOnInit() {
   console.log("ingreso", this.ingreso)
   this.catalogosService.listPaises()
@@ -63,7 +63,7 @@ export class ReferenciasComponent implements OnInit {
   listReferencias(id){
     this.ingresoService.listRefencias(id).subscribe((data:any)=>{
         this.data=data.referenciasPersonales;
-    })  
+    })
   }
 
   saveReferencia(){
@@ -85,7 +85,7 @@ export class ReferenciasComponent implements OnInit {
         timer: 1300,
         showConfirmButton: false
       });
-      
+
     })
   }
 
@@ -123,7 +123,7 @@ export class ReferenciasComponent implements OnInit {
   formatter = (x: {nombre: string}) => x.nombre;
 
   switch($event){
-    
+
   }
 
   getParentescos(){
@@ -133,4 +133,7 @@ export class ReferenciasComponent implements OnInit {
     })
   }
 
+  generatePaseUnico(item: any) {
+    console.log('item', item);
+  }
 }
