@@ -51,7 +51,7 @@
                     <td class="text-center">{{item.tipoDelito.nombre}}</td>
                     <td *ngIf="role" class="text-center">{{item.juez}}</td>
                     <td class="text-center">
-                        <i class="fa fa-history" placement="top" (click)="viewHistory(formModal2)" ngbTooltip="Ver Historial"></i> &nbsp;
+                        <i class="fa fa-history" placement="top" (click)="viewHistory(item)" ngbTooltip="Ver Historial"></i> &nbsp;
                         <i class="fa fa-cog" placement="top" (click)="delitoEdit(item) ; toggleForm(true)" ngbTooltip="Editar"></i>
                     </td>
                 </tr>

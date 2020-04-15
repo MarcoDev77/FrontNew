@@ -306,5 +306,5 @@ export class CausaPenalIngresoComponent implements OnInit {
   }
 
   onEdit(event: any){}
-
+  viewHistory(modal?){}
 }

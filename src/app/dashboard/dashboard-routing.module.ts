@@ -48,6 +48,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {expectedRole: [r.test.role, r.comiteTecnico.role]}
       },
+      {
+        path: 'seguridad-custodia',
+        loadChildren: './seguridad-custodia/seguridad-custodia.module#SeguridadCustodiaModule',
+        canActivate: [AuthGuard],
+        data: {expectedRole: [r.test.role, r.seguridadCustodia.role]}
+      },
 
 
 

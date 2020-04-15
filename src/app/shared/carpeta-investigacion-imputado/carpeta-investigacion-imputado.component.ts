@@ -281,5 +281,6 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
       console.log(this.delito)
     }
 
-
+    viewHistory(modal?){}
+    
 }

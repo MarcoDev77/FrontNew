@@ -16,7 +16,8 @@ export class Referencia{
     parentesco: any;
     imputado: any;
     extranjero: boolean;
-
+    estado:any
+    lada:any;
 
 
 
