@@ -26,9 +26,25 @@ export class ComiteTecnicoService {
   getImputadoByFolioPsicologia = folio => this.http.get(`${this.url}/api/listarImputadoPsicologia?folioImputado=${folio}`);
 
   getImputadoByFolioTrabajoSocial= folio => this.http.get(`${this.url}/api/listarImputadoTrabajoSocial?folioImputado=${folio}`);
+
+  getImputadoByFolioPedagogia= folio => this.http.get(`${this.url}/api/listarImputadoPedagogia?folioImputado=${folio}`);
+
   saveFichaPsicologica = model => {
     console.log('To server.savePlandeActividades', model);
     return this.http.post(`${this.url}/api/registrarFicha`, model);
   };
+
+  saveAntecedente=model=>{
+    console.log('To server.saveAntecedente', model);
+    return this.http.post(`${this.url}/api/registrarAntecedentesConsumo`, model);
+  }
+
+  deleteAntecedente = id => this.http.delete(`${this.url}/api/eliminarAntecedentesConsumo?idAntecedente=${id}`);
+
+  saveGrupoCanaliza= model=>{
+    console.log('To server.grupoCanaliza', model);
+    return this.http.post(`${this.url}/api/registrarGrupoCanaliza`, model);
+  }
+
 
 }

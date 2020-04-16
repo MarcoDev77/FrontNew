@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComiteTecnicoService } from '@shared/services/comite-tecnico.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-psicologia',
@@ -32,6 +33,13 @@ export class PsicologiaComponent implements OnInit {
     }
     this.comiteTecnicoService.saveFichaPsicologica(this.generalidadesPPL).subscribe((data:any)=>{
       console.log(data)
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
     })
   }
   

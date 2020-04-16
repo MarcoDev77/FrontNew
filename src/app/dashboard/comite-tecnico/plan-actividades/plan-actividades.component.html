@@ -5,54 +5,67 @@
     </div> -->
     <div class="col-md-8"></div>
     <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Folio:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Folio" />
-        </div>
+        <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span (click)="searchImputado()" class="input-group-text"><i
+                            class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
+                </div>
+                <input name="folio" required [(ngModel)]="generalidadesPPL.folio" type="text"
+                    class="form-control pull-right mr-2" placeholder="Buscar por Folio">
+            </div>
+        </form>
     </div>
     <div class="col-md-8">
         <div class="form-group">
             <label for="">Persona privada de su libertad:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Persona privada de su libertad" />
+            <input type="text" class="form-control" name="nombre" [(ngModel)]="generalidadesPPL.nombre" disabled />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Dormitorio:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Dormitorio" />
+            <input type="text" class="form-control" name="dormitorio" [(ngModel)]="generalidadesPPL.dormitorio"
+                disabled />
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Fecha de nacimiento:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="fecha de nacimiento" />
+            <input type="date" class="form-control" [ngModel]="generalidadesPPL.fechaNacimiento | date:'yyyy-MM-dd'"
+                (ngModelChange)="generalidadesPPL.fechaNacimiento = $event" disabled />
         </div>
     </div>
 
     <div class="col-md-8">
         <div class="form-group">
             <label for="">Escolaridad:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Escolaridad" />
+            <input type="text" class="form-control" name="escolaridad" [(ngModel)]="generalidadesPPL.escolaridad"
+                disabled />
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Fecha de ingreso:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Fecha de ingreso" />
+            <input type="date" class="form-control" name="fechaIngreso" #fechaIngreso="ngModel"
+                [ngModel]="generalidadesPPL.fechaIngreso | date:'yyyy-MM-dd'"
+                (ngModelChange)="generalidadesPPL.fechaIngreso = $event" disabled />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Delito:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Delito" />
+            <input type="text" class="form-control" name="listaDelitos" [(ngModel)]="generalidadesPPL.listaDelitos"
+                disabled />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Sentencia:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Sentencia" />
+            <input type="text" class="form-control" name="sentencia" [(ngModel)]="generalidadesPPL.sentencia"
+                disabled />
         </div>
     </div>
 </div>
@@ -60,76 +73,123 @@
 <app-section-title icon="fa fa-tablets" title="ANTECEDENTES DE CONSUMO"></app-section-title>
 <div class="row">
     <div class="col text-right mb-3">
-        <button class="btn btn-success btn-sm m-0 pull-right" [ngbTooltip]="'Nuevo Registro'"><i
-      class="fa fa-plus fa-lg"></i></button>
-
-
-
-
+        <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
+                class="fa fa-plus fa-lg"></i></button>
     </div>
 </div>
 <div class="table-responsive">
+
+
     <table class="table">
         <thead>
             <tr>
-                <th class="text-center">
+                <th (click)="sort('sustanciaConsumia')" class="text-center">
+                    <span *ngIf="key == 'sustanciaConsumia'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
                     Sustancia que consumia
                 </th>
-                <th class="text-center">
+                <th (click)="sort('edadInicio')" class="text-center">
+                    <span *ngIf="key == 'edadInicio'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
                     Edad de inicio
                 </th>
-                <th class="text-center">
+                <th (click)="sort('frecuenciaConsumo')" class="text-center">
+                    <span *ngIf="key == 'frecuenciaConsumo'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
                     Frecuencia de consumo
                 </th>
-                <th class="text-center">
+                <th (click)="sort('gradoConsumo')" class="text-center">
+                <span *ngIf="key == 'gradoConsumo'" class="fa"
+                    [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
                     Grado de consumo
+                </th>
+                <th class="text-center">
+                    Acciones
                 </th>
 
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="text-center"></td>
-                <td class="text-center"> </td>
-
-                <td class="text-center"></td>
-                <td class="text-center"></td>
+            <tr id="table-form" *ngIf="isForm">
+                <td class="text-center">
+                    <input name="sustanciaConsumia" type="text" class="form-control"
+                        [(ngModel)]="antecedente.sustanciaConsumia" placeholder="Sustancia que consumia"
+                        #sustanciaConsumia="ngModel"
+                        [ngClass]="{ 'is-invalid':  sustanciaConsumia.touched && sustanciaConsumia.invalid }"
+                        maxlength="45" required>
+                </td>
+                <td class="text-center">
+                    <input name="edadInicio" type="text" class="form-control" [(ngModel)]="antecedente.edadInicio"
+                        placeholder="Edad de inicio" #edadInicio="ngModel"
+                        [ngClass]="{ 'is-invalid':  edadInicio.touched && edadInicio.invalid }" maxlength="45" required>
+                </td>
+                <td class="text-center">
+                    <input name="frecuenciaConsumo" type="text" class="form-control"
+                        [(ngModel)]="antecedente.frecuenciaConsumo" placeholder="Frecuencia de consumo"
+                        #frecuenciaConsumo="ngModel"
+                        [ngClass]="{ 'is-invalid':  frecuenciaConsumo.touched && frecuenciaConsumo.invalid }" required>
+                </td>
+                <td class="text-center">
+                    <input name="gradoConsumo" type="text" class="form-control"
+                        [(ngModel)]="antecedente.gradoConsumo" placeholder="Grado de consumo"
+                        #gradoConsumo="ngModel"
+                        [ngClass]="{ 'is-invalid':  gradoConsumo.touched && gradoConsumo.invalid }" required>
+                </td>
+                <td>
+                    <i class="fa fa-times mr-3" placement="top" ngbTooltip="Cancelar" (click)="cancel()"></i>
+                    <i class="fa fa-check" placement="top" ngbTooltip="Guardar"
+                        (click)="saveAntecedente([sustanciaConsumia])"></i>
+                </td>
+            </tr>
+            <tr id="{{'tr' + i}}"
+                *ngFor="let item of antecedentes | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+                (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+                <td class="text-center">{{item.sustanciaConsumia}}</td>
+                <td class="text-center">{{item.edadInicio}}</td>
+                <td class="text-center">{{item.frecuenciaConsumo}}</td>
+                <td class="text-center">{{item.gradoConsumo}}</td>
+                <td class="text-center">
+                    <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar"
+                        (click)="updateAntecedente('tr' + i , item)"></i> &nbsp;
+                    <i class="fa fa-trash" placement="top" ngbTooltip="Eliminar"
+                        (click)="deleteAntecedente(item)"></i>
+                </td>
 
             </tr>
 
-            <tr *ngIf="data.length == 0">
+            <tr *ngIf="antecedentes.length == 0">
                 <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
             </tr>
         </tbody>
     </table>
     <div class="text-center w-100">
-        <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
+        <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel=""
+            (pageChange)="switch($event)">
         </pagination-controls>
     </div>
 </div>
-
+<form name="grupo" (ngSubmit)="saveGrupo()" #grupo="ngForm" novalidate>
 <div class="row">
     <div class="col-md-6">
-
         <div class="col-md-12 text-center">
             <h6>Canalización</h6>
         </div>
         <div class="col-md-12">
             <div class="form-group">
                 <label for="">Grupo:</label>
-                <input type="text" class="form-control" name="duenoMedio" placeholder="Grupo" />
+                <input type="text" class="form-control" name="grupo" [(ngModel)]="grupoCanaliza.grupo" />
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
                 <label for="">Área:</label>
-                <input type="text" class="form-control" name="duenoMedio" placeholder="Área" />
+                <input type="text" class="form-control" name="area" [(ngModel)]="grupoCanaliza.area"/>
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
-                <label for="">Alias:</label>
-                <input type="text" class="form-control" name="duenoMedio" placeholder="Alias" />
+                <label for="">Días:</label>
+                <input type="text" class="form-control" name="dias" [(ngModel)]="grupoCanaliza.dias"/>
             </div>
         </div>
     </div>
@@ -139,16 +199,15 @@
         </div>
         <div class="col-md-12">
             <div class="form-group">
-                <textarea class=" form-control" cols="100" placeholder="Observaciones" rows="9" value=""></textarea>
+                <textarea class="form-control" cols="100"  rows="9" value=""  name="observaciones"[(ngModel)]="grupoCanaliza.observaciones"></textarea>
             </div>
-
-
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-sm-12 text-center text-sm-right">
-        <button type="button" class="btn btn-success mr-3">Guardar</button>
-        <button type="submit" class="btn btn-success mr-3">Imprimir</button>
+        <button type="submit" class="btn btn-success mr-3" [disabled]="!generalidadesPPL.imputadoId">Guardar</button>
+        <button type="button" class="btn btn-success mr-3" [disabled]="!generalidadesPPL.imputadoId">Imprimir</button>
     </div>
 </div>
+</form>
