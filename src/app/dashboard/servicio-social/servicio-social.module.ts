@@ -7,11 +7,13 @@ import { ServicioSocialRoutingModule } from './servicio.social.routing.module';
 import {SharedModule} from '@shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {RegistroVisitaComponent} from './registro-visita/registro-visita.component';
+import { RedesFamiliaresComponent } from './redes-familiares/redes-familiares.component';
 
 
 
 @NgModule({
-  declarations: [PaseUnicoComponent, PaseMensualComponent, RootComponent, RegistroVisitaComponent],
+  declarations: [PaseUnicoComponent, PaseMensualComponent, RootComponent, RegistroVisitaComponent,
+  RedesFamiliaresComponent],
   imports: [
     CommonModule,
     SharedModule,

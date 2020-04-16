@@ -164,7 +164,8 @@ export class DelitoComponent implements OnInit {
     }
   }
 
-  toggleStatus(item: CentroPenitenciario) {
+  toggleStatus(item: any) {
+    console.log('delito', item);
     Swal.fire({
       title: '¿Estas seguro?',
       text: 'El estatus del registro cambiará.',
@@ -174,7 +175,7 @@ export class DelitoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then(({value}) => {
       if (value) {
-        this.catalogosService.deleteDelito(item.id).subscribe((data: any) => {
+        this.catalogosService.deleteDelito(item.idTipoDelito).subscribe((data: any) => {
           console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',

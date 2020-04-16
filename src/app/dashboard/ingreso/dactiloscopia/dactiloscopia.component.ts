@@ -23,6 +23,7 @@ export class DactiloscopiaComponent implements OnInit {
   public ingreso: Ingreso;
   public huella: TipoImagenDactilocopia;
   public isLoading: boolean;
+  public isLoadingData: boolean;
   public datosDactiloscopia: any;
   // Uploader
   public url: string;
@@ -42,6 +43,7 @@ export class DactiloscopiaComponent implements OnInit {
     if (ingreso) {
       this.ingreso = ingreso;
     }
+    this.isLoadingData = true;
     this.isLoadingImages = true;
     this.uriNoImage = 'no_image';
     this.isLoadingDactiloscopia = true;
@@ -63,19 +65,29 @@ export class DactiloscopiaComponent implements OnInit {
   }
 
   getData(id) {
+    this.isLoadingData = true;
     this.ingresoService.getIngreso(id).subscribe((data: any) => {
       this.ingreso = data.ingreso;
       this.ingreso.imputado.mainName = this.ingreso.imputado.apodos.find(item => item.principal);
       console.log('INGRESO', this.ingreso);
+      // this.isLoadingData = false;
+      // El que pone la variable 'this.isLoadingData' es el metodo 'getDactiloscopia'
+    }, error => {
+      console.log(error);
     });
   }
 
   getDactiloscopia() {
+    this.isLoadingData = true;
     this.ingresoService.getDactiloscopia(this.ingreso.id).subscribe((data: any) => {
       console.log('info', data);
       const {dactiloscopia} = data;
       dactiloscopia.huellasDactilares.forEach(item => this.setParameters(item));
       dactiloscopia.fotografias.forEach(item => this.setParameters(item));
+      this.isLoadingData = false;
+    }, error => {
+      console.log(error);
+      this.isLoadingData = false;
     });
   }
 

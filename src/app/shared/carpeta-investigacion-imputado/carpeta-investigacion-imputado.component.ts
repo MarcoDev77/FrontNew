@@ -82,8 +82,9 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
 
   seeDelitosCarpeta(item: any,modal) {
     this.carpeta=item
-    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
     this.getDelitos()
+
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
 
   }
 
@@ -262,6 +263,9 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
     this.ingresoService.listDelitosByCarpetaInvestigacion(this.carpeta.id).subscribe((data: any) => {
       if (data.listaDelitos) {
         this.delitosData = data.listaDelitos
+      }else{
+        this.delitosData= []
+
       }
     })
 
@@ -277,5 +281,6 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
       console.log(this.delito)
     }
 
-
+    viewHistory(modal?){}
+    
 }

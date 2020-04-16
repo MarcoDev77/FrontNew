@@ -28,7 +28,6 @@ export class RecursosProbatoriosComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private ingresoService: IngresoService) {
     this.recurso = {} as RecursoProbatorio;
-    this.initForm();
     // Table
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
@@ -37,6 +36,7 @@ export class RecursosProbatoriosComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
+    this.initForm();
   }
 
   getData() {
@@ -49,7 +49,11 @@ export class RecursosProbatoriosComponent implements OnInit {
   }
 
   update(item) {
-    console.log('update', item);
+    this.recurso = {...item};
+    console.log('ee', this.recurso);
+    this.recurso.causaPenal = null;
+    this.formGroup.setValue({...this.recurso});
+    this.toggleForm();
   }
 
   delete(item) {
@@ -108,41 +112,33 @@ export class RecursosProbatoriosComponent implements OnInit {
 
   initForm() {
     this.formGroup = this.formBuilder.group({
-      id: [
-        this.recurso.id,
-      ],
+      id: [null],
+      fechaRegistro: [null],
+      estaAgotado: [false],
+      causaPenal: [null],
       nombre: [
-        this.recurso.nombre,
+        '',
         [Validators.required, Validators.maxLength(80)]
       ],
       juzgadoProcedencia: [
-        this.recurso.juzgadoProcedencia,
+        '',
         [Validators.required, Validators.maxLength(255)]
       ],
       penalidadAnio: [
-        this.recurso.penalidadAnio,
+        '',
         [Validators.required, Validators.min(0), Validators.pattern('^[0-9]*$'), Validators.max(100)]
       ],
       penalidadMes: [
-        this.recurso.penalidadMes,
+        '',
         [Validators.required, Validators.min(0), Validators.pattern('^[0-9]*$'), Validators.max(11)]
       ],
       penalidadDia: [
-        this.recurso.penalidadDia,
-        [Validators.required, Validators.min(0), Validators.pattern('^[0-9]*$')], Validators.max(30)
+        '',
+        [Validators.required, Validators.min(0), Validators.pattern('^[0-9]*$'), Validators.max(30)],
       ],
-      observaciones: [
-        this.recurso.observaciones,
-        [Validators.required]
-      ],
-      multa: [
-        this.recurso.multa,
-        [Validators.required]
-      ],
-      reparacion: [
-        this.recurso.reparación,
-        [Validators.required]
-      ],
+      observaciones: ['', [Validators.required]],
+      multa: ['', [Validators.required]],
+      reparacion: ['', [Validators.required]],
     });
   }
 
@@ -163,13 +159,22 @@ export class RecursosProbatoriosComponent implements OnInit {
 
   toggleForm() {
     this.isForm = !this.isForm;
+    if (!this.isForm) {
+      this.resetForm();
+    }
+  }
+
+  resetForm() {
+    console.log('resetedform');
+    this.recurso = new RecursoProbatorio();
+    console.log('ddd', this.recurso);
+    this.formGroup.setValue(this.recurso);
   }
 
   submit() {
     if (this.formGroup.invalid) {
       return;
     }
-    console.log(this.formGroup.value, this.recurso);
     this.recurso = {...this.formGroup.value, causaPenal: {id: this.causaPenal.id}};
     this.ingresoService.saveRecurso(this.recurso).subscribe((data: any) => {
       console.log('Data', data);
@@ -181,6 +186,7 @@ export class RecursosProbatoriosComponent implements OnInit {
         showConfirmButton: false
       }).then(() => {
         this.getData();
+        this.resetForm();
         this.toggleForm();
       });
     });

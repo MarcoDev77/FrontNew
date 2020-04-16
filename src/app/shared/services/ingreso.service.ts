@@ -159,9 +159,10 @@ export class IngresoService {
     this.data = model;
     return this.http.post(`${this.url}/api/registrarCarpetaInvestigacion`, this.data);
   }
+
   deleteCarpetaInvestigacion = carpetaId => {
     console.log('carpetaId', carpetaId);
-    return this.http.delete(`${this.url}/api/eliminarCarpetaInvestigacion?carpetaId=${carpetaId}`);
+    return this.http.delete(`${this.url}/api/bajaLogicaCarpetaInvestigacion?id=${carpetaId}`);
   }
 
   listCausaPenal = id => this.http.get(`${this.url}/api/listarCausaPenalPorImputado?personaIngresadaId=${id}`);
@@ -189,6 +190,24 @@ export class IngresoService {
 
   deleteReferencia(id){
     return this.http.delete(`${this.url}/api/eliminarReferenciaPersonal?idReferencia=${id}`);
+  }
+
+  getTipoProceso = () => this.http.get(`${this.url}/api/listaTipoProceso`);
+
+  filterBusquedaListaIngresos = (filter, criteria) =>
+    this.http.get(`${this.url}/api/busquedaConfiltro?filtro=${filter}&criterio=${criteria}`);
+
+
+  getParentescos = () => this.http.get(`${this.url}/api/listarParentescos`);
+
+  savePaseProvisional = (model) => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.post(`${this.url}/api/registrarPaseProvisional`, model, {responseType});
+  }
+
+  generatePDFControlVisitas  = (id) => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfHojaControlVisita?imputadoId=${id}`, {responseType});
   }
 
 }

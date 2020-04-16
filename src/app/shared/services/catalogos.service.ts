@@ -100,7 +100,7 @@ export class CatalogosService {
   }
 
   saveDelito(model: Delito) {
-    model.id = model.id ? model.id : null;
+    model.idTipoDelito = model.idTipoDelito ? model.idTipoDelito : null;
     model.estatus = model.estatus ? model.estatus : true;
     this.data = model;
     console.log('To server', this.data);
@@ -230,7 +230,7 @@ export class CatalogosService {
     let personal ={...model}
     personal.user ={...model.user}
     personal.user.roles=[{id: personal.user.roles.value}];
-   
+
     return this.http.post(`${this.url}/api/registrarPersonal`, personal);
   }
 
