@@ -1,238 +1,244 @@
 <app-section-title icon="fa fa-male" title="Datos referencia"></app-section-title>
 <div class="row">
-    <div class="col text-right mb-3">
-        <button class="btn btn-success btn-sm m-0 pull-right" (click)="showModal(addModal)"
+  <div class="col text-right mb-3">
+    <button class="btn btn-success btn-sm m-0 pull-right" (click)="showModal(addModal)"
             [ngbTooltip]="'Nuevo Registro'"><i class="fa fa-plus fa-lg"></i></button>
-    </div>
+  </div>
 </div>
 <div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="text-center">
-                    Nombre Completo
-                </th>
-                <th class="text-center">
-                    Parentesco
-                </th>
+  <table class="table">
+    <thead>
+    <tr>
+      <th class="text-center">
+        Nombre Completo
+      </th>
+      <th class="text-center">
+        Parentesco
+      </th>
 
-                <th class="text-center" style="min-width: 5rem">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of data">
-                <td class="text-center">{{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</td>
-                <td class="text-center">{{item.parentesco.nombre}}</td>
-                <td class="text-center">
-                    <i class="fa fa-eye" placement="top" ngbTooltip="Consultar detalles"
-                        (click)="showModal(addModal,item)"></i> &nbsp;
-                        <i  class="fa fa-times" (click)="deleteReferencia(item.id)" placement="top" ngbTooltip="Elminar referencia"></i>
-                  &nbsp;
-                  <i class="fa fa-id-card-o" placement="top" ngbTooltip="Generar pase único"
-                     (click)="generatePaseUnico(item, view)"></i> &nbsp;
+      <th class="text-center" style="min-width: 5rem">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of data">
+      <td class="text-center">{{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</td>
+      <td class="text-center">{{item.parentesco.nombre}}</td>
+      <td class="text-center">
+        <i class="fa fa-eye" placement="top" ngbTooltip="Consultar detalles"
+           (click)="showModal(addModal,item)"></i> &nbsp;
+        <i class="fa fa-times" (click)="deleteReferencia(item.id)" placement="top" ngbTooltip="Elminar referencia"></i>
+        &nbsp;
+        <i *ngIf="item.estaVivo" class="fa fa-id-card-o" placement="top" ngbTooltip="Generar pase único"
+           (click)="generatePaseUnico(item, view)"></i> &nbsp;
+        <i *ngIf="item.estaVivo && item.esMayorEdad" class="fa fa-id-card" placement="top" ngbTooltip="Generar pase mensual"
+           (click)="generatePaseMensual(item, view)"></i>
 
-                </td>
-            </tr>
+      </td>
+    </tr>
 
-            <tr *ngIf="data.length == 0">
-                <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="text-center w-100">
-        <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel=""
-            (pageChange)="switch($event)">
-        </pagination-controls>
-    </div>
+    <tr *ngIf="data.length == 0">
+      <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="text-center w-100">
+    <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel=""
+                         (pageChange)="switch($event)">
+    </pagination-controls>
+  </div>
 </div>
 
 
 <ng-template #addModal let-add>
-    <div class="modal-body">
-        <div class="col-md-12 text-center">
-            <h3>Referencia</h3>
+  <div class="modal-body">
+    <div class="col-md-12 text-center">
+      <h3>Referencia</h3>
+    </div>
+
+    <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && saveReferencia()" #f="ngForm" novalidate>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Apellido paterno:</label>
+            <input type="text" class="form-control" name="apellidoPaterno"
+                   #apellidoPaterno="ngModel"
+                   [ngClass]="{ 'is-invalid': f.submitted && apellidoPaterno.invalid}"
+                   [(ngModel)]="referencia.apellidoPaterno" required>
+          </div>
         </div>
 
-        <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && saveReferencia()" #f="ngForm" novalidate>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Apellido paterno:</label>
-                        <input type="text" class="form-control" name="apellidoPaterno"
-                            #apellidoPaterno="ngModel"
-                            [ngClass]="{ 'is-invalid': f.submitted && apellidoPaterno.invalid}"
-                            [(ngModel)]="referencia.apellidoPaterno" required>
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Apellido materno:</label>
+            <input type="text" class="form-control" name="apellidoMaterno"
+                   #apellidoMaterno="ngModel"
+                   [ngClass]="{ 'is-invalid': f.submitted && apellidoMaterno.invalid}"
+                   [(ngModel)]="referencia.apellidoMaterno" required>
+          </div>
+        </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Apellido materno:</label>
-                        <input type="text" class="form-control" name="apellidoMaterno"
-                            #apellidoMaterno="ngModel"
-                            [ngClass]="{ 'is-invalid': f.submitted && apellidoMaterno.invalid}"
-                            [(ngModel)]="referencia.apellidoMaterno" required>
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Nombre:</label>
+            <input type="text" class="form-control" name="nombre" #nombre="ngModel"
+                   [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid}" [(ngModel)]="referencia.nombre"
+                   required>
+          </div>
+        </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Nombre:</label>
-                        <input type="text" class="form-control" name="nombre" #nombre="ngModel"
-                            [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid}" [(ngModel)]="referencia.nombre"
-                            required>
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Genero:</label>
+            <select class="form-control" name="genero" #genero="ngModel" [(ngModel)]="referencia.genero">
+              <option [value]="undefined" disabled hidden>Seleccione genero</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Genero:</label>
-                        <select class="form-control" name="genero" #genero="ngModel" [(ngModel)]="referencia.genero">
-                            <option [value]="undefined" disabled hidden>Seleccione genero</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
+            </select>
+          </div>
+        </div>
 
-                        </select>
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Parentesco:</label>
+            <!--   <input  type="text" class="form-control" name="parentesco" #parentesco="ngModel"
+              [(ngModel)]="referencia.parentesco"> -->
+            <select class="form-control shadows" name="parentesco" [(ngModel)]="referencia.parentesco.id">
+              <option *ngFor="let item of parentescos" [value]="item.id"> {{item.nombre}}</option>
+            </select>
+          </div>
+        </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Parentesco:</label>
-                      <!--   <input  type="text" class="form-control" name="parentesco" #parentesco="ngModel"
-                        [(ngModel)]="referencia.parentesco"> -->
-                            <select  class="form-control shadows" name="parentesco" [(ngModel)]="referencia.parentesco.id">
-                                <option  *ngFor="let item of parentescos" [value]="item.id"> {{item.nombre}}</option>
-                            </select>
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Ocupación:</label>
+            <input type="text" class="form-control" name="ocupacion" #ocupacion="ngModel"
+                   [(ngModel)]="referencia.ocupacion">
+          </div>
+        </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Ocupación:</label>
-                        <input  type="text" class="form-control" name="ocupacion" #ocupacion="ngModel"
-                        [(ngModel)]="referencia.ocupacion">
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Teléfono:</label>
+            <input type="tel" class="form-control" name="telefono"
+                   #telefono="ngModel" [(ngModel)]="referencia.telefono" maxlength="10" pattern='^[0-9]*$'>
+          </div>
+        </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Teléfono:</label>
-                        <input  type="tel" class="form-control" name="telefono"
-                            #telefono="ngModel" [(ngModel)]="referencia.telefono" maxlength="10" pattern='^[0-9]*$'>
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">País de nacimiento:</label>
+            <input type="text" class="form-control" [(ngModel)]="referencia.paisNacimiento"
+                   (focus)="selectArrayTofilter(paises)" [ngbTypeahead]="search" [resultTemplate]="rt"
+                   [inputFormatter]="formatter" name="paisNacimiento"/>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">País de nacimiento:</label>
-                        <input type="text" class="form-control" [(ngModel)]="referencia.paisNacimiento" (focus)="selectArrayTofilter(paises)"  [ngbTypeahead]="search"  [resultTemplate]="rt" [inputFormatter]="formatter" name="paisNacimiento"/>
-
-                    </div>
-                </div>
+          </div>
+        </div>
 
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Situación actual:</label>
-                        <select class="form-control" name="estaVivo" #estaVivo="ngModel"
-                            [(ngModel)]="referencia.estaVivo">
-                            <option [value]="undefined" disabled hidden>Seleccione situación actual</option>
-                            <option [ngValue]="true">Vivo </option>
-                            <option [ngValue]="false">Finado</option>
-                        </select>
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Situación actual:</label>
+            <select class="form-control" name="estaVivo" #estaVivo="ngModel"
+                    [(ngModel)]="referencia.estaVivo">
+              <option [value]="undefined" disabled hidden>Seleccione situación actual</option>
+              <option [ngValue]="true">Vivo</option>
+              <option [ngValue]="false">Finado</option>
+            </select>
+          </div>
+        </div>
 
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Calle y número:</label>
-                        <input  type="text" class="form-control" name="calleNumero"
-                            #calleNumero="ngModel" [(ngModel)]="referencia.calleNumero">
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Calle y número:</label>
+            <input type="text" class="form-control" name="calleNumero"
+                   #calleNumero="ngModel" [(ngModel)]="referencia.calleNumero">
+          </div>
+        </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Colonia:</label>
-                        <input  type="text" class="form-control" name="colonia" #colonia="ngModel"
-                            [(ngModel)]="referencia.colonia">
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Colonia:</label>
+            <input type="text" class="form-control" name="colonia" #colonia="ngModel"
+                   [(ngModel)]="referencia.colonia">
+          </div>
+        </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Codigo postal:</label>
-                        <input  type="text" class="form-control" name="codigoPostal" maxlength="5"
-                            #codigoPostal="ngModel" [(ngModel)]="referencia.codigoPostal" pattern='^[0-9]*$'>
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Codigo postal:</label>
+            <input type="text" class="form-control" name="codigoPostal" maxlength="5"
+                   #codigoPostal="ngModel" [(ngModel)]="referencia.codigoPostal" pattern='^[0-9]*$'>
+          </div>
+        </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Entidad federativa:</label>
-                        <input type="text" class="form-control" [(ngModel)]="referencia.estado" [ngbTypeahead]="search" (focus)="selectArrayTofilter(estados)" [resultTemplate]="rt" [inputFormatter]="formatter" name="estado" />
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Entidad federativa:</label>
+            <input type="text" class="form-control" [(ngModel)]="referencia.estado" [ngbTypeahead]="search"
+                   (focus)="selectArrayTofilter(estados)" [resultTemplate]="rt" [inputFormatter]="formatter"
+                   name="estado"/>
 
-                    </div>
-                </div>
+          </div>
+        </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Municipio o delegación:</label>
-                        <input  type="text"
-                            class="form-control" name="municipio"
-                            #municipio="ngModel" [(ngModel)]="referencia.municipio">
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">Personas dependientes de el/ella:</label>
-                        <input type="number" min="0"
-                            class="form-control" name="numeroDependientes"
-                            #numeroDependientes="ngModel" [(ngModel)]="referencia.numeroDependientes">
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="custom-control custom-checkbox mt-4">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1"
-                        name="extranjero"
-                        [(ngModel)]="referencia.extranjero">
-                        <label class="custom-control-label" for="customCheck1">¿Esta en el extranjero?</label>
-                    </div>
-                </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Municipio o delegación:</label>
+            <input type="text"
+                   class="form-control" name="municipio"
+                   #municipio="ngModel" [(ngModel)]="referencia.municipio">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Personas dependientes de el/ella:</label>
+            <input type="number" min="0"
+                   class="form-control" name="numeroDependientes"
+                   #numeroDependientes="ngModel" [(ngModel)]="referencia.numeroDependientes">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="custom-control custom-checkbox mt-4">
+            <input type="checkbox" class="custom-control-input" id="customCheck1"
+                   name="extranjero"
+                   [(ngModel)]="referencia.extranjero">
+            <label class="custom-control-label" for="customCheck1">¿Esta en el extranjero?</label>
+          </div>
+        </div>
 
-              <div class="col-sm-4">
-                <div class="custom-control custom-checkbox mt-4">
-                  <input type="checkbox" class="custom-control-input" id="mayorEdad"
-                         name="mayorEdad"
-                         [(ngModel)]="referencia.esMayorEdad">
-                  <label class="custom-control-label" for="mayorEdad">¿Es mayor de edad?</label>
-                </div>
-              </div>
+        <div class="col-sm-4">
+          <div class="custom-control custom-checkbox mt-4">
+            <input type="checkbox" class="custom-control-input" id="mayorEdad"
+                   name="mayorEdad"
+                   [(ngModel)]="referencia.esMayorEdad">
+            <label class="custom-control-label" for="mayorEdad">¿Es mayor de edad?</label>
+          </div>
+        </div>
 
-                <div  class="form-group ml-4" *ngIf="referencia.extranjero" >
-                    <label for="">Lada internacional:</label>
-                    <input  type="tel" class="form-control" name="lada"
-                        #lada="ngModel" [(ngModel)]="referencia.lada" maxlength="3" pattern='^[0-9]*$'>
-                </div>
+        <div class="form-group ml-4" *ngIf="referencia.extranjero">
+          <label for="">Lada internacional:</label>
+          <input type="tel" class="form-control" name="lada"
+                 #lada="ngModel" [(ngModel)]="referencia.lada" maxlength="3" pattern='^[0-9]*$'>
+        </div>
 
 
-            </div>
+      </div>
 
-            <div class="row">
-                <div class="col-sm-4 offset-8">
-                    <button type="submit" class="float-right btn btn-success">Guardar</button>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-sm-4 offset-8">
+          <button type="submit" class="float-right btn btn-success">Guardar</button>
+        </div>
+      </div>
 
-        </form>
-    </div>
+    </form>
+  </div>
 </ng-template>
 
 <ng-template #rt let-r="result" let-t="term">
 
-    <ngb-highlight [result]="r.nombre" [term]="t"></ngb-highlight>
+  <ngb-highlight [result]="r.nombre" [term]="t"></ngb-highlight>
 </ng-template>
 
 

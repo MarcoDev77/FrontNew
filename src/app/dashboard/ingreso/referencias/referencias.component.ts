@@ -7,7 +7,6 @@ import {Ingreso} from '@shared/models/Ingreso';
 import {Referencia} from '@shared/models/Referencia';
 import {Observable} from 'rxjs';
 import Swal from 'sweetalert2';
-
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -256,5 +255,96 @@ export class ReferenciasComponent implements OnInit {
       });
       this.modalService.dismissAll();
     };
+  }
+
+  async generatePaseMensual(item: Referencia, modal) {
+    if (!item.esMayorEdad || !item.estaVivo) {
+      return;
+    }
+
+    let infantes = [];
+
+    const childs = await Swal.fire({
+      title: 'Ingresa el número de infantes',
+      input: 'select',
+      inputOptions: {
+        0: 'Sin infantes',
+        1: '1',
+        2: '2',
+        3: '3',
+        4: '4',
+        5: '5',
+      },
+      inputAttributes: {
+        required: 'required',
+      },
+      validationMessage: 'Ingresa el número de infantes',
+      inputPlaceholder: 'Número de infantes'
+    });
+
+    if (childs.dismiss) {
+      return;
+    }
+
+    if (childs.value !== '0') {
+      const progressSteps = [];
+      const steps = [];
+
+      for (let i = 0; i < Number(childs.value); i++) {
+        progressSteps.push([`${i + 1}`]);
+        steps.push({
+          title: `Nombre del infante ${i + 1}`,
+          input: 'text',
+          inputPlaceholder: 'Nombre',
+          validationMessage: 'Ingrese el nombre del infante',
+          inputAttributes: {
+            required: 'required'
+          },
+        });
+      }
+
+      const result = await Swal.mixin({
+        progressSteps,
+        input: 'text',
+        text: 'Complete los pasos',
+        inputPlaceholder: 'Ingrese el área',
+        validationMessage: 'Ingrese el área',
+        inputAttributes: {
+          required: 'required'
+        },
+        confirmButtonText: 'Siguiente &rarr;',
+        showCancelButton: true,
+      }).queue(steps);
+
+      if (result.dismiss) {
+        return;
+      }
+      infantes = result.value;
+    }
+
+    const model = {
+      tipoPase: 'mensual',
+      nombreVisitante: `${item.nombre} ${item.apellidoPaterno} ${item.apellidoMaterno}`,
+      parentesco: item.parentesco,
+      imputado: this.ingreso,
+      menores: this.mapChilds(infantes),
+    };
+
+    this.ingresoService.savePaseProvisional(model).subscribe((data: any) => {
+      this.showPreview(data, modal);
+    }, error => {
+      console.log(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al generar el archivo',
+        icon: 'error',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    });
+  }
+
+  mapChilds(array) {
+    return array.map(child => ({nombre: child}));
   }
 }
