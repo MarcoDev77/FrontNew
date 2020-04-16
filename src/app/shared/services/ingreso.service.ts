@@ -205,6 +205,11 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/registrarPaseProvisional`, model, {responseType});
   }
 
+  generatePDFControlVisitas  = (id) => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfHojaControlVisita?imputadoId=${id}`, {responseType});
+  }
+
 }
 
 
