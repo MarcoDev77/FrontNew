@@ -347,4 +347,10 @@ export class ReferenciasComponent implements OnInit {
   mapChilds(array) {
     return array.map(child => ({nombre: child}));
   }
+
+  generateControlVisitas(modal) {
+    this.ingresoService.generatePDFControlVisitas(this.ingreso.id).subscribe((data: any) => {
+      this.showPreview(data, modal);
+    });
+  }
 }
