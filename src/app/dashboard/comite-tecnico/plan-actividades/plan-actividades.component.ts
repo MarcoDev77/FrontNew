@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ComiteTecnicoService } from '@shared/services/comite-tecnico.service';
 import Swal from 'sweetalert2';
 import { Imputado } from '@shared/models/Imputado';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-plan-actividades',
@@ -9,11 +10,12 @@ import { Imputado } from '@shared/models/Imputado';
   styleUrls: ['./plan-actividades.component.scss']
 })
 export class PlanActividadesComponent implements OnInit {
-  public isLoading: false;
+  public isLoading: boolean;
   public generalidadesPPL: GeneralidadesPPL;
   public antecedentes : any[];
   public antecedente: Antecedente;
   public grupoCanaliza: GrupoCanaliza;
+  public file:any
 
     // Table attributes
     public p;
@@ -24,7 +26,7 @@ export class PlanActividadesComponent implements OnInit {
     public selectedRow: Number;
     public setClickedRow: (i) => void;
     public auxId: any;
-  constructor(private comiteTecnicoService: ComiteTecnicoService) {
+  constructor(private comiteTecnicoService: ComiteTecnicoService, private modalService: NgbModal) {
     this.generalidadesPPL= {} as any;
     this.generalidadesPPL.estadoCivil= {} as any;
     this.antecedente= {} as any
@@ -42,9 +44,12 @@ export class PlanActividadesComponent implements OnInit {
   searchImputado(showMessage = true){
     this.comiteTecnicoService.getImputadoByFolioPedagogia(this.generalidadesPPL.folio).subscribe((data:any)=>{
       console.log(data);
-      this.generalidadesPPL=data.imputado;
-      this.antecedentes=data.imputado.antecedentesConsumo;
-      this.grupoCanaliza=data.imputado.grupoCanaliza;
+      if(!data.error){
+        this.generalidadesPPL=data.imputado;
+        this.antecedentes=data.imputado.antecedentesConsumo;
+        this.grupoCanaliza=data.imputado.grupoCanaliza;
+      }
+   
       if (showMessage) {
         Swal.fire({
           title: data.error ? 'Error!' : 'Busqueda',
@@ -208,6 +213,50 @@ export class PlanActividadesComponent implements OnInit {
     }
   }
 
+
+
+  generatePDF(modal) {
+    console.log('generatePDF');
+    this.comiteTecnicoService.generatePDFPlanActividades(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
+      console.log('PDF', data);
+      this.isLoading = false;
+      const file = new Blob([data], {type: 'application/*'});
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadstart = ev => this.isLoading = true;
+      reader.onloadend = () => {
+        this.isLoading = false;
+        let dataUrl: any;
+        dataUrl = reader.result;
+        const base64 = dataUrl.split(',')[1];
+        this.modalService.dismissAll();
+        if (base64) {
+          this.file = base64;
+          this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+        }
+      };
+      reader.onerror = () => {
+        this.isLoading = false;
+        Swal.fire({
+          title: 'Error',
+          text: 'Error al generar el archivo',
+          icon: 'error',
+          timer: 1500,
+          showConfirmButton: false
+        });
+        this.modalService.dismissAll();
+      };
+    }, error => {
+      console.log(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al generar el archivo',
+        icon: 'error',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    });
+  }
 }
 
 class GeneralidadesPPL {

@@ -79,4 +79,9 @@ export class ComiteTecnicoService {
     return this.http.get(`${this.url}/api/generarFormatoPdfHistoriaClinicaOdontologica?imputadoId=${id}`, {responseType});
   };
 
+
+  generatePDFPlanActividades = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadPedagogia?imputadoId=${id}`, {responseType});
+  };
 }
