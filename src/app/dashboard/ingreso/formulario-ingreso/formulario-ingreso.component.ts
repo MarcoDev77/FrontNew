@@ -219,7 +219,7 @@ export class FormularioIngresoComponent implements OnInit {
   searchNacionalidad = (text$: Observable<string>) => {
     return text$.pipe(
       map(term => term === '' ? []
-        : this.arrayToFilter.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+        : this.arrayToFilter.filter(v => v.nacionalidad.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     );
   };
   formatterNacionalidad = (x: { nacionalidad: string }) => x.nacionalidad;
