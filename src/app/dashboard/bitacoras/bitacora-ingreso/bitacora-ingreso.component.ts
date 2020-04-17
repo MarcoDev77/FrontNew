@@ -15,10 +15,13 @@ export class BitacoraIngresoComponent implements OnInit {
   public filter: any;
   public p: any;
   public isLoading = false;
+  public ingreso: any;
   constructor(
     private modalService: NgbModal,
     private bitacoraService: BitacoraService,
-  ) { }
+  ) { 
+    this.ingreso={} as any
+  }
 
   ngOnInit() {
     this.getData();
@@ -37,5 +40,10 @@ export class BitacoraIngresoComponent implements OnInit {
 
   openSearchModal(modal) {
     this.modalService.open(modal, {size: 'xl', windowClass: 'modal-primary mt-12'});
+  }
+
+  seeDetails(item){
+    console.log("seeDetails",item)
+    this.ingreso=item
   }
 }

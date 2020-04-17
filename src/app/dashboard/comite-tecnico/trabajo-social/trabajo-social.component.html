@@ -4,86 +4,98 @@
         <h3>Generales de la PPL</h3>
     </div>
     <div class="col-md-4">
-        <div class="form-group">
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Folio" />
-        </div>
+        <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span (click)="searchImputado()" class="input-group-text"><i
+                            class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
+                </div>
+                <input name="folio" required [(ngModel)]="generalidadesPPL.folio" type="text"
+                    class="form-control pull-right mr-2" placeholder="Buscar por Folio">
+            </div>
+        </form>
     </div>
+</div>
+<div class="row">
+
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Nombre de la PPL :</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Persona privada de su libertad" />
+            <input type="text" class="form-control" name="nombre"  [(ngModel)]="generalidadesPPL.nombre" disabled/>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Fecha de ingreso:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Fecha de ingreso" />
+            <input type="date" class="form-control" name="fechaIngreso"  #fechaIngreso="ngModel"
+            [ngModel]="generalidadesPPL.fechaIngreso | date:'yyyy-MM-dd'"
+            (ngModelChange)="generalidadesPPL.fechaIngreso = $event" disabled />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Edad:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Edad" />
+            <input type="text" class="form-control" name="edad" [(ngModel)]="generalidadesPPL.edad" disabled/>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Dormitorio:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Dormitorio" />
+            <input type="text" class="form-control" name="dormitorio" [(ngModel)]="generalidadesPPL.dormitorio" disabled />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Delito:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Delito" />
+            <input type="text" class="form-control" name="listaDelitos"  [(ngModel)]="generalidadesPPL.listaDelitos"  disabled/>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Sentencia:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Sentencia" />
+            <input type="text" class="form-control" name="sentencia"  [(ngModel)]="generalidadesPPL.sentencia" disabled/>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Estado civil:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Estado civil" />
+            <input type="text" class="form-control" name="estadoCivil" [(ngModel)]="generalidadesPPL.estadoCivil.nombre" disabled />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Programado en visita intima:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Programado en visita intima" />
+            <input type="text" class="form-control" name="duenoMedio"  />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Día:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Día" />
+            <input type="text" class="form-control" name="duenoMedio"  />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Horario:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Horario" />
+            <input type="text" class="form-control" name="duenoMedio"  />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Visita familia:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Visita familia" />
+            <input type="text" class="form-control" name="duenoMedio" />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Frecuencia:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Frecuencia" />
+            <input type="text" class="form-control" name="duenoMedio"  />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Parentesco:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Parentesco" />
+            <input type="text" class="form-control" name="duenoMedio"  />
         </div>
     </div>
 </div>
@@ -92,7 +104,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <label for="">Que actividad realiza al terminar la visita familiar:</label>
-            <textarea class=" form-control" cols="100" placeholder="Que actividad realiza al terminar la visita familiar" rows="9" value=""></textarea>
+            <textarea class=" form-control" cols="100"  rows="9" value=""></textarea>
         </div>
     </div>
 </div>
@@ -101,31 +113,31 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Taller asignado:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Taller asignado" />
+            <input type="text" class="form-control" name="duenoMedio" />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Día:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Día" />
+            <input type="text" class="form-control" name="duenoMedio" />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Horario:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Horario" />
+            <input type="text" class="form-control" name="duenoMedio" />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Fecha de inicio:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Fecha de inicio" />
+            <input type="text" class="form-control" name="duenoMedio"  />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Lugar:</label>
-            <input type="text" class="form-control" name="duenoMedio" placeholder="Lugar" />
+            <input type="text" class="form-control" name="duenoMedio"  />
         </div>
     </div>
 </div>
@@ -134,7 +146,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <label for="">Observaciones:</label>
-            <textarea class=" form-control" cols="100" placeholder="Observaciones" rows="9" value=""></textarea>
+            <textarea class=" form-control" cols="100"  rows="9" value=""></textarea>
         </div>
     </div>
 </div>

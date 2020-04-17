@@ -12,6 +12,7 @@ import { PsicologiaComponent } from './psicologia/psicologia.component';
 import { DeportesComponent } from './deportes/deportes.component';
 import { OdontologiaComponent } from './odontologia/odontologia.component';
 import { ResultadosExamenesComponent } from './resultados-examenes/resultados-examenes.component';
+import { ResolucionPruebasComponent } from './resolucion-pruebas/resolucion-pruebas.component';
 
 
 
@@ -21,7 +22,8 @@ import { ResultadosExamenesComponent } from './resultados-examenes/resultados-ex
     PsicologiaComponent,
     DeportesComponent,
     OdontologiaComponent,
-    ResultadosExamenesComponent],
+    ResultadosExamenesComponent,
+  ResolucionPruebasComponent],
   imports: [
     CommonModule,
     SharedModule,
