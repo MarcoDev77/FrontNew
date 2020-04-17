@@ -162,7 +162,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Genero:</label>
+                    <label>Género:</label>
                     <select ngbTooltip="Género" class="form-control shadows" name="genero" [(ngModel)]="ingreso.imputado.genero" #genero="ngModel" [ngClass]="{ 'is-invalid': f.submitted && genero.invalid}" required>
             <option [value]="undefined" disabled hidden>Género</option>
             <option value="Masculino">Masculino</option>
@@ -172,7 +172,7 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>Religion:</label>
+                    <label>Religión:</label>
                     <input type="text" class="form-control" [(ngModel)]="ingreso.imputado.religion" [ngbTypeahead]="search" (focus)="selectArrayTofilter(religiones)" [resultTemplate]="rt" [inputFormatter]="formatter" name="model" />
                 </div>
             </div>
@@ -338,7 +338,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label>Codigo postal:</label>
+                <label>Código postal:</label>
                 <input class="form-control" type="text" name="cp" pattern='^[0-9]*$' #cp="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cp.invalid}" maxlength="5" [(ngModel)]="ingreso.imputado.codigoPostal" />
             </div>
 
