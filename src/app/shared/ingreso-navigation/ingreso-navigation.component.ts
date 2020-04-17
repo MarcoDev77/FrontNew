@@ -26,7 +26,7 @@ export class IngresoNavigationComponent implements OnInit {
     this.steps = [
       {name: 'Formulario de ingreso', path: '/dashboard/ingreso/form-ingreso'},
       {name: 'Dactiloscopia', path: '/dashboard/ingreso/dactiloscopia'},
-      {name: 'Característica', path: '/dashboard/ingreso/caracteristicas'},
+      {name: 'Características', path: '/dashboard/ingreso/caracteristicas'},
       {name: 'Señas particulares', path: '/dashboard/ingreso/media-afiliacion'},
 
       // {name: 'Referencias'},

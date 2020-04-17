@@ -12,8 +12,8 @@
             </div>
         </div>
         <br>
-    
-      
+
+
         <div class="row" *ngIf="role == 'ARCHIVO'">
 
             <div class="col-md-4">
@@ -25,7 +25,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label >A partir de:</label>
-                    <input type="date" class="form-control"  name="apartirDe"  
+                    <input type="date" class="form-control"  name="apartirDe"
                     #apartirDe="ngModel"
                     [(ngModel)] ="causaPenal.apartirDe" (change)="change($event)"/>
                     <!--<input type="date" class="form-control" placeholder="Fecha de consignación" name="fechaConsignacion" />-->
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="row" *ngIf="role == 'ARCHIVO'">
-        
+
             <div class="col-md-4">
                 <div class="form-group shadows">
                     <label >Multa:</label>
@@ -56,7 +56,7 @@
                 <div class="form-group">
                     <div class="form-group shadows">
                         <label for="">Sentencia ejecutoriada: </label>
-                        <input type="date" class="form-control" name="fechaEjecucionSentencia" 
+                        <input type="date" class="form-control" name="fechaEjecucionSentencia"
                         #fechaEjecucionSentencia="ngModel"
                         [(ngModel)] ="causaPenal.fechaEjecucionSentencia" (change)="change($event)"/>
                     </div>
@@ -112,11 +112,11 @@
                 <div class="form-group">
                     <label for="">Observaciones:</label>
                     <textarea class="form-control"  rows="7" name="observaciones" [(ngModel)]="causaPenal.observaciones"></textarea>
-        
+
                 </div>
             </div>
         </div>
-       
+
     </div>
     <div *ngIf="isForm" class="col-md-4 animated flipInX">
         <button class="btn btn-info btn-sm shadows" (click)="submit([])">
@@ -143,7 +143,7 @@
                 <th (click)="sort('clave')" class="text-center">
                     <span *ngIf="key == 'clave'" class="fa"
                         [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Nombre
-                    causa penal
+                    Causa Penal
                 </th>
                 <th (click)="sort('fecha')" class="text-center">
                     <span *ngIf="key == 'fecha'" class="fa"
@@ -152,7 +152,7 @@
                 </th>
                 <th (click)="sort('listaDelitos')" class="text-center">
                     <span *ngIf="key == 'listaDelitos'" class="fa"
-                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Deitos
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Delitos
                 </th>
                 <th class="text-center" style="min-width: 5rem">Acciones</th>
             </tr>
