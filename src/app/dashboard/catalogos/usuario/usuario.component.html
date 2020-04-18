@@ -28,7 +28,7 @@
                 <td class="text-center">{{item.nombre}}</td>
                 <td class="text-center">{{item.area.nombre}}</td>
                 <td class="text-center">
-                    <i class="fa fa-pencil-square-o" placement="top" ngbTooltip="Editar usuario" (click)="updateUsuario(item,registrarUsuario)"></i> &nbsp;
+                    <i class="fa fa-pencil-square-o" placement="top" ngbTooltip="Modificar usuario" (click)="updateUsuario(item,registrarUsuario)"></i> &nbsp;
                     <i *ngIf="item.estadoPersonal" class="fa fa-toggle-on" (click)="togglePersonal(item.id,'personalYSesion',0)" placement="top" ngbTooltip="Deshabilitar usuario"></i>
                     <i *ngIf="!item.estadoPersonal" class="fa fa-toggle-off" (click)="togglePersonal(item.id,'activarSoloPersonal',1)" placement="top" ngbTooltip="Habilitar usuario"></i>&nbsp;
 
