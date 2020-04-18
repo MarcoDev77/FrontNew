@@ -23,14 +23,14 @@
             <div class="form-group">
                 <label for="">Nombre de la PPL :</label>
                 <input type="text" class="form-control" name="nombre" [(ngModel)]="generalidadesPPL.nombre"
-                    placeholder="Persona privada de su libertad" disabled />
+                     disabled />
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Dormitorio:</label>
-                <input type="text" class="form-control" name="dormitorio" placeholder="Dormitorio"
-                    [(ngModel)]="generalidadesPPL.dormitorio" disabled />
+                <input type="text" class="form-control" name="dormitorio" [(ngModel)]="generalidadesPPL.dormitorio"
+                     disabled />
             </div>
         </div>
         <div class="col-md-4">
@@ -38,11 +38,11 @@
                 <label for="">Edad y fecha de nacimiento:</label>
                 <div class="row">
                     <div class="col-md-4">
-                        <input type="" class="form-control" name="edad" placeholder="Edad"
+                        <input type="" class="form-control" name="edad" 
                             [(ngModel)]="generalidadesPPL.edad" disabled />
                     </div>
                     <div class="col-md-8">
-                        <input type="" class="form-control" name="fechaNacimiento" placeholder="Fecha"
+                        <input type="" class="form-control" name="fechaNacimiento"
                             [ngModel]="generalidadesPPL.fechaNacimiento | date:'yyyy-MM-dd'"
                             (ngModelChange)="generalidadesPPL.fechaNacimiento = $event" disabled />
                     </div>
@@ -53,7 +53,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Fecha de ingreso:</label>
-                <input type="text" class="form-control" name="duenoMedio" placeholder="Fecha de ingreso"
+                <input type="text" class="form-control" name="duenoMedio" 
                     [ngModel]="generalidadesPPL.fechaIngreso | date:'yyyy-MM-dd'"
                     (ngModelChange)="generalidadesPPL.fechaIngreso = $event" disabled />
             </div>
@@ -61,7 +61,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Motivo de ingreso:</label>
-                <input type="text" class="form-control" name="listaDelitos" placeholder="Motivo de ingreso"
+                <input type="text" class="form-control" name="listaDelitos" 
                     [(ngModel)]="generalidadesPPL.listaDelitos" disabled />
             </div>
         </div>
@@ -69,7 +69,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Sentencia:</label>
-                <input type="text" class="form-control" name="sentencia" placeholder="Sentencia"
+                <input type="text" class="form-control" name="sentencia"
                     [(ngModel)]="generalidadesPPL.sentencia" disabled />
             </div>
         </div>
@@ -79,7 +79,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="">Diagnóstico (DSM):</label>
-                <textarea class=" form-control" cols="100" placeholder="Diagnóstico (DSM)" rows="9" value=""
+                <textarea class=" form-control" cols="100" rows="9" value=""
                     name="diagnostico" [(ngModel)]="generalidadesPPL.ficha.diagnostico"></textarea>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="">Problemática a trabajar:</label>
-                <textarea class=" form-control" cols="100" placeholder="Problemática a trabajar" rows="9" value=""
+                <textarea class=" form-control" cols="100"  rows="9" value=""
                     name="problematicaTrabajar" [(ngModel)]="generalidadesPPL.ficha.problematicaTrabajar"></textarea>
             </div>
         </div>
@@ -97,17 +97,25 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="">Actividad sugerida:</label>
-                <textarea class=" form-control" cols="100" placeholder="Actividad sugerida" rows="9" value=""
+                <textarea class=" form-control" cols="100" rows="9" value=""
                     name="actividadSugerida" [(ngModel)]="generalidadesPPL.ficha.actividadSugerida"></textarea>
             </div>
         </div>
     </div>
 <div class="row">
     <div class="col-sm-12 text-center text-sm-right">
-        <button type="submit" class="btn btn-success mr-3">Guardar</button>
-        <button type="button" class="btn btn-success mr-3">Imprimir</button>
+        <button type="submit" class="btn btn-success mr-3" [disabled]="!generalidadesPPL.imputadoId">Guardar</button>
+        <button type="button" (click)="generatePDF(view)" class="btn btn-success mr-3" [disabled]="!generalidadesPPL.imputadoId">Imprimir</button>
     </div>
 </div>
        
 </form>
     
+
+<ng-template #view let-view>
+    <div class="modal-body text-center pt-0">
+      <i (click)="view.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
+         class="fa fa-times-circle"></i>
+      <app-web-viewer [file]="file" [name]="'acta-de-entrevista'"></app-web-viewer>
+    </div>
+  </ng-template>
