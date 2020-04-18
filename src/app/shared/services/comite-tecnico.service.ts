@@ -84,4 +84,11 @@ export class ComiteTecnicoService {
     const responseType = 'arraybuffer' as 'json';
     return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadPedagogia?imputadoId=${id}`, {responseType});
   };
+
+  generatePDFPsicologia = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfFichaPsicologia?imputadoId=${id}`, {responseType});
+  };
+
+
 }
