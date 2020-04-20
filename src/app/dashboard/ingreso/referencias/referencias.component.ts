@@ -8,6 +8,9 @@ import {Referencia} from '@shared/models/Referencia';
 import {Observable} from 'rxjs';
 import Swal from 'sweetalert2';
 import {map} from 'rxjs/operators';
+import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
+import {environment} from '@environment/environment';
+import {AuthenticationService} from '@shared/services/authentication.service';
 
 @Component({
   selector: 'app-referencias',
@@ -25,11 +28,16 @@ export class ReferenciasComponent implements OnInit {
   public parentescos: any[];
   // FilePreview
   public file: any;
+  // Uploader
+  public url: string;
+  public uploader: FileUploader;
+  public uo: FileUploaderOptions = {};
 
   constructor(private catalogosService: CatalogosService,
               private router: Router,
               private modalService: NgbModal,
-              private ingresoService: IngresoService,) {
+              private ingresoService: IngresoService,
+              private authenticationService: AuthenticationService) {
     this.isLoading = false;
     this.ingreso = {} as Ingreso;
     this.paises = [];
@@ -44,6 +52,9 @@ export class ReferenciasComponent implements OnInit {
     if (this.ingreso) {
       this.listReferencias(this.ingreso.id);
     }
+    // Uploader
+    this.url = environment.apiUrl;
+    this.uploader = new FileUploader({url: this.url + '/api/subirFotoPerfilReferencia', itemAlias: 'imagen'});
   }
 
   ngOnInit() {
@@ -65,6 +76,7 @@ export class ReferenciasComponent implements OnInit {
   listReferencias(id) {
     this.ingresoService.listRefencias(id).subscribe((data: any) => {
       this.data = data.referenciasPersonales;
+      console.log('data', this.data);
     });
   }
 
@@ -351,6 +363,65 @@ export class ReferenciasComponent implements OnInit {
   generateControlVisitas(modal) {
     this.ingresoService.generatePDFControlVisitas(this.ingreso.id).subscribe((data: any) => {
       this.showPreview(data, modal);
+    });
+  }
+  generatePasePermanente(item, view) {
+  //
+  }
+
+  clickInputFile(item: Referencia, fileInput: any) {
+   this.referencia = item;
+   fileInput.click();
+  }
+
+  uploadReferencePhoto(inputFile: HTMLInputElement) {
+    if (inputFile.files[0]) {
+      const authToken = this.authenticationService.getCurrentUser().access_token;
+      this.uo.authTokenHeader = 'Authorization';
+      this.uo.authToken = `Bearer ${authToken}`;
+      this.uo.additionalParameter = {
+        referenciaId: this.referencia.id
+      };
+      this.uploader.setOptions(this.uo);
+      this.uploader.onAfterAddingFile = (file) => {
+        file.withCredentials = false;
+      };
+      this.uploader.onBeforeUploadItem = (item) => {
+        item.withCredentials = false;
+      };
+      this.uploader.uploadAll();
+      this.uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
+      this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
+      inputFile.files = null;
+    }
+  }
+  onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+    const exit = JSON.parse(response);
+    console.log(response);
+    Swal.fire({
+      title: exit.error ? 'Error!' : 'Guardado',
+      text: exit.mensaje,
+      icon: exit.error ? 'error' : 'success',
+      timer: 1000,
+      showConfirmButton: false
+    }).then(() => {
+      this.listReferencias(this.ingreso.id);
+    });
+    this.uploader.progress = 0;
+    this.uploader.clearQueue();
+  }
+
+  onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+    console.log(response);
+    const error = JSON.stringify(response); // error server response
+    this.uploader.progress = 0;
+    this.uploader.clearQueue();
+    Swal.fire({
+      title: 'Error',
+      text: 'Error al guardado el archivo seleccionado',
+      icon: 'error',
+      timer: 1500,
+      showConfirmButton: false
     });
   }
 }
