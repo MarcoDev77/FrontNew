@@ -12,6 +12,9 @@
     <thead>
     <tr>
       <th class="text-center">
+        Foto
+      </th>
+      <th class="text-center">
         Nombre Completo
       </th>
       <th class="text-center">
@@ -23,18 +26,27 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of data">
+      <td class="text-center">
+        <div class="card-avatar">
+          <img class="img" width="50px"
+               (click)="clickInputFile(item, inputFile)"
+               src="{{item.fotoPerfil ? 'data:image/png;base64,' + item.fotoPerfil :'assets/img/no_image.png'}}">
+        </div>
+      </td>
       <td class="text-center">{{item.nombre}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</td>
       <td class="text-center">{{item.parentesco.nombre}}</td>
       <td class="text-center">
         <i class="fa fa-eye" placement="top" ngbTooltip="Consultar detalles"
            (click)="showModal(addModal,item)"></i> &nbsp;
-        <i class="fa fa-times" (click)="deleteReferencia(item.id)" placement="top" ngbTooltip="Elminar referencia"></i>
-        &nbsp;
         <i *ngIf="item.estaVivo" class="fa fa-id-card-o" placement="top" ngbTooltip="Generar pase único"
            (click)="generatePaseUnico(item, view)"></i> &nbsp;
-        <i *ngIf="item.estaVivo && item.esMayorEdad" class="fa fa-id-card" placement="top" ngbTooltip="Generar pase mensual"
-           (click)="generatePaseMensual(item, view)"></i>
-
+        <i *ngIf="item.estaVivo && item.esMayorEdad" class="fa fa-id-card" placement="top"
+           ngbTooltip="Generar pase mensual"
+           (click)="generatePaseMensual(item, view)"></i> &nbsp;
+        <i *ngIf="item.estaVivo && item.esMayorEdad" class="fa fa-address-card" placement="top"
+           ngbTooltip="Generar pase permanente"
+           (click)="generatePasePermanente(item, view)"></i>&nbsp;
+        <i class="fa fa-times" (click)="deleteReferencia(item.id)" placement="top" ngbTooltip="Elminar referencia"></i>
       </td>
     </tr>
 
@@ -251,3 +263,7 @@
     <app-web-viewer [file]="file" [name]="'acta-de-entrevista'"></app-web-viewer>
   </div>
 </ng-template>
+<input #inputFile style="display: none" accept="image/png, image/jpeg, image/jpg" type="file"
+       class="form-control-file"
+       ng2FileSelect aria-describedby="fileHelp"
+       [uploader]="uploader" (change)="uploadReferencePhoto(inputFile)"/>
