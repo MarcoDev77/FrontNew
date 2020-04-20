@@ -13,6 +13,7 @@ import { DeportesComponent } from './deportes/deportes.component';
 import { OdontologiaComponent } from './odontologia/odontologia.component';
 import { ResultadosExamenesComponent } from './resultados-examenes/resultados-examenes.component';
 import { ResolucionPruebasComponent } from './resolucion-pruebas/resolucion-pruebas.component';
+import { ReporteMedicoComponent } from './reporte-medico/reporte-medico.component';
 
 
 
@@ -23,7 +24,8 @@ import { ResolucionPruebasComponent } from './resolucion-pruebas/resolucion-prue
     DeportesComponent,
     OdontologiaComponent,
     ResultadosExamenesComponent,
-  ResolucionPruebasComponent],
+  ResolucionPruebasComponent,
+    ReporteMedicoComponent],
   imports: [
     CommonModule,
     SharedModule,
