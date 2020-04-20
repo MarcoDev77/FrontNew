@@ -68,7 +68,7 @@
 </div>
 
 <ng-template #formModal let-formModal>
-  <div class="modal-body text-center">
+  <div class="modal-body">
     <h3>Liberación de ingreso</h3>
     <br>
     <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
@@ -77,39 +77,41 @@
 
         <div class="col-sm-4">
           <div class="form-group">
-            <input [readOnly]="isDetails" name="nombre" class="form-control" type="text" placeholder="Nombre imputado"
-                   ngbTooltip="Nombre imputado" required/>
+            <label for="" class="form-text text-muted">Nombre imputado:</label>
+            <input [readOnly]="isDetails" name="nombre" class="form-control" type="text"
+                    required/>
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
+            <label for="" class="form-text text-muted">Fecha de libertad:</label>
             <input [readOnly]="isDetails" name="fechaLibertad" class="form-control" type="text"
-                   placeholder="Fecha de libertad"
-                   ngbTooltip="Fecha de libertad" required/>
+                   required/>
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
+            <label for="" class="form-text text-muted">Fecha de ingreso:</label>
             <input [readOnly]="isDetails" name="fechaIngreso" class="form-control" type="text"
-                   placeholder="Fecha de ingreso"
-                   ngbTooltip="Fecha de ingreso" required/>
+                    required/>
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
-            <input [readOnly]="isDetails" name="causaPenal" class="form-control" type="text" placeholder="Causa penal"
-                   ngbTooltip="Causa penal"
+            <label for="" class="form-text text-muted">Causa penal:</label>
+            <input [readOnly]="isDetails" name="causaPenal" class="form-control" type="text"
+                  
                    required/>
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
-            <input [readOnly]="isDetails" name="causaPenal" class="form-control" type="text" placeholder="Juzgado"
-                   ngbTooltip="Juzgado"
+            <label for="" class="form-text text-muted">Juzgado:</label>
+            <input [readOnly]="isDetails" name="causaPenal" class="form-control" type="text"
                    required/>
           </div>
         </div>
@@ -120,16 +122,15 @@
 
         <div class="col-sm-4">
           <div class="form-group">
-            <input [readOnly]="isDetails" name="delito" class="form-control" type="text" placeholder="delito"
-                   ngbTooltip="delito"
+            <label for="" class="form-text text-muted">Delito:</label>
+            <input [readOnly]="isDetails" name="delito" class="form-control" type="text"
                    required/>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
+            <label for="" class="form-text text-muted">Tipo de Libertad:</label>
             <input [readOnly]="isDetails" name="tipoLibertad" class="form-control" type="text"
-                   placeholder="Tipo de Libertad"
-                   ngbTooltip="Tipo de Libertad"
                    required/>
           </div>
         </div>

@@ -84,7 +84,6 @@
 
 <ng-template #formModal let-formModal>
   <div class="modal-body text-center">
-    <h3>Centro Penitenciario</h3>
     <app-section-title icon="fa fa-building" title="Registro de C.P."></app-section-title>
     <br>
     <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
@@ -236,7 +235,7 @@
 
             <div class="col-sm-6">
               <div class="form-group text-left">
-                &nbsp;<label class="text-muted" for="">Tipo Sanguinea</label>
+                &nbsp;<label class="text-muted" for="">Tipo Sanguíneo</label>
                 <select ngbTooltip="Tipo sanguineo" class="form-control shadows" name="tipoSanguineo"
                         [(ngModel)]="persona.tipoSanguineo" #tipoSanguineo="ngModel"
                         [ngClass]="{ 'is-invalid': f.submitted && tipoSanguineo.invalid}">
@@ -303,7 +302,7 @@
         <div class="col-12">
           <div class="form-group text-left">
             &nbsp;<label class="text-muted" for="">Dirección</label>
-            <textarea class=" form-control" cols="80" placeholder="Dirección" rows="4" value="" ngbTooltip="Dirección"
+            <textarea class=" form-control" cols="80" rows="4" value="" ngbTooltip="Dirección"
                       [(ngModel)]="persona.direccion" #direccion name="direccion"
                       maxlength="255 "
             ></textarea>
@@ -320,7 +319,7 @@
         <div class="col-4">
           <div class="form-group text-left">
             &nbsp;<label class="text-muted" for="">Contraseña</label>
-            <input type="password" class="form-control" ngbTooltip="Contraseña"
+            <input type="password" class="form-control" ngbTooltip="Contraseña" minlength="5"
                    [(ngModel)]="user.password" #password name="password">
           </div>
         </div>

@@ -87,13 +87,13 @@ export const ROUTES: RouteInfo[] = [
     collapse: 'tables',
     children: [
       {path: 'ingreso/lista-ingreso', title: 'INGRESO', ab: 'IN'},
-      {path: 'ingreso/busqueda-huella', title: 'BUSQUEDA HUELLAS', ab: 'BH'},
+      {path: 'ingreso/busqueda-huella', title: 'BÚSQUEDA HUELLAS', ab: 'BH'},
       // Bitacoras Ingreso
-      {path: 'bitacoras/ingreso', title: 'BITACORA INGRESO', ab: 'BI'},
-      {path: 'bitacoras/ingreso-liberacion', title: 'BITACORA LIB. INGRESO', ab: 'LIN'},
+      {path: 'bitacoras/ingreso', title: 'BITÁCORA INGRESO', ab: 'BI'},
+      {path: 'bitacoras/ingreso-liberacion', title: 'BITÁCORA LIB. INGRESO', ab: 'LIN'},
       // Bitacoras Imputado
-      {path: 'bitacoras/ingreso-Imputado', title: 'BITACORA IN. IMPUTADO', ab: 'BINI'},
-      {path: 'bitacoras/ingreso-imputado-liberacion', title: 'BITACORA LIB. IMPUTADO', ab: 'LI'},
+      {path: 'bitacoras/ingreso-Imputado', title: 'BITÁCORA IN. IMPUTADO', ab: 'BINI'},
+      {path: 'bitacoras/ingreso-imputado-liberacion', title: 'BITÁCORA LIB. IMPUTADO', ab: 'LI'},
     ],
   },
   {
@@ -145,7 +145,7 @@ export const ROUTES: RouteInfo[] = [
       {path: 'comite-tecnico/odontologia', title: 'Odontología', ab: 'OD'},
       {path: 'comite-tecnico/centro-escolar', title: 'Centro Escolar', ab: 'CE'},
       {path: 'comite-tecnico/trabajo-social', title: 'Trabajo social', ab: 'TS'},
-      
+
     ],
   },
   {
@@ -161,6 +161,12 @@ export const ROUTES: RouteInfo[] = [
     children: [
       {path: 'comite-tecnico/examenes', title: 'Resultado examenes', ab: 'RE'},
       {path: 'comite-tecnico/reporte-medico', title: 'Médico', ab: 'ME'},      
+
+
+
+
+
+
     ],
   }
 ];
