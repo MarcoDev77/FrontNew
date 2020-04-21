@@ -46,7 +46,7 @@
         <i *ngIf="item.estaVivo && item.esMayorEdad" class="fa fa-address-card" placement="top"
            ngbTooltip="Generar pase permanente"
            (click)="generatePasePermanente(item, view)"></i>&nbsp;
-        <i class="fa fa-times" (click)="deleteReferencia(item.id)" placement="top" ngbTooltip="Elminar referencia"></i>
+        <i class="fa fa-times" (click)="deleteReferencia(item.id)" placement="top" ngbTooltip="Eliminar referencia"></i>
       </td>
     </tr>
 
@@ -181,7 +181,7 @@
 
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="">Codigo postal:</label>
+            <label for="">Código postal:</label>
             <input type="text" class="form-control" name="codigoPostal" maxlength="5"
                    #codigoPostal="ngModel" [(ngModel)]="referencia.codigoPostal" pattern='^[0-9]*$'>
           </div>

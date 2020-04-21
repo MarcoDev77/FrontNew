@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {CatalogosService} from '@shared/services/catalogos.service';
-import {Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {IngresoService} from '@shared/services/ingreso.service';
-import {Ingreso} from '@shared/models/Ingreso';
-import {Referencia} from '@shared/models/Referencia';
-import {Observable} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { CatalogosService } from '@shared/services/catalogos.service';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IngresoService } from '@shared/services/ingreso.service';
+import { Ingreso } from '@shared/models/Ingreso';
+import { Referencia } from '@shared/models/Referencia';
+import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import {map} from 'rxjs/operators';
-import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
-import {environment} from '@environment/environment';
-import {AuthenticationService} from '@shared/services/authentication.service';
+import { map } from 'rxjs/operators';
+import { FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import { environment } from '@environment/environment';
+import { AuthenticationService } from '@shared/services/authentication.service';
 
 @Component({
   selector: 'app-referencias',
@@ -34,10 +34,10 @@ export class ReferenciasComponent implements OnInit {
   public uo: FileUploaderOptions = {};
 
   constructor(private catalogosService: CatalogosService,
-              private router: Router,
-              private modalService: NgbModal,
-              private ingresoService: IngresoService,
-              private authenticationService: AuthenticationService) {
+    private router: Router,
+    private modalService: NgbModal,
+    private ingresoService: IngresoService,
+    private authenticationService: AuthenticationService) {
     this.isLoading = false;
     this.ingreso = {} as Ingreso;
     this.paises = [];
@@ -54,7 +54,7 @@ export class ReferenciasComponent implements OnInit {
     }
     // Uploader
     this.url = environment.apiUrl;
-    this.uploader = new FileUploader({url: this.url + '/api/subirFotoPerfilReferencia', itemAlias: 'imagen'});
+    this.uploader = new FileUploader({ url: this.url + '/api/subirFotoPerfilReferencia', itemAlias: 'imagen' });
   }
 
   ngOnInit() {
@@ -122,7 +122,7 @@ export class ReferenciasComponent implements OnInit {
       this.referencia = item;
       console.log(this.referencia);
     }
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
   selectArrayTofilter(array) {
@@ -151,7 +151,7 @@ export class ReferenciasComponent implements OnInit {
 
   async generatePaseUnico(item: any, modal) {
     console.log('item', item);
-    const steps: any[] = ['Ingrese al área'];
+    const steps: any[] = ['Ingrese el área'];
     const progressSteps: any[] = ['1'];
     let options = [];
 
@@ -195,6 +195,7 @@ export class ReferenciasComponent implements OnInit {
       },
       confirmButtonText: 'Siguiente &rarr;',
       showCancelButton: true,
+      cancelButtonText: 'Cancelar'
     }).queue(steps);
 
     if (result.dismiss) {
@@ -203,21 +204,26 @@ export class ReferenciasComponent implements OnInit {
 
     const model = {
       id: null,
-      tipoPase: 'adulto',
+      referenciaPersonal: {
+        id: item.id
+      },
+      tipoPase: item.esMayorEdad ? 'adulto' : 'infante',
       nombreVisitante: `${item.nombre} ${item.apellidoPaterno} ${item.apellidoMaterno}`,
       domicilio: `${item.municipio} ${item.estado.nombre}, ${item.colonia} ${item.calleNumero}`,
       area: result.value[0],
-      parentesco: item.parentesco,
-      imputado: this.ingreso,
+      // parentesco: item.parentesco,
+      // imputado: this.ingreso,
       nombreResponsable: '',
       folio: result.value[1]
     };
 
     if (!item.mayorEdad) {
       console.log('No es mayor de edad');
-      model.tipoPase = 'infante';
       model.nombreResponsable = options[result.value[2]];
     }
+
+    console.log('To server', model);
+    
     this.ingresoService.savePaseProvisional(model).subscribe((data: any) => {
       this.showPreview(data, modal);
     }, error => {
@@ -241,7 +247,7 @@ export class ReferenciasComponent implements OnInit {
   }
 
   showPreview(data, modal) {
-    const file = new Blob([data], {type: 'application/*'});
+    const file = new Blob([data], { type: 'application/*' });
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadstart = ev => this.isLoading = true;
@@ -253,7 +259,7 @@ export class ReferenciasComponent implements OnInit {
       this.modalService.dismissAll();
       if (base64) {
         this.file = base64;
-        this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+        this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
       }
     };
     reader.onerror = () => {
@@ -326,6 +332,7 @@ export class ReferenciasComponent implements OnInit {
         },
         confirmButtonText: 'Siguiente &rarr;',
         showCancelButton: true,
+        cancelButtonText: 'Cancelar'
       }).queue(steps);
 
       if (result.dismiss) {
@@ -357,7 +364,7 @@ export class ReferenciasComponent implements OnInit {
   }
 
   mapChilds(array) {
-    return array.map(child => ({nombre: child}));
+    return array.map(child => ({ nombre: child }));
   }
 
   generateControlVisitas(modal) {
@@ -366,12 +373,12 @@ export class ReferenciasComponent implements OnInit {
     });
   }
   generatePasePermanente(item, view) {
-  //
+    //
   }
 
   clickInputFile(item: Referencia, fileInput: any) {
-   this.referencia = item;
-   fileInput.click();
+    this.referencia = item;
+    fileInput.click();
   }
 
   uploadReferencePhoto(inputFile: HTMLInputElement) {
