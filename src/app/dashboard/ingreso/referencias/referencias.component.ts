@@ -424,4 +424,8 @@ export class ReferenciasComponent implements OnInit {
       showConfirmButton: false
     });
   }
+
+  closeModal(){
+    this.modalService.dismissAll()
+  }
 }

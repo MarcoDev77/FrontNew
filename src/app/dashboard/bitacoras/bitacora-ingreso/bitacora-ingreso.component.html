@@ -1,4 +1,4 @@
-<app-section-title icon="fa fa-address-book" title="BITACORA DE INGRESOS"></app-section-title>
+<app-section-title icon="fa fa-address-book" title="BITÁCORA DE INGRESOS"></app-section-title>
 <div class="row">
   <div class="col text-right mb-3">
     <button (click)="openSearchModal(searchModal)" class="btn btn-primary m-0 pull-right">Busqueda</button>
@@ -40,7 +40,7 @@
   </table>
 
 </div>
-
+<!-- 
 <ng-template #formModal let-formModal>
   <div class="modal-body text-center">
     <h3>Bitácora de Ingresos</h3>
@@ -164,7 +164,7 @@
       </div>
     </form>
   </div>
-</ng-template>
+</ng-template> -->
 
 <ng-template #searchModal let-searchModal>
   <div class="modal-body text-center">
@@ -176,13 +176,12 @@
   <div class="modal-body text-center">
     <h3>Bitácora de Ingresos</h3>
     <br>
-
     <form class="form-horizontal" name="form" #f="ngForm">
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
             <h6>Nombre del imputado</h6>
-            <label>Roberto Lopez Lopez</label>
+            <label>{{ingreso.apodo.nombre}} {{ingreso.apodo.apellidoPaterno}} {{ingreso.apodo.apellidoMaterno}}</label>
           </div>
         </div>
       </div>
@@ -202,7 +201,7 @@
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Carpeta de investigación</h6>
-            <label>2365</label>
+            <label>{{ingreso.numeroExpediente}}</label>
           </div>
         </div>
       </div>
@@ -210,19 +209,19 @@
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Hora de ingreso</h6>
-            <label>17:59 </label>
+            <label>{{ingreso.fechaRegistro| date:'shortTime'}}</label>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Fecha y hora de detención</h6>
-            <label>17:59 </label>
+            <label>{{ingreso.fechaRegistro|date}} </label>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Juzgado</h6>
-            <label>250</label>
+            <label>Sin información</label>
           </div>
         </div>
 
@@ -231,19 +230,19 @@
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Fecha de ampliación</h6>
-            <label>250</label>
+            <label>Sin información</label>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Fecha de vinculación</h6>
-            <label>250</label>
+            <label>Sin información</label>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Delito</h6>
-            <label>Ataque peligroso</label>
+            <label>Sin información</label>
           </div>
         </div>
 
@@ -252,19 +251,19 @@
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Causa Penal</h6>
-            <label>causa penal</label>
+            <label>{{ingreso.causaPenal[0].nombre}}</label>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Autoridad que ordena</h6>
-            <label>autoridad</label>
+            <label>{{ingreso.causaPenal[0].juzgadoProcedencia}}</label>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Tipo C-F-P-R</h6>
-            <label>Primodelincuente</label>
+            <label>{{ingreso.tipoIngreso}}</label>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-<app-section-title icon="fa fa-book" title="BITACORA DE IMPUTADOS"></app-section-title>
+<app-section-title icon="fa fa-book" title="BITÁCORA DE IMPUTADOS"></app-section-title>
 <div class="row">
   <div class="col text-right mb-3">
     <button (click)="openSearchModal(searchModal)" class="btn btn-primary m-0 pull-right">Busqueda</button>
@@ -26,10 +26,11 @@
         <tbody>
         <tr *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p };">
           <td class="text-center"> {{item.folio}}</td>
-          <td class="text-center"> {{item.tipo}}</td>
           <td class="text-center">{{item.apodo.nombre}} {{item.apodo.apellidoPaterno}} {{item.apodo.apellidoPaterno}} </td>
+
+          <td class="text-center"> {{item.tipo}}</td>
                 <td class="text-center">
-                    <i class="fa fa-eye"></i>
+                    <i class="fa fa-eye" (click)="seeDetails(item);add(formModal)"></i>
 
                 </td>
             </tr>
@@ -52,69 +53,83 @@
         <h3>Bitácora de imputados</h3>
         <br>
         <form class="form-horizontal" name="form" #f="ngForm">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="" class="form-text text-muted">Nombre del imputado:</label>
-                        <input name="nombreImputado" class="form-control" type="text"
-                             />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="" class="form-text text-muted">Fecha y hora de ingreso:</label>
-                        <input type="text" class="form-control" 
-                            onfocus="(this.type='datetime-local')" />
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <h6>Nombre del imputado</h6>
+                <label>{{ingreso.apodo.nombre}} {{ingreso.apodo.apellidoPaterno}} {{ingreso.apodo.apellidoMaterno}}</label>
+              </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="" class="form-text text-muted">Carpeta de investación:</label>
-                        <input name="carpetaInvestigacion" class="form-control" type="text"
-                            />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="" class="form-text text-muted">Delito:</label>
-                        <input name="Delito" class="form-control" type="text"  />
-                    </div>
-                </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <h6>Fecha de ingreso</h6>
+                <label>{{ingreso.fechaRegistro|date}}</label>
+              </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="" class="form-text text-muted">Causa penal:</label>
-                        <input name="causaPenal" class="form-control" type="text"  />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="" class="form-text text-muted">Medida Cautelar:</label>
-                        <input name="medidaCautelar" class="form-control" type="text"  />
-                    </div>
-                </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <h6>Lugar de nacimiento</h6>
+                <label>{{ingreso.estadoNacimiento.nombre}}</label>
+              </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group shadows">
-                        <label for="" class="form-text text-muted">Tipo:</label>
-                        <select class="form-control shadows" name="tipoPR">
-                            <option disabled selected>Seleccione</option>
-                            <option value="Cereso">Primodelincuente</option>
-                            <option value="Cefereso">Reincidente</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <h6>Carpeta de investigación</h6>
+                <label>{{ingreso.numeroExpediente}}</label>
+              </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12 text-center text-sm-right">
-                    <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Aceptar</button>
-                </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <h6>Hora de ingreso</h6>
+                <label>{{ingreso.fechaRegistro| date:'shortTime'}}</label>
+              </div>
             </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <h6>Fecha y hora de detención</h6>
+                <label>{{ingreso.fechaRegistro|date}} </label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <h6>Juzgado</h6>
+                <label>Sin información</label>
+              </div>
+            </div>
+    
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <h6>Fecha de ampliación</h6>
+                <label>Sin información</label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <h6>Fecha de vinculación</h6>
+                <label>Sin información</label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <h6>Delito</h6>
+                <label>Sin información</label>
+              </div>
+            </div>
+    
+          </div>
+        
+          <div class="row">
+            <div class="col-sm-12 text-center text-sm-right">
+              <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cerrar</button>
+    
+            </div>
+          </div>
         </form>
-    </div>
+      </div>
 </ng-template>
