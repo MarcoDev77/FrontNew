@@ -16,7 +16,7 @@ export class BitacoraService {
     return this.http.get(`${this.url}/api/bitacoraIngresos?offset=${offset}&max=${max}`);
   }
 
-  listBitacoraIngresoImputado() {
-    return this.http.get(`${this.url}/api/bitacoraImputado`);
+  listBitacoraIngresoImputado(max, offset) {
+    return this.http.get(`${this.url}/api/bitacoraImputado?offset=${offset}&max=${max}`);
   }
 }

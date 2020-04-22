@@ -39,6 +39,16 @@
         </tr>
         </tbody>
     </table>
+  <div class="text-center w-100">
+    <div class="btn-group" role="group">
+      <button [disabled]="offset === 0" (click)="previousPage()" type="button" class="btn btn-secondary">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <button [disabled]="data.length === 0 || data.length < max" (click)="nextPage()" type="button" class="btn btn-secondary">
+        <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
 
 </div>
 
@@ -100,7 +110,7 @@
                 <label>Sin información</label>
               </div>
             </div>
-    
+
           </div>
           <div class="row">
             <div class="col-sm-4">
@@ -121,13 +131,13 @@
                 <label>Sin información</label>
               </div>
             </div>
-    
+
           </div>
-        
+
           <div class="row">
             <div class="col-sm-12 text-center text-sm-right">
+              <button type="button" (click)="goToFormularioIngreso()" class="btn btn-primary mr-3">Ver Ingreso</button>
               <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cerrar</button>
-    
             </div>
           </div>
         </form>
