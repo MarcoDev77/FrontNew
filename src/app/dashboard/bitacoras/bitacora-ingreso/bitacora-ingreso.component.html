@@ -1,7 +1,7 @@
 <app-section-title icon="fa fa-address-book" title="BITÁCORA DE INGRESOS"></app-section-title>
 <div class="row">
   <div class="col text-right mb-3">
-    <button (click)="openSearchModal(searchModal)" class="btn btn-primary m-0 pull-right">Busqueda</button>
+    <button (click)="openSearchModal(searchModal)" class="btn btn-primary m-0 pull-right">Búsqueda</button>
     <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
            [(ngModel)]="filter"
            placeholder="Buscar">
@@ -18,18 +18,16 @@
       <th class="text-center">
         Nombre
       </th>
-
-
       <th class="text-center" style="min-width: 5rem">Detalle</th>
     </tr>
     </thead>
     <tbody>
     <tr
-      *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p };">
+      *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 20, currentPage: p };">
       <td class="text-center"> {{item.folio}}</td>
       <td class="text-center">{{item.apodo.nombre}} {{item.apodo.apellidoPaterno}} {{item.apodo.apellidoPaterno}} </td>
       <td class="text-center">
-        <i class="fa fa-eye" (click)="add(formModal2);seeDetails(item)"></i>
+        <i class="fa fa-eye" ngbTooltip="Ver detalle" placement="top" (click)="add(formModal2);seeDetails(item)"></i>
 
       </td>
     </tr>
@@ -38,9 +36,20 @@
     </tr>
     </tbody>
   </table>
+  <div class="text-center w-100">
+    <div class="btn-group" role="group">
+      <button [disabled]="offset === 0" (click)="previousPage()" type="button" class="btn btn-secondary">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <button [disabled]="data.length === 0 || data.length < max" (click)="nextPage()" type="button" class="btn btn-secondary">
+        <i class="fa fa-arrow-right"></i>
+      </button>
+
+    </div>
+  </div>
 
 </div>
-<!-- 
+<!--
 <ng-template #formModal let-formModal>
   <div class="modal-body text-center">
     <h3>Bitácora de Ingresos</h3>
@@ -59,7 +68,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="" class="form-text text-muted">Fecha de ingreso:</label>
-            <input type="text" class="form-control" 
+            <input type="text" class="form-control"
                    onfocus="(this.type='date')"/>
           </div>
         </div>
@@ -251,13 +260,13 @@
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Causa Penal</h6>
-            <label>{{ingreso.causaPenal[0].nombre}}</label>
+            <label>{{ingreso?.causaPenal[0]?.nombre}}</label>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <h6>Autoridad que ordena</h6>
-            <label>{{ingreso.causaPenal[0].juzgadoProcedencia}}</label>
+            <label>{{ingreso?.causaPenal[0]?.juzgadoProcedencia}}</label>
           </div>
         </div>
         <div class="col-sm-4">
@@ -269,8 +278,8 @@
       </div>
       <div class="row">
         <div class="col-sm-12 text-center text-sm-right">
+          <button type="button" (click)="goToFormularioIngreso()" class="btn btn-primary mr-3">Ver Ingreso</button>
           <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cerrar</button>
-
         </div>
       </div>
     </form>

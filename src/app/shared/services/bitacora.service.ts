@@ -6,18 +6,14 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class BitacoraService {
-  data: any;
-  params: string;
   public url: string;
 
   constructor(private http: HttpClient) {
     this.url = environment.apiUrl;
-    this.data = {};
-    this.params = '';
   }
 
-  listBitacoraIngreso() {
-    return this.http.get(`${this.url}/api/bitacoraIngresos`);
+  listBitacoraIngreso(max, offset) {
+    return this.http.get(`${this.url}/api/bitacoraIngresos?offset=${offset}&max=${max}`);
   }
 
   listBitacoraIngresoImputado() {
