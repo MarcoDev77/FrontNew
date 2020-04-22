@@ -45,7 +45,7 @@
            (click)="generatePaseMensual(item, view)"></i> &nbsp;
         <i *ngIf="item.estaVivo && item.esMayorEdad" class="fa fa-address-card" placement="top"
            ngbTooltip="Generar pase permanente"
-           (click)="generatePasePermanente(item, view)"></i>&nbsp;
+           (click)="showModalPasePermanente(item, pasePermanenteModal)"></i>&nbsp;
         <i class="fa fa-times" (click)="deleteReferencia(item.id)" placement="top" ngbTooltip="Eliminar referencia"></i>
       </td>
     </tr>
@@ -268,3 +268,97 @@
        class="form-control-file"
        ng2FileSelect aria-describedby="fileHelp"
        [uploader]="uploader" (change)="uploadReferencePhoto(inputFile)"/>
+
+<ng-template #pasePermanenteModal let-pasePermanenteModal>
+  <div class="modal-body form-text text-muted pt-0">
+    <app-section-title icon="fa fa-address-card" title="Pase permanente"></app-section-title>
+    <form name="formPasePermanente" (ngSubmit)="formPasePermanente.form.valid && generatePasePermanente(view)" #formPasePermanente="ngForm" novalidate>
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label>Tipo de pase</label>
+            <select [(ngModel)]="pasePermanente.tipoPase" class="form-control" name="tipo" required>
+              <option value="individual">Individual</option>
+              <option value="colectivo">Colectivo</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-8">
+          <label>Horario de visita</label>
+          <input [(ngModel)]="pasePermanente.horarioVisita" name="horarioVisita" type="text" minlength="5"
+                 maxlength="50" class="form-control" required>
+        </div>
+        <div *ngIf="pasePermanente.tipoPase === 'colectivo'" class="col-4">
+          <button type="button" (click)="showFormModal()" class="btn btn-info btn-sm shadows">Agregar menor</button>
+        </div>
+
+      </div>
+      <table *ngIf="pasePermanente.tipoPase === 'colectivo'" class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido Paterno</th>
+          <th scope="col">Apellido Materno</th>
+          <th scope="col">Fecha de nacimiento</th>
+          <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="table-form" *ngIf="isForm">
+          <td class="text-center">
+            <input name="nombre" type="text" class="form-control" [(ngModel)]="menor.nombre"
+                   placeholder="Nombre"
+                   #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }"
+                   maxlength="60" required>
+          </td>
+          <td class="text-center">
+            <input name="apellidoPaterno" type="text" class="form-control" [(ngModel)]="menor.apellidoPaterno"
+                   placeholder="Apellido Paterno" #apellidoPaterno="ngModel"
+                   [ngClass]="{ 'is-invalid':  apellidoPaterno.touched && apellidoPaterno.invalid }"
+                   maxlength="60" required>
+          </td>
+          <td class="text-center">
+            <input name="apellidoMaterno" type="text" class="form-control" [(ngModel)]="menor.apellidoMaterno"
+                   placeholder="Apellido Materno" #apellidoMaterno="ngModel"
+                   [ngClass]="{ 'is-invalid':  apellidoMaterno.touched && apellidoMaterno.invalid }"
+                   maxlength="60" required>
+          </td>
+
+          <td class="text-center">
+            <input name="fechaNacimiento" type="date" class="form-control" [(ngModel)]="menor.fechaNacimiento"
+                   placeholder="Fecha de Nacimiento" #fechaNacimiento="ngModel"
+                   [ngClass]="{ 'is-invalid':  fechaNacimiento.touched && fechaNacimiento.invalid }"
+                   required>
+          </td>
+
+          <td class="text-center">
+            <i class="fa fa-times mr-3" placement="top" ngbTooltip="Cancelar"
+               (click)="cancel()"></i>
+            <i class="fa fa-check" placement="top" ngbTooltip="Guardar"
+               (click)="addMenorPasePermanente([nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento])"></i>
+          </td>
+
+        </tr>
+        <tr id="{{'tr' + i}}"
+            *ngFor="let item of pasePermanente.menores | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+            (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+          <td class="text-center">{{item.nombre}}</td>
+          <td class="text-center">{{item.apellidoPaterno}}</td>
+          <td class="text-center">{{item.apellidoMaterno}}</td>
+          <td class="text-center">{{item.fechaNacimiento | date:'dd/MM/yy'}}</td>
+          <td class="text-center">
+            <i (click)="deleteMenorPasePermanente(item)" placement="top" ngbTooltip="Eliminar"
+               class="fa fa-trash-o"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-sm-4 offset-8">
+          <button type="button" (click)="closeModal()" class="btn btn-danger mr-3">Cerrar</button>
+          <button type="submit" class="float-right btn btn-success">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

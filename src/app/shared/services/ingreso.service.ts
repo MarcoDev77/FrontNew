@@ -210,6 +210,11 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/generarFormatoPdfHojaControlVisita?imputadoId=${id}`, {responseType});
   }
 
+  generatePDFPasePermanente = (model) => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.post(`${this.url}/api/registrarPasePermanente`, model, {responseType});
+  }
+
 }
 
 
