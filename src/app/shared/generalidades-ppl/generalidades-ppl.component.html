@@ -1,0 +1,83 @@
+<div class="row">
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Nombre de la PPL :</label>
+      <input type="text" value="{{generalidadesPPL?.nombre}}" class="form-control" readonly
+             placeholder="Persona privada de su libertad"/>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Dormitorio:</label>
+      <input type="text" value="{{generalidadesPPL?.dormitorio}}" class="form-control" readonly name="dormitorio"
+             placeholder="Dormitorio"/>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Fecha de nacimiento:</label>
+      <input type="text" readonly class="form-control" value="{{generalidadesPPL?.fechaNacimiento| date:'dd/MM/yyyy'}}"
+             name="fechaNacimiento" placeholder="Fecha de nacimiento"/>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Edad:</label>
+      <input type="text" class="form-control" value="{{generalidadesPPL?.edad}}" readonly name="edad"
+             placeholder="Edad"/>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Estado civil:</label>
+      <input type="text" class="form-control" readonly value="{{generalidadesPPL?.estadoCivil?.nombre}}"
+             name="estadoCivil" placeholder="Estado civil"/>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Escolaridad:</label>
+      <input type="text" class="form-control" readonly name="escolaridad" value="{{generalidadesPPL?.escolaridad}}"
+             placeholder="Escolaridad"/>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Delito:</label>
+      <input type="text" class="form-control" readonly name="delito" value="{{generalidadesPPL?.listaDelitos}}"
+             placeholder="Delito"/>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Fecha y lugar de ingreso:</label>
+      <input type="text" class="form-control" readonly value="{{generalidadesPPL?.fechaIngreso | date:'dd/MM/yyyy'}}"
+             name="fechaIngreso"
+             placeholder="Fecha y lugar de ingreso"/>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Originario:</label>
+      <input type="text" class="form-control" readonly value="{{generalidadesPPL?.originario?.nombre}}" name="originario"
+             placeholder="Originario"/>
+    </div>
+  </div>
+
+  <div *ngFor="let input of inputs" class="col-md-4">
+    <div class="form-group">
+      <label>{{input.label}}:</label>
+      <input type="text" class="form-control" readonly [value]="input.value" [placeholder]="input.label"/>
+    </div>
+  </div>
+
+</div>

@@ -8,12 +8,13 @@ import {SharedModule} from '@shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {RegistroVisitaComponent} from './registro-visita/registro-visita.component';
 import { RedesFamiliaresComponent } from './redes-familiares/redes-familiares.component';
+import {OfrecimientoTrabajoComponent} from '@dashboard/servicio-social/ofrecimiento-trabajo/ofrecimiento-trabajo.component';
 
 
 
 @NgModule({
   declarations: [PaseUnicoComponent, PaseMensualComponent, RootComponent, RegistroVisitaComponent,
-  RedesFamiliaresComponent],
+  RedesFamiliaresComponent, OfrecimientoTrabajoComponent],
   imports: [
     CommonModule,
     SharedModule,
