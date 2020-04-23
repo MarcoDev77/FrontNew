@@ -1,0 +1,20 @@
+<app-section-title icon="fa fa-table" title="Ofrecimiento Trabajo"></app-section-title>
+<div class="row">
+  <div class="col-md-8">
+    <h3>Oficio de ofrecimiento de trabajo</h3>
+  </div>
+  <div class="col-md-4">
+    <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
+      <div class="input-group">
+        <div class="input-group-prepend">
+        <span (click)="searchImputado()" class="input-group-text"><i
+          class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
+        </div>
+        <input name="folio" required [(ngModel)]="ingreso.folio" type="text"
+               class="form-control pull-right mr-2"
+               placeholder="Buscar por Folio">
+      </div>
+    </form>
+  </div>
+</div>
+<app-generalidades-ppl [generalidadesPPL]="ingreso" [inputs]="moreInnputs"></app-generalidades-ppl>

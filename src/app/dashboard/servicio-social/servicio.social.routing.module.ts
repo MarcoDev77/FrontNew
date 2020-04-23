@@ -5,6 +5,7 @@ import { PaseMensualComponent } from './pase-mensual/pase-mensual.component';
 import { PaseUnicoComponent } from './pase-unico/pase-unico.component';
 import {RegistroVisitaComponent} from '@dashboard/servicio-social/registro-visita/registro-visita.component';
 import { RedesFamiliaresComponent } from './redes-familiares/redes-familiares.component';
+import {OfrecimientoTrabajoComponent} from '@dashboard/servicio-social/ofrecimiento-trabajo/ofrecimiento-trabajo.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
       {path: 'pase-mensual', component: PaseMensualComponent},
       {path: 'pase-unico', component: PaseUnicoComponent},
       {path: 'registro-visita', component: RegistroVisitaComponent},
-      {path: 'redes-familiares', component: RedesFamiliaresComponent}
+      {path: 'redes-familiares', component: RedesFamiliaresComponent},
+      {path: 'ofrecimiento-trabajo', component: OfrecimientoTrabajoComponent}
     ]
   },
 ];

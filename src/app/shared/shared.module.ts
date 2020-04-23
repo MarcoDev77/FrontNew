@@ -26,6 +26,7 @@ import { DelitoComponent } from '@dashboard/catalogos/delito/delito.component';
 import { FotosExtraIngresoComponent } from './fotos-extra-ingreso/fotos-extra-ingreso.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import { RecursosProbatoriosComponent } from './recursos-probatorios/recursos-probatorios.component';
+import { GeneralidadesPPLComponent } from './generalidades-ppl/generalidades-ppl.component';
 
 
 const MODULES = [
@@ -52,8 +53,8 @@ const COMPONENTS = [
 
 @NgModule({
   imports: [CommonModule, ...MODULES, FileUploadModule, ReactiveFormsModule],
-    exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, FotosExtraIngresoComponent],
-  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, CausaPenalIngresoComponent, DelitoIngresoComponent, FotosExtraIngresoComponent, RecursosProbatoriosComponent],
+    exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, FotosExtraIngresoComponent, GeneralidadesPPLComponent],
+  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, CausaPenalIngresoComponent, DelitoIngresoComponent, FotosExtraIngresoComponent, RecursosProbatoriosComponent, GeneralidadesPPLComponent],
 })
 export class SharedModule {
 }
