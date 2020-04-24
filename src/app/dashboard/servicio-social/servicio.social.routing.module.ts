@@ -7,6 +7,7 @@ import {RegistroVisitaComponent} from '@dashboard/servicio-social/registro-visit
 import { RedesFamiliaresComponent } from './redes-familiares/redes-familiares.component';
 import {OfrecimientoTrabajoComponent} from '@dashboard/servicio-social/ofrecimiento-trabajo/ofrecimiento-trabajo.component';
 import { ControlEntrevistaComponent } from './control-entrevista/control-entrevista.component';
+import { OtrosOficiosComponent } from './otros-oficios/otros-oficios.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       {path: 'redes-familiares', component: RedesFamiliaresComponent},
       {path: 'ofrecimiento-trabajo', component: OfrecimientoTrabajoComponent},
       {path: 'control-entrevista', component: ControlEntrevistaComponent},
+      {path: 'otros-oficios', component: OtrosOficiosComponent},
     ]
   },
 ];

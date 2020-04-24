@@ -10,12 +10,13 @@ import {RegistroVisitaComponent} from './registro-visita/registro-visita.compone
 import { RedesFamiliaresComponent } from './redes-familiares/redes-familiares.component';
 import {OfrecimientoTrabajoComponent} from '@dashboard/servicio-social/ofrecimiento-trabajo/ofrecimiento-trabajo.component';
 import { ControlEntrevistaComponent } from './control-entrevista/control-entrevista.component';
+import { OtrosOficiosComponent } from './otros-oficios/otros-oficios.component';
 
 
 
 @NgModule({
   declarations: [PaseUnicoComponent, PaseMensualComponent, RootComponent, RegistroVisitaComponent,
-  RedesFamiliaresComponent, OfrecimientoTrabajoComponent, ControlEntrevistaComponent],
+  RedesFamiliaresComponent, OfrecimientoTrabajoComponent, ControlEntrevistaComponent, OtrosOficiosComponent],
   imports: [
     CommonModule,
     SharedModule,
