@@ -1,3 +1,5 @@
+import { Parentesco } from './Parentesco';
+
 export class NucleoFamiliar {
     id: number;
     // Núcleo Primario
@@ -31,8 +33,9 @@ export class NucleoFamiliar {
     tieneFamiliarProblemasConductaS = true;
     detalleProblemasConductaS: string;
     numeroParejasS: number;
+    // Datos del interno    
     trabajoDesempenado: string;
-    tiempoLaborar: number;
+    tiempoLaborar: string;
     sueldo: number;
     aportacionesEconomicas: string;
     distribucionGasto: string;
@@ -47,9 +50,9 @@ export class NucleoFamiliar {
     esVisitadoOtros = false;
     detalleVisitasOtros: string;
     nombreAvalMoral: string;
-    parentescoAvalMoral: any;
+    parentescoAvalMoral: Parentesco;
     nombreViviraExternado: string;
-    parentescoVivira: any;
+    parentescoVivira: Parentesco;
     calleVivira: string;
     numeroVivira: number;
     coloniaVivira: string;
