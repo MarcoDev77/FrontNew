@@ -11,12 +11,13 @@ import { RedesFamiliaresComponent } from './redes-familiares/redes-familiares.co
 import {OfrecimientoTrabajoComponent} from '@dashboard/servicio-social/ofrecimiento-trabajo/ofrecimiento-trabajo.component';
 import { ControlEntrevistaComponent } from './control-entrevista/control-entrevista.component';
 import { OtrosOficiosComponent } from './otros-oficios/otros-oficios.component';
+import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.component';
 
 
 
 @NgModule({
   declarations: [PaseUnicoComponent, PaseMensualComponent, RootComponent, RegistroVisitaComponent,
-  RedesFamiliaresComponent, OfrecimientoTrabajoComponent, ControlEntrevistaComponent, OtrosOficiosComponent],
+  RedesFamiliaresComponent, OfrecimientoTrabajoComponent, ControlEntrevistaComponent, OtrosOficiosComponent, NucleoFamiliarComponent],
   imports: [
     CommonModule,
     SharedModule,
