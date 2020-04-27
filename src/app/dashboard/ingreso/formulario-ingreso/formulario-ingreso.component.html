@@ -96,7 +96,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Clasificación:</label>
-                    <select class="form-control shadows" name="clasificacion" required #clasificacion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && clasificacion.invalid}" [(ngModel)]="ingreso.clasificacion">
+                    <select class="form-control shadows" name="clasificacion" #clasificacion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && clasificacion.invalid}" [(ngModel)]="ingreso.clasificacion">
             <option [value]="undefined" disabled hidden>Clasificación</option>
             <option value="Federal">Federal</option>
             <option value="Estatal">Estatal</option>
