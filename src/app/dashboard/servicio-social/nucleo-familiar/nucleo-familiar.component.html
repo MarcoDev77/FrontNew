@@ -1,0 +1,218 @@
+<app-section-title
+  icon="fa fa-table"
+  title="Núcleo Familiar"
+></app-section-title>
+<div class="row">
+  <div class="col-md-8">
+    <h3>Generalidades PPL</h3>
+  </div>
+  <div class="col-md-4">
+    <form
+      name="search"
+      (ngSubmit)="searchImputado()"
+      #formSearch="ngForm"
+      novalidate
+    >
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span (click)="searchImputado()" class="input-group-text"
+            ><i
+              class="fa {{ isLoading ? 'fa-spinner fa-spin' : 'fa-search' }}"
+            ></i
+          ></span>
+        </div>
+        <input
+          name="folio"
+          required
+          [(ngModel)]="ingreso.folio"
+          type="text"
+          class="form-control pull-right mr-2"
+          placeholder="Buscar por Folio"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+<app-generalidades-ppl [generalidadesPPL]="ingreso"></app-generalidades-ppl>
+
+<div class="row">
+  <div class="col-md-12 mt-4">
+    <h3>Núcleo Familiar Principal</h3>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Características de Zona</label>
+      <select class="form-control">
+        <option value="urbana">Urbana</option>
+        <option value="suburbana">Suburbana</option>
+        <option value="rural">Rural</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Responsable de Manutención</label>
+      <input type="text" class="form-control" />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Ingresos Mensuales</label>
+      <input type="number" class="form-control" />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Egresos Mensuales</label>
+      <input type="number" class="form-control" />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="custom-control custom-checkbox mt-4">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="cooperaDineroInternoP"
+        name="cooperaDineroInternoP"
+      />
+      <label class="custom-control-label" for="cooperaDineroInternoP">
+        ¿El interno coopera con dinero?
+      </label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="custom-control custom-checkbox mt-4">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="tieneAhorrosP"
+        name="tieneAhorrosP"
+      />
+      <label class="custom-control-label" for="tieneAhorrosP">
+        ¿Cuenta con ahorros?
+      </label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Grupo Familiar</label>
+      <select class="form-control">
+        <option value="funcional">Funcional</option>
+        <option value="disfuncional">Disfuncional</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Relaciones Interfamiliares</label>
+      <select class="form-control">
+        <option value="adecuadas">Adecuadas</option>
+        <option value="inadecuadas">Inadecuadas</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="custom-control custom-checkbox mt-4">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="huboViolenciaP"
+        name="huboViolenciaP"
+      />
+      <label class="custom-control-label" for="huboViolenciaP">
+        ¿Hubo violencia?
+      </label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Detalle Violencia</label>
+      <textarea class="form-control" cols="30" rows="10"></textarea>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Nivel Socioeconómico</label>
+      <select class="form-control">
+        <option value="bajo">Bajo</option>
+        <option value="medio">Medio</option>
+        <option value="alto">Alto</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="custom-control custom-checkbox mt-4">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="tieneFamiliarAntecedentesP"
+        name="tieneFamiliarAntecedentesP"
+      />
+      <label class="custom-control-label" for="tieneFamiliarAntecedentesP">
+        ¿Un familiar tiene antecedentes?
+      </label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Detalle Antedecentes Familiares</label>
+      <textarea class="form-control" cols="30" rows="10"></textarea>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Concepto que tiene la familia del interno</label>
+      <input type="text" class="form-control" />
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mt-4">
+    <h3>Núcleo Familiar Secundario</h3>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Numero de hijos</label>
+      <input type="text" class="form-control" />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Grupo Familiar</label>
+      <select class="form-control">
+        <option value="funcional">Funcional</option>
+        <option value="disfuncional">Disfuncional</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Relaciones Interfamiliares</label>
+      <select class="form-control">
+        <option value="adecuadas">Adecuadas</option>
+        <option value="inadecuadas">Inadecuadas</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="custom-control custom-checkbox mt-4">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="huboViolenciaP"
+        name="huboViolenciaP"
+      />
+      <label class="custom-control-label" for="huboViolenciaP">
+        ¿Hubo violencia?
+      </label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-gruop">
+      <label>Detalle Violencia</label>
+      <textarea class="form-control" cols="30" rows="10"></textarea>
+    </div>
+  </div>
+</div>
+
