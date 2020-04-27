@@ -233,12 +233,18 @@
         <h6>¿Hubo violencia intrafamiliar?:</h6>
     </div>
     <div class="custom-control custom-checkbox mt-3 mb-1">
-        <input type="checkbox" id="carpinteria"
+        <input type="checkbox" id="violencia" [(ngModel)]="estudio.violencia"
                class="custom-control-input">
-        <label class="custom-control-label" for="carpinteria"></label>
+        <label class="custom-control-label" for="violencia"></label>
       </div>
     <div class="col-md-7"></div>
 
+    <div class="col-md-12" *ngIf="estudio.violencia">
+        <div class="form-group">
+            <label for="">Especificar:</label>
+            <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+        </div>
+    </div>
 
     <div class="col-md-3 mt-4">
         <h6>Nivel socio-económico y cultural:</h6>
@@ -262,6 +268,30 @@
         </div>
     </div>
 
+
+    <div class="col-md-10 mt-3">
+        <h6>Algún integrante de la familia tiene antecedentes penales ó adicción a algpún tipo de estupefaciente ó cualquier tipo de tóxicos:</h6>
+    </div>
+    <div class="custom-control custom-checkbox mt-3 mb-1">
+        <input type="checkbox" id="antecedentes" [(ngModel)]="estudio.antecedentes"
+               class="custom-control-input">
+        <label class="custom-control-label" for="antecedentes"></label>
+      </div>
+    <div class="col-md-1"></div>
+
+    <div class="col-md-12" *ngIf="estudio.antecedentes">
+        <div class="form-group">
+            <label for="">Especificar:</label>
+            <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="col-md-12" >
+        <div class="form-group">
+            <label for="">Concepto que tiene la familia del interno:</label>
+            <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+        </div>
+    </div>
 
 </div>
 <div class="row">
