@@ -15,7 +15,12 @@ export class ServicioSocialService {
 
   getInfoNucleoFamiliar = folio =>
     this.http.get(`${this.url}/api/buscarRegistroNucleoFamiliar?folioImputado=${folio}`);
-  
+
   saveNucleoFamiliar = model => this.http.post(`${this.url}/api/registrarNucleoFamiliar`, model);
-  
+
+  generatePDFEstudioTrabajoSocial = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfEstudioTrabajoSocial?imputadoId=${id}`, { responseType });
+  }
+
 }
