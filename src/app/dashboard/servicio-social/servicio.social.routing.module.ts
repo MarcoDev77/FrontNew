@@ -8,6 +8,7 @@ import { RedesFamiliaresComponent } from './redes-familiares/redes-familiares.co
 import {OfrecimientoTrabajoComponent} from '@dashboard/servicio-social/ofrecimiento-trabajo/ofrecimiento-trabajo.component';
 import { ControlEntrevistaComponent } from './control-entrevista/control-entrevista.component';
 import { EstudioTrabajoSocialComponent } from './estudio-trabajo-social/estudio-trabajo-social.component';
+import { TablaFamiliaresComponent } from './tabla-familiares/tabla-familiares.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
       {path: 'redes-familiares', component: RedesFamiliaresComponent},
       {path: 'ofrecimiento-trabajo', component: OfrecimientoTrabajoComponent},
       {path: 'control-entrevista', component: ControlEntrevistaComponent},
-      {path: 'estudio-trabajo-social',component: EstudioTrabajoSocialComponent}
+      {path: 'estudio-trabajo-social',component: EstudioTrabajoSocialComponent},
+      {path: 'tabla-familiar',component: TablaFamiliaresComponent}
     ]
   },
 ];
