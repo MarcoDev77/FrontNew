@@ -243,6 +243,7 @@ export class CatalogosService {
   listRoles = () => this.http.get(`${this.url}/api/listarRoles`);
   listAreas = () => this.http.get(`${this.url}/api/listAreas`);
 
+  getParentescos = () => this.http.get(`${this.url}/api/listarParentescos`);
 
 }
 
