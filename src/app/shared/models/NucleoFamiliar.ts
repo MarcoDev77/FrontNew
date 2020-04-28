@@ -14,14 +14,14 @@ export class NucleoFamiliar {
     huboViolenciaP = false;
     detalleViolenciaP: string;
     nivelSocioeconomicoP: string;
-    tieneFamiliarAntecedentesP = true;
+    tieneFamiliarAntecedentesP = false;
     detalleFamiliarAntecentesP: string;
     conceptoFamiliaInternoP: string;
     // Núcleo Secundario
     hijosUnionesS: string;
     grupoFamiliarS: string;
     relacionesInterfamiliaresS: string;
-    huboViolenciaS = true;
+    huboViolenciaS = false;
     detalleViolenciaS: string;
     nivelSocioeconomicoS: string;
     numeroHabitacionesS: number;
@@ -30,7 +30,7 @@ export class NucleoFamiliar {
     mobiliarioEnseresS: string;
     caracteristicaZonaS: string;
     relacionMedioExternoS: string;
-    tieneFamiliarProblemasConductaS = true;
+    tieneFamiliarProblemasConductaS = false;
     detalleProblemasConductaS: string;
     numeroParejasS: number;
     // Datos del interno    

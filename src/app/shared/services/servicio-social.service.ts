@@ -13,6 +13,9 @@ export class ServicioSocialService {
     this.url = environment.apiUrl;
   }
 
-  getInfoNucleFamiliar = folio =>
-    this.http.get(`${this.url}/api/buscarRegistroNucleoFamiliarl?folioImputado=${folio}`);
+  getInfoNucleoFamiliar = folio =>
+    this.http.get(`${this.url}/api/buscarRegistroNucleoFamiliar?folioImputado=${folio}`);
+  
+  saveNucleoFamiliar = model => this.http.post(`${this.url}/api/registrarNucleoFamiliar`, model);
+  
 }
