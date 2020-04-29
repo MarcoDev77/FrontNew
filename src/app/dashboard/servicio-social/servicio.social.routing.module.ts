@@ -7,6 +7,8 @@ import {RegistroVisitaComponent} from '@dashboard/servicio-social/registro-visit
 import { RedesFamiliaresComponent } from './redes-familiares/redes-familiares.component';
 import {OfrecimientoTrabajoComponent} from '@dashboard/servicio-social/ofrecimiento-trabajo/ofrecimiento-trabajo.component';
 import { ControlEntrevistaComponent } from './control-entrevista/control-entrevista.component';
+import { EstudioTrabajoSocialComponent } from './estudio-trabajo-social/estudio-trabajo-social.component';
+import { TablaFamiliaresComponent } from './tabla-familiares/tabla-familiares.component';
 import { OtrosOficiosComponent } from './otros-oficios/otros-oficios.component';
 import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.component';
 
@@ -21,6 +23,8 @@ const routes: Routes = [
       {path: 'redes-familiares', component: RedesFamiliaresComponent},
       {path: 'ofrecimiento-trabajo', component: OfrecimientoTrabajoComponent},
       {path: 'control-entrevista', component: ControlEntrevistaComponent},
+      {path: 'estudio-trabajo-social',component: EstudioTrabajoSocialComponent},
+      {path: 'tabla-familiar',component: TablaFamiliaresComponent}
       {path: 'otros-oficios', component: OtrosOficiosComponent},
       {path: 'nucleo-familiar', component: NucleoFamiliarComponent},
     ]

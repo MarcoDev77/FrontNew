@@ -1,0 +1,301 @@
+<app-section-title icon="fa fa-table" title="estudio trabajo social"></app-section-title>
+<div class="row">
+    <div class="col-md-8">
+        <h3 class="title-pink">Generalidades PPL</h3>
+    </div>
+    <div class="col-md-4">
+        <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span (click)="searchImputado()" class="input-group-text"><i
+                            class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
+                </div>
+                <input name="folio" required [(ngModel)]="ingreso.folio" type="text"
+                    class="form-control pull-right mr-2" placeholder="Buscar por Folio">
+            </div>
+        </form>
+    </div>
+</div>
+<app-generalidades-ppl [generalidadesPPL]="ingreso"></app-generalidades-ppl>
+
+<div class="row mt-2">
+    <div class="col md-9">
+        <h5 class="title-pink">Grupo familiar primario</h5>
+    </div>
+    <div class="col text-right mb-3">
+        <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
+                class="fa fa-plus fa-lg"></i></button>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th (click)="sort('nombre')" class="text-center">
+                    <span *ngIf="key == 'sustanciaConsumia'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+                    Nombre
+                </th>
+                <th (click)="sort('edadInicio')" class="text-center">
+                    <span *ngIf="key == 'edadInicio'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+                    Parentesco
+                </th>
+                <th (click)="sort('frecuenciaConsumo')" class="text-center">
+                    <span *ngIf="key == 'frecuenciaConsumo'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+                    Edad
+                </th>
+                <th (click)="sort('gradoConsumo')" class="text-center">
+                    <span *ngIf="key == 'gradoConsumo'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+                    Edo. Civil
+                </th>
+                <th (click)="sort('gradoConsumo')" class="text-center">
+                    <span *ngIf="key == 'gradoConsumo'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+                    Escolaridad
+                </th>
+                <th (click)="sort('gradoConsumo')" class="text-center">
+                    <span *ngIf="key == 'gradoConsumo'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+                    Ocupación
+                </th>
+                <th class="text-center">
+                    Acciones
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="table-form" *ngIf="isForm">
+                <td class="text-center">
+                    <input name="sustanciaConsumia" type="text" class="form-control"
+                        [(ngModel)]="antecedente.sustanciaConsumia" placeholder="Sustancia que consumia"
+                        #sustanciaConsumia="ngModel"
+                        [ngClass]="{ 'is-invalid':  sustanciaConsumia.touched && sustanciaConsumia.invalid }"
+                        maxlength="45" required>
+                </td>
+                <td class="text-center">
+                    <input name="edadInicio" type="text" class="form-control" [(ngModel)]="antecedente.edadInicio"
+                        placeholder="Edad de inicio" #edadInicio="ngModel"
+                        [ngClass]="{ 'is-invalid':  edadInicio.touched && edadInicio.invalid }" maxlength="45" required>
+                </td>
+                <td class="text-center">
+                    <input name="frecuenciaConsumo" type="text" class="form-control"
+                        [(ngModel)]="antecedente.frecuenciaConsumo" placeholder="Frecuencia de consumo"
+                        #frecuenciaConsumo="ngModel"
+                        [ngClass]="{ 'is-invalid':  frecuenciaConsumo.touched && frecuenciaConsumo.invalid }" required>
+                </td>
+                <td class="text-center">
+                    <input name="gradoConsumo" type="text" class="form-control" [(ngModel)]="antecedente.gradoConsumo"
+                        placeholder="Grado de consumo" #gradoConsumo="ngModel"
+                        [ngClass]="{ 'is-invalid':  gradoConsumo.touched && gradoConsumo.invalid }" required>
+                </td>
+                <td>
+                    <i class="fa fa-times mr-3" placement="top" ngbTooltip="Cancelar" (click)="cancel()"></i>
+                    <i class="fa fa-check" placement="top" ngbTooltip="Guardar"
+                        (click)="saveAntecedente([sustanciaConsumia])"></i>
+                </td>
+            </tr>
+            <tr id="{{'tr' + i}}"
+                *ngFor="let item of grupoFamiliar | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+                (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+                <td class="text-center">{{item.sustanciaConsumia}}</td>
+                <td class="text-center">{{item.edadInicio}}</td>
+                <td class="text-center">{{item.frecuenciaConsumo}}</td>
+                <td class="text-center">{{item.gradoConsumo}}</td>
+                <td class="text-center">
+                    <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar"
+                        (click)="updateAntecedente('tr' + i , item)"></i> &nbsp;
+                    <i class="fa fa-trash" placement="top" ngbTooltip="Eliminar" (click)="deleteAntecedente(item)"></i>
+                </td>
+
+            </tr>
+
+            <tr *ngIf="grupoFamiliar.length == 0">
+                <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center w-100">
+        <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel=""
+            (pageChange)="switch($event)">
+        </pagination-controls>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h6 class="title-pink">Señalar cómo era la situación económica en su familia primaria </h6>
+    </div>
+    <div class="col-12 form-group">
+        <div class="form-check form-check-radio form-check-inline pb-4 w-100">
+            <label style="margin-right: 2rem;margin-top: 0.3rem;">Señalar características de la zona:</label>
+            <label class="form-check-label media">
+                <input class="form-check-input has-danger" type="radio" [value]="'Cuadrada'" name="cara" required>
+                Urbana
+                <span class="form-check-sign"></span>
+            </label>
+
+            <label class="form-check-label media">
+                <input class="form-check-input" type="radio" [value]="'Redonda'" name="cara" required>
+                Sub-urbana
+                <span class="form-check-sign"></span>
+            </label>
+
+            <label class="form-check-label media">
+                <input class="form-check-input" type="radio" [value]="'Ovalada'" name="cara" required>
+                Rural
+                <span class="form-check-sign"></span>
+            </label>
+
+            <label class="form-check-label media">
+                <input class="form-check-input" type="radio" [value]="'Alargada'" name="cara" required>
+                Criminogena
+                <span class="form-check-sign"></span>
+            </label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Responsable de la manutención del hogar:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Total de ingresos mensuales:</label>
+            <input type="number" class="form-control">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Total de egresos mensuales:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="">Actualmente coopera el interno económicamente con la familia:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="">Tiene fondos de ahorro:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-12">
+        <h6 class="title-pink">Características del núcleo primario</h6>
+    </div>
+    <div class="col-md-2 mt-4">
+        <h6>Grupo familiar:</h6>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+            <label for="">Funcional:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+            <label for="">Disfuncional:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-md-2 mt-4">
+        <h6>Relaciones interfamiliares:</h6>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+            <label for="">Adecuadas:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+            <label for="">Inadecuadas:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+
+
+    <div class="col-md-4 mt-3">
+        <h6>¿Hubo violencia intrafamiliar?:</h6>
+    </div>
+    <div class="custom-control custom-checkbox mt-3 mb-1">
+        <input type="checkbox" id="violencia" [(ngModel)]="estudio.violencia"
+               class="custom-control-input">
+        <label class="custom-control-label" for="violencia"></label>
+      </div>
+    <div class="col-md-7"></div>
+
+    <div class="col-md-12" *ngIf="estudio.violencia">
+        <div class="form-group">
+            <label for="">Especificar:</label>
+            <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="col-md-3 mt-4">
+        <h6>Nivel socio-económico y cultural:</h6>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="">Alto:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="">Medio:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="">Bajo:</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+
+
+    <div class="col-md-10 mt-3">
+        <h6>Algún integrante de la familia tiene antecedentes penales ó adicción a algpún tipo de estupefaciente ó cualquier tipo de tóxicos:</h6>
+    </div>
+    <div class="custom-control custom-checkbox mt-3 mb-1">
+        <input type="checkbox" id="antecedentes" [(ngModel)]="estudio.antecedentes"
+               class="custom-control-input">
+        <label class="custom-control-label" for="antecedentes"></label>
+      </div>
+    <div class="col-md-1"></div>
+
+    <div class="col-md-12" *ngIf="estudio.antecedentes">
+        <div class="form-group">
+            <label for="">Especificar:</label>
+            <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="col-md-12" >
+        <div class="form-group">
+            <label for="">Concepto que tiene la familia del interno:</label>
+            <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-4 offset-8">
+        <button class="btn btn-success pull-right">Imprimir</button>
+    </div>
+</div>

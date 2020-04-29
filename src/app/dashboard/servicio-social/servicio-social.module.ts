@@ -10,6 +10,9 @@ import {RegistroVisitaComponent} from './registro-visita/registro-visita.compone
 import { RedesFamiliaresComponent } from './redes-familiares/redes-familiares.component';
 import {OfrecimientoTrabajoComponent} from '@dashboard/servicio-social/ofrecimiento-trabajo/ofrecimiento-trabajo.component';
 import { ControlEntrevistaComponent } from './control-entrevista/control-entrevista.component';
+import { EstudioTrabajoSocialComponent } from './estudio-trabajo-social/estudio-trabajo-social.component';
+import { TablaFamiliaresComponent } from './tabla-familiares/tabla-familiares.component';
+
 import { OtrosOficiosComponent } from './otros-oficios/otros-oficios.component';
 import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.component';
 
@@ -17,7 +20,10 @@ import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.compo
 
 @NgModule({
   declarations: [PaseUnicoComponent, PaseMensualComponent, RootComponent, RegistroVisitaComponent,
-  RedesFamiliaresComponent, OfrecimientoTrabajoComponent, ControlEntrevistaComponent, OtrosOficiosComponent, NucleoFamiliarComponent],
+  RedesFamiliaresComponent, OfrecimientoTrabajoComponent, ControlEntrevistaComponent,
+  EstudioTrabajoSocialComponent,
+  TablaFamiliaresComponent,OtrosOficiosComponent, NucleoFamiliarComponent],
+
   imports: [
     CommonModule,
     SharedModule,
