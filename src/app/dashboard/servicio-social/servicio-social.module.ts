@@ -13,13 +13,17 @@ import { ControlEntrevistaComponent } from './control-entrevista/control-entrevi
 import { EstudioTrabajoSocialComponent } from './estudio-trabajo-social/estudio-trabajo-social.component';
 import { TablaFamiliaresComponent } from './tabla-familiares/tabla-familiares.component';
 
+import { OtrosOficiosComponent } from './otros-oficios/otros-oficios.component';
+import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.component';
+
 
 
 @NgModule({
   declarations: [PaseUnicoComponent, PaseMensualComponent, RootComponent, RegistroVisitaComponent,
   RedesFamiliaresComponent, OfrecimientoTrabajoComponent, ControlEntrevistaComponent,
   EstudioTrabajoSocialComponent,
-  TablaFamiliaresComponent],
+  TablaFamiliaresComponent,OtrosOficiosComponent, NucleoFamiliarComponent],
+
   imports: [
     CommonModule,
     SharedModule,
