@@ -3,6 +3,7 @@ import { ServicioSocialService } from '@shared/services/servicio-social.service'
 import { IngresoService } from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CatalogosService } from '@shared/services/catalogos.service';
 
 @Component({
   selector: 'app-tabla-familiares',
@@ -13,6 +14,8 @@ export class TablaFamiliaresComponent implements OnInit {
   public familiar : Familiar
   public parentescos: any[]
   public familiares: any[];
+  public tituloModal: string
+  public estadosCiviles: any[];
   //Table atributess
   public p;
   public filter: any;
@@ -22,24 +25,53 @@ export class TablaFamiliaresComponent implements OnInit {
   public selectedRow: Number;
   public setClickedRow: (i) => void;
   public auxId: any;
-  constructor(private servicioSocialService: ServicioSocialService, private ingresoService: IngresoService, private modalService: NgbModal) {
+  constructor(private servicioSocialService: ServicioSocialService,
+     private ingresoService: IngresoService,
+    private  catalogosService: CatalogosService,private modalService: NgbModal) {
     this.familiar= {} as any;
     this.familiares= [];
+    this.estadosCiviles=[];
+    this.familiar.parentesco = {} as any
+    this.familiar.estadoCivil={} as any
    }
 
   ngOnInit() {
+    this.getFamiliares();
+    this.getParentescos();
+    this.getEstadosCiviles();
   }
 
 
 
   getParentescos(){
     this.ingresoService.getParentescos().subscribe((data: any)=>{
+      console.log(data)
       this.parentescos=data.parentescos
     })
   }
 
-  saveFamiliar(array: any[]){
-    if (this.validateFiels(array)) {
+  getEstadosCiviles(){
+    this.catalogosService.listEstadosCiviles().subscribe((data:any)=>{
+      console.log(data);
+      this.estadosCiviles=data.estadosCiviles
+    })
+  }
+
+  getFamiliares(){
+    let model={
+      tipoNucleo: "primario",
+      nucleoId:3
+      
+    }
+    this.servicioSocialService.getMiembrosNucleoFamiliar(model).subscribe((data:any)=>{
+      console.log(data)
+      this.familiares=data.miembrosNucleo;
+    })
+  }
+
+  saveFamiliar(){
+    this.familiar.nucleoFamiliar={id: 3}
+    this.familiar.tipoNucleo= "primario"
       this.servicioSocialService.saveMiembroNucleoFamiliar(this.familiar).subscribe((data: any) => {
         console.log(data);
         Swal.fire({
@@ -49,13 +81,13 @@ export class TablaFamiliaresComponent implements OnInit {
           timer: 1300,
           showConfirmButton: false
         });
-       
+        this.getFamiliares()
       });
-    }
+    
   }
 
  
-  deleteAntecedente(item){
+  deleteFamiliar(item){
     Swal.fire({
       title: '¿Estas seguro?',
       text: 'El registro se eliminara.',
@@ -65,10 +97,10 @@ export class TablaFamiliaresComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then(({value}) => {
       if (value) {
-        this.servicioSocialService.deleteMiembroNucleoFamiliar(item.id).subscribe((data: any) => {
+        this.servicioSocialService.deleteMiembroNucleoFamiliar(item).subscribe((data: any) => {
           console.log(data);
           Swal.fire({
-            title: data.error ? 'Error!' : 'Cambio exitoso.',
+            title: data.error ? 'Error!' : 'Eliminación exitoso.',
             text: data.mensaje,
             icon: data.error ? 'error' : 'success',
             timer: 1300,
@@ -76,7 +108,7 @@ export class TablaFamiliaresComponent implements OnInit {
           }).finally(() => {
             if (!data.error) {
               //this.cancel();
-             // this.getData(false);
+             this.getFamiliares();
             }
           });
         });
@@ -86,16 +118,6 @@ export class TablaFamiliaresComponent implements OnInit {
 
 
 //Table methods
-validateFiels(array: any[]): boolean {
-  let pass = true;
-  for (const field of array) {
-    if (!field.valid) {
-      pass = false;
-      field.control.markAsTouched();
-    }
-  }
-  return pass;
-}
 
 sort(key) {
   if (key === this.key) {
@@ -112,12 +134,19 @@ sort(key) {
 
 
 add() {
+  this.tituloModal="Registrar familiar"
   this.familiar = {} as any;
-  this.isForm = true;
+  this.familiar.parentesco={} as any
+  this.familiar.estadoCivil={} as any
 }
 
+updateFamiliar(familiar){
+  this.tituloModal="Modificar familiar"
+  this.familiar=familiar
+}
 
-
+openModal(modal){
+  this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });}
 }
 
 class Familiar {
@@ -125,8 +154,10 @@ class Familiar {
   nombre: String
   parentesco: any
   ocupacion: String
-  estadoCivil: String
+  estadoCivil: any
   escolaridad: String
   edad: number
   imputadoId: number
+  tipoNucleo: string
+  nucleoFamiliar: any
 }

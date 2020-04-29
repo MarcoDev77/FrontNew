@@ -3,8 +3,8 @@
         <h5 class="title-pink">Grupo familiar</h5>
     </div>
     <div class="col text-right mb-3">
-        <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
-                class="fa fa-plus fa-lg"></i></button>
+        <button class="btn btn-success btn-sm m-0 pull-right" (click)="add(); openModal(registrarFamiliar)"
+            [ngbTooltip]="'Nuevo Registro'"><i class="fa fa-plus fa-lg"></i></button>
     </div>
 </div>
 <div class="table-responsive">
@@ -48,19 +48,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr 
-                *ngFor="let item of familiares | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
-                (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+            <tr *ngFor="let item of familiares | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+               >
                 <td class="text-center">{{item.nombre}}</td>
                 <td class="text-center">{{item.parentesco.nombre}}</td>
                 <td class="text-center">{{item.edad}}</td>
-                <td class="text-center">{{item.estadoCivil}}</td>
+                <td class="text-center">{{item.estadoCivil.nombre}}</td>
                 <td class="text-center">{{item.gradoEstudio}}</td>
                 <td class="text-center">{{item.ocupacion}}</td>
 
                 <td class="text-center">
                     <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar"
-                        (click)="updateFamiliar(item)"></i> &nbsp;
+                        (click)="updateFamiliar(item);openModal(registrarFamiliar)"></i> &nbsp;
                     <i class="fa fa-trash" placement="top" ngbTooltip="Eliminar" (click)="deleteFamiliar(item)"></i>
                 </td>
 
@@ -82,7 +81,7 @@
     <div class="modal-body">
         <h3>{{tituloModal}}</h3>
         <br>
-        <form class="form-horizontal" name="form" #f="ngForm" (ngSubmit)="f.form.valid && savePersonal()" novalidate>
+        <form class="form-horizontal" name="form" #f="ngForm" (ngSubmit)="f.form.valid && saveFamiliar()" novalidate>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -95,28 +94,26 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Parentesco:</label>
-                        <input name="parentesco" type="text" class="form-control" [(ngModel)]="familiar.parentesco"
-                            placeholder="Parentesco" #parentesco="ngModel"
-                            [ngClass]="{ 'is-invalid':  parentesco.touched && parentesco.invalid }" maxlength="45"
-                            required>
+                        <select class="form-control shadows" name="parentesco" [(ngModel)]="familiar.parentesco.id">
+                            <option *ngFor="let item of parentescos" [value]="item.id"> {{item.nombre}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Fecha de nacimiento:</label>
                         <input name="fechaNacimiento" type="date" class="form-control"
-                            [(ngModel)]="familiar.fechaNacimiento" placeholder="Fecha de nacimiento"
-                            #fechaNacimiento="ngModel"
-                            [ngClass]="{ 'is-invalid':  fechaNacimiento.touched && fechaNacimiento.invalid }" required>
+                            [ngModel]="familiar.fechaNacimiento| date:'yyyy-MM-dd'"
+                            (ngModelChange)="familiar.fechaNacimiento = $event" required>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Estado civil:</label>
-                        <input name="estadoCivil" type="text" class="form-control" [(ngModel)]="familiar.estadoCivil"
-                            placeholder="Estado civil" #estadoCivil="ngModel"
-                            [ngClass]="{ 'is-invalid':  estadoCivil.touched && estadoCivil.invalid }" required>
+                        <select class="form-control shadows" name="parentesco" [(ngModel)]="familiar.estadoCivil.id">
+                            <option *ngFor="let item of estadosCiviles" [value]="item.id"> {{item.nombre}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -131,15 +128,15 @@
                     <div class="form-group">
                         <label for="">Ocupación:</label>
                         <input name="ocupacion" type="text" class="form-control" [(ngModel)]="familiar.ocupacion"
-                        placeholder="Ocupación" #ocupacion="ngModel"
-                        [ngClass]="{ 'is-invalid':  ocupacion.touched && ocupacion.invalid }" required>
+                            placeholder="Ocupación" #ocupacion="ngModel"
+                            [ngClass]="{ 'is-invalid':  ocupacion.touched && ocupacion.invalid }" required>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 text-center text-sm-right">
-                    <button type="button" (click)="registroUsuarioModal.close()"
-                        class="btn btn-danger mr-3">Cancelar</button>
+                    <button type="button" (click)="registroFamiliarModal.close()"
+                        class="btn btn-danger mr-3">Cerrar</button>
                     <button type="submit" class="btn btn-success mr-3">Guardar</button>
                 </div>
             </div>
