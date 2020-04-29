@@ -16,6 +16,8 @@
         </form>
     </div>
 </div>
+<form name="save" (ngSubmit)="saveActividad()" #formSave="ngForm" novalidate>
+
 <div class="row">
 
     <div class="col-md-4">
@@ -65,37 +67,40 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Programado en visita intima:</label>
-            <input type="text" class="form-control" name="duenoMedio"  />
+            <input type="text" class="form-control" name="visitaIntima" [(ngModel)]="actividad.visitaIntima" />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Día:</label>
-            <input type="text" class="form-control" name="duenoMedio"  />
+            <input type="text" class="form-control" name="diaVisitaIntima" [(ngModel)]="actividad.diaVisitaIntima"  />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Horario:</label>
-            <input type="text" class="form-control" name="duenoMedio"  />
+            <input type="text" class="form-control" name="horarioVisitaIntima"  [(ngModel)]="actividad.horarioVisitaIntima"/>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Visita familia:</label>
-            <input type="text" class="form-control" name="duenoMedio" />
+            <input type="text" class="form-control" name="visitaFamiliar" [(ngModel)]="actividad.visitaFamiliar" />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Frecuencia:</label>
-            <input type="text" class="form-control" name="duenoMedio"  />
+            <input type="text" class="form-control" name="frecuencia"  [(ngModel)]="actividad.frecuencia"/>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Parentesco:</label>
-            <input type="text" class="form-control" name="duenoMedio"  />
+            <select class="form-control shadows" name="parentesco" [(ngModel)]="actividad.parentesco.id">
+                <option *ngFor="let item of parentescos" [ngValue]="item.id"> {{item.nombre}}</option>
+                
+            </select>
         </div>
     </div>
 </div>
@@ -104,7 +109,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <label for="">Que actividad realiza al terminar la visita familiar:</label>
-            <textarea class=" form-control" cols="100"  rows="9" value=""></textarea>
+            <textarea class=" form-control" cols="100"  rows="9" value="" name="actividadRealiza" [(ngModel)]="actividad.actividadRealiza"></textarea>
         </div>
     </div>
 </div>
@@ -113,31 +118,33 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Taller asignado:</label>
-            <input type="text" class="form-control" name="duenoMedio" />
+            <input type="text" class="form-control" name="tallerAsignado" [(ngModel)]="actividad.tallerAsignado" />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Día:</label>
-            <input type="text" class="form-control" name="duenoMedio" />
+            <input type="text" class="form-control" name="diaTaller" [(ngModel)]="actividad.diaTaller" />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Horario:</label>
-            <input type="text" class="form-control" name="duenoMedio" />
+            <input type="text" class="form-control" name="horarioTaller"  [(ngModel)]="actividad.horarioTaller"/>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Fecha de inicio:</label>
-            <input type="text" class="form-control" name="duenoMedio"  />
+            <input type="date" class="form-control" name="fechaInicio" 
+            [ngModel]="actividad.fechaInicio| date:'yyyy-MM-dd'"
+                            (ngModelChange)="actividad.fechaInicio = $event" />
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="">Lugar:</label>
-            <input type="text" class="form-control" name="duenoMedio"  />
+            <input type="text" class="form-control" name="lugar" [(ngModel)]="actividad.lugar" />
         </div>
     </div>
 </div>
@@ -146,14 +153,23 @@
     <div class="col-md-12">
         <div class="form-group">
             <label for="">Observaciones:</label>
-            <textarea class=" form-control" cols="100"  rows="9" value=""></textarea>
+            <textarea class=" form-control" cols="100"  rows="9" value="" name="observaciones" [(ngModel)]="actividad.observaciones"></textarea>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-12 text-center text-sm-right">
-        <button type="button" class="btn btn-success mr-3">Guardar</button>
-        <button type="submit" class="btn btn-success mr-3">Imprimir</button>
+        <button type="submit" class="btn btn-success mr-3" [disabled]="!generalidadesPPL.imputadoId">Guardar</button>
+        <button type="button" class="btn btn-success mr-3" (click)="generatePDF(view)" [disabled]="!generalidadesPPL.imputadoId">Imprimir</button>
     </div>
 </div>
+</form>
+
+<ng-template #view let-view>
+    <div class="modal-body text-center pt-0">
+      <i (click)="view.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
+         class="fa fa-times-circle"></i>
+      <app-web-viewer [file]="file" [name]="'acta-trabajo-social'"></app-web-viewer>
+    </div>
+  </ng-template>

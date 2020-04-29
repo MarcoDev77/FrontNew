@@ -97,4 +97,15 @@ export class ComiteTecnicoService {
     return this.http.get(`${this.url}/api/buscarDocumentoResultadoExamen?imputadoId=${id}&claveDocumento=${clave}`, {responseType});
   }
 
+  saveActividadestrabajoSocial =model =>{
+    console.log('To server.trabajoSocial', model);
+    return this.http.post(`${this.url}/api/registrarActividadesTrabajo`, model);
+  }
+
+  generatePDFTrabajoSocial = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadTrabajoSocial?imputadoId=${id}`, {responseType});
+  };
+
+
 }
