@@ -24,7 +24,7 @@ const routes: Routes = [
       {path: 'ofrecimiento-trabajo', component: OfrecimientoTrabajoComponent},
       {path: 'control-entrevista', component: ControlEntrevistaComponent},
       {path: 'estudio-trabajo-social',component: EstudioTrabajoSocialComponent},
-      {path: 'tabla-familiar',component: TablaFamiliaresComponent}
+      {path: 'tabla-familiar',component: TablaFamiliaresComponent},
       {path: 'otros-oficios', component: OtrosOficiosComponent},
       {path: 'nucleo-familiar', component: NucleoFamiliarComponent},
     ]
