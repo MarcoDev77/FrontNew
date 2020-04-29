@@ -14,6 +14,7 @@ import { OdontologiaComponent } from './odontologia/odontologia.component';
 import { ResultadosExamenesComponent } from './resultados-examenes/resultados-examenes.component';
 import { ResolucionPruebasComponent } from './resolucion-pruebas/resolucion-pruebas.component';
 import { ReporteMedicoComponent } from './reporte-medico/reporte-medico.component';
+import {FileUploadModule} from 'ng2-file-upload';
 
 
 
@@ -26,11 +27,12 @@ import { ReporteMedicoComponent } from './reporte-medico/reporte-medico.componen
     ResultadosExamenesComponent,
   ResolucionPruebasComponent,
     ReporteMedicoComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    FormsModule,
-    ComiteTecnicoRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        FormsModule,
+        ComiteTecnicoRoutingModule,
+        FileUploadModule
+    ]
 })
 export class ComiteTecnicoModule { }
