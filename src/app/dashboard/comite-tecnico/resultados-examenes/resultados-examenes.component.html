@@ -7,6 +7,7 @@
             <input type="text" class="form-control" name="duenoMedio" placeholder="Folio" />
         </div>
     </div>
+<<<<<<< HEAD
     <div class="col-md-12">
         <h6>Examen médico:</h6>
         <div class="input-group mb-3">
@@ -24,6 +25,69 @@
         <div class="input-group mb-3">
             <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
         </div>
+=======
+  </div>
+  <div class="col-md-12">
+    <app-generalidades-ppl
+      [generalidadesPPL]="ingreso.imputado"
+    ></app-generalidades-ppl>
+  </div>
+  <div class="col-md-12">
+    <h6>Examen médico:</h6>
+    <div class="input-group mb-3">
+      <button [disabled]="!this.ingreso.imputado?.id" (click)="searchDocuments('examen_medico', view)"
+              class="btn btn-success">Archivo actual
+      </button>
+      <input
+        #fileMedico
+        ng2FileSelect aria-describedby="fileHelp"
+        (change)="uploadFile(fileMedico, 'examen_medico', uploaderMedico)"
+        [uploader]="uploaderMedico"
+        type="file"
+        class="form-control-file btn btn-simple"
+        name="fileMedico"
+        accept="application/pdf"
+        [disabled]="!this.ingreso.imputado?.id"
+      />
+    </div>
+  </div>
+  <div class="col-md-12">
+    <h6>Examen odontológico:</h6>
+    <div class="input-group mb-3">
+      <button [disabled]="!this.ingreso.imputado?.id" (click)="searchDocuments('examen_odontologico', view)"
+              class="btn btn-success">Archivo actual
+      </button>
+      <input
+        #fileOdontologia
+        ng2FileSelect aria-describedby="fileHelp"
+        (change)="uploadFile(fileOdontologia, 'examen_odontologico', uploaderOdontologico)"
+        [uploader]="uploaderOdontologico"
+        type="file"
+        class="form-control-file btn btn-simple"
+        name="fileOdontologia"
+        accept="application/pdf"
+        [disabled]="!this.ingreso.imputado?.id"
+      />
+    </div>
+  </div>
+  <div class="col-md-12">
+    <h6>Examen psicológico:</h6>
+    <div class="input-group mb-3">
+      <button [disabled]="!this.ingreso.imputado?.id" (click)="searchDocuments('examen_psicologico', view)"
+              class="btn btn-success">Archivo actual
+      </button>
+      <input
+        #filePsicologico
+        ng2FileSelect aria-describedby="fileHelp"
+        (change)="uploadFile(filePsicologico, 'examen_psicologico', uploaderPsicologico)"
+        [uploader]="uploaderPsicologico"
+        type="file"
+        class="form-control-file btn btn-simple"
+        name="filePsicologico"
+        accept="application/pdf"
+        [disabled]="!this.ingreso.imputado?.id"
+      />
+>>>>>>> parent of f14bbfa... Merge branch 'feature/verificar-examenes' into 'develop'
     </div>
   
    
