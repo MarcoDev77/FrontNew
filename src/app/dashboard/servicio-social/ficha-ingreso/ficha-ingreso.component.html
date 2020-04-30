@@ -1,0 +1,52 @@
+<app-section-title icon="fa fa-table" title="Ficha ingreso"></app-section-title>
+<div class="row">
+  <div class="col-md-8">
+    <h3 class="title-pink">Generalidades PPL</h3>
+  </div>
+  <div class="col-md-4">
+    <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
+      <div class="input-group">
+        <div class="input-group-prepend">
+        <span (click)="searchImputado()" class="input-group-text"><i
+          class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
+        </div>
+        <input name="folio" required [(ngModel)]="ingreso.folio" type="text"
+               class="form-control pull-right mr-2"
+               placeholder="Buscar por Folio">
+      </div>
+    </form>
+  </div>
+</div>
+<app-generalidades-ppl [generalidadesPPL]="ingreso"></app-generalidades-ppl>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="">Número telefonico del PPL</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-md-5 mt-4">
+        <h6>¿Cuenta con servicio medico?</h6>
+    </div>
+    <div class="custom-control custom-checkbox mt-4">
+        <input type="checkbox" id="violencia" [(ngModel)]="ingreso.violencia"
+               class="custom-control-input">
+        <label class="custom-control-label" for="violencia"></label>
+      </div>
+    <div class="col-md-7"></div>
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="">Necesidades detectadas:</label>
+            <textarea class=" form-control" cols="100" rows="9" value=""
+                ></textarea>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 text-center text-sm-right">
+        <button type="submit" class="btn btn-success mr-3">Guardar</button>
+        <button type="button" class="btn btn-success mr-3">Imprimir</button>
+    </div>
+</div>

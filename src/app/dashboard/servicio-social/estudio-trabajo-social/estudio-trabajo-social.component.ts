@@ -11,6 +11,7 @@ export class EstudioTrabajoSocialComponent implements OnInit {
   public ingreso: Ingreso;
   public grupoFamiliar: any[];
   public familiar: any;
+  public antecedente: any
   public estudio: any;
 
   //Table atributess
@@ -25,6 +26,7 @@ export class EstudioTrabajoSocialComponent implements OnInit {
   constructor() {
     this.ingreso = {} as Ingreso;
    this.grupoFamiliar=[];
+   this.antecedente= {} as any
    this.estudio= {} as any;
   }
 
@@ -35,6 +37,9 @@ export class EstudioTrabajoSocialComponent implements OnInit {
 
   }
 
+  deleteAntecedente(item?){
+
+  }
 
 //Table methods
   validateFiels(array: any[]): boolean {
