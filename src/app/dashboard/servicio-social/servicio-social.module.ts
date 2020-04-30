@@ -14,6 +14,9 @@ import { EstudioTrabajoSocialComponent } from './estudio-trabajo-social/estudio-
 import { TablaFamiliaresComponent } from './tabla-familiares/tabla-familiares.component';
 import { FichaIngresoComponent } from './ficha-ingreso/ficha-ingreso.component';
 
+import { OtrosOficiosComponent } from './otros-oficios/otros-oficios.component';
+import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.component';
+
 
 
 @NgModule({
@@ -21,7 +24,9 @@ import { FichaIngresoComponent } from './ficha-ingreso/ficha-ingreso.component';
   RedesFamiliaresComponent, OfrecimientoTrabajoComponent, ControlEntrevistaComponent,
   EstudioTrabajoSocialComponent,
   TablaFamiliaresComponent,
-  FichaIngresoComponent],
+  FichaIngresoComponent,
+  OtrosOficiosComponent, NucleoFamiliarComponent],
+
   imports: [
     CommonModule,
     SharedModule,

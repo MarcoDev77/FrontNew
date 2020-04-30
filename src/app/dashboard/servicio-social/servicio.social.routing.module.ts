@@ -10,6 +10,8 @@ import { ControlEntrevistaComponent } from './control-entrevista/control-entrevi
 import { EstudioTrabajoSocialComponent } from './estudio-trabajo-social/estudio-trabajo-social.component';
 import { TablaFamiliaresComponent } from './tabla-familiares/tabla-familiares.component';
 import { FichaIngresoComponent } from './ficha-ingreso/ficha-ingreso.component';
+import { OtrosOficiosComponent } from './otros-oficios/otros-oficios.component';
+import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.component';
 
 const routes: Routes = [
   {
@@ -24,7 +26,9 @@ const routes: Routes = [
       {path: 'control-entrevista', component: ControlEntrevistaComponent},
       {path: 'estudio-trabajo-social',component: EstudioTrabajoSocialComponent},
       {path: 'tabla-familiar',component: TablaFamiliaresComponent},
-      {path: 'ficha-ingreso', component: FichaIngresoComponent}
+      {path: 'ficha-ingreso', component: FichaIngresoComponent},
+      {path: 'otros-oficios', component: OtrosOficiosComponent},
+      {path: 'nucleo-familiar', component: NucleoFamiliarComponent},
     ]
   },
 ];

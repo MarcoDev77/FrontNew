@@ -3,16 +3,14 @@
   <div class="col-md-4">
     <div class="form-group">
       <label>Nombre de la PPL :</label>
-      <input type="text" value="{{generalidadesPPL?.nombre}}" class="form-control" readonly
-             placeholder="Persona privada de su libertad"/>
+      <input type="text" value="{{generalidadesPPL?.nombre}}" class="form-control" readonly/>
     </div>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
       <label>Dormitorio:</label>
-      <input type="text" value="{{generalidadesPPL?.dormitorio}}" class="form-control" readonly name="dormitorio"
-             placeholder="Dormitorio"/>
+      <input type="text" value="{{generalidadesPPL?.dormitorio}}" class="form-control" readonly name="dormitorio"/>
     </div>
   </div>
 
@@ -20,15 +18,14 @@
     <div class="form-group">
       <label>Fecha de nacimiento:</label>
       <input type="text" readonly class="form-control" value="{{generalidadesPPL?.fechaNacimiento| date:'dd/MM/yyyy'}}"
-             name="fechaNacimiento" placeholder="Fecha de nacimiento"/>
+             name="fechaNacimiento"/>
     </div>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
       <label>Edad:</label>
-      <input type="text" class="form-control" value="{{generalidadesPPL?.edad}}" readonly name="edad"
-             placeholder="Edad"/>
+      <input type="text" class="form-control" value="{{generalidadesPPL?.edad}}" readonly name="edad"/>
     </div>
   </div>
 
@@ -36,47 +33,43 @@
     <div class="form-group">
       <label>Estado civil:</label>
       <input type="text" class="form-control" readonly value="{{generalidadesPPL?.estadoCivil?.nombre}}"
-             name="estadoCivil" placeholder="Estado civil"/>
+             name="estadoCivil"/>
     </div>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
       <label>Escolaridad:</label>
-      <input type="text" class="form-control" readonly name="escolaridad" value="{{generalidadesPPL?.escolaridad}}"
-             placeholder="Escolaridad"/>
+      <input type="text" class="form-control" readonly name="escolaridad" value="{{generalidadesPPL?.escolaridad}}"/>
     </div>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
       <label>Delito:</label>
-      <input type="text" class="form-control" readonly name="delito" value="{{generalidadesPPL?.listaDelitos}}"
-             placeholder="Delito"/>
+      <input type="text" class="form-control" readonly name="delito" value="{{generalidadesPPL?.listaDelitos}}"/>
     </div>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
-      <label>Fecha y lugar de ingreso:</label>
+      <label>Fecha ingreso:</label>
       <input type="text" class="form-control" readonly value="{{generalidadesPPL?.fechaIngreso | date:'dd/MM/yyyy'}}"
-             name="fechaIngreso"
-             placeholder="Fecha y lugar de ingreso"/>
+             name="fechaIngreso"/>
     </div>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
       <label>Originario:</label>
-      <input type="text" class="form-control" readonly value="{{generalidadesPPL?.originario?.nombre}}" name="originario"
-             placeholder="Originario"/>
+      <input type="text" class="form-control" readonly value="{{generalidadesPPL?.originario?.nombre}}" name="originario"/>
     </div>
   </div>
 
-  <div *ngFor="let input of inputs" class="col-md-4">
+  <div *ngFor="let input of inputs" class="col-md-{{input.size ? input.size : '4'}}">
     <div class="form-group">
       <label>{{input.label}}:</label>
-      <input type="text" class="form-control" readonly [value]="input.value" [placeholder]="input.label"/>
+      <input type="text" class="form-control" readonly [value]="input.value"/>
     </div>
   </div>
 
