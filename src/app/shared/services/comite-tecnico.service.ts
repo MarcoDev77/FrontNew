@@ -106,6 +106,8 @@ export class ComiteTecnicoService {
     const responseType = 'arraybuffer' as 'json';
     return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadTrabajoSocial?imputadoId=${id}`, {responseType});
   };
-
+  
+  checkDocumentsResultadosImputado = id =>
+    this.http.get(`${this.url}/api/listarDocumentosResultadoImputado?imputadoId=${id}`);
 
 }
