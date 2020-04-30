@@ -11,7 +11,8 @@ import { CatalogosService } from '@shared/services/catalogos.service';
   styleUrls: ['./tabla-familiares.component.scss']
 })
 export class TablaFamiliaresComponent implements OnInit {
-  public familiar : Familiar
+  public isLoading:boolean
+  public familiar : any
   public parentescos: any[]
   public familiares: any[];
   public tituloModal: string
@@ -144,6 +145,7 @@ updateFamiliar(familiar){
   this.tituloModal="Modificar familiar"
   this.familiar=familiar
 }
+switch($event){}
 
 openModal(modal){
   this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });}

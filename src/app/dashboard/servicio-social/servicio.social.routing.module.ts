@@ -9,6 +9,7 @@ import {OfrecimientoTrabajoComponent} from '@dashboard/servicio-social/ofrecimie
 import { ControlEntrevistaComponent } from './control-entrevista/control-entrevista.component';
 import { EstudioTrabajoSocialComponent } from './estudio-trabajo-social/estudio-trabajo-social.component';
 import { TablaFamiliaresComponent } from './tabla-familiares/tabla-familiares.component';
+import { FichaIngresoComponent } from './ficha-ingreso/ficha-ingreso.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
       {path: 'ofrecimiento-trabajo', component: OfrecimientoTrabajoComponent},
       {path: 'control-entrevista', component: ControlEntrevistaComponent},
       {path: 'estudio-trabajo-social',component: EstudioTrabajoSocialComponent},
-      {path: 'tabla-familiar',component: TablaFamiliaresComponent}
+      {path: 'tabla-familiar',component: TablaFamiliaresComponent},
+      {path: 'ficha-ingreso', component: FichaIngresoComponent}
     ]
   },
 ];

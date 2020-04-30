@@ -12,6 +12,7 @@ import {OfrecimientoTrabajoComponent} from '@dashboard/servicio-social/ofrecimie
 import { ControlEntrevistaComponent } from './control-entrevista/control-entrevista.component';
 import { EstudioTrabajoSocialComponent } from './estudio-trabajo-social/estudio-trabajo-social.component';
 import { TablaFamiliaresComponent } from './tabla-familiares/tabla-familiares.component';
+import { FichaIngresoComponent } from './ficha-ingreso/ficha-ingreso.component';
 
 
 
@@ -19,7 +20,8 @@ import { TablaFamiliaresComponent } from './tabla-familiares/tabla-familiares.co
   declarations: [PaseUnicoComponent, PaseMensualComponent, RootComponent, RegistroVisitaComponent,
   RedesFamiliaresComponent, OfrecimientoTrabajoComponent, ControlEntrevistaComponent,
   EstudioTrabajoSocialComponent,
-  TablaFamiliaresComponent],
+  TablaFamiliaresComponent,
+  FichaIngresoComponent],
   imports: [
     CommonModule,
     SharedModule,
