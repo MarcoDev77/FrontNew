@@ -113,15 +113,15 @@ export class DactiloscopiaComponent implements OnInit {
     if (esHuella === 'huella') {
       this.uo.additionalParameter = this.chooseParameters(this.currentImage);
       this.uo.additionalParameter.esHuella = 'huella';
-      if (!this.uo.additionalParameter.clasificacion) {
-        return Swal.fire({
-          title: 'Cuidado',
-          text: 'Se debe ingresar la clasificación de la huella antes.',
-          icon: 'warning',
-          timer: 1300,
-          showConfirmButton: false
-        });
-      }
+      // if (!this.uo.additionalParameter.clasificacion) {
+      //   return Swal.fire({
+      //     title: 'Cuidado',
+      //     text: 'Se debe ingresar la clasificación de la huella antes.',
+      //     icon: 'warning',
+      //     timer: 1300,
+      //     showConfirmButton: false
+      //   });
+      // }
     } else {
       // TODO: Se cambiara, se va a mandar el tipo de imagen en lugar de la validacion
       // if (inputFile.files[0].type.split('/')[1])
