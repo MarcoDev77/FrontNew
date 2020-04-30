@@ -8,7 +8,6 @@ import {Ingreso} from '@shared/models/Ingreso';
 import {ComiteTecnicoService} from '@shared/services/comite-tecnico.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-
 @Component({
   selector: 'app-resultados-examenes',
   templateUrl: './resultados-examenes.component.html',
@@ -38,6 +37,7 @@ export class ResultadosExamenesComponent implements OnInit {
     this.uploaderOdontologico = new FileUploader({url: this.url + '/api/registrarDocumentoResultadoExamen', itemAlias: 'documento'});
     this.uploaderPsicologico = new FileUploader({url: this.url + '/api/registrarDocumentoResultadoExamen', itemAlias: 'documento'});
   }
+
 
 
   ngOnInit() {
