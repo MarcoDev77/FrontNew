@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
-import {environment} from '@environment/environment';
+import { Component, OnInit } from '@angular/core';
+import { FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import { environment } from '@environment/environment';
 import Swal from 'sweetalert2';
-import {AuthenticationService} from '@shared/services/authentication.service';
-import {Ingreso} from '@shared/models/Ingreso';
-import {ComiteTecnicoService} from '@shared/services/comite-tecnico.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from '@shared/services/authentication.service';
+import { Ingreso } from '@shared/models/Ingreso';
+import { ComiteTecnicoService } from '@shared/services/comite-tecnico.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-resultados-examenes',
@@ -16,6 +16,7 @@ export class ResultadosExamenesComponent implements OnInit {
 
   public isLoading: boolean;
   public ingreso: Ingreso;
+  public docs = [];
   // Uploader
   public url: string;
   public uploaderMedico: FileUploader;
@@ -32,9 +33,9 @@ export class ResultadosExamenesComponent implements OnInit {
     this.ingreso = {} as Ingreso;
     // Uploader
     this.url = environment.apiUrl;
-    this.uploaderMedico = new FileUploader({url: this.url + '/api/registrarDocumentoResultadoExamen', itemAlias: 'documento'});
-    this.uploaderOdontologico = new FileUploader({url: this.url + '/api/registrarDocumentoResultadoExamen', itemAlias: 'documento'});
-    this.uploaderPsicologico = new FileUploader({url: this.url + '/api/registrarDocumentoResultadoExamen', itemAlias: 'documento'});
+    this.uploaderMedico = new FileUploader({ url: this.url + '/api/registrarDocumentoResultadoExamen', itemAlias: 'documento' });
+    this.uploaderOdontologico = new FileUploader({ url: this.url + '/api/registrarDocumentoResultadoExamen', itemAlias: 'documento' });
+    this.uploaderPsicologico = new FileUploader({ url: this.url + '/api/registrarDocumentoResultadoExamen', itemAlias: 'documento' });
   }
 
   ngOnInit() {
@@ -66,10 +67,19 @@ export class ResultadosExamenesComponent implements OnInit {
   }
 
   searchImputado() {
+    this.resetUploaders();
     this.comiteTecnicoService.getImputadoByFolioGeneral(this.ingreso.folio).subscribe((data: any) => {
       console.log('Data', data);
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Busqueda',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1000,
+        showConfirmButton: false
+      });
       if (!data.error) {
         this.ingreso.imputado = data.imputado;
+        this.checkDocuments();
       } else {
         this.ingreso = {} as Ingreso;
       }
@@ -97,8 +107,17 @@ export class ResultadosExamenesComponent implements OnInit {
     }
   }
 
+  checkDocuments() {
+    this.comiteTecnicoService.checkDocumentsResultadosImputado(this.ingreso.imputado.id)
+      .subscribe((data: any) => {
+        if (!data.error) {
+          this.docs = data.documentos;
+        }
+      });
+  }
+
   showPreview(data, modal) {
-    const file = new Blob([data], {type: 'application/*'});
+    const file = new Blob([data], { type: 'application/*' });
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadstart = ev => this.isLoading = true;
@@ -110,7 +129,7 @@ export class ResultadosExamenesComponent implements OnInit {
       this.modalService.dismissAll();
       if (base64) {
         this.file = base64;
-        this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+        this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
       }
     };
     reader.onerror = () => {
@@ -138,6 +157,7 @@ export class ResultadosExamenesComponent implements OnInit {
       showConfirmButton: false
     }).then(() => {
     });
+    this.checkDocuments();
     this.resetUploaders();
   }
 
