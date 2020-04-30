@@ -1,11 +1,6 @@
-<<<<<<< Updated upstream
 
-=======
-<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
-=======
->>>>>>> Stashed changes
-import {Component, OnInit} from '@angular/core';
+
 import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
 import {environment} from '@environment/environment';
 import Swal from 'sweetalert2';
@@ -13,10 +8,6 @@ import {AuthenticationService} from '@shared/services/authentication.service';
 import {Ingreso} from '@shared/models/Ingreso';
 import {ComiteTecnicoService} from '@shared/services/comite-tecnico.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of f14bbfa... Merge branch 'feature/verificar-examenes' into 'develop'
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-resultados-examenes',
@@ -25,13 +16,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ResultadosExamenesComponent implements OnInit {
 
-<<<<<<< Updated upstream
 
-=======
-<<<<<<< HEAD
-  constructor() { }
-=======
->>>>>>> Stashed changes
   public isLoading: boolean;
   public ingreso: Ingreso;
   // Uploader
@@ -54,20 +39,12 @@ export class ResultadosExamenesComponent implements OnInit {
     this.uploaderOdontologico = new FileUploader({url: this.url + '/api/registrarDocumentoResultadoExamen', itemAlias: 'documento'});
     this.uploaderPsicologico = new FileUploader({url: this.url + '/api/registrarDocumentoResultadoExamen', itemAlias: 'documento'});
   }
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of f14bbfa... Merge branch 'feature/verificar-examenes' into 'develop'
->>>>>>> Stashed changes
+
 
   ngOnInit() {
   }
 
-<<<<<<< Updated upstream
 
-=======
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
   uploadFile(input, clave, uploader) {
     if (input.files.length === 0) {
       return this.resetUploaders();
@@ -191,8 +168,4 @@ export class ResultadosExamenesComponent implements OnInit {
     this.uploaderOdontologico.clearQueue();
   }
 
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of f14bbfa... Merge branch 'feature/verificar-examenes' into 'develop'
->>>>>>> Stashed changes
 }
