@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+
+import {Component, OnInit} from '@angular/core';
 import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
 import {environment} from '@environment/environment';
 import Swal from 'sweetalert2';
@@ -14,7 +15,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ResultadosExamenesComponent implements OnInit {
 
-  
+
   public isLoading: boolean;
   public ingreso: Ingreso;
   // Uploader
@@ -40,6 +41,7 @@ export class ResultadosExamenesComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
   uploadFile(input, clave, uploader) {
     if (input.files.length === 0) {
