@@ -1,6 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
 import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
 import {environment} from '@environment/environment';
 import Swal from 'sweetalert2';
@@ -9,13 +8,13 @@ import {Ingreso} from '@shared/models/Ingreso';
 import {ComiteTecnicoService} from '@shared/services/comite-tecnico.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
+
 @Component({
   selector: 'app-resultados-examenes',
   templateUrl: './resultados-examenes.component.html',
   styleUrls: ['./resultados-examenes.component.scss']
 })
 export class ResultadosExamenesComponent implements OnInit {
-
 
   public isLoading: boolean;
   public ingreso: Ingreso;
