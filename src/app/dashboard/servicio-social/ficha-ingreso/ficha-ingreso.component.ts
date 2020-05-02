@@ -9,9 +9,11 @@ import Swal from 'sweetalert2';
 })
 export class FichaIngresoComponent implements OnInit {
   public isLoading: boolean;
-  public ingreso: Ingreso;
+  public ingreso: any;
+  public ficha: any
   constructor(private servicioSocialService: ServicioSocialService) { 
-    this.ingreso= {} as any
+    this.ingreso= {} as any;
+    this.ficha={} as any;
   }
 
   ngOnInit() {
@@ -22,7 +24,7 @@ export class FichaIngresoComponent implements OnInit {
       console.log(data)
       this.ingreso=data.imputado
       Swal.fire({
-        title: data.error ? 'Error!' : 'Guardado',
+        title: data.error ? 'Error!' : 'Resultados',
         text: data.mensaje,
         icon: data.error ? 'error' : 'success',
         timer: 1300,
@@ -32,6 +34,20 @@ export class FichaIngresoComponent implements OnInit {
   };
 
   saveFicha(){
+    this.ficha.imputado={
+      id:this.ingreso.imputadoId
+    }
 
+    console.log(this.ficha)
+    this.servicioSocialService.saveFichaIngreso(this.ficha).subscribe((data:any)=>{
+      console.log(data)
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
+    })
   }
 }

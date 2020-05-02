@@ -59,13 +59,7 @@
     </div>
   </div>
 
-  <div class="col-md-4">
-    <div class="form-group">
-      <label>Originario:</label>
-      <input type="text" class="form-control" readonly value="{{generalidadesPPL?.originario?.nombre}}" name="originario"/>
-    </div>
-  </div>
-
+ 
   <div *ngFor="let input of inputs" class="col-md-{{input.size ? input.size : '4'}}">
     <div class="form-group">
       <label>{{input.label}}:</label>
