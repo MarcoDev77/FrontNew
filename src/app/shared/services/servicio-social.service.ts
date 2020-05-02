@@ -12,6 +12,8 @@ export class ServicioSocialService {
   constructor(private http: HttpClient) {
     this.url = environment.apiUrl;
   }
+  
+  getImputadoByFolio = folio => this.http.get(`${this.url}/api/buscarImputadoFolio?folioImputado=${folio}`);
 
   getInfoNucleFamiliar = folio =>
     this.http.get(`${this.url}/api/buscarRegistroNucleoFamiliarl?folioImputado=${folio}`);
@@ -36,6 +38,15 @@ export class ServicioSocialService {
   generatePDFEstudioTrabajoSocial = id => {
     const responseType = 'arraybuffer' as 'json';
     return this.http.get(`${this.url}/api/generarFormatoPdfEstudioTrabajoSocial?imputadoId=${id}`, { responseType });
+  }
+
+  getEntrevistasImputado = id => this.http.get(`${this.url}/api/listarEntrevistasImputado?imputadoId=${id}`);
+
+  saveEntrevistaImputado = model => this.http.post(`${this.url}/api/registrarEntrevistaTrabajo`, model);
+
+  generatePDFEntrevistaTrabajo = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfControlEntrevistaTrabajo?entrevistaId=${id}`, { responseType });
   }
 
 }
