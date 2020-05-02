@@ -38,4 +38,8 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfEstudioTrabajoSocial?imputadoId=${id}`, { responseType });
   }
 
+  getInfoFichaIngreso=folio=>{
+    return this.http.get(`${this.url}/api/listarfichaIngresoTrabajoSocial?folioImputado=${folio}`);
+  }
+
 }
