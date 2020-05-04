@@ -289,7 +289,7 @@
                  maxlength="50" class="form-control" required>
         </div>
         <div *ngIf="pasePermanente.tipoPase === 'colectivo'" class="col-4">
-          <button type="button" (click)="showFormModal()" class="btn btn-info btn-sm shadows">Agregar menor</button>
+          <button type="button" (click)="showFormModal()" [disabled]="pasePermanente?.menores.length >= 5" class="btn btn-info btn-sm shadows">Agregar menor</button>
         </div>
 
       </div>

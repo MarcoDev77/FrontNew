@@ -12,6 +12,8 @@ export class ServicioSocialService {
   constructor(private http: HttpClient) {
     this.url = environment.apiUrl;
   }
+  
+  getImputadoByFolio = folio => this.http.get(`${this.url}/api/buscarImputadoFolio?folioImputado=${folio}`);
 
   getInfoNucleFamiliar = folio =>
     this.http.get(`${this.url}/api/buscarRegistroNucleoFamiliarl?folioImputado=${folio}`);
@@ -44,6 +46,24 @@ export class ServicioSocialService {
 
   saveFichaIngreso= model=>{
     return this.http.post(`${this.url}/api/registrarFichaIngresoTS`, model);
+
+  getEntrevistasImputado = id => this.http.get(`${this.url}/api/listarEntrevistasImputado?imputadoId=${id}`);
+
+  saveEntrevistaImputado = model => this.http.post(`${this.url}/api/registrarEntrevistaTrabajo`, model);
+
+  generatePDFEntrevistaTrabajo = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfControlEntrevistaTrabajo?entrevistaId=${id}`, { responseType });
+  }
+
+  generatePDFPrevencionReadaptacion = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfPrevencionReadaptacion?imputadoId=${id}`, { responseType });
+  }
+
+  generatePDFOficioDirectorGeneral = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfDirectorGeneralSanciones?imputadoId=${id}`, { responseType });
   }
 
 }
