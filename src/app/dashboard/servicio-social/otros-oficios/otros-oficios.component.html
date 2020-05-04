@@ -1,47 +1,88 @@
-<app-section-title icon="fa fa-table" title="Ofrecimiento Trabajo"></app-section-title>
+<app-section-title
+  icon="fa fa-table"
+  title="Ofrecimiento Trabajo"
+></app-section-title>
 <div class="row">
   <div class="col-md-8">
     <h3>Generalidades PPL</h3>
   </div>
   <div class="col-md-4">
-    <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
+    <form
+      name="search"
+      (ngSubmit)="searchImputado()"
+      #formSearch="ngForm"
+      novalidate
+    >
       <div class="input-group">
         <div class="input-group-prepend">
-        <span (click)="searchImputado()" class="input-group-text"><i
-          class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
+          <span (click)="searchImputado()" class="input-group-text"
+            ><i
+              class="fa {{ isLoading ? 'fa-spinner fa-spin' : 'fa-search' }}"
+            ></i
+          ></span>
         </div>
-        <input name="folio" required [(ngModel)]="ingreso.folio" type="text"
-               class="form-control pull-right mr-2"
-               placeholder="Buscar por Folio">
+        <input
+          name="folio"
+          required
+          [(ngModel)]="ingreso.folio"
+          type="text"
+          class="form-control pull-right mr-2"
+          placeholder="Buscar por Folio"
+        />
       </div>
     </form>
   </div>
 </div>
-<app-generalidades-ppl [generalidadesPPL]="ingreso"></app-generalidades-ppl>
+<app-generalidades-ppl
+  [generalidadesPPL]="ingreso?.imputado"
+></app-generalidades-ppl>
 <div class="row">
-    <div class="col-md-12 mt-4">
-        <h3>Otros Oficios</h3>
-    </div>
-    <div id="card-container">
-        <div class="col-md-12">
-            <div class="card-deck">
-    
-                <div *ngFor="let format of formats" class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">{{format.name}}</h5>
-                    <p class="card-text">{{format.description}}</p>
-                    <div class="row">
-                        <div class="col">
-                            <button (click)="format.methodToGenerate()" class="btn btn-success pull-right">
-                                Generar
-                            </button>
-                        </div>
-                    </div>
-                  </div>    
-                </div>
-    
+  <div class="col-md-12 mt-4">
+    <h3>Otros Oficios</h3>
+  </div>
+  <div id="card-container">
+    <div class="col-md-12">
+      <div class="card-deck">
+        <div *ngFor="let format of formats" class="card" style="max-width: 250px;">
+          <div class="text-center">
+            <img src="/assets/img/min/{{format.image}}" class="card-img-top min-img" alt="formato">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ format.name }}</h5>
+            <div class="row">
+              <div class="col">
+                <button
+                  [disabled]="!this.ingreso?.imputado?.id"
+                  (click)="format.methodToGenerate(view)"
+                  class="btn btn-success pull-right"
+                >
+                  Generar
+                </button>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    
+  </div>
 </div>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'estudio trabajo social'"
+    ></app-web-viewer>
+  </div>
+</ng-template>

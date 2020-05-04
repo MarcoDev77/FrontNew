@@ -107,10 +107,15 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fa fa-group',
     collapse: 'tables',
     children: [
+      {path: 'ingreso/lista-ingreso', title: 'LISTA DE INGRESOS', ab: 'LI'},
       {path: 'servicio-social/pase-mensual', title: 'PASE MENSUAL', ab: 'PM'},
       {path: 'servicio-social/pase-unico', title: 'PASE UNICO', ab: 'PU'},
       {path: 'servicio-social/registro-visita', title: 'REGISTRO DE VISITA', ab: 'RV  '},
-
+      {path: 'servicio-social/ofrecimiento-trabajo', title: 'OFRECIMIENTO TRABAJO', ab: 'OT'},
+      {path: 'servicio-social/control-entrevista', title: 'CONTROL DE ENTREVISTA', ab: 'CE'},
+      {path: 'servicio-social/nucleo-familiar', title: 'NÚCLEO FAMILIAR', ab: 'NF'},
+      {path: 'servicio-social/tabla-familiar', title: 'FAMILIARES', ab: 'FA'},
+      {path: 'servicio-social/otros-oficios', title: 'OTROS OFICIOS', ab: 'OF'},
     ],
   },
   {

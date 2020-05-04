@@ -49,4 +49,14 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfControlEntrevistaTrabajo?entrevistaId=${id}`, { responseType });
   }
 
+  generatePDFPrevencionReadaptacion = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfPrevencionReadaptacion?imputadoId=${id}`, { responseType });
+  }
+
+  generatePDFOficioDirectorGeneral = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfDirectorGeneralSanciones?imputadoId=${id}`, { responseType });
+  }
+
 }
