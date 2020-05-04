@@ -361,6 +361,7 @@ export class ReferenciasComponent implements OnInit {
       parentesco: item.parentesco,
       imputado: this.ingreso,
       menores: this.mapChilds(infantes),
+      referenciaPersonal: {id: item.id}
     };
 
     this.ingresoService.savePaseProvisional(model).subscribe((data: any) => {
