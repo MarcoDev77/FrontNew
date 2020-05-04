@@ -89,9 +89,9 @@
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="" class="form-text text-muted">N° de seguro social:</label>
+                                <label for="" class="form-text text-muted">Tipo sanguíneo:</label>
 
-                                <select ngbTooltip="Tipo sanguineo" class="form-control shadows" name="tipoSanguineo" [(ngModel)]="persona.tipoSanguineo" #tipoSanguineo="ngModel" [ngClass]="{ 'is-invalid': f.submitted && tipoSanguineo.invalid}">
+                                <select  class="form-control shadows" name="tipoSanguineo" [(ngModel)]="persona.tipoSanguineo" #tipoSanguineo="ngModel" [ngClass]="{ 'is-invalid': f.submitted && tipoSanguineo.invalid}">
                                     <option [value]="undefined" disabled hidden>Seleccione</option>
                                     <option [value]="'A+'">A+</option>
                                     <option [value]="'A-'">A-</option>

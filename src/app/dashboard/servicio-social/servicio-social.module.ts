@@ -16,6 +16,7 @@ import { FichaIngresoComponent } from './ficha-ingreso/ficha-ingreso.component';
 
 import { OtrosOficiosComponent } from './otros-oficios/otros-oficios.component';
 import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.component';
+import { EstudioSocioeconomicoComponent } from './estudio-socioeconomico/estudio-socioeconomico.component';
 
 
 
@@ -25,7 +26,8 @@ import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.compo
   EstudioTrabajoSocialComponent,
   TablaFamiliaresComponent,
   FichaIngresoComponent,
-  OtrosOficiosComponent, NucleoFamiliarComponent],
+  OtrosOficiosComponent, NucleoFamiliarComponent,
+  EstudioSocioeconomicoComponent],
 
   imports: [
     CommonModule,
