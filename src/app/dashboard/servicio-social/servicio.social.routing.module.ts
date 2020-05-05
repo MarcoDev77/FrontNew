@@ -12,6 +12,7 @@ import { TablaFamiliaresComponent } from './tabla-familiares/tabla-familiares.co
 import { FichaIngresoComponent } from './ficha-ingreso/ficha-ingreso.component';
 import { OtrosOficiosComponent } from './otros-oficios/otros-oficios.component';
 import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.component';
+import { EstudioSocioeconomicoComponent } from './estudio-socioeconomico/estudio-socioeconomico.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
       {path: 'ficha-ingreso', component: FichaIngresoComponent},
       {path: 'otros-oficios', component: OtrosOficiosComponent},
       {path: 'nucleo-familiar', component: NucleoFamiliarComponent},
+      {path: 'estudio-socioeconomico', component: EstudioSocioeconomicoComponent}
     ]
   },
 ];

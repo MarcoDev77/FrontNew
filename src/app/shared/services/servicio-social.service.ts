@@ -40,6 +40,13 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfEstudioTrabajoSocial?imputadoId=${id}`, { responseType });
   }
 
+  getInfoFichaIngreso=folio=>{
+    return this.http.get(`${this.url}/api/listarfichaIngresoTrabajoSocial?folioImputado=${folio}`);
+  }
+
+  saveFichaIngreso= model=>{
+    return this.http.post(`${this.url}/api/registrarFichaIngresoTS`, model);
+
   getEntrevistasImputado = id => this.http.get(`${this.url}/api/listarEntrevistasImputado?imputadoId=${id}`);
 
   saveEntrevistaImputado = model => this.http.post(`${this.url}/api/registrarEntrevistaTrabajo`, model);
