@@ -110,4 +110,17 @@ export class ComiteTecnicoService {
   checkDocumentsResultadosImputado = id =>
     this.http.get(`${this.url}/api/listarDocumentosResultadoImputado?imputadoId=${id}`);
 
+  getDatosDocumentosGuardados = (clave, id) =>
+    this.http.get(
+      `${this.url}/api/consultarDatosDocumentoGuardado?claveDocumento=${clave}&imputadoId=${id}`
+    );
+
+    generatePDFDocumentoGuardado = (clave, id) => {
+      const responseType = 'arraybuffer' as 'json';
+      return this.http.get(
+        `${this.url}/api/buscarDocumentoGuardado?claveDocumento=${clave}&imputadoId=${id}`,
+        {responseType}
+      );
+    };
+
 }
