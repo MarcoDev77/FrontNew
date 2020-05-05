@@ -46,4 +46,15 @@ export class ServicioSocialService {
     return this.http.post(`${this.url}/api/registrarFichaIngresoTS`, model);
   }
 
+  getEstudioSocioEconomico= folio=>{
+    return this.http.get(`${this.url}/api/listarEstudioSocioeconomicoFolio?folioImputado=${folio}`);
+  }
+
+
+  saveEstudioSocioeconomico= model=>{
+    return this.http.post(`${this.url}/api/registrarEstudioSocioeconomico`, model);
+  }
+
+
+
 }
