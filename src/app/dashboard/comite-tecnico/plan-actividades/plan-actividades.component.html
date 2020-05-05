@@ -113,25 +113,25 @@
             <tr id="table-form" *ngIf="isForm">
                 <td class="text-center">
                     <input name="sustanciaConsumia" type="text" class="form-control"
-                        [(ngModel)]="antecedente.sustanciaConsumia" placeholder="Sustancia que consumia"
+                        [(ngModel)]="antecedente.sustanciaConsumia" 
                         #sustanciaConsumia="ngModel"
                         [ngClass]="{ 'is-invalid':  sustanciaConsumia.touched && sustanciaConsumia.invalid }"
                         maxlength="45" required>
                 </td>
                 <td class="text-center">
                     <input name="edadInicio" type="text" class="form-control" [(ngModel)]="antecedente.edadInicio"
-                        placeholder="Edad de inicio" #edadInicio="ngModel"
+                         #edadInicio="ngModel"
                         [ngClass]="{ 'is-invalid':  edadInicio.touched && edadInicio.invalid }" maxlength="45" required>
                 </td>
                 <td class="text-center">
                     <input name="frecuenciaConsumo" type="text" class="form-control"
-                        [(ngModel)]="antecedente.frecuenciaConsumo" placeholder="Frecuencia de consumo"
+                        [(ngModel)]="antecedente.frecuenciaConsumo"
                         #frecuenciaConsumo="ngModel"
                         [ngClass]="{ 'is-invalid':  frecuenciaConsumo.touched && frecuenciaConsumo.invalid }" required>
                 </td>
                 <td class="text-center">
                     <input name="gradoConsumo" type="text" class="form-control"
-                        [(ngModel)]="antecedente.gradoConsumo" placeholder="Grado de consumo"
+                        [(ngModel)]="antecedente.gradoConsumo" 
                         #gradoConsumo="ngModel"
                         [ngClass]="{ 'is-invalid':  gradoConsumo.touched && gradoConsumo.invalid }" required>
                 </td>

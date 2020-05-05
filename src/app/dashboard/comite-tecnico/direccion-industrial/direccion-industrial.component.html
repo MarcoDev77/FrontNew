@@ -621,11 +621,12 @@
 
 <div class="row">
   <div class="col-sm-12 text-center text-sm-right">
+    <button type="button" [disabled]="!generalidadesPPL.imputadoId" (click)="submit()"
+    class="btn btn-success mr-3">Guardar
+</button>
     <button type="button" [disabled]="!generalidadesPPL.imputadoId" (click)="generatePDF(view)" class="btn btn-success mr-3">Imprimir
     </button>
-    <button type="button" [disabled]="!generalidadesPPL.imputadoId" (click)="submit()"
-            class="btn btn-success mr-3">Guardar
-    </button>
+   
   </div>
 </div>
 

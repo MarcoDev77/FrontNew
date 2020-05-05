@@ -66,4 +66,15 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfDirectorGeneralSanciones?imputadoId=${id}`, { responseType });
   }
 
+  getEstudioSocioEconomico= folio=>{
+    return this.http.get(`${this.url}/api/listarEstudioSocioeconomicoFolio?folioImputado=${folio}`);
+  }
+
+
+  saveEstudioSocioeconomico= model=>{
+    return this.http.post(`${this.url}/api/registrarEstudioSocioeconomico`, model);
+  }
+
+
+
 }
