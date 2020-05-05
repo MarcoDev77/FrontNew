@@ -11,7 +11,7 @@ export class ComiteTecnicoService {
   constructor(private http: HttpClient) {
     this.url = environment.apiUrl;
   }
-
+ 
   getImputadoByFolio = folio => this.http.get(`${this.url}/api/listarImputadoPorFolio?folioImputado=${folio}`);
 
   savePlandeActividades = model => {
