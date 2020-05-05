@@ -226,6 +226,12 @@
         ></textarea>
       </div>
     </div>
+    <div class="col-md-12">
+      <br>
+      <hr>
+      <app-tabla-familiares *ngIf="nucleo.id" [nucleoId]="nucleo?.id" tipoNucleo="primario"></app-tabla-familiares>
+      <hr>
+    </div>
 
     <div class="col-md-4">
       <div class="form-gruop">
@@ -461,6 +467,12 @@
           rows="10"
         ></textarea>
       </div>
+    </div>
+    <div class="col-md-12">
+      <br>
+      <hr>
+      <app-tabla-familiares *ngIf="nucleo.id" [nucleoId]="nucleo?.id" tipoNucleo="secundario"></app-tabla-familiares>
+      <hr>
     </div>
     <div class="col-md-12">
       <button

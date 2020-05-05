@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ServicioSocialService } from '@shared/services/servicio-social.service';
 import { IngresoService } from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
@@ -11,6 +11,8 @@ import { CatalogosService } from '@shared/services/catalogos.service';
   styleUrls: ['./tabla-familiares.component.scss']
 })
 export class TablaFamiliaresComponent implements OnInit {
+  @Input() tipoNucleo: string;
+  @Input() nucleoId: number;
   public isLoading:boolean
   public familiar : any
   public parentescos: any[]
@@ -26,6 +28,7 @@ export class TablaFamiliaresComponent implements OnInit {
   public selectedRow: Number;
   public setClickedRow: (i) => void;
   public auxId: any;
+
   constructor(private servicioSocialService: ServicioSocialService,
      private ingresoService: IngresoService,
     private  catalogosService: CatalogosService,private modalService: NgbModal) {
@@ -60,9 +63,8 @@ export class TablaFamiliaresComponent implements OnInit {
 
   getFamiliares(){
     let model={
-      tipoNucleo: "primario",
-      nucleoId:3
-      
+      tipoNucleo: this.tipoNucleo,
+      nucleoId: this.nucleoId,
     }
     this.servicioSocialService.getMiembrosNucleoFamiliar(model).subscribe((data:any)=>{
       console.log(data)
@@ -71,8 +73,8 @@ export class TablaFamiliaresComponent implements OnInit {
   }
 
   saveFamiliar(){
-    this.familiar.nucleoFamiliar={id: 3}
-    this.familiar.tipoNucleo= "primario"
+    this.familiar.nucleoFamiliar={id: this.nucleoId};
+    this.familiar.tipoNucleo= this.tipoNucleo;
       this.servicioSocialService.saveMiembroNucleoFamiliar(this.familiar).subscribe((data: any) => {
         console.log(data);
         Swal.fire({
@@ -83,6 +85,7 @@ export class TablaFamiliaresComponent implements OnInit {
           showConfirmButton: false
         });
         this.getFamiliares()
+        this.modalService.dismissAll();
       });
     
   }
