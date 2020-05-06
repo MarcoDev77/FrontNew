@@ -51,8 +51,8 @@ export class PsicologiaComponent implements OnInit {
         timer: 1300,
         showConfirmButton: false
       });
-    })
-  }
+    }) 
+  } 
   
   generatePDF(modal) {
     console.log('generatePDF');

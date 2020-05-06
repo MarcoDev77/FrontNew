@@ -13,7 +13,7 @@ export class TrabajoSocialComponent implements OnInit {
   public isLoading: boolean;
   public generalidadesPPL: GeneralidadesPPL;
   public actividad: Actividad;
-  public parentescos: any[]
+  public parentescos: any[] 
   public file: any
   
   constructor(private comiteTecnicoService: ComiteTecnicoService, private ingresoService:IngresoService
