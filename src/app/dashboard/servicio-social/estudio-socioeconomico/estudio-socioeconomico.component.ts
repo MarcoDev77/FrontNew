@@ -11,9 +11,11 @@ export class EstudioSocioeconomicoComponent implements OnInit {
   public ingreso : any
   public moreInputs: any[]
   public estudio:any
+  public isLoading: boolean
   constructor(private servicioSocialService: ServicioSocialService) { 
     this.ingreso= {} as any
     this.estudio={} as any
+    this.isLoading=false
     this.moreInputs = [
       {label: 'Ocupación', value: 'Carpintero'},
       {label: 'Domicilio', value: 'a'},

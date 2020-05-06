@@ -39,12 +39,12 @@
     <tr id="table-form" *ngIf="isForm">
       <td class="text-center">
         <input name="clave" type="text" class="form-control" [(ngModel)]="clasificacionJuridica.clave"
-               placeholder="Clave" #clave="ngModel" [ngClass]="{ 'is-invalid':  clave.touched && clave.invalid }"
+               placeholder="" #clave="ngModel" [ngClass]="{ 'is-invalid':  clave.touched && clave.invalid }"
                maxlength="10" required>
       </td>
       <td class="text-center">
         <input name="nombre" type="text" class="form-control" [(ngModel)]="clasificacionJuridica.nombre"
-               placeholder="Nombre" #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }"
+               placeholder="" #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }"
                maxlength="45" required>
       </td>
 

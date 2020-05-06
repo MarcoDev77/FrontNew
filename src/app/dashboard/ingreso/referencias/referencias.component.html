@@ -307,26 +307,26 @@
         <tr id="table-form" *ngIf="isForm">
           <td class="text-center">
             <input name="nombre" type="text" class="form-control" [(ngModel)]="menor.nombre"
-                   placeholder="Nombre"
+                   
                    #nombre="ngModel" [ngClass]="{ 'is-invalid':  nombre.touched && nombre.invalid }"
                    maxlength="60" required>
           </td>
           <td class="text-center">
             <input name="apellidoPaterno" type="text" class="form-control" [(ngModel)]="menor.apellidoPaterno"
-                   placeholder="Apellido Paterno" #apellidoPaterno="ngModel"
+                    #apellidoPaterno="ngModel"
                    [ngClass]="{ 'is-invalid':  apellidoPaterno.touched && apellidoPaterno.invalid }"
                    maxlength="60" required>
           </td>
           <td class="text-center">
             <input name="apellidoMaterno" type="text" class="form-control" [(ngModel)]="menor.apellidoMaterno"
-                   placeholder="Apellido Materno" #apellidoMaterno="ngModel"
+                   #apellidoMaterno="ngModel"
                    [ngClass]="{ 'is-invalid':  apellidoMaterno.touched && apellidoMaterno.invalid }"
                    maxlength="60" required>
           </td>
 
           <td class="text-center">
             <input name="fechaNacimiento" type="date" class="form-control" [(ngModel)]="menor.fechaNacimiento"
-                   placeholder="Fecha de Nacimiento" #fechaNacimiento="ngModel"
+                   #fechaNacimiento="ngModel"
                    [ngClass]="{ 'is-invalid':  fechaNacimiento.touched && fechaNacimiento.invalid }"
                    required>
           </td>

@@ -2,7 +2,7 @@
 <div class="row">
 
   <div class="col-md-8">
-    <h3>Generales de la PPL</h3>
+    <h4 class="title-pink">Generales de la PPL</h4>
   </div>
 
   <div class="col-md-4">
@@ -23,7 +23,7 @@
     <div class="form-group">
       <label>Nombre de la PPL :</label>
       <input type="text" value="{{generalidadesPPL.nombre}}" class="form-control" readonly
-             placeholder="Persona privada de su libertad"/>
+             />
     </div>
   </div>
 
@@ -31,7 +31,7 @@
     <div class="form-group">
       <label>Dormitorio:</label>
       <input type="text" value="{{generalidadesPPL.dormitorio}}" class="form-control" readonly name="dormitorio"
-             placeholder="Dormitorio"/>
+             />
     </div>
   </div>
 
@@ -39,7 +39,7 @@
     <div class="form-group">
       <label>Fecha de nacimiento:</label>
       <input type="text" readonly class="form-control" value="{{generalidadesPPL.fechaNacimiento| date:'dd/MM/yyyy'}}"
-             name="fechaNacimiento" placeholder="Fecha de nacimiento"/>
+             name="fechaNacimiento"/>
     </div>
   </div>
 
@@ -47,7 +47,7 @@
     <div class="form-group">
       <label>Edad:</label>
       <input type="text" class="form-control" value="{{generalidadesPPL.edad}}" readonly name="edad"
-             placeholder="Edad"/>
+             />
     </div>
   </div>
 
@@ -55,7 +55,7 @@
     <div class="form-group">
       <label>Estado civil:</label>
       <input type="text" class="form-control" readonly value="{{generalidadesPPL.estadoCivil?.nombre}}"
-             name="estadoCivil" placeholder="Estado civil"/>
+             name="estadoCivil" />
     </div>
   </div>
 
@@ -63,7 +63,7 @@
     <div class="form-group">
       <label>Escolaridad:</label>
       <input type="text" class="form-control" readonly name="escolaridad" value="{{generalidadesPPL.escolaridad}}"
-             placeholder="Escolaridad"/>
+             />
     </div>
   </div>
 
@@ -71,14 +71,14 @@
     <div class="form-group">
       <label>Delito:</label>
       <input type="text" class="form-control" readonly name="delito" value="{{generalidadesPPL.listaDelitos}}"
-             placeholder="Delito"/>
+             />
     </div>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
       <label>Sentencia:</label>
-      <input type="text" class="form-control" readonly value="{{generalidadesPPL.sentencia}}" placeholder="Sentencia"/>
+      <input type="text" class="form-control" readonly value="{{generalidadesPPL.sentencia}}" />
     </div>
   </div>
 
@@ -87,14 +87,14 @@
       <label>Fecha y lugar de ingreso:</label>
       <input type="text" class="form-control" readonly value="{{generalidadesPPL.fechaIngreso | date:'dd/MM/yyyy'}}"
              name="fechaIngreso"
-             placeholder="Fecha y lugar de ingreso"/>
+             />
     </div>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
       <label>Dependiente:</label>
-      <input type="text" class="form-control" readonly name="dependiente" placeholder="Dependientes"/>
+      <input type="text" class="form-control" readonly name="dependiente" />
     </div>
   </div>
 
@@ -102,7 +102,7 @@
     <div class="form-group">
       <label>Originario:</label>
       <input type="text" class="form-control" readonly value="{{generalidadesPPL.originario?.nombre}}" name="originario"
-             placeholder="Originario"/>
+             />
     </div>
   </div>
 
@@ -150,19 +150,19 @@
     <tr id="table-form" *ngIf="isForm">
       <td class="text-center">
         <input name="trabajoRealizado" type="text" class="form-control" [(ngModel)]="experiencia.trabajoRealizado"
-               placeholder="Trabajo Realizado"
+               
                #trabajoRealizado="ngModel"
                [ngClass]="{ 'is-invalid':  trabajoRealizado.touched && trabajoRealizado.invalid }" maxlength="45"
                required>
       </td>
       <td class="text-center">
-        <input name="tiempo" type="text" class="form-control" [(ngModel)]="experiencia.tiempo" placeholder="Tiempo"
+        <input name="tiempo" type="text" class="form-control" [(ngModel)]="experiencia.tiempo" 
                #tiempo="ngModel" [ngClass]="{ 'is-invalid':  tiempo.touched && tiempo.invalid }" maxlength="45"
                required>
       </td>
       <td class="text-center">
         <input name="motivoSeparacion" type="text" class="form-control" [(ngModel)]="experiencia.motivoSeparacion"
-               placeholder="Motivo Separación"
+               
                #motivoSeparacion="ngModel" [ngClass]="{ 'is-invalid':  motivoSeparacion.touched && motivoSeparacion.invalid }"
                required>
       </td>
@@ -201,21 +201,21 @@
     <div class="form-group">
       <label>Trabaja actualmente:</label>
       <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.trabajoactual"
-             name="trabajoactual" placeholder="Trabaja actualmente"/>
+             name="trabajoactual" />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>¿Qué realiza?:</label>
       <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.queRealiza" name="queRealiza"
-             placeholder="¿Qué realiza?"/>
+            />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>¿Por qué no?:</label>
       <input maxlength="150" type="text" class="form-control" [(ngModel)]="actividades.porQueNo" name="porQueNo"
-             placeholder="¿Por qué no?"/>
+            />
     </div>
   </div>
 </div>
@@ -244,7 +244,7 @@
       <label>Observaciones:</label>
       <input maxlength="250" [(ngModel)]="actividades.artesanias.observaciones" type="text" class="form-control"
              name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
   <div class="col-md-4">
@@ -252,7 +252,7 @@
       <label>Horario:</label>
       <input maxlength="150" [(ngModel)]="actividades.artesanias.horario" type="text" class="form-control"
              name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
 
