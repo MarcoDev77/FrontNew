@@ -71,7 +71,7 @@
             <tr id="table-form" *ngIf="isForm">
                 <td class="text-center">
                     <input name="sustanciaConsumia" type="text" class="form-control"
-                        [(ngModel)]="antecedente.sustanciaConsumia" placeholder="Sustancia que consumia"
+                        [(ngModel)]="antecedente.sustanciaConsumia" 
                         #sustanciaConsumia="ngModel"
                         [ngClass]="{ 'is-invalid':  sustanciaConsumia.touched && sustanciaConsumia.invalid }"
                         maxlength="45" required>

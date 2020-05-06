@@ -39,10 +39,10 @@ export class PsicologiaComponent implements OnInit {
   }
 
   saveFicha(){
-    this.generalidadesPPL.imputado={
+    this.generalidadesPPL.ficha.imputado={
       id:this.generalidadesPPL.imputadoId
     }
-    this.comiteTecnicoService.saveFichaPsicologica(this.generalidadesPPL).subscribe((data:any)=>{
+    this.comiteTecnicoService.saveFichaPsicologica(this.generalidadesPPL.ficha).subscribe((data:any)=>{
       console.log(data)
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',

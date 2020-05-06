@@ -20,7 +20,7 @@
     <div class="form-group">
       <label for="">Nombre de la PPL :</label>
       <input type="text" value="{{generalidadesPPL.nombre}}" class="form-control" readonly
-             placeholder="Persona privada de su libertad"/>
+             />
     </div>
   </div>
   <div class="col-md-4">
@@ -34,7 +34,7 @@
     <div class="form-group">
       <label for="">Fecha de nacimiento:</label>
       <input type="text" readonly class="form-control" value="{{generalidadesPPL.fechaNacimiento| date:'dd/MM/yyyy'}}"
-             name="fechaNacimiento" />
+             name="fechaNacimiento"/>
     </div>
   </div>
   <div class="col-md-4">
@@ -48,32 +48,32 @@
     <div class="form-group">
       <label for="">Escolaridad:</label>
       <input type="text" class="form-control" readonly name="escolaridad" value="{{generalidadesPPL.escolaridad}}"
-             placeholder="Escolaridad"/>
+            />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Escolaridad interior:</label>
-      <input type="text" readonly class="form-control" name="duenoMedio" placeholder="Escolaridad interior"/>
+      <input type="text" readonly class="form-control" name="duenoMedio" />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Delito:</label>
       <input type="text" class="form-control" readonly name="delito" value="{{generalidadesPPL.listaDelitos}}"
-             placeholder="Delito"/>
+             />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Sentencia:</label>
-      <input type="text" class="form-control" readonly value="{{generalidadesPPL.sentencia}}" placeholder="Sentencia"/>
+      <input type="text" class="form-control" readonly value="{{generalidadesPPL.sentencia}}" />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Fecha de elaboración:</label>
-      <input type="text" readonly class="form-control" name="duenoMedio" placeholder="Fecha de elaboración"/>
+      <input type="text" readonly class="form-control" name="duenoMedio" />
     </div>
   </div>
 </div>
@@ -90,14 +90,14 @@
     <div class="form-group">
       <label for="">Día:</label>
       <input type="text" class="form-control" [(ngModel)]="actividades.alfabetizacion.dia" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Hora:</label>
       <input type="text" class="form-control" [(ngModel)]="actividades.alfabetizacion.hora" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
 
@@ -107,12 +107,12 @@
 
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.primaria.dia" name="duenoMedio" placeholder=""/>
+      <input type="text" class="form-control" [(ngModel)]="actividades.primaria.dia" name="duenoMedio" />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.primaria.hora" name="duenoMedio" placeholder=""/>
+      <input type="text" class="form-control" [(ngModel)]="actividades.primaria.hora" name="duenoMedio"/>
     </div>
   </div>
 
@@ -123,13 +123,13 @@
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.secundaria.dia" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.secundaria.hora" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
 
@@ -140,13 +140,13 @@
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.preparatoria.dia" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.preparatoria.hora" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
 
@@ -157,13 +157,13 @@
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.honoresBandera.dia" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.honoresBandera.hora" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
 
@@ -174,13 +174,13 @@
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.biblioteca.dia" name="duenoMedio"
-             placeholder=""/>
+            />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.biblioteca.hora" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
 
@@ -190,12 +190,12 @@
 
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.curso.dia" name="duenoMedio" placeholder=""/>
+      <input type="text" class="form-control" [(ngModel)]="actividades.curso.dia" name="duenoMedio" />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.curso.hora" name="duenoMedio" placeholder=""/>
+      <input type="text" class="form-control" [(ngModel)]="actividades.curso.hora" name="duenoMedio" />
     </div>
   </div>
 
@@ -205,13 +205,13 @@
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.grupoReligioso.dia" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.grupoReligioso.hora" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
 
@@ -222,13 +222,13 @@
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.actividadExtracurricular.dia" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="actividades.actividadExtracurricular.hora" name="duenoMedio"
-             placeholder=""/>
+             />
     </div>
   </div>
 
@@ -239,7 +239,7 @@
     <div class="form-group">
       <label for="">Observaciones:</label>
       <textarea name="observaciones" [(ngModel)]="actividades.observaciones" class=" form-control" cols="100"
-                placeholder="Observaciones" rows="9"></textarea>
+                 rows="9"></textarea>
     </div>
   </div>
 </div>
