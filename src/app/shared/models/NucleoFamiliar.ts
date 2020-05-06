@@ -50,6 +50,11 @@ export class NucleoFamiliar {
     esVisitadoOtros = false;
     detalleVisitasOtros: string;
     nombreAvalMoral: string;
+    apellidoPaternoAval: string;
+    apellidoMaternoAval: string;
+    domicilioAval: string;
+    entreCallesAval: string;
+    ciudadAval: string;
     parentescoAvalMoral: Parentesco;
     nombreViviraExternado: string;
     parentescoVivira: Parentesco;
