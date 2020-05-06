@@ -77,7 +77,7 @@ export class TrabajoSocialComponent implements OnInit {
 
   generatePDF(modal) {
     console.log('generatePDF');
-    this.comiteTecnicoService.generatePDFPlanActividades(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
+    this.comiteTecnicoService.generatePDFTrabajoSocial(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
       console.log('PDF', data);
       this.isLoading = false;
       const file = new Blob([data], {type: 'application/*'});
