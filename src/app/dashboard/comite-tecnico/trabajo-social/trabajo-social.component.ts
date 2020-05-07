@@ -13,9 +13,9 @@ export class TrabajoSocialComponent implements OnInit {
   public isLoading: boolean;
   public generalidadesPPL: GeneralidadesPPL;
   public actividad: Actividad;
-  public parentescos: any[] 
+  public parentescos: any[]
   public file: any
-  
+
   constructor(private comiteTecnicoService: ComiteTecnicoService, private ingresoService:IngresoService
     ,private modalService: NgbModal) {
     this.generalidadesPPL= {} as any
@@ -37,6 +37,9 @@ export class TrabajoSocialComponent implements OnInit {
       if(!data.error){
         this.generalidadesPPL=data.imputado;
         this.actividad=data.imputado.actividades
+        if(!this.actividad.parentesco) {
+          this.actividad.parentesco={} as any
+        }
         console.log(this.actividad)
       }
         Swal.fire({
@@ -70,7 +73,7 @@ export class TrabajoSocialComponent implements OnInit {
         showConfirmButton: false
       });
     })
-    
+
   }
   change($event){}
 
@@ -134,7 +137,7 @@ class GeneralidadesPPL {
   listaDelitos: any;
   ficha:any;
   imputado: any;
-  
+
 }
 
 class Actividad {
