@@ -1071,7 +1071,7 @@
     </div>
     <div class="col-md-12">
       <button
-        [disabled]="!imputado.id"
+        [disabled]="!imputado.id || isLoading"
         (click)="genetatePDF(view)"
         type="button"
         class="btn btn-success pull-right"
@@ -1079,7 +1079,7 @@
         Imprimir Estudio Trabajo Social
       </button>
       <button
-        [disabled]="!imputado.id"
+        [disabled]="!imputado.id || isLoading"
         type="submit"
         class="btn btn-success pull-right"
       >

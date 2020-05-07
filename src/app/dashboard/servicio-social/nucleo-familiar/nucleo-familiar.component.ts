@@ -95,9 +95,22 @@ export class NucleoFamiliarComponent implements OnInit {
   }
 
   genetatePDF(modal) {
+    this.isLoading = true;
     this.servicioSocialService.generatePDFEstudioTrabajoSocial(this.imputado.id).subscribe((data: any) => {
       console.log('preview', data);
+      this.isLoading = false;
       this.showPreview(data, modal);
+    }, error => {
+      this.isLoading = false;
+      Swal.fire({
+        title:'Error!',
+        text: 'error al generar el documento',
+        icon: 'error',
+        timer: 1000,
+        showConfirmButton: false
+      });
+      console.log(error);
+
     });
   }
 
