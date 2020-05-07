@@ -44,63 +44,92 @@
   <div class="col-md-12">
     <h6>Examen médico:</h6>
     <div class="input-group mb-3">
-      <button *ngIf="docs[0]?.estaRegistrado" [disabled]="!this.ingreso.imputado?.id" (click)="searchDocuments('examen_medico', view)"
-              class="btn btn-success">
+      <button
+        *ngIf="docs[0]?.estaRegistrado"
+        [disabled]="!this.ingreso.imputado?.id"
+        (click)="searchDocuments('examen_medico', view)"
+        class="btn btn-success"
+      >
         Archivo actual
       </button>
-      <span *ngIf="!docs[0]?.estaRegistrado && this.ingreso.imputado?.id">Sin Archivo</span>
+      <span *ngIf="!docs[0]?.estaRegistrado && this.ingreso.imputado?.id"
+        >Sin Archivo</span
+      >
       <input
         #fileMedico
-        ng2FileSelect aria-describedby="fileHelp"
+        ng2FileSelect
+        aria-describedby="fileHelp"
         (change)="uploadFile(fileMedico, 'examen_medico', uploaderMedico)"
         [uploader]="uploaderMedico"
         type="file"
         class="form-control-file btn btn-simple"
         name="fileMedico"
         accept="application/pdf"
-        [disabled]="!this.ingreso.imputado?.id"
+        [disabled]="!this.ingreso.imputado?.id || isLoading"
       />
     </div>
   </div>
   <div class="col-md-12">
     <h6>Examen odontológico:</h6>
     <div class="input-group mb-3">
-      <button *ngIf="docs[1]?.estaRegistrado" [disabled]="!this.ingreso.imputado?.id" (click)="searchDocuments('examen_odontologico', view)"
-              class="btn btn-success">
+      <button
+        *ngIf="docs[1]?.estaRegistrado"
+        [disabled]="!this.ingreso.imputado?.id"
+        (click)="searchDocuments('examen_odontologico', view)"
+        class="btn btn-success"
+      >
         Archivo actual
       </button>
-      <span *ngIf="!docs[1]?.estaRegistrado && this.ingreso.imputado?.id">Sin Archivo</span>
+      <span *ngIf="!docs[1]?.estaRegistrado && this.ingreso.imputado?.id"
+        >Sin Archivo</span
+      >
       <input
         #fileOdontologia
-        ng2FileSelect aria-describedby="fileHelp"
-        (change)="uploadFile(fileOdontologia, 'examen_odontologico', uploaderOdontologico)"
+        ng2FileSelect
+        aria-describedby="fileHelp"
+        (change)="
+          uploadFile(
+            fileOdontologia,
+            'examen_odontologico',
+            uploaderOdontologico
+          )
+        "
         [uploader]="uploaderOdontologico"
         type="file"
         class="form-control-file btn btn-simple"
         name="fileOdontologia"
         accept="application/pdf"
-        [disabled]="!this.ingreso.imputado?.id"
+        [disabled]="!this.ingreso.imputado?.id || isLoading"
       />
     </div>
   </div>
   <div class="col-md-12">
     <h6>Examen psicológico:</h6>
     <div class="input-group mb-3">
-      <button *ngIf="docs[2]?.estaRegistrado" [disabled]="!this.ingreso.imputado?.id" (click)="searchDocuments('examen_psicologico', view)"
-              class="btn btn-success">
+      <button
+        *ngIf="docs[2]?.estaRegistrado"
+        [disabled]="!this.ingreso.imputado?.id"
+        (click)="searchDocuments('examen_psicologico', view)"
+        class="btn btn-success"
+      >
         Archivo actual
       </button>
-      <span *ngIf="!docs[2]?.estaRegistrado && this.ingreso.imputado?.id">Sin Archivo</span>
+      <span *ngIf="!docs[2]?.estaRegistrado && this.ingreso.imputado?.id">
+        Sin Archivo
+      </span>
       <input
         #filePsicologico
-        ng2FileSelect aria-describedby="fileHelp"
-        (change)="uploadFile(filePsicologico, 'examen_psicologico', uploaderPsicologico)"
+        ng2FileSelect
+        aria-describedby="fileHelp"
+        (change)="
+          uploadFile(filePsicologico, 'examen_psicologico', uploaderPsicologico)
+        "
         [uploader]="uploaderPsicologico"
         type="file"
         class="form-control-file btn btn-simple"
         name="filePsicologico"
         accept="application/pdf"
-        [disabled]="!this.ingreso.imputado?.id"
+        [disabled]="!this.ingreso.imputado?.id || isLoading"
       />
     </div>
   </div>
@@ -112,8 +141,20 @@
 
 <ng-template #view let-view>
   <div class="modal-body text-center pt-0">
-    <i (click)="view.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
-       class="fa fa-times-circle"></i>
-    <app-web-viewer [file]="file" [name]="'acta-de-entrevista'"></app-web-viewer>
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'acta-de-entrevista'"
+    ></app-web-viewer>
   </div>
 </ng-template>
