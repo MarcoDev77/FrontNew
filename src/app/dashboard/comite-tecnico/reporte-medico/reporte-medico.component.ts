@@ -106,8 +106,10 @@ export class ReporteMedicoComponent implements OnInit {
       item.withCredentials = false;
     };
     this.uploaderMedico.uploadAll();
-    this.uploaderMedico.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
-    this.uploaderMedico.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
+    this.uploaderMedico.onErrorItem = (item, response, status, headers) =>
+      this.onErrorItem(item, response, status, headers, inputFile);
+    this.uploaderMedico.onSuccessItem = (item, response, status, headers) =>
+      this.onSuccessItem(item, response, status, headers, inputFile);
   }
 
   generatePDF(modal) {
@@ -159,8 +161,9 @@ export class ReporteMedicoComponent implements OnInit {
   }
 
   // Uploader methods
-  onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+  onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders, input): any {
     this.isLoading = false;
+    input.value = null;
     const exit = JSON.parse(response);
     console.log(response);
     Swal.fire({
@@ -174,8 +177,9 @@ export class ReporteMedicoComponent implements OnInit {
     this.resetUploaders();
   }
 
-  onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+  onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders, input): any {
     this.isLoading = false;
+    input.value = null;
     console.log(response);
     const error = JSON.stringify(response); // error server response
     this.resetUploaders();
