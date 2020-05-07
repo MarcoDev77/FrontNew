@@ -73,9 +73,11 @@ export class DeportesComponent implements OnInit {
   }
 
   submit() {
+    this.isLoading = true;
     console.log('info', this.informacionDeportiva);
     this.informacionDeportiva.imputado = {id: this.generalidades.imputadoId};
     this.comiteTecnicoService.saveComiteDeporte(this.informacionDeportiva).subscribe((data: any) => {
+      this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Actualización',
         text: data.mensaje,
@@ -85,6 +87,7 @@ export class DeportesComponent implements OnInit {
       });
     }, error => {
       console.log(error);
+      this.isLoading = false;
       Swal.fire({
         title: 'Error!',
         text: 'Actualización fallida',
@@ -97,6 +100,7 @@ export class DeportesComponent implements OnInit {
 
   generatePDF(modal) {
     console.log('generatePDF');
+    this.isLoading = true;
     this.comiteTecnicoService.generatePDFDeportes(this.generalidades.imputadoId).subscribe((data: any) => {
       console.log('PDF', data);
       this.isLoading = false;
@@ -128,6 +132,7 @@ export class DeportesComponent implements OnInit {
       };
     }, error => {
       console.log(error);
+      this.isLoading = false;
       Swal.fire({
         title: 'Error',
         text: 'Error al generar el archivo',
