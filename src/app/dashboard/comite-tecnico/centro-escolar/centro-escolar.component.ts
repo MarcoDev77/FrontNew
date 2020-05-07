@@ -32,9 +32,11 @@ export class CentroEscolarComponent implements OnInit {
   }
 
   submit() {
+    this.isLoading = true;
     this.actividades.imputado = {id: this.generalidadesPPL.imputadoId};
     console.log('actividades', this.actividades);
     this.comiteTecnicoService.saveActividadesEscolares(this.actividades).subscribe((data: any) => {
+      this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Actualización',
         text: data.mensaje,
@@ -43,6 +45,7 @@ export class CentroEscolarComponent implements OnInit {
         showConfirmButton: false
       });
     }, error => {
+      this.isLoading = false;
       console.log(error);
       Swal.fire({
         title: 'Error!',
@@ -98,6 +101,7 @@ export class CentroEscolarComponent implements OnInit {
 
   generatePDF(modal) {
     console.log('generatePDF');
+    this.isLoading = true;
     this.comiteTecnicoService.generatePDFCentroEscolar(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
       console.log('PDF', data);
       this.isLoading = false;
@@ -128,6 +132,7 @@ export class CentroEscolarComponent implements OnInit {
         this.modalService.dismissAll();
       };
     }, error => {
+      this.isLoading = false;
       console.log(error);
       Swal.fire({
         title: 'Error',
