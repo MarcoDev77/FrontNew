@@ -9,7 +9,10 @@ export class NucleoFamiliar {
     egresosMensualesP: number;
     cooperaDineroInternoP = false;
     tieneAhorrosP = false;
-    grupoFamiliarP: string;
+    grupoFamiliarFuncionalP: string;
+    grupoFamiliarOrganizadoP: string;
+    grupoFamiliarIntegradoP: string;
+    grupoFamiliarCompletoP: string;
     relacionesInterfamiliaresP: string;
     huboViolenciaP = false;
     detalleViolenciaP: string;
@@ -19,7 +22,10 @@ export class NucleoFamiliar {
     conceptoFamiliaInternoP: string;
     // Núcleo Secundario
     hijosUnionesS: string;
-    grupoFamiliarS: string;
+    grupoFamiliarFuncionalS: string;
+    grupoFamiliarOrganizadoS: string;
+    grupoFamiliarIntegradoS: string;
+    grupoFamiliarCompletoS: string;
     relacionesInterfamiliaresS: string;
     huboViolenciaS = false;
     detalleViolenciaS: string;
@@ -33,7 +39,7 @@ export class NucleoFamiliar {
     tieneFamiliarProblemasConductaS = false;
     detalleProblemasConductaS: string;
     numeroParejasS: number;
-    // Datos del interno    
+    // Datos del interno
     trabajoDesempenado: string;
     tiempoLaborar: string;
     sueldo: number;
@@ -50,6 +56,11 @@ export class NucleoFamiliar {
     esVisitadoOtros = false;
     detalleVisitasOtros: string;
     nombreAvalMoral: string;
+    apellidoPaternoAval: string;
+    apellidoMaternoAval: string;
+    domicilioAval: string;
+    entreCallesAval: string;
+    ciudadAval: string;
     parentescoAvalMoral: Parentesco;
     nombreViviraExternado: string;
     parentescoVivira: Parentesco;
