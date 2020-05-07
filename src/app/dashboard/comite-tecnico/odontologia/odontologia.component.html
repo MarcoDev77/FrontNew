@@ -1,88 +1,154 @@
-<app-section-title icon="fa fa-tasks" title="CENTRO ESCOLAR"></app-section-title>
+<app-section-title
+  icon="fa fa-tasks"
+  title="CENTRO ESCOLAR"
+></app-section-title>
 <div class="row">
   <div class="col-md-8">
     <h3>Historia clinica odontologíca</h3>
   </div>
   <div class="col-md-4">
-    <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
+    <form
+      name="search"
+      (ngSubmit)="searchImputado()"
+      #formSearch="ngForm"
+      novalidate
+    >
       <div class="input-group">
         <div class="input-group-prepend">
-        <span (click)="searchImputado()" class="input-group-text"><i
-          class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
+          <span (click)="searchImputado()" class="input-group-text"
+            ><i
+              class="fa {{ isLoading ? 'fa-spinner fa-spin' : 'fa-search' }}"
+            ></i
+          ></span>
         </div>
-        <input name="folio" required [(ngModel)]="generalidades.folio" type="text"
-               class="form-control pull-right mr-2"
-               placeholder="Buscar por Folio">
+        <input
+          name="folio"
+          required
+          [(ngModel)]="generalidades.folio"
+          type="text"
+          class="form-control pull-right mr-2"
+          placeholder="Buscar por Folio"
+        />
       </div>
     </form>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Nombre de la PPL :</label>
-      <input type="text" readonly value="{{this.generalidades.nombre}}" class="form-control" name="duenoMedio"
-            />
+      <input
+        type="text"
+        readonly
+        value="{{ this.generalidades.nombre }}"
+        class="form-control"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Edad:</label>
-      <input type="text" readonly value="{{this.generalidades.edad}}" class="form-control" name="duenoMedio"
-             />
+      <input
+        type="text"
+        readonly
+        value="{{ this.generalidades.edad }}"
+        class="form-control"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Sexo:</label>
-      <input type="text" readonly value="{{this.generalidades.sexo}}" class="form-control" name="duenoMedio"
-             />
+      <input
+        type="text"
+        readonly
+        value="{{ this.generalidades.sexo }}"
+        class="form-control"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Fecha de nacimiento:</label>
-      <input type="text" readonly value="{{this.generalidades.fechaNacimiento}}" class="form-control" name="duenoMedio"
-            />
+      <input
+        type="text"
+        readonly
+        value="{{ this.generalidades.fechaNacimiento }}"
+        class="form-control"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Talla:</label>
-      <input type="text" readonly value="{{this.generalidades.talla}}" class="form-control" name="duenoMedio"
-             />
+      <input
+        type="text"
+        readonly
+        value="{{ this.generalidades.talla }}"
+        class="form-control"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Peso:</label>
-      <input type="text" readonly value="{{this.generalidades.peso}}" class="form-control" name="duenoMedio"
-             />
+      <input
+        type="text"
+        readonly
+        value="{{ this.generalidades.peso }}"
+        class="form-control"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">T/A:</label>
-      <input type="text" [(ngModel)]="historial.ta" class="form-control" name="duenoMedio" />
+      <input
+        type="text"
+        [(ngModel)]="historial.ta"
+        class="form-control"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">F/C:</label>
-      <input type="text" [(ngModel)]="historial.fc" class="form-control" name="duenoMedio"/>
+      <input
+        type="text"
+        [(ngModel)]="historial.fc"
+        class="form-control"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">FR:</label>
-      <input type="text" [(ngModel)]="historial.fr" class="form-control" name="duenoMedio" />
+      <input
+        type="text"
+        [(ngModel)]="historial.fr"
+        class="form-control"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
   <div class="col-md-12">
     <div class="form-group">
       <label for="">Sintomatología:</label>
-      <textarea class=" form-control" [(ngModel)]="historial.sintomatologia" cols="100" 
-                rows="3" value=""></textarea>
+      <textarea
+        class="form-control"
+        [(ngModel)]="historial.sintomatologia"
+        cols="100"
+        rows="3"
+        value=""
+      ></textarea>
     </div>
   </div>
 </div>
@@ -98,8 +164,12 @@
     <div class="form-group">
       <label for="">Si:</label>
       <div class="custom-control custom-checkbox text-center">
-        <input type="checkbox" [(ngModel)]="historial.fiebreReumatica.realizada" class="custom-control-input"
-               id="customCheck1">
+        <input
+          type="checkbox"
+          [(ngModel)]="historial.fiebreReumatica.realizada"
+          class="custom-control-input"
+          id="customCheck1"
+        />
         <label class="custom-control-label" for="customCheck1"></label>
       </div>
     </div>
@@ -107,8 +177,13 @@
   <div class="col-md-6">
     <div class="form-group">
       <label for="">Datos:</label>
-      <input type="text" [(ngModel)]="historial.fiebreReumatica.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.fiebreReumatica.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -117,15 +192,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.enfermedadCorazon.realizada" class="custom-control-input"
-             id="customCheck2">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.enfermedadCorazon.realizada"
+        class="custom-control-input"
+        id="customCheck2"
+      />
       <label class="custom-control-label" for="customCheck2"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.enfermedadCorazon.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.enfermedadCorazon.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -135,16 +219,25 @@
   <div class="col-md-1">
     <div class="form-group">
       <div class="custom-control custom-checkbox text-center">
-        <input type="checkbox" [(ngModel)]="historial.enfermedadRinon.realizada" class="custom-control-input"
-               id="customCheck3">
+        <input
+          type="checkbox"
+          [(ngModel)]="historial.enfermedadRinon.realizada"
+          class="custom-control-input"
+          id="customCheck3"
+        />
         <label class="custom-control-label" for="customCheck3"></label>
       </div>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.enfermedadRinon.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.enfermedadRinon.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -153,15 +246,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.tuberculosis.realizada" class="custom-control-input"
-             id="customCheck4">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.tuberculosis.realizada"
+        class="custom-control-input"
+        id="customCheck4"
+      />
       <label class="custom-control-label" for="customCheck4"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.tuberculosis.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.tuberculosis.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -170,13 +272,23 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.ulceras.realizada" class="custom-control-input" id="customCheck5">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.ulceras.realizada"
+        class="custom-control-input"
+        id="customCheck5"
+      />
       <label class="custom-control-label" for="customCheck5"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.ulceras.dato" class="form-control" name="duenoMedio" />
+      <input
+        type="text"
+        [(ngModel)]="historial.ulceras.dato"
+        class="form-control"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
@@ -185,15 +297,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.hepatitisIctericaHigado.realizada" class="custom-control-input"
-             id="customCheck6">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.hepatitisIctericaHigado.realizada"
+        class="custom-control-input"
+        id="customCheck6"
+      />
       <label class="custom-control-label" for="customCheck6"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.hepatitisIctericaHigado.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.hepatitisIctericaHigado.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -202,13 +323,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.artitris.realizada" class="custom-control-input" id="customCheck7">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.artitris.realizada"
+        class="custom-control-input"
+        id="customCheck7"
+      />
       <label class="custom-control-label" for="customCheck7"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.artitris.dato" class="form-control" name="duenoMedio" placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.artitris.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -217,13 +349,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.diabetes.realizada" class="custom-control-input" id="customCheck8">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.diabetes.realizada"
+        class="custom-control-input"
+        id="customCheck8"
+      />
       <label class="custom-control-label" for="customCheck8"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.diabetes.dato" class="form-control" name="duenoMedio" placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.diabetes.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -232,15 +375,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.desmayosConvulsiones.realizada" class="custom-control-input"
-             id="customCheck9">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.desmayosConvulsiones.realizada"
+        class="custom-control-input"
+        id="customCheck9"
+      />
       <label class="custom-control-label" for="customCheck9"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.desmayosConvulsiones.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.desmayosConvulsiones.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -249,13 +401,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.alergica.realizada" class="custom-control-input" id="customCheck10">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.alergica.realizada"
+        class="custom-control-input"
+        id="customCheck10"
+      />
       <label class="custom-control-label" for="customCheck10"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.alergica.dato" class="form-control" name="duenoMedio" placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.alergica.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -264,15 +427,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.enfermedadSexual.realizada" class="custom-control-input"
-             id="customCheck11">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.enfermedadSexual.realizada"
+        class="custom-control-input"
+        id="customCheck11"
+      />
       <label class="custom-control-label" for="customCheck11"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.enfermedadSexual.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.enfermedadSexual.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -281,15 +453,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.hipertensionHipotension.realizada" class="custom-control-input"
-             id="customCheck12">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.hipertensionHipotension.realizada"
+        class="custom-control-input"
+        id="customCheck12"
+      />
       <label class="custom-control-label" for="customCheck12"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.hipertensionHipotension.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.hipertensionHipotension.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -298,15 +479,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.tosPersistente.realizada" class="custom-control-input"
-             id="customCheck13">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.tosPersistente.realizada"
+        class="custom-control-input"
+        id="customCheck13"
+      />
       <label class="custom-control-label" for="customCheck13"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.tosPersistente.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.tosPersistente.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -315,32 +505,53 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.dolorDePecho.realizada" class="custom-control-input"
-             id="customCheck14">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.dolorDePecho.realizada"
+        class="custom-control-input"
+        id="customCheck14"
+      />
       <label class="custom-control-label" for="customCheck14"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.dolorDePecho.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.dolorDePecho.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
   <div class="col-md-5">
-    <label>¿Le falta el aire después de realizar algún ejercicio por mínimo que sea?</label>
+    <label
+      >¿Le falta el aire después de realizar algún ejercicio por mínimo que
+      sea?</label
+    >
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.faltaDeAire.realizada" class="custom-control-input"
-             id="customCheck15">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.faltaDeAire.realizada"
+        class="custom-control-input"
+        id="customCheck15"
+      />
       <label class="custom-control-label" for="customCheck15"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.faltaDeAire.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.faltaDeAire.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -349,15 +560,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.respiraBoca.realizada" class="custom-control-input"
-             id="customCheck16">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.respiraBoca.realizada"
+        class="custom-control-input"
+        id="customCheck16"
+      />
       <label class="custom-control-label" for="customCheck16"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.respiraBoca.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.respiraBoca.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -366,32 +586,53 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.sangranEncias.realizada" class="custom-control-input"
-             id="customCheck17">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.sangranEncias.realizada"
+        class="custom-control-input"
+        id="customCheck17"
+      />
       <label class="custom-control-label" for="customCheck17"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.sangranEncias.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.sangranEncias.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
   <div class="col-md-5">
-    <label>¿Le rechinan los dientes por la noche o los aprieta constantemente durante el día?</label>
+    <label
+      >¿Le rechinan los dientes por la noche o los aprieta constantemente
+      durante el día?</label
+    >
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.rechinanDientes.realizada" class="custom-control-input"
-             id="customCheck18">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.rechinanDientes.realizada"
+        class="custom-control-input"
+        id="customCheck18"
+      />
       <label class="custom-control-label" for="customCheck18"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.rechinanDientes.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.rechinanDientes.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -400,14 +641,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.dolorOidos.realizada" class="custom-control-input"
-             id="customCheck19">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.dolorOidos.realizada"
+        class="custom-control-input"
+        id="customCheck19"
+      />
       <label class="custom-control-label" for="customCheck19"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.dolorOidos.dato" class="form-control" name="duenoMedio" placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.dolorOidos.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -416,31 +667,52 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.tumorBoca.realizada" class="custom-control-input"
-             id="customCheck20">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.tumorBoca.realizada"
+        class="custom-control-input"
+        id="customCheck20"
+      />
       <label class="custom-control-label" for="customCheck20"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.tumorBoca.dato" class="form-control" name="duenoMedio" />
+      <input
+        type="text"
+        [(ngModel)]="historial.tumorBoca.dato"
+        class="form-control"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
   <div class="col-md-5">
-    <label>¿Ha presentado infecciones últimamente por hongo (Candida o algodoncillo en la boca o garganta)?</label>
+    <label
+      >¿Ha presentado infecciones últimamente por hongo (Candida o algodoncillo
+      en la boca o garganta)?</label
+    >
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.infeccionHongo.realizada" class="custom-control-input"
-             id="customCheck21">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.infeccionHongo.realizada"
+        class="custom-control-input"
+        id="customCheck21"
+      />
       <label class="custom-control-label" for="customCheck21"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.infeccionHongo.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.infeccionHongo.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -449,14 +721,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.embarazada.realizada" class="custom-control-input"
-             id="customCheck22">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.embarazada.realizada"
+        class="custom-control-input"
+        id="customCheck22"
+      />
       <label class="custom-control-label" for="customCheck22"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.embarazada.dato" class="form-control" name="duenoMedio" placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.embarazada.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -465,15 +747,24 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.psiquiatrico.realizada" class="custom-control-input"
-             id="customCheck23">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.psiquiatrico.realizada"
+        class="custom-control-input"
+        id="customCheck23"
+      />
       <label class="custom-control-label" for="customCheck23"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.psiquiatrico.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.psiquiatrico.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
@@ -482,45 +773,94 @@
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.asmatico.realizada" class="custom-control-input" id="customCheck24">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.asmatico.realizada"
+        class="custom-control-input"
+        id="customCheck24"
+      />
       <label class="custom-control-label" for="customCheck24"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.asmatico.dato" class="form-control" name="duenoMedio" placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.asmatico.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 
   <div class="col-md-5">
-    <label>¿Tiene antecedentes de enfermedades heredo familiares (Diabetes, Hipertensión, Cáncer, etc.)?</label>
+    <label
+      >¿Tiene antecedentes de enfermedades heredo familiares (Diabetes,
+      Hipertensión, Cáncer, etc.)?</label
+    >
   </div>
   <div class="col-md-1">
     <div class="custom-control custom-checkbox text-center">
-      <input type="checkbox" [(ngModel)]="historial.antecedentesEnfermedades.realizada" class="custom-control-input"
-             id="customCheck25">
+      <input
+        type="checkbox"
+        [(ngModel)]="historial.antecedentesEnfermedades.realizada"
+        class="custom-control-input"
+        id="customCheck25"
+      />
       <label class="custom-control-label" for="customCheck25"></label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input type="text" [(ngModel)]="historial.antecedentesEnfermedades.dato" class="form-control" name="duenoMedio"
-             placeholder=""/>
+      <input
+        type="text"
+        [(ngModel)]="historial.antecedentesEnfermedades.dato"
+        class="form-control"
+        name="duenoMedio"
+        placeholder=""
+      />
     </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col-sm-12 text-center text-sm-right">
-    <button type="button" (click)="submit()" [disabled]="!generalidades.imputadoId" class="btn btn-success mr-3">Guardar</button>
-    <button type="button" (click)="generatePDF(view)" [disabled]="!generalidades.imputadoId" class="btn btn-success mr-3">Imprimir</button>
+    <button
+      type="button"
+      (click)="submit()"
+      [disabled]="!generalidades.imputadoId || isLoading"
+      class="btn btn-success mr-3"
+    >
+      Guardar
+    </button>
+    <button
+      type="button"
+      (click)="generatePDF(view)"
+      [disabled]="!generalidades.imputadoId || isLoading"
+      class="btn btn-success mr-3"
+    >
+      Imprimir
+    </button>
   </div>
 </div>
 
 <ng-template #view let-view>
   <div class="modal-body text-center pt-0">
-    <i (click)="view.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
-       class="fa fa-times-circle"></i>
-    <app-web-viewer [file]="file" [name]="'acta-de-entrevista'"></app-web-viewer>
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'acta-de-entrevista'"
+    ></app-web-viewer>
   </div>
 </ng-template>
