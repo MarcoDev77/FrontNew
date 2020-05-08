@@ -54,9 +54,6 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {expectedRole: [r.test.role, r.seguridadCustodia.role]}
       },
-
-
-
     ]
   },
 
