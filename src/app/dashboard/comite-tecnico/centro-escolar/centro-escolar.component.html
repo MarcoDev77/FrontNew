@@ -245,10 +245,10 @@
 </div>
 <div class="row">
   <div class="col-sm-12 text-center text-sm-right">
-    <button [disabled]="!generalidadesPPL.imputadoId" type="button" (click)="submit()"
+    <button [disabled]="!generalidadesPPL.imputadoId || isLoading" type="button" (click)="submit()"
             class="btn btn-success mr-3">Guardar
     </button>
-    <button [disabled]="!generalidadesPPL.imputadoId" type="button" (click)="generatePDF(view)"
+    <button [disabled]="!generalidadesPPL.imputadoId || isLoading" type="button" (click)="generatePDF(view)"
             class="btn btn-success mr-3">Imprimir
     </button>
   </div>

@@ -74,8 +74,10 @@ export class OdontologiaComponent implements OnInit {
 
   submit() {
     console.log('dd', this.historial);
+    this.isLoading = true;
     this.historial.imputado = {id: this.generalidades.imputadoId};
     this.comiteTecnicoService.saveComiteOdontolofia(this.historial).subscribe((data: any) => {
+      this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Actualización',
         text: data.mensaje,
@@ -84,6 +86,7 @@ export class OdontologiaComponent implements OnInit {
         showConfirmButton: false
       });
     }, error => {
+      this.isLoading = false;
       console.log(error);
       Swal.fire({
         title: 'Error!',
@@ -96,6 +99,7 @@ export class OdontologiaComponent implements OnInit {
   }
 
   generatePDF(modal) {
+    this.isLoading = true;
     console.log('generatePDF');
     this.comiteTecnicoService.generatePDFOdontologia(this.generalidades.imputadoId).subscribe((data: any) => {
       console.log('PDF', data);
@@ -127,6 +131,7 @@ export class OdontologiaComponent implements OnInit {
         this.modalService.dismissAll();
       };
     }, error => {
+      this.isLoading = false;
       console.log(error);
       Swal.fire({
         title: 'Error',

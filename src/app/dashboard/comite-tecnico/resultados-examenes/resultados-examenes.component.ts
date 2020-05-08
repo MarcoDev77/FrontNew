@@ -45,7 +45,7 @@ export class ResultadosExamenesComponent implements OnInit {
     if (input.files.length === 0) {
       return this.resetUploaders();
     }
-
+    this.isLoading = true;
     const authToken = this.authenticationService.getCurrentUser().access_token;
     this.uo.authTokenHeader = 'Authorization';
     this.uo.authToken = `Bearer ${authToken}`;
@@ -62,14 +62,20 @@ export class ResultadosExamenesComponent implements OnInit {
       item.withCredentials = false;
     };
     uploader.uploadAll();
-    uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
-    uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
+    uploader.onErrorItem = (item, response, status, headers) =>
+      this.onErrorItem(item, response, status, headers, input);
+    uploader.onSuccessItem = (item, response, status, headers) =>
+      this.onSuccessItem(item, response, status, headers, input);
+    console.log('end');
+
   }
 
   searchImputado() {
+    this.isLoading = true;
     this.resetUploaders();
     this.comiteTecnicoService.getImputadoByFolioGeneral(this.ingreso.folio).subscribe((data: any) => {
       console.log('Data', data);
+      this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Busqueda',
         text: data.mensaje,
@@ -83,28 +89,60 @@ export class ResultadosExamenesComponent implements OnInit {
       } else {
         this.ingreso = {} as Ingreso;
       }
+    }, error => {
+      this.isLoading = false;
+      console.log(error);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error al realizar la busqueda',
+        icon: 'error',
+        timer: 1000,
+        showConfirmButton: false
+      });
     });
   }
 
   searchDocuments(clave, modal) {
     console.log(clave, modal);
-    switch (clave) {
-      case 'examen_medico':
-        this.comiteTecnicoService.buscarDocumentoResultadoExamen(this.ingreso.imputado.id, clave).subscribe((data: any) => {
-          this.showPreview(data, modal);
-        });
-        break;
-      case 'examen_odontologico':
-        this.comiteTecnicoService.buscarDocumentoResultadoExamen(this.ingreso.imputado.id, clave).subscribe((data: any) => {
-          this.showPreview(data, modal);
-        });
-        break;
-      case 'examen_psicologico':
-        this.comiteTecnicoService.buscarDocumentoResultadoExamen(this.ingreso.imputado.id, clave).subscribe((data: any) => {
-          this.showPreview(data, modal);
-        });
-        break;
+    try {
+      switch (clave) {
+        case 'examen_medico':
+          this.isLoading = true;
+          this.comiteTecnicoService.buscarDocumentoResultadoExamen(this.ingreso.imputado.id, clave)
+            .subscribe((data: any) => {
+              this.isLoading = false;
+              this.showPreview(data, modal);
+            });
+          break;
+        case 'examen_odontologico':
+          this.isLoading = true;
+          this.comiteTecnicoService.buscarDocumentoResultadoExamen(this.ingreso.imputado.id, clave)
+            .subscribe((data: any) => {
+              this.isLoading = false;
+              this.showPreview(data, modal);
+            });
+          break;
+        case 'examen_psicologico':
+          this.isLoading = true;
+          this.comiteTecnicoService.buscarDocumentoResultadoExamen(this.ingreso.imputado.id, clave)
+            .subscribe((data: any) => {
+              this.isLoading = false;
+              this.showPreview(data, modal);
+            });
+          break;
+      }
+    } catch (error) {
+      console.log(error);
+      this.isLoading = false;
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error al generar el documento.',
+        icon: 'error',
+        timer: 1000,
+        showConfirmButton: false
+      });
     }
+
   }
 
   checkDocuments() {
@@ -146,22 +184,24 @@ export class ResultadosExamenesComponent implements OnInit {
   }
 
   // Uploader methods
-  onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+  onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders, input: any): any {
     const exit = JSON.parse(response);
     console.log(response);
+    input.value = null;
     Swal.fire({
       title: exit.error ? 'Error!' : 'Guardado',
       text: exit.mensaje,
       icon: exit.error ? 'error' : 'success',
       timer: 1000,
       showConfirmButton: false
-    }).then(() => {
-    });
+    }).then(() => this.isLoading = false);
     this.checkDocuments();
     this.resetUploaders();
   }
 
-  onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+  onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders, input: any): any {
+    this.isLoading = false;
+    input.value = null;
     console.log(response);
     const error = JSON.stringify(response); // error server response
     this.resetUploaders();
@@ -171,7 +211,7 @@ export class ResultadosExamenesComponent implements OnInit {
       icon: 'error',
       timer: 1500,
       showConfirmButton: false
-    });
+    }).then(() => this.isLoading = false)
   }
 
   resetUploaders() {

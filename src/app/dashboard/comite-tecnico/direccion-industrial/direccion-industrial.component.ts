@@ -97,8 +97,10 @@ export class DireccionIndustrialComponent implements OnInit {
   }
 
   submit() {
+    this.isLoading = true;
     console.log('Lista Actividades', this.actividades);
     this.comiteTecnicoService.savePlandeActividades(this.actividades).subscribe((data: any) => {
+      this.isLoading = false;
       console.log('savePlandeActividades', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Actualización',
@@ -109,6 +111,7 @@ export class DireccionIndustrialComponent implements OnInit {
       });
     }, error => {
       console.log(error);
+      this.isLoading = false;
       Swal.fire({
         title: 'Error!',
         text: 'Actualización fallida',
@@ -135,9 +138,11 @@ export class DireccionIndustrialComponent implements OnInit {
 
   saveExperienciaLaboral(array: any[]) {
     if (this.validateFiels(array)) {
+      this.isLoading = true;
       this.experiencia.imputado = {id: this.generalidadesPPL.imputadoId};
       console.log('To server', this.experiencia);
       this.comiteTecnicoService.saveExperienciaLaboral(this.experiencia).subscribe((data: any) => {
+        this.isLoading = false;
         console.log(data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
@@ -150,6 +155,16 @@ export class DireccionIndustrialComponent implements OnInit {
           this.getData(false);
           this.isForm = false;
         }
+      }, error => {
+        this.isLoading = false;
+        console.log(error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Error al guardar.',
+          icon: 'error',
+          timer: 1300,
+          showConfirmButton: false
+        });
       });
     }
   }
@@ -164,7 +179,9 @@ export class DireccionIndustrialComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then(({value}) => {
       if (value) {
+        this.isLoading = true;
         this.comiteTecnicoService.deleteExperienciaLaboral(item.id).subscribe((data: any) => {
+          this.isLoading = false;
           console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
@@ -178,6 +195,16 @@ export class DireccionIndustrialComponent implements OnInit {
               this.getData(false);
             }
           });
+        }, error => {
+          this.isLoading = false;
+          console.log(error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'No se pudo realizar el cambio',
+            icon: 'error',
+            timer: 1300,
+            showConfirmButton: false
+          });
         });
       }
     });
@@ -185,6 +212,7 @@ export class DireccionIndustrialComponent implements OnInit {
 
   generatePDF(modal) {
     console.log('generatePDF');
+    this.isLoading = true;
     this.comiteTecnicoService.generatePDFDireccionIndustrial(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
       console.log('PDF', data);
       this.isLoading = false;
@@ -215,6 +243,7 @@ export class DireccionIndustrialComponent implements OnInit {
         this.modalService.dismissAll();
       };
     }, error => {
+      this.isLoading = false;
       console.log(error);
       Swal.fire({
         title: 'Error',

@@ -117,7 +117,7 @@
     <h3>Diagnóstico de experiencia laboral y/o cursos</h3>
   </div>
   <div class="col text-right mb-3 mt-4">
-    <button class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
+    <button [disabled]="!generalidadesPPL.imputadoId || isLoading" type="button" class="btn btn-success btn-sm m-0 pull-right" (click)="add()" [ngbTooltip]="'Nuevo Registro'"><i
       class="fa fa-plus fa-lg"></i></button>
   </div>
 </div>
@@ -150,19 +150,19 @@
     <tr id="table-form" *ngIf="isForm">
       <td class="text-center">
         <input name="trabajoRealizado" type="text" class="form-control" [(ngModel)]="experiencia.trabajoRealizado"
-               
+
                #trabajoRealizado="ngModel"
                [ngClass]="{ 'is-invalid':  trabajoRealizado.touched && trabajoRealizado.invalid }" maxlength="45"
                required>
       </td>
       <td class="text-center">
-        <input name="tiempo" type="text" class="form-control" [(ngModel)]="experiencia.tiempo" 
+        <input name="tiempo" type="text" class="form-control" [(ngModel)]="experiencia.tiempo"
                #tiempo="ngModel" [ngClass]="{ 'is-invalid':  tiempo.touched && tiempo.invalid }" maxlength="45"
                required>
       </td>
       <td class="text-center">
         <input name="motivoSeparacion" type="text" class="form-control" [(ngModel)]="experiencia.motivoSeparacion"
-               
+
                #motivoSeparacion="ngModel" [ngClass]="{ 'is-invalid':  motivoSeparacion.touched && motivoSeparacion.invalid }"
                required>
       </td>
@@ -621,12 +621,12 @@
 
 <div class="row">
   <div class="col-sm-12 text-center text-sm-right">
-    <button type="button" [disabled]="!generalidadesPPL.imputadoId" (click)="submit()"
+    <button type="button" [disabled]="!generalidadesPPL.imputadoId || isLoading" (click)="submit()"
     class="btn btn-success mr-3">Guardar
 </button>
-    <button type="button" [disabled]="!generalidadesPPL.imputadoId" (click)="generatePDF(view)" class="btn btn-success mr-3">Imprimir
+    <button type="button" [disabled]="!generalidadesPPL.imputadoId || isLoading" (click)="generatePDF(view)" class="btn btn-success mr-3">Imprimir
     </button>
-   
+
   </div>
 </div>
 
