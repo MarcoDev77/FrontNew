@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Nombramiento } from '@shared/models/Nombramiento';
+import { SeguridadCustodiaService } from '@shared/services/seguridad-custodia.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nombramiento',
@@ -19,19 +21,93 @@ export class NombramientoComponent implements OnInit {
     public selectedRow: Number;
     public setClickedRow: (i) => void;
     public auxId: any;
-  constructor() {
+  constructor(private seguridadCustodiaService: SeguridadCustodiaService) {
     this.nombramiento= {} as any;
     this.nombramientos=[];
+    this.setClickedRow = (index) => {
+      this.selectedRow = this.selectedRow === index ? -1 : index;
+    };
    }
 
   ngOnInit() {
     this.getData()
   }
 
-  getData(){}
+  getData(){
+    this.seguridadCustodiaService.listNombramientos().subscribe((data: any)=>{
+      console.log(data)
+      if(!data.error){
+        this.nombramientos=data.nombramiento
+      }
+    })
+  }
 
-  saveNombramiento(){
+  saveNombramiento(array: any[]){
+    console.log(array)
+    if(this.validateFiels(array)){
+      this.seguridadCustodiaService.saveNombramiento(this.nombramiento).subscribe((data:any)=>{
+        Swal.fire({
+          title: data.error ? 'Error!' : 'Guardado',
+          text: data.mensaje,
+          icon: data.error ? 'error' : 'success',
+          timer: 1300,
+          showConfirmButton: false
+        });
+        if (!data.error) {
+          this.cancel();
+          this.getData();
+        }
+      });
+    }   
+  }
 
+  toggleStatus(item: Nombramiento) {
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: 'El estatus del registro cambiará.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then(({value}) => {
+      if (value) {
+        this.seguridadCustodiaService.cambiarStatusNombramiento(item.id).subscribe((data: any) => {
+          console.log(data);
+          Swal.fire({
+            title: data.error ? 'Error!' : 'Cambio exitoso.',
+            text: data.mensaje,
+            icon: data.error ? 'error' : 'success',
+            timer: 1300,
+            showConfirmButton: false
+          }).finally(() => {
+            if (!data.error) {
+              this.getData();
+            }
+          });
+        });
+      }
+    });
+
+  }
+
+
+  updateNombramiento(id, item) {
+    this.isForm = true;
+    this.nombramiento = {...item};
+
+    if (this.auxId && this.auxId !== id) {
+      this.showTr();
+      this.auxId = id;
+    } else {
+      this.auxId = id;
+    }
+    setTimeout(() => {
+      this.hiddenTr();
+      const tr = document.getElementById(this.auxId);
+      const form = document.getElementById('table-form');
+
+      tr.insertAdjacentElement('afterend', form);
+    }, 50);
   }
 
 
