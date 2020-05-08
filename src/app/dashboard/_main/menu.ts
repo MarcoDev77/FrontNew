@@ -165,13 +165,7 @@ export const ROUTES: RouteInfo[] = [
     collapse: 'tables',
     children: [
       {path: 'comite-tecnico/examenes', title: 'Resultado examenes', ab: 'RE'},
-      {path: 'comite-tecnico/reporte-medico', title: 'Médico', ab: 'ME'},      
-
-
-
-
-
-
+      {path: 'comite-tecnico/reporte-medico', title: 'Médico', ab: 'ME'},     
     ],
   }
 ];

@@ -40,8 +40,8 @@ export const roles = {
     main: 'dashboard/servicio-social/registro-visita'
   }, seguridadCustodia: {
     role: 'ROLE_SEGURIDAD_CUSTODIA',
-    name: 'Consultor',
-    main: 'dactiloscopia'
+    name: 'Seguridad y custodia',
+    main: 'seguridad-custodia'
   }, comiteTecnico: {
     role: 'ROLE_COMITE_TECNICO',
     name: 'Comité tecnico',
