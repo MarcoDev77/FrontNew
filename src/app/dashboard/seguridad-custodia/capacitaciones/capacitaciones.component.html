@@ -58,7 +58,7 @@
             name="nombre"
             type="text"
             class="form-control"
-            [(ngModel)]="motivoReubicacion.descripcion"
+            [(ngModel)]="capacitacion.nombre"
             placeholder="Nombre"
             #nombre="ngModel"
             [ngClass]="{ 'is-invalid': nombre.touched && nombre.invalid }"
@@ -96,12 +96,32 @@
         (click)="setClickedRow(i)"
         [class.active]="i == selectedRow"
       >
-        <td class="text-center">{{ item.descripcion }}</td>
+        <td class="text-center">{{ item.nombre }}</td>
         <td class="text-center">
           {{ item.fechaActualizacion | date: "dd/MM/yy h:mm a" }}
         </td>
         <td class="text-center">
-          <!-- <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top" ngbTooltip="Habilitar"></i> &nbsp; -->
+          <i
+            *ngIf="item.estatus"
+            class="fa fa-toggle-on"
+            (click)="toggleStatus(item.id)"
+            placement="top"
+            ngbTooltip="Deshabilitar"
+          ></i>
+          <i
+            *ngIf="!item.estatus"
+            class="fa fa-toggle-off"
+            (click)="toggleStatus(item.id)"
+            placement="top"
+            ngbTooltip="Habilitar"
+          ></i>
+          &nbsp;
+          <i
+          class="fa fa-pencil"
+          (click)="updateCapacitacion('tr' + i, item)"
+          placement="top"
+          ngbTooltip="Actualizar"
+        ></i>
         </td>
       </tr>
 
