@@ -13,5 +13,11 @@ export class SeguridadCustodiaService {
     this.url = environment.apiUrl;
   }
 
-  
+  saveNombramiento = model => this.http.post(`${this.url}/api/registrarNombramiento`, model);
+
+  listNombramientos= () => this.http.get(`${this.url}/api/listarNombramiento`);
+
+  cambiarStatusNombramiento= id => this.http.delete(`${this.url}/api/actualizarEstatusNombramiento?nombramientoId=${id}`);
+
+
 }

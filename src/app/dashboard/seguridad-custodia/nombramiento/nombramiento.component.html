@@ -31,21 +31,23 @@
                         maxlength="45" required>
                 </td>
 
-                <td>
+                <td class="text-center">
                     <i class="fa fa-times mr-3" placement="top" ngbTooltip="Cancelar" (click)="cancel()"></i>
                     <i class="fa fa-check" placement="top" ngbTooltip="Guardar"
-                        (click)="saveNombremiento([nombremiento])"></i>
+                        (click)="saveNombramiento([nombre])"></i>
                 </td>
             </tr>
             <tr id="{{'tr' + i}}"
-                *ngFor="let item of nombremientos | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+                *ngFor="let item of nombramientos | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
                 (click)="setClickedRow(i)" [class.active]="i == selectedRow">
                 <td class="text-center">{{item.nombre}}</td>
                 <td class="text-center">
                     <i class="fa fa-pencil" placement="top" ngbTooltip="Modificar"
-                        (click)="updateNombremiento('tr' + i , item)"></i> &nbsp;
-                    <i class="fa fa-trash" placement="top" ngbTooltip="Eliminar"
-                        (click)="deleteNombramiento(item)"></i>
+                        (click)="updateNombramiento('tr' + i , item)"></i> &nbsp;
+                        <i *ngIf="item.estatus" class="fa fa-toggle-on" (click)="toggleStatus(item)" placement="top"
+                           ngbTooltip="Deshabilitar"></i>
+                        <i *ngIf="!item.estatus" class="fa fa-toggle-off" (click)="toggleStatus(item)" placement="top"
+                           ngbTooltip="Habilitar"></i>
                 </td>
 
             </tr>
