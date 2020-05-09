@@ -7,6 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CapacitacionesComponent } from './capacitaciones/capacitaciones.component';
 import { SeguridadCustodiaRoutingModule } from './seguridad.custodia.routing.module';
 import { NombramientoComponent } from './nombramiento/nombramiento.component';
+import { CustodiosComponent } from './custodios/custodios.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { NombramientoComponent } from './nombramiento/nombramiento.component';
     RootComponent,
     CapacitacionesComponent,
     NombramientoComponent,
+    CustodiosComponent
   ],
   imports: [
     CommonModule,

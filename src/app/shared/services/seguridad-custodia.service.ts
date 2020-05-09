@@ -15,15 +15,21 @@ export class SeguridadCustodiaService {
 
   saveNombramiento = model => this.http.post(`${this.url}/api/registrarNombramiento`, model);
 
-  listNombramientos= () => this.http.get(`${this.url}/api/listarNombramiento`);
+  listNombramientos = () => this.http.get(`${this.url}/api/listarNombramiento`);
 
-  cambiarStatusNombramiento= id => this.http.delete(`${this.url}/api/actualizarEstatusNombramiento?nombramientoId=${id}`);
-  
+  cambiarStatusNombramiento = id => this.http.delete(`${this.url}/api/actualizarEstatusNombramiento?nombramientoId=${id}`);
+
   getCapacitaciones = () => this.http.get(`${this.url}/api/listarCapacitacion`);
 
   saveCapacitaciones = model => this.http.post(`${this.url}/api/registrarCapacitacion`, model);
 
   changeStatusCapacitaciones = id =>
     this.http.delete(`${this.url}/api/actualizarEstatusCapacitacion?capacitacionId=${id}`);
+
+  saveCustodio = model => this.http.post(`${this.url}/api/registrarCustodio`, model);
+
+  listCustodios = () => this.http.get(`${this.url}/api/listarCustodio`);
+
+  changeStatusCustodio = id => this.http.delete(`${this.url}/api/actualizarEstatusCustodio?custodioId=${id}`);
 
 }
