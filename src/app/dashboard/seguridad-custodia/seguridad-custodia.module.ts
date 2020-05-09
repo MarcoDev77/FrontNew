@@ -8,6 +8,7 @@ import { CapacitacionesComponent } from './capacitaciones/capacitaciones.compone
 import { SeguridadCustodiaRoutingModule } from './seguridad.custodia.routing.module';
 import { NombramientoComponent } from './nombramiento/nombramiento.component';
 import { CustodiosComponent } from './custodios/custodios.component';
+import { CapacitacionesPaseListaComponent } from './capacitaciones-pase-lista/capacitaciones-pase-lista.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { CustodiosComponent } from './custodios/custodios.component';
     RootComponent,
     CapacitacionesComponent,
     NombramientoComponent,
-    CustodiosComponent
+    CustodiosComponent,
+    CapacitacionesPaseListaComponent,
   ],
   imports: [
     CommonModule,

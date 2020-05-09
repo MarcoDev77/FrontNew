@@ -117,11 +117,18 @@
           ></i>
           &nbsp;
           <i
-          class="fa fa-pencil"
-          (click)="updateCapacitacion('tr' + i, item)"
-          placement="top"
-          ngbTooltip="Actualizar"
-        ></i>
+            class="fa fa-pencil"
+            (click)="updateCapacitacion('tr' + i, item)"
+            placement="top"
+            ngbTooltip="Actualizar"
+          ></i>
+          &nbsp;
+          <i
+            class="fa fa-list"
+            placement="top"
+            ngbTooltip="Pasar Lista"
+            (click)="goToPaseLista(item)"
+          ></i>
         </td>
       </tr>
 

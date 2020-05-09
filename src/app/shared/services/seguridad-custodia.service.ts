@@ -32,4 +32,6 @@ export class SeguridadCustodiaService {
 
   changeStatusCustodio = id => this.http.delete(`${this.url}/api/actualizarEstatusCustodio?custodioId=${id}`);
 
+  saveAsistencia = model => this.http.post(`${this.url}/api/registarCustodioCapacitacion`, model);
+
 }

@@ -10,4 +10,5 @@ export class Custodio {
   curp: string;
   formacionInicial: boolean;
   nombramiento: any;
+  asistio: boolean;
 }

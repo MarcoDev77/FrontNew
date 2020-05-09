@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SeguridadCustodiaService } from '@shared/services/seguridad-custodia.service';
 import { Capacitacion } from '@shared/models/Capacitacion';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-capacitaciones',
@@ -24,7 +25,9 @@ export class CapacitacionesComponent implements OnInit {
   public setClickedRow: (i) => void;
 
 
-  constructor(private seguridadCustodiaService: SeguridadCustodiaService) {
+  constructor(
+    private seguridadCustodiaService: SeguridadCustodiaService,
+    private router: Router) {
 
     // Table
     this.setClickedRow = function (index) {
@@ -119,6 +122,11 @@ export class CapacitacionesComponent implements OnInit {
         });
       }
     })
+  }
+
+  goToPaseLista(capacitacion: Capacitacion) {
+    localStorage.setItem('capacitacion', JSON.stringify(capacitacion));
+    this.router.navigate(['dashboard/seguridad-custodia/capacitaciones-lista']);
   }
 
 
