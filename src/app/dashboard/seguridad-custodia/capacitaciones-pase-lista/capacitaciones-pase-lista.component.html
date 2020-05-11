@@ -1,0 +1,52 @@
+<app-section-title
+  icon="fa fa-list-alt"
+  title="Pase de Lista"
+  [goBack]="true"
+></app-section-title>
+
+<div class="row">
+  <div class="col-md-8">
+    <h3>{{ capacitacion.nombre }}</h3>
+  </div>
+</div>
+<br />
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th>N.</th>
+      <th>Nombre</th>
+      <th class="text-center">Asistencia</th>
+    </tr>
+    <tbody>
+      <tr *ngFor="let cus of custodios">
+        <td>{{ cus.numCustodio }}</td>
+        <td>
+          {{ cus.apellidoPaterno }} {{ cus.apellidoMaterno }} {{ cus.nombre }}
+        </td>
+        <td class="text-center">
+          <input
+            type="checkbox"
+            [checked]="cus.asistio"
+            (click)="saveAsistencia(cus)"
+            [ngbTooltip]="
+              cus.asistio ? 'Quitar Asistencia' : 'Poner Asistencia'
+            "
+          />
+          <!-- <i
+            *ngIf="cus.asistio"
+            (click)="saveAsistencia(cus)"
+            class="fa fa-check-square-o"
+            ngbTooltip="Quitar Asistencia"
+          ></i>
+          <i
+            *ngIf="!cus.asistio"
+            (click)="saveAsistencia(cus)"
+            class="fa fa-square-o"
+            ngbTooltip="Poner Asistencia"
+          ></i> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

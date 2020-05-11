@@ -105,6 +105,20 @@
             placement="top"
             ngbTooltip="Deshabilitar"
           ></i>
+          &nbsp;
+          <i
+            class="fa fa-pencil"
+            (click)="update(item, formModal)"
+            placement="top"
+            ngbTooltip="Editar"
+          ></i>
+          &nbsp;
+          <i
+            class="fa fa-briefcase"
+            (click)="seeCapacitaciones(capModal, item)"
+            placement="top"
+            ngbTooltip="Capacitaciones"
+          ></i>
         </td>
       </tr>
 
@@ -153,6 +167,7 @@
               type="text"
               minlength="10"
               maxlength="10"
+              pattern="^[0-9]*$"
               required
             />
           </div>
@@ -272,35 +287,35 @@
 
         <div class="col-md-4">
           <div class="form-group">
-            <label class="text-muted" for="">Curp</label>
+            <label class="text-muted" for="">Cuip</label>
             <input
-              name="curp"
-              [(ngModel)]="custodio.curp"
-              #curp="ngModel"
+              name="cuip"
+              [(ngModel)]="custodio.cuip"
+              #cuip="ngModel"
               class="form-control"
               [ngClass]="{
-                'is-invalid': f.submitted && curp.invalid
+                'is-invalid': f.submitted && cuip.invalid
               }"
               type="text"
-              minlength="1"
-              maxlength="75"
+              minlength="20"
+              maxlength="20"
               required
             />
           </div>
         </div>
 
         <div class="col-md-4">
-          <div class="form-group">
-            <label class="text-muted" for=""
-              >Cuenta con formación inicial</label
-            >
+          <div class="custom-control custom-checkbox mt-4">
             <input
-              name="formacionInicial"
+              name="cooperaDineroInternoP"
               [(ngModel)]="custodio.formacionInicial"
-              #formacionInicial="ngModel"
-              class="form-control"
               type="checkbox"
+              class="custom-control-input"
+              id="formacionInicial"
             />
+            <label class="custom-control-label" for="formacionInicial">
+              ¿Cuenta con formación inicial?
+            </label>
           </div>
         </div>
 
@@ -340,6 +355,31 @@
         </div>
       </div>
     </form>
-    {{ this.custodio | json }}
+    <!-- {{ this.custodio | json }} -->
+  </div>
+</ng-template>
+
+<ng-template #capModal let-capModal>
+  <div class="modal-body pt-0">
+    <app-section-title
+      title="Capacitaciones"
+      icon="fa fa fa-briefcase"
+    ></app-section-title>
+    <br />
+    <h3>Lista de capacitaciones</h3>
+    <br />
+    <ul class="list-group">
+      <button
+        *ngFor="let cap of capacitaciones; let i = index"
+        (click)="gotoCapacitaciones(cap)"
+        [disabled]="!cap.id"
+        class="list-group-item d-flex justify-content-between align-items-center list-group-item-action"
+      >
+        {{ i + 1 }} - {{ cap.nombre }}
+        <span class="badge badge-primary badge-pill">
+          {{ cap.fechaActualizacion | date: "dd/MM/yy" }}
+        </span>
+      </button>
+    </ul>
   </div>
 </ng-template>

@@ -4,6 +4,8 @@ import { Custodio } from '@shared/models/Custodio';
 import { SeguridadCustodiaService } from '@shared/services/seguridad-custodia.service';
 import { Nombramiento } from '@shared/models/Nombramiento';
 import Swal from 'sweetalert2';
+import { Capacitacion } from '@shared/models/Capacitacion';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-custodios',
@@ -14,6 +16,7 @@ export class CustodiosComponent implements OnInit {
 
   public custodios: Custodio[];
   public custodio: Custodio;
+  public capacitaciones: any[];
   public isLoading: boolean;
   public nombramientos: Nombramiento[];
   // Table atributes
@@ -27,6 +30,7 @@ export class CustodiosComponent implements OnInit {
   public setClickedRow: (i) => void;
 
   constructor(
+    private router: Router,
     private modalService: NgbModal,
     private serguridadCustodiaService: SeguridadCustodiaService) {
     this.custodios = [];
@@ -43,6 +47,15 @@ export class CustodiosComponent implements OnInit {
       console.log('getData', data);
       this.isLoading = false;
       this.custodios = data.custodios;
+    });
+  }
+
+  getCapacitaciones(custodio: Custodio) {
+    this.serguridadCustodiaService.getCapacitacionesByCustodio(custodio.id).subscribe((data: any) => {
+      this.capacitaciones = data.capacitaciones;
+      if (this.capacitaciones.length === 0) {
+        this.capacitaciones.push({ nombre: 'Sin capacitaciones' });
+      }
     });
   }
 
@@ -66,8 +79,13 @@ export class CustodiosComponent implements OnInit {
     });
   }
 
-  update(custodio: Custodio) {
+  update(custodio: Custodio, modal) {
+    this.openModal(modal, { custodio, isNew: false });
+  }
 
+  seeCapacitaciones(modal, custodio: Custodio) {
+    this.getCapacitaciones(custodio);
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
   }
 
   toggleStatus(id) {
@@ -104,7 +122,7 @@ export class CustodiosComponent implements OnInit {
       this.custodio.nombramiento = {};
       this.custodio.formacionInicial = false;
     } else {
-      this.custodio = config.custodio;
+      this.custodio = { ...config.custodio };
     }
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
   }
@@ -113,6 +131,12 @@ export class CustodiosComponent implements OnInit {
     this.serguridadCustodiaService.listNombramientos().subscribe((data: any) => {
       this.nombramientos = data.nombramiento;
     });
+  }
+
+  gotoCapacitaciones(capacitacion: Capacitacion) {
+    localStorage.setItem('capacitacion', JSON.stringify(capacitacion));
+    this.router.navigate(['dashboard/seguridad-custodia/capacitaciones-lista']);
+    this.modalService.dismissAll();
   }
 
   // Table methods
