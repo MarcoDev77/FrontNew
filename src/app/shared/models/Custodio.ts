@@ -7,7 +7,7 @@ export class Custodio {
   area: string;
   turno: string;
   horario: string;
-  curp: string;
+  cuip: string;
   formacionInicial: boolean;
   nombramiento: any;
   asistio: boolean;

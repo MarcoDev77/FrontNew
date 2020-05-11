@@ -25,7 +25,15 @@
           {{ cus.apellidoPaterno }} {{ cus.apellidoMaterno }} {{ cus.nombre }}
         </td>
         <td class="text-center">
-          <i
+          <input
+            type="checkbox"
+            [checked]="cus.asistio"
+            (click)="saveAsistencia(cus)"
+            [ngbTooltip]="
+              cus.asistio ? 'Quitar Asistencia' : 'Poner Asistencia'
+            "
+          />
+          <!-- <i
             *ngIf="cus.asistio"
             (click)="saveAsistencia(cus)"
             class="fa fa-check-square-o"
@@ -36,7 +44,7 @@
             (click)="saveAsistencia(cus)"
             class="fa fa-square-o"
             ngbTooltip="Poner Asistencia"
-          ></i>
+          ></i> -->
         </td>
       </tr>
     </tbody>
