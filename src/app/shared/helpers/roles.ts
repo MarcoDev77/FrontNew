@@ -37,7 +37,7 @@ export const roles = {
   trabajoSocial: {
     role: 'ROLE_TRABAJO_SOCIAL',
     name: 'Trabajo social',
-    main: 'dashboard/servicio-social/registro-visita'
+    main: 'dashboard/servicio-social/nucleo-familiar'
   }, seguridadCustodia: {
     role: 'ROLE_SEGURIDAD_CUSTODIA',
     name: 'Seguridad y custodia',
