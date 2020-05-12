@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {CatalogosService} from '@shared/services/catalogos.service';
-import {Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {IngresoService} from '@shared/services/ingreso.service';
-import {Ingreso} from '@shared/models/Ingreso';
-import {Referencia} from '@shared/models/Referencia';
-import {Observable} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { CatalogosService } from '@shared/services/catalogos.service';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IngresoService } from '@shared/services/ingreso.service';
+import { Ingreso } from '@shared/models/Ingreso';
+import { Referencia } from '@shared/models/Referencia';
+import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import {map} from 'rxjs/operators';
-import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
-import {environment} from '@environment/environment';
-import {AuthenticationService} from '@shared/services/authentication.service';
+import { map } from 'rxjs/operators';
+import { FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import { environment } from '@environment/environment';
+import { AuthenticationService } from '@shared/services/authentication.service';
 
 @Component({
   selector: 'app-referencias',
@@ -44,10 +44,10 @@ export class ReferenciasComponent implements OnInit {
   public isForm: boolean;
 
   constructor(private catalogosService: CatalogosService,
-              private router: Router,
-              private modalService: NgbModal,
-              private ingresoService: IngresoService,
-              private authenticationService: AuthenticationService) {
+    private router: Router,
+    private modalService: NgbModal,
+    private ingresoService: IngresoService,
+    private authenticationService: AuthenticationService) {
     this.isLoading = false;
     this.ingreso = {} as Ingreso;
     this.paises = [];
@@ -64,9 +64,9 @@ export class ReferenciasComponent implements OnInit {
     }
     // Uploader
     this.url = environment.apiUrl;
-    this.uploader = new FileUploader({url: this.url + '/api/subirFotoPerfilReferencia', itemAlias: 'imagen'});
+    this.uploader = new FileUploader({ url: this.url + '/api/subirFotoPerfilReferencia', itemAlias: 'imagen' });
     // Table
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -135,8 +135,11 @@ export class ReferenciasComponent implements OnInit {
     if (item) {
       this.referencia = item;
       console.log(this.referencia);
+    } else {
+      this.referencia = {} as Referencia;
+      this.referencia.parentesco = {} as any;
     }
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
   selectArrayTofilter(array) {
@@ -261,7 +264,7 @@ export class ReferenciasComponent implements OnInit {
   }
 
   showPreview(data, modal) {
-    const file = new Blob([data], {type: 'application/*'});
+    const file = new Blob([data], { type: 'application/*' });
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadstart = ev => this.isLoading = true;
@@ -273,7 +276,7 @@ export class ReferenciasComponent implements OnInit {
       this.modalService.dismissAll();
       if (base64) {
         this.file = base64;
-        this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+        this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
       }
     };
     reader.onerror = () => {
@@ -361,7 +364,7 @@ export class ReferenciasComponent implements OnInit {
       parentesco: item.parentesco,
       imputado: this.ingreso,
       menores: this.mapChilds(infantes),
-      referenciaPersonal: {id: item.id}
+      referenciaPersonal: { id: item.id }
     };
 
     this.ingresoService.savePaseProvisional(model).subscribe((data: any) => {
@@ -379,7 +382,7 @@ export class ReferenciasComponent implements OnInit {
   }
 
   mapChilds(array) {
-    return array.map(child => ({nombre: child}));
+    return array.map(child => ({ nombre: child }));
   }
 
   generateControlVisitas(modal) {
@@ -392,7 +395,7 @@ export class ReferenciasComponent implements OnInit {
     this.pasePermanente = {} as PasePermanente;
     this.pasePermanente.menores = [];
     this.menor = {};
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
     this.referencia = item;
   }
 
@@ -420,7 +423,7 @@ export class ReferenciasComponent implements OnInit {
     }
 
     console.log('To server', this.pasePermanente);
-    this.pasePermanente.referenciaPersonal = { id: this.referencia.id};
+    this.pasePermanente.referenciaPersonal = { id: this.referencia.id };
     this.ingresoService.generatePDFPasePermanente(this.pasePermanente).subscribe((data: any) => {
       this.modalService.dismissAll();
       this.showPreview(data, modal);
