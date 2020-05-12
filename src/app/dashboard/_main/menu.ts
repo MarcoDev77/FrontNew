@@ -1,4 +1,4 @@
-import {roles as r} from '../../shared/helpers/roles';
+import { roles as r } from '../../shared/helpers/roles';
 
 export const ROUTES: RouteInfo[] = [
   // {
@@ -56,12 +56,12 @@ export const ROUTES: RouteInfo[] = [
     isCollapsed: false,
     children: [
       // {path: 'usuario', title: 'USUARIOS', ab: 'US'},
-      {path: 'centro-penitenciario', title: 'CENTROS PENITENCIARIOS', ab: 'CP'},
-      {path: 'delito', title: 'DELITOS', ab: 'DE'},
-      {path: 'tipo-libertad', title: 'TIPO DE LIBERTAD', ab: 'TL'},
-      {path: 'clasificacion-juridica', title: 'CLASIFICACIÓN JURÍDICA', ab: 'CJ'},
-      {path: 'enfermedad-cronica', title: 'ENFERMEDAD CRÓNICA', ab: 'EC'},
-      {path: 'motivo-reubicacion', title: 'MOTIVO DE REUBICACIÓN', ab: 'MR'},
+      { path: 'centro-penitenciario', title: 'CENTROS PENITENCIARIOS', ab: 'CP' },
+      { path: 'delito', title: 'DELITOS', ab: 'DE' },
+      { path: 'tipo-libertad', title: 'TIPO DE LIBERTAD', ab: 'TL' },
+      { path: 'clasificacion-juridica', title: 'CLASIFICACIÓN JURÍDICA', ab: 'CJ' },
+      { path: 'enfermedad-cronica', title: 'ENFERMEDAD CRÓNICA', ab: 'EC' },
+      { path: 'motivo-reubicacion', title: 'MOTIVO DE REUBICACIÓN', ab: 'MR' },
     ]
   },
   {
@@ -69,10 +69,10 @@ export const ROUTES: RouteInfo[] = [
       r.admin.role
     ],
     path: '/dashboard/catalogo/usuario',
-    title : 'USUARIOS',
+    title: 'USUARIOS',
     type: 'link',
-    icontype : 'fa fa-user',
-    collapse : 'tables',
+    icontype: 'fa fa-user',
+    collapse: 'tables',
     isCollapsed: false,
   },
   {
@@ -86,14 +86,14 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fa fa-sign-in',
     collapse: 'tables',
     children: [
-      {path: 'ingreso/lista-ingreso', title: 'INGRESO', ab: 'IN'},
-      {path: 'ingreso/busqueda-huella', title: 'BÚSQUEDA HUELLAS', ab: 'BH'},
+      { path: 'ingreso/lista-ingreso', title: 'INGRESO', ab: 'IN' },
+      { path: 'ingreso/busqueda-huella', title: 'BÚSQUEDA HUELLAS', ab: 'BH' },
       // Bitacoras Ingreso
-      {path: 'bitacoras/ingreso', title: 'BITÁCORA INGRESO', ab: 'BI'},
-      {path: 'bitacoras/ingreso-liberacion', title: 'BITÁCORA LIB. INGRESO', ab: 'LIN'},
+      { path: 'bitacoras/ingreso', title: 'BITÁCORA INGRESO', ab: 'BI' },
+      { path: 'bitacoras/ingreso-liberacion', title: 'BITÁCORA LIB. INGRESO', ab: 'LIN' },
       // Bitacoras Imputado
-      {path: 'bitacoras/ingreso-Imputado', title: 'BITÁCORA IN. IMPUTADO', ab: 'BINI'},
-      {path: 'bitacoras/ingreso-imputado-liberacion', title: 'BITÁCORA LIB. IMPUTADO', ab: 'LI'},
+      { path: 'bitacoras/ingreso-Imputado', title: 'BITÁCORA IN. IMPUTADO', ab: 'BINI' },
+      { path: 'bitacoras/ingreso-imputado-liberacion', title: 'BITÁCORA LIB. IMPUTADO', ab: 'LI' },
     ],
   },
   {
@@ -107,15 +107,15 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fa fa-group',
     collapse: 'tables',
     children: [
-      {path: 'ingreso/lista-ingreso', title: 'LISTA DE INGRESOS', ab: 'LI'},
-      {path: 'servicio-social/pase-mensual', title: 'PASE MENSUAL', ab: 'PM'},
-      {path: 'servicio-social/pase-unico', title: 'PASE UNICO', ab: 'PU'},
-      {path: 'servicio-social/registro-visita', title: 'REGISTRO DE VISITA', ab: 'RV  '},
-      {path: 'servicio-social/ofrecimiento-trabajo', title: 'OFRECIMIENTO TRABAJO', ab: 'OT'},
-      {path: 'servicio-social/control-entrevista', title: 'CONTROL DE ENTREVISTA', ab: 'CE'},
-      {path: 'servicio-social/nucleo-familiar', title: 'NÚCLEO FAMILIAR', ab: 'NF'},
-      {path: 'servicio-social/tabla-familiar', title: 'FAMILIARES', ab: 'FA'},
-      {path: 'servicio-social/otros-oficios', title: 'OTROS OFICIOS', ab: 'OF'},
+      { path: 'ingreso/lista-ingreso', title: 'LISTA DE INGRESOS', ab: 'LI' },
+      // { path: 'servicio-social/pase-mensual', title: 'PASE MENSUAL', ab: 'PM' },
+      // { path: 'servicio-social/pase-unico', title: 'PASE UNICO', ab: 'PU' },
+      // { path: 'servicio-social/registro-visita', title: 'REGISTRO DE VISITA', ab: 'RV  ' },
+      { path: 'servicio-social/ofrecimiento-trabajo', title: 'OFRECIMIENTO TRABAJO', ab: 'OT' },
+      { path: 'servicio-social/control-entrevista', title: 'CONTROL DE ENTREVISTA', ab: 'CE' },
+      { path: 'servicio-social/nucleo-familiar', title: 'NÚCLEO FAMILIAR', ab: 'NF' },
+      { path: 'servicio-social/tabla-familiar', title: 'FAMILIARES', ab: 'FA' },
+      { path: 'servicio-social/otros-oficios', title: 'OTROS OFICIOS', ab: 'OF' },
     ],
   },
   {
@@ -129,7 +129,7 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fa fa-folder',
     collapse: 'tables',
     children: [
-      {path: 'archivo/archivo', title: 'ARCHIVO', ab: 'AR'},
+      { path: 'archivo/archivo', title: 'ARCHIVO', ab: 'AR' },
     ],
   },
   {
@@ -143,14 +143,30 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fa fa-folder',
     collapse: 'tables',
     children: [
-      {path: 'comite-tecnico/direccion-industrial', title: 'Dirección industrial', ab: 'DI'},
-      {path: 'comite-tecnico/plan-actividades', title: 'Pedagogía', ab: 'PE'},
-      {path: 'comite-tecnico/psicologia', title: 'Psicología', ab: 'PS'},
-      {path: 'comite-tecnico/deportes', title: 'Deportes', ab: 'DE'},
-      {path: 'comite-tecnico/odontologia', title: 'Odontología', ab: 'OD'},
-      {path: 'comite-tecnico/centro-escolar', title: 'Centro Escolar', ab: 'CE'},
-      {path: 'comite-tecnico/trabajo-social', title: 'Trabajo social', ab: 'TS'},
+      { path: 'comite-tecnico/direccion-industrial', title: 'Dirección industrial', ab: 'DI' },
+      { path: 'comite-tecnico/plan-actividades', title: 'Pedagogía', ab: 'PE' },
+      { path: 'comite-tecnico/psicologia', title: 'Psicología', ab: 'PS' },
+      { path: 'comite-tecnico/deportes', title: 'Deportes', ab: 'DE' },
+      { path: 'comite-tecnico/odontologia', title: 'Odontología', ab: 'OD' },
+      { path: 'comite-tecnico/centro-escolar', title: 'Centro Escolar', ab: 'CE' },
+      { path: 'comite-tecnico/trabajo-social', title: 'Trabajo social', ab: 'TS' },
 
+    ],
+  },
+  {
+    roles: [
+      r.seguridadCustodia.role,
+    ],
+    path: '/dashboard',
+    title: 'Seg. y Custodia',
+    type: 'sub',
+    icontype: 'fa fa-folder',
+    collapse: 'tables',
+    children: [
+      { path: 'seguridad-custodia/capacitaciones', title: 'Capacitaciones', ab: 'CAP' },
+      { path: 'seguridad-custodia/nombramiento', title: 'Nombramiento', ab: 'NOM' },
+      { path: 'seguridad-custodia/custodios', title: 'Custodios', ab: 'CUS' },
+      { path: 'seguridad-custodia/pertenencias', title: 'Pertenencias', ab: 'PE' },
     ],
   },
   {
@@ -164,8 +180,8 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fa fa-file',
     collapse: 'tables',
     children: [
-      {path: 'comite-tecnico/examenes', title: 'Resultado examenes', ab: 'RE'},
-      {path: 'comite-tecnico/reporte-medico', title: 'Médico', ab: 'ME'},     
+      { path: 'comite-tecnico/examenes', title: 'Resultado examenes', ab: 'RE' },
+      { path: 'comite-tecnico/reporte-medico', title: 'Médico', ab: 'ME' },
     ],
   }
 ];

@@ -11,41 +11,43 @@ import Swal from 'sweetalert2';
 export class NombramientoComponent implements OnInit {
   public nombramiento: Nombramiento;
   public nombramientos: any[];
+  public isLoading: boolean;
 
-    // Table attributes
-    public p;
-    public filter: any;
-    public reverse = true;
-    public key = 'id'; // set default
-    public isForm: boolean;
-    public selectedRow: Number;
-    public setClickedRow: (i) => void;
-    public auxId: any;
+
+  // Table attributes
+  public p;
+  public filter: any;
+  public reverse = true;
+  public key = 'id'; // set default
+  public isForm: boolean;
+  public selectedRow: Number;
+  public setClickedRow: (i) => void;
+  public auxId: any;
   constructor(private seguridadCustodiaService: SeguridadCustodiaService) {
-    this.nombramiento= {} as any;
-    this.nombramientos=[];
+    this.nombramiento = {} as any;
+    this.nombramientos = [];
     this.setClickedRow = (index) => {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
-   }
+  }
 
   ngOnInit() {
     this.getData()
   }
 
-  getData(){
-    this.seguridadCustodiaService.listNombramientos().subscribe((data: any)=>{
+  getData() {
+    this.seguridadCustodiaService.listNombramientos().subscribe((data: any) => {
       console.log(data)
-      if(!data.error){
-        this.nombramientos=data.nombramiento
+      if (!data.error) {
+        this.nombramientos = data.nombramiento
       }
     })
   }
 
-  saveNombramiento(array: any[]){
+  saveNombramiento(array: any[]) {
     console.log(array)
-    if(this.validateFiels(array)){
-      this.seguridadCustodiaService.saveNombramiento(this.nombramiento).subscribe((data:any)=>{
+    if (this.validateFiels(array)) {
+      this.seguridadCustodiaService.saveNombramiento(this.nombramiento).subscribe((data: any) => {
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -58,7 +60,7 @@ export class NombramientoComponent implements OnInit {
           this.getData();
         }
       });
-    }   
+    }
   }
 
   toggleStatus(item: Nombramiento) {
@@ -69,7 +71,7 @@ export class NombramientoComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.seguridadCustodiaService.cambiarStatusNombramiento(item.id).subscribe((data: any) => {
           console.log(data);
@@ -93,7 +95,7 @@ export class NombramientoComponent implements OnInit {
 
   updateNombramiento(id, item) {
     this.isForm = true;
-    this.nombramiento = {...item};
+    this.nombramiento = { ...item };
 
     if (this.auxId && this.auxId !== id) {
       this.showTr();
