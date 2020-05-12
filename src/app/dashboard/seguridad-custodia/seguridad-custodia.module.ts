@@ -9,6 +9,7 @@ import { SeguridadCustodiaRoutingModule } from './seguridad.custodia.routing.mod
 import { NombramientoComponent } from './nombramiento/nombramiento.component';
 import { CustodiosComponent } from './custodios/custodios.component';
 import { CapacitacionesPaseListaComponent } from './capacitaciones-pase-lista/capacitaciones-pase-lista.component';
+import { PertenenciasComponent } from './pertenencias/pertenencias.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CapacitacionesPaseListaComponent } from './capacitaciones-pase-lista/ca
     NombramientoComponent,
     CustodiosComponent,
     CapacitacionesPaseListaComponent,
+    PertenenciasComponent,
   ],
   imports: [
     CommonModule,

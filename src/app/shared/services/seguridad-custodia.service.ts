@@ -13,6 +13,8 @@ export class SeguridadCustodiaService {
     this.url = environment.apiUrl;
   }
 
+  getImputadoByFolio = folio => this.http.get(`${this.url}/api/buscarImputadoFolio?folioImputado=${folio}`);
+
   saveNombramiento = model => this.http.post(`${this.url}/api/registrarNombramiento`, model);
 
   listNombramientos = () => this.http.get(`${this.url}/api/listarNombramiento`);
@@ -37,5 +39,15 @@ export class SeguridadCustodiaService {
   getAsistencias = id => this.http.get(`${this.url}/api/custodiosPorCapacitacion?capacitacionId=${id}`);
 
   getCapacitacionesByCustodio = id => this.http.get(`${this.url}/api/capacitacionesPorCustodio?custodioId=${id}`);
+
+  getRegistroPertenencias = id => this.http.get(`${this.url}/api/listarRevisiones?idImputado=${id}`);
+
+  saveRegistroPertenencias = model => this.http.post(`${this.url}/api/registrarRevision`, model);
+
+  getObjetosRevision = id => this.http.get(`${this.url}/api/listarObjetosDecomisados?revisionId=${id}`);
+
+  saveObjetoRevision = model => this.http.post(`${this.url}/api/registrarObjetoDecomisado`, model);
+
+  deleteObjetosRevision = id => this.http.delete(`${this.url}/api/eliminarObjetoDecomisado?objetoId=${id}`);
 
 }
