@@ -34,9 +34,9 @@ export class Imputado {
   estadoNacimiento: any;
   estadoNacimientoSelect: any;
   municipioNacimiento: string;
-  municipioDomicilio:any;
-  
-  
+  municipioDomicilio: any;
+  numeroDomicilio: string;
+
 }
 
 // Date fechaNacimiento
