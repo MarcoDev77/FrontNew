@@ -1,33 +1,290 @@
-<app-section-title icon="fa fa-address-card-o" title="Registro de visita"></app-section-title>
+<app-section-title
+  icon="fa fa-address-card-o"
+  title="Registro de visita"
+></app-section-title>
 <div class="row">
-    <div class="col-md-2">
-        <div class="form-group shadows">
-            <input class="form-control" type="text" placeholder="Fecha de registro" name="Delito" />
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="Imputado">
-                <label class="custom-control-label" for="Imputado">Guardar con esta fecha</label>
-            </div>
+  <div class="col-md-8">
+    <h3>Registro de visitas</h3>
+  </div>
+  <div class="col-md-4">
+    <form
+      name="search"
+      (ngSubmit)="searchImputado()"
+      #formSearch="ngForm"
+      novalidate
+    >
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span (click)="searchImputado()" class="input-group-text"
+            ><i
+              class="fa {{ isLoading ? 'fa-spinner fa-spin' : 'fa-search' }}"
+            ></i
+          ></span>
         </div>
-    </div>
-    <div class="col-md-8" style="text-align: center;">
-        <h5>SISTEMA PENITENCIARIO CERESO MORELOS VARONIL</h5><br>
-        <h4>PASE PERMANENTE DE VISITA</h4><br>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group shadows">
-            <input class="form-control" type="text" placeholder="Folio" name="Delito" />
-        </div>
-    </div>
+        <input
+          name="folio"
+          required
+          [(ngModel)]="ingreso.folio"
+          type="text"
+          class="form-control pull-right mr-2"
+          placeholder="Buscar por Folio"
+        />
+      </div>
+    </form>
+  </div>
 </div>
+
+<app-generalidades-ppl
+  [generalidadesPPL]="ingreso?.imputado"
+></app-generalidades-ppl>
+
 <div class="row">
-    <div class="col-md-8">
-        <div class="form-group shadows">
-            <input class="form-control" type="text" placeholder="Nombre del visitante" name="Delito" />
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group shadows">
-            <input class="form-control" type="text" placeholder="Folio" name="Folio" />
-        </div>
-    </div>
+  <div class="col text-right mb-3">
+    <button
+      class="btn btn-success btn-sm m-0 pull-right"
+      (click)="openModal(formModal)"
+      [ngbTooltip]="'Nuevo Registro'"
+      [disabled]="isLoading || !this.ingreso?.imputado?.id"
+    >
+      <i class="fa fa-plus fa-lg"></i>
+    </button>
+    <input
+      type="text"
+      class="form-control form-control-sm pull-right mr-2"
+      style="max-width: 12rem;"
+      [(ngModel)]="filter"
+      placeholder="Buscar"
+    />
+  </div>
 </div>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th (click)="sort('nombre')" class="text-center">
+          <span
+            *ngIf="key == 'nombre'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Nombre
+        </th>
+        <th (click)="sort('infantes')" class="text-center">
+          <span
+            *ngIf="key == 'infantes'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          N. de infantes
+        </th>
+        <th (click)="sort('entrada')" class="text-center">
+          <span
+            *ngIf="key == 'entrada'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Fecha hora entrada
+        </th>
+        <th (click)="sort('salida')" class="text-center">
+          <span
+            *ngIf="key == 'salida'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Fecha hora salida
+        </th>
+        <th class="text-center" style="min-width: 5rem;">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        id="{{ 'tr' + i }}"
+        *ngFor="
+          let item of visitas
+            | orderBy: key:reverse
+            | filter: filter
+            | paginate: { itemsPerPage: 10, currentPage: p };
+          let i = index
+        "
+      >
+        <td class="text-center">
+          {{ item.referenciaPersonal?.apellidoPaterno }}
+          {{ item.referenciaPersonal?.apellidoMaterno }}
+          {{ item.referenciaPersonal?.nombre }}
+        </td>
+        <td class="text-center">
+          {{ item.numeroInfantes }}
+        </td>
+        <td class="text-center">
+          {{ item.fechaEntrada | date: "dd/MM/yy h:mm a" }}
+        </td>
+        <td class="text-center">
+          {{ item.fechaSalida | date: "dd/MM/yy h:mm a" }}
+        </td>
+        <td class="text-center">
+          <i
+            class="fa fa-pencil"
+            (click)="openModal(formModal, item)"
+            placement="top"
+            ngbTooltip="Editar"
+          ></i>
+          &nbsp;
+          <i
+            class="fa fa-print"
+            (click)="generateReciboPertenencias(item.id, view)"
+            placement="top"
+            ngbTooltip="Formato de recibo de pertenencias"
+          ></i>
+          &nbsp;
+          <i
+            *ngIf="!item.fechaSalida"
+            class="fa fa-sign-out"
+            (click)="setHoraSalida(item.id)"
+            placement="top"
+            ngbTooltip="Marcar hora de salida"
+          ></i>
+        </td>
+      </tr>
+
+      <tr *ngIf="visitas.length == 0">
+        <td colspan="6">
+          {{ isLoading ? "Cargando..." : "Sin registros..." }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center w-100">
+    <pagination-controls
+      autoHide="true"
+      responsive="true"
+      previousLabel=""
+      nextLabel=""
+      (pageChange)="switch($event)"
+    >
+    </pagination-controls>
+  </div>
+</div>
+
+<ng-template #formModal let-formModal>
+  <div class="modal-body pt-0">
+    <app-section-title
+      title="Registro de visita"
+      icon="fa fa-address-card-o"
+    ></app-section-title>
+    <form
+      class="form-horizontal"
+      name="form"
+      (ngSubmit)="f.form.valid && saveVisita()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="text-muted" for="">Persona</label>
+            <select
+              name="referenciaPersonal"
+              [(ngModel)]="visita.referenciaPersonal.id"
+              #referenciaPersonal="ngModel"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': f.submitted && referenciaPersonal.invalid
+              }"
+              required
+            >
+              <option *ngFor="let ref of referencias" [value]="ref.id">
+                {{ ref.apellidoPaterno }} {{ ref.apellidoMaterno }}
+                {{ ref.nombre }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="text-muted" for="">N. de infantes</label>
+            <select
+              name="numeroInfantes"
+              [(ngModel)]="visita.numeroInfantes"
+              #numeroInfantes="ngModel"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': f.submitted && numeroInfantes.invalid
+              }"
+              required
+            >
+              <option [value]="0">
+                Sin infantes
+              </option>
+              <option [value]="1">1</option>
+              <option [value]="2">2</option>
+              <option [value]="3">3</option>
+              <option [value]="4">4</option>
+              <option [value]="5">5</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-gruop">
+            <label>Pertenencias de la visita</label>
+            <textarea
+              [(ngModel)]="visita.pertenencias"
+              name="pertenencias"
+              #pertenencias="ngModel"
+              [ngClass]="{
+                'is-invalid': f.submitted && pertenencias.invalid
+              }"
+              class="form-control"
+              cols="30"
+              rows="10"
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-sm-12 text-center text-sm-right">
+          <button
+            type="button"
+            (click)="formModal.close()"
+            class="btn btn-danger mr-3"
+          >
+            Cerrar
+          </button>
+          <button type="submit" [disabled]="isLoading" class="btn btn-success">
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'estudio trabajo social'"
+    ></app-web-viewer>
+  </div>
+</ng-template>
