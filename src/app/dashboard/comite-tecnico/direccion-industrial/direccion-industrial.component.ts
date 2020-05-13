@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ComiteTecnicoService} from '@shared/services/comite-tecnico.service';
+import { Component, OnInit } from '@angular/core';
+import { ComiteTecnicoService } from '@shared/services/comite-tecnico.service';
 import Swal from 'sweetalert2';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-direccion-industrial',
@@ -23,7 +23,7 @@ export class DireccionIndustrialComponent implements OnInit {
   public selectedRow: Number;
   public setClickedRow: (i) => void;
   public auxId: any;
-// FilePreview
+  // FilePreview
   public file: any;
 
   constructor(private comiteTecnicoService: ComiteTecnicoService, private modalService: NgbModal) {
@@ -31,6 +31,7 @@ export class DireccionIndustrialComponent implements OnInit {
     this.generalidadesPPL = {} as GeneralidadesPPL;
     this.actividades = new ListaActividades();
     this.experiencia = {} as ExperienciaLaboral;
+    this.listExperienciaLaboral = [];
   }
 
   ngOnInit() {
@@ -53,14 +54,14 @@ export class DireccionIndustrialComponent implements OnInit {
 
       if (!data.error) {
         this.generalidadesPPL = data.imputado;
-        const imputado = {id: this.generalidadesPPL.imputadoId};
+        const imputado = { id: this.generalidadesPPL.imputadoId };
 
         if (data.imputado.listaActividades) {
           this.parceListaActividades(data.imputado.listaActividades);
-          this.actividades = {imputado, ...data.imputado.listaActividades};
+          this.actividades = { imputado, ...data.imputado.listaActividades };
         } else {
           this.actividades = new ListaActividades();
-          this.actividades = {imputado, ...this.actividades};
+          this.actividades = { imputado, ...this.actividades };
         }
         // Agregando datos al arreglo de experiencia loboral
         if (data.imputado.experienciaLaboral) {
@@ -87,6 +88,8 @@ export class DireccionIndustrialComponent implements OnInit {
     this.isLoading = false;
     this.generalidadesPPL = {} as GeneralidadesPPL;
     this.actividades = new ListaActividades();
+    this.experiencia = {} as ExperienciaLaboral;
+    this.listExperienciaLaboral = [];
   }
 
   searchImputado() {
@@ -139,7 +142,7 @@ export class DireccionIndustrialComponent implements OnInit {
   saveExperienciaLaboral(array: any[]) {
     if (this.validateFiels(array)) {
       this.isLoading = true;
-      this.experiencia.imputado = {id: this.generalidadesPPL.imputadoId};
+      this.experiencia.imputado = { id: this.generalidadesPPL.imputadoId };
       console.log('To server', this.experiencia);
       this.comiteTecnicoService.saveExperienciaLaboral(this.experiencia).subscribe((data: any) => {
         this.isLoading = false;
@@ -177,7 +180,7 @@ export class DireccionIndustrialComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.isLoading = true;
         this.comiteTecnicoService.deleteExperienciaLaboral(item.id).subscribe((data: any) => {
@@ -216,7 +219,7 @@ export class DireccionIndustrialComponent implements OnInit {
     this.comiteTecnicoService.generatePDFDireccionIndustrial(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
       console.log('PDF', data);
       this.isLoading = false;
-      const file = new Blob([data], {type: 'application/*'});
+      const file = new Blob([data], { type: 'application/*' });
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadstart = ev => this.isLoading = true;
@@ -228,7 +231,7 @@ export class DireccionIndustrialComponent implements OnInit {
         this.modalService.dismissAll();
         if (base64) {
           this.file = base64;
-          this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+          this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
         }
       };
       reader.onerror = () => {
@@ -270,7 +273,7 @@ export class DireccionIndustrialComponent implements OnInit {
 
   updateExperienciaLaboral(id, item) {
     this.isForm = true;
-    this.experiencia = {...item};
+    this.experiencia = { ...item };
 
     if (this.auxId && this.auxId !== id) {
       this.showTr();
