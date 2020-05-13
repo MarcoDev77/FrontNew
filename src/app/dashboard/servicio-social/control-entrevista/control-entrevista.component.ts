@@ -43,12 +43,21 @@ export class ControlEntrevistaComponent implements OnInit {
   searchImputado() {
     this.isLoading = true;
     this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Resultados',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1000,
+        showConfirmButton: false
+      });
       this.isLoading = false;
       if (!data.error) {
         this.ingreso.imputado = data.imputado;
         this.listEntrevistas(this.ingreso.imputado.id);
       } else {
         this.ingreso = {} as Ingreso;
+        this.entrevista = {} as ControlEntrevista;
+        this.entrevistas = [];
       }
     }, error => {
       console.log(error);
