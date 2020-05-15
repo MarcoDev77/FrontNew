@@ -59,6 +59,8 @@ export class PertenenciasComponent implements OnInit {
         this.getData();
       } else {
         this.ingreso = {} as Ingreso;
+        this.revisiones = [];
+        this.objetos = [];
       }
     });
   }
