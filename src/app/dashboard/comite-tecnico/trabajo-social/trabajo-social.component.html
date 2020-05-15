@@ -1,175 +1,327 @@
-<app-section-title icon="fa fa-tasks" title="TRABAJO SOCIAL"></app-section-title>
+<app-section-title
+  icon="fa fa-tasks"
+  title="TRABAJO SOCIAL"
+></app-section-title>
 <div class="row">
-    <div class="col-md-8">
-        <h3>Generales de la PPL</h3>
-    </div>
-    <div class="col-md-4">
-        <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span (click)="searchImputado()" class="input-group-text"><i
-                            class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
-                </div>
-                <input name="folio" required [(ngModel)]="generalidadesPPL.folio" type="text"
-                    class="form-control pull-right mr-2" placeholder="Buscar por Folio">
-            </div>
-        </form>
-    </div>
+  <div class="col-md-8">
+    <h3>Generales de la PPL</h3>
+  </div>
+  <div class="col-md-4">
+    <form
+      name="search"
+      (ngSubmit)="searchImputado()"
+      #formSearch="ngForm"
+      novalidate
+    >
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span (click)="searchImputado()" class="input-group-text"
+            ><i
+              class="fa {{ isLoading ? 'fa-spinner fa-spin' : 'fa-search' }}"
+            ></i
+          ></span>
+        </div>
+        <input
+          name="folio"
+          required
+          [(ngModel)]="generalidadesPPL.folio"
+          type="text"
+          class="form-control pull-right mr-2"
+          placeholder="Buscar por Folio"
+        />
+      </div>
+    </form>
+  </div>
 </div>
 <form name="save" (ngSubmit)="saveActividad()" #formSave="ngForm" novalidate>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Persona privada de la libertad:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="nombre"
+          [(ngModel)]="generalidadesPPL.nombre"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Fecha de ingreso:</label>
+        <input
+          type="date"
+          class="form-control"
+          name="fechaIngreso"
+          #fechaIngreso="ngModel"
+          [ngModel]="generalidadesPPL.fechaIngreso | date: 'yyyy-MM-dd'"
+          (ngModelChange)="generalidadesPPL.fechaIngreso = $event"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Edad:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="edad"
+          [(ngModel)]="generalidadesPPL.edad"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Dormitorio:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="dormitorio"
+          [(ngModel)]="generalidadesPPL.dormitorio"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Delito:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="listaDelitos"
+          [(ngModel)]="generalidadesPPL.listaDelitos"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Sentencia:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="sentencia"
+          [(ngModel)]="generalidadesPPL.sentencia"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Estado civil:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="estadoCivil"
+          [(ngModel)]="generalidadesPPL.estadoCivil.nombre"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Programado en visita intima:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="visitaIntima"
+          [(ngModel)]="actividad.visitaIntima"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Día:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="diaVisitaIntima"
+          [(ngModel)]="actividad.diaVisitaIntima"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Horario:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="horarioVisitaIntima"
+          [(ngModel)]="actividad.horarioVisitaIntima"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Visita familia:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="visitaFamiliar"
+          [(ngModel)]="actividad.visitaFamiliar"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Frecuencia:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="frecuencia"
+          [(ngModel)]="actividad.frecuencia"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Parentesco:</label>
+        <select
+          class="form-control shadows"
+          name="parentesco"
+          [(ngModel)]="actividad.parentesco.id"
+        >
+          <option *ngFor="let item of parentescos" [ngValue]="item.id">
+            {{ item.nombre }}</option
+          >
+        </select>
+      </div>
+    </div>
+  </div>
 
-<div class="row">
-
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Nombre de la PPL :</label>
-            <input type="text" class="form-control" name="nombre"  [(ngModel)]="generalidadesPPL.nombre" disabled/>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Fecha de ingreso:</label>
-            <input type="date" class="form-control" name="fechaIngreso"  #fechaIngreso="ngModel"
-            [ngModel]="generalidadesPPL.fechaIngreso | date:'yyyy-MM-dd'"
-            (ngModelChange)="generalidadesPPL.fechaIngreso = $event" disabled />
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Edad:</label>
-            <input type="text" class="form-control" name="edad" [(ngModel)]="generalidadesPPL.edad" disabled/>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Dormitorio:</label>
-            <input type="text" class="form-control" name="dormitorio" [(ngModel)]="generalidadesPPL.dormitorio" disabled />
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Delito:</label>
-            <input type="text" class="form-control" name="listaDelitos"  [(ngModel)]="generalidadesPPL.listaDelitos"  disabled/>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Sentencia:</label>
-            <input type="text" class="form-control" name="sentencia"  [(ngModel)]="generalidadesPPL.sentencia" disabled/>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Estado civil:</label>
-            <input type="text" class="form-control" name="estadoCivil" [(ngModel)]="generalidadesPPL.estadoCivil.nombre" disabled />
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Programado en visita intima:</label>
-            <input type="text" class="form-control" name="visitaIntima" [(ngModel)]="actividad.visitaIntima" />
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Día:</label>
-            <input type="text" class="form-control" name="diaVisitaIntima" [(ngModel)]="actividad.diaVisitaIntima"  />
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Horario:</label>
-            <input type="text" class="form-control" name="horarioVisitaIntima"  [(ngModel)]="actividad.horarioVisitaIntima"/>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Visita familia:</label>
-            <input type="text" class="form-control" name="visitaFamiliar" [(ngModel)]="actividad.visitaFamiliar" />
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Frecuencia:</label>
-            <input type="text" class="form-control" name="frecuencia"  [(ngModel)]="actividad.frecuencia"/>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Parentesco:</label>
-            <select class="form-control shadows" name="parentesco" [(ngModel)]="actividad.parentesco.id">
-                <option *ngFor="let item of parentescos" [ngValue]="item.id"> {{item.nombre}}</option>
-                
-            </select>
-        </div>
-    </div>
-</div>
-
-<div class="row">
+  <div class="row">
     <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Que actividad realiza al terminar la visita familiar:</label>
-            <textarea class=" form-control" cols="100"  rows="9" value="" name="actividadRealiza" [(ngModel)]="actividad.actividadRealiza"></textarea>
-        </div>
+      <div class="form-group">
+        <label for=""
+          >Que actividad realiza al terminar la visita familiar:</label
+        >
+        <textarea
+          class="form-control"
+          cols="100"
+          rows="9"
+          value=""
+          name="actividadRealiza"
+          [(ngModel)]="actividad.actividadRealiza"
+        ></textarea>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="row">
+  <div class="row">
     <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Taller asignado:</label>
-            <input type="text" class="form-control" name="tallerAsignado" [(ngModel)]="actividad.tallerAsignado" />
-        </div>
+      <div class="form-group">
+        <label for="">Taller asignado:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="tallerAsignado"
+          [(ngModel)]="actividad.tallerAsignado"
+        />
+      </div>
     </div>
     <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Día:</label>
-            <input type="text" class="form-control" name="diaTaller" [(ngModel)]="actividad.diaTaller" />
-        </div>
+      <div class="form-group">
+        <label for="">Día:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="diaTaller"
+          [(ngModel)]="actividad.diaTaller"
+        />
+      </div>
     </div>
     <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Horario:</label>
-            <input type="text" class="form-control" name="horarioTaller"  [(ngModel)]="actividad.horarioTaller"/>
-        </div>
+      <div class="form-group">
+        <label for="">Horario:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="horarioTaller"
+          [(ngModel)]="actividad.horarioTaller"
+        />
+      </div>
     </div>
     <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Fecha de inicio:</label>
-            <input type="date" class="form-control" name="fechaInicio" 
-            [ngModel]="actividad.fechaInicio| date:'yyyy-MM-dd'"
-                            (ngModelChange)="actividad.fechaInicio = $event" />
-        </div>
+      <div class="form-group">
+        <label for="">Fecha de inicio:</label>
+        <input
+          type="date"
+          class="form-control"
+          name="fechaInicio"
+          [ngModel]="actividad.fechaInicio | date: 'yyyy-MM-dd'"
+          (ngModelChange)="actividad.fechaInicio = $event"
+        />
+      </div>
     </div>
     <div class="col-md-4">
-        <div class="form-group">
-            <label for="">Lugar:</label>
-            <input type="text" class="form-control" name="lugar" [(ngModel)]="actividad.lugar" />
-        </div>
+      <div class="form-group">
+        <label for="">Lugar:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="lugar"
+          [(ngModel)]="actividad.lugar"
+        />
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="row">
+  <div class="row">
     <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Observaciones:</label>
-            <textarea class=" form-control" cols="100"  rows="9" value="" name="observaciones" [(ngModel)]="actividad.observaciones"></textarea>
-        </div>
+      <div class="form-group">
+        <label for="">Observaciones:</label>
+        <textarea
+          class="form-control"
+          cols="100"
+          rows="9"
+          value=""
+          name="observaciones"
+          [(ngModel)]="actividad.observaciones"
+        ></textarea>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="row">
+  <div class="row">
     <div class="col-sm-12 text-center text-sm-right">
-        <button type="submit" class="btn btn-success mr-3" [disabled]="!generalidadesPPL.imputadoId">Guardar</button>
-        <button type="button" class="btn btn-success mr-3" (click)="generatePDF(view)" [disabled]="!generalidadesPPL.imputadoId">Imprimir</button>
+      <button
+        type="submit"
+        class="btn btn-success mr-3"
+        [disabled]="!generalidadesPPL.imputadoId"
+      >
+        Guardar
+      </button>
+      <button
+        type="button"
+        class="btn btn-success mr-3"
+        (click)="generatePDF(view)"
+        [disabled]="!generalidadesPPL.imputadoId"
+      >
+        Imprimir
+      </button>
     </div>
-</div>
+  </div>
 </form>
 
 <ng-template #view let-view>
-    <div class="modal-body text-center pt-0"> 
-      <i (click)="view.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
-         class="fa fa-times-circle"></i>
-      <app-web-viewer [file]="file" [name]="'acta-trabajo-social'"></app-web-viewer>
-    </div>
-  </ng-template>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'acta-trabajo-social'"
+    ></app-web-viewer>
+  </div>
+</ng-template>

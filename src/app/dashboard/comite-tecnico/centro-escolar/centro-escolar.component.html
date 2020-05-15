@@ -1,54 +1,94 @@
-<app-section-title icon="fa fa-tasks" title="CENTRO ESCOLAR"></app-section-title>
+<app-section-title
+  icon="fa fa-tasks"
+  title="CENTRO ESCOLAR"
+></app-section-title>
 <div class="row">
   <div class="col-md-8">
     <h3>Generales de la PPL</h3>
   </div>
   <div class="col-md-4">
-    <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
+    <form
+      name="search"
+      (ngSubmit)="searchImputado()"
+      #formSearch="ngForm"
+      novalidate
+    >
       <div class="input-group">
         <div class="input-group-prepend">
-        <span (click)="searchImputado()" class="input-group-text"><i
-          class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
+          <span (click)="searchImputado()" class="input-group-text"
+            ><i
+              class="fa {{ isLoading ? 'fa-spinner fa-spin' : 'fa-search' }}"
+            ></i
+          ></span>
         </div>
-        <input name="folio" required [(ngModel)]="generalidadesPPL.folio" type="text"
-               class="form-control pull-right mr-2"
-               placeholder="Buscar por Folio">
+        <input
+          name="folio"
+          required
+          [(ngModel)]="generalidadesPPL.folio"
+          type="text"
+          class="form-control pull-right mr-2"
+          placeholder="Buscar por Folio"
+        />
       </div>
     </form>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <label for="">Nombre de la PPL :</label>
-      <input type="text" value="{{generalidadesPPL.nombre}}" class="form-control" readonly
-             />
+      <label for="">Persona privada de la libertad:</label>
+      <input
+        type="text"
+        value="{{ generalidadesPPL.nombre }}"
+        class="form-control"
+        readonly
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Dormitorio:</label>
-      <input type="text" value="{{generalidadesPPL.dormitorio}}" class="form-control" readonly name="dormitorio"
-             />
+      <input
+        type="text"
+        value="{{ generalidadesPPL.dormitorio }}"
+        class="form-control"
+        readonly
+        name="dormitorio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Fecha de nacimiento:</label>
-      <input type="text" readonly class="form-control" value="{{generalidadesPPL.fechaNacimiento| date:'dd/MM/yyyy'}}"
-             name="fechaNacimiento"/>
+      <input
+        type="text"
+        readonly
+        class="form-control"
+        value="{{ generalidadesPPL.fechaNacimiento | date: 'dd/MM/yyyy' }}"
+        name="fechaNacimiento"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Edad:</label>
-      <input type="text" class="form-control" value="{{generalidadesPPL.edad}}" readonly name="edad"
-             />
+      <input
+        type="text"
+        class="form-control"
+        value="{{ generalidadesPPL.edad }}"
+        readonly
+        name="edad"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Escolaridad:</label>
-      <input type="text" class="form-control" readonly name="escolaridad" value="{{generalidadesPPL.escolaridad}}"
-            />
+      <input
+        type="text"
+        class="form-control"
+        readonly
+        name="escolaridad"
+        value="{{ generalidadesPPL.escolaridad }}"
+      />
     </div>
   </div>
   <div class="col-md-4">
@@ -60,14 +100,24 @@
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Delito:</label>
-      <input type="text" class="form-control" readonly name="delito" value="{{generalidadesPPL.listaDelitos}}"
-             />
+      <input
+        type="text"
+        class="form-control"
+        readonly
+        name="delito"
+        value="{{ generalidadesPPL.listaDelitos }}"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Sentencia:</label>
-      <input type="text" class="form-control" readonly value="{{generalidadesPPL.sentencia}}" />
+      <input
+        type="text"
+        class="form-control"
+        readonly
+        value="{{ generalidadesPPL.sentencia }}"
+      />
     </div>
   </div>
   <div class="col-md-4">
@@ -78,8 +128,7 @@
   </div>
 </div>
 <div class="row mt-4">
-
-  <div class="col-md-4 ">
+  <div class="col-md-4">
     <div class="form-group">
       <label for="">Actividades:</label>
       <h6>Alfabetización</h6>
@@ -89,175 +138,277 @@
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Día:</label>
-      <input type="text" class="form-control" [(ngModel)]="actividades.alfabetizacion.dia" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.alfabetizacion.dia"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="">Hora:</label>
-      <input type="text" class="form-control" [(ngModel)]="actividades.alfabetizacion.hora" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.alfabetizacion.hora"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
-  <div class="col-md-4 ">
+  <div class="col-md-4">
     <h6>Primaria</h6>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.primaria.dia" name="duenoMedio" />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.primaria.dia"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.primaria.hora" name="duenoMedio"/>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.primaria.hora"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
-  <div class="col-md-4 ">
+  <div class="col-md-4">
     <h6>Secundaria</h6>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.secundaria.dia" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.secundaria.dia"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.secundaria.hora" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.secundaria.hora"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
-  <div class="col-md-4 ">
+  <div class="col-md-4">
     <h6>Preparatoria</h6>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.preparatoria.dia" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.preparatoria.dia"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.preparatoria.hora" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.preparatoria.hora"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
-  <div class="col-md-4 ">
+  <div class="col-md-4">
     <h6>Honores a la bandera</h6>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.honoresBandera.dia" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.honoresBandera.dia"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.honoresBandera.hora" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.honoresBandera.hora"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
-  <div class="col-md-4 ">
+  <div class="col-md-4">
     <h6>Biblioteca</h6>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.biblioteca.dia" name="duenoMedio"
-            />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.biblioteca.dia"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.biblioteca.hora" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.biblioteca.hora"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
-  <div class="col-md-4 ">
+  <div class="col-md-4">
     <h6>Curso</h6>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.curso.dia" name="duenoMedio" />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.curso.dia"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.curso.hora" name="duenoMedio" />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.curso.hora"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
-  <div class="col-md-4 ">
+  <div class="col-md-4">
     <h6>Grupo religioso</h6>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.grupoReligioso.dia" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.grupoReligioso.dia"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.grupoReligioso.hora" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.grupoReligioso.hora"
+        name="duenoMedio"
+      />
     </div>
   </div>
 
-  <div class="col-md-4 ">
+  <div class="col-md-4">
     <h6>Actividad extracurricular</h6>
   </div>
 
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.actividadExtracurricular.dia" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.actividadExtracurricular.dia"
+        name="duenoMedio"
+      />
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="actividades.actividadExtracurricular.hora" name="duenoMedio"
-             />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.actividadExtracurricular.hora"
+        name="duenoMedio"
+      />
     </div>
   </div>
-
 </div>
 
 <div class="row">
   <div class="col-md-12">
     <div class="form-group">
       <label for="">Observaciones:</label>
-      <textarea name="observaciones" [(ngModel)]="actividades.observaciones" class=" form-control" cols="100"
-                 rows="9"></textarea>
+      <textarea
+        name="observaciones"
+        [(ngModel)]="actividades.observaciones"
+        class="form-control"
+        cols="100"
+        rows="9"
+      ></textarea>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-sm-12 text-center text-sm-right">
-    <button [disabled]="!generalidadesPPL.imputadoId || isLoading" type="button" (click)="submit()"
-            class="btn btn-success mr-3">Guardar
+    <button
+      [disabled]="!generalidadesPPL.imputadoId || isLoading"
+      type="button"
+      (click)="submit()"
+      class="btn btn-success mr-3"
+    >
+      Guardar
     </button>
-    <button [disabled]="!generalidadesPPL.imputadoId || isLoading" type="button" (click)="generatePDF(view)"
-            class="btn btn-success mr-3">Imprimir
+    <button
+      [disabled]="!generalidadesPPL.imputadoId || isLoading"
+      type="button"
+      (click)="generatePDF(view)"
+      class="btn btn-success mr-3"
+    >
+      Imprimir
     </button>
   </div>
 </div>
 
 <ng-template #view let-view>
   <div class="modal-body text-center pt-0">
-    <i (click)="view.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
-       class="fa fa-times-circle"></i>
-    <app-web-viewer [file]="file" [name]="'acta-de-entrevista'"></app-web-viewer>
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'acta-de-entrevista'"
+    ></app-web-viewer>
   </div>
 </ng-template>
