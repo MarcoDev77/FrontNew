@@ -135,7 +135,6 @@ export const ROUTES: RouteInfo[] = [
     roles: [
       r.comiteTecnico.role,
       r.test.role,
-      r.trabajoSocial.role,
     ],
     path: '/dashboard',
     title: 'Plan de actividades',
