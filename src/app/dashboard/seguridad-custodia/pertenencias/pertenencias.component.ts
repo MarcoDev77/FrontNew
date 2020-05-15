@@ -13,11 +13,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class PertenenciasComponent implements OnInit {
 
   public isLoading: boolean;
-  public ingreso: Ingreso;
-  public revisiones = [];
+  public isLoadingSearchName: boolean
+  public isLoadingSearchFolio: boolean
+  public criteria = '';
+  public imputadoListSearch = [];
+  public imputadoList = [];
+  public objetosList = [];
   public revision: any;
-  public objetos = [];
-  public objeto: any;
+  public objetoDecomisado: any;
+  public currentImputado: any;
   // Table atributes
   public auxId: any;
   public isForm = false;
@@ -31,7 +35,8 @@ export class PertenenciasComponent implements OnInit {
   constructor(
     private seguridadCustodioService: SeguridadCustodiaService,
     private modalService: NgbModal) {
-    this.ingreso = {} as Ingreso;
+
+    this.revision = JSON.parse(localStorage.getItem('revision'));
 
     // Table
     this.setClickedRow = function (index) {
@@ -40,62 +45,59 @@ export class PertenenciasComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  searchImputado() {
-    this.isLoading = true;
-    this.seguridadCustodioService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
-      this.isLoading = false;
-      console.log('data', data);
-      Swal.fire({
-        title: data.error ? 'Error!' : 'Busqueda',
-        text: data.mensaje,
-        icon: data.error ? 'error' : 'success',
-        timer: 1000,
-        showConfirmButton: false
-      });
-      if (!data.error) {
-        this.ingreso.imputado = data.imputado;
-        this.getData();
-      } else {
-        this.ingreso = {} as Ingreso;
-        this.revisiones = [];
-        this.objetos = [];
-      }
-    });
+    this.getData();
   }
 
   getData() {
-    this.seguridadCustodioService.getRegistroPertenencias(this.ingreso.imputado.id)
+    this.isLoading = true;
+    this.seguridadCustodioService.getImputadosByRevision(this.revision.id).subscribe((data: any) => {
+      this.isLoading = false;
+      console.log('getData', data);
+      if (!data.error) {
+        this.imputadoList = data.imputado;
+      }
+    });
+  }
+
+  searchImputado() {
+    this.isLoadingSearchFolio = true;
+    this.isLoadingSearchName = true;
+    this.imputadoListSearch = [];
+    this.seguridadCustodioService.filterBusquedaListaIngresos('folio', this.criteria)
       .subscribe((data: any) => {
-        console.log(data);
-        this.revisiones = data.imputado.listaRevisiones;
+        this.isLoadingSearchFolio = false;
+        if (!data.error) {
+          this.imputadoListSearch = [...this.imputadoListSearch, ...data.ingresos];
+        }
+      });
+    this.seguridadCustodioService.filterBusquedaListaIngresos('nombre', this.criteria)
+      .subscribe((data: any) => {
+        this.isLoadingSearchName = false;
+        if (!data.error) {
+          this.imputadoListSearch = [...this.imputadoListSearch, ...data.ingresos];
+        }
       });
   }
 
-  selectRevision(rev) {
-    this.revision = { ...rev };
-    this.getObjetosReviciones(this.revision.id);
-  }
-
-  getObjetosReviciones(revisionId) {
+  selectImputado(item) {
+    this.currentImputado = { ...item };
+    this.objetosList = [];
     this.isLoading = true;
-    this.seguridadCustodioService.getObjetosRevision(revisionId).subscribe((data: any) => {
-      this.isLoading = false;
-      console.log('getObjetosReviciones', data);
-      if (!data.error) {
-        this.objetos = data.objetosDecomisados;
-      } else {
-        this.objetos = [];
-      }
-    });
+    this.seguridadCustodioService.getObjetosRevision(this.revision.id, item.id)
+      .subscribe((data: any) => {
+        this.isLoading = false;
+        if (!data.error) {
+          this.objetosList = data.objetosDecomisados;
+        }
+      });
   }
 
   saveObjeto(array) {
     if (this.validateFiels(array)) {
-      this.objeto.revision = { id: this.revision.id };
-      console.log('to Server', this.objeto);
-      this.seguridadCustodioService.saveObjetoRevision(this.objeto).subscribe((data: any) => {
+      this.objetoDecomisado.revision = { id: this.revision.id };
+      this.objetoDecomisado.imputado = { id: this.currentImputado.id };
+      console.log('to Server', this.objetoDecomisado);
+      this.seguridadCustodioService.saveObjetoRevision(this.objetoDecomisado).subscribe((data: any) => {
         this.cancel();
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
@@ -105,7 +107,7 @@ export class PertenenciasComponent implements OnInit {
           showConfirmButton: false
         });
         if (!data.error) {
-          this.getObjetosReviciones(this.revision.id);
+          this.selectImputado(this.currentImputado);
         }
       });
     }
@@ -132,7 +134,7 @@ export class PertenenciasComponent implements OnInit {
             showConfirmButton: false
           }).finally(() => {
             if (!data.error) {
-              this.getObjetosReviciones(this.revision.id);
+              this.selectImputado(this.currentImputado);
             }
           });
         });
@@ -151,30 +153,6 @@ export class PertenenciasComponent implements OnInit {
     return pass;
   }
 
-  openFormModal(modal) {
-    this.revision = {};
-    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
-  }
-
-  saveRevision() {
-    this.isLoading = true;
-    this.revision.imputado = { id: this.ingreso.imputado.id }
-    this.seguridadCustodioService.saveRegistroPertenencias(this.revision).subscribe((data: any) => {
-      this.isLoading = false;
-      Swal.fire({
-        title: data.error ? 'Error!' : 'Guardado',
-        text: data.mensaje,
-        icon: data.error ? 'error' : 'success',
-        timer: 1300,
-        showConfirmButton: false
-      });
-      if (!data.error) {
-        this.getData();
-        this.modalService.dismissAll();
-      }
-    });
-  }
-
   // Table methods
   sort(key) {
     if (key === this.key) {
@@ -191,7 +169,7 @@ export class PertenenciasComponent implements OnInit {
 
   add() {
     this.isForm = true;
-    this.objeto = {};
+    this.objetoDecomisado = {};
   }
 
   cancel() {
