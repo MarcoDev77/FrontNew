@@ -1,121 +1,210 @@
 <app-section-title icon="fa fa-tasks" title="PSICOLOGÍA"></app-section-title>
 <div class="row">
-    <div class="col-md-8">
-        <h3>Ficha para la implementación de actividades</h3>
-    </div>
-    <div class="col-md-4">
-        <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span (click)="searchImputado()" class="input-group-text"><i
-                            class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
-                </div>
-                <input name="folio" required [(ngModel)]="generalidadesPPL.folio" type="text"
-                    class="form-control pull-right mr-2" placeholder="Buscar por Folio">
-            </div>
-        </form>
-    </div>
-</div> 
+  <div class="col-md-8">
+    <h3>Ficha para la implementación de actividades</h3>
+  </div>
+  <div class="col-md-4">
+    <form
+      name="search"
+      (ngSubmit)="searchImputado()"
+      #formSearch="ngForm"
+      novalidate
+    >
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span (click)="searchImputado()" class="input-group-text"
+            ><i
+              class="fa {{ isLoading ? 'fa-spinner fa-spin' : 'fa-search' }}"
+            ></i
+          ></span>
+        </div>
+        <input
+          name="folio"
+          required
+          [(ngModel)]="generalidadesPPL.folio"
+          type="text"
+          class="form-control pull-right mr-2"
+          placeholder="Buscar por Folio"
+        />
+      </div>
+    </form>
+  </div>
+</div>
 
 <form name="search" (ngSubmit)="saveFicha()" #formSearch="ngForm" novalidate>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Nombre de la PPL :</label>
-                <input type="text" class="form-control" name="nombre" [(ngModel)]="generalidadesPPL.nombre"
-                     disabled />
-            </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Persona privada de la libertad:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="nombre"
+          [(ngModel)]="generalidadesPPL.nombre"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Dormitorio:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="dormitorio"
+          [(ngModel)]="generalidadesPPL.dormitorio"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Edad y fecha de nacimiento:</label>
+        <div class="row">
+          <div class="col-md-4">
+            <input
+              type=""
+              class="form-control"
+              name="edad"
+              [(ngModel)]="generalidadesPPL.edad"
+              disabled
+            />
+          </div>
+          <div class="col-md-8">
+            <input
+              type=""
+              class="form-control"
+              name="fechaNacimiento"
+              [ngModel]="generalidadesPPL.fechaNacimiento | date: 'yyyy-MM-dd'"
+              (ngModelChange)="generalidadesPPL.fechaNacimiento = $event"
+              disabled
+            />
+          </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Dormitorio:</label>
-                <input type="text" class="form-control" name="dormitorio" [(ngModel)]="generalidadesPPL.dormitorio"
-                     disabled />
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Edad y fecha de nacimiento:</label>
-                <div class="row">
-                    <div class="col-md-4">
-                        <input type="" class="form-control" name="edad" 
-                            [(ngModel)]="generalidadesPPL.edad" disabled />
-                    </div>
-                    <div class="col-md-8">
-                        <input type="" class="form-control" name="fechaNacimiento"
-                            [ngModel]="generalidadesPPL.fechaNacimiento | date:'yyyy-MM-dd'"
-                            (ngModelChange)="generalidadesPPL.fechaNacimiento = $event" disabled />
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Fecha de ingreso:</label>
-                <input type="text" class="form-control" name="duenoMedio" 
-                    [ngModel]="generalidadesPPL.fechaIngreso | date:'yyyy-MM-dd'"
-                    (ngModelChange)="generalidadesPPL.fechaIngreso = $event" disabled />
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Motivo de ingreso:</label>
-                <input type="text" class="form-control" name="listaDelitos" 
-                    [(ngModel)]="generalidadesPPL.listaDelitos" disabled />
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="">Sentencia:</label>
-                <input type="text" class="form-control" name="sentencia"
-                    [(ngModel)]="generalidadesPPL.sentencia" disabled />
-            </div>
-        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Fecha de ingreso:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="duenoMedio"
+          [ngModel]="generalidadesPPL.fechaIngreso | date: 'yyyy-MM-dd'"
+          (ngModelChange)="generalidadesPPL.fechaIngreso = $event"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Motivo de ingreso:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="listaDelitos"
+          [(ngModel)]="generalidadesPPL.listaDelitos"
+          disabled
+        />
+      </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="">Diagnóstico (DSM):</label>
-                <textarea class=" form-control" cols="100" rows="9" value=""
-                    name="diagnostico" [(ngModel)]="generalidadesPPL.ficha.diagnostico"></textarea>
-            </div>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Sentencia:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="sentencia"
+          [(ngModel)]="generalidadesPPL.sentencia"
+          disabled
+        />
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="">Problemática a trabajar:</label>
-                <textarea class=" form-control" cols="100"  rows="9" value=""
-                    name="problematicaTrabajar" [(ngModel)]="generalidadesPPL.ficha.problematicaTrabajar"></textarea>
-            </div>
-        </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="">Diagnóstico (DSM):</label>
+        <textarea
+          class="form-control"
+          cols="100"
+          rows="9"
+          value=""
+          name="diagnostico"
+          [(ngModel)]="generalidadesPPL.ficha.diagnostico"
+        ></textarea>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="">Actividad sugerida:</label>
-                <textarea class=" form-control" cols="100" rows="9" value=""
-                    name="actividadSugerida" [(ngModel)]="generalidadesPPL.ficha.actividadSugerida"></textarea>
-            </div>
-        </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="">Problemática a trabajar:</label>
+        <textarea
+          class="form-control"
+          cols="100"
+          rows="9"
+          value=""
+          name="problematicaTrabajar"
+          [(ngModel)]="generalidadesPPL.ficha.problematicaTrabajar"
+        ></textarea>
+      </div>
     </div>
-<div class="row">
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="">Actividad sugerida:</label>
+        <textarea
+          class="form-control"
+          cols="100"
+          rows="9"
+          value=""
+          name="actividadSugerida"
+          [(ngModel)]="generalidadesPPL.ficha.actividadSugerida"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-sm-12 text-center text-sm-right">
-        <button type="submit" class="btn btn-success mr-3" [disabled]="!generalidadesPPL.imputadoId">Guardar</button>
-        <button type="button" (click)="generatePDF(view)" class="btn btn-success mr-3" [disabled]="!generalidadesPPL.imputadoId">Imprimir</button>
+      <button
+        type="submit"
+        class="btn btn-success mr-3"
+        [disabled]="!generalidadesPPL.imputadoId"
+      >
+        Guardar
+      </button>
+      <button
+        type="button"
+        (click)="generatePDF(view)"
+        class="btn btn-success mr-3"
+        [disabled]="!generalidadesPPL.imputadoId"
+      >
+        Imprimir
+      </button>
     </div>
-</div>
-       
+  </div>
 </form>
-    
 
 <ng-template #view let-view>
-    <div class="modal-body text-center pt-0">
-      <i (click)="view.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
-         class="fa fa-times-circle"></i>
-      <app-web-viewer [file]="file" [name]="'acta-de-entrevista'"></app-web-viewer>
-    </div>
-  </ng-template>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'acta-de-entrevista'"
+    ></app-web-viewer>
+  </div>
+</ng-template>
