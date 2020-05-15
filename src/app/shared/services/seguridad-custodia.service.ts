@@ -40,14 +40,23 @@ export class SeguridadCustodiaService {
 
   getCapacitacionesByCustodio = id => this.http.get(`${this.url}/api/capacitacionesPorCustodio?custodioId=${id}`);
 
-  getRegistroPertenencias = id => this.http.get(`${this.url}/api/listarRevisiones?idImputado=${id}`);
+  getRevisiones = () => this.http.get(`${this.url}/api/listarRevisiones`);
 
-  saveRegistroPertenencias = model => this.http.post(`${this.url}/api/registrarRevision`, model);
+  saveRevision = model => this.http.post(`${this.url}/api/registrarRevision`, model);
 
-  getObjetosRevision = id => this.http.get(`${this.url}/api/listarObjetosDecomisados?revisionId=${id}`);
+  saveImputadoOnRevision = model => this.http.post(`${this.url}/api/registarImputadoRevision`, model);
+
+  getImputadosByRevision = id => this.http.get(`${this.url}/api/listarImputadosRevision?revisionId=${id}`);;
+
+  getObjetosRevision = (revisionId, imputadoId) => this.http.get(
+    `${this.url}/api/listarObjetosDecomisados?revisionId=${revisionId}&imputadoId=${imputadoId}`
+  );
 
   saveObjetoRevision = model => this.http.post(`${this.url}/api/registrarObjetoDecomisado`, model);
 
   deleteObjetosRevision = id => this.http.delete(`${this.url}/api/eliminarObjetoDecomisado?objetoId=${id}`);
+
+  filterBusquedaListaIngresos = (filter, criteria) =>
+    this.http.get(`${this.url}/api/busquedaConfiltro?filtro=${filter}&criterio=${criteria}`);
 
 }

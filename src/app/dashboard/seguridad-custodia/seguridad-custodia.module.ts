@@ -10,6 +10,8 @@ import { NombramientoComponent } from './nombramiento/nombramiento.component';
 import { CustodiosComponent } from './custodios/custodios.component';
 import { CapacitacionesPaseListaComponent } from './capacitaciones-pase-lista/capacitaciones-pase-lista.component';
 import { PertenenciasComponent } from './pertenencias/pertenencias.component';
+import { RevisionesComponent } from './revisiones/revisiones.component';
+import { PertenenciasResultadoBusquedaComponent } from './pertenencias-resultado-busqueda/pertenencias-resultado-busqueda.component';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { PertenenciasComponent } from './pertenencias/pertenencias.component';
     CustodiosComponent,
     CapacitacionesPaseListaComponent,
     PertenenciasComponent,
+    RevisionesComponent,
+    PertenenciasResultadoBusquedaComponent,
   ],
   imports: [
     CommonModule,

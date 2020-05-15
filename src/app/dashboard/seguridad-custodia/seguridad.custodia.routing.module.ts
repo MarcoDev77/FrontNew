@@ -6,6 +6,7 @@ import { NombramientoComponent } from './nombramiento/nombramiento.component';
 import { CustodiosComponent } from './custodios/custodios.component';
 import { CapacitacionesPaseListaComponent } from './capacitaciones-pase-lista/capacitaciones-pase-lista.component';
 import { PertenenciasComponent } from './pertenencias/pertenencias.component';
+import { RevisionesComponent } from './revisiones/revisiones.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
       { path: 'capacitaciones-lista', component: CapacitacionesPaseListaComponent },
       { path: 'nombramiento', component: NombramientoComponent },
       { path: 'custodios', component: CustodiosComponent },
-      { path: 'pertenencias', component: PertenenciasComponent },
+      { path: 'revisiones', component: RevisionesComponent },
+      { path: 'revisiones-pertenencias', component: PertenenciasComponent },
     ]
   },
 ];
