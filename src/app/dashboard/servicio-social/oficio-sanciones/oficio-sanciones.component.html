@@ -1,0 +1,209 @@
+<app-section-title
+  icon="fa fa-table"
+  title="Oficio Sanciones"
+></app-section-title>
+
+<div class="row">
+  <div class="col-md-8">
+    <h3>Oficio Sanciones</h3>
+  </div>
+  <div class="col-md-4">
+    <form
+      name="search"
+      (ngSubmit)="searchImputado()"
+      #formSearch="ngForm"
+      novalidate
+    >
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span (click)="searchImputado()" class="input-group-text"
+            ><i
+              class="fa {{ isLoading ? 'fa-spinner fa-spin' : 'fa-search' }}"
+            ></i
+          ></span>
+        </div>
+        <input
+          name="folio"
+          required
+          [(ngModel)]="ingreso.folio"
+          type="text"
+          class="form-control pull-right mr-2"
+          placeholder="Buscar por Folio"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-generalidades-ppl
+  [generalidadesPPL]="ingreso.imputado"
+></app-generalidades-ppl>
+
+<app-section-title
+  icon="fa fa-user"
+  title="Persona que suscribe"
+></app-section-title>
+
+<form
+  #form="ngForm"
+  name="formNucleoFamiliarPrincipal"
+  (ngSubmit)="form.form.valid && submit()"
+>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label class="text-muted" for="">Nombre del quien suscribe</label>
+        <input
+          name="nombreSuscribe"
+          [(ngModel)]="oficio.nombreSuscribe"
+          #nombreSuscribe="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': form.submitted && nombreSuscribe.invalid
+          }"
+          type="text"
+          minlength="1"
+          maxlength="75"
+          required
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label class="text-muted" for=""
+          >Apellido Paterno del quien suscribe</label
+        >
+        <input
+          name="apellidoPSuscribe"
+          [(ngModel)]="oficio.apellidoPSuscribe"
+          #apellidoPSuscribe="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': form.submitted && apellidoPSuscribe.invalid
+          }"
+          type="text"
+          minlength="1"
+          maxlength="75"
+          required
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label class="text-muted" for=""
+          >Apellido Materno del quien suscribe</label
+        >
+        <input
+          name="apellidoMSuscribe"
+          [(ngModel)]="oficio.apellidoMSuscribe"
+          #apellidoMSuscribe="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': form.submitted && apellidoMSuscribe.invalid
+          }"
+          type="text"
+          minlength="1"
+          maxlength="75"
+          required
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label class="text-muted" for="">Parentesco</label>
+        <input
+          name="parentesco"
+          [(ngModel)]="oficio.parentesco"
+          #parentesco="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': form.submitted && parentesco.invalid
+          }"
+          type="text"
+          minlength="1"
+          maxlength="75"
+          required
+        />
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="form-group">
+        <label class="text-muted" for="">Domicilio</label>
+        <input
+          name="domicilio"
+          [(ngModel)]="oficio.domicilio"
+          #domicilio="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': form.submitted && domicilio.invalid
+          }"
+          type="text"
+          minlength="1"
+          maxlength="75"
+          required
+        />
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="form-group">
+        <label class="text-muted" for="">Entre calles</label>
+        <input
+          name="entrecalle"
+          [(ngModel)]="oficio.entrecalle"
+          #entrecalle="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': form.submitted && entrecalle.invalid
+          }"
+          type="text"
+          minlength="1"
+          maxlength="75"
+          required
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label class="text-muted" for="">Ciudad</label>
+        <input
+          name="ciudad"
+          [(ngModel)]="oficio.ciudad"
+          #ciudad="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': form.submitted && ciudad.invalid
+          }"
+          type="text"
+          minlength="1"
+          maxlength="75"
+          required
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label class="text-muted" for="">Teléfono</label>
+        <input
+          name="telefono"
+          [(ngModel)]="oficio.telefono"
+          #telefono="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': form.submitted && telefono.invalid
+          }"
+          type="tel"
+          required
+        />
+      </div>
+    </div>
+    <div class="col-md-12">
+      <button
+        [disabled]="!ingreso?.imputado?.id || isLoading"
+        type="submit"
+        class="btn btn-success pull-right"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
