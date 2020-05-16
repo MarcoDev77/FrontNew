@@ -115,6 +115,7 @@ export const ROUTES: RouteInfo[] = [
       { path: 'servicio-social/nucleo-familiar', title: 'NÚCLEO FAMILIAR', ab: 'NF' },
       { path: 'servicio-social/registro-visita', title: 'REGISTRO VISITA', ab: 'RV' },
       { path: 'servicio-social/otros-oficios', title: 'OTROS OFICIOS', ab: 'OF' },
+      { path: 'servicio-social/oficio-sanciones', title: 'OFICIOS SANCIONES', ab: 'OS' },
     ],
   },
   {

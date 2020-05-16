@@ -87,4 +87,8 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfReciboPertenencias?visitaFamiliarId=${id}`, { responseType });
   }
 
+  getOficioSanciones = id => this.http.get(`${this.url}/api/listarImputadoOficioSanciones?imputadoId=${id}`);
+
+  saveOficioSanciones = model => this.http.post(`${this.url}/api/registrarOficioSanciones`, model);
+
 }
