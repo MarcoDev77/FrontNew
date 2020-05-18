@@ -32,6 +32,12 @@ export class OtrosOficiosComponent implements OnInit {
         name: 'Prevención y readaptación social (Oficio)',
         image: 'prevencion-readaptacion-social.png',
         methodToGenerate: (view) => this.generatePrevencionReadaptacion(view),
+      },
+      {
+        // generarFormatoPdfTrabajoSocial
+        name: 'Formato de Trabajo Social',
+        image: 'trabajo-social.png',
+        methodToGenerate: (view) => this.generateFormatoTrabajoSocial(view),
       }
     ];
   }
@@ -60,16 +66,28 @@ export class OtrosOficiosComponent implements OnInit {
   }
 
   generatePrevencionReadaptacion(modal) {
+    this.isLoading = true;
     this.servicioSocialService.generatePDFPrevencionReadaptacion(this.ingreso.imputado.id)
       .subscribe((data: any) => {
+        this.isLoading = false;
         this.showPreview(data, modal)
       });
   }
 
   generateOficioDirectorGeneral(modal) {
-    console.log('Se genera otro');
+    this.isLoading = true;
     this.servicioSocialService.generatePDFOficioDirectorGeneral(this.ingreso.imputado.id)
       .subscribe((data: any) => {
+        this.isLoading = false;
+        this.showPreview(data, modal);
+      });
+  }
+
+  generateFormatoTrabajoSocial(modal) {
+    this.isLoading = true;
+    this.servicioSocialService.generatePDFTrabajoSocial(this.ingreso.imputado.id)
+      .subscribe((data: any) => {
+        this.isLoading = false;
         this.showPreview(data, modal);
       });
   }
