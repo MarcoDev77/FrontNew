@@ -201,6 +201,13 @@ export class ReferenciasComponent implements OnInit {
       steps.push(...stepsArray);
     }
 
+    steps.push({
+      title: 'Observaciones',
+      input: 'text',
+      inputPlaceholder: 'Observaciones',
+      validationMessage: 'Observaciones',
+    });
+
     const result = await Swal.mixin({
       progressSteps,
       input: 'text',
@@ -215,6 +222,9 @@ export class ReferenciasComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).queue(steps);
 
+    console.log('result', result);
+
+
     if (result.dismiss) {
       return;
     }
@@ -228,8 +238,7 @@ export class ReferenciasComponent implements OnInit {
       nombreVisitante: `${item.nombre} ${item.apellidoPaterno} ${item.apellidoMaterno}`,
       domicilio: `${item.municipio} ${item.estado.nombre}, ${item.colonia} ${item.calleNumero}`,
       area: result.value[0],
-      // parentesco: item.parentesco,
-      // imputado: this.ingreso,
+      observaciones: item.esMayorEdad ? result.value[1] : result.value[3],
       nombreResponsable: '',
       folio: result.value[1]
     };
@@ -338,6 +347,13 @@ export class ReferenciasComponent implements OnInit {
         });
       }
 
+      steps.push({
+        title: 'Observaciones',
+        input: 'text',
+        inputPlaceholder: 'Observaciones',
+        validationMessage: 'Observaciones',
+      });
+
       const result = await Swal.mixin({
         progressSteps,
         input: 'text',
@@ -358,8 +374,14 @@ export class ReferenciasComponent implements OnInit {
       infantes = result.value;
     }
 
+    const observaciones = infantes[Number(childs.value)];
+    infantes.pop();
+
+    console.log('ob', observaciones, 'onfantes', infantes);
+
     const model = {
       tipoPase: 'mensual',
+      observaciones,
       nombreVisitante: `${item.nombre} ${item.apellidoPaterno} ${item.apellidoMaterno}`,
       parentesco: item.parentesco,
       imputado: this.ingreso,
@@ -529,4 +551,5 @@ class PasePermanente {
   referenciaPersonal: any;
   fechaNacimiento: string;
   menores: any[];
+  observaciones: string;
 }

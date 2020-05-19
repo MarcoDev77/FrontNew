@@ -1,4 +1,5 @@
 <app-section-title
+  [goBack]="true"
   icon="fa fa-male"
   title="Datos referencia"
 ></app-section-title>
@@ -488,7 +489,11 @@
             <label>Tipo de pase</label>
             <select
               [(ngModel)]="pasePermanente.tipoPase"
+              #tipoPase="ngModel"
               class="form-control"
+              [ngClass]="{
+                'is-invalid': formPasePermanente.submitted && tipoPase.invalid
+              }"
               name="tipo"
               required
             >
@@ -501,12 +506,26 @@
           <label>Horario de visita</label>
           <input
             [(ngModel)]="pasePermanente.horarioVisita"
+            #horarioVisita="ngModel"
             name="horarioVisita"
             type="text"
-            minlength="5"
+            minlength="1"
             maxlength="50"
             class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                formPasePermanente.submitted && horarioVisita.invalid
+            }"
             required
+          />
+        </div>
+        <div class="col-12">
+          <label>Observaciones</label>
+          <input
+            [(ngModel)]="pasePermanente.observaciones"
+            name="observaciones"
+            type="text"
+            class="form-control"
           />
         </div>
         <div *ngIf="pasePermanente.tipoPase === 'colectivo'" class="col-4">
