@@ -412,6 +412,23 @@
 
       <div class="col-md-4">
         <div class="form-group">
+          <label>Dialecto:</label>
+          <input
+            class="form-control shadows"
+            type="text"
+            name="dialecto"
+            #dialecto="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && dialecto.invalid }"
+            maxlength="255"
+            [(ngModel)]="ingreso.imputado.dialecto"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4"></div>
+
+      <div class="col-md-4">
+        <div class="form-group">
           <div class="custom-control custom-checkbox">
             <input
               name="esIndigena"
