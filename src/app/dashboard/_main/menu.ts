@@ -110,7 +110,7 @@ export const ROUTES: RouteInfo[] = [
       { path: 'ingreso/lista-ingreso', title: 'LISTA DE INGRESOS', ab: 'LI' },
       // { path: 'servicio-social/pase-mensual', title: 'PASE MENSUAL', ab: 'PM' },
       // { path: 'servicio-social/pase-unico', title: 'PASE UNICO', ab: 'PU' },
-      // { path: 'servicio-social/ofrecimiento-trabajo', title: 'OFRECIMIENTO TRABAJO', ab: 'OT' },
+      { path: 'servicio-social/estudio-trabajo-social', title: 'ESTUDIO CLASIFICACIÓN', ab: 'EC' },
       { path: 'servicio-social/control-entrevista', title: 'CONTROL DE ENTREVISTA', ab: 'CE' },
       { path: 'servicio-social/nucleo-familiar', title: 'NÚCLEO FAMILIAR', ab: 'NF' },
       { path: 'servicio-social/registro-visita', title: 'REGISTRO VISITA', ab: 'RV' },
@@ -167,7 +167,7 @@ export const ROUTES: RouteInfo[] = [
       { path: 'seguridad-custodia/capacitaciones', title: 'Capacitaciones', ab: 'CAP' },
       { path: 'seguridad-custodia/nombramiento', title: 'Nombramiento', ab: 'NOM' },
       { path: 'seguridad-custodia/custodios', title: 'Custodios', ab: 'CUS' },
-      { path: 'seguridad-custodia/pertenencias', title: 'Pertenencias', ab: 'PE' },
+      { path: 'seguridad-custodia/revisiones', title: 'Revisiones', ab: 'RE' },
     ],
   },
   {

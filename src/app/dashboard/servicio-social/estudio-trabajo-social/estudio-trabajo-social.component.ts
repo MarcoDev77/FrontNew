@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Ingreso} from '@shared/models/Ingreso';
+import { Component, OnInit } from '@angular/core';
+import { Ingreso } from '@shared/models/Ingreso';
+import { EstudioTrabajoSocial } from '@shared/models/EstudioTrabajoSocial';
+import { ServicioSocialService } from '@shared/services/servicio-social.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-estudio-trabajo-social',
@@ -9,103 +12,83 @@ import {Ingreso} from '@shared/models/Ingreso';
 export class EstudioTrabajoSocialComponent implements OnInit {
   public isLoading: boolean;
   public ingreso: Ingreso;
-  public grupoFamiliar: any[];
-  public familiar: any;
-  public antecedente: any
-  public estudio: any;
+  public estudio: EstudioTrabajoSocial;
+  public parentescos: any[];
 
-  //Table atributess
-  public p;
-  public filter: any;
-  public reverse = true;
-  public key = 'id'; // set default
-  public isForm: boolean;
-  public selectedRow: Number;
-  public setClickedRow: (i) => void;
-  public auxId: any;
-  constructor() {
+
+  constructor(private servicioSocialService: ServicioSocialService) {
+    this.parentescos = [];
     this.ingreso = {} as Ingreso;
-   this.grupoFamiliar=[];
-   this.antecedente= {} as any
-   this.estudio= {} as any;
+    this.estudio = {} as EstudioTrabajoSocial;
+    this.estudio.parentesco = {};
   }
 
   ngOnInit() {
+    this.getParentescos();
   }
 
   searchImputado() {
-
-  }
-
-  deleteAntecedente(item?){
-
-  }
-
-//Table methods
-  validateFiels(array: any[]): boolean {
-    let pass = true;
-    for (const field of array) {
-      if (!field.valid) {
-        pass = false;
-        field.control.markAsTouched();
+    this.isLoading = true;
+    this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
+      console.log('Data', data);
+      this.isLoading = false;
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Búsqueda',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1000,
+        showConfirmButton: false
+      });
+      if (!data.error) {
+        this.ingreso.imputado = data.imputado;
+        this.getClasificacion();
+      } else {
+        this.ingreso = {} as Ingreso;
+        this.estudio = {} as EstudioTrabajoSocial;
+        this.estudio.parentesco = {};
       }
-    }
-    return pass;
+    }, error => {
+      this.isLoading = false;
+      this.ingreso = {} as Ingreso;
+      this.estudio = {} as EstudioTrabajoSocial;
+      this.estudio.parentesco = {};
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error al realizar la búsqueda',
+        icon: 'error',
+        timer: 1000,
+        showConfirmButton: false
+      });
+    });
   }
 
+  getParentescos() {
+    this.servicioSocialService.getParentescos()
+      .subscribe((data: any) => this.parentescos = data.parentescos);
+  }
 
-
-  sort(key) {
-    if (key === this.key) {
-      this.reverse = !this.reverse;
-      if (this.reverse === false) {
-        this.key = 'id';
-        this.reverse = true;
+  getClasificacion() {
+    this.servicioSocialService.getEstudioClasificion(this.ingreso.folio).subscribe((data: any) => {
+      if (!data.error) {
+        this.estudio = data.imputado.estudioSocioeconomico;
+        this.estudio.parentesco = data.imputado.estudioSocioeconomico.parentescoResponsable;
       }
-    } else {
-      this.key = key;
-      this.reverse = false;
-    }
+    });
+  }
+  submit() {
+    this.isLoading = true;
+    console.log('To server', this.estudio);
+    this.estudio.imputado = { id: this.ingreso.imputado.id };
+    this.servicioSocialService.saveEstudioClasificacion(this.estudio).subscribe((data: any) => {
+      this.isLoading = false;
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1000,
+        showConfirmButton: false
+      });
+    });
   }
 
-  cancel() {
-    this.showTr();
-    this.isForm = false;
-    this.familiar = {} as any;
-  }
-
-  switch(e) {
-    this.p = e;
-    this.cancel();
-  }
-
-  add() {
-    this.familiar = {} as any;
-    this.isForm = true;
-  }
-
-  showTr() {
-    if (this.auxId) {
-      const tr = document.getElementById(this.auxId);
-      const array: any = tr.childNodes;
-
-      if (array) {
-        for (const td of array) {
-          td.style.display = 'table-cell';
-        }
-        this.auxId = '';
-      }
-    }
-  }
-
-  hiddenTr() {
-    const tr = document.getElementById(this.auxId);
-    const array: any = tr.childNodes;
-
-    if (array) {
-      for (const td of array) {
-        td.style.display = 'none';
-      }
-    }
-  }
 }

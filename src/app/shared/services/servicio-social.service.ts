@@ -101,4 +101,10 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfTrabajoSocial?imputadoId=${id}`, { responseType });
   }
 
+  getParentescos = () => this.http.get(`${this.url}/api/listarParentescos`);
+
+  saveEstudioClasificacion = model => this.http.post(`${this.url}/api/registrarEstudioClasificacion`, model);
+
+  getEstudioClasificion = folio => this.http.get(`${this.url}/api/listarEstudioClasificacion?folioImputado=${folio}`);
+
 }
