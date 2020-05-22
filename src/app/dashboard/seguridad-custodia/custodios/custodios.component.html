@@ -36,7 +36,7 @@
               'fa-chevron-circle-up': !reverse
             }"
           ></span>
-          N. de Custodio
+          N. de Empleado
         </th>
         <th (click)="sort('nombre')" class="text-center">
           <span
@@ -142,7 +142,7 @@
 </div>
 
 <ng-template #formModal let-formModal>
-  <div class="modal-body text-center pt-0">
+  <div class="modal-body pt-0 form-text text-muted">
     <app-section-title
       title="Custodios"
       icon="fa fa-hand-rock-o"
@@ -157,7 +157,7 @@
       <div class="row">
         <div class="col-md-4">
           <div class="form-group">
-            <label class="text-muted" for="">N. de Custodio</label>
+            <label class="text-muted" for="">N. de Empleado</label>
             <input
               name="numCustodio"
               [(ngModel)]="custodio.numCustodio"
@@ -230,7 +230,7 @@
 
         <div class="col-md-4">
           <div class="form-group">
-            <label class="text-muted" for="">Area</label>
+            <label class="text-muted" for="">Área</label>
             <input
               name="area"
               [(ngModel)]="custodio.area"
@@ -365,21 +365,31 @@
       title="Capacitaciones"
       icon="fa fa fa-briefcase"
     ></app-section-title>
-    <br />
     <h3>Lista de capacitaciones</h3>
     <br />
-    <ul class="list-group">
-      <button
-        *ngFor="let cap of capacitaciones; let i = index"
-        (click)="gotoCapacitaciones(cap)"
-        [disabled]="!cap.id"
-        class="list-group-item d-flex justify-content-between align-items-center list-group-item-action"
-      >
-        {{ i + 1 }} - {{ cap.nombre }}
-        <span class="badge badge-primary badge-pill">
-          {{ cap.fechaActualizacion | date: "dd/MM/yy" }}
-        </span>
-      </button>
-    </ul>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="text-center">Capaciatación</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cap of capacitaciones">
+          <td class="text-center">
+            {{ cap.nombre }}
+          </td>
+          <td class="text-center">
+            <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
+            <input
+              *ngIf="!isLoading"
+              type="checkbox"
+              [checked]="cap.isChecked"
+              (click)="saveAsistencia(cap)"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </ng-template>
