@@ -6,6 +6,9 @@ import { Nombramiento } from '@shared/models/Nombramiento';
 import Swal from 'sweetalert2';
 import { Capacitacion } from '@shared/models/Capacitacion';
 import { Router } from '@angular/router';
+import { environment } from '@environment/environment';
+import { FileUploader, FileUploaderOptions, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
+import { AuthenticationService } from '@shared/services/authentication.service';
 
 @Component({
   selector: 'app-custodios',
@@ -19,6 +22,10 @@ export class CustodiosComponent implements OnInit {
   public capacitaciones: any[];
   public isLoading: boolean;
   public nombramientos: Nombramiento[];
+  // Uploader
+  public url: string;
+  public uploader: FileUploader;
+  public uo: FileUploaderOptions = {};
   // Table atributes
   public auxId: any;
   public isForm = false;
@@ -32,8 +39,12 @@ export class CustodiosComponent implements OnInit {
   constructor(
     private router: Router,
     private modalService: NgbModal,
-    private serguridadCustodiaService: SeguridadCustodiaService) {
+    private serguridadCustodiaService: SeguridadCustodiaService,
+    private authenticationService: AuthenticationService) {
     this.custodios = [];
+    // Uploader
+    this.url = environment.apiUrl;
+    this.uploader = new FileUploader({ url: this.url + '/api/registrarFotoPerfilCustodio', itemAlias: 'image' });
   }
 
   ngOnInit() {
@@ -138,6 +149,11 @@ export class CustodiosComponent implements OnInit {
     this.openModal(modal, { custodio, isNew: false });
   }
 
+  clickInputFile(item, inputFile) {
+    this.custodio = { ...item };
+    inputFile.click();
+  }
+
   seeCapacitaciones(modal, custodio: Custodio) {
     this.getCapacitacionesByCustodio(custodio);
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
@@ -170,6 +186,30 @@ export class CustodiosComponent implements OnInit {
     })
   }
 
+  uploadPhoto(inputFile: HTMLInputElement) {
+    if (inputFile.files[0]) {
+      this.isLoading = true;
+      const authToken = this.authenticationService.getCurrentUser().access_token;
+      this.uo.authTokenHeader = 'Authorization';
+      this.uo.authToken = `Bearer ${authToken}`;
+      this.uo.additionalParameter = {
+        custodioId: this.custodio.id
+      };
+      this.uploader.setOptions(this.uo);
+      this.uploader.onAfterAddingFile = (file) => {
+        file.withCredentials = false;
+      };
+      this.uploader.onBeforeUploadItem = (item) => {
+        item.withCredentials = false;
+      };
+      console.log('To server', this.uo);
+      this.uploader.uploadAll();
+      this.uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
+      this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
+      inputFile.files = null;
+    }
+  }
+
   openModal(modal, config?: any) {
     if (config.isNew) {
       console.log('is New');
@@ -187,11 +227,37 @@ export class CustodiosComponent implements OnInit {
       this.nombramientos = data.nombramiento;
     });
   }
+  // Uploader methods
+  onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+    this.isLoading = false;
+    const exit = JSON.parse(response);
+    console.log(response);
+    Swal.fire({
+      title: exit.error ? 'Error!' : 'Guardado',
+      text: exit.mensaje,
+      icon: exit.error ? 'error' : 'success',
+      timer: 1000,
+      showConfirmButton: false
+    }).then(() => {
+      this.getData();
+    });
+    this.uploader.progress = 0;
+    this.uploader.clearQueue();
+  }
 
-  gotoCapacitaciones(capacitacion: Capacitacion) {
-    localStorage.setItem('capacitacion', JSON.stringify(capacitacion));
-    this.router.navigate(['dashboard/seguridad-custodia/capacitaciones-lista']);
-    this.modalService.dismissAll();
+  onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
+    this.isLoading = false;
+    console.log(response);
+    const error = JSON.stringify(response); // error server response
+    this.uploader.progress = 0;
+    this.uploader.clearQueue();
+    Swal.fire({
+      title: 'Error',
+      text: 'Error al guardado el archivo seleccionado',
+      icon: 'error',
+      timer: 1500,
+      showConfirmButton: false
+    });
   }
 
   // Table methods

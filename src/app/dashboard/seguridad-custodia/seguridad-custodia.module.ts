@@ -12,6 +12,7 @@ import { CapacitacionesPaseListaComponent } from './capacitaciones-pase-lista/ca
 import { PertenenciasComponent } from './pertenencias/pertenencias.component';
 import { RevisionesComponent } from './revisiones/revisiones.component';
 import { PertenenciasResultadoBusquedaComponent } from './pertenencias-resultado-busqueda/pertenencias-resultado-busqueda.component';
+import {FileUploadModule} from 'ng2-file-upload';
 
 
 @NgModule({
@@ -25,13 +26,14 @@ import { PertenenciasResultadoBusquedaComponent } from './pertenencias-resultado
     RevisionesComponent,
     PertenenciasResultadoBusquedaComponent,
   ],
-  imports: [
-    CommonModule,
-    CommonModule,
-    SeguridadCustodiaRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule,
-  ]
+    imports: [
+        CommonModule,
+        CommonModule,
+        SeguridadCustodiaRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SharedModule,
+        FileUploadModule,
+    ]
 })
 export class SeguridadCustodiaModule { }

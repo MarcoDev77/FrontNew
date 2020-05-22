@@ -27,6 +27,9 @@
   <table class="table">
     <thead>
       <tr>
+        <th class="text-center">
+          Foto
+        </th>
         <th (click)="sort('numero')" class="text-center">
           <span
             *ngIf="key == 'numero'"
@@ -86,6 +89,20 @@
         "
         [class.active]="i == selectedRow"
       >
+        <td class="text-center">
+          <div class="card-avatar">
+            <img
+              class="img"
+              width="50px"
+              (click)="clickInputFile(item, inputFile)"
+              src="{{
+                item.foto
+                  ? 'data:image/png;base64,' + item.foto
+                  : 'assets/img/no_image.png'
+              }}"
+            />
+          </div>
+        </td>
         <td class="text-center">{{ item.numCustodio }}</td>
         <td class="text-center">{{ item.nombre }}</td>
         <td class="text-center">{{ item.apellidoPaterno }}</td>
@@ -393,3 +410,15 @@
     </table>
   </div>
 </ng-template>
+
+<input
+  #inputFile
+  style="display: none;"
+  accept="image/png, image/jpeg, image/jpg"
+  type="file"
+  class="form-control-file"
+  ng2FileSelect
+  aria-describedby="fileHelp"
+  [uploader]="uploader"
+  (change)="uploadPhoto(inputFile)"
+/>
