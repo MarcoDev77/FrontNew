@@ -39,6 +39,7 @@ export class CustodiosComponent implements OnInit {
   ngOnInit() {
     this.getData();
     this.getNombramientos();
+    this.getCapacitaciones();
   }
 
   getData() {
@@ -50,12 +51,66 @@ export class CustodiosComponent implements OnInit {
     });
   }
 
-  getCapacitaciones(custodio: Custodio) {
-    this.serguridadCustodiaService.getCapacitacionesByCustodio(custodio.id).subscribe((data: any) => {
+  getCapacitaciones() {
+    this.serguridadCustodiaService.getCapacitaciones().subscribe((data: any) => {
       this.capacitaciones = data.capacitaciones;
-      if (this.capacitaciones.length === 0) {
-        this.capacitaciones.push({ nombre: 'Sin capacitaciones' });
+    })
+  }
+
+  getCapacitacionesByCustodio(custodio: Custodio) {
+    this.isLoading = true;
+    this.custodio = { ...custodio }
+    this.capacitaciones.map(cap => {
+      cap.isChecked = false;
+      return cap;
+    })
+    this.serguridadCustodiaService.getCapacitacionesByCustodio(custodio.id).subscribe((data2: any) => {
+      this.isLoading = false;
+      console.log('asistio', data2.capacitaciones);
+      for (const cap of this.capacitaciones) {
+        for (const capCus of data2.capacitaciones) {
+          if (cap.id === capCus.id) {
+            console.log('res', cap);
+            cap.isChecked = true;
+            break;
+          }
+        }
       }
+      console.log('total', this.capacitaciones);
+    }, error => {
+      console.log(error);
+      this.isLoading = false;
+    });
+  }
+
+  saveAsistencia(capacitacion) {
+    this.isLoading = true;
+    const model = {
+      custodio: {
+        id: this.custodio.id
+      },
+      capacitacion: {
+        id: capacitacion.id,
+      },
+    };
+    console.log(model);
+
+    this.serguridadCustodiaService.saveAsistencia(model).subscribe((data: any) => {
+      this.isLoading = false;
+      console.log('saveAsistencia', data);
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      })
+      if (!data.error) {
+        this.getCapacitacionesByCustodio(this.custodio);
+      }
+    }, error => {
+      console.log(error);
+      this.isLoading = false;
     });
   }
 
@@ -84,7 +139,7 @@ export class CustodiosComponent implements OnInit {
   }
 
   seeCapacitaciones(modal, custodio: Custodio) {
-    this.getCapacitaciones(custodio);
+    this.getCapacitacionesByCustodio(custodio);
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
   }
 

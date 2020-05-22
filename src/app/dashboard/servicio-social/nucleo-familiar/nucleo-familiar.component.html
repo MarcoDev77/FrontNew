@@ -273,10 +273,15 @@
       </div>
     </div>
     <div class="col-md-12">
-      <br>
-      <hr>
-      <app-tabla-familiares *ngIf="nucleo.id" [nucleoId]="nucleo?.id" tipoNucleo="primario"></app-tabla-familiares>
-      <hr>
+      <br />
+      <hr />
+      <app-tabla-familiares
+        title="Grupo familiar primario"
+        *ngIf="nucleo.id"
+        [nucleoId]="nucleo?.id"
+        tipoNucleo="primario"
+      ></app-tabla-familiares>
+      <hr />
     </div>
 
     <div class="col-md-4">
@@ -435,7 +440,7 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-gruop">
         <label>Mobiliario y Enseres</label>
         <textarea
@@ -448,11 +453,24 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-gruop">
         <label>Descripción de Vivienda</label>
         <textarea
           [(ngModel)]="nucleo.descripcionViviendaS"
+          name="descripcionViviendaS"
+          class="form-control"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Relación con medio externos</label>
+        <textarea
+          [(ngModel)]="nucleo.relacionMedioExternoS"
           name="descripcionViviendaS"
           class="form-control"
           cols="30"
@@ -475,18 +493,6 @@
 
     <div class="col-md-4">
       <div class="form-gruop">
-        <label>Relación con medio externos</label>
-        <input
-          [(ngModel)]="nucleo.relacionMedioExternoS"
-          name="relacionMedioExternoS"
-          type="text"
-          class="form-control"
-        />
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="form-gruop">
         <label>Número de parejas anteriores</label>
         <input
           [(ngModel)]="nucleo.numeroParejasS"
@@ -497,7 +503,7 @@
         />
       </div>
     </div>
-
+    <div class="col-md-4"></div>
     <div class="col-md-4">
       <div class="custom-control custom-checkbox mt-4">
         <input
@@ -561,10 +567,15 @@
       </div>
     </div>
     <div class="col-md-12">
-      <br>
-      <hr>
-      <app-tabla-familiares *ngIf="nucleo.id" [nucleoId]="nucleo?.id" tipoNucleo="secundario"></app-tabla-familiares>
-      <hr>
+      <br />
+      <hr />
+      <app-tabla-familiares
+        title="Grupo familiar secundario"
+        *ngIf="nucleo.id"
+        [nucleoId]="nucleo?.id"
+        tipoNucleo="secundario"
+      ></app-tabla-familiares>
+      <hr />
     </div>
     <div class="col-md-12">
       <button
@@ -792,7 +803,10 @@
 
     <!-- Title DAtos aval -->
     <div class="col-md-12 mt-4">
-      <app-section-title icon="fa fa-user" title="Datos Aval"></app-section-title>
+      <app-section-title
+        icon="fa fa-user"
+        title="Datos Aval"
+      ></app-section-title>
     </div>
 
     <div class="col-md-4">
@@ -889,7 +903,10 @@
 
     <!-- Title Persona con la cual vivirá -->
     <div class="col-md-12 mt-4">
-      <app-section-title icon="fa fa-home" title="Datos Persona Vivirá"></app-section-title>
+      <app-section-title
+        icon="fa fa-home"
+        title="Datos Persona Vivirá"
+      ></app-section-title>
     </div>
 
     <div class="col-md-4">
@@ -1091,8 +1108,20 @@
 
 <ng-template #view let-view>
   <div class="modal-body text-center pt-0">
-    <i (click)="view.dismiss()" style="cursor: pointer;position: absolute;right: 1%;top: 1%;font-size: 20px"
-       class="fa fa-times-circle"></i>
-    <app-web-viewer [file]="file" [name]="'estudio trabajo social'"></app-web-viewer>
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'estudio trabajo social'"
+    ></app-web-viewer>
   </div>
 </ng-template>

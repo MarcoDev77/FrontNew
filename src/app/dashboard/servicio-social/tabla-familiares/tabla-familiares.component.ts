@@ -13,6 +13,7 @@ import { CatalogosService } from '@shared/services/catalogos.service';
 export class TablaFamiliaresComponent implements OnInit {
   @Input() tipoNucleo: string;
   @Input() nucleoId: number;
+  @Input() title: string;
   public isLoading:boolean
   public familiar : any
   public parentescos: any[]
@@ -87,10 +88,10 @@ export class TablaFamiliaresComponent implements OnInit {
         this.getFamiliares()
         this.modalService.dismissAll();
       });
-    
+
   }
 
- 
+
   deleteFamiliar(item){
     Swal.fire({
       title: '¿Estas seguro?',
