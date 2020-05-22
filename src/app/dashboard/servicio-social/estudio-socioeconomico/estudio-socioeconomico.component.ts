@@ -22,10 +22,10 @@ export class EstudioSocioeconomicoComponent implements OnInit {
     this.estudio = {} as any
     this.isLoading = false
     this.moreInputs = [
-      { label: 'Ocupación', value: 'Carpintero' },
-      { label: 'Domicilio', value: 'a' },
-      { label: 'Lugar nacimiento', value: 'Mexico' },
-      { label: 'Dialecto', value: 'Español' },
+      // { label: 'Ocupación', value: 'Carpintero' },
+      // { label: 'Domicilio', value: 'a' },
+      // { label: 'Lugar nacimiento', value: 'Mexico' },
+      // { label: 'Dialecto', value: 'Español' },
     ];
   }
 
