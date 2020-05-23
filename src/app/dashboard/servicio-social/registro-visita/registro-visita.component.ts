@@ -31,15 +31,16 @@ export class RegistroVisitaComponent implements OnInit {
   constructor(
     private servicioSocialService: ServicioSocialService,
     private modalService: NgbModal) {
-    this.ingreso = {} as Ingreso;
-    this.visitas = [];
-    this.referencias = [];
+    this.cleanForm();
   }
 
   ngOnInit() {
   }
 
-  searchImputado() {
+  searchImputado(ingreso) {
+    if (ingreso) {
+      this.ingreso = { ...ingreso };
+    }
     this.isLoading = true;
     this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
       this.isLoading = false;
@@ -55,15 +56,18 @@ export class RegistroVisitaComponent implements OnInit {
         this.getVisitas();
         this.getReferencias();
       } else {
-        this.ingreso = {} as Ingreso;
-        this.visitas = [];
-        this.referencias = [];
+        this.cleanForm();
       }
     }, error => {
       console.log(error);
-      this.isLoading = false;
-      this.ingreso = {} as Ingreso;
+      this.cleanForm();
     });
+  }
+
+  cleanForm() {
+    this.ingreso = {} as Ingreso;
+    this.visitas = [];
+    this.referencias = [];
   }
 
   getVisitas() {
