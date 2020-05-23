@@ -39,9 +39,11 @@ export class NucleoFamiliarComponent implements OnInit {
     this.getEstados();
   }
 
-  searchImputado() {
+  searchImputado(imputado?) {
+    console.log(imputado);
+
     this.isLoading = true;
-    this.servicioSocialService.getInfoNucleoFamiliar(this.ingreso.folio).subscribe((data: any) => {
+    this.servicioSocialService.getInfoNucleoFamiliar(this.ingreso.folio || imputado.folio).subscribe((data: any) => {
       console.log('data', data);
       this.isLoading = false;
       Swal.fire({
@@ -80,6 +82,16 @@ export class NucleoFamiliarComponent implements OnInit {
     this.nucleo.estadoVivira = {} as any;
   }
 
+  cleanForm() {
+    this.isLoading = false;
+    this.ingreso = {} as Ingreso;
+    this.imputado = {} as any;
+    this.nucleo = new NucleoFamiliar();
+    this.nucleo.parentescoAvalMoral = {} as any;
+    this.nucleo.parentescoVivira = {} as any;
+    this.nucleo.estadoVivira = {} as any;
+  }
+
   submit() {
     console.log('submit', this.nucleo);
     this.servicioSocialService.saveNucleoFamiliar(this.nucleo).subscribe((data: any) => {
@@ -103,7 +115,7 @@ export class NucleoFamiliarComponent implements OnInit {
     }, error => {
       this.isLoading = false;
       Swal.fire({
-        title:'Error!',
+        title: 'Error!',
         text: 'error al generar el documento',
         icon: 'error',
         timer: 1000,
