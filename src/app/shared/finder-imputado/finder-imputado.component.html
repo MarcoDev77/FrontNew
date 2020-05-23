@@ -10,7 +10,7 @@
           <span (click)="search()" class="input-group-text"
             ><i
               class="fa {{
-                isLoadingSearchFolio && isLoadingSearchName
+                (isLoadingSearchFolio && isLoadingSearchName) || isLoading
                   ? 'fa-spinner fa-spin'
                   : 'fa-search'
               }}"

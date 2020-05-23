@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Ingreso } from '@shared/models/Ingreso';
 import { SeguridadCustodiaService } from '@shared/services/seguridad-custodia.service';
 
@@ -16,6 +16,7 @@ export class FinderImputadoComponent implements OnInit {
   public ingresoSelected: any;
   @Output() onSelectIngresoSearch = new EventEmitter();
   @Output() onClearSearch = new EventEmitter();
+  @Input() isLoading: boolean;
   constructor(private seguridadCustodioService: SeguridadCustodiaService) { }
 
   ngOnInit() {
