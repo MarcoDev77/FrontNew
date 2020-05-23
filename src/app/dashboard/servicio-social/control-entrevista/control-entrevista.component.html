@@ -3,44 +3,22 @@
   title="Control de Entrevista"
 ></app-section-title>
 
-<div class="row">
-  <div class="col-md-8">
-    <h3>Generalidades PPL</h3>
-  </div>
-  <div class="col-md-4">
-    <form
-      name="search"
-      (ngSubmit)="searchImputado()"
-      #formSearch="ngForm"
-      novalidate
-    >
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span (click)="searchImputado()" class="input-group-text"
-            ><i
-              class="fa {{ isLoading ? 'fa-spinner fa-spin' : 'fa-search' }}"
-            ></i
-          ></span>
-        </div>
-        <input
-          name="folio"
-          required
-          [(ngModel)]="ingreso.folio"
-          type="text"
-          class="form-control pull-right mr-2"
-          placeholder="Buscar por Folio"
-        />
-      </div>
-    </form>
-  </div>
-</div>
+<app-finder-imputado
+  [isLoading]="isLoading"
+  (onSelectIngresoSearch)="searchImputado($event)"
+  (onClearSearch)="cleanForm()"
+></app-finder-imputado>
 <app-generalidades-ppl
   [generalidadesPPL]="ingreso.imputado"
 ></app-generalidades-ppl>
 
 <div class="row">
   <div class="col-md-4 offset-8">
-    <button [disabled]="!ingreso?.imputado?.id" (click)="openModal(formModal)" class="btn btn-success pull-right">
+    <button
+      [disabled]="!ingreso?.imputado?.id"
+      (click)="openModal(formModal)"
+      class="btn btn-success pull-right"
+    >
       Agregar
     </button>
   </div>
@@ -99,7 +77,9 @@
         "
         [class.active]="i === selectedRow"
       >
-        <td class="text-center">{{ item.fechaRegistro | date:'dd/MM/yy h:mm a' }}</td>
+        <td class="text-center">
+          {{ item.fechaRegistro | date: "dd/MM/yy h:mm a" }}
+        </td>
         <td class="text-center">{{ item.motivoEstudio }}</td>
         <td class="text-center">{{ item.observaciones }}</td>
         <td class="text-center">
@@ -189,7 +169,10 @@
         </div>
         <div class="row">
           <div class="col mt-5">
-            <button (click)="saveEntrevista([motivoEstudio, observaciones])" class="btn btn-success">
+            <button
+              (click)="saveEntrevista([motivoEstudio, observaciones])"
+              class="btn btn-success"
+            >
               Guardar
             </button>
           </div>
