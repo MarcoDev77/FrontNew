@@ -27,6 +27,7 @@ import { FotosExtraIngresoComponent } from './fotos-extra-ingreso/fotos-extra-in
 import {FileUploadModule} from 'ng2-file-upload';
 import { RecursosProbatoriosComponent } from './recursos-probatorios/recursos-probatorios.component';
 import { GeneralidadesPPLComponent } from './generalidades-ppl/generalidades-ppl.component';
+import { FinderImputadoComponent } from './finder-imputado/finder-imputado.component';
 
 
 const MODULES = [
@@ -53,8 +54,8 @@ const COMPONENTS = [
 
 @NgModule({
   imports: [CommonModule, ...MODULES, FileUploadModule, ReactiveFormsModule],
-    exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, FotosExtraIngresoComponent, GeneralidadesPPLComponent],
-  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, CausaPenalIngresoComponent, DelitoIngresoComponent, FotosExtraIngresoComponent, RecursosProbatoriosComponent, GeneralidadesPPLComponent],
+    exports: [CommonModule, ...COMPONENTS, ...MODULES, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, FotosExtraIngresoComponent, GeneralidadesPPLComponent, FinderImputadoComponent],
+  declarations: [...COMPONENTS, SelectComponent, SectionTitleComponent, IngresoNavigationComponent, WebViewerComponent, CausaPenalIngresoComponent, DelitoIngresoComponent, FotosExtraIngresoComponent, RecursosProbatoriosComponent, GeneralidadesPPLComponent, FinderImputadoComponent],
 })
 export class SharedModule {
 }

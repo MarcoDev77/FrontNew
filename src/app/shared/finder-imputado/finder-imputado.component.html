@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-4">
+    <h3>Búsqueda PPL(S)</h3>
+  </div>
+
+  <div class="col-md-8">
+    <form name="search" (ngSubmit)="search()" #formSearch="ngForm" novalidate>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span (click)="search()" class="input-group-text"
+            ><i
+              class="fa {{
+                isLoadingSearchFolio && isLoadingSearchName
+                  ? 'fa-spinner fa-spin'
+                  : 'fa-search'
+              }}"
+            ></i
+          ></span>
+        </div>
+        <input
+          name="folio"
+          required
+          [(ngModel)]="criteria"
+          (keyup)="clearSearch()"
+          type="text"
+          class="form-control pull-right mr-2"
+          placeholder="Buscar por Folio o Nombre"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+<p>Selecciona el ppl</p>
+<table class="table table-sm table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Folio</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apodo</th>
+      <th scope="col">Fecha Ingreso</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ingreso of listIngreso" (click)="selectIngreso(ingreso)">
+      <th scope="row">{{ ingreso?.folio }}</th>
+      <td>{{ ingreso?.nombreCompleto }}</td>
+      <td>{{ ingreso?.apodo?.otro }}</td>
+      <td>{{ ingreso?.fechaRegistro | date: "dd/mm/yyyy" }}</td>
+    </tr>
+  </tbody>
+</table>
