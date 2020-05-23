@@ -23,7 +23,10 @@ export class OficioSancionesComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchImputado() {
+  searchImputado(imputado) {
+    if (imputado) {
+      this.ingreso = { ...imputado };
+    }
     this.isLoading = true;
     this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
       console.log('Data', data);
