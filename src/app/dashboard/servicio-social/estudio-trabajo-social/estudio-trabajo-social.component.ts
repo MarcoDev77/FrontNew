@@ -28,10 +28,11 @@ export class EstudioTrabajoSocialComponent implements OnInit {
   }
 
   searchImputado(ingreso?) {
-    console.log('searchImputado', ingreso);
-
+    if (ingreso) {
+      this.ingreso = { ...ingreso };
+    }
     this.isLoading = true;
-    this.servicioSocialService.getImputadoByFolio(this.ingreso.folio || ingreso.folio).subscribe((data: any) => {
+    this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
       console.log('Data', data);
       this.isLoading = false;
       Swal.fire({
@@ -77,6 +78,8 @@ export class EstudioTrabajoSocialComponent implements OnInit {
   }
 
   getClasificacion() {
+    console.log('To server getClasificacion', this.ingreso.folio);
+
     this.servicioSocialService.getEstudioClasificion(this.ingreso.folio).subscribe((data: any) => {
       console.log('Clasificacion', data);
       if (!data.error) {
