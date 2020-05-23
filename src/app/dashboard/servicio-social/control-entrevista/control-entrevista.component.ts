@@ -40,9 +40,9 @@ export class ControlEntrevistaComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchImputado() {
+  searchImputado(ingreso?) {
     this.isLoading = true;
-    this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
+    this.servicioSocialService.getImputadoByFolio(this.ingreso.folio || ingreso.folio).subscribe((data: any) => {
       Swal.fire({
         title: data.error ? 'Error!' : 'Resultados',
         text: data.mensaje,
@@ -64,6 +64,12 @@ export class ControlEntrevistaComponent implements OnInit {
       this.isLoading = false;
       this.ingreso = {} as Ingreso;
     });
+  }
+
+  cleanForm() {
+    this.ingreso = {} as Ingreso;
+    this.entrevista = {} as ControlEntrevista;
+    this.entrevistas = [];
   }
 
   listEntrevistas(imputadoId) {

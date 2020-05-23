@@ -45,7 +45,10 @@ export class OtrosOficiosComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchImputado() {
+  searchImputado(ingreso?) {
+    if (ingreso) {
+      this.ingreso = { ...ingreso };
+    }
     this.isLoading = true;
     this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
       this.isLoading = false;
@@ -63,6 +66,10 @@ export class OtrosOficiosComponent implements OnInit {
         this.ingreso = {} as Ingreso;
       }
     });
+  }
+
+  cleanForm() {
+    this.ingreso = {} as Ingreso;
   }
 
   generatePrevencionReadaptacion(modal) {

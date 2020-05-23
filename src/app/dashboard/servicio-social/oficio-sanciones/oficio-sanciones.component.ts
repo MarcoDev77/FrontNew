@@ -23,7 +23,10 @@ export class OficioSancionesComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchImputado() {
+  searchImputado(imputado) {
+    if (imputado) {
+      this.ingreso = { ...imputado };
+    }
     this.isLoading = true;
     this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
       console.log('Data', data);
@@ -39,13 +42,10 @@ export class OficioSancionesComponent implements OnInit {
         this.ingreso.imputado = data.imputado;
         this.getOficioSanciones();
       } else {
-        this.ingreso = {} as Ingreso;
-        this.oficio = {} as OficioSanciones;
+        this.cleanForm();
       }
     }, error => {
-      this.isLoading = false;
-      this.ingreso = {} as Ingreso;
-      this.oficio = {} as OficioSanciones;
+      this.cleanForm();
       console.log(error);
       Swal.fire({
         title: 'Error!',
@@ -55,6 +55,12 @@ export class OficioSancionesComponent implements OnInit {
         showConfirmButton: false
       });
     });
+  }
+
+  cleanForm() {
+    this.isLoading = false;
+    this.ingreso = {} as Ingreso;
+    this.oficio = {} as OficioSanciones;
   }
 
   getOficioSanciones() {

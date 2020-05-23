@@ -18,9 +18,7 @@ export class EstudioSocioeconomicoComponent implements OnInit {
   constructor(
     private servicioSocialService: ServicioSocialService,
     private modalService: NgbModal) {
-    this.ingreso = {} as any
-    this.estudio = {} as any
-    this.isLoading = false
+    this.cleanForm();
     this.moreInputs = [
       // { label: 'Ocupación', value: 'Carpintero' },
       // { label: 'Domicilio', value: 'a' },
@@ -32,7 +30,10 @@ export class EstudioSocioeconomicoComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchImputado() {
+  searchImputado(imputado?) {
+    if (imputado) {
+      this.ingreso = { ...imputado };
+    }
     this.isLoading = true;
     this.servicioSocialService.getEstudioSocioEconomico(this.ingreso.folio).subscribe((data: any) => {
       this.isLoading = false;
@@ -49,9 +50,7 @@ export class EstudioSocioeconomicoComponent implements OnInit {
         showConfirmButton: false
       });
     }, error => {
-      this.isLoading = false;
-      this.ingreso = {} as any
-      this.estudio = {} as any
+      this.cleanForm();
       Swal.fire({
         title: 'Error!',
         text: 'Error al realizar la búsqueda.',
@@ -60,6 +59,12 @@ export class EstudioSocioeconomicoComponent implements OnInit {
         showConfirmButton: false
       });
     })
+  }
+
+  cleanForm() {
+    this.isLoading = false;
+    this.ingreso = {} as any
+    this.estudio = {} as any
   }
 
   saveEstudioSocioeconomico() {
