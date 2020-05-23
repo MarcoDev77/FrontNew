@@ -27,9 +27,11 @@ export class EstudioTrabajoSocialComponent implements OnInit {
     this.getParentescos();
   }
 
-  searchImputado() {
+  searchImputado(ingreso?) {
+    console.log('searchImputado', ingreso);
+
     this.isLoading = true;
-    this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
+    this.servicioSocialService.getImputadoByFolio(this.ingreso.folio || ingreso.folio).subscribe((data: any) => {
       console.log('Data', data);
       this.isLoading = false;
       Swal.fire({
@@ -62,6 +64,13 @@ export class EstudioTrabajoSocialComponent implements OnInit {
     });
   }
 
+  cleanForm() {
+    this.isLoading = false;
+    this.ingreso = {} as Ingreso;
+    this.estudio = {} as EstudioTrabajoSocial;
+    this.estudio.parentesco = {};
+  }
+
   getParentescos() {
     this.servicioSocialService.getParentescos()
       .subscribe((data: any) => this.parentescos = data.parentescos);
@@ -69,6 +78,7 @@ export class EstudioTrabajoSocialComponent implements OnInit {
 
   getClasificacion() {
     this.servicioSocialService.getEstudioClasificion(this.ingreso.folio).subscribe((data: any) => {
+      console.log('Clasificacion', data);
       if (!data.error) {
         this.estudio = data.imputado.estudioSocioeconomico;
         this.estudio.parentesco = data.imputado.estudioSocioeconomico.parentescoResponsable;
