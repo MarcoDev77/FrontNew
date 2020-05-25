@@ -107,4 +107,9 @@ export class ServicioSocialService {
 
   getEstudioClasificion = folio => this.http.get(`${this.url}/api/listarEstudioClasificacion?folioImputado=${folio}`);
 
+  generatePDFEstudioClasificacion = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfEstudioClasificacion?imputadoId=${id}`, { responseType });
+  }
+
 }

@@ -3,6 +3,7 @@ import { Ingreso } from '@shared/models/Ingreso';
 import { EstudioTrabajoSocial } from '@shared/models/EstudioTrabajoSocial';
 import { ServicioSocialService } from '@shared/services/servicio-social.service';
 import Swal from 'sweetalert2';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-estudio-trabajo-social',
@@ -14,9 +15,13 @@ export class EstudioTrabajoSocialComponent implements OnInit {
   public ingreso: Ingreso;
   public estudio: EstudioTrabajoSocial;
   public parentescos: any[];
+  // Filepreview
+  public file: any;
 
 
-  constructor(private servicioSocialService: ServicioSocialService) {
+  constructor(
+    private servicioSocialService: ServicioSocialService,
+    private modalService: NgbModal) {
     this.parentescos = [];
     this.ingreso = {} as Ingreso;
     this.estudio = {} as EstudioTrabajoSocial;
@@ -102,6 +107,42 @@ export class EstudioTrabajoSocialComponent implements OnInit {
         showConfirmButton: false
       });
     });
+  }
+
+  genetatePDF(modal) {
+    this.servicioSocialService.generatePDFEstudioClasificacion(this.ingreso.imputado.id)
+      .subscribe((data: any) => {
+        this.showPreview(data, modal);
+      })
+  }
+
+  showPreview(data, modal) {
+    const file = new Blob([data], { type: 'application/*' });
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadstart = ev => this.isLoading = true;
+    reader.onloadend = () => {
+      this.isLoading = false;
+      let dataUrl: any;
+      dataUrl = reader.result;
+      const base64 = dataUrl.split(',')[1];
+      this.modalService.dismissAll();
+      if (base64) {
+        this.file = base64;
+        this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
+      }
+    };
+    reader.onerror = () => {
+      this.isLoading = false;
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al generar el archivo',
+        icon: 'error',
+        timer: 1500,
+        showConfirmButton: false
+      });
+      this.modalService.dismissAll();
+    };
   }
 
 }
