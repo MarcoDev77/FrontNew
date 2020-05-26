@@ -1,0 +1,81 @@
+<app-section-title icon="fa fa-address-card-o" title="Registro de pases unicos"></app-section-title>
+<div class="row mt-2">
+    <div class="col-md-7"></div>
+    <div class="col-md-5">
+        <form name="search" (ngSubmit)="searchVisitas()" #formSearch="ngForm" novalidate>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span (click)="searchVisitas()" class="input-group-text"><i class="fa {{
+                    isLoadingData ||  isLoading
+                      ? 'fa-spinner fa-spin'
+                      : 'fa-search'
+                  }}"></i></span>
+                </div>
+                <input name="folio" required [(ngModel)]="criteria.date"  type="date"
+                    class="form-control pull-right mr-2" />
+                <input name="folio" required [(ngModel)]="criteria.dormitorio"  type="text"
+                    class="form-control pull-right mr-2" placeholder="Dormitorio"
+                    
+                    [ngbTypeahead]="search"
+                    [resultTemplate]="rt"
+                    [inputFormatter]="formatter"/>
+                 
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive mt-3">
+    <table class="table">
+        <thead>
+            <tr>
+                <th (click)="sort('nombreFamiliar')" class="text-center">
+                    <span *ngIf="key == 'nombreFamiliar'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+                    Nombre del interno
+                </th>
+                <th (click)="sort('nombreImputado')" class="text-center">
+                    <span *ngIf="key == 'nombreImputado'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+                    Nombre del familiar
+                </th>
+                <th (click)="sort('parentesco')" class="text-center">
+                    <span *ngIf="key == 'parentesco'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+                    Parentesco
+                </th>
+                <th (click)="sort('observaciones')" class="text-center">
+                    <span *ngIf="key == 'observaciones'" class="fa"
+                        [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+                    Observaciones
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let item of visitas | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                <td class="text-center">{{item.nombreFamiliar}}</td>
+                <td class="text-center">{{item.nombreImputado}}</td>
+                <td class="text-center">{{item.parentesco}}</td>
+                <td class="text-center">{{item.observaciones}}</td>
+
+
+            </tr>
+
+            <tr *ngIf="visitas.length == 0">
+                <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center w-100">
+        <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel=""
+            (pageChange)="switch($event)">
+        </pagination-controls>
+    </div>
+</div>
+
+<ng-template #rt let-r="result" let-t="term">
+    <ngb-highlight [result]="r.nombre" [term]="t"></ngb-highlight>
+  </ng-template>
+  

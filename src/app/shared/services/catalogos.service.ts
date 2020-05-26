@@ -245,6 +245,7 @@ export class CatalogosService {
 
   getParentescos = () => this.http.get(`${this.url}/api/listarParentescos`);
 
+  listDormitoriosAsignados=() =>this.http.get (`${this.url}/api/listarDormitoriosAsignados`)
 }
 
 
