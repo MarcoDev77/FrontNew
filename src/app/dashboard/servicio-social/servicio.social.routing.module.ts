@@ -14,6 +14,7 @@ import { OtrosOficiosComponent } from './otros-oficios/otros-oficios.component';
 import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.component';
 import { EstudioSocioeconomicoComponent } from './estudio-socioeconomico/estudio-socioeconomico.component';
 import { OficioSancionesComponent } from './oficio-sanciones/oficio-sanciones.component';
+import { RegistroPaseUnicoComponent } from './registro-pase-unico/registro-pase-unico.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: 'nucleo-familiar', component: NucleoFamiliarComponent },
       { path: 'estudio-socioeconomico', component: EstudioSocioeconomicoComponent },
       { path: 'oficio-sanciones', component: OficioSancionesComponent },
+      { path: 'registro-pase-unico', component: RegistroPaseUnicoComponent}
     ]
   },
 ];

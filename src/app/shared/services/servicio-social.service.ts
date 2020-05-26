@@ -112,4 +112,6 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfEstudioClasificacion?imputadoId=${id}`, { responseType });
   }
 
+  searchByDate= model=> this.http.get(`${this.url}/api/listarRegistroPasesProvisionales?fecha=${model.date}&dormitorio=${model.dormitorio.nombre}`)
+  
 }
