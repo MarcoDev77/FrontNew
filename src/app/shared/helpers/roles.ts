@@ -53,7 +53,7 @@ export const roles = {
   }, site: {
     role: 'ROLE_SITE',
     name: 'Consultor',
-    main: 'dactiloscopia'
+    main: 'informatica'
   },
 };
 
