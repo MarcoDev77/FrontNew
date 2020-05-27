@@ -4,11 +4,12 @@ import { RootComponent } from './_root/root.component';
 import { SharedModule } from '@shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { InformaticaRoutingModule } from './informatica-routing.module';
+import { ReporteVisitasComponent } from './reporte-visitas/reporte-visitas.component';
 
 
 
 @NgModule({
-  declarations: [RootComponent],
+  declarations: [RootComponent, ReporteVisitasComponent],
   imports: [
     CommonModule,
     SharedModule,

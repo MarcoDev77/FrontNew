@@ -1,0 +1,145 @@
+<app-section-title
+  icon="fa fa-table"
+  title="Reporte de visitas"
+></app-section-title>
+<app-finder-imputado
+  [isLoading]="isLoading"
+  (onSelectIngresoSearch)="searchImputado($event)"
+  (onClearSearch)="cleanForm()"
+></app-finder-imputado>
+
+<div class="row">
+  <div class="col md-9 mt-4 mb-2">
+    <h5 class="title-pink">
+      Información PPL
+    </h5>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <img
+      src="https://www.w3schools.com/w3images/avatar2.png"
+      class="img"
+      style="max-height: 400px;"
+      alt="imagen ppl"
+    />
+  </div>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-6">
+        <label>Nombre del PPL</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+      <div class="col-md-3">
+        <label>Fecha de Nac.</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+      <div class="col-md-3">
+        <label>Edad</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <label>Domicilio (Calle, número y colonia)</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label>Municipio</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label>Estado</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label>Nacionalidad</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label>Escolaridad</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+      <div class="col-md-6">
+        <label>Ocupación</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label>Fecha de Ingreso</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+      <div class="col-md-6">
+        <label>N. de expediente</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label>Calidad de Delicuencial</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label>Fuero</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label>Proceso</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <label>Delitos / Causa Sentencia</label>
+        <textarea class="form-control" disabled> </textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label>Alias</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label>Dormitorio</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label>Estatus Jurídico</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label>Fecha Libertad</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+      <div class="col-md-8">
+        <label>Tipo Libertad</label>
+        <input type="text" disabled class="form-control" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col md-9 mt-4">
+    <h5 class="title-pink">
+      Bloque de visita registrada de la persona privada de la libertad
+    </h5>
+  </div>
+</div>
+Ingreso: {{ this.ingreso | json }}
