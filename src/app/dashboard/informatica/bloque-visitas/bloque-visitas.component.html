@@ -1,0 +1,9 @@
+<div *ngIf="visitantes.length>0" class="card-deck">    
+        <div *ngFor="let item of visitantes" class="col-md-3 mb-4 p0">
+            <app-card-visita [visitante]=item ></app-card-visita>
+        </div>
+</div>
+<div *ngIf="visitantes.length==0">
+    <h5>Este PPL no ha recibido visitas</h5>
+</div>
+
