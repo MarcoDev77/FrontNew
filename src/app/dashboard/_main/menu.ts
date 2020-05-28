@@ -107,12 +107,12 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fa fa-group',
     collapse: 'tables',
     children: [
-      { path: 'ingreso/ficha-ingreso', title: 'FICHA DE INGRESO', ab: 'FI' },
+      { path: 'servicio-social/ficha-ingreso', title: 'FICHA DE INGRESO', ab: 'FI' },
       // { path: 'servicio-social/pase-mensual', title: 'PASE MENSUAL', ab: 'PM' },
       // { path: 'servicio-social/pase-unico', title: 'PASE UNICO', ab: 'PU' },
       { path: 'servicio-social/estudio-trabajo-social', title: 'ESTUDIO DE CLASIFICACIÓN', ab: 'EC' },
       { path: 'comite-tecnico/plan-actividades', title: 'FORMATO DE PLAN DE ACTIVIDADES', ab: 'FPA' },
-      { path: 'servicio-social/nucleo-familiar', title: 'FORMATO DE AVANCE Y/O INFORME', ab: 'FAI' },//Pentiente
+      { path: '#', title: 'FORMATO DE AVANCE Y/O INFORME', ab: 'FAI' },//Pentiente
       { path: 'servicio-social/nucleo-familiar', title: 'ESTUDIO FEDERAL', ab: 'EF' },
       { path: 'servicio-social/estudio-socioeconomico', title: 'ESTUDIO SOCIOECONÓMICO', ab: 'ES' },
     ],
