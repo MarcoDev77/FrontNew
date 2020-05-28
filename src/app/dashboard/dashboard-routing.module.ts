@@ -46,7 +46,7 @@ const routes: Routes = [
         path: 'comite-tecnico',
         loadChildren: './comite-tecnico/comite-tecnico.module#ComiteTecnicoModule',
         canActivate: [AuthGuard],
-        data: { expectedRole: [r.test.role, r.comiteTecnico.role] }
+        data: { expectedRole: [r.test.role, r.comiteTecnico.role, r.trabajoSocial.role] }
       },
       {
         path: 'seguridad-custodia',
