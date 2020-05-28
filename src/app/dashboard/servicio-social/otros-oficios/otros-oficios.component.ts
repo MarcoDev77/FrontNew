@@ -22,12 +22,11 @@ export class OtrosOficiosComponent implements OnInit {
     private modalService: NgbModal) {
     this.ingreso = {} as Ingreso;
     this.formats = [
-      {
-        name: 'Oficio que emite el director general de sanciones',
-        image: 'oficio-director-general.png',
-        methodToGenerate: (view) => this.generateOficioDirectorGeneral(view),
-
-      },
+      // {
+      //   name: 'Oficio que emite el director general de sanciones',
+      //   image: 'oficio-director-general.png',
+      //   methodToGenerate: (view) => this.generateOficioDirectorGeneral(view),
+      // },
       {
         name: 'Prevención y readaptación social (Oficio)',
         image: 'prevencion-readaptacion-social.png',
