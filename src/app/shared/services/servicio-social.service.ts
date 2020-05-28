@@ -40,6 +40,11 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfEstudioTrabajoSocial?imputadoId=${id}`, { responseType });
   }
 
+  generatePDFFichaIngresoTrabajoSocial = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfFichaIngreso?imputadoId=${id}`, { responseType });
+  }
+
   getInfoFichaIngreso = folio => {
     return this.http.get(`${this.url}/api/listarfichaIngresoTrabajoSocial?folioImputado=${folio}`);
   }
