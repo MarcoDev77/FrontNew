@@ -9,5 +9,7 @@ export class GeneralidadesPPLComponent {
   @Input() generalidadesPPL: any;
   @Input() inputs: any[];
 
-  constructor() { }
+  constructor() { 
+    console.log(this.generalidadesPPL)
+  }
 }

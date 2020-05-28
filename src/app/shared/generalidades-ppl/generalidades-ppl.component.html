@@ -57,7 +57,7 @@
         type="text"
         class="form-control"
         readonly
-        value="{{ generalidadesPPL?.estadoCivil?.nombre }}"
+        value="{{ generalidadesPPL?.estadoCivil?.nombre || generalidadesPPL?.estadoCivil}}"
         name="estadoCivil"
       />
     </div>
@@ -84,7 +84,7 @@
         class="form-control"
         readonly
         name="delito"
-        value="{{ generalidadesPPL?.listaDelitos }}"
+        value="{{ generalidadesPPL?.listaDelitos || generalidadesPPL?.delitos }}"
       />
     </div>
   </div>
