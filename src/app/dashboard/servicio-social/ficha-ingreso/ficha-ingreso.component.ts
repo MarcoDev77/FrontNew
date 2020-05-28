@@ -12,21 +12,24 @@ export class FichaIngresoComponent implements OnInit {
   public isLoading: boolean;
   public ingreso: any;
   public ficha: any
-  public file:any
-  constructor(private servicioSocialService: ServicioSocialService, private modalService: NgbModal) { 
-    this.ingreso= {} as any;
-    this.ficha={} as any;
+  public file: any
+  constructor(private servicioSocialService: ServicioSocialService, private modalService: NgbModal) {
+    this.ingreso = {} as any;
+    this.ficha = {} as any;
   }
 
   ngOnInit() {
   }
 
-  searchImputado(){
-    this.isLoading=true
-    this.servicioSocialService.getInfoFichaIngreso(this.ingreso.folio).subscribe((data:any)=>{
+  searchImputado(ingreso?) {
+    if (ingreso) {
+      this.ingreso = { ...ingreso };
+    }
+    this.isLoading = true
+    this.servicioSocialService.getInfoFichaIngreso(this.ingreso.folio).subscribe((data: any) => {
       console.log(data)
-      this.ingreso=data.imputado
-      this.ficha=data.imputado.fichaIngreso
+      this.ingreso = data.imputado
+      this.ficha = data.imputado.fichaIngreso
       Swal.fire({
         title: data.error ? 'Error!' : 'Resultados',
         text: data.mensaje,
@@ -34,17 +37,22 @@ export class FichaIngresoComponent implements OnInit {
         timer: 1300,
         showConfirmButton: false
       });
-      this.isLoading=false
+      this.isLoading = false
     })
   };
 
-  saveFicha(){
-    this.ficha.imputado={
-      id:this.ingreso.imputadoId
+  cleanForm() {
+    this.ingreso = {} as any;
+    this.ficha = {} as any;
+  }
+
+  saveFicha() {
+    this.ficha.imputado = {
+      id: this.ingreso.imputadoId
     }
 
     console.log(this.ficha)
-    this.servicioSocialService.saveFichaIngreso(this.ficha).subscribe((data:any)=>{
+    this.servicioSocialService.saveFichaIngreso(this.ficha).subscribe((data: any) => {
       console.log(data)
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
@@ -56,7 +64,7 @@ export class FichaIngresoComponent implements OnInit {
     })
   }
 
-  
+
   genetatePDF(modal) {
     this.isLoading = true;
     this.servicioSocialService.generatePDFFichaIngresoTrabajoSocial(this.ingreso.imputadoId).subscribe((data: any) => {
