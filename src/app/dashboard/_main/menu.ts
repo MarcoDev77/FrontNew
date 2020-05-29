@@ -182,7 +182,23 @@ export const ROUTES: RouteInfo[] = [
       { path: 'comite-tecnico/examenes', title: 'Resultado examenes', ab: 'RE' },
       { path: 'comite-tecnico/reporte-medico', title: 'Médico', ab: 'ME' },
     ],
-  }
+  },
+  {
+    roles: [
+      r.test.role,
+      r.site.role,
+      r.superadmin.role
+    ],
+    path: '/dashboard/informatica',
+    title: 'INFORMÁTICA',
+    type: 'sub',
+    icontype: 'fa fa-laptop',
+    collapse: 'tables',
+    isCollapsed: false,
+    children: [
+      { path: 'personas-visitan', title: 'REPORTE VISITAS', ab: 'RV' },
+    ]
+  },
 ];
 
 export interface RouteInfo {
