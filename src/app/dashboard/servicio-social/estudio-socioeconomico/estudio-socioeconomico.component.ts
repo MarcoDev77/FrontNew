@@ -41,6 +41,8 @@ export class EstudioSocioeconomicoComponent implements OnInit {
       if (!data.error) {
         this.ingreso = data.imputado;
         this.estudio = data.imputado.estudioSocioeconomico;
+      } else {
+        this.ingreso = {}
       }
       Swal.fire({
         title: data.error ? 'Error!' : 'Busqueda',

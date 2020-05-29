@@ -12,44 +12,53 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class PlanActividadesComponent implements OnInit {
   public isLoading: boolean;
   public generalidadesPPL: GeneralidadesPPL;
-  public antecedentes : any[];
+  public antecedentes: any[];
   public antecedente: Antecedente;
   public grupoCanaliza: GrupoCanaliza;
-  public file:any
+  public file: any
 
-    // Table attributes
-    public p;
-    public filter: any;
-    public reverse = true;
-    public key = 'id'; // set default
-    public isForm: boolean;
-    public selectedRow: Number;
-    public setClickedRow: (i) => void;
-    public auxId: any;
+  // Table attributes
+  public p;
+  public filter: any;
+  public reverse = true;
+  public key = 'id'; // set default
+  public isForm: boolean;
+  public selectedRow: Number;
+  public setClickedRow: (i) => void;
+  public auxId: any;
   constructor(private comiteTecnicoService: ComiteTecnicoService, private modalService: NgbModal) {
-    this.generalidadesPPL= {} as any;
-    this.generalidadesPPL.estadoCivil= {} as any;
-    this.antecedente= {} as any
-    this.grupoCanaliza= {} as any
-    this.antecedentes= [];
-    
-    this.isLoading=false;
+    this.generalidadesPPL = {} as any;
+    this.generalidadesPPL.estadoCivil = {} as any;
+    this.antecedente = {} as any
+    this.grupoCanaliza = {} as any
+    this.antecedentes = [];
+
+    this.isLoading = false;
   }
-  
+
   ngOnInit() {
   }
 
-  
- 
-  searchImputado(showMessage = true){
-    this.comiteTecnicoService.getImputadoByFolioPedagogia(this.generalidadesPPL.folio).subscribe((data:any)=>{
+
+
+  searchImputado(showMessage = true, ingreso?) {
+    if (ingreso.folio) {
+      this.generalidadesPPL.folio = ingreso.folio;
+    }
+    this.comiteTecnicoService.getImputadoByFolioPedagogia(this.generalidadesPPL.folio).subscribe((data: any) => {
       console.log(data);
-      if(!data.error){
-        this.generalidadesPPL=data.imputado;
-        this.antecedentes=data.imputado.antecedentesConsumo;
-        this.grupoCanaliza=data.imputado.grupoCanaliza;
+      if (!data.error) {
+        this.generalidadesPPL = data.imputado;
+        this.antecedentes = data.imputado.antecedentesConsumo;
+        this.grupoCanaliza = data.imputado.grupoCanaliza;
+      } else {
+        this.generalidadesPPL = {} as any;
+        this.generalidadesPPL.estadoCivil = {} as any;
+        this.antecedente = {} as any
+        this.grupoCanaliza = {} as any
+        this.antecedentes = [];
       }
-   
+
       if (showMessage) {
         Swal.fire({
           title: data.error ? 'Error!' : 'Busqueda',
@@ -62,9 +71,9 @@ export class PlanActividadesComponent implements OnInit {
     })
   }
 
-  saveAntecedente(array: any[]){
+  saveAntecedente(array: any[]) {
     if (this.validateFiels(array)) {
-      this.antecedente.imputado = {id: this.generalidadesPPL.imputadoId};
+      this.antecedente.imputado = { id: this.generalidadesPPL.imputadoId };
       console.log('To server', this.antecedente);
       this.comiteTecnicoService.saveAntecedente(this.antecedente).subscribe((data: any) => {
         console.log(data);
@@ -85,7 +94,7 @@ export class PlanActividadesComponent implements OnInit {
 
   updateAntecedente(id, item) {
     this.isForm = true;
-    this.antecedente = {...item};
+    this.antecedente = { ...item };
 
     if (this.auxId && this.auxId !== id) {
       this.showTr();
@@ -102,7 +111,7 @@ export class PlanActividadesComponent implements OnInit {
     }, 50);
   }
 
-  deleteAntecedente(item){
+  deleteAntecedente(item) {
     Swal.fire({
       title: '¿Estas seguro?',
       text: 'El registro se eliminara.',
@@ -110,7 +119,7 @@ export class PlanActividadesComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.comiteTecnicoService.deleteAntecedente(item.id).subscribe((data: any) => {
           console.log(data);
@@ -131,9 +140,9 @@ export class PlanActividadesComponent implements OnInit {
     });
   }
 
-  saveGrupo(){
-    this.grupoCanaliza.imputado={id: this.generalidadesPPL.imputadoId};
-    this.comiteTecnicoService.saveGrupoCanaliza(this.grupoCanaliza).subscribe((data:any)=>{
+  saveGrupo() {
+    this.grupoCanaliza.imputado = { id: this.generalidadesPPL.imputadoId };
+    this.comiteTecnicoService.saveGrupoCanaliza(this.grupoCanaliza).subscribe((data: any) => {
       console.log(data)
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
@@ -144,9 +153,9 @@ export class PlanActividadesComponent implements OnInit {
       });
     })
   }
-   // Table methods
+  // Table methods
 
-   validateFiels(array: any[]): boolean {
+  validateFiels(array: any[]): boolean {
     let pass = true;
     for (const field of array) {
       if (!field.valid) {
@@ -220,7 +229,7 @@ export class PlanActividadesComponent implements OnInit {
     this.comiteTecnicoService.generatePDFPlanActividades(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
       console.log('PDF', data);
       this.isLoading = false;
-      const file = new Blob([data], {type: 'application/*'});
+      const file = new Blob([data], { type: 'application/*' });
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadstart = ev => this.isLoading = true;
@@ -232,7 +241,7 @@ export class PlanActividadesComponent implements OnInit {
         this.modalService.dismissAll();
         if (base64) {
           this.file = base64;
-          this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+          this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
         }
       };
       reader.onerror = () => {
@@ -272,24 +281,24 @@ class GeneralidadesPPL {
   sentencia: any;
   originario: any;
   listaDelitos: any;
-  ficha:any;
+  ficha: any;
   imputado: any;
-  
+
 }
 
-class Antecedente{
-  id: number 
+class Antecedente {
+  id: number
   sustanciaConsumia: String
   edadInicio: String
   frecuenciaConsumo: String
-  gradoConsumo: String 
+  gradoConsumo: String
   imputado: any
 }
 
-class GrupoCanaliza{
-  grupo:string;
-  area:string;
-  dias:string;
-  observaciones:string
+class GrupoCanaliza {
+  grupo: string;
+  area: string;
+  dias: string;
+  observaciones: string
   imputado: any;
 }
