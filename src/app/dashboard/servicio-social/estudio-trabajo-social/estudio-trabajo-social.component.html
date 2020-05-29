@@ -353,12 +353,12 @@
     <div class="col-md-4">
       <label>Parentesco</label>
       <select
-        [(ngModel)]="estudio.parentesco.id"
-        name="parentesco"
-        #parentesco="ngModel"
+        [(ngModel)]="estudio.parentescoResponsable.id"
+        name="parentescoResponsable"
+        #parentescoResponsable="ngModel"
         class="form-control"
         [ngClass]="{
-          'is-invalid': f.submitted && parentesco.invalid
+          'is-invalid': f.submitted && parentescoResponsable.invalid
         }"
       >
         <option *ngFor="let p of parentescos" [value]="p.id">
@@ -531,12 +531,12 @@
       <div class="form-gruop">
         <label>Desarrollo intrainstitucional</label>
         <textarea
-          [(ngModel)]="estudio.detalleMaterialContruccion"
-          name="detalleMaterialContruccion"
-          #detalleMaterialContruccion="ngModel"
+          [(ngModel)]="estudio.desarrolloIntrainstitucional"
+          name="desarrolloIntrainstitucional"
+          #desarrolloIntrainstitucional="ngModel"
           class="form-control"
           [ngClass]="{
-            'is-invalid': f.submitted && detalleMaterialContruccion.invalid
+            'is-invalid': f.submitted && desarrolloIntrainstitucional.invalid
           }"
           cols="30"
           rows="10"

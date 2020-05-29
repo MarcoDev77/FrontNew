@@ -31,6 +31,7 @@ export class EstudioTrabajoSocial {
   // Situacion economica
   responsableSolvencia: string;
   parentesco: any;
+  parentescoResponsable: any;
   ocupacionResponsable: string;
   ingresoMensualResponsable: number;
   apoyaEconomicamente: string;

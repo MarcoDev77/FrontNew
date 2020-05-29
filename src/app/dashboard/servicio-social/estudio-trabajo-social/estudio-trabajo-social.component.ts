@@ -26,6 +26,7 @@ export class EstudioTrabajoSocialComponent implements OnInit {
     this.ingreso = {} as Ingreso;
     this.estudio = {} as EstudioTrabajoSocial;
     this.estudio.parentesco = {};
+    this.estudio.parentescoResponsable = {}
   }
 
   ngOnInit() {
@@ -49,6 +50,9 @@ export class EstudioTrabajoSocialComponent implements OnInit {
       });
       if (!data.error) {
         this.ingreso.imputado = data.imputado;
+        if (!data.imputado.parentescoResponsable) {
+          this.estudio.parentescoResponsable = {}
+        }
         this.getClasificacion();
       } else {
         this.ingreso = {} as Ingreso;
@@ -75,6 +79,7 @@ export class EstudioTrabajoSocialComponent implements OnInit {
     this.ingreso = {} as Ingreso;
     this.estudio = {} as EstudioTrabajoSocial;
     this.estudio.parentesco = {};
+    this.estudio.parentescoResponsable = {}
   }
 
   getParentescos() {
@@ -87,9 +92,16 @@ export class EstudioTrabajoSocialComponent implements OnInit {
 
     this.servicioSocialService.getEstudioClasificion(this.ingreso.folio).subscribe((data: any) => {
       console.log('Clasificacion', data);
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Búsqueda',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1000,
+        showConfirmButton: false
+      });
       if (!data.error) {
-        this.estudio = data.imputado.estudioSocioeconomico;
-        this.estudio.parentesco = data.imputado.estudioSocioeconomico.parentescoResponsable;
+        this.estudio = data.imputado.estudioClasificacion;
+        this.estudio.parentescoResponsable = data.imputado.estudioClasificacion.parentescoResponsable || {};
       }
     });
   }
@@ -110,6 +122,7 @@ export class EstudioTrabajoSocialComponent implements OnInit {
   }
 
   genetatePDF(modal) {
+    this.isLoading = true;
     this.servicioSocialService.generatePDFEstudioClasificacion(this.ingreso.imputado.id)
       .subscribe((data: any) => {
         this.showPreview(data, modal);
