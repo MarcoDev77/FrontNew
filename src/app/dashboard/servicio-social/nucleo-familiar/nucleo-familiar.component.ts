@@ -56,8 +56,6 @@ export class NucleoFamiliarComponent implements OnInit {
       if (!data.error) {
         this.imputado = data.nucleoFamiliar.imputado;
         this.nucleo = data.nucleoFamiliar;
-      } else {
-        this.handleErrorSearch();
       }
     }, this.handleErrorSearch);
   }

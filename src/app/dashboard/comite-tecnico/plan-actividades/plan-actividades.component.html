@@ -2,11 +2,15 @@
   icon="fa fa-tasks"
   title="PLAN DE ACTIVIDADES"
 ></app-section-title>
+<app-finder-imputado
+  [isLoading]="isLoading"
+  (onSelectIngresoSearch)="searchImputado(true, $event)"
+></app-finder-imputado>
 <div class="row">
   <!-- <div class="col-md-12 text-center mb-1">
         <h5>CERESO "MORELOS" DEPARTAMENTO DE PEDAGOGÍA PROPUESTA DE PLAN DE ACTIVIDADES PRELIMINAR</h5>
     </div> -->
-  <div class="col-md-8"></div>
+  <!-- <div class="col-md-8"></div>
   <div class="col-md-4">
     <form
       name="search"
@@ -32,7 +36,7 @@
         />
       </div>
     </form>
-  </div>
+  </div> -->
   <div class="col-md-8">
     <div class="form-group">
       <label for="">Persona privada de la libertad:</label>
