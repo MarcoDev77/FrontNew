@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { InformaticaRoutingModule } from './informatica-routing.module';
 import { BloqueVistasComponent } from './bloque-visitas/bloque-visitas.component';
 import { CardVisitaComponent } from './card-visita/card-visita.component';
+import { ReporteVisitasComponent } from './reporte-visitas/reporte-visitas.component';
 
 
 
 @NgModule({
-  declarations: [RootComponent, BloqueVistasComponent, CardVisitaComponent],
+  declarations: [RootComponent, BloqueVistasComponent, CardVisitaComponent, ReporteVisitasComponent],
   imports: [
     CommonModule,
     SharedModule,
