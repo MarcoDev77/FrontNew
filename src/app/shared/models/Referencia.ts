@@ -20,4 +20,7 @@ export class Referencia {
   lada: any;
   esMayorEdad = false;
   numeroDomicilio: string;
+  estadoCivil: any;
+  fechaNacimiento:any;
+  gradoEstudio: String
 }

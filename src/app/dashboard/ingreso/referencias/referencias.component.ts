@@ -26,6 +26,7 @@ export class ReferenciasComponent implements OnInit {
   public arrayToFilter: any;
   public estados: any;
   public parentescos: any[];
+  public estadosCiviles: any[];
   public pasePermanente: PasePermanente;
   public menor: any;
   // FilePreview
@@ -56,6 +57,8 @@ export class ReferenciasComponent implements OnInit {
     this.data = [];
     this.referencia = {} as any;
     this.parentescos = [];
+    this.estadosCiviles=[];
+    this.referencia.estadoCivil= {} as any;
     this.referencia.parentesco = {} as any;
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
 
@@ -75,10 +78,18 @@ export class ReferenciasComponent implements OnInit {
     console.log('ingreso', this.ingreso);
     this.catalogosService.listPaises()
       .subscribe((data: any) => this.paises = data.paises);
+      this.getEstadosCiviles();
+
     this.getEstado();
     this.getParentescos();
   }
 
+  getEstadosCiviles(){
+    this.catalogosService.listEstadosCiviles().subscribe((data:any)=>{
+      console.log(data);
+      this.estadosCiviles=data.estadosCiviles
+    })
+  }
 
   getEstado() {
     this.catalogosService.listEstados('mexico', null)
@@ -138,6 +149,7 @@ export class ReferenciasComponent implements OnInit {
     } else {
       this.referencia = {} as Referencia;
       this.referencia.parentesco = {} as any;
+      this.referencia.estadoCivil= {} as any;
     }
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
