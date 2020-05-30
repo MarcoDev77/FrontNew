@@ -37,6 +37,7 @@ export class Imputado {
   municipioDomicilio: any;
   numeroDomicilio: string;
   dialecto: string;
+  tipoFuero: string;
 
 }
 

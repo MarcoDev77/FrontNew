@@ -235,6 +235,7 @@
       </div>
     </div>
     <div class="row">
+
       <div class="col-md-4">
         <div class="form-group">
           <label>Número control RNIP:</label>
@@ -250,6 +251,22 @@
           />
         </div>
       </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Fuero</label>
+          <input
+            class="form-control shadows"
+            minlength="1"
+            name="tipoFuero"
+            #tipoFuero="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && tipoFuero.invalid }"
+            [(ngModel)]="ingreso.imputado.tipoFuero"
+            maxlength="50"
+          />
+        </div>
+      </div>
+
     </div>
   </div>
   <!--Datos personales-->
