@@ -3,4 +3,5 @@ export class Visita {
   pertenencias: string;
   numeroInfantes: number;
   referenciaPersonal: any;
+  tipoPase: string;
 }

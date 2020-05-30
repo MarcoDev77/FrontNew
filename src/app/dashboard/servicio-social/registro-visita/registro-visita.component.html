@@ -210,6 +210,22 @@
           </div>
         </div>
         <div class="col-md-12">
+          <label class="text-muted" for="">Tipo de Pase</label>
+          <select
+              name="tipoPase"
+              [(ngModel)]="visita.tipoPase"
+              #tipoPase="ngModel"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': f.submitted && tipoPase.invalid
+              }"
+              required
+            >
+              <option value="pase">Pase provisional</option>
+              <option value="credencial">Credencial</option>
+            </select>
+        </div>
+        <div class="col-md-12">
           <div class="form-gruop">
             <label>Pertenencias de la visita</label>
             <textarea

@@ -80,6 +80,10 @@ export class RegistroVisitaComponent implements OnInit {
   getReferencias() {
     this.servicioSocialService.listRefencias(this.ingreso.imputado.id).subscribe((data: any) => {
       console.log('referemcias', data);
+      if (data.error) {
+        this.referencias = [];
+        return;
+      }
       this.referencias = data.referenciasPersonales;
     });
   }
@@ -87,6 +91,7 @@ export class RegistroVisitaComponent implements OnInit {
   saveVisita() {
     this.isLoading = true;
     this.visita.numeroInfantes = Number(this.visita.numeroInfantes);
+    console.log('To server', this.visita);
     this.servicioSocialService.saveVisitas(this.visita).subscribe((data: any) => {
       console.log('submit', data);
       this.isLoading = false;
