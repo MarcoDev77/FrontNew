@@ -42,7 +42,7 @@
           type="text"
           disabled
           class="form-control"
-          value="{{ imputado.fechaNacimiento }}"
+          value="{{ imputado.fechaNacimiento | date: 'dd/MM/yy' }}"
         />
       </div>
       <div class="col-md-3">
@@ -220,4 +220,38 @@
     </h5>
   </div>
 </div>
+
 <app-bloque-visitas [visitantes]="imputado.visitas || []"></app-bloque-visitas>
+
+<div class="row">
+  <div class="col-md-12">
+    <button
+      [disabled]="!ingreso?.id || isLoading"
+      (click)="generatePDF(view)"
+      type="button"
+      class="btn btn-success pull-right"
+    >
+      Imprimir
+    </button>
+  </div>
+</div>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'estudio trabajo social'"
+    ></app-web-viewer>
+  </div>
+</ng-template>
