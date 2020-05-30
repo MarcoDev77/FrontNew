@@ -115,6 +115,7 @@ export const ROUTES: RouteInfo[] = [
       { path: '#', title: 'FORMATO DE AVANCE Y/O INFORME', ab: 'FAI' },//Pentiente
       { path: 'servicio-social/nucleo-familiar', title: 'ESTUDIO FEDERAL', ab: 'EF' },
       { path: 'servicio-social/estudio-socioeconomico', title: 'ESTUDIO SOCIOECONÓMICO', ab: 'ES' },
+      { path: 'servicio-social/registro-visita', title: 'REGISTRO VISITAS', ab: 'RV' },
     ],
   },
   {
