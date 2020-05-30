@@ -1,5 +1,6 @@
+<app-section-title  [goBack]="true" icon="fa fa-address-card-o" title="Datos Generales"></app-section-title>
+
 <form class="form-horizontal" name="f" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
-    <app-section-title icon="fa fa-address-card-o" title="Datos Generales"></app-section-title>
     <div class="row" *ngIf="ingreso.tipoImputado==='Ingreso'">
         <div class="col-sm-4">
             <div class="form-group">
@@ -138,10 +139,16 @@
                 <label>{{ingreso.gradoEstudio.nombre}}</label>
             </div>
         </div>
+        <div class="col-sm-4" >
+            <div class="form-group">
+                <label for="">Dormitorio:</label>
+                <input class="form-control" type="text" name="dormitorio" [(ngModel)]="ingreso.dormitorio" #dormitorio="ngModel"  />
+            </div>
+        </div>
 
         <div class="col-md-4">
             <div class="form-group">
-                <div class="custom-control custom-checkbox">
+                <div class="custom-control custom-checkbox mt-4">
                     <input name="esTraslado" type="checkbox" class="custom-control-input" id="esIndigena" [(ngModel)]="ingreso.esTraslado" #esTraslado="ngModel">
                     <label class="custom-control-label" for="esIndigena">Es traslado</label>
                 </div>
@@ -150,7 +157,8 @@
 
         <div class="col-sm-8" *ngIf="ingreso.esTraslado">
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Centro de origen" name="centroOrigen" [(ngModel)]="ingreso.centroOrigen" #centroOrigen="ngModel" [ngbTooltip]="'Centro penitenciario de origen'" />
+                <label for="">Centro de origen:</label>
+                <input class="form-control" type="text" name="centroOrigen" [(ngModel)]="ingreso.centroOrigen" #centroOrigen="ngModel"  />
             </div>
         </div>
     </div>

@@ -21,7 +21,7 @@ export class SituacionJuridicaComponent implements OnInit {
    }
 
   ngOnInit() {
-   // this.getIngreso();
+    //this.getData();
   }
 
   getData(){
@@ -35,7 +35,8 @@ export class SituacionJuridicaComponent implements OnInit {
     let model={
       imputadoId: this.ingreso.id,
       esTraslado: this.ingreso.esTraslado,
-      centroOrigen: this.ingreso.centroOrigen
+      centroOrigen: this.ingreso.centroOrigen,
+      dormitorio: this.ingreso.dormitorio
     }
     console.log(model)
     this.ingresoService.editTraslado(model).subscribe((data: any) => {
