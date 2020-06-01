@@ -59,4 +59,9 @@ export class SeguridadCustodiaService {
   filterBusquedaListaIngresos = (filter, criteria) =>
     this.http.get(`${this.url}/api/busquedaConfiltro?filtro=${filter}&criterio=${criteria}`);
 
+  generatePdfRevision = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfReporteDecomiso?revisionId=${id}`, { responseType });
+  }
+
 }

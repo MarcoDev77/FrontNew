@@ -112,26 +112,12 @@
         [class.active]="i == selectedRow"
       >
         <td class="text-center">
-          {{ item.fechaRevision | date: "dd/MM/yy" }}
+          {{ item.fechaRevision | date: "yyyy-MM-dd" }}
         </td>
         <td class="text-center">
           {{ item.horaRevision }}
         </td>
         <td class="text-center">
-          <!-- <i
-            *ngIf="item.estatus"
-            class="fa fa-toggle-on"
-            (click)="toggleStatus(item.id)"
-            placement="top"
-            ngbTooltip="Deshabilitar"
-          ></i>
-          <i
-            *ngIf="!item.estatus"
-            class="fa fa-toggle-off"
-            (click)="toggleStatus(item.id)"
-            placement="top"
-            ngbTooltip="Habilitar"
-          ></i> -->
           &nbsp;
           <i
             class="fa fa-pencil"
@@ -145,6 +131,13 @@
             placement="top"
             ngbTooltip="Agregar imputados"
             (click)="goToPertenencias(item)"
+          ></i>
+          &nbsp;
+          <i
+            class="fa fa-list-ul"
+            placement="top"
+            ngbTooltip="Resumen"
+            (click)="seeImputados(item, imputados)"
           ></i>
         </td>
       </tr>
@@ -167,3 +160,81 @@
     </pagination-controls>
   </div>
 </div>
+
+<ng-template #imputados let-imputados>
+  <div class="modal-body pt-0">
+    <app-section-title title="Resumen" icon="fa fa-list-ul"></app-section-title>
+    <h3>Lista de imputados</h3>
+    <br />
+    <p *ngIf="isLoading">Cargando...</p>
+    <p *ngIf="!isLoading && listImputados.length === 0" class="text-center">
+      No hay imputados
+    </p>
+    <div *ngIf="!isLoading">
+      <ul *ngFor="let imputado of listImputados" class="list-unstyled">
+        <li class="media">
+          <div class="media-body">
+            <h6 class="mt-0 mb-1">
+              {{ imputado?.nombre }} - {{ imputado?.folio }}
+            </h6>
+            <p
+              *ngIf="
+                !imputado.objetosDecomisados ||
+                imputado.objetosDecomisados.length === 0
+              "
+            >
+              Sin objetos
+            </p>
+            <ul
+              *ngIf="
+                imputado.objetosDecomisados &&
+                imputado.objetosDecomisados.length > 0
+              "
+            >
+              <li *ngFor="let obj of imputado.objetosDecomisados">
+                {{ obj.objeto }}
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-12 text-center text-sm-right">
+      <button
+        type="button"
+        (click)="imputados.close()"
+        class="btn btn-danger mr-3"
+      >
+        Cerrar
+      </button>
+      <button
+        type="button"
+        (click)="generatePdf(revision.id, view)"
+        [disabled]="isLoading || listImputados.length === 0"
+        class="btn btn-success"
+      >
+        Imprimir
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'estudio trabajo social'"
+    ></app-web-viewer>
+  </div>
+</ng-template>
