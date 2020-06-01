@@ -3,6 +3,8 @@ import { SeguridadCustodiaService } from '@shared/services/seguridad-custodia.se
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
+import * as moment from 'moment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-revisiones',
@@ -14,6 +16,9 @@ export class RevisionesComponent implements OnInit {
   public data = [];
   public isLoading = false;
   public revision: Revision;
+  public listImputados = [];
+  // Filepreview
+  public file: any;
   // Table atributes
   public auxId: any;
   public isForm = false;
@@ -28,6 +33,7 @@ export class RevisionesComponent implements OnInit {
   constructor(
     private router: Router,
     private datePipe: DatePipe,
+    private modalService: NgbModal,
     private seguridadCustodiaService: SeguridadCustodiaService) {
 
     // Table
@@ -52,6 +58,7 @@ export class RevisionesComponent implements OnInit {
 
   submit(array) {
     if (this.validateFiels(array)) {
+      console.log('toServer', this.revision);
       this.seguridadCustodiaService.saveRevision(this.revision).subscribe((data: any) => {
         console.log('submit', data);
         Swal.fire({
@@ -83,6 +90,7 @@ export class RevisionesComponent implements OnInit {
   update(id, item) {
     this.revision = { ...item };
     this.revision.fechaRevision = this.datePipe.transform(this.revision.fechaRevision, 'yyyy-MM-dd');
+    // this.revision.fechaRevision = moment(this.revision.fechaRevision).format('yyyy-MM-dd');
 
     this.isForm = true;
 
@@ -127,6 +135,59 @@ export class RevisionesComponent implements OnInit {
       }
     })
   }
+
+  seeImputados(item, modal) {
+    console.log(item);
+    this.listImputados = [];
+    this.revision = { ...item };
+    this.isLoading = true;
+    this.modalService.open(modal, { size: 'sm', windowClass: 'modal-primary' });
+    this.seguridadCustodiaService.getImputadosByRevision(item.id).subscribe((data: any) => {
+      this.isLoading = false;
+      if (!data.error) {
+        this.listImputados = data.imputado;
+        console.log('list', this.listImputados);
+      }
+    });
+  }
+
+  generatePdf(revisionId, modal) {
+    this.isLoading = true;
+    this.seguridadCustodiaService.generatePdfRevision(revisionId).subscribe((data: any) => {
+      this.isLoading = false;
+      this.showPreview(data, modal);
+    });
+  }
+
+  showPreview(data, modal) {
+    const file = new Blob([data], { type: 'application/*' });
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadstart = ev => this.isLoading = true;
+    reader.onloadend = () => {
+      this.isLoading = false;
+      let dataUrl: any;
+      dataUrl = reader.result;
+      const base64 = dataUrl.split(',')[1];
+      this.modalService.dismissAll();
+      if (base64) {
+        this.file = base64;
+        this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
+      }
+    };
+    reader.onerror = () => {
+      this.isLoading = false;
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al generar el archivo',
+        icon: 'error',
+        timer: 1500,
+        showConfirmButton: false
+      });
+      this.modalService.dismissAll();
+    };
+  }
+
   goToPertenencias(item: Revision) {
     localStorage.setItem('revision', JSON.stringify(item));
     this.router.navigate(['dashboard/seguridad-custodia/revisiones-pertenencias']);
@@ -188,6 +249,7 @@ export class RevisionesComponent implements OnInit {
 
 }
 class Revision {
-  fechaRevision: string;
+  id: number;
+  fechaRevision: any;
   horaRevision: string;
 }
