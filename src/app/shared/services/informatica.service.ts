@@ -13,4 +13,9 @@ export class InformaticaService {
   }
 
   getVisitasImputado = (id) => this.http.get(`${this.url}/api/visitasImputado?idImputado=${id}`);
+
+  generatePDFFormatoPdfReporteVisitaCredencial = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfReporteVisitaCredencial?imputadoId=${id}`, { responseType });
+  }
 }
