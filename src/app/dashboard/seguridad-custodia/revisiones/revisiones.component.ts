@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SeguridadCustodiaService } from '@shared/services/seguridad-custodia.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import * as moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -57,23 +57,24 @@ export class RevisionesComponent implements OnInit {
   }
 
   submit(array) {
-    if (this.validateFiels(array)) {
-      console.log('toServer', this.revision);
-      this.seguridadCustodiaService.saveRevision(this.revision).subscribe((data: any) => {
-        console.log('submit', data);
-        Swal.fire({
-          title: data.error ? 'Error!' : 'Guardado',
-          text: data.mensaje,
-          icon: data.error ? 'error' : 'success',
-          timer: 1300,
-          showConfirmButton: false
-        });
-        if (!data.error) {
-          this.getData();
-        }
-      });
-      return this.cancel();
+    if (!this.validateFiels(array)) {
+      return;
     }
+    console.log('toServer', this.revision);
+    this.seguridadCustodiaService.saveRevision(this.revision).subscribe((data: any) => {
+      console.log('submit', data);
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
+      if (!data.error) {
+        this.getData();
+      }
+    });
+    this.cancel();
   }
 
   validateFiels(array: any[]): boolean {
@@ -89,8 +90,7 @@ export class RevisionesComponent implements OnInit {
 
   update(id, item) {
     this.revision = { ...item };
-    this.revision.fechaRevision = this.datePipe.transform(this.revision.fechaRevision, 'yyyy-MM-dd');
-    // this.revision.fechaRevision = moment(this.revision.fechaRevision).format('yyyy-MM-dd');
+    this.revision.fechaRevision = this.datePipe.transform(item.fechaRevision, 'yyyy-MM-dd', '+120');
 
     this.isForm = true;
 
