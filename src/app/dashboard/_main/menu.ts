@@ -187,7 +187,6 @@ export const ROUTES: RouteInfo[] = [
     roles: [
       r.test.role,
       r.site.role,
-      r.superadmin.role
     ],
     path: '/dashboard/informatica',
     title: 'INFORMÁTICA',
