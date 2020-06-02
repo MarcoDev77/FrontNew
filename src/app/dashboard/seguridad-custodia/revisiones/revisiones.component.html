@@ -2,7 +2,6 @@
   title="Revisiones"
   icon="fa fa-briefcase"
 ></app-section-title>
-
 <div class="row">
   <div class="col text-right mb-3">
     <button
@@ -112,7 +111,7 @@
         [class.active]="i == selectedRow"
       >
         <td class="text-center">
-          {{ item.fechaRevision | date: "yyyy-MM-dd" }}
+          {{ item.fechaRevision | date: "dd/MM/yyyy":"+120" }}
         </td>
         <td class="text-center">
           {{ item.horaRevision }}
