@@ -52,7 +52,7 @@ export const roles = {
     main: 'dactiloscopia'
   }, site: {
     role: 'ROLE_SITE',
-    name: 'Consultor',
+    name: 'Informática',
     main: 'informatica'
   },
 };
