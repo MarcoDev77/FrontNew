@@ -14,7 +14,8 @@ import { OdontologiaComponent } from './odontologia/odontologia.component';
 import { ResultadosExamenesComponent } from './resultados-examenes/resultados-examenes.component';
 import { ResolucionPruebasComponent } from './resolucion-pruebas/resolucion-pruebas.component';
 import { ReporteMedicoComponent } from './reporte-medico/reporte-medico.component';
-import {FileUploadModule} from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
+import { InvitacionActividadComponent } from './invitacion-actividad/invitacion-actividad.component';
 
 
 
@@ -25,14 +26,16 @@ import {FileUploadModule} from 'ng2-file-upload';
     DeportesComponent,
     OdontologiaComponent,
     ResultadosExamenesComponent,
-  ResolucionPruebasComponent,
+    ResolucionPruebasComponent,
+    InvitacionActividadComponent,
     ReporteMedicoComponent],
-    imports: [
-        CommonModule,
-        SharedModule,
-        FormsModule,
-        ComiteTecnicoRoutingModule,
-        FileUploadModule
-    ]
+
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    ComiteTecnicoRoutingModule,
+    FileUploadModule
+  ]
 })
 export class ComiteTecnicoModule { }
