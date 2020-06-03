@@ -149,6 +149,8 @@ export const ROUTES: RouteInfo[] = [
       { path: 'comite-tecnico/odontologia', title: 'Odontología', ab: 'OD' },
       { path: 'comite-tecnico/centro-escolar', title: 'Centro Escolar', ab: 'CE' },
       { path: 'comite-tecnico/trabajo-social', title: 'Trabajo social', ab: 'TS' },
+      { path: 'comite-tecnico/invitacion-actividad', title: 'Invitación de actividad ', ab: 'IA' },
+
 
     ],
   },

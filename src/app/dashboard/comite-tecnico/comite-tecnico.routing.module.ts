@@ -11,6 +11,7 @@ import { OdontologiaComponent } from './odontologia/odontologia.component';
 import { ResultadosExamenesComponent } from './resultados-examenes/resultados-examenes.component';
 import { ResolucionPruebasComponent } from './resolucion-pruebas/resolucion-pruebas.component';
 import { ReporteMedicoComponent } from './reporte-medico/reporte-medico.component';
+import { InvitacionActividadComponent } from './invitacion-actividad/invitacion-actividad.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
       {path: 'odontologia', component: OdontologiaComponent},
       {path: 'examenes', component: ResultadosExamenesComponent},
       {path: 'resolucion-pruebas', component: ResolucionPruebasComponent},
-      {path: 'reporte-medico', component: ReporteMedicoComponent}
+      {path: 'reporte-medico', component: ReporteMedicoComponent},
+      {path: 'invitacion-actividad', component: InvitacionActividadComponent}
   
 
     ]

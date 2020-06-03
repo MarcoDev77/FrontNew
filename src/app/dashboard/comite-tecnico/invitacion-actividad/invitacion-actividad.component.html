@@ -1,0 +1,85 @@
+<app-section-title icon="fa fa-address-book" title="Invitación a actividad"></app-section-title>
+<app-finder-imputado
+  [isLoading]="isLoading"
+  (onSelectIngresoSearch)="searchImputado($event)"
+  (onClearSearch)="cleanForm()"
+></app-finder-imputado>
+<app-generalidades-ppl
+  [generalidadesPPL]="ingreso.imputado"
+></app-generalidades-ppl>
+<form
+  #f="ngForm"
+  name="formInvitacion"
+  (ngSubmit)="f.form.valid && saveInvitacion()"
+>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="">Taller:</label>
+            <input type="text" class="form-control" name="taller" [(ngModel)]="invitacion.taller"> 
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="">Horario:</label>
+            <input type="text" class="form-control" name="horario" [(ngModel)]="invitacion.horario"> 
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="">Duración:</label>
+            <input type="text" class="form-control" name="duracion" [(ngModel)]="invitacion.duracion"> 
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="">Lugar:</label>
+            <input type="text" class="form-control" name="lugar" [(ngModel)]="invitacion.lugar"> 
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="">Inicio:</label>
+            <input type="text" class="form-control" name="inicia" [(ngModel)]="invitacion.inicia"> 
+        </div>
+    </div>
+    
+</div>
+
+<div class="col-md-12">
+    <button
+      [disabled]="!ingreso?.imputado?.id || isLoading"
+      (click)="genetatePDF(view)"
+      type="button"
+      class="btn btn-success pull-right"
+    >
+      Imprimir
+    </button>
+  
+  </div>
+  </form>
+
+  <ng-template #view let-view>
+    <div class="modal-body text-center pt-0">
+      <i
+        (click)="view.dismiss()"
+        style="
+          cursor: pointer;
+          position: absolute;
+          right: 1%;
+          top: 1%;
+          font-size: 20px;
+        "
+        class="fa fa-times-circle"
+      ></i>
+      <app-web-viewer
+        [file]="file"
+        [name]="'estudio trabajo social'"
+      ></app-web-viewer>
+    </div>
+  </ng-template>
+  

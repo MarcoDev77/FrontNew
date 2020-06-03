@@ -123,4 +123,13 @@ export class ComiteTecnicoService {
       );
     };
 
+
+  generatePDFInvitacionTaller= model=> {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.post(
+      `${this.url}/api/registrarInvitacionTaller`,model,
+      {responseType}
+    );
+  };
 }
+  
