@@ -190,27 +190,16 @@ export const ROUTES: RouteInfo[] = [
       r.test.role,
       r.site.role,
     ],
-    path: '/dashboard/informatica',
+    path: '/dashboard',
     title: 'INFORMÁTICA',
     type: 'sub',
     icontype: 'fa fa-laptop',
     collapse: 'tables',
     isCollapsed: false,
     children: [
-      { path: 'personas-visitan', title: 'REPORTE VISITAS', ab: 'RV' },
+      { path: '/ingreso', title: 'INGRESO', ab: 'IN' },
+      { path: '/informatica/personas-visitan', title: 'REPORTE VISITAS', ab: 'RV' },
     ]
-  },
-  {
-    roles: [
-      r.test.role,
-      r.site.role,
-    ],
-    path: '/dashboard/ingreso',
-    title: 'INGRESO',
-    type: 'link',
-    icontype: 'fa fa-user',
-    collapse: 'tables',
-    isCollapsed: false,
   },
 ];
 
