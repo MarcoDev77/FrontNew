@@ -23,4 +23,5 @@ export class Referencia {
   estadoCivil: any;
   fechaNacimiento:any;
   gradoEstudio: String
+  observaciones: String;
 }
