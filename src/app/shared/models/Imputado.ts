@@ -39,6 +39,7 @@ export class Imputado {
   dialecto: string;
   tipoFuero: string;
 
+  dependientesEconomicos:number
 }
 
 // Date fechaNacimiento

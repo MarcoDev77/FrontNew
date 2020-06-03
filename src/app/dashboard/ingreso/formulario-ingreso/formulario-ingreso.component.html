@@ -381,6 +381,7 @@
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
@@ -555,6 +556,22 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Dependientes económicos:</label>
+          <input
+            class="form-control shadows"
+            min="0"
+            name="dependientesEconomicos"
+            #dependientesEconomicos="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && dependientesEconomicos.invalid }"
+            [(ngModel)]="ingreso.imputado.dependientesEconomicos"
+            pattern="^[0-9]*$"
+          />
+        </div>
+      </div>
+    </div> 
   </div>
   <app-section-title
     title="Lugar de Nacimiento"
@@ -602,6 +619,8 @@
       />
     </div>
   </div>
+
+ 
   <app-section-title title="Domicilio" icon="fa fa-home"></app-section-title>
   <div class="row">
     <div class="col-md-4">
