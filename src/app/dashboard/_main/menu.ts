@@ -198,6 +198,18 @@ export const ROUTES: RouteInfo[] = [
       { path: 'personas-visitan', title: 'REPORTE VISITAS', ab: 'RV' },
     ]
   },
+  {
+    roles: [
+      r.test.role,
+      r.site.role,
+    ],
+    path: '/dashboard/ingreso',
+    title: 'INGRESO',
+    type: 'link',
+    icontype: 'fa fa-user',
+    collapse: 'tables',
+    isCollapsed: false,
+  },
 ];
 
 export interface RouteInfo {
