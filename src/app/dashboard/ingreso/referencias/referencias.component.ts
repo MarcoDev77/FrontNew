@@ -43,12 +43,13 @@ export class ReferenciasComponent implements OnInit {
   public key = 'id'; // set default
   public reverse = true;
   public isForm: boolean;
-
+  public roles=[]
   constructor(private catalogosService: CatalogosService,
     private router: Router,
     private modalService: NgbModal,
     private ingresoService: IngresoService,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    ) {
     this.isLoading = false;
     this.ingreso = {} as Ingreso;
     this.paises = [];
@@ -61,7 +62,9 @@ export class ReferenciasComponent implements OnInit {
     this.referencia.estadoCivil= {} as any;
     this.referencia.parentesco = {} as any;
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
-
+    const user=authenticationService.getCurrentUser()
+    this.roles= user.roles;
+    console.log(this.roles)
     if (this.ingreso) {
       this.listReferencias(this.ingreso.id);
     }
@@ -553,6 +556,8 @@ export class ReferenciasComponent implements OnInit {
   cancel() {
     this.isForm = false;
   }
+
+  change($event){}
 
 }
 
