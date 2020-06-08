@@ -86,8 +86,26 @@ export class ReporteMedicoComponent implements OnInit {
   submit(inputFile) {
     // Check file is not empty
     if (inputFile.files.length === 0) {
+      Swal.fire({
+        title: 'Cuidado',
+        text: 'No se ha seleccionado un archivo',
+        icon: 'warning',
+        timer: 1500,
+        showConfirmButton: false
+      });
       return this.resetUploaders();
     }
+
+    if (this.comentarios.length > 255) {
+      Swal.fire({
+        title: 'Cuidado',
+        text: 'Límite de carateres superado (255).',
+        icon: 'warning',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    }
+
     this.isLoading = true;
     const authToken = this.authenticationService.getCurrentUser().access_token;
     this.uo.authTokenHeader = 'Authorization';
@@ -173,6 +191,7 @@ export class ReporteMedicoComponent implements OnInit {
       timer: 1000,
       showConfirmButton: false
     }).then(() => {
+      this.searchImputado();
     });
     this.resetUploaders();
   }
