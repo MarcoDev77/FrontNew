@@ -70,8 +70,7 @@
         &nbsp;
         <i class="fa fa-male" placement="top" ngbTooltip="Referencias" (click)="goTo('referencias', item)"></i> &nbsp;
         <i class="fa fa-pencil-square-o" placement="top" ngbTooltip="Situación Jurídica"
-           (click)="goTo('situacion-juridica', item)"></i>&nbsp;
-        <i class="fa fa-file-archive-o" placement="top" ngbTooltip="Formatos" (click)="search(formModal2)"></i> &nbsp;
+           (click)="goTo('situacion-juridica', item)"></i>
       </td>
     </tr>
 
@@ -124,51 +123,6 @@
       <div class="row">
         <div class="col-sm-12 text-center text-sm-right">
           <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cerrar</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</ng-template>
-
-<ng-template #formModal2 let-formModal>
-  <div class="modal-body text-center">
-    <h3>Formatos</h3>
-    <br>
-    <form class="form-horizontal" name="form" #f="ngForm">
-
-      <div class="row">
-
-        <div class="col-sm-1"></div>
-        <div class="col-sm-4 card  box-shadow">
-          <div class="card-body">
-            <p class="card-text">Descripción del formato.</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Vista Previa</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Descargar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-4 card  box-shadow">
-          <div class="card-body">
-            <p class="card-text">Descripción del formato.</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Vista Previa</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Descargar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-1"></div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12 text-center text-sm-right">
-          <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cancelar</button>
-          <button type="submit" class="btn btn-success">Aceptar</button>
         </div>
       </div>
     </form>

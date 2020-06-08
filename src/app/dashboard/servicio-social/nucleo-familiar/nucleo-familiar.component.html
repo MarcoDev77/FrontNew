@@ -602,8 +602,9 @@
         <label>Sueldo Percibido</label>
         <input
           [(ngModel)]="nucleo.sueldo"
+          max="1000000"
           name="sueldo"
-          type="text"
+          type="number"
           class="form-control"
         />
       </div>
