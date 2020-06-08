@@ -4,6 +4,7 @@ import {Ingreso} from '@shared/models/Ingreso';
 import {IngresoService} from '@shared/services/ingreso.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import { AuthenticationService } from '@shared/services/authentication.service';
 
 @Component({
   selector: 'app-lista-ingreso',
@@ -15,6 +16,7 @@ export class ListaIngresoComponent implements OnInit {
   public isLoading = false;
   public filterSearch = '';
   public criteria = '';
+  public roles=[]
   // Table attributes
   public p;
   public filter;
@@ -23,10 +25,10 @@ export class ListaIngresoComponent implements OnInit {
 
   public selectedRow: number;
   public setClickedRow: Function;
-
-  constructor(private router: Router, private ingresoService: IngresoService, private modalService: NgbModal) {
+  constructor(private router: Router, private ingresoService: IngresoService, private modalService: NgbModal, private authenticationService: AuthenticationService) {
     this.data = [];
-
+    const user= this.authenticationService.getCurrentUser()
+    this.roles= user.roles;
     this.setClickedRow = function(index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };

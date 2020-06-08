@@ -5,7 +5,7 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Expediente</h6>
-                <label>{{ingreso.numeroExpediente}}</label>
+                <label>{{ingreso?.numeroExpediente}}</label>
             </div>
         </div>
     </div>
@@ -13,13 +13,13 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Folio</h6>
-                <label>{{ingreso.folio}}</label>
+                <label>{{ingreso?.folio}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Número de expediente</h6>
-                <label>{{ingreso.numeroExpediente}}</label>
+                <label>{{ingreso?.numeroExpediente}}</label>
             </div>
         </div>
     </div>
@@ -27,19 +27,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Nombre:</h6>
-                <label>{{ingreso.apodo.nombre}} </label>
+                <label>{{ingreso?.apodo?.nombre}} </label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Apellido Paterno:</h6>
-                <label>{{ingreso.apodo.apellidoPaterno}}</label>
+                <label>{{ingreso?.apodo?.apellidoPaterno}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Apellido Materno:</h6>
-                <label>{{ingreso.apodo.apellidoMaterno}}</label>
+                <label>{{ingreso?.apodo?.apellidoMaterno}}</label>
             </div>
         </div>
     </div>
@@ -62,19 +62,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Genero:</h6>
-                <label>{{ingreso.genero}}</label>
+                <label>{{ingreso?.genero}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Domicilio:</h6>
-                <label>{{ingreso.calleNumero}}, {{ingreso.colonia}}, {{ingreso.codigoPostal}}</label>
+                <label>{{ingreso?.calleNumero}}, {{ingreso?.colonia}}, {{ingreso?.codigoPostal}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Estado civil:</h6>
-                <label>{{ingreso.estadoCivil.nombre}}</label>
+                <label>{{ingreso?.estadoCivil?.nombre}}</label>
             </div>
         </div>
     </div>
@@ -82,19 +82,19 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Lugar de origen:</h6>
-                <label>{{ingreso.municipioNacimiento ? ingreso.municipioNacimiento: 'Dato desconocido'}}</label>
+                <label>{{ingreso?.municipioNacimiento ? ingreso?.municipioNacimiento: 'Dato desconocido'}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Estado:</h6>
-                <label>{{ingreso.estadoNacimiento.nombre}}</label>
+                <label>{{ingreso?.estadoNacimiento?.nombre}}</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Ocupación:</h6>
-                <label>{{ingreso.ocupacion.nombre}}</label>
+                <label>{{ingreso?.ocupacion}}</label>
             </div>
         </div>
     </div>
@@ -102,7 +102,7 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Edad:</h6>
-                <label>{{ingreso.edadAparente}}</label>
+                <label>{{ingreso?.edadAparente}}</label>
             </div>
         </div>
         <div class="col-sm-4">
@@ -114,7 +114,7 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Religión:</h6>
-                <label>{{ingreso.religion.nombre}}</label>
+                <label>{{ingreso?.religion.nombre}}</label>
             </div>
         </div>
     </div>
@@ -129,14 +129,14 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Fecha de nacimiento:</h6>
-                <label>{{ingreso.fechaNacimiento|date: 'dd/MM/yyyy'}}</label>
+                <label>{{ingreso?.fechaNacimiento|date: 'dd/MM/yyyy'}}</label>
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <h6>Educación:</h6>
-                <label>{{ingreso.gradoEstudio.nombre}}</label>
+                <label>{{ingreso?.gradoEstudio}}</label>
             </div>
         </div>
         <div class="col-sm-4" >

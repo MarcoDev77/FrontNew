@@ -145,11 +145,11 @@ export const ROUTES: RouteInfo[] = [
       { path: 'comite-tecnico/direccion-industrial', title: 'Dirección industrial', ab: 'DI' },
       { path: 'comite-tecnico/plan-actividades', title: 'Pedagogía', ab: 'PE' },
       { path: 'comite-tecnico/psicologia', title: 'Psicología', ab: 'PS' },
+      { path: 'comite-tecnico/invitacion-actividad', title: 'Invitación de actividad ', ab: 'IA' },
       { path: 'comite-tecnico/deportes', title: 'Deportes', ab: 'DE' },
       { path: 'comite-tecnico/odontologia', title: 'Odontología', ab: 'OD' },
       { path: 'comite-tecnico/centro-escolar', title: 'Centro Escolar', ab: 'CE' },
       { path: 'comite-tecnico/trabajo-social', title: 'Trabajo social', ab: 'TS' },
-      { path: 'comite-tecnico/invitacion-actividad', title: 'Invitación de actividad ', ab: 'IA' },
 
 
     ],

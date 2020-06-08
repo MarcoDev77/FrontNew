@@ -46,13 +46,13 @@
         <td class="text-center">
           <i class="fa fa-eye" placement="top" ngbTooltip="Consultar detalles" (click)="showModal(addModal, item)"></i>
           &nbsp;
-          <i *ngIf="item.estaVivo" class="fa fa-id-card-o" placement="top" ngbTooltip="Generar pase único"
+          <i *ngIf="item.estaVivo&& roles[0]==='ROLE_SITE'"  class="fa fa-id-card-o" placement="top" ngbTooltip="Generar pase único"
             (click)="generatePaseUnico(item, view)"></i>
           &nbsp;
-          <i *ngIf="item.estaVivo && item.esMayorEdad" class="fa fa-id-card" placement="top"
+          <i *ngIf="item.estaVivo && item.esMayorEdad&&roles[0]==='ROLE_TRABAJO_SOCIAL'" class="fa fa-id-card" placement="top"
             ngbTooltip="Generar pase mensual" (click)="generatePaseMensual(item, view)"></i>
           &nbsp;
-          <i *ngIf="item.estaVivo && item.esMayorEdad" class="fa fa-address-card" placement="top"
+          <i *ngIf="item.estaVivo && item.esMayorEdad&&roles[0]==='ROLE_TRABAJO_SOCIAL'" class="fa fa-address-card" placement="top"
             ngbTooltip="Generar pase permanente" (click)="showModalPasePermanente(item, pasePermanenteModal)"></i>&nbsp;
           <i class="fa fa-times" (click)="deleteReferencia(item.id)" placement="top"
             ngbTooltip="Eliminar referencia"></i>
@@ -158,12 +158,14 @@
           <div class="form-group">
             <label for="">Fecha de nacimiento:</label>
             <input
-              type="date"
-              class="form-control"
-              name="fechaNacimiento"
-              [ngModel]="referencia.fechaNacimiento | date: 'yyyy-MM-dd'"
-              (ngModelChange)="referencia.fechaNacimiento = $event"
-              
+            type="date"
+            class="form-control"
+            name="fechaNacimiento"
+            (change)="change($event)"
+            #fechaNacimiento="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && fechaNacimiento.invalid }"
+            [(ngModel)]="referencia.fechaNacimiento"
+            required
             />
           </div>
         </div>
@@ -385,10 +387,13 @@
                     apellidoMaterno.touched && apellidoMaterno.invalid
                 }" maxlength="60" required />
             </td>
-
+         
             <td class="text-center">
-              <input name="fechaNacimiento" type="date" class="form-control" [(ngModel)]="menor.fechaNacimiento"
-                #fechaNacimiento="ngModel" [ngClass]="{
+              <input name="fechaNacimiento" type="date" class="form-control"  
+                         (change)="change($event)"
+                         #fechaNacimiento="ngModel"
+              [(ngModel)]="menor.fechaNacimiento"
+                 [ngClass]="{
                   'is-invalid':
                     fechaNacimiento.touched && fechaNacimiento.invalid
                 }" required />
