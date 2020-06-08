@@ -34,6 +34,9 @@ export class PlanActividadesComponent implements OnInit {
     this.antecedentes = [];
 
     this.isLoading = false;
+    this.setClickedRow = function (index) {
+      this.selectedRow = this.selectedRow === index ? -1 : index;
+    };
   }
 
   ngOnInit() {
@@ -42,11 +45,12 @@ export class PlanActividadesComponent implements OnInit {
 
 
   searchImputado(showMessage = true, ingreso?) {
-    if (ingreso.folio) {
+    console.log("ingreso",ingreso)
+     if (ingreso) {
       this.generalidadesPPL.folio = ingreso.folio;
-    }
+    } 
     this.comiteTecnicoService.getImputadoByFolioPedagogia(this.generalidadesPPL.folio).subscribe((data: any) => {
-      console.log(data);
+      console.log("Search",data);
       if (!data.error) {
         this.generalidadesPPL = data.imputado;
         this.antecedentes = data.imputado.antecedentesConsumo;
@@ -76,7 +80,6 @@ export class PlanActividadesComponent implements OnInit {
       this.antecedente.imputado = { id: this.generalidadesPPL.imputadoId };
       console.log('To server', this.antecedente);
       this.comiteTecnicoService.saveAntecedente(this.antecedente).subscribe((data: any) => {
-        console.log(data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
