@@ -19,6 +19,7 @@ import { NucleoFamiliarComponent } from './nucleo-familiar/nucleo-familiar.compo
 import { EstudioSocioeconomicoComponent } from './estudio-socioeconomico/estudio-socioeconomico.component';
 import { OficioSancionesComponent } from './oficio-sanciones/oficio-sanciones.component';
 import { RegistroPaseUnicoComponent } from './registro-pase-unico/registro-pase-unico.component';
+import { TransladoFederalComponent } from './translado-federal/translado-federal.component';
 
 
 
@@ -38,7 +39,8 @@ import { RegistroPaseUnicoComponent } from './registro-pase-unico/registro-pase-
     NucleoFamiliarComponent,
     EstudioSocioeconomicoComponent,
     OficioSancionesComponent,
-    RegistroPaseUnicoComponent
+    RegistroPaseUnicoComponent,
+    TransladoFederalComponent
   ],
 
   imports: [

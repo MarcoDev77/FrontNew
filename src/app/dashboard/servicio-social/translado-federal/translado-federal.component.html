@@ -1,0 +1,169 @@
+<app-section-title
+  icon="fa fa-table"
+  title="Estudio socioeconómico"
+></app-section-title>
+<app-finder-imputado
+  [isLoading]="isLoading"
+  (onSelectIngresoSearch)="searchImputado($event)"
+  (onClearSearch)="cleanForm()"
+></app-finder-imputado>
+<app-generalidades-ppl
+  [generalidadesPPL]="ingreso"
+  [inputs]="moreInputs"
+></app-generalidades-ppl>
+<form action="">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Dirección previa a la reclusión:</label>
+                <input type="text" name="direccionPrevia" class="form-control" [(ngModel)]="traslado.direccionPrevia">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Ocupación previa a la reclusión:</label>
+                <input type="text" name="ocupacionPrevia" class="form-control" [(ngModel)]="traslado.ocupacionPrevia">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="fom-group">
+                <label for="">Tiempo de laborar:</label>
+                <input type="text" name="tiempoLaboral" class="form-control" [(ngModel)]="traslado.tiempoLaboral">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="fom-group">
+                <label for="">Sueldo:</label>
+                <input type="text" name="sueldo" class="form-control" [(ngModel)]="traslado.sueldo">
+            </div>
+        </div>
+        <div class="col-md-12 mt-4">
+            <h5 class="title-pink">Características de la zona donde residía:</h5>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Tipo de zona:</label>
+                <select name="tipoZona" class="form-control" [(ngModel)]="traslado.tipoZona">          
+                    <option value="URBANA">Urbana</option>
+                    <option value="SUB-URBANA">Sub-urbana</option>
+                    <option value="RURAL">Rural</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-check form-check form-check-inline pb-4 w-100">
+    
+                <label class="form-check-label"  for="indices">
+                    <input class="form-check-input" type="checkbox"  name="indicesDelictivos" id="indices" [(ngModel)]="traslado.indicesDelictivos"
+                       required>
+                    C/Altos índices delictivos
+                    <span class="form-check-sign"></span>
+                </label>
+
+                <label class="form-check-label" for="sobrePoblada">
+                    <input class="form-check-input" type="checkbox"  name="sobrePoblacion" id="sobrePoblada"  [(ngModel)]="traslado.sobrePoblacion"
+                          required>
+                    Sobre-poblada
+                    <span class="form-check-sign"></span>
+                </label>
+
+                <label class="form-check-label" for="girosNegros">
+                    <input class="form-check-input" type="checkbox"  name="girosNegros" id="girosNegros"  [(ngModel)]="traslado.girosNegros"
+                          required>
+                    Giros negros
+                    <span class="form-check-sign"></span>
+                </label>
+
+                <label class="form-check-label" for="policiaMinia">
+                    <input class="form-check-input" type="checkbox"  name="presenciaPoliciaca" id="policiaMinia"  [(ngModel)]="traslado.presenciaPoliciaca"
+                          required>
+                    Presencia policíaca mínima
+                    <span class="form-check-sign"></span>
+                </label>
+
+                <label class="form-check-label" for="drogas">
+                    <input class="form-check-input" type="checkbox"  name="consumoViaPublica" id="drogas"  [(ngModel)]="traslado.consumoViaPublica"
+                          required>
+                    Consumo de drogas en vía publica
+                    <span class="form-check-sign"></span>
+                </label>
+            </div>
+
+            
+        </div>
+
+        <div class="col-md-12 mt-4">
+            <h5 class="title-pink">Características del grupo familiar primario:</h5>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Tipo de familia:</label>
+                <select name="tipoFamilia" class="form-control" [(ngModel)]="traslado.tipoFamilia">          
+                    <option value="NUCLEAR">Nuclear</option>
+                    <option value="MONO-PARENTAL">Mono-parental</option>
+                    <option value="Extensa">Extensa</option>
+                    <option value="INCOMPLETA">Incompleta</option>
+                    <option value="RE-ESTRUCTURADA">Re-estructurada</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Tipo de comunicación:</label>
+                <select name="tipoZona" class="form-control" [(ngModel)]="traslado.tipoComunicacionPrimaria">          
+                    <option value="BUENA">Buena</option>
+                    <option value="REGULAR">Regular</option>
+                    <option value="MÍNIMA">Mínima</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Tipo de relaciones entre los integrantes de la familia:</label>
+                <select name="tipoZona" class="form-control" [(ngModel)]="traslado.tipoRelacionFamiliarPrimaria">          
+                    <option value="CORDIALES">Cordiales</option>
+                    <option value="CON PROBLEMAS LEVES ENTRE FAMILIARES">Con problemas leves entre familiares</option>
+                    <option value="VIOLENCIA FAMILIAR">Violencia familiar</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Nivel socioeconómico:</label>
+                <select name="tipoZona" class="form-control" [(ngModel)]="traslado.nivelSocioEconomico">          
+                    <option value="ALTO">Alto</option>
+                    <option value="MEDIO">Medio</option>
+                    <option value="BAJO">Bajo</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Uso de drogas lícitas o ilícitas en la familia:</label>
+                <select name="tipoZona" class="form-control" [(ngModel)]="traslado.nivelSocioEconomico">          
+                    <option value="PADRE">Padre</option>
+                    <option value="MADRE">Madre</option>
+                    <option value="HERMANOS">Hermanos</option>
+                    <option value="OTROS">Otros</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Tipo de sustancia</label>
+                <input type="text" name="sustancia" class="form-control">
+            </div>
+        </div>
+
+
+
+
+    </div>
+</form>
