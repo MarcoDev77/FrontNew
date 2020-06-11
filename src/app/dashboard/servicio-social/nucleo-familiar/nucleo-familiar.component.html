@@ -41,6 +41,7 @@
           name="responsableManuntencionP"
           type="text"
           class="form-control"
+          maxlength="255"
         />
       </div>
     </div>
@@ -460,6 +461,7 @@
           name="caracteristicaZonaS"
           type="text"
           class="form-control"
+          maxlength="255"
         />
       </div>
     </div>
@@ -506,6 +508,7 @@
           class="form-control"
           cols="30"
           rows="10"
+          maxlength="255"
         ></textarea>
       </div>
     </div>
@@ -580,6 +583,7 @@
           [(ngModel)]="nucleo.trabajoDesempenado"
           name="trabajoDesempenado"
           type="text"
+          maxlength="255"
           class="form-control"
         />
       </div>
@@ -592,6 +596,7 @@
           [(ngModel)]="nucleo.tiempoLaborar"
           name="tiempoLaborar"
           type="text"
+          maxlength="255"
           class="form-control"
         />
       </div>
@@ -603,6 +608,7 @@
         <input
           [(ngModel)]="nucleo.sueldo"
           max="1000000"
+          min="0"
           name="sueldo"
           type="number"
           class="form-control"
@@ -629,6 +635,7 @@
           [(ngModel)]="nucleo.distribucionGasto"
           name="distribucionGasto"
           type="text"
+          maxlength="255"
           class="form-control"
         />
       </div>
@@ -641,6 +648,7 @@
           [(ngModel)]="nucleo.alimentacionFamiliar"
           name="alimentacionFamiliar"
           type="text"
+          maxlength="255"
           class="form-control"
         />
       </div>
@@ -653,6 +661,8 @@
           [(ngModel)]="nucleo.serviciosPublicos"
           name="serviciosPublicos"
           type="text"
+          maxlength="250"
+          minlength="1"
           class="form-control"
         />
       </div>
@@ -703,7 +713,7 @@
       </div>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-4">
       <div class="form-gruop">
         <label>Frecuencia de la visitas</label>
         <input
@@ -711,6 +721,20 @@
           name="frecuenciaVisitas"
           type="text"
           class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Parentesco de visitas</label>
+        <input
+          [(ngModel)]="nucleo.parentescoVisitas"
+          name="parentescoVisitas"
+          type="text"
+          class="form-control"
+          maxlength="255"
         />
       </div>
     </div>
@@ -771,6 +795,8 @@
           class="form-control"
           cols="30"
           rows="10"
+          maxlength="250"
+          minlength="1"
         ></textarea>
       </div>
     </div>
@@ -791,6 +817,7 @@
           name="nombreAvalMoral"
           type="text"
           class="form-control"
+          maxlength="255"
         />
       </div>
     </div>
@@ -802,6 +829,7 @@
           [(ngModel)]="nucleo.apellidoPaternoAval"
           name="apellidoPaternoAval"
           type="text"
+          maxlength="255"
           class="form-control"
         />
       </div>
@@ -814,6 +842,7 @@
           [(ngModel)]="nucleo.apellidoMaternoAval"
           name="apellidoMaternoAval"
           type="text"
+          maxlength="255"
           class="form-control"
         />
       </div>
@@ -827,6 +856,7 @@
           name="domicilioAval"
           type="text"
           class="form-control"
+          maxlength="255"
         />
       </div>
     </div>
@@ -839,6 +869,7 @@
           name="entreCallesAval"
           type="text"
           class="form-control"
+          maxlength="255"
         />
       </div>
     </div>
@@ -850,6 +881,35 @@
           [(ngModel)]="nucleo.ciudadAval"
           name="ciudadAval"
           type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Estado</label>
+        <select
+          [(ngModel)]="nucleo.estadoAval.id"
+          name="estadoAval"
+          class="form-control"
+        >
+          <option *ngFor="let estado of estados" [value]="estado.id">
+            {{ estado.nombre }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Teléfono</label>
+        <input
+          [(ngModel)]="nucleo.telefonoAval"
+          name="telefonoAval"
+          type="tel"
+          maxlength="16"
           class="form-control"
         />
       </div>
@@ -891,6 +951,7 @@
           name="nombreViviraExternado"
           type="text"
           class="form-control"
+          maxlength="255"
         />
       </div>
     </div>
@@ -921,6 +982,7 @@
           name="calleVivira"
           type="text"
           class="form-control"
+          maxlength="255"
         />
       </div>
     </div>
@@ -933,6 +995,7 @@
           name="numeroVivira"
           type="text"
           class="form-control"
+          maxlength="15"
         />
       </div>
     </div>
@@ -945,6 +1008,7 @@
           name="coloniaVivira"
           type="text"
           class="form-control"
+          maxlength="255"
         />
       </div>
     </div>
@@ -971,6 +1035,7 @@
           name="municipioVivira"
           type="text"
           class="form-control"
+          maxlength="255"
         />
       </div>
     </div>
@@ -983,6 +1048,7 @@
           name="ciudadVivira"
           type="text"
           class="form-control"
+          maxlength="255"
         />
       </div>
     </div>
@@ -1018,6 +1084,7 @@
           class="form-control"
           cols="30"
           rows="10"
+          maxlength="250"
         ></textarea>
       </div>
     </div>
@@ -1031,13 +1098,14 @@
           class="form-control"
           cols="30"
           rows="10"
+          maxlength="250"
         ></textarea>
       </div>
     </div>
 
     <div class="col-md-12">
       <div class="form-gruop">
-        <label>Diagnostico Social</label>
+        <label>Diagnóstico Social</label>
         <textarea
           [(ngModel)]="nucleo.diagnosticoSocial"
           name="diagnosticoSocial"
@@ -1057,6 +1125,7 @@
           class="form-control"
           cols="30"
           rows="10"
+          maxlength="255"
         ></textarea>
       </div>
     </div>

@@ -26,12 +26,7 @@ export class NucleoFamiliarComponent implements OnInit {
     private servicioSocialService: ServicioSocialService,
     private catalogoService: CatalogosService,
     private modalService: NgbModal) {
-    this.ingreso = {} as Ingreso;
-    this.imputado = {} as any;
-    this.nucleo = new NucleoFamiliar();
-    this.nucleo.parentescoAvalMoral = {} as any;
-    this.nucleo.parentescoVivira = {} as any;
-    this.nucleo.estadoVivira = {} as any;
+    this.cleanForm();
   }
 
   ngOnInit() {
@@ -71,13 +66,7 @@ export class NucleoFamiliarComponent implements OnInit {
       timer: 1000,
       showConfirmButton: false
     });
-    this.isLoading = false;
-    this.ingreso = {} as Ingreso;
-    this.imputado = {} as any;
-    this.nucleo = new NucleoFamiliar();
-    this.nucleo.parentescoAvalMoral = {} as any;
-    this.nucleo.parentescoVivira = {} as any;
-    this.nucleo.estadoVivira = {} as any;
+    this.cleanForm();
   }
 
   cleanForm() {
@@ -88,6 +77,7 @@ export class NucleoFamiliarComponent implements OnInit {
     this.nucleo.parentescoAvalMoral = {} as any;
     this.nucleo.parentescoVivira = {} as any;
     this.nucleo.estadoVivira = {} as any;
+    this.nucleo.estadoAval = {} as any;
   }
 
   submit() {

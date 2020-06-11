@@ -1,55 +1,87 @@
-<app-section-title icon="fa fa-book" title="BITÁCORA DE IMPUTADOS"></app-section-title>
+<app-section-title
+  icon="fa fa-book"
+  title="BITÁCORA DE IMPUTADOS"
+></app-section-title>
 <div class="row">
   <div class="col text-right mb-3">
-    <button (click)="openSearchModal(searchModal)" class="btn btn-primary m-0 pull-right">Busqueda</button>
-    <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem"
-           [(ngModel)]="filter"
-           placeholder="Buscar">
+    <button
+      (click)="openSearchModal(searchModal)"
+      class="btn btn-primary m-0 pull-right"
+    >
+      Busqueda
+    </button>
+    <input
+      type="text"
+      class="form-control form-control-sm pull-right mr-2"
+      style="max-width: 12rem;"
+      [(ngModel)]="filter"
+      placeholder="Buscar"
+    />
   </div>
 </div>
 <div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="text-center">
-                    Folio
-                </th>
-                <th class="text-center">
-                    Nombre
-                </th>
-                <th class="text-center">
-                    Tipo P-R
-                </th>
-                <th class="text-center" style="min-width: 5rem">Detalle</th>
-            </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p };">
-          <td class="text-center"> {{item.folio}}</td>
-          <td class="text-center">{{item.apodo.nombre}} {{item.apodo.apellidoPaterno}} {{item.apodo.apellidoPaterno}} </td>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="text-center">
+          Folio
+        </th>
+        <th class="text-center">
+          Nombre
+        </th>
+        <th class="text-center">
+          Tipo P-R
+        </th>
+        <th class="text-center" style="min-width: 5rem;">Detalle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let item of data
+            | orderBy: key:reverse
+            | filter: filter
+            | paginate: { itemsPerPage: 5, currentPage: p }
+        "
+      >
+        <td class="text-center">{{ item.folio }}</td>
+        <td class="text-center">
+          {{ item.apodo.nombre }} {{ item.apodo.apellidoPaterno }}
+          {{ item.apodo.apellidoPaterno }}
+        </td>
 
-          <td class="text-center"> {{item.tipoIngreso}}</td>
-                <td class="text-center">
-                    <i class="fa fa-eye" (click)="seeDetails(item);add(formModal)"></i>
-
-                </td>
-            </tr>
-        <tr *ngIf="data.length == 0">
-          <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
-        </tr>
-        </tbody>
-    </table>
+        <td class="text-center">{{ item.tipoIngreso }}</td>
+        <td class="text-center">
+          <i class="fa fa-eye" (click)="seeDetails(item); add(formModal)"></i>
+        </td>
+      </tr>
+      <tr *ngIf="data.length == 0">
+        <td colspan="6">
+          {{ isLoading ? "Cargando..." : "Sin registros..." }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <div class="text-center w-100">
     <div class="btn-group" role="group">
-      <button [disabled]="offset === 0" (click)="previousPage()" type="button" class="btn btn-secondary">
+      <button
+        [disabled]="offset === 0"
+        (click)="previousPage()"
+        type="button"
+        class="btn btn-secondary"
+      >
         <i class="fa fa-arrow-left"></i>
       </button>
-      <button [disabled]="data.length === 0 || data.length < max" (click)="nextPage()" type="button" class="btn btn-secondary">
+      <button
+        [disabled]="data.length === 0 || data.length < max"
+        (click)="nextPage()"
+        type="button"
+        class="btn btn-secondary"
+      >
         <i class="fa fa-arrow-right"></i>
       </button>
     </div>
   </div>
-
 </div>
 
 <ng-template #searchModal let-searchModal>
@@ -59,87 +91,100 @@
 </ng-template>
 
 <ng-template #formModal let-formModal>
-    <div class="modal-body text-center">
-        <h3>Bitácora de imputados</h3>
-        <br>
-        <form class="form-horizontal" name="form" #f="ngForm">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <h6>Nombre del imputado</h6>
-                <label>{{ingreso.apodo.nombre}} {{ingreso.apodo.apellidoPaterno}} {{ingreso.apodo.apellidoMaterno}}</label>
-              </div>
-            </div>
+  <div class="modal-body text-center">
+    <h3>Bitácora de imputados</h3>
+    <br />
+    <form class="form-horizontal" name="form" #f="ngForm">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <h6>Nombre del imputado</h6>
+            <label
+              >{{ ingreso.apodo.nombre }} {{ ingreso.apodo.apellidoPaterno }}
+              {{ ingreso.apodo.apellidoMaterno }}</label
+            >
           </div>
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <h6>Fecha de ingreso</h6>
-                <label>{{ingreso.fechaRegistro|date}}</label>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <h6>Lugar de nacimiento</h6>
-                <label>{{ingreso.estadoNacimiento.nombre}}</label>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <h6>Carpeta de investigación</h6>
-                <label>{{ingreso.numeroExpediente}}</label>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <h6>Hora de ingreso</h6>
-                <label>{{ingreso.fechaRegistro| date:'shortTime'}}</label>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <h6>Fecha y hora de detención</h6>
-                <label>{{ingreso.fechaRegistro|date}} </label>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <h6>Juzgado</h6>
-                <label>Sin información</label>
-              </div>
-            </div>
-
-          </div>
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <h6>Fecha de ampliación</h6>
-                <label>Sin información</label>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <h6>Fecha de vinculación</h6>
-                <label>Sin información</label>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <h6>Delito</h6>
-                <label>Sin información</label>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="row">
-            <div class="col-sm-12 text-center text-sm-right">
-              <button type="button" (click)="goToFormularioIngreso()" class="btn btn-primary mr-3">Ver Ingreso</button>
-              <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cerrar</button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <h6>Fecha de ingreso</h6>
+            <label>{{ ingreso.fechaRegistro | date }}</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <h6>Lugar de nacimiento</h6>
+            <label>{{ ingreso.estadoNacimiento.nombre }}</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <h6>Carpeta de investigación</h6>
+            <label>{{ ingreso.numeroExpediente }}</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <h6>Hora de ingreso</h6>
+            <label>{{ ingreso.fechaRegistro | date: "shortTime" }}</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <h6>Fecha y hora de detención</h6>
+            <label>{{ ingreso.fechaRegistro | date }} </label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <h6>Juzgado</h6>
+            <label>Sin información</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <h6>Fecha de ampliación</h6>
+            <label>Sin información</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <h6>Fecha de vinculación</h6>
+            <label>Sin información</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <h6>Delito</h6>
+            <label>Sin información</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 text-center text-sm-right">
+          <button
+            type="button"
+            (click)="goToFormularioIngreso()"
+            class="btn btn-primary mr-3"
+          >
+            Ver Ingreso
+          </button>
+          <button
+            type="button"
+            (click)="formModal.close()"
+            class="btn btn-danger mr-3"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </ng-template>

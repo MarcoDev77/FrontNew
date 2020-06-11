@@ -170,9 +170,7 @@ export class ReferenciasComponent implements OnInit {
   };
   formatter = (x: { nombre: string }) => x.nombre;
 
-  switch($event) {
-
-  }
+  switch = $event => this.p = $event;
 
   getParentescos() {
     this.ingresoService.getParentescos().subscribe((data: any) => {

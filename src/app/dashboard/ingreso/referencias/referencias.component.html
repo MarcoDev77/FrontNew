@@ -28,7 +28,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of data">
+      <tr *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
         <td class="text-center">
           <div class="card-avatar">
             <img class="img" width="50px" (click)="clickInputFile(item, inputFile)" src="{{
@@ -180,7 +180,7 @@
             </select>
           </div>
         </div>
-        
+
         <div class="col-md-4">
           <div class="form-group">
             <label for="">Estado civil:</label>
@@ -202,7 +202,7 @@
           </div>
         </div>
 
-    
+
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Calle:</label>
@@ -265,13 +265,13 @@
           </div>
         </div>
 
-        <div class="col-sm-4">
+        <!-- <div class="col-sm-4">
           <div class="custom-control custom-checkbox mt-4">
             <input type="checkbox" class="custom-control-input" id="mayorEdad" name="mayorEdad"
               [(ngModel)]="referencia.esMayorEdad" />
             <label class="custom-control-label" for="mayorEdad">¿Es mayor de edad?</label>
           </div>
-        </div>
+        </div> -->
 
         <div class="form-group ml-4" *ngIf="referencia.extranjero">
           <label for="">Lada internacional:</label>
@@ -285,7 +285,7 @@
             <textarea class="form-control" name="observaciones" id="" cols="30" rows="5" maxlength="60" [(ngModel)]="referencia.observaciones"></textarea>
           </div>
         </div>
-       
+
       </div>
 
       <div class="row">
@@ -387,9 +387,9 @@
                     apellidoMaterno.touched && apellidoMaterno.invalid
                 }" maxlength="60" required />
             </td>
-         
+
             <td class="text-center">
-              <input name="fechaNacimiento" type="date" class="form-control"  
+              <input name="fechaNacimiento" type="date" class="form-control"
                          (change)="change($event)"
                          #fechaNacimiento="ngModel"
               [(ngModel)]="menor.fechaNacimiento"
