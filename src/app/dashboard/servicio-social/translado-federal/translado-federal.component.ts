@@ -19,6 +19,7 @@ export class TransladoFederalComponent implements OnInit {
     private modalService: NgbModal) 
     {
       this.ingreso={} as any
+      this.ingreso.nucleoFamiliar={} as any
       this.traslado={} as any
       this.isLoading= false;
      }
@@ -48,10 +49,81 @@ export class TransladoFederalComponent implements OnInit {
       this.isLoading = false
     })
   }
+
+  saveTrasladoFederal(){
+    this.isLoading=true
+    this.traslado.imputado={
+      id: this.ingreso.imputadoId
+    }
+    console.log(this.traslado)
+    this.servicioSocialService.saveTrasladofederal(this.traslado).subscribe((data: any)=>{
+      console.log(data)
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
+      this.isLoading = false
+    })
+
+  }
   
 
   cleanForm() {
+    this.ingreso={} as any
+    this.ingreso.nucleoFamiliar={} as any
+    this.traslado={} as any
+    this.isLoading= false;
+  }
 
+  generatePDF(modal) {
+    this.isLoading = true;
+    //TODO: Cambiar por el metodo correspondiente
+    this.servicioSocialService.generatePDFEstudioSocieconomico(this.ingreso.imputadoId)
+      .subscribe((data: any) => {
+        this.isLoading = false;
+        this.showPreview(data, modal);
+      }, error => {
+        this.isLoading = false;
+        Swal.fire({
+          title: 'Error!',
+          text: 'Error al generar el documento.',
+          icon: 'error',
+          timer: 1000,
+          showConfirmButton: false
+        });
+      });
+  }
+
+  showPreview(data, modal) {
+    const file = new Blob([data], { type: 'application/*' });
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadstart = ev => this.isLoading = true;
+    reader.onloadend = () => {
+      this.isLoading = false;
+      let dataUrl: any;
+      dataUrl = reader.result;
+      const base64 = dataUrl.split(',')[1];
+      this.modalService.dismissAll();
+      if (base64) {
+        this.file = base64;
+        this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
+      }
+    };
+    reader.onerror = () => {
+      this.isLoading = false;
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al generar el archivo',
+        icon: 'error',
+        timer: 1500,
+        showConfirmButton: false
+      });
+      this.modalService.dismissAll();
+    };
   }
 }
 
@@ -84,4 +156,5 @@ class Traslado {
   dondeResidiraEgresarReclucion: String
   opinionEvolucionInterno: String
   opinionSobreTraslado: String
+  imputado: any
 }

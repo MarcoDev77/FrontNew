@@ -2,7 +2,7 @@
 <app-finder-imputado [isLoading]="isLoading" (onSelectIngresoSearch)="searchImputado($event)"
     (onClearSearch)="cleanForm()"></app-finder-imputado>
 <app-generalidades-ppl [generalidadesPPL]="ingreso" [inputs]="moreInputs"></app-generalidades-ppl>
-<form action="">
+<form name="search" (ngSubmit)="saveTrasladoFederal()" #formSearch="ngForm" novalidate>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -54,26 +54,26 @@
                 </div>
 
                 <div class="custom-control custom-checkbox mt-4 mr-2">
-                    <input type="checkbox" class="custom-control-input"  name="sobrePoblacion" id="sobrePoblada"
-                    [(ngModel)]="traslado.sobrePoblacion"/>
+                    <input type="checkbox" class="custom-control-input" name="sobrePoblacion" id="sobrePoblada"
+                        [(ngModel)]="traslado.sobrePoblacion" />
                     <label class="custom-control-label" for="sobrePoblada">Sobre-poblada</label>
                 </div>
 
                 <div class="custom-control custom-checkbox mt-4 mr-2">
-                    <input type="checkbox" class="custom-control-input"  name="girosNegros" id="girosNegros"
-                    [(ngModel)]="traslado.girosNegros"/>
+                    <input type="checkbox" class="custom-control-input" name="girosNegros" id="girosNegros"
+                        [(ngModel)]="traslado.girosNegros" />
                     <label class="custom-control-label" for="sobrePoblada">Giros negros</label>
                 </div>
 
                 <div class="custom-control custom-checkbox mt-4 mr-2">
-                    <input type="checkbox" class="custom-control-input"  name="presenciaPoliciaca" id="policiaMinia"
-                    [(ngModel)]="traslado.presenciaPoliciaca"/>
+                    <input type="checkbox" class="custom-control-input" name="presenciaPoliciaca" id="policiaMinia"
+                        [(ngModel)]="traslado.presenciaPoliciaca" />
                     <label class="custom-control-label" for="sobrePoblada"> Presencia policíaca mínima</label>
                 </div>
 
                 <div class="custom-control custom-checkbox mt-4 mr-2">
-                    <input type="checkbox" class="custom-control-input"  name="consumoViaPublica" id="drogas"
-                    [(ngModel)]="traslado.consumoViaPublica"/>
+                    <input type="checkbox" class="custom-control-input" name="consumoViaPublica" id="drogas"
+                        [(ngModel)]="traslado.consumoViaPublica" />
                     <label class="custom-control-label" for="sobrePoblada"> Consumo de drogas en vía publica</label>
                 </div>
 
@@ -157,7 +157,10 @@
             <h5 class="title-pink">Antecedentes antisociales familiares</h5>
         </div>
 
-        <!-- <app-tabla-familiares [tipoNucleo]="'secundario'" [nucleoId]="ingreso.nucleoId"></app-tabla-familiares> -->
+        <div class="col-md-12">
+            <app-tabla-familiares [tipoNucleo]="'secundario'" [nucleoId]="ingreso.nucleoFamiliar.id"></app-tabla-familiares>
+
+        </div>
 
         <div class="col-md-4">
             <div class="form-group">
@@ -234,7 +237,7 @@
             </div>
         </div>
 
-        <div class="col md-12">
+        <div class="col-md-12">
             <div class="form-group">
                 <label for="">Opinión respecto a la evolución del interno:</label>
                 <textarea class=" form-control" cols="80" rows="4" value=""

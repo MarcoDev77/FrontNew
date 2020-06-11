@@ -11,15 +11,56 @@
 
         <div class="col-md-4">
             <div class="form-gruop">
-              <label>Grupo Familiar Funcional</label>
+                <label>Grupo Familiar Funcional</label>
+                <select [(ngModel)]="beneficio.grupoFamiliarFuncionalP" name="grupoFamiliarFuncionalP"
+                    class="form-control">
+                    <option value="funcional">Funcional</option>
+                    <option value="disfuncional">Disfuncional</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-gruop">
+              <label>Relaciones Interfamiliares</label>
               <select
-                [(ngModel)]="beneficio.grupoFamiliarFuncionalP"
-                name="grupoFamiliarFuncionalP"
+                [(ngModel)]="beneficio.relacionesInterfamiliaresP"
+                name="relacionesInterfamiliaresP"
                 class="form-control"
               >
-                <option value="funcional">Funcional</option>
-                <option value="disfuncional">Disfuncional</option>
+                <option value="adecuadas">Adecuadas</option>
+                <option value="inadecuadas">Inadecuadas</option>
               </select>
+            </div>
+          </div>
+      
+          <div class="col-md-4">
+            <div class="custom-control custom-checkbox mt-4">
+              <input
+                [(ngModel)]="beneficio.huboViolenciaP"
+                name="huboViolenciaP"
+                type="checkbox"
+                class="custom-control-input"
+                id="huboViolenciaP"
+              />
+              <label class="custom-control-label" for="huboViolenciaP">
+                ¿Hubo violencia?
+              </label>
+            </div>
+          </div>
+      
+          <div class="col-md-8">
+            <div class="form-gruop">
+              <label>Detalle Violencia</label>
+              <textarea
+                [(ngModel)]="beneficio.detalleViolenciaP"
+                [disabled]="!beneficio.huboViolenciaP"
+                [readOnly]="!beneficio.huboViolenciaP"
+                name="detalleViolenciaP"
+                class="form-control"
+                cols="30"
+                rows="10"
+              ></textarea>
             </div>
           </div>
     </div>

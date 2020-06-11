@@ -18,8 +18,8 @@ export class BeneficioEstatalComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.ingreso={} as any
-    this.beneficio={} as any
+    this.ingreso = {} as any
+    this.beneficio = {} as any
   }
 
 
@@ -48,4 +48,31 @@ export class BeneficioEstatalComponent implements OnInit {
   }
 
 
+}
+
+class BeneficioEstatal {
+  relacionInterfamiliarPrimario: String
+  grupoFamiliarPrimario: String
+  violenciaIntrafamiliarPrimario: Boolean
+  violenciaEspecificarPrimario: String
+  nivelSocioeconomicoPrimario: String
+  familiarAntecedentesAdiccionPrimario: String
+  familiarEspecifiquePrimario: String
+  hijosAnteriores: number
+  grupoFamiliarSecundario: String
+  relacionInterfamiliarSecundario: String
+  violenciaIntrafamiliarSecundario: Boolean
+  violenciaEspecificarSecundario: String
+  nivelSocioeconomicoSecundario: String
+  familiarAntecedentesAdiccionSecundario: String
+  familiarEspecifiqueSecundario: String
+  familiaConductaAntisocial: String
+  conductaAntisocialEspecifique: String
+  numeroParejasEstables: Number
+  apoyoFamiliar: Boolean
+  visitaFamiliar: Boolean
+  frecuencia: String
+  visitadoPersonas: Boolean
+  diagnosticoPronostico: String
+  opinionBeneficiosInternos: String
 }
