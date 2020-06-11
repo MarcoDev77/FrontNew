@@ -20,6 +20,7 @@ import { EstudioSocioeconomicoComponent } from './estudio-socioeconomico/estudio
 import { OficioSancionesComponent } from './oficio-sanciones/oficio-sanciones.component';
 import { RegistroPaseUnicoComponent } from './registro-pase-unico/registro-pase-unico.component';
 import { TransladoFederalComponent } from './translado-federal/translado-federal.component';
+import { BeneficioEstatalComponent } from './beneficio-estatal/beneficio-estatal.component';
 
 
 
@@ -40,7 +41,8 @@ import { TransladoFederalComponent } from './translado-federal/translado-federal
     EstudioSocioeconomicoComponent,
     OficioSancionesComponent,
     RegistroPaseUnicoComponent,
-    TransladoFederalComponent
+    TransladoFederalComponent,
+    BeneficioEstatalComponent
   ],
 
   imports: [

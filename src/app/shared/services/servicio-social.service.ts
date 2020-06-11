@@ -119,4 +119,5 @@ export class ServicioSocialService {
 
   searchByDate= model=> this.http.get(`${this.url}/api/listarRegistroPasesProvisionales?fecha=${model.date}&dormitorio=${model.dormitorio.nombre}`)
   
+  getInfoTrasladoFederal =folio=> this.http.get(`${this.url}/api/listarImputadoTrasladoFederal?folioImputado=${folio}`)
 }

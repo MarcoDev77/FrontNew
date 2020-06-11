@@ -16,6 +16,7 @@ import { EstudioSocioeconomicoComponent } from './estudio-socioeconomico/estudio
 import { OficioSancionesComponent } from './oficio-sanciones/oficio-sanciones.component';
 import { RegistroPaseUnicoComponent } from './registro-pase-unico/registro-pase-unico.component';
 import { TransladoFederalComponent } from './translado-federal/translado-federal.component';
+import { BeneficioEstatalComponent } from './beneficio-estatal/beneficio-estatal.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
       { path: 'estudio-socioeconomico', component: EstudioSocioeconomicoComponent },
       { path: 'oficio-sanciones', component: OficioSancionesComponent },
       { path: 'registro-pase-unico', component: RegistroPaseUnicoComponent},
-      { path: 'traslado-federal',component: TransladoFederalComponent}
+      { path: 'traslado-federal',component: TransladoFederalComponent},
+      { path: 'beneficio-estatal', component: BeneficioEstatalComponent}
     ]
   },
 ];

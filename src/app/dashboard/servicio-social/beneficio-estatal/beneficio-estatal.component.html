@@ -1,0 +1,26 @@
+<app-section-title icon="fa fa-table" title="Beneficio estatal"></app-section-title>
+<app-finder-imputado [isLoading]="isLoading" (onSelectIngresoSearch)="searchImputado($event)"
+    (onClearSearch)="cleanForm()"></app-finder-imputado>
+<app-generalidades-ppl [generalidadesPPL]="ingreso" [inputs]="moreInputs"></app-generalidades-ppl>
+<form action="">
+    <div class="row">
+        <div class="col-md-12 mt-4">
+            <h5 class="title-pink">Características del núcleo primario</h5>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="form-gruop">
+              <label>Grupo Familiar Funcional</label>
+              <select
+                [(ngModel)]="beneficio.grupoFamiliarFuncionalP"
+                name="grupoFamiliarFuncionalP"
+                class="form-control"
+              >
+                <option value="funcional">Funcional</option>
+                <option value="disfuncional">Disfuncional</option>
+              </select>
+            </div>
+          </div>
+    </div>
+</form>

@@ -1,16 +1,7 @@
-<app-section-title
-  icon="fa fa-table"
-  title="Estudio socioeconómico"
-></app-section-title>
-<app-finder-imputado
-  [isLoading]="isLoading"
-  (onSelectIngresoSearch)="searchImputado($event)"
-  (onClearSearch)="cleanForm()"
-></app-finder-imputado>
-<app-generalidades-ppl
-  [generalidadesPPL]="ingreso"
-  [inputs]="moreInputs"
-></app-generalidades-ppl>
+<app-section-title icon="fa fa-table" title="Traslado federal"></app-section-title>
+<app-finder-imputado [isLoading]="isLoading" (onSelectIngresoSearch)="searchImputado($event)"
+    (onClearSearch)="cleanForm()"></app-finder-imputado>
+<app-generalidades-ppl [generalidadesPPL]="ingreso" [inputs]="moreInputs"></app-generalidades-ppl>
 <form action="">
     <div class="row">
         <div class="col-md-12">
@@ -45,7 +36,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Tipo de zona:</label>
-                <select name="tipoZona" class="form-control" [(ngModel)]="traslado.tipoZona">          
+                <select name="tipoZona" class="form-control" [(ngModel)]="traslado.tipoZona">
                     <option value="URBANA">Urbana</option>
                     <option value="SUB-URBANA">Sub-urbana</option>
                     <option value="RURAL">Rural</option>
@@ -53,57 +44,55 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="form-check form-check form-check-inline pb-4 w-100">
-    
-                <label class="form-check-label"  for="indices">
-                    <input class="form-check-input" type="checkbox"  name="indicesDelictivos" id="indices" [(ngModel)]="traslado.indicesDelictivos"
-                       required>
-                    C/Altos índices delictivos
-                    <span class="form-check-sign"></span>
-                </label>
 
-                <label class="form-check-label" for="sobrePoblada">
-                    <input class="form-check-input" type="checkbox"  name="sobrePoblacion" id="sobrePoblada"  [(ngModel)]="traslado.sobrePoblacion"
-                          required>
-                    Sobre-poblada
-                    <span class="form-check-sign"></span>
-                </label>
+            <div class="form-check form-check-inline pb-4 w-100">
+                <div class="custom-control custom-checkbox mt-4 mr-2">
+                    <input type="checkbox" class="custom-control-input" name="indicesDelictivos" id="indices"
+                        [(ngModel)]="traslado.indicesDelictivos" />
+                    <label class="custom-control-label" for="indices"> C/Altos índices delictivos
+                    </label>
+                </div>
 
-                <label class="form-check-label" for="girosNegros">
-                    <input class="form-check-input" type="checkbox"  name="girosNegros" id="girosNegros"  [(ngModel)]="traslado.girosNegros"
-                          required>
-                    Giros negros
-                    <span class="form-check-sign"></span>
-                </label>
+                <div class="custom-control custom-checkbox mt-4 mr-2">
+                    <input type="checkbox" class="custom-control-input"  name="sobrePoblacion" id="sobrePoblada"
+                    [(ngModel)]="traslado.sobrePoblacion"/>
+                    <label class="custom-control-label" for="sobrePoblada">Sobre-poblada</label>
+                </div>
 
-                <label class="form-check-label" for="policiaMinia">
-                    <input class="form-check-input" type="checkbox"  name="presenciaPoliciaca" id="policiaMinia"  [(ngModel)]="traslado.presenciaPoliciaca"
-                          required>
-                    Presencia policíaca mínima
-                    <span class="form-check-sign"></span>
-                </label>
+                <div class="custom-control custom-checkbox mt-4 mr-2">
+                    <input type="checkbox" class="custom-control-input"  name="girosNegros" id="girosNegros"
+                    [(ngModel)]="traslado.girosNegros"/>
+                    <label class="custom-control-label" for="sobrePoblada">Giros negros</label>
+                </div>
 
-                <label class="form-check-label" for="drogas">
-                    <input class="form-check-input" type="checkbox"  name="consumoViaPublica" id="drogas"  [(ngModel)]="traslado.consumoViaPublica"
-                          required>
-                    Consumo de drogas en vía publica
-                    <span class="form-check-sign"></span>
-                </label>
+                <div class="custom-control custom-checkbox mt-4 mr-2">
+                    <input type="checkbox" class="custom-control-input"  name="presenciaPoliciaca" id="policiaMinia"
+                    [(ngModel)]="traslado.presenciaPoliciaca"/>
+                    <label class="custom-control-label" for="sobrePoblada"> Presencia policíaca mínima</label>
+                </div>
+
+                <div class="custom-control custom-checkbox mt-4 mr-2">
+                    <input type="checkbox" class="custom-control-input"  name="consumoViaPublica" id="drogas"
+                    [(ngModel)]="traslado.consumoViaPublica"/>
+                    <label class="custom-control-label" for="sobrePoblada"> Consumo de drogas en vía publica</label>
+                </div>
+
+
             </div>
 
-            
+
         </div>
 
         <div class="col-md-12 mt-4">
-            <h5 class="title-pink">Características del grupo familiar primario:</h5>
+            <h5 class="title-pink">Características del grupo familiar primario</h5>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Tipo de familia:</label>
-                <select name="tipoFamilia" class="form-control" [(ngModel)]="traslado.tipoFamilia">          
+                <select name="tipoFamilia" class="form-control" [(ngModel)]="traslado.tipoFamilia">
                     <option value="NUCLEAR">Nuclear</option>
                     <option value="MONO-PARENTAL">Mono-parental</option>
-                    <option value="Extensa">Extensa</option>
+                    <option value="EXTENSA">Extensa</option>
                     <option value="INCOMPLETA">Incompleta</option>
                     <option value="RE-ESTRUCTURADA">Re-estructurada</option>
                 </select>
@@ -113,10 +102,11 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Tipo de comunicación:</label>
-                <select name="tipoZona" class="form-control" [(ngModel)]="traslado.tipoComunicacionPrimaria">          
+                <select name="tipoComunicacionPrimaria" class="form-control"
+                    [(ngModel)]="traslado.tipoComunicacionPrimaria">
                     <option value="BUENA">Buena</option>
                     <option value="REGULAR">Regular</option>
-                    <option value="MÍNIMA">Mínima</option>
+                    <option value="MINIMA">Mínima</option>
                 </select>
             </div>
         </div>
@@ -124,7 +114,8 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Tipo de relaciones entre los integrantes de la familia:</label>
-                <select name="tipoZona" class="form-control" [(ngModel)]="traslado.tipoRelacionFamiliarPrimaria">          
+                <select name="tipoRelacionFamiliarPrimaria" class="form-control"
+                    [(ngModel)]="traslado.tipoRelacionFamiliarPrimaria">
                     <option value="CORDIALES">Cordiales</option>
                     <option value="CON PROBLEMAS LEVES ENTRE FAMILIARES">Con problemas leves entre familiares</option>
                     <option value="VIOLENCIA FAMILIAR">Violencia familiar</option>
@@ -135,7 +126,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Nivel socioeconómico:</label>
-                <select name="tipoZona" class="form-control" [(ngModel)]="traslado.nivelSocioEconomico">          
+                <select name="nivelSocioEconomico" class="form-control" [(ngModel)]="traslado.nivelSocioEconomico">
                     <option value="ALTO">Alto</option>
                     <option value="MEDIO">Medio</option>
                     <option value="BAJO">Bajo</option>
@@ -146,7 +137,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="">Uso de drogas lícitas o ilícitas en la familia:</label>
-                <select name="tipoZona" class="form-control" [(ngModel)]="traslado.nivelSocioEconomico">          
+                <select name="usoDrogasFamilia" class="form-control" [(ngModel)]="traslado.usoDrogasFamilia">
                     <option value="PADRE">Padre</option>
                     <option value="MADRE">Madre</option>
                     <option value="HERMANOS">Hermanos</option>
@@ -158,12 +149,130 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="">Tipo de sustancia</label>
-                <input type="text" name="sustancia" class="form-control">
+                <input type="text" name="sustancia" class="form-control" [(ngModel)]="traslado.tipoSustancia">
+            </div>
+        </div>
+
+        <div class="col-md-12 mt-4">
+            <h5 class="title-pink">Antecedentes antisociales familiares</h5>
+        </div>
+
+        <!-- <app-tabla-familiares [tipoNucleo]="'secundario'" [nucleoId]="ingreso.nucleoId"></app-tabla-familiares> -->
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Tipo de comunicación:</label>
+                <select name="tipoComunicacionSecundaria" class="form-control"
+                    [(ngModel)]="traslado.tipoComunicacionSecundaria">
+                    <option value="BUENA">Buena</option>
+                    <option value="REGULAR">Regular</option>
+                    <option value="MÍNIMA">Mínima</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Tipo de relaciones entre los integrantes de la familia:</label>
+                <select name="tipoRelacionFamiliarSecundaria" class="form-control"
+                    [(ngModel)]="traslado.tipoRelacionFamiliarSecundaria">
+                    <option value="CORDIALES">Cordiales</option>
+                    <option value="CON PROBLEMAS LEVES ENTRE FAMILIARES">Con problemas leves entre familiares</option>
+                    <option value="VIOLENCIA FAMILIAR">Violencia familiar</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Situación familiar:</label>
+                <input type="text" class="form-control" name="situacionFamiliar"
+                    [(ngModel)]="traslado.situacionFamiliar">
             </div>
         </div>
 
 
+        <div class="col-md-12 mt-4">
+            <h5 class="title-pink">Proyecto de vida al egreso de reclusión</h5>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Municipio y estado rádica la familia primaria:</label>
+                <input type="text" class="form-control" name="municipioPrimaria"
+                    [(ngModel)]="traslado.municipioPrimaria">
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Municipio y estado rádica la familia secundaria:</label>
+                <input type="text" class="form-control" name="municipioSecundaria"
+                    [(ngModel)]="traslado.municipioSecundaria">
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">¿Que tipo de apoyo tiene al exterior?:</label>
+                <input type="text" class="form-control" name="apoyoExterior" [(ngModel)]="traslado.apoyoExterior">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="">¿Dónde residirá al egresar de reclusión?::</label>
+                <input type="text" class="form-control" name="apoyoExterior"
+                    [(ngModel)]="traslado.dondeResidiraEgresarReclucion">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="">¿Con quién residirá al egresar de reclusión?:</label>
+                <input type="text" class="form-control" name="apoyoExterior"
+                    [(ngModel)]="traslado.residiraEgresarReclucion">
+            </div>
+        </div>
+
+        <div class="col md-12">
+            <div class="form-group">
+                <label for="">Opinión respecto a la evolución del interno:</label>
+                <textarea class=" form-control" cols="80" rows="4" value=""
+                    [(ngModel)]="traslado.opinionEvolucionInterno" #opinionEvolucionInterno
+                    name="opinionEvolucionInterno" maxlength="255"></textarea>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="">Opinión sobre traslado:</label>
+                <input type="text" class="form-control" name="opinionSobreTraslado"
+                    [(ngModel)]="traslado.opinionSobreTraslado">
+            </div>
+        </div>
+        <div class="col-sm-12 text-center text-sm-right">
+            <button type="submit" [disabled]="!ingreso.imputadoId || isLoading" class="btn btn-success mr-3">
+                Guardar
+            </button>
+            <button [disabled]="!ingreso.imputadoId || isLoading" type="button" (click)="generatePDF(view)"
+                class="btn btn-success mr-3">
+                Imprimir
+            </button>
+        </div>
 
 
     </div>
 </form>
+
+<ng-template #view let-view>
+    <div class="modal-body text-center pt-0">
+        <i (click)="view.dismiss()" style="
+          cursor: pointer;
+          position: absolute;
+          right: 1%;
+          top: 1%;
+          font-size: 20px;
+        " class="fa fa-times-circle"></i>
+        <app-web-viewer [file]="file" [name]="'estudio trabajo social'"></app-web-viewer>
+    </div>
+</ng-template>

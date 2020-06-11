@@ -11,12 +11,14 @@ import Swal from 'sweetalert2';
 export class TransladoFederalComponent implements OnInit {
   public ingreso: any
   public moreInputs: any[]
-  public estudio: any
   public isLoading: boolean
   public traslado: Traslado
+  public file: any
   constructor(
     private servicioSocialService: ServicioSocialService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal) 
+    {
+      this.ingreso={} as any
       this.traslado={} as any
       this.isLoading= false;
      }
@@ -30,9 +32,12 @@ export class TransladoFederalComponent implements OnInit {
       this.ingreso = { ...ingreso };
     }  
     this.isLoading = true
-    this.servicioSocialService.getInfoFichaIngreso(this.ingreso.folio).subscribe((data: any) => {
+    this.servicioSocialService.getInfoTrasladoFederal(this.ingreso.folio).subscribe((data: any) => {
       console.log(data)
-      this.ingreso = data.imputado
+      if(!data.error){
+        this.ingreso = data.imputado
+        this.traslado=data.imputado.trasladoFederal
+      }
       Swal.fire({
         title: data.error ? 'Error!' : 'Resultados',
         text: data.mensaje,
@@ -76,6 +81,7 @@ class Traslado {
   municipioSecundaria: String
   apoyoExterior: String
   residiraEgresarReclucion: String
+  dondeResidiraEgresarReclucion: String
   opinionEvolucionInterno: String
   opinionSobreTraslado: String
 }
