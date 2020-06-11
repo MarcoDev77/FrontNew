@@ -1,67 +1,356 @@
 <app-section-title icon="fa fa-table" title="Beneficio estatal"></app-section-title>
 <app-finder-imputado [isLoading]="isLoading" (onSelectIngresoSearch)="searchImputado($event)"
-    (onClearSearch)="cleanForm()"></app-finder-imputado>
+  (onClearSearch)="cleanForm()"></app-finder-imputado>
 <app-generalidades-ppl [generalidadesPPL]="ingreso" [inputs]="moreInputs"></app-generalidades-ppl>
 <form action="">
-    <div class="row">
-        <div class="col-md-12 mt-4">
-            <h5 class="title-pink">Características del núcleo primario</h5>
-        </div>
-
-
-        <div class="col-md-4">
-            <div class="form-gruop">
-                <label>Grupo Familiar Funcional</label>
-                <select [(ngModel)]="beneficio.grupoFamiliarFuncionalP" name="grupoFamiliarFuncionalP"
-                    class="form-control">
-                    <option value="funcional">Funcional</option>
-                    <option value="disfuncional">Disfuncional</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-gruop">
-              <label>Relaciones Interfamiliares</label>
-              <select
-                [(ngModel)]="beneficio.relacionesInterfamiliaresP"
-                name="relacionesInterfamiliaresP"
-                class="form-control"
-              >
-                <option value="adecuadas">Adecuadas</option>
-                <option value="inadecuadas">Inadecuadas</option>
-              </select>
-            </div>
-          </div>
-      
-          <div class="col-md-4">
-            <div class="custom-control custom-checkbox mt-4">
-              <input
-                [(ngModel)]="beneficio.huboViolenciaP"
-                name="huboViolenciaP"
-                type="checkbox"
-                class="custom-control-input"
-                id="huboViolenciaP"
-              />
-              <label class="custom-control-label" for="huboViolenciaP">
-                ¿Hubo violencia?
-              </label>
-            </div>
-          </div>
-      
-          <div class="col-md-8">
-            <div class="form-gruop">
-              <label>Detalle Violencia</label>
-              <textarea
-                [(ngModel)]="beneficio.detalleViolenciaP"
-                [disabled]="!beneficio.huboViolenciaP"
-                [readOnly]="!beneficio.huboViolenciaP"
-                name="detalleViolenciaP"
-                class="form-control"
-                cols="30"
-                rows="10"
-              ></textarea>
-            </div>
-          </div>
+  <div class="row">
+    <div class="col-md-12 mt-4">
+      <h5 class="title-pink">Características del núcleo primario</h5>
     </div>
+
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Grupo Familiar Funcional:</label>
+        <select [(ngModel)]="beneficio.grupoFamiliarPrimario" name="grupoFamiliarFuncionalP" class="form-control">
+          <option value="funcional">Funcional</option>
+          <option value="disfuncional">Disfuncional</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Relaciones Interfamiliares:</label>
+        <select [(ngModel)]="beneficio.relacionInterfamiliarPrimario" name="relacionesInterfamiliaresP"
+          class="form-control">
+          <option value="adecuadas">Adecuadas</option>
+          <option value="inadecuadas">Inadecuadas</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input [(ngModel)]="beneficio.violenciaIntrafamiliarPrimario" name="huboViolenciaP" type="checkbox"
+          class="custom-control-input" id="huboViolenciaP" />
+        <label class="custom-control-label" for="huboViolenciaP">
+          ¿Hubo violencia?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Detalle Violencia:</label>
+        <textarea [(ngModel)]="beneficio.violenciaEspecificarPrimario"
+          [disabled]="!beneficio.violenciaIntrafamiliarPrimario" [readOnly]="!beneficio.violenciaIntrafamiliarPrimario"
+          name="violenciaEspecificarPrimario" class="form-control" cols="30" rows="10"></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Nivel Socioeconómico y cultural</label>
+        <select [(ngModel)]="beneficio.nivelSocioeconomicoPrimario" name="nivelSocioeconomicoPrimario"
+          class="form-control">
+          <option value="bajo">Bajo</option>
+          <option value="medio">Medio</option>
+          <option value="alto">Alto</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="beneficio.familiarAntecedentesAdiccionPrimario"
+          name="familiarAntecedentesAdiccionPrimario"
+          type="checkbox"
+          class="custom-control-input"
+          id="tieneFamiliarProblemasConductaS"
+        />
+        <label
+          class="custom-control-label"
+          for="tieneFamiliarProblemasConductaS"
+        >
+          ¿Algún integrante de la familia tiene antecedentes penales o adicción a algún
+          estupefaciente o cualquier tipo toxico?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-gruop">
+        <label>Especificar:</label>
+        <textarea
+          [(ngModel)]="beneficio.familiarEspecifiquePrimario"
+          [disabled]="!beneficio.familiarAntecedentesAdiccionPrimario"
+          [readOnly]="!beneficio.familiarAntecedentesAdiccionPrimario"
+          name="familiarEspecifiquePrimario"
+          class="form-control"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-4">
+      <h5 class="title-pink">Características del núcleo secundario</h5>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Número de hijos de uniones anteriores</label>
+        <input
+          [(ngModel)]="beneficio.hijosAnteriores"
+          name="hijosAnteriores"
+          type="number"
+          min="0"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Grupo Familiar Funcional</label>
+        <select [(ngModel)]="beneficio.grupoFamiliarSecundario" name="grupoFamiliarSecundario" class="form-control">
+          <option value="funcional">Funcional</option>
+          <option value="disfuncional">Disfuncional</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Relaciones Interfamiliares</label>
+        <select [(ngModel)]="beneficio.relacionInterfamiliarSecundario" name="relacionInterfamiliarSecundario"
+          class="form-control">
+          <option value="adecuadas">Adecuadas</option>
+          <option value="inadecuadas">Inadecuadas</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input [(ngModel)]="beneficio.violenciaIntrafamiliarSecundario" name="violenciaIntrafamiliarSecundario" type="checkbox"
+          class="custom-control-input" id="huboViolenciaP" />
+        <label class="custom-control-label" for="huboViolenciaP">
+          ¿Hubo violencia?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Detalle Violencia:</label>
+        <textarea [(ngModel)]="beneficio.violenciaIntrafamiliarSecundario"
+          [disabled]="!beneficio.violenciaIntrafamiliarSecundario" [readOnly]="!beneficio.violenciaIntrafamiliarSecundario"
+          name="violenciaIntrafamiliarSecundario" class="form-control" cols="30" rows="10"></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Nivel Socioeconómico y cultural:</label>
+        <select [(ngModel)]="beneficio.nivelSocioeconomicoSecundario" name="nivelSocioeconomicoSecundario"
+          class="form-control">
+          <option value="bajo">Bajo</option>
+          <option value="medio">Medio</option>
+          <option value="alto">Alto</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Relación con medio externo:</label>
+        <input
+        type="text"
+          [(ngModel)]="beneficio.relacionMedioExterno"
+          name="relacionMedioExterno"
+          class="form-control"
+          cols="30"
+          rows="10"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="beneficio.familiarAntecedentesAdiccionSecundario"
+          name="familiarAntecedentesAdiccionSecundario"
+          type="checkbox"
+          class="custom-control-input"
+          id="familiarAntecedentesAdiccionSecundario"
+        />
+        <label
+          class="custom-control-label"
+          for="familiarAntecedentesAdiccionSecundario"
+        >
+          ¿Algún integrante de la familia tiene antecedentes penales o adicción a algún
+          estupefaciente o cualquier tipo toxico?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Especificar:</label>
+        <textarea
+          [(ngModel)]="beneficio.familiarEspecifiqueSecundario"
+          [disabled]="!beneficio.familiarAntecedentesAdiccionSecundario"
+          [readOnly]="!beneficio.familiarAntecedentesAdiccionSecundario"
+          name="familiarEspecifiquePrimario"
+          class="form-control"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Número de parejas con las que ha vivido de manera estable:</label>
+        <input
+          [(ngModel)]="beneficio.numeroParejasEstables"
+          name="numeroParejasEstables"
+          min="0"
+          type="number"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="beneficio.apoyoFamiliar"
+          name="apoyoFamiliar"
+          type="checkbox"
+          class="custom-control-input"
+          id="apoyoFamiliar"
+        />
+        <label
+          class="custom-control-label"
+          for="apoyoFamiliar"
+        >
+          ¿cuenta con el apoyo de la familia ó de alguna otra persona?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="beneficio.visitaFamiliar"
+          name="familiarAntecedentesAdiccionSecundario"
+          type="checkbox"
+          class="custom-control-input"
+          id="visitaFamiliar"
+        />
+        <label
+          class="custom-control-label"
+          for="visitaFamiliar"
+        >
+          ¿Recibe vista de familiares?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="beneficio.radicaEstado"
+          name="radicaEstado"
+          type="checkbox"
+          class="custom-control-input"
+          id="radicaEstado"
+        />
+        <label
+          class="custom-control-label"
+          for="radicaEstado"
+        >
+          ¿Radican en el estado?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Parentesco</label>
+        <select
+          [(ngModel)]="beneficio.parentesco.id"
+          name="parentescoAvalMoral"
+          class="form-control"
+        >
+          <option
+            *ngFor="let parentesco of parentescos"
+            [value]="parentesco.id"
+          >
+            {{ parentesco.nombre }}
+          </option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Frecuencia </label>
+        <input
+          [(ngModel)]="beneficio.frecuencia"
+          name="frecuencia"
+          type="text"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="beneficio.visitadoPersonas"
+          name="visitadoPersonas"
+          type="checkbox"
+          class="custom-control-input"
+          id="visitadoPersonas"
+        />
+        <label
+          class="custom-control-label"
+          for="visitadoPersonas"
+        >
+          ¿Es visitado por otras personas?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Diagnostico social y pronóstico de extenuación:</label>
+        <textarea [(ngModel)]="beneficio.diagnosticoPronostico"
+          
+          name="diagnosticoPronostico" class="form-control" cols="30" rows="10"></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Opinión sobre la concesión de beneficios al interno en estudio:</label>
+        <textarea [(ngModel)]="beneficio.opinionBeneficiosInternos"
+          
+          name="opinionBeneficiosInternos" class="form-control" cols="30" rows="10"></textarea>
+      </div>
+    </div>
+
+  <div class="col-sm-12 text-center text-sm-right">
+      <button type="submit" [disabled]="!ingreso.imputadoId || isLoading" class="btn btn-success mr-3">
+          Guardar
+      </button>
+      <button [disabled]="!ingreso.imputadoId || isLoading" type="button" (click)="generatePDF(view)"
+          class="btn btn-success mr-3">
+          Imprimir
+      </button>
+  </div>
+
+  </div>
 </form>
