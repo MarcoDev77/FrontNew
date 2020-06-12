@@ -67,7 +67,7 @@ export class FichaIngresoComponent implements OnInit {
 
   genetatePDF(modal) {
     this.isLoading = true;
-    this.servicioSocialService.generatePDFFichaIngresoTrabajoSocial(this.ingreso.imputadoId).subscribe((data: any) => {
+    this.servicioSocialService.generatePDFFichaIngresoTrabajoSocialV2(this.ingreso.imputadoId).subscribe((data: any) => {
       console.log('preview', data);
       this.isLoading = false;
       this.showPreview(data, modal);

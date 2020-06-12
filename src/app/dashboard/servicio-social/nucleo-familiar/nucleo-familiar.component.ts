@@ -96,7 +96,7 @@ export class NucleoFamiliarComponent implements OnInit {
 
   genetatePDF(modal) {
     this.isLoading = true;
-    this.servicioSocialService.generatePDFEstudioTrabajoSocial(this.imputado.id).subscribe((data: any) => {
+    this.servicioSocialService.generatePDFEstudioTrabajoSocialV2(this.imputado.id).subscribe((data: any) => {
       console.log('preview', data);
       this.isLoading = false;
       this.showPreview(data, modal);

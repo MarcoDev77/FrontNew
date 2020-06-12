@@ -45,6 +45,11 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfFichaIngreso?imputadoId=${id}`, { responseType });
   }
 
+  generatePDFFichaIngresoTrabajoSocialV2 = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfMergeIngresoHoja?imputadoId=${id}`, { responseType });
+  }
+
   getInfoFichaIngreso = folio => {
     return this.http.get(`${this.url}/api/listarfichaIngresoTrabajoSocial?folioImputado=${folio}`);
   }
@@ -119,18 +124,23 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfEstudioClasificacion?imputadoId=${id}`, { responseType });
   }
 
-  searchByDate= model=> this.http.get(`${this.url}/api/listarRegistroPasesProvisionales?fecha=${model.date}&dormitorio=${model.dormitorio.nombre}`)
-  
-  getInfoTrasladoFederal =folio=> this.http.get(`${this.url}/api/listarImputadoTrasladoFederal?folioImputado=${folio}`)
+  generatePDFEstudioTrabajoSocialV2 = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfMergeEstudioTrabajo?imputadoId=${id}`, { responseType });
+  }
 
-  saveTrasladofederal = model => this.http.post(`${this.url}/api/registrarTrasladoFederal`,model)
+  searchByDate = model => this.http.get(`${this.url}/api/listarRegistroPasesProvisionales?fecha=${model.date}&dormitorio=${model.dormitorio.nombre}`)
+
+  getInfoTrasladoFederal = folio => this.http.get(`${this.url}/api/listarImputadoTrasladoFederal?folioImputado=${folio}`)
+
+  saveTrasladofederal = model => this.http.post(`${this.url}/api/registrarTrasladoFederal`, model)
 
   generatePDFTrasladoFederal = id => {
     const responseType = 'arraybuffer' as 'json';
     return this.http.get(`${this.url}/api/generarFormatoPdfTrasladoFederal?imputadoId=${id}`, { responseType });
   }
-  
-  getInfoBeneficioEstatal= folio=> this.http.get(`${this.url}/api/listarImputadoBeneficioEstatal?folioImputado=${folio}`)
-  
-  saveBeneficioEstatal = model => this.http.post(`${this.url}/api/registrarBeneficioEstatal`,model)
+
+  getInfoBeneficioEstatal = folio => this.http.get(`${this.url}/api/listarImputadoBeneficioEstatal?folioImputado=${folio}`)
+
+  saveBeneficioEstatal = model => this.http.post(`${this.url}/api/registrarBeneficioEstatal`, model)
 }
