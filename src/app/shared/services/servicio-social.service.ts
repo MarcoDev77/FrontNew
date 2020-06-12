@@ -124,6 +124,11 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfEstudioClasificacion?imputadoId=${id}`, { responseType });
   }
 
+  generatePDFEstudioTrabajoSocialV2 = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfMergeEstudioTrabajo?imputadoId=${id}`, { responseType });
+  }
+
   searchByDate = model => this.http.get(`${this.url}/api/listarRegistroPasesProvisionales?fecha=${model.date}&dormitorio=${model.dormitorio.nombre}`)
 
   getInfoTrasladoFederal = folio => this.http.get(`${this.url}/api/listarImputadoTrasladoFederal?folioImputado=${folio}`)
