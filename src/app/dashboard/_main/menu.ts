@@ -45,7 +45,7 @@ export const ROUTES: RouteInfo[] = [
   {
     roles: [
       r.test.role,
-      r.superadmin.role
+      r.admin.role
     ],
     path: '/dashboard/catalogo',
     title: 'CATÁLOGOS',

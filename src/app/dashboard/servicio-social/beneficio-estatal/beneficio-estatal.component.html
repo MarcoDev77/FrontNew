@@ -2,7 +2,22 @@
 <app-finder-imputado [isLoading]="isLoading" (onSelectIngresoSearch)="searchImputado($event)"
   (onClearSearch)="cleanForm()"></app-finder-imputado>
 <app-generalidades-ppl [generalidadesPPL]="ingreso" [inputs]="moreInputs"></app-generalidades-ppl>
-<form action="">
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label>Domicilio:</label>
+      <input
+        [(ngModel)]="ingreso.domicilio"
+        name="domicilio"
+        type="text"
+        class="form-control"
+        readonly
+      />
+    </div>
+  </div>
+</div>
+
+<form name="search" (ngSubmit)="saveBeneficioEstatal()" #formSearch="ngForm" novalidate>
   <div class="row">
     <div class="col-md-12 mt-4">
       <h5 class="title-pink">Características del núcleo primario</h5>
@@ -12,9 +27,9 @@
     <div class="col-md-4">
       <div class="form-group">
         <label>Grupo Familiar Funcional:</label>
-        <select [(ngModel)]="beneficio.grupoFamiliarPrimario" name="grupoFamiliarFuncionalP" class="form-control">
-          <option value="funcional">Funcional</option>
-          <option value="disfuncional">Disfuncional</option>
+        <select [(ngModel)]="beneficio.grupoFamiliarPrimario" name="grupoFamiliarPrimario" class="form-control">
+          <option value="FUNCIONAL">Funcional</option>
+          <option value="DISFUNCIONAL">Disfuncional</option>
         </select>
       </div>
     </div>
@@ -23,17 +38,17 @@
         <label>Relaciones Interfamiliares:</label>
         <select [(ngModel)]="beneficio.relacionInterfamiliarPrimario" name="relacionesInterfamiliaresP"
           class="form-control">
-          <option value="adecuadas">Adecuadas</option>
-          <option value="inadecuadas">Inadecuadas</option>
+          <option value="ADECUADAS">Adecuadas</option>
+          <option value="INDADECUADAS">Inadecuadas</option>
         </select>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="custom-control custom-checkbox mt-4">
-        <input [(ngModel)]="beneficio.violenciaIntrafamiliarPrimario" name="huboViolenciaP" type="checkbox"
-          class="custom-control-input" id="huboViolenciaP" />
-        <label class="custom-control-label" for="huboViolenciaP">
+        <input [(ngModel)]="beneficio.violenciaIntrafamiliarPrimario" name="violenciaIntrafamiliarPrimario" type="checkbox"
+          class="custom-control-input" id="violenciaIntrafamiliarPrimario" />
+        <label class="custom-control-label" for="huboVviolenciaIntrafamiliarPrimarioiolenciaP">
           ¿Hubo violencia?
         </label>
       </div>
@@ -53,9 +68,9 @@
         <label>Nivel Socioeconómico y cultural</label>
         <select [(ngModel)]="beneficio.nivelSocioeconomicoPrimario" name="nivelSocioeconomicoPrimario"
           class="form-control">
-          <option value="bajo">Bajo</option>
-          <option value="medio">Medio</option>
-          <option value="alto">Alto</option>
+          <option value="BAJO">Bajo</option>
+          <option value="MEDIO">Medio</option>
+          <option value="ALTO">Alto</option>
         </select>
       </div>
     </div>
@@ -114,8 +129,8 @@
       <div class="form-group">
         <label>Grupo Familiar Funcional</label>
         <select [(ngModel)]="beneficio.grupoFamiliarSecundario" name="grupoFamiliarSecundario" class="form-control">
-          <option value="funcional">Funcional</option>
-          <option value="disfuncional">Disfuncional</option>
+          <option value="FUNCIONAL">Funcional</option>
+          <option value="DISFUNCIONAL">Disfuncional</option>
         </select>
       </div>
     </div>
@@ -124,8 +139,8 @@
         <label>Relaciones Interfamiliares</label>
         <select [(ngModel)]="beneficio.relacionInterfamiliarSecundario" name="relacionInterfamiliarSecundario"
           class="form-control">
-          <option value="adecuadas">Adecuadas</option>
-          <option value="inadecuadas">Inadecuadas</option>
+          <option value="ADECUADAS">Adecuadas</option>
+          <option value="INADECUADAS">Inadecuadas</option>
         </select>
       </div>
     </div>
@@ -143,7 +158,7 @@
     <div class="col-md-12">
       <div class="form-group">
         <label>Detalle Violencia:</label>
-        <textarea [(ngModel)]="beneficio.violenciaIntrafamiliarSecundario"
+        <textarea [(ngModel)]="beneficio.violenciaEspecificarSecundario"
           [disabled]="!beneficio.violenciaIntrafamiliarSecundario" [readOnly]="!beneficio.violenciaIntrafamiliarSecundario"
           name="violenciaIntrafamiliarSecundario" class="form-control" cols="30" rows="10"></textarea>
       </div>
@@ -154,9 +169,9 @@
         <label>Nivel Socioeconómico y cultural:</label>
         <select [(ngModel)]="beneficio.nivelSocioeconomicoSecundario" name="nivelSocioeconomicoSecundario"
           class="form-control">
-          <option value="bajo">Bajo</option>
-          <option value="medio">Medio</option>
-          <option value="alto">Alto</option>
+          <option value="BAJO">Bajo</option>
+          <option value="MEDIO">Medio</option>
+          <option value="ALTO">Alto</option>
         </select>
       </div>
     </div>

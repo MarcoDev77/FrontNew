@@ -22,10 +22,12 @@ export class BeneficioEstatalComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit() {
+   
     this.ingreso = {} as any
     this.beneficio = {} as any
     this.beneficio.parentesco={} as any
     this.getParentescos()
+   
   }
 
   getParentescos() {
@@ -39,9 +41,13 @@ export class BeneficioEstatalComponent implements OnInit {
       this.ingreso = { ...ingreso };
     }
     this.isLoading = true
-    this.servicioSocialService.getInfoFichaIngreso(this.ingreso.folio).subscribe((data: any) => {
+    this.servicioSocialService.getInfoBeneficioEstatal(this.ingreso.folio).subscribe((data: any) => {
       console.log(data)
-      this.ingreso = data.imputado
+      if(!data.error){
+        this.ingreso = data.imputado
+        this.beneficio= data.imputado.beneficioEstatal
+      }
+      
       Swal.fire({
         title: data.error ? 'Error!' : 'Resultados',
         text: data.mensaje,
@@ -51,6 +57,27 @@ export class BeneficioEstatalComponent implements OnInit {
       });
       this.isLoading = false
     })
+  }
+
+  saveBeneficioEstatal(){
+    this.isLoading=true
+    this.beneficio.imputado={
+      id: this.ingreso.imputadoId
+    }
+    console.log(this.beneficio)
+    this.servicioSocialService.saveBeneficioEstatal(this.beneficio).subscribe((data: any)=>{
+      console.log(data)
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
+      this.isLoading = false
+    })
+
+
   }
 
   cleanForm() {
@@ -134,4 +161,5 @@ class BeneficioEstatal {
   opinionBeneficiosInternos: String
   radicaEstado: boolean
   parentesco: any
+  imputado: any
 }

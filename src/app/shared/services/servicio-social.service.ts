@@ -101,6 +101,8 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfTrabajoSocial?imputadoId=${id}`, { responseType });
   }
 
+
+
   generatePDFTrabajoSocial = id => {
     const responseType = 'arraybuffer' as 'json';
     return this.http.get(`${this.url}/api/generarFormatoPdfTrabajoSocial?imputadoId=${id}`, { responseType });
@@ -122,4 +124,13 @@ export class ServicioSocialService {
   getInfoTrasladoFederal =folio=> this.http.get(`${this.url}/api/listarImputadoTrasladoFederal?folioImputado=${folio}`)
 
   saveTrasladofederal = model => this.http.post(`${this.url}/api/registrarTrasladoFederal`,model)
+
+  generatePDFTrasladoFederal = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfTrasladoFederal?imputadoId=${id}`, { responseType });
+  }
+  
+  getInfoBeneficioEstatal= folio=> this.http.get(`${this.url}/api/listarImputadoBeneficioEstatal?folioImputado=${folio}`)
+  
+  saveBeneficioEstatal = model => this.http.post(`${this.url}/api/registrarBeneficioEstatal`,model)
 }

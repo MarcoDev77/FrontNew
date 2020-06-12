@@ -80,8 +80,7 @@ export class TransladoFederalComponent implements OnInit {
 
   generatePDF(modal) {
     this.isLoading = true;
-    //TODO: Cambiar por el metodo correspondiente
-    this.servicioSocialService.generatePDFEstudioSocieconomico(this.ingreso.imputadoId)
+    this.servicioSocialService.generatePDFTrasladoFederal(this.ingreso.imputadoId)
       .subscribe((data: any) => {
         this.isLoading = false;
         this.showPreview(data, modal);
