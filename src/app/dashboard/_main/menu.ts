@@ -115,6 +115,11 @@ export const ROUTES: RouteInfo[] = [
       { path: 'servicio-social/nucleo-familiar', title: 'ESTUDIO FEDERAL', ab: 'EF' },
       { path: 'servicio-social/estudio-socioeconomico', title: 'ESTUDIO SOCIOECONÓMICO', ab: 'ES' },
       { path: 'servicio-social/registro-visita', title: 'REGISTRO VISITAS', ab: 'RV' },
+      { path: 'servicio-social/beneficio-estatal', title: 'BENEFICIO ESTATAL', ab: 'BE' },
+      { path: 'servicio-social/traslado-federal', title: 'TRASLADO FEDERAL', ab: 'TF' },
+
+
+
     ],
   },
   {
