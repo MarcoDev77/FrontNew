@@ -48,7 +48,7 @@
       <div class="custom-control custom-checkbox mt-4">
         <input [(ngModel)]="beneficio.violenciaIntrafamiliarPrimario" name="violenciaIntrafamiliarPrimario" type="checkbox"
           class="custom-control-input" id="violenciaIntrafamiliarPrimario" />
-        <label class="custom-control-label" for="huboVviolenciaIntrafamiliarPrimarioiolenciaP">
+        <label class="custom-control-label" for="violenciaIntrafamiliarPrimario">
           ¿Hubo violencia?
         </label>
       </div>
@@ -148,8 +148,8 @@
     <div class="col-md-4">
       <div class="custom-control custom-checkbox mt-4">
         <input [(ngModel)]="beneficio.violenciaIntrafamiliarSecundario" name="violenciaIntrafamiliarSecundario" type="checkbox"
-          class="custom-control-input" id="huboViolenciaP" />
-        <label class="custom-control-label" for="huboViolenciaP">
+          class="custom-control-input" id="violenciaIntrafamiliarSecundario" />
+        <label class="custom-control-label" for="violenciaIntrafamiliarSecundario">
           ¿Hubo violencia?
         </label>
       </div>
@@ -160,7 +160,7 @@
         <label>Detalle Violencia:</label>
         <textarea [(ngModel)]="beneficio.violenciaEspecificarSecundario"
           [disabled]="!beneficio.violenciaIntrafamiliarSecundario" [readOnly]="!beneficio.violenciaIntrafamiliarSecundario"
-          name="violenciaIntrafamiliarSecundario" class="form-control" cols="30" rows="10"></textarea>
+          name="violenciaEspecificarSecundario" class="form-control" cols="30" rows="10"></textarea>
       </div>
     </div>
 
@@ -369,3 +369,16 @@
 
   </div>
 </form>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+      <i (click)="view.dismiss()" style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      " class="fa fa-times-circle"></i>
+      <app-web-viewer [file]="file" [name]="'estudio trabajo social'"></app-web-viewer>
+  </div>
+</ng-template>

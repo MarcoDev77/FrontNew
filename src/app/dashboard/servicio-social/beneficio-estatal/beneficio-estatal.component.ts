@@ -36,7 +36,6 @@ export class BeneficioEstatalComponent implements OnInit {
     });
   }
   searchImputado(ingreso?) {
-    console.log(ingreso)
     if (ingreso) {
       this.ingreso = { ...ingreso };
     }
@@ -45,7 +44,9 @@ export class BeneficioEstatalComponent implements OnInit {
       console.log(data)
       if(!data.error){
         this.ingreso = data.imputado
-        this.beneficio= data.imputado.beneficioEstatal
+        if(data.beneficioEstatal!=null){
+          this.beneficio= data.imputado.beneficioEstatal
+        }
       }
       
       Swal.fire({
