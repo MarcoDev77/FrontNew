@@ -1,0 +1,80 @@
+<app-section-title
+  icon="fa fa-table"
+  title="Registro de visitas"
+></app-section-title>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Codigo de barras:</label>
+      <input type="text" name="codigoBarras" id="" class="form-control" [(ngModel)]="codigoBarras"/>
+    </div>
+  </div>
+  <div class="col-md-4 mt-2 pt-2">
+    <button class="btn btn-success" (click)="searchVisita()">Buscar</button>
+  </div>
+</div>
+<div *ngIf="referencia.tipoPase=='pase'" class="row">
+  <div class="col-md-4 text-center">
+    <img src="{{referencia.fotoPerfil ? 'data:image/png;base64,' + referencia.fotoPerfil :'assets/img/no_image.png'}}">
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Nombre del visitante:</label>
+      <p>{{referencia?.nombre}} {{referencia?.apellidoPaterno}} {{referencia?.apellidoMaterno}}</p>
+    </div>
+    <div class="form-group">
+      <label for="">Fecha de nacimiento:</label>
+      <p>{{referencia?.fechaNacimiento|date:'shortDate'}}</p>
+    </div>
+    <div class="form-group">
+      <label for="">Edad:</label>
+      <p>{{referencia?.edad}}</p>
+    </div>
+    <div class="form-group">
+      <label for="">Folio de imputado:</label>
+      <p>{{referencia?.noControlPpl}}</p>
+    </div>
+  </div>
+
+  <div *ngIf="referencia.fechaEntrada==null" class="col-md-4">
+    <form  name="form" (ngSubmit)="f.form.valid && saveIngresoVisita()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="">Niños a ingresar:</label>
+        <input type="number" name="numeroNinos" id="" min="0" class="form-control"  [(ngModel)]="referencia.numeroNinos">
+      </div>
+      <div class="form-group text-center">
+        <button class="btn btn-success" type="submit">Registrar visita</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="referencia.fechaEntrada!=null" class="col-md-4">
+    <div class="form-group">
+      <label for="">Fecha de entrada:</label>
+      <p>{{referencia?.fechaEntrada|date:'shortDate'}}</p>
+    </div>
+    <div class="form-group">
+      <label for="">Hora de entrada:</label>
+      <p>{{referencia?.horaEntrada}}</p>
+    </div>
+
+    <form *ngIf="referencia.horaSalida==null"  n name="form" (ngSubmit)="f.form.valid && saveSalidaVisita()" #f="ngForm" novalidate>
+      <div class="form-group text-center">
+        <button class="btn btn-success" type="submit">Registrar salida</button>
+      </div>
+    </form>
+
+    <div *ngIf="referencia.horaSalida!=null">
+      adsf
+      <div class="form-group">
+        <label for="">Fecha de entrada:</label>
+        <p>{{referencia?.fechaSalida|date:'shortDate'}}</p>
+      </div>
+      <div class="form-group">
+        <label for="">Hora de entrada:</label>
+        <p>{{referencia?.horaSalida}}</p>
+      </div>
+    </div>
+   
+  </div>
+</div>

@@ -13,6 +13,7 @@ import { PertenenciasComponent } from './pertenencias/pertenencias.component';
 import { RevisionesComponent } from './revisiones/revisiones.component';
 import { PertenenciasResultadoBusquedaComponent } from './pertenencias-resultado-busqueda/pertenencias-resultado-busqueda.component';
 import {FileUploadModule} from 'ng2-file-upload';
+import { RegistroVisitasComponent } from './registro-visitas/registro-visitas.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {FileUploadModule} from 'ng2-file-upload';
     PertenenciasComponent,
     RevisionesComponent,
     PertenenciasResultadoBusquedaComponent,
+    RegistroVisitasComponent
   ],
     imports: [
         CommonModule,
