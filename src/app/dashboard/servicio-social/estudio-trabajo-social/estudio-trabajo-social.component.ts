@@ -14,6 +14,7 @@ export class EstudioTrabajoSocialComponent implements OnInit {
   public isLoading: boolean;
   public ingreso: Ingreso;
   public estudio: EstudioTrabajoSocial;
+  public nucleoId: number;
   public parentescos: any[];
   // Filepreview
   public file: any;
@@ -102,6 +103,7 @@ export class EstudioTrabajoSocialComponent implements OnInit {
       if (!data.error) {
         this.estudio = data.imputado.estudioClasificacion;
         this.estudio.parentescoResponsable = data.imputado.estudioClasificacion.parentescoResponsable || {};
+        this.nucleoId = data.imputado.nucleoFamiliar;
       }
     });
   }

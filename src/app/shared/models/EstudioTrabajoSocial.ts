@@ -48,4 +48,7 @@ export class EstudioTrabajoSocial {
   tratamiento: string;
 
   imputado: any;
+  // Datos nucleo Familiar
+  hijosUnionesS: string;
+  numeroParejasS: number;
 }
