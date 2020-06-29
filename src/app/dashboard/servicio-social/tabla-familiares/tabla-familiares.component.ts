@@ -14,8 +14,9 @@ export class TablaFamiliaresComponent implements OnInit {
   @Input() tipoNucleo: string;
   @Input() nucleoId: number;
   @Input() title: string;
-  public isLoading:boolean
-  public familiar : any
+  @Input() showTitle: boolean;
+  public isLoading: boolean
+  public familiar: any
   public parentescos: any[]
   public familiares: any[];
   public tituloModal: string
@@ -31,14 +32,14 @@ export class TablaFamiliaresComponent implements OnInit {
   public auxId: any;
 
   constructor(private servicioSocialService: ServicioSocialService,
-     private ingresoService: IngresoService,
-    private  catalogosService: CatalogosService,private modalService: NgbModal) {
-    this.familiar= {} as any;
-    this.familiares= [];
-    this.estadosCiviles=[];
+    private ingresoService: IngresoService,
+    private catalogosService: CatalogosService, private modalService: NgbModal) {
+    this.familiar = {} as any;
+    this.familiares = [];
+    this.estadosCiviles = [];
     this.familiar.parentesco = {} as any
-    this.familiar.estadoCivil={} as any
-   }
+    this.familiar.estadoCivil = {} as any
+  }
 
   ngOnInit() {
     this.getFamiliares();
@@ -48,51 +49,51 @@ export class TablaFamiliaresComponent implements OnInit {
 
 
 
-  getParentescos(){
-    this.ingresoService.getParentescos().subscribe((data: any)=>{
+  getParentescos() {
+    this.ingresoService.getParentescos().subscribe((data: any) => {
       console.log(data)
-      this.parentescos=data.parentescos
+      this.parentescos = data.parentescos
     })
   }
 
-  getEstadosCiviles(){
-    this.catalogosService.listEstadosCiviles().subscribe((data:any)=>{
+  getEstadosCiviles() {
+    this.catalogosService.listEstadosCiviles().subscribe((data: any) => {
       console.log(data);
-      this.estadosCiviles=data.estadosCiviles
+      this.estadosCiviles = data.estadosCiviles
     })
   }
 
-  getFamiliares(){
-    let model={
+  getFamiliares() {
+    let model = {
       tipoNucleo: this.tipoNucleo,
       nucleoId: this.nucleoId,
     }
-    this.servicioSocialService.getMiembrosNucleoFamiliar(model).subscribe((data:any)=>{
+    this.servicioSocialService.getMiembrosNucleoFamiliar(model).subscribe((data: any) => {
       console.log(data)
-      this.familiares=data.miembrosNucleo;
+      this.familiares = data.miembrosNucleo;
     })
   }
 
-  saveFamiliar(){
-    this.familiar.nucleoFamiliar={id: this.nucleoId};
-    this.familiar.tipoNucleo= this.tipoNucleo;
-      this.servicioSocialService.saveMiembroNucleoFamiliar(this.familiar).subscribe((data: any) => {
-        console.log(data);
-        Swal.fire({
-          title: data.error ? 'Error!' : 'Guardado',
-          text: data.mensaje,
-          icon: data.error ? 'error' : 'success',
-          timer: 1300,
-          showConfirmButton: false
-        });
-        this.getFamiliares()
-        this.modalService.dismissAll();
+  saveFamiliar() {
+    this.familiar.nucleoFamiliar = { id: this.nucleoId };
+    this.familiar.tipoNucleo = this.tipoNucleo;
+    this.servicioSocialService.saveMiembroNucleoFamiliar(this.familiar).subscribe((data: any) => {
+      console.log(data);
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
       });
+      this.getFamiliares()
+      this.modalService.dismissAll();
+    });
 
   }
 
 
-  deleteFamiliar(item){
+  deleteFamiliar(item) {
     Swal.fire({
       title: '¿Estas seguro?',
       text: 'El registro se eliminara.',
@@ -100,7 +101,7 @@ export class TablaFamiliaresComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.servicioSocialService.deleteMiembroNucleoFamiliar(item).subscribe((data: any) => {
           console.log(data);
@@ -113,7 +114,7 @@ export class TablaFamiliaresComponent implements OnInit {
           }).finally(() => {
             if (!data.error) {
               //this.cancel();
-             this.getFamiliares();
+              this.getFamiliares();
             }
           });
         });
@@ -122,41 +123,42 @@ export class TablaFamiliaresComponent implements OnInit {
   }
 
 
-//Table methods
+  //Table methods
 
-sort(key) {
-  if (key === this.key) {
-    this.reverse = !this.reverse;
-    if (this.reverse === false) {
-      this.key = 'id';
-      this.reverse = true;
+  sort(key) {
+    if (key === this.key) {
+      this.reverse = !this.reverse;
+      if (this.reverse === false) {
+        this.key = 'id';
+        this.reverse = true;
+      }
+    } else {
+      this.key = key;
+      this.reverse = false;
     }
-  } else {
-    this.key = key;
-    this.reverse = false;
+  }
+
+
+  add() {
+    this.tituloModal = "Registrar familiar"
+    this.familiar = {} as any;
+    this.familiar.parentesco = {} as any
+    this.familiar.estadoCivil = {} as any
+  }
+
+  updateFamiliar(familiar) {
+    this.tituloModal = "Modificar familiar"
+    this.familiar = familiar
+  }
+  switch($event) { }
+
+  openModal(modal) {
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 }
 
-
-add() {
-  this.tituloModal="Registrar familiar"
-  this.familiar = {} as any;
-  this.familiar.parentesco={} as any
-  this.familiar.estadoCivil={} as any
-}
-
-updateFamiliar(familiar){
-  this.tituloModal="Modificar familiar"
-  this.familiar=familiar
-}
-switch($event){}
-
-openModal(modal){
-  this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });}
-}
-
 class Familiar {
-  id:number
+  id: number
   nombre: String
   parentesco: any
   ocupacion: String
