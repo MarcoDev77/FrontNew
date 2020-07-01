@@ -1,0 +1,196 @@
+<app-section-title icon="fa fa-table" title="Restricción de visitas"></app-section-title>
+<h3 class="title-pink">Por visita</h3>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Codigo de barras:</label>
+      <input type="text" name="codigoBarras" id="" class="form-control" [(ngModel)]="criteria.codigoBarras" />
+    </div>
+  </div>
+  <div class="col-md-4 mt-2 pt-2">
+    <button class="btn btn-success" (click)="searchReferencia('referencia')">Buscar</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Apellido paterno:</label>
+      <input type="text" name="apellidoPaterno"  class="form-control" [(ngModel)]="criteria.apellidoPaterno" />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Apellido materno:</label>
+      <input type="text" name="apellidoMaterno"  class="form-control" [(ngModel)]="criteria.apellidoMaterno" />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Nombre:</label>
+      <input type="text" name="nombre"  class="form-control" [(ngModel)]="criteria.nombre" />
+    </div>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="text-center">
+          Apellido paterno
+        </th>
+        <th class="text-center">
+          Apellido materno
+        </th>
+        <th class="text-center">
+          Nombre
+        </th>
+        <th class="text-center">
+          PPL
+        </th>
+        <th class="text-center" style="min-width: 5rem;">Restringir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data | paginate: { itemsPerPage: 20, currentPage: p }">
+        <td class="text-center">{{ item.apellidoPaterno }}</td>
+        <td class="text-center">
+          {{ item.apellidoMaterno }}
+        </td>
+        <td class="text-center">
+          {{ item.nombre }}
+        </td>
+        <td class="text-center">
+          {{ item.nombrePpl }}
+        </td>
+        <td class="text-center">
+          <i class="fa fa-times-circle-o" ngbTooltip="Restringir visita" (click)="openModal(formModal,'referencia',item)" placement="top"></i>
+        </td>
+      </tr>
+      <tr *ngIf="data.length == 0">
+        <td colspan="6">
+          {{ isLoading ? "Cargando..." : "Sin registros..." }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center w-100">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<h3 class="title-pink">Por PPL</h3>
+<div class="row">
+  <div class="col-md-4 mt-2 pt-2">
+    <button class="btn btn-success" (click)="searchReferencia('ppl')">Buscar</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Apellido paterno:</label>
+      <input type="text" name="apellidoPaterno" class="form-control" [(ngModel)]="criteriaPPL.apellidoPaterno" />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Apellido materno:</label>
+      <input type="text" name="apellidoMaterno"  class="form-control" [(ngModel)]="criteriaPPL.apellidoMaterno" />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="">Nombre:</label>
+      <input type="text" name="nombre" class="form-control" [(ngModel)]="criteriaPPL.nombre" />
+    </div>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="text-center">
+          Apellido paterno
+        </th>
+        <th class="text-center">
+          Apellido materno
+        </th>
+        <th class="text-center">
+          Nombre
+        </th>
+        <th class="text-center" style="min-width: 5rem;">Restringir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataPPL | paginate: { itemsPerPage: 20, currentPage: p }">
+        <td class="text-center">{{ item.apellidoPaterno }}</td>
+        <td class="text-center">
+          {{ item.apellidoMaterno }}
+        </td>
+        <td class="text-center">
+          {{ item.nombre }}
+        </td>
+        <td class="text-center">
+          <i class="fa fa-times-circle-o" ngbTooltip="Restringir todas las visitas" (click)="openModal(formModal,'imputado',item)" placement="top"></i>
+        </td>
+      </tr>
+      <tr *ngIf="dataPPL.length == 0">
+        <td colspan="6">
+          {{ isLoading ? "Cargando..." : "Sin registros..." }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center w-100">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #formModal let-formModal>
+  <div class="modal-body">
+    <h3>Restricción de visita</h3>
+    <br>
+    <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && saveRestriccion()" #f="ngForm" novalidate>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="">Inicio de restricción</label>
+            <input type="date" class="form-control" name="fechaInicio" [(ngModel)]="restriccion.fechaInicio" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="">Fin de restricción</label>
+            <input type="date"class="form-control" name="fechaFin"  [(ngModel)]="restriccion.fechaFin">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">Comentarios</label>
+            <textarea name="comentarios"class="form-control"  cols="30" rows="10" [(ngModel)]="restriccion.comentario"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 text-center text-sm-right">
+        <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cancelar</button>
+        <button type="submit" class="btn btn-success">Guardar</button>
+      </div>
+
+    </form>
+  </div>
+</ng-template>

@@ -7,11 +7,16 @@ import { InformaticaRoutingModule } from './informatica-routing.module';
 import { BloqueVistasComponent } from './bloque-visitas/bloque-visitas.component';
 import { CardVisitaComponent } from './card-visita/card-visita.component';
 import { ReporteVisitasComponent } from './reporte-visitas/reporte-visitas.component';
+import { RestriccionVisitasComponent } from './restriccion-visitas/restriccion-visitas.component';
 
 
 
 @NgModule({
-  declarations: [RootComponent, BloqueVistasComponent, CardVisitaComponent, ReporteVisitasComponent],
+  declarations: [RootComponent,
+     BloqueVistasComponent,
+    CardVisitaComponent,
+    ReporteVisitasComponent,
+    RestriccionVisitasComponent],
   imports: [
     CommonModule,
     SharedModule,
