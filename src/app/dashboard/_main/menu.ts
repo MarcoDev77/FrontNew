@@ -173,6 +173,8 @@ export const ROUTES: RouteInfo[] = [
       { path: 'seguridad-custodia/nombramiento', title: 'Nombramiento', ab: 'NOM' },
       { path: 'seguridad-custodia/custodios', title: 'Custodios', ab: 'CUS' },
       { path: 'seguridad-custodia/revisiones', title: 'Revisiones', ab: 'RE' },
+      { path: 'seguridad-custodia/registro-visitas', title: 'Registro de visitas', ab: 'RE' },
+
     ],
   },
   {
@@ -204,6 +206,8 @@ export const ROUTES: RouteInfo[] = [
     children: [
       { path: '/ingreso', title: 'INGRESO', ab: 'IN' },
       { path: '/informatica/personas-visitan', title: 'REPORTE VISITAS', ab: 'RV' },
+      { path: '/informatica/restriccion-visitas', title: 'RESTRICCIÓN DE VISITAS', ab: 'RNV' },
+
     ]
   },
 ];

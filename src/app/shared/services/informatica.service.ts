@@ -18,4 +18,30 @@ export class InformaticaService {
     const responseType = 'arraybuffer' as 'json';
     return this.http.get(`${this.url}/api/generarFormatoPdfReporteVisitaCredencial?imputadoId=${id}`, { responseType });
   }
+
+  searchReferenciaPersonal= model=>{
+    if(model.codigoBarras){
+      return this.http.get(`${this.url}/api/buscarReferenciasPersonalesCodigo?codigoBarras=${model.codigoBarras}`)
+    }else{
+      return this.http.get(`${this.url}/api/buscarPplReferenciasNombre?nombre=${model.nombre}&apellidoPaterno=${model.apellidoPaterno}&apellidoMaterno=${model.apellidoMaterno}&tipoBusqueda=${model.tipoBusqueda}`)
+    }
+  }
+  
+  saveRestriccion=model=>{
+    if(model.tipo=='imputado'){
+      return this.http.post(`${this.url}/api/registrarRestriccionVisita`,model)
+    }else{
+      return this.http.post(`${this.url}/api/registrarRestriccionVisitaReferencia`,model)
+    }
+  }
+
+  deleteRestriccion(id,tipo){
+    if(tipo=="imputado"){
+      return     this.http.get(`${this.url}/api/eliminarRestriccionVisitaImputado?restriccionId=${id}`)
+
+    }else{
+      return     this.http.get(`${this.url}/api/eliminarRestriccionVisitaReferencia?restriccionId=${id}`)
+
+    }
+  }
 }

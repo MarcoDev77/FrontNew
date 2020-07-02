@@ -143,4 +143,5 @@ export class ServicioSocialService {
   getInfoBeneficioEstatal = folio => this.http.get(`${this.url}/api/listarImputadoBeneficioEstatal?folioImputado=${folio}`)
 
   saveBeneficioEstatal = model => this.http.post(`${this.url}/api/registrarBeneficioEstatal`, model)
+
 }
