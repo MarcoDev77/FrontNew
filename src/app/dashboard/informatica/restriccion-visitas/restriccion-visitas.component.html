@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="col-md-4 mt-2 pt-2">
-    <button class="btn btn-success" (click)="searchReferencia('referencia')">Buscar</button>
+    <button class="btn btn-success" (click)="searchReferencia('referencia',true)">Buscar</button>
   </div>
 </div>
 <div class="row">
@@ -63,7 +63,11 @@
           {{ item.nombrePpl }}
         </td>
         <td class="text-center">
-          <i class="fa fa-times-circle-o" ngbTooltip="Restringir visita" (click)="openModal(formModal,'referencia',item)" placement="top"></i>
+          <i class="fa fa-times-circle-o" *ngIf="!item.restriccionVisita.id" ngbTooltip="Restringir visita" (click)="openModal(formModal,'referencia',item)" placement="top"></i>  &nbsp;
+
+          <i class="fa fa-pencil" *ngIf="item.restriccionVisita.id" ngbTooltip="Editar restricción de visita" (click)="openModal(formModal,'referencia',item)" placement="top"></i> &nbsp;
+          <i class="fa fa-trash-o" *ngIf="item.restriccionVisita.id" ngbTooltip="Eliminar restricción de visita" (click)="deleteRestriccion(item,'referencia')" placement="top"></i>
+
         </td>
       </tr>
       <tr *ngIf="data.length == 0">
@@ -88,7 +92,7 @@
 <h3 class="title-pink">Por PPL</h3>
 <div class="row">
   <div class="col-md-4 mt-2 pt-2">
-    <button class="btn btn-success" (click)="searchReferencia('ppl')">Buscar</button>
+    <button class="btn btn-success" (click)="searchReferencia('ppl',true)">Buscar</button>
   </div>
 </div>
 <div class="row">
@@ -137,7 +141,10 @@
           {{ item.nombre }}
         </td>
         <td class="text-center">
-          <i class="fa fa-times-circle-o" ngbTooltip="Restringir todas las visitas" (click)="openModal(formModal,'imputado',item)" placement="top"></i>
+          <i class="fa fa-times-circle-o" *ngIf="!item.restriccionVisita.id" ngbTooltip="Restringir visita" (click)="openModal(formModal,'imputado',item)" placement="top"></i>  &nbsp;
+
+          <i class="fa fa-pencil" *ngIf="item.restriccionVisita.id" ngbTooltip="Editar restricción de visita" (click)="openModal(formModal,'imputado',item)" placement="top"></i> &nbsp;
+          <i class="fa fa-trash-o" *ngIf="item.restriccionVisita.id" ngbTooltip="Eliminar restricción de visita" (click)="deleteRestriccion(item,'imputado')" placement="top"></i>
         </td>
       </tr>
       <tr *ngIf="dataPPL.length == 0">
@@ -169,13 +176,20 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="">Inicio de restricción</label>
-            <input type="date" class="form-control" name="fechaInicio" [(ngModel)]="restriccion.fechaInicio" />
+            <input type="date" class="form-control" name="fechaInicio"
+            #fechaInicio="ngModel"
+            [ngModel]="restriccion.fechaInicio | date: 'yyyy-MM-dd'"
+            (ngModelChange)="restriccion.fechaInicio = $event"
+           />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label for="">Fin de restricción</label>
-            <input type="date"class="form-control" name="fechaFin"  [(ngModel)]="restriccion.fechaFin">
+            <input type="date"class="form-control" name="fechaFin" 
+            #fechaInicio="ngModel"
+            [ngModel]="restriccion.fechaFin | date: 'yyyy-MM-dd'"
+            (ngModelChange)="restriccion.fechaFin = $event" >
           </div>
         </div>
         <div class="col-md-12">

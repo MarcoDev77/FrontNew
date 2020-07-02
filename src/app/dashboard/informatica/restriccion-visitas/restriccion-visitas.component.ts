@@ -31,7 +31,9 @@ export class RestriccionVisitasComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchReferencia(tipo) {
+  searchReferencia(tipo, showModal) {
+    this.data=[]
+    this.dataPPL=[]
     let model
     if (tipo == 'ppl') {
       this.criteriaPPL.tipoBusqueda= tipo
@@ -49,19 +51,18 @@ export class RestriccionVisitasComponent implements OnInit {
       if (data.registros && tipo == "ppl") {
         this.dataPPL = data.registros
       }
-      Swal.fire({
-        title: data.error ? 'Error!' : 'Busqueda terminada!',
-        text: data.mensaje,
-        icon: data.error ? 'error' : 'success',
-        timer: 1300,
-        showConfirmButton: false
-      });
-      this.resetForm()
+      if(showModal){
+        Swal.fire({
+          title: data.error ? 'Error!' : 'Busqueda terminada!',
+          text: data.mensaje,
+          icon: data.error ? 'error' : 'success',
+          timer: 1300,
+          showConfirmButton: false
+        });
+      }
+     
+      //this.resetForm()
     })
-
-  }
-
-  searchImputado(item) {
 
   }
 
@@ -86,14 +87,41 @@ export class RestriccionVisitasComponent implements OnInit {
         timer: 1300,
         showConfirmButton: false
       });
-      this.resetForm()
-    })
+      this.reloadData()
+      this.modalService.dismissAll()
 
+    })
+   
   }
 
+  deleteRestriccion(item,tipo){
+    this.tipo=tipo
+    this.InformaticaService.deleteRestriccion(item.restriccionVisita.id,tipo).subscribe((data: any)=>{
+      console.log(data)
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Busqueda terminada!',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
+      this.reloadData()      
+    })
+  }
+  reloadData(){
+    if(this.tipo==="imputado"){
+      this.searchReferencia('ppl',false)
+    }else{
+      console.log("entra al else")
+      this.searchReferencia('referencia',false)
+    }
+  }
   openModal(modal,tipo,item) {
     this.tipo=tipo
     this.persona=item
+    if(item.restriccionVisita){
+      this.restriccion=item.restriccionVisita
+    }
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 

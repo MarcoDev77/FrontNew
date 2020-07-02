@@ -34,4 +34,14 @@ export class InformaticaService {
       return this.http.post(`${this.url}/api/registrarRestriccionVisitaReferencia`,model)
     }
   }
+
+  deleteRestriccion(id,tipo){
+    if(tipo=="imputado"){
+      return     this.http.get(`${this.url}/api/eliminarRestriccionVisitaImputado?restriccionId=${id}`)
+
+    }else{
+      return     this.http.get(`${this.url}/api/eliminarRestriccionVisitaReferencia?restriccionId=${id}`)
+
+    }
+  }
 }
