@@ -103,7 +103,7 @@ export class ServicioSocialService {
 
   generatePDFEstudioSocieconomico = id => {
     const responseType = 'arraybuffer' as 'json';
-    return this.http.get(`${this.url}/api/generarFormatoPdfTrabajoSocial?imputadoId=${id}`, { responseType });
+    return this.http.get(`${this.url}/api/generarFormatoPdfEstudioSocioeconomico?imputadoId=${id}`, { responseType });
   }
 
 
