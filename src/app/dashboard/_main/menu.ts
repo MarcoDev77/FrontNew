@@ -108,13 +108,14 @@ export const ROUTES: RouteInfo[] = [
     children: [
       { path: 'servicio-social/ficha-ingreso', title: 'FICHA DE INGRESO', ab: 'FI' },
       { path: 'servicio-social/estudio-trabajo-social', title: 'ESTUDIO DE CLASIFICACIÓN', ab: 'EC' },
-      { path: 'comite-tecnico/plan-actividades', title: 'FORMATO DE PLAN DE ACTIVIDADES', ab: 'FPA' },
       { path: 'servicio-social/seguimiento', title: 'FORMATO DE AVANCE Y/O INFORME', ab: 'FAI' },
+      { path: 'servicio-social/nucleo-familiar', title: 'ESTUDIO FEDERAL', ab: 'EF' },
       { path: 'servicio-social/beneficio-estatal', title: 'BENEFICIO ESTATAL', ab: 'BE' },
       { path: 'servicio-social/traslado-federal', title: 'TRASLADO FEDERAL', ab: 'TF' },
-      { path: 'servicio-social/nucleo-familiar', title: 'ESTUDIO FEDERAL', ab: 'EF' },
       { path: 'servicio-social/estudio-socioeconomico', title: 'ESTUDIO SOCIOECONÓMICO', ab: 'ES' },
-      { path: 'servicio-social/registro-visita', title: 'REGISTRO VISITAS', ab: 'RV' },
+      // No se han definido
+      // { path: 'comite-tecnico/plan-actividades', title: 'FORMATO DE PLAN DE ACTIVIDADES', ab: 'FPA' },
+      // { path: 'servicio-social/registro-visita', title: 'REGISTRO VISITAS', ab: 'RV' },
     ],
   },
   {
