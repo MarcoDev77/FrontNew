@@ -109,7 +109,7 @@ export const ROUTES: RouteInfo[] = [
       { path: 'servicio-social/ficha-ingreso', title: 'FICHA DE INGRESO', ab: 'FI' },
       { path: 'servicio-social/estudio-trabajo-social', title: 'ESTUDIO DE CLASIFICACIÓN', ab: 'EC' },
       { path: 'comite-tecnico/plan-actividades', title: 'FORMATO DE PLAN DE ACTIVIDADES', ab: 'FPA' },
-      { path: '#', title: 'FORMATO DE AVANCE Y/O INFORME', ab: 'FAI' },//Pentiente
+      { path: 'servicio-social/seguimiento', title: 'FORMATO DE AVANCE Y/O INFORME', ab: 'FAI' },
       { path: 'servicio-social/beneficio-estatal', title: 'BENEFICIO ESTATAL', ab: 'BE' },
       { path: 'servicio-social/traslado-federal', title: 'TRASLADO FEDERAL', ab: 'TF' },
       { path: 'servicio-social/nucleo-familiar', title: 'ESTUDIO FEDERAL', ab: 'EF' },
