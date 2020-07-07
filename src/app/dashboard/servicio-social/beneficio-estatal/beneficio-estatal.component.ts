@@ -15,19 +15,19 @@ export class BeneficioEstatalComponent implements OnInit {
   public isLoading: boolean
   public beneficio: BeneficioEstatal
   public parentescos: []
-  public file:any
+  public file: any
   constructor(
     private servicioSocialService: ServicioSocialService,
     private catalogoService: CatalogosService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
-   
+
     this.ingreso = {} as any
     this.beneficio = {} as any
-    this.beneficio.parentesco={} as any
+    this.beneficio.parentesco = {} as any
     this.getParentescos()
-   
+
   }
 
   getParentescos() {
@@ -42,13 +42,13 @@ export class BeneficioEstatalComponent implements OnInit {
     this.isLoading = true
     this.servicioSocialService.getInfoBeneficioEstatal(this.ingreso.folio).subscribe((data: any) => {
       console.log(data)
-      if(!data.error){
+      if (!data.error) {
         this.ingreso = data.imputado
-        if(data.beneficioEstatal!=null){
-          this.beneficio= data.imputado.beneficioEstatal
+        if (data.beneficioEstatal != null) {
+          this.beneficio = data.imputado.beneficioEstatal
         }
       }
-      
+
       Swal.fire({
         title: data.error ? 'Error!' : 'Resultados',
         text: data.mensaje,
@@ -60,13 +60,13 @@ export class BeneficioEstatalComponent implements OnInit {
     })
   }
 
-  saveBeneficioEstatal(){
-    this.isLoading=true
-    this.beneficio.imputado={
+  saveBeneficioEstatal() {
+    this.isLoading = true
+    this.beneficio.imputado = {
       id: this.ingreso.imputadoId
     }
     console.log(this.beneficio)
-    this.servicioSocialService.saveBeneficioEstatal(this.beneficio).subscribe((data: any)=>{
+    this.servicioSocialService.saveBeneficioEstatal(this.beneficio).subscribe((data: any) => {
       console.log(data)
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
@@ -87,7 +87,7 @@ export class BeneficioEstatalComponent implements OnInit {
   generatePDF(modal) {
     this.isLoading = true;
     //TODO: Cambiar por el metodo correspondiente
-    this.servicioSocialService.generatePDFEstudioSocieconomico(this.ingreso.imputadoId)
+    this.servicioSocialService.generarFormatoPdfTrabajoSocial(this.ingreso.imputadoId)
       .subscribe((data: any) => {
         this.isLoading = false;
         this.showPreview(data, modal);

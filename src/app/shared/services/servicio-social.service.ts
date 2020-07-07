@@ -149,4 +149,9 @@ export class ServicioSocialService {
     return this.http.get(`${this.url}/api/generarFormatoPdfSeguimientoTratamiento?imputadoId=${id}`, { responseType });
   }
 
+  generarFormatoPdfTrabajoSocial = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfTrabajoSocial?imputadoId=${id}`, { responseType });
+  }
+
 }
