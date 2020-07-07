@@ -1,1 +1,52 @@
-<p>seguimiento-tratamiento works!</p>
+<app-section-title
+  icon="fa fa-address-card-o"
+  title="Seguimiento y Tratamiento"
+></app-section-title>
+<app-finder-imputado
+  [isLoading]="isLoading"
+  (onSelectIngresoSearch)="searchImputado($event)"
+  (onClearSearch)="cleanForm()"
+></app-finder-imputado>
+<app-generalidades-ppl
+  [generalidadesPPL]="ingreso?.imputado"
+></app-generalidades-ppl>
+
+<div class="row">
+  <div class="col-sm-12 text-center text-sm-right">
+    <!-- <button
+      type="submit"
+      [disabled]="!ingreso?.imputado?.id || isLoading"
+      class="btn btn-success mr-3"
+    >
+      Guardar
+    </button> -->
+    <button
+      [disabled]="!ingreso?.imputado?.id || isLoading"
+      type="button"
+      (click)="generatePDF(view)"
+      class="btn btn-success mr-3"
+    >
+      Imprimir
+    </button>
+  </div>
+</div>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'estudio trabajo social'"
+    ></app-web-viewer>
+  </div>
+</ng-template>
