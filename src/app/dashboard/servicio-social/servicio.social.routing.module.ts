@@ -17,6 +17,7 @@ import { OficioSancionesComponent } from './oficio-sanciones/oficio-sanciones.co
 import { RegistroPaseUnicoComponent } from './registro-pase-unico/registro-pase-unico.component';
 import { TransladoFederalComponent } from './translado-federal/translado-federal.component';
 import { BeneficioEstatalComponent } from './beneficio-estatal/beneficio-estatal.component';
+import { SeguimientoTratamientoComponent } from './seguimiento-tratamiento/seguimiento-tratamiento.component';
 
 const routes: Routes = [
   {
@@ -36,9 +37,10 @@ const routes: Routes = [
       { path: 'nucleo-familiar', component: NucleoFamiliarComponent },
       { path: 'estudio-socioeconomico', component: EstudioSocioeconomicoComponent },
       { path: 'oficio-sanciones', component: OficioSancionesComponent },
-      { path: 'registro-pase-unico', component: RegistroPaseUnicoComponent},
-      { path: 'traslado-federal',component: TransladoFederalComponent},
-      { path: 'beneficio-estatal', component: BeneficioEstatalComponent}
+      { path: 'registro-pase-unico', component: RegistroPaseUnicoComponent },
+      { path: 'traslado-federal', component: TransladoFederalComponent },
+      { path: 'beneficio-estatal', component: BeneficioEstatalComponent },
+      { path: 'seguimiento', component: SeguimientoTratamientoComponent },
     ]
   },
 ];

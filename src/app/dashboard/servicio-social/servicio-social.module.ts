@@ -21,6 +21,7 @@ import { OficioSancionesComponent } from './oficio-sanciones/oficio-sanciones.co
 import { RegistroPaseUnicoComponent } from './registro-pase-unico/registro-pase-unico.component';
 import { TransladoFederalComponent } from './translado-federal/translado-federal.component';
 import { BeneficioEstatalComponent } from './beneficio-estatal/beneficio-estatal.component';
+import { SeguimientoTratamientoComponent } from './seguimiento-tratamiento/seguimiento-tratamiento.component';
 
 
 
@@ -42,7 +43,8 @@ import { BeneficioEstatalComponent } from './beneficio-estatal/beneficio-estatal
     OficioSancionesComponent,
     RegistroPaseUnicoComponent,
     TransladoFederalComponent,
-    BeneficioEstatalComponent
+    BeneficioEstatalComponent,
+    SeguimientoTratamientoComponent,
   ],
 
   imports: [
