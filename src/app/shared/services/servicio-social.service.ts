@@ -144,4 +144,9 @@ export class ServicioSocialService {
 
   saveBeneficioEstatal = model => this.http.post(`${this.url}/api/registrarBeneficioEstatal`, model)
 
+  generatePDFSeguimientoTratamiento = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfSeguimientoTratamiento?imputadoId=${id}`, { responseType });
+  }
+
 }
