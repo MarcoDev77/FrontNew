@@ -55,5 +55,10 @@ export const roles = {
     name: 'Informática',
     main: 'informatica'
   },
+  seguridadIngreso: {
+    role: 'ROLE_SEGURIDAD_INGRESO',
+    name: 'Seguridad ingreso',
+    main: 'seguridad-custodia/registro-visitas'
+  },
 };
 
