@@ -1,0 +1,425 @@
+<app-section-title
+  icon="fa fa-table"
+  title="Estudio socioeconómico"
+></app-section-title>
+<app-finder-imputado
+  [isLoading]="isLoading"
+  (onSelectIngresoSearch)="searchImputado($event)"
+  (onClearSearch)="cleanForm()"
+></app-finder-imputado>
+<app-generalidades-ppl
+  [generalidadesPPL]="ingreso"
+  [inputs]="moreInputs"
+></app-generalidades-ppl>
+<form
+  name="search"
+  (ngSubmit)="saveEstudioSocioeconomico()"
+  #formSearch="ngForm"
+  novalidate
+>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Hijos de uniones anteriores:</label>
+        <input
+          type="number"
+          class="form-control"
+          name="hijosUnionesAnteriores"
+          [(ngModel)]="estudio.hijosUnionesAnteriores"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Los apoya económicamente:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="apoyaEconomicamente"
+          [(ngModel)]="estudio.apoyaEconomicamente"
+        />
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Observaciones de dinámica familiar:</label>
+        <textarea
+          class="form-control"
+          name="observacionesDinamicaFamiliar"
+          rows="5"
+          cols="5"
+          [(ngModel)]="estudio.observacionesDinamicaFamiliar"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <h3 class="title-pink">Situación económica</h3>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>En su familia primaria cual era la situación económica:</label>
+        <textarea
+          class="form-control"
+          name="familiaPrimariaSituacion"
+          rows="3"
+          cols="5"
+          [(ngModel)]="estudio.familiaPrimariaSituacion"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>¿Que trabajo desempeñaba antes de ser recluido?:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="trabajoDesempenaba"
+          [(ngModel)]="estudio.trabajoDesempenaba"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4 mt-3">
+      <div class="form-group">
+        <label>Tiempo de laborar:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="tiempoLaboral"
+          [(ngModel)]="estudio.tiempoLaboral"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4 mt-3">
+      <div class="form-group">
+        <label>Sueldo percibido:</label>
+        <input
+          type="number"
+          class="form-control"
+          min="0"
+          name="sueldoPercibido"
+          [(ngModel)]="estudio.sueldoPercibido"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label
+          >A parte del interno que otras aportaciones económicas había en la
+          familia quién las hacía y a cuanto ascendían:</label
+        >
+        <textarea
+          class="form-control"
+          rows="3"
+          cols="5"
+          name="otraAportacion"
+          [(ngModel)]="estudio.otraAportacion"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-">
+      <div class="form-group">
+        <label>Actualmente como se sostiene la familia:</label>
+        <input
+          type="text"
+          class="form-control"
+          min="0"
+          name="comoSostieneFamilia"
+          [(ngModel)]="estudio.comoSostieneFamilia"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <h3 class="title-pink">Distribución del gasto familiar (Mensual)</h3>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Alimentación:</label>
+        <input
+          type="number"
+          class="form-control"
+          name="alimentacion"
+          [(ngModel)]="estudio.alimentacion"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Combustible:</label>
+        <input
+          type="number"
+          class="form-control"
+          name="combustible"
+          [(ngModel)]="estudio.combustible"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Luz:</label>
+        <input
+          type="number"
+          class="form-control"
+          name="luz"
+          [(ngModel)]="estudio.luz"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Transporte:</label>
+        <input
+          type="number"
+          class="form-control"
+          name="transporte"
+          [(ngModel)]="estudio.transporte"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Agua:</label>
+        <input
+          type="number"
+          class="form-control"
+          name="agua"
+          [(ngModel)]="estudio.agua"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Renta de vivienda:</label>
+        <input
+          type="number"
+          class="form-control"
+          name="renta"
+          [(ngModel)]="estudio.renta"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Vestuario:</label>
+        <input
+          type="number"
+          class="form-control"
+          name="vestuario"
+          [(ngModel)]="estudio.vestuario"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Atención médica:</label>
+        <input
+          type="number"
+          class="form-control"
+          name="atencionMedica"
+          [(ngModel)]="estudio.atencionMedica"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-">
+      <div class="form-group">
+        <label>La alimentación familiar consiste:</label>
+        <textarea
+          class="form-control"
+          name="alimentacionFamiliar"
+          rows="3"
+          cols="5"
+          [(ngModel)]="estudio.alimentacionFamiliar"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Con que cocina sus alimentos la familia:</label>
+        <textarea
+          class="form-control"
+          name="conQueCocina"
+          rows="3"
+          cols="5"
+          [(ngModel)]="estudio.conQueCocina"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Tiene servicios de luz, agua y drenaje:</label>
+        <input
+          type="text"
+          class="form-control"
+          min="0"
+          name="servicioAguaLuzDrenaje"
+          [(ngModel)]="estudio.servicioAguaLuzDrenaje"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label
+          >Como es su vivienda (Descripción, materiales de los que esta
+          construida):</label
+        >
+        <textarea
+          class="form-control"
+          name="vivienda"
+          rows="3"
+          cols="5"
+          [(ngModel)]="estudio.vivienda"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label
+          >El transporte esta cerca de su vivienda o tiene que caminar para
+          tomarlo, si es así, cuánto caminan:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          min="0"
+          name="transporteCerca"
+          [(ngModel)]="estudio.transporteCerca"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6 mt-">
+      <div class="form-group">
+        <label>Zona de ubicación:</label>
+        <select
+          class="form-control shadows"
+          name="zonaUbicacion"
+          [(ngModel)]="estudio.zonaUbicacion"
+        >
+          <option value="" disabled hidden>Seleccione</option>
+          <option value="Urbana">Urbana</option>
+          <option value="Urbana">Suburbana</option>
+          <option value="Urbana">Rural</option>
+          <option value="Urbana">Ciudad perdida</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-6 mt-">
+      <div class="form-group">
+        <label>Nivel socioeconómico:</label>
+        <select
+          class="form-control shadows"
+          name="nivelSocioEconomico"
+          [(ngModel)]="estudio.nivelSocioEconomico"
+        >
+          <option value="" disabled hidden>Seleccione</option>
+          <option value="Alto">Alto</option>
+          <option value="Urbana">Medio</option>
+          <option value="Urbana">Bajo</option>
+          <option value="Urbana">Precario</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Mobiliario y enseres domésticos:</label>
+        <textarea
+          class="form-control"
+          name="mobiliarioEnseresDomesticos"
+          rows="3"
+          cols="5"
+          [(ngModel)]="estudio.mobiliarioEnseresDomesticos"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Diagnóstico socioeconómico:</label>
+
+        <textarea
+          class="form-control"
+          name="nivelSocioEconomico"
+          rows="3"
+          cols="5"
+          [(ngModel)]="estudio.nivelSocioEconomico"
+        >
+        </textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Sugerencias:</label>
+        <textarea
+          class="form-control"
+          name="sugerencias"
+          rows="3"
+          cols="5"
+          [(ngModel)]="estudio.sugerencias"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 text-center text-sm-right">
+      <button
+        type="submit"
+        [disabled]="!ingreso.imputadoId || isLoading"
+        class="btn btn-success mr-3"
+      >
+        Guardar
+      </button>
+      <button
+        [disabled]="!ingreso.imputadoId || isLoading"
+        type="button"
+        (click)="generatePDF(view)"
+        class="btn btn-success mr-3"
+      >
+        Imprimir
+      </button>
+    </div>
+  </div>
+</form>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'estudio trabajo social'"
+    ></app-web-viewer>
+  </div>
+</ng-template>

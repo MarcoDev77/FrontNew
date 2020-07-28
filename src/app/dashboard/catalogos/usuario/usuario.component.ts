@@ -32,7 +32,7 @@ export class UsuarioComponent implements OnInit {
   public persona: Personal;
   public user: User;
 
-
+  public tituloModal: String;
   constructor(private authenticationService: AuthenticationService, private catalogosService: CatalogosService, private router: Router, private modalService: NgbModal) {
     this.data = [];
     this.rolesLista = [];
@@ -56,7 +56,6 @@ export class UsuarioComponent implements OnInit {
       console.log('getData', data);
       if (data.listPersonal) {
         this.data = data.listPersonal;
-      
       }
       console.log(this.data);
     });
@@ -83,29 +82,14 @@ export class UsuarioComponent implements OnInit {
     console.log('Save');
     ///console.log(this.user);
    
-    if(this.user.roles==undefined || this.user.roles.length==0){
-     
-      return  Swal.fire({
-        title: 'Cuidado',
-        text: "Para guardar el personal debe seleccionar su rol",
-        icon: 'warning',
-       
-        showConfirmButton: true
-      })
-    }
-    this.persona.centroPenitenciario = {
-      id: 1
-    }
-    
     if(this.areaSelected){
     this.persona.area={id:this.areaSelected.value}
     }
-    let model={...this.persona};
     this.persona.user=this.user;
-      console.log(model);
+      
     
     this.catalogosService.saveUsuario(this.persona).subscribe((data: any) => {
-      console.log(data);
+      
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -128,6 +112,7 @@ export class UsuarioComponent implements OnInit {
   openModal(modal) {
     this.persona= {} as any;
     this.user= {} as any;
+    this.tituloModal="Registrar usuario"
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
@@ -186,7 +171,7 @@ export class UsuarioComponent implements OnInit {
     console.log("user",item.user)
     
     this.user.roles={value: this.user.roles[0].id,description:this.user.roles[0].authority};
-    
+    this.tituloModal="Modificar usuario";
     console.log(this.persona)
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
     this.getData();

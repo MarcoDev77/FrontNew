@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {ROUTES} from '@dashboard/_main/menu';
+import {roles, roles as r} from '@shared/helpers/roles';
 import {AuthenticationService} from '@shared/services/authentication.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class HeaderComponent implements OnInit {
   private mobile_menu_visible: any = 0;
   private toggleButton: any;
   public currentUser: any;
+  public currentPersonal: any;
   public date: Date;
   public intervalo: any;
   public informationUser: any;
@@ -40,8 +42,17 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.getDate();
 
-    this.informationUser = {name: 'Juan Manuel', role: 'Administrador'}
-
+   
+      this.currentUser = this.authenticationService.getCurrentUser(); 
+   
+      for (let [key, value] of Object.entries(roles)) {
+        if (this.currentUser && value.role === this.currentUser.roles[0]) {
+         
+          this.informationUser = {name: this.currentUser.nombre, role: value.name, foto: this.currentUser.foto}
+        
+        }
+      }
+      this.getCurrentPersonal();
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -157,5 +168,12 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
+  }
+
+  getCurrentPersonal(){
+    this.authenticationService.getCurrentPersonal().subscribe((data:any)=>{
+      this.currentPersonal=data;
+      this.informationUser.name=this.currentPersonal.personal.nombre
+    })
   }
 }

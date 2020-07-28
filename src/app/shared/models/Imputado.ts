@@ -17,17 +17,58 @@ export class Imputado {
   municipioSelect: any;
   paisNacimiento: any;
   paisNacimientoSelect: any;
-  estado: any;
-  estadoSelect: any;
+  estadoDomicilio: any;
+  estadoDomicilioSelect: any;
   religion: any;
   religionSelect: any;
   estadoCivil: any;
   estadoCivilSelect: any;
   ocupacion: any;
-  ocupacionSelect: any;
   gradoEstudio: any;
-  gradoEstudioSelect: any;
   apodos: any[];
   delitos: any[];
   mainName: any;
+  finadoPadre: boolean;
+  finadoMadre: boolean;
+  // Lugar Nacimirnto
+  estadoNacimiento: any;
+  estadoNacimientoSelect: any;
+  municipioNacimiento: string;
+  municipioDomicilio: any;
+  numeroDomicilio: string;
+  dialecto: string;
+  tipoFuero: string;
+
+  dependientesEconomicos:number
 }
+
+// Date fechaNacimiento
+// int edadAparente
+// String genero
+// int numeroHijos
+// String nombrePadre
+// String nombreMadre
+// Boolean finadoPadre
+// Boolean finadoMadre
+// String etnia
+// boolean esIndigina
+// boolean hablaIndigena
+// Date fechaRegistro
+// Boolean esTraslado
+// String centroOrigen
+// String ocupacion
+// String gradoEstudio
+// String municipioNacimiento
+// String codigoPostal
+// String colonia
+// String calleNumero
+//
+// static belongsTo = [
+//   municipio: Municipio,
+//   paisNacimiento: Pais,
+//   estadoNacimiento: Estado,
+//   estadoDomicilio: Estado,
+//   religion: Religion,
+//   estadoCivil: EstadoCivil,
+//
+// ]

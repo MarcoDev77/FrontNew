@@ -1,0 +1,114 @@
+<app-section-title [goBack]="true" icon="fa fa-search" title="Resultados"></app-section-title>
+<div class="row">
+  <div class="col-1">
+    <h1 *ngIf="areMore">{{offset + 1}}</h1>
+  </div>
+  <div class="col-11">
+    <div class="row">
+      <div class="col-4">
+        <img src="{{resultado.imagen64 ? 'data:image/png;base64,' + resultado.imagen64 :'assets/img/no_image.png'}}">
+      </div>
+      <div class="col-8">
+        <br>
+        <div class="row">
+          <div class="col-3">Apellido Paterno: <b>{{resultado.apellidoPaterno}}</b></div>
+          <div class="col-3">Apelliso Materno: <b>{{resultado.apellidoMaterno}}</b></div>
+          <div class="col-3">Nombre(s): <b>{{resultado.nombre}}</b></div>
+          <div class="col-3">Apodo: <b>{{resultado.otro}}</b></div>
+        </div>
+        <div class="row">
+          <div class="col-3">Genero: <b>{{resultado.genero}}</b></div>
+          <div class="col-3">Fecha de Nacimieto: <b>{{resultado.fechaNacimiento | date:'dd/MM/yy h:mm a'}}</b></div>
+          <div class="col-3">Fecha de Registro: <b>{{resultado.fechaRegistro | date:'dd/MM/yy h:mm a'}}</b></div>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="isLoading" class="col-12 text-center">
+    <i class="fa fa-spinner fa-spin"></i>
+    Cargando...
+    <hr>
+  </div>
+  <div *ngIf="!areMore" class="col-12 text-center">
+    No hay más resultados.
+    <hr>
+  </div>
+  <div *ngIf="!isLoading && areMore" class="col-12">
+    <div class="text-center">
+      <h4>Folio de ingreso: {{list.folio}}</h4>
+    </div>
+    <div class="row text-center">
+      <div *ngFor="let photo of list.fotografiasPerfil" class="col-4">
+        <img height="250"
+             src="{{photo.imagen64 ? 'data:image/png;base64,' + photo.imagen64 :'assets/img/no_image.png'}}">
+        <br>
+        <b>{{photo.claveFotografia | uppercase}}</b>
+      </div>
+    </div>
+    <h3>Serie</h3>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="text-center">Pulgar</th>
+          <th class="text-center">Inidice</th>
+          <th class="text-center">Medio</th>
+          <th class="text-center">Anular</th>
+          <th class="text-center">Meñique</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td *ngFor="let item of list.huellasDactilares.derecha" class="text-center">
+            <img height="250"
+                 src="{{item.imagen64 ? 'data:image/png;base64,' + item.imagen64 :'assets/img/no_image.png'}}">
+            <div class="text-left">
+              <br>
+              Casificación: <b>{{item.clasificacion}}</b>
+              <br>
+              Subclasificación: <b>{{item.subclasificacion}}</b>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <h3>Sección</h3>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="text-center">Pulgar</th>
+          <th class="text-center">Inidice</th>
+          <th class="text-center">Medio</th>
+          <th class="text-center">Anular</th>
+          <th class="text-center">Meñique</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td *ngFor="let item of list.huellasDactilares.izquierda" class="text-center">
+            <img height="250"
+                 src="{{item.imagen64 ? 'data:image/png;base64,' + item.imagen64 :'assets/img/no_image.png'}}">
+            <div class="text-left">
+              <br>
+              Casificación: <b>{{item.clasificacion}}</b>
+              <br>
+              Subclasificación: <b>{{item.subclasificacion}}</b>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+  </div>
+  <div class="col-6 text-center">
+    <button class="btn btn-simple" [disabled]="isLoading || offset === 0" (click)="previousPage()">Anterior</button>
+  </div>
+  <div class="col-6 text-center">
+    <button class="btn btn-success" [disabled]="isLoading || !areMore" (click)="nextPage()">Siguiente</button>
+  </div>
+</div>

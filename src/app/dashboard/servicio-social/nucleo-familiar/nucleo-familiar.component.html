@@ -1,0 +1,1170 @@
+<app-section-title
+  icon="fa fa-table"
+  title="Núcleo Familiar"
+></app-section-title>
+<app-finder-imputado
+  (onSelectIngresoSearch)="searchImputado($event)"
+  (onClearSearch)="cleanForm()"
+></app-finder-imputado>
+<app-generalidades-ppl [generalidadesPPL]="imputado"></app-generalidades-ppl>
+<!-- Núcleo Familiar Principal -->
+<form
+  #formNucleoFamiliarPrincipal="ngForm"
+  name="formNucleoFamiliarPrincipal"
+  (ngSubmit)="formNucleoFamiliarPrincipal.form.valid && submit()"
+>
+  <div class="row">
+    <div class="col-md-12 mt-4">
+      <h3>Núcleo Familiar Principal</h3>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Características de Zona</label>
+        <select
+          [(ngModel)]="nucleo.caracteristicaZonaP"
+          name="caracteristicaZonaP"
+          class="form-control"
+        >
+          <option value="urbana">Urbana</option>
+          <option value="suburbana">Suburbana</option>
+          <option value="rural">Rural</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Responsable de Manutención</label>
+        <input
+          [(ngModel)]="nucleo.responsableManuntencionP"
+          name="responsableManuntencionP"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Ingresos Mensuales</label>
+        <input
+          [(ngModel)]="nucleo.ingresosMensualesP"
+          name="ingresosMensualesP"
+          min="0"
+          type="number"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Egresos Mensuales</label>
+        <input
+          [(ngModel)]="nucleo.egresosMensualesP"
+          name="egresosMensualesP"
+          min="0"
+          type="number"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="nucleo.cooperaDineroInternoP"
+          name="cooperaDineroInternoP"
+          type="checkbox"
+          class="custom-control-input"
+          id="cooperaDineroInternoP"
+        />
+        <label class="custom-control-label" for="cooperaDineroInternoP">
+          ¿El interno coopera con dinero?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="nucleo.tieneAhorrosP"
+          name="tieneAhorrosP"
+          type="checkbox"
+          class="custom-control-input"
+          id="tieneAhorrosP"
+        />
+        <label class="custom-control-label" for="tieneAhorrosP">
+          ¿Cuenta con ahorros?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Grupo Familiar Funcional</label>
+        <select
+          [(ngModel)]="nucleo.grupoFamiliarFuncionalP"
+          name="grupoFamiliarFuncionalP"
+          class="form-control"
+        >
+          <option value="funcional">Funcional</option>
+          <option value="disfuncional">Disfuncional</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Grupo Familiar Organizado</label>
+        <select
+          [(ngModel)]="nucleo.grupoFamiliarOrganizadoP"
+          name="grupoFamiliarOrganizadoP"
+          class="form-control"
+        >
+          <option value="organizado">Organizado</option>
+          <option value="desorganizado">Desorganizado</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Grupo Familiar Integrado</label>
+        <select
+          [(ngModel)]="nucleo.grupoFamiliarIntegradoP"
+          name="grupoFamiliarIntegradoP"
+          class="form-control"
+        >
+          <option value="integrado">Integrado</option>
+          <option value="desintegrado">Desintegrado</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Grupo Familiar Completo</label>
+        <select
+          [(ngModel)]="nucleo.grupoFamiliarCompletoP"
+          name="grupoFamiliarCompletoP"
+          class="form-control"
+        >
+          <option value="completo">Completo</option>
+          <option value="incompleto">Incompleto</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Relaciones Interfamiliares</label>
+        <select
+          [(ngModel)]="nucleo.relacionesInterfamiliaresP"
+          name="relacionesInterfamiliaresP"
+          class="form-control"
+        >
+          <option value="adecuadas">Adecuadas</option>
+          <option value="inadecuadas">Inadecuadas</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Nivel Socioeconómico</label>
+        <select
+          [(ngModel)]="nucleo.nivelSocioeconomicoP"
+          name="nivelSocioeconomicoP"
+          class="form-control"
+        >
+          <option value="bajo">Bajo</option>
+          <option value="medio">Medio</option>
+          <option value="alto">Alto</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="nucleo.tieneFamiliarAntecedentesP"
+          name="tieneFamiliarAntecedentesP"
+          type="checkbox"
+          class="custom-control-input"
+          id="tieneFamiliarAntecedentesP"
+        />
+        <label class="custom-control-label" for="tieneFamiliarAntecedentesP">
+          ¿Un familiar tiene antecedentes?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="form-gruop">
+        <label>Detalle Antedecentes Familiares</label>
+        <textarea
+          [(ngModel)]="nucleo.detalleFamiliarAntecentesP"
+          [disabled]="!nucleo.tieneFamiliarAntecedentesP"
+          [readOnly]="!nucleo.tieneFamiliarAntecedentesP"
+          name="detalleFamiliarAntecentesP"
+          class="form-control"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="nucleo.huboViolenciaP"
+          name="huboViolenciaP"
+          type="checkbox"
+          class="custom-control-input"
+          id="huboViolenciaP"
+        />
+        <label class="custom-control-label" for="huboViolenciaP">
+          ¿Hubo violencia?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="form-gruop">
+        <label>Detalle Violencia</label>
+        <textarea
+          [(ngModel)]="nucleo.detalleViolenciaP"
+          [disabled]="!nucleo.huboViolenciaP"
+          [readOnly]="!nucleo.huboViolenciaP"
+          name="detalleViolenciaP"
+          class="form-control"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <br />
+      <hr />
+      <app-tabla-familiares
+        title="Grupo familiar primario"
+        *ngIf="nucleo.id"
+        [nucleoId]="nucleo?.id"
+        tipoNucleo="primario"
+      ></app-tabla-familiares>
+      <hr />
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Concepto que tiene la familia del interno</label>
+        <input
+          [(ngModel)]="nucleo.conceptoFamiliaInternoP"
+          name="conceptoFamiliaInternoP"
+          type="text"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="col-md-8">
+      <button
+        [disabled]="!imputado.id"
+        type="submit"
+        class="btn btn-success pull-right"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<!-- Núcleo familiar Secundario -->
+<form
+  #formNucleoFamiliarSecundario="ngForm"
+  name="formNucleoFamiliarSecundario"
+  (ngSubmit)="formNucleoFamiliarSecundario.form.valid && submit()"
+>
+  <div class="row">
+    <div class="col-md-12 mt-4">
+      <h3>Núcleo Familiar Secundario</h3>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Número de hijos de uniones anteriores</label>
+        <input
+          [(ngModel)]="nucleo.hijosUnionesS"
+          name="hijosUnionesS"
+          type="text"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Grupo Familiar Funcional</label>
+        <select
+          [(ngModel)]="nucleo.grupoFamiliarFuncionalS"
+          name="grupoFamiliarS"
+          class="form-control"
+        >
+          <option value="funcional">Funcional</option>
+          <option value="disfuncional">Disfuncional</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Grupo Familiar Organizado</label>
+        <select
+          [(ngModel)]="nucleo.grupoFamiliarOrganizadoP"
+          name="grupoFamiliarOrganizadoP"
+          class="form-control"
+        >
+          <option value="organizado">Organizado</option>
+          <option value="desorganizado">Desorganizado</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Grupo Familiar Integrado</label>
+        <select
+          [(ngModel)]="nucleo.grupoFamiliarIntegradoP"
+          name="grupoFamiliarIntegradoP"
+          class="form-control"
+        >
+          <option value="integrado">Integrado</option>
+          <option value="desintegrado">Desintegrado</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Grupo Familiar Completo</label>
+        <select
+          [(ngModel)]="nucleo.grupoFamiliarCompletoP"
+          name="grupoFamiliarCompletoP"
+          class="form-control"
+        >
+          <option value="completo">Completo</option>
+          <option value="incompleto">Incompleto</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Relaciones Interfamiliares</label>
+        <select
+          [(ngModel)]="nucleo.relacionesInterfamiliaresS"
+          name="relacionesInterfamiliaresS"
+          class="form-control"
+        >
+          <option value="adecuadas">Adecuadas</option>
+          <option value="inadecuadas">Inadecuadas</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Nivel Socioeconómico</label>
+        <select
+          [(ngModel)]="nucleo.nivelSocioeconomicoS"
+          name="nivelSocioeconomicoS"
+          class="form-control"
+        >
+          <option value="bajo">Bajo</option>
+          <option value="medio">Medio</option>
+          <option value="alto">Alto</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Número de habitaciones</label>
+        <input
+          [(ngModel)]="nucleo.numeroHabitacionesS"
+          name="numeroHabitacionesS"
+          type="number"
+          min="0"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Medio de transporte que se utiliza</label>
+        <input
+          [(ngModel)]="nucleo.transporteS"
+          name="transporteS"
+          type="text"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Mobiliario y Enseres</label>
+        <textarea
+          [(ngModel)]="nucleo.mobiliarioEnseresS"
+          name="mobiliarioEnseresS"
+          class="form-control"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Descripción de Vivienda</label>
+        <textarea
+          [(ngModel)]="nucleo.descripcionViviendaS"
+          name="descripcionViviendaS"
+          class="form-control"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Relación con medio externos</label>
+        <textarea
+          [(ngModel)]="nucleo.relacionMedioExternoS"
+          name="descripcionViviendaS"
+          class="form-control"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Características de la zona</label>
+        <input
+          [(ngModel)]="nucleo.caracteristicaZonaS"
+          name="caracteristicaZonaS"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Número de parejas anteriores</label>
+        <input
+          [(ngModel)]="nucleo.numeroParejasS"
+          name="numeroParejasS"
+          min="0"
+          type="number"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="nucleo.tieneFamiliarProblemasConductaS"
+          name="tieneFamiliarProblemasConductaS"
+          type="checkbox"
+          class="custom-control-input"
+          id="tieneFamiliarProblemasConductaS"
+        />
+        <label
+          class="custom-control-label"
+          for="tieneFamiliarProblemasConductaS"
+        >
+          ¿Algún familiar tiene problemas de conducta?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="form-gruop">
+        <label>Detalle Problemas de conducta</label>
+        <textarea
+          [(ngModel)]="nucleo.detalleProblemasConductaS"
+          [disabled]="!nucleo.tieneFamiliarProblemasConductaS"
+          [readOnly]="!nucleo.tieneFamiliarProblemasConductaS"
+          name="detalleProblemasConductaS"
+          class="form-control"
+          cols="30"
+          rows="10"
+          maxlength="255"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="nucleo.huboViolenciaS"
+          name="huboViolenciaS"
+          type="checkbox"
+          class="custom-control-input"
+          id="huboViolenciaS"
+        />
+        <label class="custom-control-label" for="huboViolenciaS">
+          ¿Hubo violencia?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="form-gruop">
+        <label>Detalle Violencia</label>
+        <textarea
+          [(ngModel)]="nucleo.detalleViolenciaS"
+          [disabled]="!nucleo.huboViolenciaS"
+          [readOnly]="!nucleo.huboViolenciaS"
+          name="detalleViolenciaS"
+          class="form-control"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <br />
+      <hr />
+      <app-tabla-familiares
+        title="Grupo familiar secundario"
+        *ngIf="nucleo.id"
+        [nucleoId]="nucleo?.id"
+        tipoNucleo="secundario"
+      ></app-tabla-familiares>
+      <hr />
+    </div>
+    <div class="col-md-12">
+      <button
+        [disabled]="!imputado.id"
+        type="submit"
+        class="btn btn-success pull-right"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<!-- Datos interno -->
+<form
+  #formNucleoFamiliarDatos="ngForm"
+  name="formNucleoFamiliarDatos"
+  (ngSubmit)="formNucleoFamiliarDatos.form.valid && submit()"
+>
+  <div class="row">
+    <div class="col-md-12 mt-4">
+      <h3>Datos del Interno</h3>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Trabajo Desempeñado Antes del Internamiento</label>
+        <input
+          [(ngModel)]="nucleo.trabajoDesempenado"
+          name="trabajoDesempenado"
+          type="text"
+          maxlength="255"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Tiempo de haber laborado</label>
+        <input
+          [(ngModel)]="nucleo.tiempoLaborar"
+          name="tiempoLaborar"
+          type="text"
+          maxlength="255"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Sueldo Percibido</label>
+        <input
+          [(ngModel)]="nucleo.sueldo"
+          max="1000000"
+          min="0"
+          name="sueldo"
+          type="number"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Aportaciones Económicas</label>
+        <input
+          [(ngModel)]="nucleo.aportacionesEconomicas"
+          name="aportacionesEconomicas"
+          type="text"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Distribución del Gasto Económico</label>
+        <input
+          [(ngModel)]="nucleo.distribucionGasto"
+          name="distribucionGasto"
+          type="text"
+          maxlength="255"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Alimentación Familiar</label>
+        <input
+          [(ngModel)]="nucleo.alimentacionFamiliar"
+          name="alimentacionFamiliar"
+          type="text"
+          maxlength="255"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Servicios Públicos</label>
+        <input
+          [(ngModel)]="nucleo.serviciosPublicos"
+          name="serviciosPublicos"
+          type="text"
+          maxlength="250"
+          minlength="1"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="nucleo.tieneApoyoFamiliar"
+          name="tieneApoyoFamiliar"
+          type="checkbox"
+          class="custom-control-input"
+          id="tieneApoyoFamiliar"
+        />
+        <label class="custom-control-label" for="tieneApoyoFamiliar">
+          ¿Tiene apoyo familiar?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="nucleo.tieneVisitasFamiliar"
+          type="checkbox"
+          class="custom-control-input"
+          id="tieneVisitasFamiliar"
+          name="tieneVisitasFamiliar"
+        />
+        <label class="custom-control-label" for="tieneVisitasFamiliar">
+          ¿Tiene visitas de familiares?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="nucleo.radicanEstadoVisitas"
+          type="checkbox"
+          class="custom-control-input"
+          id="radicanEstadoVisitas"
+          name="radicanEstadoVisitas"
+        />
+        <label class="custom-control-label" for="radicanEstadoVisitas">
+          ¿Tiene visitas de otros estados?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Frecuencia de la visitas</label>
+        <input
+          [(ngModel)]="nucleo.frecuenciaVisitas"
+          name="frecuenciaVisitas"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Parentesco de visitas</label>
+        <input
+          [(ngModel)]="nucleo.parentescoVisitas"
+          name="parentescoVisitas"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="nucleo.esVisitadoOtros"
+          type="checkbox"
+          class="custom-control-input"
+          id="esVisitadoOtros"
+          name="esVisitadoOtros"
+        />
+        <label class="custom-control-label" for="esVisitadoOtros">
+          ¿Tiene visitas de otras personas?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="form-gruop">
+        <label>Detalle de Otras visitas</label>
+        <textarea
+          [(ngModel)]="nucleo.detalleVisitasOtros"
+          [disabled]="!nucleo.esVisitadoOtros"
+          [readOnly]="!nucleo.esVisitadoOtros"
+          name="detalleVisitasOtros"
+          class="form-control"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="nucleo.tieneOfertaTrabajo"
+          type="checkbox"
+          class="custom-control-input"
+          id="tieneOfertaTrabajo"
+          name="tieneOfertaTrabajo"
+        />
+        <label class="custom-control-label" for="tieneOfertaTrabajo">
+          ¿Tiene ofertas de trabajo?
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="form-gruop">
+        <label>Detalle Oferta de Trabajo</label>
+        <textarea
+          [(ngModel)]="nucleo.detalleOfertaTrabajo"
+          [disabled]="!nucleo.tieneOfertaTrabajo"
+          [readOnly]="!nucleo.tieneOfertaTrabajo"
+          name="detalleOfertaTrabajo"
+          class="form-control"
+          cols="30"
+          rows="10"
+          maxlength="250"
+          minlength="1"
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- Title DAtos aval -->
+    <div class="col-md-12 mt-4">
+      <app-section-title
+        icon="fa fa-user"
+        title="Datos Aval"
+      ></app-section-title>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Nombre de Aval moral</label>
+        <input
+          [(ngModel)]="nucleo.nombreAvalMoral"
+          name="nombreAvalMoral"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Apellido Paterno de Aval moral</label>
+        <input
+          [(ngModel)]="nucleo.apellidoPaternoAval"
+          name="apellidoPaternoAval"
+          type="text"
+          maxlength="255"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Apellido Materno de Aval moral</label>
+        <input
+          [(ngModel)]="nucleo.apellidoMaternoAval"
+          name="apellidoMaternoAval"
+          type="text"
+          maxlength="255"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="form-gruop">
+        <label>Domicilio de Aval moral</label>
+        <input
+          [(ngModel)]="nucleo.domicilioAval"
+          name="domicilioAval"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Entre calles</label>
+        <input
+          [(ngModel)]="nucleo.entreCallesAval"
+          name="entreCallesAval"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Ciudad</label>
+        <input
+          [(ngModel)]="nucleo.ciudadAval"
+          name="ciudadAval"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Estado</label>
+        <select
+          [(ngModel)]="nucleo.estadoAval.id"
+          name="estadoAval"
+          class="form-control"
+        >
+          <option *ngFor="let estado of estados" [value]="estado.id">
+            {{ estado.nombre }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Teléfono</label>
+        <input
+          [(ngModel)]="nucleo.telefonoAval"
+          name="telefonoAval"
+          type="tel"
+          maxlength="16"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Parentesco Aval moral</label>
+        <select
+          [(ngModel)]="nucleo.parentescoAvalMoral.id"
+          name="parentescoAvalMoral"
+          class="form-control"
+        >
+          <option
+            *ngFor="let parentesco of parentescos"
+            [value]="parentesco.id"
+          >
+            {{ parentesco.nombre }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4"></div>
+
+    <!-- Title Persona con la cual vivirá -->
+    <div class="col-md-12 mt-4">
+      <app-section-title
+        icon="fa fa-home"
+        title="Datos Persona Vivirá"
+      ></app-section-title>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Nombre de la persona con la que vivirá al salir</label>
+        <input
+          [(ngModel)]="nucleo.nombreViviraExternado"
+          name="nombreViviraExternado"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Parentesco de la persona con quien vivirá</label>
+        <select
+          [(ngModel)]="nucleo.parentescoVivira.id"
+          name="parentescoVivira"
+          class="form-control"
+        >
+          <option
+            *ngFor="let parentesco of parentescos"
+            [value]="parentesco.id"
+          >
+            {{ parentesco.nombre }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Calle</label>
+        <input
+          [(ngModel)]="nucleo.calleVivira"
+          name="calleVivira"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Número</label>
+        <input
+          [(ngModel)]="nucleo.numeroVivira"
+          name="numeroVivira"
+          type="text"
+          class="form-control"
+          maxlength="15"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Colonia</label>
+        <input
+          [(ngModel)]="nucleo.coloniaVivira"
+          name="coloniaVivira"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Código Postal</label>
+        <input
+          [(ngModel)]="nucleo.codigoPostalVivira"
+          name="codigoPostalVivira"
+          type="text"
+          pattern="^[0-9]*$"
+          maxlength="5"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Municipio</label>
+        <input
+          [(ngModel)]="nucleo.municipioVivira"
+          name="municipioVivira"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Ciudad</label>
+        <input
+          [(ngModel)]="nucleo.ciudadVivira"
+          name="ciudadVivira"
+          type="text"
+          class="form-control"
+          maxlength="255"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Estado</label>
+        <select
+          [(ngModel)]="nucleo.estadoVivira.id"
+          name="estadoVivira"
+          class="form-control"
+        >
+          <option *ngFor="let estado of estados" [value]="estado.id">
+            {{ estado.nombre }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+
+    <div class="col-md-12">
+      <hr />
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-gruop">
+        <label>Opinión Internamiento</label>
+        <textarea
+          [(ngModel)]="nucleo.opinionInternamiento"
+          name="opinionInternamiento"
+          class="form-control"
+          cols="30"
+          rows="10"
+          maxlength="250"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-gruop">
+        <label>Influenciado Instancia</label>
+        <textarea
+          [(ngModel)]="nucleo.influenciadoInstancia"
+          name="influenciadoInstancia"
+          class="form-control"
+          cols="30"
+          rows="10"
+          maxlength="250"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-gruop">
+        <label>Diagnóstico Social</label>
+        <textarea
+          [(ngModel)]="nucleo.diagnosticoSocial"
+          name="diagnosticoSocial"
+          class="form-control"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-gruop">
+        <label>Opinión y concesión de Beneficios</label>
+        <textarea
+          [(ngModel)]="nucleo.opinionConsecionBeneficios"
+          name="opinionConsecionBeneficios"
+          class="form-control"
+          cols="30"
+          rows="10"
+          maxlength="255"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <button
+        [disabled]="!imputado.id || isLoading"
+        (click)="genetatePDF(view)"
+        type="button"
+        class="btn btn-success pull-right"
+      >
+        Imprimir Estudio Trabajo Social Federal
+      </button>
+      <button
+        [disabled]="!imputado.id || isLoading"
+        type="submit"
+        class="btn btn-success pull-right"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'estudio trabajo social'"
+    ></app-web-viewer>
+  </div>
+</ng-template>

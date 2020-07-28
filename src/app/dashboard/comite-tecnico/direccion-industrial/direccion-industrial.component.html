@@ -1,0 +1,1089 @@
+<app-section-title
+  icon="fa fa-tasks"
+  title="DIRECCIÓN INDUSTRIAL"
+></app-section-title>
+<div class="row">
+  <div class="col-md-8">
+    <h4 class="title-pink">Generales de la PPL</h4>
+  </div>
+
+  <div class="col-md-4">
+    <form
+      name="search"
+      (ngSubmit)="searchImputado()"
+      #formSearch="ngForm"
+      novalidate
+    >
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span (click)="searchImputado()" class="input-group-text"
+            ><i
+              class="fa {{ isLoading ? 'fa-spinner fa-spin' : 'fa-search' }}"
+            ></i
+          ></span>
+        </div>
+        <input
+          name="folio"
+          required
+          [(ngModel)]="generalidadesPPL.folio"
+          type="text"
+          class="form-control pull-right mr-2"
+          placeholder="Buscar por Folio"
+        />
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Persona privada de la libertad:</label>
+      <input
+        type="text"
+        value="{{ generalidadesPPL.nombre }}"
+        class="form-control"
+        readonly
+      />
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Dormitorio:</label>
+      <input
+        type="text"
+        value="{{ generalidadesPPL.dormitorio }}"
+        class="form-control"
+        readonly
+        name="dormitorio"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Fecha de nacimiento:</label>
+      <input
+        type="text"
+        readonly
+        class="form-control"
+        value="{{ generalidadesPPL.fechaNacimiento | date: 'dd/MM/yyyy' }}"
+        name="fechaNacimiento"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Edad:</label>
+      <input
+        type="text"
+        class="form-control"
+        value="{{ generalidadesPPL.edad }}"
+        readonly
+        name="edad"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Estado civil:</label>
+      <input
+        type="text"
+        class="form-control"
+        readonly
+        value="{{ generalidadesPPL.estadoCivil?.nombre }}"
+        name="estadoCivil"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Escolaridad:</label>
+      <input
+        type="text"
+        class="form-control"
+        readonly
+        name="escolaridad"
+        value="{{ generalidadesPPL.escolaridad }}"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Delito:</label>
+      <input
+        type="text"
+        class="form-control"
+        readonly
+        name="delito"
+        value="{{ generalidadesPPL.listaDelitos }}"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Sentencia:</label>
+      <input
+        type="text"
+        class="form-control"
+        readonly
+        value="{{ generalidadesPPL.sentencia }}"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Fecha y lugar de ingreso:</label>
+      <input
+        type="text"
+        class="form-control"
+        readonly
+        value="{{ generalidadesPPL.fechaIngreso | date: 'dd/MM/yyyy' }}"
+        name="fechaIngreso"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Dependiente:</label>
+      <input type="text" class="form-control" readonly name="dependiente" />
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Originario:</label>
+      <input
+        type="text"
+        class="form-control"
+        readonly
+        value="{{ generalidadesPPL.originario?.nombre }}"
+        name="originario"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-4"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 mt-4">
+    <h3>Diagnóstico de experiencia laboral y/o cursos</h3>
+  </div>
+  <div class="col text-right mb-3 mt-4">
+    <button
+      [disabled]="!generalidadesPPL.imputadoId || isLoading"
+      type="button"
+      class="btn btn-success btn-sm m-0 pull-right"
+      (click)="add()"
+      [ngbTooltip]="'Nuevo Registro'"
+    >
+      <i class="fa fa-plus fa-lg"></i>
+    </button>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th (click)="sort('realizados')" class="text-center">
+          <span
+            *ngIf="key == 'realizados'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Trabajos realizados
+        </th>
+        <th (click)="sort('tiempo')" class="text-center">
+          <span
+            *ngIf="key == 'tiempo'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Tiempo
+        </th>
+        <th (click)="sort('motivo')" class="text-center">
+          <span
+            *ngIf="key == 'motivo'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Motivo de separación
+        </th>
+        <th class="text-center">
+          Acciones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr id="table-form" *ngIf="isForm">
+        <td class="text-center">
+          <input
+            name="trabajoRealizado"
+            type="text"
+            class="form-control"
+            [(ngModel)]="experiencia.trabajoRealizado"
+            #trabajoRealizado="ngModel"
+            [ngClass]="{
+              'is-invalid': trabajoRealizado.touched && trabajoRealizado.invalid
+            }"
+            maxlength="45"
+            required
+          />
+        </td>
+        <td class="text-center">
+          <input
+            name="tiempo"
+            type="text"
+            class="form-control"
+            [(ngModel)]="experiencia.tiempo"
+            #tiempo="ngModel"
+            [ngClass]="{ 'is-invalid': tiempo.touched && tiempo.invalid }"
+            maxlength="45"
+            required
+          />
+        </td>
+        <td class="text-center">
+          <input
+            name="motivoSeparacion"
+            type="text"
+            class="form-control"
+            [(ngModel)]="experiencia.motivoSeparacion"
+            #motivoSeparacion="ngModel"
+            [ngClass]="{
+              'is-invalid': motivoSeparacion.touched && motivoSeparacion.invalid
+            }"
+            required
+          />
+        </td>
+        <td>
+          <i
+            class="fa fa-times mr-3"
+            placement="top"
+            ngbTooltip="Cancelar"
+            (click)="cancel()"
+          ></i>
+          <i
+            class="fa fa-check"
+            placement="top"
+            ngbTooltip="Guardar"
+            (click)="saveExperienciaLaboral([trabajoRealizado])"
+          ></i>
+        </td>
+      </tr>
+      <tr
+        id="{{ 'tr' + i }}"
+        *ngFor="
+          let item of listExperienciaLaboral
+            | orderBy: key:reverse
+            | filter: filter
+            | paginate: { itemsPerPage: 5, currentPage: p };
+          let i = index
+        "
+        (click)="setClickedRow(i)"
+        [class.active]="i == selectedRow"
+      >
+        <td class="text-center">{{ item.trabajoRealizado }}</td>
+        <td class="text-center">{{ item.tiempo }}</td>
+        <td class="text-center">{{ item.motivoSeparacion }}</td>
+        <td class="text-center">
+          <i
+            class="fa fa-pencil"
+            placement="top"
+            ngbTooltip="Modificar"
+            (click)="updateExperienciaLaboral('tr' + i, item)"
+          ></i>
+          &nbsp;
+          <i
+            class="fa fa-trash"
+            placement="top"
+            ngbTooltip="Eliminar"
+            (click)="deleteExpeienciaLaboral(item)"
+          ></i>
+        </td>
+      </tr>
+
+      <tr *ngIf="listExperienciaLaboral.length == 0">
+        <td colspan="6">
+          {{ isLoading ? "Cargando..." : "Sin registros..." }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center w-100">
+    <pagination-controls
+      autoHide="true"
+      responsive="true"
+      previousLabel=""
+      nextLabel=""
+      (pageChange)="switch($event)"
+    >
+    </pagination-controls>
+  </div>
+</div>
+<app-section-title
+  icon="fa fa-list-alt"
+  title="Plan de actividades"
+></app-section-title>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Trabaja actualmente:</label>
+      <input
+        maxlength="150"
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.trabajoactual"
+        name="trabajoactual"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>¿Qué realiza?:</label>
+      <input
+        maxlength="150"
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.queRealiza"
+        name="queRealiza"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>¿Por qué no?:</label>
+      <input
+        maxlength="150"
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.porQueNo"
+        name="porQueNo"
+      />
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <h3>Actividades que puede realizar</h3>
+  </div>
+  <div class="col-md-4"></div>
+
+  <div class="col-md-3 mt-4">
+    <h6>Artesanias</h6>
+  </div>
+  <div class="col-md-1 mt-4">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="artesania"
+        [(ngModel)]="actividades.artesanias.realizada"
+      />
+      <label class="custom-control-label" for="artesania"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Observaciones:</label>
+      <input
+        maxlength="250"
+        [(ngModel)]="actividades.artesanias.observaciones"
+        type="text"
+        class="form-control"
+        name="duenoMedio"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Horario:</label>
+      <input
+        maxlength="150"
+        [(ngModel)]="actividades.artesanias.horario"
+        type="text"
+        class="form-control"
+        name="duenoMedio"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <h6>Bolas de Hilo Macrame</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        [(ngModel)]="actividades.bolasHiloMacrame.realizada"
+        id="bolasHiloMacrame"
+        type="checkbox"
+        class="custom-control-input"
+      />
+      <label class="custom-control-label" for="bolasHiloMacrame"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        maxlength="250"
+        type="text"
+        [(ngModel)]="actividades.bolasHiloMacrame.observaciones"
+        class="form-control"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        maxlength="150"
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.bolasHiloMacrame.horario"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <h6>Bolsas de plástico</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        [(ngModel)]="actividades.bolsasPlastico.realizada"
+        id="bolsasPlastico"
+        class="custom-control-input"
+      />
+      <label class="custom-control-label" for="bolsasPlastico"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        maxlength="250"
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.bolsasPlastico.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.bolsasPlastico.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Calado</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        id="calado"
+        [(ngModel)]="actividades.calado.realizada"
+        class="custom-control-input"
+      />
+      <label class="custom-control-label" for="calado"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.calado.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.calado.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Carpintería</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        id="carpinteria"
+        [(ngModel)]="actividades.carpinteria.realizada"
+        class="custom-control-input"
+      />
+      <label class="custom-control-label" for="carpinteria"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.carpinteria.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.carpinteria.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Cocina</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="cocina"
+        [(ngModel)]="actividades.cocina.realizada"
+      />
+      <label class="custom-control-label" for="cocina"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.cocina.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.cocina.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Huarachería</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        id="huaracheria"
+        class="custom-control-input"
+        [(ngModel)]="actividades.huaracheria.realizada"
+      />
+      <label class="custom-control-label" for="huaracheria"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.huaracheria.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="105"
+      class="form-control"
+      [(ngModel)]="actividades.huaracheria.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Imprenta</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        id="imprenta"
+        type="checkbox"
+        class="custom-control-input"
+        [(ngModel)]="actividades.imprenta.realizada"
+      />
+      <label class="custom-control-label" for="imprenta"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.imprenta.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.imprenta.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Mosaico</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="mosaico"
+        [(ngModel)]="actividades.mosaico.realizada"
+      />
+      <label class="custom-control-label" for="mosaico"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.mosaico.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.mosaico.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Panadería</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="panaderia"
+        [(ngModel)]="actividades.panaderia.realizada"
+      />
+      <label class="custom-control-label" for="panaderia"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.panaderia.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.panaderia.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Papiroflexia</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="papiraflexia"
+        [(ngModel)]="actividades.papiroflexia.realizada"
+      />
+      <label class="custom-control-label" for="papiraflexia"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.papiroflexia.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.papiroflexia.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Pintura textil</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="pinturaTextil"
+        [(ngModel)]="actividades.pinturaTextil.realizada"
+      />
+      <label class="custom-control-label" for="pinturaTextil"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.pinturaTextil.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.pinturaTextil.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Piteado</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="piteado"
+        [(ngModel)]="actividades.piteado.realizada"
+      />
+      <label class="custom-control-label" for="piteado"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.piteado.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input type="text" maxlength="150" class="form-control" ç />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Repujado</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="repujado"
+        [(ngModel)]="actividades.repujado.realizada"
+      />
+      <label class="custom-control-label" for="repujado"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.repujado.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.repujado.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Servicios</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="servicios"
+        [(ngModel)]="actividades.servicios.realizada"
+      />
+      <label class="custom-control-label" for="servicios"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.servicios.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.servicios.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Tallado</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="tallado"
+        [(ngModel)]="actividades.tallado.realizada"
+      />
+      <label class="custom-control-label" for="tallado"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.tallado.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.tallado.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Taller de cubrebocas</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="tallerCubrebocas"
+        [(ngModel)]="actividades.tallerCubrebocas.realizada"
+      />
+      <label class="custom-control-label" for="tallerCubrebocas"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.tallerCubrebocas.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.tallerCubrebocas.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Taller de Tokal</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="tallerTokal"
+        [(ngModel)]="actividades.tallerTokal.realizada"
+      />
+      <label class="custom-control-label" for="tallerTokal"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="actividades.tallerTokal.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="actividades.tallerTokal.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Tienda</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="tienda"
+        [(ngModel)]="actividades.tienda.realizada"
+      />
+      <label class="custom-control-label" for="tienda"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.tienda.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.tienda.horario"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <h6>Otras (Especificar)</h6>
+  </div>
+  <div class="col-md-1">
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="otro"
+        [(ngModel)]="actividades.otras.realizada"
+      />
+      <label class="custom-control-label" for="otro"></label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="250"
+        class="form-control"
+        [(ngModel)]="actividades.otras.observaciones"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <input
+      type="text"
+      maxlength="150"
+      class="form-control"
+      [(ngModel)]="actividades.otras.horario"
+    />
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12 text-center text-sm-right">
+    <button
+      type="button"
+      [disabled]="!generalidadesPPL.imputadoId || isLoading"
+      (click)="submit()"
+      class="btn btn-success mr-3"
+    >
+      Guardar
+    </button>
+    <button
+      type="button"
+      [disabled]="!generalidadesPPL.imputadoId || isLoading"
+      (click)="generatePDF(view)"
+      class="btn btn-success mr-3"
+    >
+      Imprimir
+    </button>
+  </div>
+</div>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'acta-de-entrevista'"
+    ></app-web-viewer>
+  </div>
+</ng-template>

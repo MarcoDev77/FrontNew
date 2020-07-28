@@ -7,14 +7,19 @@ import {IngresoService} from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
 import {DatePipe} from '@angular/common';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs';
+import {debounceTime, map} from 'rxjs/operators';
+import {catchError, distinctUntilChanged, tap, switchMap} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-formulario-ingreso',
   templateUrl: './formulario-ingreso.component.html',
   styleUrls: ['./formulario-ingreso.component.scss']
 })
-export class FormularioIngresoComponent implements OnInit {
 
+export class FormularioIngresoComponent implements OnInit {
+  public model: any;
   public ingreso: Ingreso;
   public datoDelito: DatoDelito;
   public arrayDatoDelito: DatoDelito[] = [];
@@ -26,10 +31,13 @@ export class FormularioIngresoComponent implements OnInit {
   public ocupaciones = [];
   public paises = [];
   public estados = [];
+  public estadosDimicilio = [];
   public municipios = [];
   public delitos = [];
   public centrosPenitenciarios = [];
-
+  public arrayToFilter = [];
+  public searching = false;
+  public searchFailed = false;
 
   constructor(
     private catalogosService: CatalogosService,
@@ -45,7 +53,6 @@ export class FormularioIngresoComponent implements OnInit {
 
     const ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
     if (ingreso) {
-      this.ingreso = ingreso;
       this.getIngreso(ingreso.id);
     }
   }
@@ -54,87 +61,48 @@ export class FormularioIngresoComponent implements OnInit {
     this.getCatalogos();
   }
 
+
   getCatalogos() {
-    this.catalogosService.listGradoEstudio()
-      .subscribe((data: any) => this.gradosdeEstudio = this.mapToSelect(data.gradosEstudio));
     this.catalogosService.listReligiones()
-      .subscribe((data: any) => this.religiones = this.mapToSelect(data.religiones));
+      .subscribe((data: any) => this.religiones = data.religiones);
     this.catalogosService.listEstadosCiviles()
-      .subscribe((data: any) => this.estadosCiviles = this.mapToSelect(data.estadosCiviles));
-    this.catalogosService.listOcupaciones()
-      .subscribe((data: any) => this.ocupaciones = this.mapToSelect(data.ocupaciones));
+      .subscribe((data: any) => this.estadosCiviles = data.estadosCiviles);
     this.catalogosService.listPaises()
-      .subscribe((data: any) => this.paises = this.mapToSelect(data.paises));
-    this.catalogosService.listCentroPenitenciario()
-      .subscribe((data: any) => this.centrosPenitenciarios = this.mapToSelect(data.centros));
+      .subscribe((data: any) => this.paises = data.paises);
     this.catalogosService.listDelito()
-      .subscribe((data: any) => this.delitos = this.mapToSelect(data.delitos));
+      .subscribe((data: any) => this.delitos = data.delitos);
+    this.getEstado();
   }
+
 
   getEstado() {
-    if (this.ingreso.imputado.paisNacimientoSelect) {
-      this.catalogosService.listEstados('seleccionada', this.ingreso.imputado.paisNacimientoSelect.value)
-        .subscribe((data: any) => this.estados = this.mapToSelect(data.estados));
-    }
+    this.catalogosService.listEstados('mexico', null)
+      .subscribe((data: any) => {
+        console.log('ESTADOS', data);
+        this.estados = data.estados;
+      });
   }
 
-  getMunicipios() {
-    if (this.ingreso.imputado.estadoSelect) {
-      this.catalogosService.listMunicipios('seleccionada', this.ingreso.imputado.estadoSelect.value)
-        .subscribe((data: any) => this.municipios = this.mapToSelect(data.estados));
-    }
-  }
 
   getIngreso(id) {
     this.ingresoService.getIngreso(id).subscribe((data: any) => {
       console.log('new ingreso', data);
       const {ingreso, error} = data;
-      ingreso.imputado.gradoEstudioSelect = {
-        value: ingreso.imputado.gradoEstudio.id,
-        description: ingreso.imputado.gradoEstudio.nombre
-      };
-      ingreso.imputado.ocupacionSelect = {
-        value: ingreso.imputado.ocupacion.id,
-        description: ingreso.imputado.ocupacion.nombre
-      };
-      ingreso.imputado.estadoCivilSelect = {
-        value: ingreso.imputado.estadoCivil.id,
-        description: ingreso.imputado.estadoCivil.nombre
-      };
-      ingreso.imputado.paisNacimientoSelect = {
-        value: ingreso.imputado.paisNacimiento.id,
-        description: ingreso.imputado.paisNacimiento.nombre
-      };
-      ingreso.imputado.religionSelect = {
-        value: ingreso.imputado.religion.id,
-        description: ingreso.imputado.religion.nombre
-      };
-      ingreso.imputado.municipioSelect = {
-        value: ingreso.imputado.municipio.id,
-        description: ingreso.imputado.municipio.nombre
-      };
-      ingreso.imputado.estadoSelect = {
-        value: ingreso.imputado.municipio.estado.id,
-        description: ingreso.imputado.municipio.estado.nombre
-      };
-      this.ingreso = ingreso;
-      this.arrayAlias = ingreso.imputado.apodos;
-      this.arrayDatoDelito = ingreso.imputado.delitos;
-      console.log('FECHA', this.ingreso.imputado.fechaNacimiento, new Date(this.ingreso.imputado.fechaNacimiento));
-      this.ingreso.imputado.fechaNacimiento = this.datePipe.transform(this.ingreso.imputado.fechaNacimiento, 'yyyy-MM-dd');
+      console.log('GET ingreso', ingreso);
+      if (!ingreso.registroNuevo) {
+        this.ingreso = ingreso;
+        this.arrayAlias = ingreso.imputado.apodos;
+        this.arrayDatoDelito = ingreso.imputado.delitos;
+        this.ingreso.imputado.fechaNacimiento = this.datePipe.transform(this.ingreso.imputado.fechaNacimiento, 'yyyy-MM-dd');
+      } else {
+        this.ingreso = ingreso;
+        this.arrayAlias = ingreso.imputado.apodos;
+      }
+      this.ingreso.registroTerminado = ingreso.registroTerminado;
     });
   }
 
   submit() {
-    if (!this.validSelect()) {
-      return Swal.fire({
-        title: 'Cuidado',
-        text: 'Se deben llenar los campos de <<Religion>>, <<Pais de Nacimiento>>, <<Estado de nacimiento>>, <<Estado civil>>, <<Ocupación>> y <<Grado de estudios>>',
-        icon: 'warning',
-        timer: 1300,
-        showConfirmButton: false
-      });
-    }
     console.log('submit', this.ingreso);
     this.ingreso.imputado = {...this.ingreso.imputado, fechaNacimiento: new Date(this.ingreso.imputado.fechaNacimiento)};
     this.ingreso.imputado.edadAparente = Number(this.ingreso.imputado.edadAparente);
@@ -155,43 +123,8 @@ export class FormularioIngresoComponent implements OnInit {
     });
   }
 
-  validSelect(): boolean {
-    if (this.ingreso.imputado.religionSelect && this.ingreso.imputado.paisNacimientoSelect && this.ingreso.imputado.estadoSelect
-      && this.ingreso.imputado.estadoCivilSelect && this.ingreso.imputado.ocupacionSelect && this.ingreso.imputado.gradoEstudioSelect) {
-      return true;
-    }
-    return false;
-  }
-
-  addDatoDelito(array) {
-    // TODO: Arreglar que desaparecen las opciones del select
-    if (this.validateFiels(array) && this.datoDelito.tipoDelitoSelect && this.arrayDatoDelito.length <= 10) {
-      const model = {
-        tipoDelito: {id: this.datoDelito.tipoDelitoSelect.value},
-        imputado: {id: this.ingreso.id},
-        fechaRegistro: this.datoDelito.fechaRegistro,
-        fechaDetencion: this.datoDelito.fechaDetencion,
-        causaPenal: this.datoDelito.causaPenal,
-        carpetaInvestigacion: this.datoDelito.carpetaInvestigacion
-      };
-      this.ingresoService.savePreDelito(model).subscribe((data: any) => {
-        console.log('save predelito', data);
-        Swal.fire({
-          title: data.error ? 'Error!' : 'Guardado',
-          text: data.mensaje,
-          icon: data.error ? 'error' : 'success',
-          timer: 1300,
-          showConfirmButton: false
-        });
-        if (!data.error) {
-          this.getIngreso(this.ingreso.id);
-        }
-      });
-    }
-  }
-
   addAlias(array) {
-    if (this.validateFiels(array) && this.arrayAlias.length <= 5) {
+    if (this.validateFiels(array)) {
       this.alias.imputado = {id: this.ingreso.id};
       this.ingresoService.saveApodo(this.alias).subscribe((data: any) => {
         console.log(data);
@@ -238,11 +171,7 @@ export class FormularioIngresoComponent implements OnInit {
     }
     return pass;
   }
-
-  mapToSelect(array: any[]) {
-    return array.map((item: any) => ({value: item.id, description: item.nombre}));
-  }
-
+  
   checkMainAlias(): boolean {
     for (const item of this.arrayAlias) {
       if (item.principal) {
@@ -252,13 +181,13 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   goToSenasParticulares() {
-    if (this.ingreso.id && this.arrayAlias.length > 0 && this.checkMainAlias() && this.arrayDatoDelito.length > 0) {
+    if (this.ingreso.id && this.arrayAlias.length > 0 && this.checkMainAlias()) {
       sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
-      this.router.navigate(['/dashboard/ingreso/media-afiliacion']);
+      this.router.navigate(['/dashboard/ingreso/dactiloscopia']);
     } else {
       Swal.fire({
         title: 'Cuidado',
-        text: 'Se debe completar el registro, marcar como principal un nombre y registrar delitos',
+        text: 'Se debe completar el registro, marcar como principal un nombre',
         icon: 'warning',
       });
     }
@@ -273,6 +202,27 @@ export class FormularioIngresoComponent implements OnInit {
       this.getCatalogos();
     });
   }
+
+  selectArrayTofilter(array) {
+    this.arrayToFilter = array;
+    console.log('Array To filter', this.arrayToFilter);
+  }
+
+  search = (text$: Observable<string>) => {
+    return text$.pipe(
+      map(term => term === '' ? []
+        : this.arrayToFilter.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    );
+  };
+  formatter = (x: { nombre: string }) => x.nombre;
+
+  searchNacionalidad = (text$: Observable<string>) => {
+    return text$.pipe(
+      map(term => term === '' ? []
+        : this.arrayToFilter.filter(v => v.nacionalidad.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    );
+  };
+  formatterNacionalidad = (x: { nacionalidad: string }) => x.nacionalidad;
 }
 
 class DatoDelito {

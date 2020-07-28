@@ -44,16 +44,6 @@ export class IngresoService {
   }
 
   saveIngreso(model: Ingreso) {
-    model.imputado.estado = {id: 1};
-    model.imputado.municipio = {id: 1};
-    model.imputado.calleNumero = 'Villa #3';
-    model.imputado.colonia = 'Villa Real';
-    model.imputado.codigoPostal = 62577;
-    model.imputado.paisNacimiento = {id: model.imputado.paisNacimientoSelect.value};
-    model.imputado.religion = {id: model.imputado.religionSelect.value};
-    model.imputado.estadoCivil = {id: model.imputado.estadoCivilSelect.value};
-    model.imputado.ocupacion = {id: model.imputado.ocupacionSelect.value};
-    model.imputado.gradoEstudio = {id: model.imputado.gradoEstudioSelect.value};
     model.imputado.numeroHijos = Number(model.imputado.numeroHijos);
     this.data = model;
     console.log('To server', this.data);
@@ -75,6 +65,9 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/registarIngresoDelito`, this.data);
   }
 
+  editTraslado(model){
+    return this.http.put(`${this.url}/api/edicionImputadoTraslado`, model);
+  }
   //SITUACION JURIDICA;
   getSituacionJuridica(id) {
     return this.http.get(`${this.url}/api/consultarIngresoImputado?imputadoId=${id}`);
@@ -91,11 +84,30 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/listCausaPenal`, this.data);
   }
 
-  listDelitosByCausasPenales(model) {
-    this.data = model;
-    return this.http.post(`${this.url}/api/delitosByImputadoAndCausaPenal`, this.data);
-
+  listDelitosByCausasPenales(id) {
+    return this.http.get(`${this.url}/api/listarDelitosPorCausa?causaId=${id}`);
   }
+
+  listDelitosByCarpetaInvestigacion(id){
+    return this.http.get(`${this.url}/api/listarDelitosPorCarpeta?carpetaId=${id}`);
+  }
+
+  saveDelito(model){
+    console.log("To server",model);
+
+    return this.http.post(`${this.url}/api/registrarDelitosCausaOCarpeta`, model);
+  }
+
+  listRecursos = id => this.http.get(`${this.url}/api/consultarRecursosProbatorios?causaPenalId=${id}`);
+
+  saveRecurso = model => {
+    console.log('To server', model);
+    return this.http.post(`${this.url}/api/registrarRecursoProbatorio`, model);
+  }
+
+  deleteRecurso = id => this.http.get(`${this.url}/api/eliminarRecursoProbatorio?recursoId=${id}`);
+
+  setRecursoAgotado = id => this.http.get(`${this.url}/api/marcarRecursoProbatorioAgotado?recursoId=${id}`);
 
   // CARACTERISTICAS
   getCaracteristica(clave, imputadoId) {
@@ -122,5 +134,89 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/consultarInformacionDactiloscopia?imputadoId=${id}`);
   }
 
+  selectIngresoDactiloscopia(imputadoId, imputadoCopiarId) {
+    console.log('To server, imputadoId', imputadoId, 'imputadoCopiarId', imputadoCopiarId);
+    return this.http.get(`${this.url}/api/seleccionarHuellasIngresoImportar?imputadoId=${imputadoId}&imputadoCopiarId=${imputadoCopiarId}`);
+  }
+
+  finishIngreso(id) {
+    console.log('To server', id);
+    return this.http.get(`${this.url}/api/marcarIngresoTerminado?imputadoId=${id}`);
+  }
+
+  listHuellasPersona = (id, offset, max) => {
+    return this.http.get(`${this.url}/api/listarHuellasIngresoPersona?personaIngresadaId=${id}&offset=${offset}&max=${max}`);
+  }
+
+  generateFolio = (id = null) => this.http.get(`${this.url}/api/generarFolioImputado?personaIngresadaId=${id}`);
+
+  listCarpetasInvestigacion = id => {
+    console.log('listCarpetasInvestigacion', id);
+    return this.http.get(`${this.url}/api/listarCarpetasPorImputado?personaIngresadaId=${id}`);
+  }
+
+  saveCarpetaInvestigacion = model => {
+    this.data = model;
+    return this.http.post(`${this.url}/api/registrarCarpetaInvestigacion`, this.data);
+  }
+
+  deleteCarpetaInvestigacion = carpetaId => {
+    console.log('carpetaId', carpetaId);
+    return this.http.delete(`${this.url}/api/bajaLogicaCarpetaInvestigacion?id=${carpetaId}`);
+  }
+
+  listCausaPenal = id => this.http.get(`${this.url}/api/listarCausaPenalPorImputado?personaIngresadaId=${id}`);
+
+  saveCausaPenal = model => {
+    console.log('To server', model);
+    this.data = model;
+    return this.http.post(`${this.url}/api/registrarCausaPenal`, this.data);
+  }
+
+  deleteCausaPenal = id => {
+    return this.http.put(`${this.url}/api/bajaLogicaCausaPenal?id=${id}`, {});
+  }
+
+  getHistorialDelito = id => this.http.get(`${this.url}/api/historicoDelitos?delitoId=${id}`);
+
+  getForografiasImputado = id => this.http.get(`${this.url}/api/consultarFotografiasImputado?imputadoId=${id}`);
+
+
+  listRefencias = id => this.http.get(`${this.url}/api/listarReferenciasPersonales?imputadoId=${id}`);
+
+  saveReferencia(model){
+    return this.http.post(`${this.url}/api/registrarReferenciaPersonal`, model);
+  }
+
+  deleteReferencia(id){
+    return this.http.delete(`${this.url}/api/eliminarReferenciaPersonal?idReferencia=${id}`);
+  }
+
+  getTipoProceso = () => this.http.get(`${this.url}/api/listaTipoProceso`);
+
+  filterBusquedaListaIngresos = (filter, criteria) =>
+    this.http.get(`${this.url}/api/busquedaConfiltro?filtro=${filter}&criterio=${criteria}`);
+
+
+  getParentescos = () => this.http.get(`${this.url}/api/listarParentescos`);
+
+  savePaseProvisional = (model) => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.post(`${this.url}/api/registrarPaseProvisional`, model, {responseType});
+  }
+
+  generatePDFControlVisitas  = (id) => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfHojaControlVisita?imputadoId=${id}`, {responseType});
+  }
+
+  generatePDFPasePermanente = (model) => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.post(`${this.url}/api/registrarPasePermanente`, model, {responseType});
+  }
 
 }
+
+
+
+

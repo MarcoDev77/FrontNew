@@ -1,0 +1,173 @@
+<app-section-title icon="fa fa-cubes" title="Recursos"></app-section-title>
+<div *ngIf="isForm">
+  <div class="row">
+    <div class="col-md-4">
+      <button type="button" class="btn btn-info btn-sm shadows" (click)="toggleForm()">
+        Regresar
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-12">
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="row">
+
+          <div class="col-md-4">
+            <div class="form-group text-left">
+              <label>Nombre</label>
+              <input formControlName="nombre" class="form-control" type="text" placeholder="Nombre"
+                     [class.is-invalid]="isValidControl('nombre')">
+            </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <div class="form-group text-left">
+              <label>Juzgado de Procedencia</label>
+              <input formControlName="juzgadoProcedencia" class="form-control" type="text"
+                     [class.is-invalid]="isValidControl('juzgadoProcedencia')"
+                     placeholder="Juzgado de Procedencia">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group text-left">
+              <label>Años de Penalidad</label>
+              <input formControlName="penalidadAnio" class="form-control" type="number" placeholder="Años de Penalidad"
+                     [class.is-invalid]="isValidControl('penalidadAnio')">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group text-left">
+              <label>Mes(es) de Penalidad</label>
+              <input formControlName="penalidadMes" class="form-control" type="number" placeholder="Mes(es) de Penalidad"
+                     [class.is-invalid]="isValidControl('penalidadMes')">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group text-left">
+              <label>Dia(s) de Penalidad</label>
+              <input formControlName="penalidadDia" class="form-control" type="number" placeholder="Dia(s) de Penalidad"
+                     [class.is-invalid]="isValidControl('penalidadDia')">
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <label>Observaciones</label>
+            <textarea formControlName="observaciones" placeholder="Observaciones" class="form-control" cols="12"
+                      [class.is-invalid]="isValidControl('observaciones')"
+                      rows="5"></textarea>
+          </div>
+
+          <br><br><br>
+          <br>
+
+          <div class="col-md-4">
+            <div class="form-group text-left">
+              <label>Multa</label>
+              <input formControlName="multa" class="form-control" type="text" placeholder="Multa"
+                     [class.is-invalid]="isValidControl('multa')">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group text-left">
+              <label>Reparación</label>
+              <input formControlName="reparacion" class="form-control" type="text" placeholder="Reparación"
+                     [class.is-invalid]="isValidControl('reparacion')">
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-success" [disabled]="formGroup.invalid" type="submit">Guardar</button>
+          </div>
+        </div>
+        <br>
+        <br>
+      </form>
+    </div>
+  </div>
+</div>
+<div *ngIf="!isForm">
+  <div class="row">
+    <div class="col-md-4">
+      <button class="btn btn-info btn-sm shadows" (click)="toggleForm()">
+        Agregar
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th (click)="sort('clave')" class="text-center">
+              <span *ngIf="key == 'clave'" class="fa"
+                    [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+              Nombre
+            </th>
+            <th (click)="sort('fecha')" class="text-center">
+              <span *ngIf="key == 'fecha'" class="fa"
+                    [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+              Juzgado
+            </th>
+            <th (click)="sort('anio')" class="text-center">
+              <span *ngIf="key == 'anio'" class="fa"
+                    [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Año(s)
+            </th>
+            <th (click)="sort('mes')" class="text-center">
+              <span *ngIf="key == 'mes'" class="fa"
+                    [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+              Mes(es)
+            </th>
+            <th (click)="sort('dia')" class="text-center">
+              <span *ngIf="key == 'dia'" class="fa"
+                    [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+              Dia(s)
+            </th>
+            <th (click)="sort('multa')" class="text-center">
+              <span *ngIf="key == 'multa'" class="fa"
+                    [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+              Multa
+            </th>
+            <th (click)="sort('status')" class="text-center">
+              <span *ngIf="key == 'status'" class="fa"
+                    [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
+              Multa
+            </th>
+
+            <th class="text-center" style="min-width: 5rem">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr id="{{'tr' + i}}"
+              *ngFor="let item of listRecursos | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+              (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+            <td class="text-center">{{item.nombre}}</td>
+            <td class="text-center">{{item.juzgadoProcedencia}}</td>
+            <td class="text-center">{{item.penalidadAnio}}</td>
+            <td class="text-center">{{item.penalidadMes}}</td>
+            <td class="text-center">{{item.penalidadDia}}</td>
+            <td class="text-center">{{item.multa}}</td>
+            <td class="text-center">
+              <span *ngIf="!item.estaAgotado" class="badge badge-secondary">Disponible</span>
+              <span *ngIf="item.estaAgotado" class="badge badge-warning">Agotado</span>
+            </td>
+            <td class="text-center">
+              <i class="fa fa-pencil" placement="top" ngbTooltip="Actiualizar" (click)="update(item)"></i> &nbsp;
+              <i class="fa fa-trash-o" placement="top" ngbTooltip="Eliminar" (click)="delete(item)"></i> &nbsp;
+              <i *ngIf="!item.estaAgotado" class="fa fa-level-down" placement="top" ngbTooltip="Marcar como agotado" (click)="setAgotado(item)"></i>
+            </td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<app-section-title icon="fa fa-table" title="Ofrecimiento Trabajo"></app-section-title>
+<div class="row">
+  <div class="col-md-8">
+    <h3>Generalidades PPL</h3>
+  </div>
+  <div class="col-md-4">
+    <form name="search" (ngSubmit)="searchImputado()" #formSearch="ngForm" novalidate>
+      <div class="input-group">
+        <div class="input-group-prepend">
+        <span (click)="searchImputado()" class="input-group-text"><i
+          class="fa {{isLoading ? 'fa-spinner fa-spin' : 'fa-search'}}"></i></span>
+        </div>
+        <input name="folio" required [(ngModel)]="ingreso.folio" type="text"
+               class="form-control pull-right mr-2"
+               placeholder="Buscar por Folio">
+      </div>
+    </form>
+  </div>
+</div>
+<app-generalidades-ppl [generalidadesPPL]="ingreso"></app-generalidades-ppl>
+<div class="row">
+
+  <div class="col-md-12 mt-4">
+    <h3>Oficio de ofrecimiento de trabajo</h3>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Persona que suscribe:</label>
+      <input type="text" class="form-control"  name="personaSuscribe"/>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Domicilio de quien suscribe:</label>
+      <input type="text" class="form-control"  name="domicilioSuscribe"/>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Teléfono de quien suscribe:</label>
+      <input type="tel" class="form-control"  name="telefonoSuscribe"/>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Puesto de trabajo:</label>
+      <input type="tel" class="form-control"  name="puesto"/>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-4 offset-8">
+    <button class="btn btn-success pull-right">Imprimir</button>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<app-section-title icon="fa fa-table" title="Ficha ingreso"></app-section-title>
+<app-finder-imputado
+  [isLoading]="isLoading"
+  (onSelectIngresoSearch)="searchImputado($event)"
+  (onClearSearch)="cleanForm()"
+></app-finder-imputado>
+<app-generalidades-ppl [generalidadesPPL]="ingreso"></app-generalidades-ppl>
+<form name="save" (ngSubmit)="saveFicha()" #formSave="ngForm" novalidate>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Número telefónico del PPL</label>
+        <input
+          type="tel"
+          class="form-control"
+          name="telefonoImputado"
+          [(ngModel)]="ficha.telefonoImputado"
+          maxlength="10"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="">¿Cuenta con servicio médico?</label>
+        <input
+          type="text"
+          class="form-control"
+          name="servicioMedico"
+          [(ngModel)]="ficha.servicioMedico"
+        />
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="">Necesidades detectadas:</label>
+        <textarea
+          class="form-control"
+          cols="100"
+          rows="9"
+          value=""
+          name="necesidadesDetectadas"
+          [(ngModel)]="ficha.necesidadesDetectadas"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 text-center text-sm-right">
+      <button
+        type="submit"
+        class="btn btn-success mr-3"
+        [disabled]="!ingreso?.imputadoId"
+      >
+        Guardar
+      </button>
+      <button
+        type="button"
+        class="btn btn-success mr-3"
+        [disabled]="!ingreso?.imputadoId || isLoading"
+        (click)="genetatePDF(view)"
+        type="button"
+        class="btn btn-success pull-right"
+      >
+        Imprimir
+      </button>
+    </div>
+  </div>
+</form>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'estudio trabajo social'"
+    ></app-web-viewer>
+  </div>
+</ng-template>

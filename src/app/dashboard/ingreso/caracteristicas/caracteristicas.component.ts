@@ -43,7 +43,7 @@ export class CaracteristicasComponent implements OnInit {
   }
 
   find(modal, label?) {
-    this.modalService.open(modal, {size: 'sm', windowClass: 'modal-primary'});
+    this.modalService.open(modal, { windowClass: 'modal-primary'});
     this.ingresoService.getCaracteristica(label, this.ingreso.id).subscribe((data: any) => {
       console.log('DATA', data);
       this.caracteristica = data.senaParticular;
@@ -54,6 +54,16 @@ export class CaracteristicasComponent implements OnInit {
   submit(array) {
     if (!this.validateFiels(array)) {
       return;
+    }
+    console.log('carateristica', this.caracteristica);
+    if (this.caracteristica.descripcion.length > 255) {
+      Swal.fire({
+        title: 'Atención',
+        text: 'Número de caracteres superado para la descripción',
+        icon: 'warning',
+        timer: 2000,
+        showConfirmButton: false
+      });
     }
     this.caracteristica.imputado = {} as Imputado;
     this.caracteristica.imputado.id = this.ingreso.id;
@@ -90,6 +100,6 @@ export class CaracteristicasComponent implements OnInit {
 
   goToDactiloscopia() {
     sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
-    this.router.navigate(['/dashboard/ingreso/dactiloscopia']);
+    this.router.navigate(['/dashboard/ingreso/media-afiliacion']);
   }
 }

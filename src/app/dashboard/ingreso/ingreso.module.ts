@@ -7,28 +7,33 @@ import {IngresoRoutingModule} from '@dashboard/ingreso/ingreso-routing.module';
 import { FormularioIngresoComponent } from './formulario-ingreso/formulario-ingreso.component';
 import { ListaIngresoComponent } from './lista-ingreso/lista-ingreso.component';
 import { DactiloscopiaComponent } from './dactiloscopia/dactiloscopia.component';
-import { SituacionJuridicaIngresoComponent } from './situacion-juridica-ingreso/situacion-juridica-ingreso.component';
 import { ReferenciasComponent } from './referencias/referencias.component';
 import { CaracteristicasComponent } from './caracteristicas/caracteristicas.component';
 import { MediaAfiliacionComponent } from './media-afiliacion/media-afiliacion.component';
-import { SituacionJuridicaImputadoComponent } from './situacion-juridica-imputado/situacion-juridica-imputado.component';
+import { SituacionJuridicaComponent } from './situacion-juridica/situacion-juridica-ingreso.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {CatalogosModule} from '@dashboard/catalogos/catalogos.module';
+import { BusquedaHuellasComponent } from './busqueda-huellas/busqueda-huellas.component';
+import { BusquedaHuellasDetalleComponent } from './busqueda-huellas-detalle/busqueda-huellas-detalle.component';
 
 
 
 @NgModule({
-  declarations: [
-    RootComponent,
-    FormularioIngresoComponent,
-    ListaIngresoComponent,
-    DactiloscopiaComponent,
-    SituacionJuridicaIngresoComponent,
-    ReferenciasComponent,
-    CaracteristicasComponent,
-    MediaAfiliacionComponent,
-    SituacionJuridicaImputadoComponent
-  ],
+    declarations: [
+        RootComponent,
+        FormularioIngresoComponent,
+        ListaIngresoComponent,
+        DactiloscopiaComponent,
+        SituacionJuridicaComponent,
+        ReferenciasComponent,
+        CaracteristicasComponent,
+        MediaAfiliacionComponent,
+        BusquedaHuellasComponent,
+        BusquedaHuellasDetalleComponent
+    ],
+    exports: [
+        BusquedaHuellasComponent
+    ],
     imports: [
         CommonModule,
         SharedModule,

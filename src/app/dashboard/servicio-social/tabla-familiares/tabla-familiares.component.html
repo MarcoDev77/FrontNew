@@ -1,0 +1,281 @@
+<div class="row mt-2">
+  <div class="col md-9">
+    <h5 *ngIf="showTitle" class="title-pink">
+      {{ title || "Grupo Familiar" }}
+    </h5>
+  </div>
+  <div class="col text-right mb-3">
+    <button
+      type="button"
+      class="btn btn-success btn-sm m-0 pull-right"
+      (click)="add(); openModal(registrarFamiliar)"
+      [ngbTooltip]="'Nuevo Registro'"
+    >
+      <i class="fa fa-plus fa-lg"></i>
+    </button>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th (click)="sort('nombre')" class="text-center">
+          <span
+            *ngIf="key == 'nombre'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Nombre
+        </th>
+        <th (click)="sort('parentesco')" class="text-center">
+          <span
+            *ngIf="key == 'parentesco'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Parentesco
+        </th>
+        <th (click)="sort('edad')" class="text-center">
+          <span
+            *ngIf="key == 'edad'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Edad
+        </th>
+        <th (click)="sort('estadoCivil')" class="text-center">
+          <span
+            *ngIf="key == 'estadoCivil'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Edo. Civil
+        </th>
+        <th (click)="sort('escolaridad')" class="text-center">
+          <span
+            *ngIf="key == 'escolaridad'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Escolaridad
+        </th>
+        <th (click)="sort('ocupacion')" class="text-center">
+          <span
+            *ngIf="key == 'ocupacion'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Ocupación
+        </th>
+        <th class="text-center">
+          Acciones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let item of familiares
+            | orderBy: key:reverse
+            | filter: filter
+            | paginate: { itemsPerPage: 5, currentPage: p };
+          let i = index
+        "
+      >
+        <td class="text-center">{{ item.nombre }}</td>
+        <td class="text-center">{{ item.parentesco.nombre }}</td>
+        <td class="text-center">{{ item.edad }}</td>
+        <td class="text-center">{{ item.estadoCivil.nombre }}</td>
+        <td class="text-center">{{ item.gradoEstudio }}</td>
+        <td class="text-center">{{ item.ocupacion }}</td>
+
+        <td class="text-center">
+          <i
+            class="fa fa-pencil"
+            placement="top"
+            ngbTooltip="Modificar"
+            (click)="updateFamiliar(item); openModal(registrarFamiliar)"
+          ></i>
+          &nbsp;
+          <i
+            class="fa fa-trash"
+            placement="top"
+            ngbTooltip="Eliminar"
+            (click)="deleteFamiliar(item)"
+          ></i>
+        </td>
+      </tr>
+
+      <tr *ngIf="familiares.length == 0">
+        <td colspan="6">
+          {{ isLoading ? "Cargando..." : "Sin registros..." }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center w-100">
+    <pagination-controls
+      autoHide="true"
+      responsive="true"
+      previousLabel=""
+      nextLabel=""
+      (pageChange)="switch($event)"
+    >
+    </pagination-controls>
+  </div>
+</div>
+
+<ng-template #registrarFamiliar let-registroFamiliarModal>
+  <div class="modal-body">
+    <h3>{{ tituloModal }}</h3>
+    <br />
+    <form
+      class="form-horizontal"
+      name="form"
+      #f="ngForm"
+      (ngSubmit)="f.form.valid && saveFamiliar()"
+      novalidate
+    >
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">Nombre:</label>
+            <input
+              name="nombre"
+              type="text"
+              class="form-control"
+              [(ngModel)]="familiar.nombre"
+              placeholder="Nombre"
+              #nombre="ngModel"
+              [ngClass]="{ 'is-invalid': nombre.touched && nombre.invalid }"
+              maxlength="45"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="">Parentesco:</label>
+            <select
+              class="form-control shadows"
+              name="parentesco"
+              [(ngModel)]="familiar.parentesco.id"
+            >
+              <option *ngFor="let item of parentescos" [value]="item.id">
+                {{ item.nombre }}</option
+              >
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">Origen:</label>
+            <textarea
+              class="form-control"
+              name="origen"
+              id=""
+              cols="30"
+              rows="5"
+              maxlength="45"
+              [(ngModel)]="familiar.origen"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="">Fecha de nacimiento:</label>
+            <input
+              name="fechaNacimiento"
+              type="date"
+              class="form-control"
+              [ngModel]="familiar.fechaNacimiento | date: 'yyyy-MM-dd'"
+              (ngModelChange)="familiar.fechaNacimiento = $event"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="">Estado civil:</label>
+            <select
+              class="form-control shadows"
+              name="parentesco"
+              [(ngModel)]="familiar.estadoCivil.id"
+            >
+              <option *ngFor="let item of estadosCiviles" [value]="item.id">
+                {{ item.nombre }}</option
+              >
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="">Grado de estudios:</label>
+            <input
+              name="gradoEstudio"
+              type="text"
+              class="form-control"
+              [(ngModel)]="familiar.gradoEstudio"
+              placeholder="Escolaridad"
+              #gradoEstudio="ngModel"
+              [ngClass]="{
+                'is-invalid': gradoEstudio.touched && gradoEstudio.invalid
+              }"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="">Ocupación:</label>
+            <input
+              name="ocupacion"
+              type="text"
+              class="form-control"
+              [(ngModel)]="familiar.ocupacion"
+              placeholder="Ocupación"
+              #ocupacion="ngModel"
+              [ngClass]="{
+                'is-invalid': ocupacion.touched && ocupacion.invalid
+              }"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 text-center text-sm-right">
+          <button
+            type="button"
+            (click)="registroFamiliarModal.close()"
+            class="btn btn-danger mr-3"
+          >
+            Cerrar
+          </button>
+          <button type="submit" class="btn btn-success mr-3">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

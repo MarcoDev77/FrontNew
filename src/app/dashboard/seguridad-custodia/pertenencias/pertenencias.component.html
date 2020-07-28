@@ -1,0 +1,254 @@
+<app-section-title
+  [goBack]="true"
+  icon="fa fa-user-plus"
+  title="Revisión"
+></app-section-title>
+
+<div class="row">
+  <div class="col-md-4">
+    <h3>Agregar PPL(S)</h3>
+  </div>
+
+  <div class="col-md-8">
+    <form
+      name="search"
+      (ngSubmit)="searchImputado()"
+      #formSearch="ngForm"
+      novalidate
+    >
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span (click)="searchImputado()" class="input-group-text"
+            ><i
+              class="fa {{
+                isLoadingSearchFolio && isLoadingSearchName
+                  ? 'fa-spinner fa-spin'
+                  : 'fa-search'
+              }}"
+            ></i
+          ></span>
+        </div>
+        <input
+          name="folio"
+          required
+          [(ngModel)]="criteria"
+          type="text"
+          class="form-control pull-right mr-2"
+          placeholder="Buscar por Folio o Nombre"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-pertenencias-resultado-busqueda
+  [imputados]="imputadoListSearch"
+  [revisionId]="this.revision.id"
+  (refresh)="getData()"
+></app-pertenencias-resultado-busqueda>
+
+<div class="row">
+  <div class="col-md-12">
+    <hr />
+  </div>
+  <div class="col-md-8">
+    <h3>Revisiones {{ revision.fechaRevision | date }}</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a
+        *ngFor="let imputado of imputadoList"
+        (click)="selectImputado(imputado)"
+        class="list-group-item list-group-item-action"
+        id="list-home-{{ imputado.id }}"
+        data-toggle="list"
+        href="#list-home-{{ imputado.id }}"
+        role="tab"
+        aria-controls="home"
+      >
+        {{ imputado.folio }}
+        -
+        <b>{{ imputado.nombre }}</b>
+      </a>
+    </div>
+  </div>
+  <div class="col-8">
+    <div>
+      <div class="tab-pane fade show">
+        <app-section-title
+          icon="fa fa-list-alt"
+          title="Objetos"
+        ></app-section-title>
+        <div class="row">
+          <div class="col text-right mb-3">
+            <button
+              class="btn btn-success btn-sm m-0 pull-right"
+              (click)="add()"
+              [disabled]="isLoading || !currentImputado?.id"
+              [ngbTooltip]="'Nuevo Registro'"
+            >
+              <i class="fa fa-plus fa-lg"></i>
+            </button>
+            <input
+              type="text"
+              class="form-control form-control-sm pull-right mr-2"
+              style="max-width: 12rem;"
+              [(ngModel)]="filter"
+              [disabled]="isLoading"
+              placeholder="Buscar"
+            />
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th (click)="sort('objeto')" class="text-center">
+                  <span
+                    *ngIf="key == 'objeto'"
+                    class="fa"
+                    [ngClass]="{
+                      'fa-chevron-circle-down': reverse,
+                      'fa-chevron-circle-up': !reverse
+                    }"
+                  ></span>
+                  Objeto
+                </th>
+                <th (click)="sort('tipo')" class="text-center">
+                  <span
+                    *ngIf="key == 'tipo'"
+                    class="fa"
+                    [ngClass]="{
+                      'fa-chevron-circle-down': reverse,
+                      'fa-chevron-circle-up': !reverse
+                    }"
+                  ></span>
+                  Tipo
+                </th>
+                <th (click)="sort('ubiacion')" class="text-center">
+                  <span
+                    *ngIf="key == 'ubiacion'"
+                    class="fa"
+                    [ngClass]="{
+                      'fa-chevron-circle-down': reverse,
+                      'fa-chevron-circle-up': !reverse
+                    }"
+                  ></span>
+                  Ubicación
+                </th>
+                <th class="text-center" style="min-width: 5rem;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="table-form" *ngIf="isForm">
+                <td class="text-center">
+                  <input
+                    name="objeto"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="objetoDecomisado.objeto"
+                    placeholder="Objeto"
+                    #objeto="ngModel"
+                    [ngClass]="{
+                      'is-invalid': objeto.touched && objeto.invalid
+                    }"
+                    maxlength="150"
+                    required
+                  />
+                </td>
+                <td class="text-center">
+                  <input
+                    name="tipo"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="objetoDecomisado.tipo"
+                    placeholder="Tipo"
+                    #tipo="ngModel"
+                    [ngClass]="{
+                      'is-invalid': tipo.touched && tipo.invalid
+                    }"
+                    maxlength="150"
+                    required
+                  />
+                </td>
+                <td class="text-center">
+                  <input
+                    name="ubicacion"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="objetoDecomisado.ubicacion"
+                    placeholder="Ubicación"
+                    #ubicacion="ngModel"
+                    [ngClass]="{
+                      'is-invalid': ubicacion.touched && ubicacion.invalid
+                    }"
+                    maxlength="150"
+                    required
+                  />
+                </td>
+
+                <td class="text-center">
+                  <i
+                    class="fa fa-times mr-3"
+                    placement="top"
+                    ngbTooltip="Cancelar"
+                    (click)="cancel()"
+                  ></i>
+                  <i
+                    class="fa fa-check"
+                    placement="top"
+                    ngbTooltip="Guardar"
+                    (click)="saveObjeto([objeto, tipo, ubicacion])"
+                  ></i>
+                </td>
+              </tr>
+
+              <tr
+                id="{{ 'tr' + i }}"
+                *ngFor="
+                  let item of objetosList
+                    | orderBy: key:reverse
+                    | filter: filter
+                    | paginate: { itemsPerPage: 5, currentPage: p };
+                  let i = index
+                "
+                (click)="setClickedRow(i)"
+              >
+                <td class="text-center">{{ item.objeto }}</td>
+                <td class="text-center">{{ item.tipo }}</td>
+                <td class="text-center">{{ item.ubicacion }}</td>
+                <td class="text-center">
+                  <i
+                    class="fa fa-trash-o"
+                    (click)="deleteObjeto(item.id)"
+                    placement="top"
+                    ngbTooltip="Eliminar"
+                  ></i>
+                </td>
+              </tr>
+
+              <tr *ngIf="objetosList.length == 0">
+                <td colspan="6">
+                  {{ isLoading ? "Cargando..." : "Sin registros..." }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="text-center w-100">
+            <pagination-controls
+              autoHide="true"
+              responsive="true"
+              previousLabel=""
+              nextLabel=""
+              (pageChange)="switch($event)"
+            >
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,305 @@
+<app-section-title  [goBack]="true" icon="fa fa-address-card-o" title="Datos Generales"></app-section-title>
+
+<form class="form-horizontal" name="f" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
+    <div class="row" *ngIf="ingreso.tipoImputado==='Ingreso'">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Expediente</h6>
+                <label>{{ingreso?.numeroExpediente}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="ingreso.tipoImputado==='Imputado'">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Folio</h6>
+                <label>{{ingreso?.folio}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Número de expediente</h6>
+                <label>{{ingreso?.numeroExpediente}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Nombre:</h6>
+                <label>{{ingreso?.apodo?.nombre}} </label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Apellido Paterno:</h6>
+                <label>{{ingreso?.apodo?.apellidoPaterno}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Apellido Materno:</h6>
+                <label>{{ingreso?.apodo?.apellidoMaterno}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Alias:</h6>
+                <label>{{ingreso.apodo.otro? ingreso.apodo.otro: 'Sin alias'}}</label>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Nacionalidad:</h6>
+                <label> {{ingreso.paisNacimiento.nombre? 'Mexicano': 'Extranjero'}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Genero:</h6>
+                <label>{{ingreso?.genero}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Domicilio:</h6>
+                <label>{{ingreso?.calleNumero}}, {{ingreso?.colonia}}, {{ingreso?.codigoPostal}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Estado civil:</h6>
+                <label>{{ingreso?.estadoCivil?.nombre}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Lugar de origen:</h6>
+                <label>{{ingreso?.municipioNacimiento ? ingreso?.municipioNacimiento: 'Dato desconocido'}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Estado:</h6>
+                <label>{{ingreso?.estadoNacimiento?.nombre}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Ocupación:</h6>
+                <label>{{ingreso?.ocupacion}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Edad:</h6>
+                <label>{{ingreso?.edadAparente}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Tipo de ingreso:</h6>
+                <label>{{ingreso.tipoIngreso}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Religión:</h6>
+                <label>{{ingreso?.religion.nombre}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Grupo étnico:</h6>
+                <label>{{ingreso.etnia? ingreso.imputado.etnia: 'Sin grupo étnico'}}</label>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Fecha de nacimiento:</h6>
+                <label>{{ingreso?.fechaNacimiento|date: 'dd/MM/yyyy'}}</label>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <h6>Educación:</h6>
+                <label>{{ingreso?.gradoEstudio}}</label>
+            </div>
+        </div>
+        <div class="col-sm-4" >
+            <div class="form-group">
+                <label for="">Dormitorio:</label>
+                <input class="form-control" type="text" name="dormitorio" [(ngModel)]="ingreso.dormitorio" #dormitorio="ngModel"  />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <div class="custom-control custom-checkbox mt-4">
+                    <input name="esTraslado" type="checkbox" class="custom-control-input" id="esIndigena" [(ngModel)]="ingreso.esTraslado" #esTraslado="ngModel">
+                    <label class="custom-control-label" for="esIndigena">Es traslado</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-8" *ngIf="ingreso.esTraslado">
+            <div class="form-group">
+                <label for="">Centro de origen:</label>
+                <input class="form-control" type="text" name="centroOrigen" [(ngModel)]="ingreso.centroOrigen" #centroOrigen="ngModel"  />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 text-center text-sm-right">
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </div>
+</form>
+
+<app-carpeta-investigacion-imputado *ngIf="ingreso?.id && ingreso.personaIngresada.id"  [ingresoId]="ingreso.id" [personaId]="ingreso.personaIngresada.id"></app-carpeta-investigacion-imputado>
+
+<app-causa-penal-ingreso *ngIf="ingreso?.id && ingreso.personaIngresada.id" role="ARCHIVO" [ingresoId]="ingreso.id" [personaId]="ingreso.personaIngresada.id"></app-causa-penal-ingreso>
+<app-causa-penal-ingreso [hidden]="true" #causaPenal></app-causa-penal-ingreso>
+
+
+
+
+
+<ng-template #formModal let-formModal>
+    <div class="modal-body text-center">
+        <div class="col-md-12">
+            <h3>Modificar Delito</h3>
+        </div>
+        <br>
+        <form class="form-horizontal" name="form" #f="ngForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group shadows">
+                        <input class="form-control" type="text" placeholder="Nombre del delito" name="nombreDelito" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group shadows">
+                        <button class="btn btn-success btn-sm m-0 pull-right" [ngbTooltip]="'Nuevo Delito'"><i
+                                class="fa fa-plus fa-lg"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <select class="form-control shadows" name="causaPenal">
+                            <option disabled selected>Causa Penal</option>
+                            <option value="">Causa penal 1</option>
+                            <option value="">Causa penal 2</option>
+                            <option value="">Causa penal 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group shadows">
+                        <input class="form-control" type="text" placeholder="Juez" name="juez" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Fecha de detencion" onfocus="(this.type='date')" />
+                        <!--<input type="date" class="form-control" placeholder="Fecha de consignación" name="fechaConsignacion" />-->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Fecha de registro" onfocus="(this.type='date')" />
+                        <!--<input type="date" class="form-control" placeholder="Fecha de consignación" name="fechaConsignacion" />-->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <select class="form-control shadows" name="causaPenal">
+                            <option disabled selected>Tipo de delito</option>
+                            <option value="">Tipo 1</option>
+                            <option value="">Tipo 2</option>
+                            <option value="">Tipo 3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #formModal2 let-formModal>
+    <div class="modal-body text-center">
+        <div class="col-md-12">
+            <h3>Historial de modificaciones</h3>
+        </div>
+        <br>
+        <form class="form-horizontal" name="form" #f="ngForm">
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    No
+                                </th>
+                                <th class="text-center">
+                                    Nombre del delito
+                                </th>
+                                <th class="text-center">
+                                    Causa Penal
+                                </th>
+
+                                <th class="text-center">
+                                    Fecha de modificacion
+                                </th>
+                                <th class="text-center">
+                                    Juez
+                                </th>
+                                <th class="text-center">
+                                    Tipo de delito
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">658</td>
+                                <td class="text-center">Robo a mano armada</td>
+                                <td class="text-center">Causa penal</td>
+                                <td class="text-center">12/12/2016</td>
+                                <td class="text-center">Juez</td>
+                                <td class="text-center">Tipo Delito</td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center text-sm-right">
+                    <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cerrar</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

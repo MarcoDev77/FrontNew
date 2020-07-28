@@ -1,19 +1,23 @@
-<div class="sidebar" data-color="fiscalia" style="width: 237px;">
+<div class="sidebar" data-color="fiscalia">
     <div class="logo" style="height: 5rem;">
         <a class="simple-text logo-mini ml-1 pl-2" style="width: unset;">
-            <div class="logo-img">
-                <img style="width: 280px;" src="./assets/img/logo.png" height="50" width="auto" />
-            </div>
+          <div *ngIf="isCollapsed" class="logo-img">
+              <img style="width: 280px;" src="./assets/img/logo.png" height="50" width="auto" />
+          </div>
+          <div *ngIf="!isCollapsed" class="simple-text logo-mini">
+            MOR.
+          </div>
         </a>
-        <!--<div class="navbar-minimize">
-      <button id="minimizeSidebar" class="btn btn-simple btn-icon btn-neutral btn-round" (click)="minimizeSidebar()">
-        <i class="now-ui-icons text_align-center visible-on-sidebar-regular"></i>
-        <i class="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini"></i>
-      </button>
-    </div>-->
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
+            <li style="width: 15rem;">
+                <a (click)="minimizeSidebar()">
+                    <i class="fa {{isCollapsed ? 'fa-angle-left' : 'fa-angle-right'}}"></i>
+                    <p>MENÚ</p>
+                </a>
+            </li>
+            <br>
             <li routerLinkActive="active" *ngFor="let menuitem of menuItems" style="width: 15rem;">
                 <!--If is a single link-->
                 <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">

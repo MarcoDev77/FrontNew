@@ -1,0 +1,70 @@
+<app-section-title
+  icon="fa fa-table"
+  title="Ofrecimiento Trabajo"
+></app-section-title>
+<app-finder-imputado
+  [isLoading]="isLoading"
+  (onSelectIngresoSearch)="searchImputado($event)"
+  (onClearSearch)="cleanForm()"
+></app-finder-imputado>
+<app-generalidades-ppl
+  [generalidadesPPL]="ingreso?.imputado"
+></app-generalidades-ppl>
+<div class="row">
+  <div class="col-md-12 mt-4">
+    <h3>Otros Oficios</h3>
+  </div>
+  <div id="card-container">
+    <div class="col-md-12">
+      <div class="card-deck">
+        <div
+          *ngFor="let format of formats"
+          class="card"
+          style="max-width: 250px;"
+        >
+          <div class="text-center">
+            <img
+              src="/assets/img/min/{{ format.image }}"
+              class="card-img-top min-img"
+              alt="formato"
+            />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ format.name }}</h5>
+            <div class="row">
+              <div class="col">
+                <button
+                  [disabled]="!this.ingreso?.imputado?.id || isLoading"
+                  (click)="format.methodToGenerate(view)"
+                  class="btn btn-success pull-right"
+                >
+                  Generar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'estudio trabajo social'"
+    ></app-web-viewer>
+  </div>
+</ng-template>

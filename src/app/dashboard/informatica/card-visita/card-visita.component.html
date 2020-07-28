@@ -1,0 +1,36 @@
+<div class="card m-0">
+  <img
+    class="card-img-top"
+    src="{{
+      visitante.fotoPerfil
+        ? 'data:image/png;base64,' + visitante.fotoPerfil
+        : 'assets/img/no_image.png'
+    }}"
+    alt="Card image cap"
+  />
+  <div class="card-body">
+    <div class="form-group">
+      <label>C.B.:</label><br />
+      <span>{{ visitante.codigoBarras }}</span
+      ><br />
+      <label>Nombre:</label><br />
+      <span>{{ visitante.nombre }}</span
+      ><br />
+      <label>Domicilio:</label><br />
+      <span>{{ visitante.domicilio }}</span
+      ><br />
+      <label>Fecha de nacimiento:</label><br />
+      <span>{{ visitante.fechaNacimiento | date: "shortDate" }}</span
+      ><br />
+      <label>Grado de estudios:</label><br />
+      <span>{{ visitante.gradoEstudio }}</span
+      ><br />
+      <label>Estado civil:</label><br />
+      <span>{{ visitante.estadoCivil }}</span
+      ><br />
+      <label>Sexo:</label><br />
+      <span>{{ visitante.sexo }}</span
+      ><br />
+    </div>
+  </div>
+</div>

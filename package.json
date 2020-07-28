@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.2.7",
     "@angular/router": "~8.2.7",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
+    "animate.css": "^3.7.2",
     "crypto-js": "^3.1.9-1",
     "iv-viewer": "^2.0.1",
     "moment": "^2.24.0",

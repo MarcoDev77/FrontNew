@@ -19,5 +19,5 @@ export class Personal{
      user:User;
      centroPenitenciario: any;
      area:any;
-     
+     areaSelect: any;
 }

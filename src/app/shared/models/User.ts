@@ -5,4 +5,5 @@ export class User {
   roles: any;
   token?: string;
   enabled: boolean;
+  centro: any;
 }

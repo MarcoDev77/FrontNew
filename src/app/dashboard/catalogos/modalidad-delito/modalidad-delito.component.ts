@@ -4,6 +4,7 @@ import {ModalidadDelito} from '@shared/models/ModalidadDelito';
 import Swal from 'sweetalert2';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Delito } from '@shared/models/Delito';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-modalidad-delito',
@@ -30,7 +31,7 @@ export class ModalidadDelitoComponent implements OnInit {
   public key = 'id'; // set default
   public reverse = true;
 
-  constructor(private catalogosService: CatalogosService) {
+  constructor(private catalogosService: CatalogosService, private router: Router) {
     this.modalidadDelito = {} as ModalidadDelito;
     this.data = [];
     this.date = new Date();
@@ -42,7 +43,7 @@ export class ModalidadDelitoComponent implements OnInit {
 
     this.delito=JSON.parse(sessionStorage.getItem('delito'));
     console.log(this.delito)
-    this.modalidadDelito.tipoDelito={id:this.delito.id};
+    this.modalidadDelito.tipoDelito={id:this.delito.idTipoDelito};
   }
 
   ngOnInit() {
@@ -79,7 +80,7 @@ export class ModalidadDelitoComponent implements OnInit {
   }
   getData() {
     this.isLoading = true;
-    this.catalogosService.listModalidadDelito(this.delito.id).subscribe((data: any) => {
+    this.catalogosService.listModalidadDelito(this.delito.idTipoDelito).subscribe((data: any) => {
       this.isLoading = false;
       console.log('DATA', data);
       if (data.error) {
@@ -91,6 +92,7 @@ export class ModalidadDelitoComponent implements OnInit {
   }
   submit(array) {
     if (this.validateFiels(array)) {
+      this.modalidadDelito.tipoDelito = {id: this.delito.idTipoDelito};
       this.catalogosService.saveModalidadDelito(this.modalidadDelito).subscribe((data: any) => {
         console.log('ADD', data);
         Swal.fire({
@@ -219,5 +221,9 @@ export class ModalidadDelitoComponent implements OnInit {
         });
       }
     });
+  }
+
+  goBack() {
+    this.router.navigate(['/catalogo/delito']);
   }
 }

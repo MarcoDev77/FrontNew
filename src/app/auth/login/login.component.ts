@@ -4,7 +4,7 @@ import {AuthenticationService} from '@shared/services/authentication.service';
 import {User} from '@shared/models/User';
 import {first} from 'rxjs/operators';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import {roles} from '@shared/helpers/roles';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -28,9 +28,8 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {
     const user = authenticationService.getCurrentUser();
-    console.log('USER', user);
     if (user) {
-      this.router.navigate(['/dashboard']);
+      this.redirectUser(user);
     }
   }
 
@@ -39,23 +38,11 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit() {
-    // return console.log('USER', this.user);
-    // this.router.navigate(['/dashboard/ingreso']);
-    // this.loading = true;
-    // try {
-    //   this.isLoading = true;
-    //   const data = await this.authenticationService.login(this.user.username, this.user.password, this.token).pipe(first());
-    //   console.log(data);
-    // } catch (e) {
-    //   console.log(e);
-    // } finally {
-    //   this.isLoading = false;
-    // }
     this.isLoading = true;
     this.authenticationService.login(this.user.username, this.user.password).pipe(first()).subscribe(user => {
         this.isLoading = false;
         if (user) {
-          this.router.navigate(['/dashboard']);
+          this.redirectUser(user);
         }
       },
       error => {
@@ -70,6 +57,14 @@ export class LoginComponent implements OnInit {
 
   composeEmail() {
 
+  }
+
+  redirectUser(user: User) {
+    for (const r of Object.values(roles)) {
+      if (user.roles.includes(r.role)) {
+        return this.router.navigate([r.main]);
+      }
+    }
   }
 
   switch(flag?) {

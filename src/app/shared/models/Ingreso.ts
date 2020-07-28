@@ -11,4 +11,10 @@ export class Ingreso {
   imputado: Imputado;
   clasificacion?: string;
   edadAparente: number;
+  esTraslado: boolean;
+  centroOrigen: string;
+  registroTerminado: boolean;
+  personaIngresada: any;
+  municipioDomicilio: any;
+  
 }

@@ -6,6 +6,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {EncrDecrService} from '@shared/helpers/encr-decr.service';
+import {Personal} from '@shared/models/Personal';
+import {User} from '@shared/models/User';
 
 @Component({
   selector: 'app-centro-penitenciario',
@@ -21,7 +23,10 @@ export class CentroPenitenciarioComponent implements OnInit {
   public estados: any[];
   public municipios: any[];
   public tipoCentros: any[];
+  public listAreas: any[] = [];
   public centroPenitenciario: CentroPenitenciario;
+  public persona: Personal;
+  public user: User;
 
   public auxId: any;
   public isForm = false;
@@ -42,8 +47,10 @@ export class CentroPenitenciarioComponent implements OnInit {
     this.estados = [];
     this.municipios = [];
     this.tipoCentros = [];
+    this.user = {} as User;
+    this.persona = {} as Personal;
 
-    this.setClickedRow = function(index) {
+    this.setClickedRow = (index) => {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -52,7 +59,7 @@ export class CentroPenitenciarioComponent implements OnInit {
     this.getData();
     this.getEstados('mexico', null);
     this.getTipoCentros();
-    // this.getMunicipios('morelos', null);
+    this.getAreas();
   }
 
   getData() {
@@ -82,9 +89,11 @@ export class CentroPenitenciarioComponent implements OnInit {
   getEstados(region, idPais) {
     this.catalogosService.listEstados(region, idPais).subscribe((data: any) => {
       if (data.estados) {
+        this.estados = [];
         for (const estado of data.estados) {
           this.estados = [...this.estados, {value: estado.id, description: estado.nombre}];
         }
+        this.estados = [...this.estados].sort();
         console.log('ESTADOS', this.estados);
       }
     });
@@ -95,6 +104,7 @@ export class CentroPenitenciarioComponent implements OnInit {
     this.catalogosService.listMunicipios(region, idEstado).subscribe((data: any) => {
       console.log('Municipios', data);
       if (data.estados) {
+        this.municipios = [];
         for (const municipio of data.estados) {
           this.municipios = [...this.municipios, {value: municipio.id, description: municipio.nombre}];
         }
@@ -103,12 +113,32 @@ export class CentroPenitenciarioComponent implements OnInit {
     });
   }
 
+  getAreas() {
+    this.catalogosService.listAreas().subscribe((data: any) => {
+      console.log('Areas', data);
+      for (const area of data.areas) {
+        this.listAreas = [...this.listAreas, {value: area.id, description: area.nombre}];
+      }
+    });
+  }
+
   submit(array?) {
     if (!this.centroPenitenciario.municipioSelect || !this.centroPenitenciario.tipoCentroSelect) {
       return Swal.fire('Atención', 'Tienes que selecionar estado, municipio y tipo de centro.', 'warning');
     }
-    console.log('submit', this.centroPenitenciario);
-    this.catalogosService.saveCentroPenitenciario(this.centroPenitenciario).subscribe((data: any) => {
+    if (!this.persona.areaSelect) {
+      return Swal.fire('Atención', 'Tienes que selecionar el area del administrador.', 'warning');
+    }
+    // this.catalogosService.validAdminCentroPenitenciario({}).subscribe((res: any) => {
+    //   console.log(res);
+    // });
+    // return console.log('submit', this.centroPenitenciario, 'personal', this.persona, 'user', this.user);
+    const model = {
+      ...this.centroPenitenciario,
+      personal: {...this.persona, ...this.user},
+    };
+    console.log('Model', model);
+    this.catalogosService.saveCentroPenitenciario(model).subscribe((data: any) => {
       console.log(data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
@@ -140,16 +170,21 @@ export class CentroPenitenciarioComponent implements OnInit {
 
   add(modal) {
     this.centroPenitenciario = {} as CentroPenitenciario;
+    this.persona = {} as Personal;
     this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
   }
 
   update(item, modal) {
     console.log(item);
     this.centroPenitenciario = {...item};
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
+    this.persona = {...item.personal};
+    this.user.username = item.personal.username;
+    this.user.password = item.personal.password;
     this.centroPenitenciario.estadoSelect = [{value: item.municipio.estado.id, description: item.municipio.estado.nombre}];
     this.centroPenitenciario.municipioSelect = [{value: item.municipio.id, description: item.municipio.nombre}];
     this.centroPenitenciario.tipoCentroSelect = [{value: item.tipoCentro.id, description: item.tipoCentro.nombre}];
+    this.persona.areaSelect = [{value: item.personal.area.id , description: item.personal.area.nombre}];
+    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
   }
 
   switch(e) {
@@ -186,7 +221,7 @@ export class CentroPenitenciarioComponent implements OnInit {
   }
 
   onSelectEstado() {
-    if (this.centroPenitenciario) {
+    if (this.centroPenitenciario && this.centroPenitenciario.estadoSelect) {
       const estado = this.centroPenitenciario.estadoSelect;
       console.log('isEstado', estado);
       this.getMunicipios('seleccionada', estado.value);

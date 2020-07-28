@@ -1,0 +1,645 @@
+<app-section-title
+  icon="fa fa-table"
+  title="estudio de clasificación"
+></app-section-title>
+<app-finder-imputado
+  [isLoading]="isLoading"
+  (onSelectIngresoSearch)="searchImputado($event)"
+  (onClearSearch)="cleanForm()"
+></app-finder-imputado>
+<app-generalidades-ppl
+  [generalidadesPPL]="ingreso.imputado"
+></app-generalidades-ppl>
+<form
+  #f="ngForm"
+  name="formNucleoFamiliarPrincipal"
+  (ngSubmit)="f.form.valid && submit()"
+>
+  <div class="row mt-2">
+    <div class="col md-9">
+      <h5 class="title-pink">Grupo familiar primario</h5>
+    </div>
+  </div>
+  <app-tabla-familiares
+    title="Grupo familiar Primario"
+    [showTitle]="false"
+    *ngIf="nucleoId"
+    [nucleoId]="nucleoId"
+    tipoNucleo="primario"
+  ></app-tabla-familiares>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <label>
+            Grupo familiar completo
+          </label>
+          <select
+            [(ngModel)]="estudio.familiarPrimarioCompleto"
+            name="familiarPrimarioCompleto"
+            #familiarPrimarioCompleto="ngModel"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': f.submitted && familiarPrimarioCompleto.invalid
+            }"
+          >
+            <option value="completo">Completo</option>
+            <option value="incompleto">Incompleto</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label>
+            Grupo familiar integrado
+          </label>
+          <select
+            [(ngModel)]="estudio.familiarPrimarioIntegrado"
+            name="familiarPrimarioIntegrado"
+            #familiarPrimarioIntegrado="ngModel"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': f.submitted && familiarPrimarioIntegrado.invalid
+            }"
+          >
+            <option value="integrado">Integrado</option>
+            <option value="desintegrado">Desintegrado</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label>
+            Grupo familiar organizado
+          </label>
+          <select
+            [(ngModel)]="estudio.familiarPrimarioOrganizado"
+            name="familiarPrimarioOrganizado"
+            #familiarPrimarioOrganizado="ngModel"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': f.submitted && familiarPrimarioOrganizado.invalid
+            }"
+          >
+            <option value="organizado">Organizado</option>
+            <option value="desorganizado">Desorganizado</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label>
+            Grupo familiar funcional
+          </label>
+          <select
+            [(ngModel)]="estudio.familiarPrimarioFuncional"
+            name="familiarPrimarioFuncional"
+            #familiarPrimarioFuncional="ngModel"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': f.submitted && familiarPrimarioFuncional.invalid
+            }"
+          >
+            <option value="funcional">Funcional</option>
+            <option value="disfuncional">Disfuncional</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-gruop">
+        <label>Dinámica familiar primaria</label>
+        <textarea
+          [(ngModel)]="estudio.dinamicaFamiliarPrimaria"
+          name="dinamicaFamiliarPrimaria"
+          #dinamicaFamiliarPrimaria="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && dinamicaFamiliarPrimaria.invalid
+          }"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col md-9">
+      <h5 class="title-pink">Grupo familiar secundario</h5>
+    </div>
+  </div>
+  <app-tabla-familiares
+    title=""
+    [showTitle]="false"
+    *ngIf="nucleoId"
+    [nucleoId]="nucleoId"
+    tipoNucleo="secundario"
+  ></app-tabla-familiares>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <label>Número de parejas anteriores</label>
+          <input
+            [(ngModel)]="estudio.numeroParejasS"
+            name="numeroParejasS"
+            #numeroParejasS="ngModel"
+            type="number"
+            max="100"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': f.submitted && numeroParejasS.invalid
+            }"
+          />
+        </div>
+        <div class="col-md-6">
+          <label>Hijo de uniones anteriores</label>
+          <input
+            [(ngModel)]="estudio.hijosUnionesS"
+            name="hijosUnionesS"
+            #hijosUnionesS="ngModel"
+            type="text"
+            maxlength="150"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': f.submitted && hijosUnionesS.invalid
+            }"
+          />
+        </div>
+        <div class="col-md-6">
+          <label>
+            Grupo familiar completo
+          </label>
+          <select
+            [(ngModel)]="estudio.familiarSecundarioCompleto"
+            name="familiarSecundarioCompleto"
+            #familiarSecundarioCompleto="ngModel"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': f.submitted && familiarSecundarioCompleto.invalid
+            }"
+          >
+            <option value="completo">Completo</option>
+            <option value="incompleto">Incompleto</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label>
+            Grupo familiar integrado
+          </label>
+          <select
+            [(ngModel)]="estudio.familiarSecundarioIntegrado"
+            name="familiarSecundarioIntegrado"
+            #familiarSecundarioIntegrado="ngModel"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': f.submitted && familiarSecundarioIntegrado.invalid
+            }"
+          >
+            <option value="integrado">Integrado</option>
+            <option value="desintegrado">Desintegrado</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label>
+            Grupo familiar organizado
+          </label>
+          <select
+            [(ngModel)]="estudio.familiarSecundarioOrganizado"
+            name="familiarSecundarioOrganizado"
+            #familiarSecundarioOrganizado="ngModel"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': f.submitted && familiarSecundarioOrganizado.invalid
+            }"
+          >
+            <option value="organizado">Organizado</option>
+            <option value="desorganizado">Desorganizado</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label>
+            Grupo familiar funcional
+          </label>
+          <select
+            [(ngModel)]="estudio.familiarSecundarioFuncional"
+            name="familiarSecundarioFuncional"
+            #familiarSecundarioFuncional="ngModel"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': f.submitted && familiarSecundarioFuncional.invalid
+            }"
+          >
+            <option value="funcional">Funcional</option>
+            <option value="disfuncional">Disfuncional</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-gruop">
+        <label>Dinámica familiar secundaria</label>
+        <textarea
+          [(ngModel)]="estudio.dinamicaFamiliarSecundaria"
+          name="dinamicaFamiliarPrimaria"
+          #dinamicaFamiliarPrimaria="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && dinamicaFamiliarPrimaria.invalid
+          }"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mt-4">
+      <h5 class="title-pink">Vivienda</h5>
+    </div>
+    <div class="col-md-4">
+      <label>
+        Tipo de vivienda
+      </label>
+      <select
+        [(ngModel)]="estudio.tipoVivienda"
+        name="tipoVivienda"
+        #tipoVivienda="ngModel"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f.submitted && tipoVivienda.invalid
+        }"
+      >
+        <option value="casa">Casa</option>
+        <option value="departamento">Departamento</option>
+        <option value="cuarto">Cuarto</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label>
+        Características de vivienda
+      </label>
+      <select
+        [(ngModel)]="estudio.caracteristicasVivienda"
+        name="caracteristicasVivienda"
+        #caracteristicasVivienda="ngModel"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f.submitted && caracteristicasVivienda.invalid
+        }"
+      >
+        <option value="rentada">Rentada</option>
+        <option value="propia">Propia</option>
+        <option value="prestada">Prestada</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label>
+        Material de construcción
+      </label>
+      <select
+        [(ngModel)]="estudio.materialConstruccion"
+        name="materialConstruccion"
+        #materialConstruccion="ngModel"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f.submitted && materialConstruccion.invalid
+        }"
+      >
+        <option value="concreto">Concreto</option>
+        <option value="lamina">Lamina</option>
+        <option value="madera">Madera</option>
+      </select>
+    </div>
+    <div class="col-md-8">
+      <div class="form-gruop">
+        <label>Especifíque</label>
+        <input
+          [(ngModel)]="estudio.detalleMaterialContruccion"
+          name="detalleMaterialContruccion"
+          #detalleMaterialContruccion="ngModel"
+          type="text"
+          maxlength="150"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && detalleMaterialContruccion.invalid
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="custom-control custom-checkbox mt-4">
+        <input
+          [(ngModel)]="estudio.serviciosPublicos"
+          name="serviciosPublicos"
+          type="checkbox"
+          class="custom-control-input"
+          id="serviciosPublicos"
+        />
+        <label class="custom-control-label" for="serviciosPublicos">
+          ¿La vivienda cuenta con servicios públicos?
+        </label>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="form-gruop">
+        <label>Cuales</label>
+        <input
+          [disabled]="!estudio.serviciosPublicos"
+          [(ngModel)]="estudio.detalleServiciosPublicos"
+          name="detalleServiciosPublicos"
+          #detalleServiciosPublicos="ngModel"
+          type="text"
+          maxlength="150"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 mt-4">
+      <hr />
+    </div>
+    <div class="col-md-12 mt-4">
+      <h5 class="title-pink">Version del Delito</h5>
+    </div>
+    <div class="col-md-12">
+      <div class="form-gruop">
+        <label>Version del delito</label>
+        <textarea
+          [(ngModel)]="estudio.versionDelito"
+          name="versionDelito"
+          #versionDelito="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && versionDelito.invalid
+          }"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-md-12 mt-4">
+      <h5 class="title-pink">Situación económica</h5>
+    </div>
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Responsable de la solvencia económica</label>
+        <input
+          [(ngModel)]="estudio.responsableSolvencia"
+          name="responsableSolvencia"
+          #responsableSolvencia="ngModel"
+          type="text"
+          maxlength="150"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && responsableSolvencia.invalid
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label>Parentesco</label>
+      <select
+        [(ngModel)]="estudio.parentescoResponsable.id"
+        name="parentescoResponsable"
+        #parentescoResponsable="ngModel"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f.submitted && parentescoResponsable.invalid
+        }"
+      >
+        <option *ngFor="let p of parentescos" [value]="p.id">
+          {{ p.nombre }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Ocupación</label>
+        <input
+          [(ngModel)]="estudio.ocupacionResponsable"
+          name="ocupacionResponsable"
+          #ocupacionResponsable="ngModel"
+          type="text"
+          maxlength="150"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && ocupacionResponsable.invalid
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Ingresos mensual</label>
+        <input
+          [(ngModel)]="estudio.ingresoMensualResponsable"
+          name="ingresoMensualResponsable"
+          #ingresoMensualResponsable="ngModel"
+          type="number"
+          min="0"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && ingresoMensualResponsable.invalid
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>El interno apoyo económicamente</label>
+        <input
+          [(ngModel)]="estudio.apoyaEconomicamente"
+          name="apoyaEconomicamente"
+          #apoyaEconomicamente="ngModel"
+          type="text"
+          maxlength="150"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && apoyaEconomicamente.invalid
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label>
+        Nivel económico
+      </label>
+      <select
+        [(ngModel)]="estudio.nivelEconomico"
+        name="nivelEconomico"
+        #nivelEconomico="ngModel"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f.submitted && nivelEconomico.invalid
+        }"
+      >
+        <option value="precario">Precario</option>
+        <option value="bajo">Bajo</option>
+        <option value="medio">Medio</option>
+        <option value="alto">Alto</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <div class="form-gruop">
+        <label>Teléfono</label>
+        <input
+          [(ngModel)]="estudio.telefonoFamiliar"
+          name="telefonoFamiliar"
+          #telefonoFamiliar="ngModel"
+          type="tel"
+          maxlength="10"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && telefonoFamiliar.invalid
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 mt-4">
+      <h5 class="title-pink">Área social</h5>
+    </div>
+    <div class="col-md-4">
+      <label>
+        Actitud de la familia hacia el Interno
+      </label>
+      <select
+        [(ngModel)]="estudio.actitudFamilia"
+        name="actitudFamilia"
+        #actitudFamilia="ngModel"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f.submitted && actitudFamilia.invalid
+        }"
+      >
+        <option value="rechazo">Rechazo</option>
+        <option value="indiferencia">Indiferencia</option>
+        <option value="apoyo">Apoyo</option>
+      </select>
+    </div>
+    <div class="col-md-8">
+      <div class="form-gruop">
+        <label>Personas que lo visitan</label>
+        <input
+          [(ngModel)]="estudio.personasVisitan"
+          name="personasVisitan"
+          #personasVisitan="ngModel"
+          type="text"
+          maxlength="150"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && personasVisitan.invalid
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label>
+        Frecuencia de la visitas
+      </label>
+      <select
+        [(ngModel)]="estudio.frecuenciaVisita"
+        name="frecuenciaVisita"
+        #frecuenciaVisita="ngModel"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f.submitted && frecuenciaVisita.invalid
+        }"
+      >
+        <option value="semanal">Semanal</option>
+        <option value="mensual">Mensual</option>
+        <option value="esporadica">Esporádica</option>
+      </select>
+    </div>
+    <div class="col-md-12 mt-4">
+      <h5 class="title-pink">Pronóstico</h5>
+    </div>
+    <div class="col-md-8">
+      <label>
+        Pronostico
+      </label>
+      <select
+        [(ngModel)]="estudio.pronostico"
+        name="pronostico"
+        #pronostico="ngModel"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f.submitted && pronostico.invalid
+        }"
+      >
+        <option value="desfavorable">Desfavorable</option>
+        <option value="favorable">Favorable</option>
+      </select>
+    </div>
+    <div class="col-md-12 mt-4">
+      <h5 class="title-pink">Desarrollo intrainstitucional</h5>
+    </div>
+    <div class="col-md-12">
+      <div class="form-gruop">
+        <label>Desarrollo intrainstitucional</label>
+        <textarea
+          [(ngModel)]="estudio.desarrolloIntrainstitucional"
+          name="desarrolloIntrainstitucional"
+          #desarrolloIntrainstitucional="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && desarrolloIntrainstitucional.invalid
+          }"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-md-12 mt-4">
+      <h5 class="title-pink">Tratamiento</h5>
+    </div>
+    <div class="col-md-12">
+      <div class="form-gruop">
+        <label>Tratamiento</label>
+        <textarea
+          [(ngModel)]="estudio.tratamiento"
+          name="tratamiento"
+          #tratamiento="ngModel"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': f.submitted && tratamiento.invalid
+          }"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <button
+      [disabled]="!ingreso?.imputado?.id || isLoading"
+      (click)="genetatePDF(view)"
+      type="button"
+      class="btn btn-success pull-right"
+    >
+      Imprimir
+    </button>
+    <button
+      [disabled]="!ingreso?.imputado?.id || isLoading"
+      type="submit"
+      class="btn btn-success pull-right"
+    >
+      Guardar
+    </button>
+  </div>
+</form>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'estudio trabajo social'"
+    ></app-web-viewer>
+  </div>
+</ng-template>

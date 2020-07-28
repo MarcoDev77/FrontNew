@@ -5,7 +5,8 @@ import {AuthenticationService} from '@shared/services/authentication.service';
 import Swal from 'sweetalert2';
 import {Ingreso} from '@shared/models/Ingreso';
 import {IngresoService} from '@shared/services/ingreso.service';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dactiloscopia',
@@ -21,6 +22,8 @@ export class DactiloscopiaComponent implements OnInit {
   public nameImages: DactiloscopiaImages;
   public ingreso: Ingreso;
   public huella: TipoImagenDactilocopia;
+  public isLoading: boolean;
+  public isLoadingData: boolean;
   public datosDactiloscopia: any;
   // Uploader
   public url: string;
@@ -33,12 +36,14 @@ export class DactiloscopiaComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private ingresoService: IngresoService,
+    private modalService: NgbModal,
     private router: Router,
   ) {
     const ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
     if (ingreso) {
       this.ingreso = ingreso;
     }
+    this.isLoadingData = true;
     this.isLoadingImages = true;
     this.uriNoImage = 'no_image';
     this.isLoadingDactiloscopia = true;
@@ -47,6 +52,7 @@ export class DactiloscopiaComponent implements OnInit {
     this.nameImages = new DactiloscopiaImages();
     this.currentImage = '';
     this.huella = new TipoImagenDactilocopia();
+    this.isLoading = false;
     // Uploader
     this.url = environment.apiUrl;
     this.uploader = new FileUploader({url: this.url + '/api/registrarHuellaDactilar', itemAlias: 'image'});
@@ -59,19 +65,29 @@ export class DactiloscopiaComponent implements OnInit {
   }
 
   getData(id) {
+    this.isLoadingData = true;
     this.ingresoService.getIngreso(id).subscribe((data: any) => {
       this.ingreso = data.ingreso;
       this.ingreso.imputado.mainName = this.ingreso.imputado.apodos.find(item => item.principal);
       console.log('INGRESO', this.ingreso);
+      // this.isLoadingData = false;
+      // El que pone la variable 'this.isLoadingData' es el metodo 'getDactiloscopia'
+    }, error => {
+      console.log(error);
     });
   }
 
   getDactiloscopia() {
+    this.isLoadingData = true;
     this.ingresoService.getDactiloscopia(this.ingreso.id).subscribe((data: any) => {
       console.log('info', data);
       const {dactiloscopia} = data;
       dactiloscopia.huellasDactilares.forEach(item => this.setParameters(item));
       dactiloscopia.fotografias.forEach(item => this.setParameters(item));
+      this.isLoadingData = false;
+    }, error => {
+      console.log(error);
+      this.isLoadingData = false;
     });
   }
 
@@ -82,7 +98,10 @@ export class DactiloscopiaComponent implements OnInit {
     this.currentImage = name;
   }
 
-  uploadFile() {
+  uploadFile(inputFile?) {
+    if (!inputFile.files[0]) {
+      return console.log('esta vacio');
+    }
     let esHuella = 'huella';
     if (this.currentImage === this.nameImages.perfilFrente || this.currentImage === this.nameImages.perfilIzquierdo ||
       this.currentImage === this.nameImages.perfilDerecho) {
@@ -94,19 +113,34 @@ export class DactiloscopiaComponent implements OnInit {
     if (esHuella === 'huella') {
       this.uo.additionalParameter = this.chooseParameters(this.currentImage);
       this.uo.additionalParameter.esHuella = 'huella';
-      if (!this.uo.additionalParameter.clasificacion) {
+      // if (!this.uo.additionalParameter.clasificacion) {
+      //   return Swal.fire({
+      //     title: 'Cuidado',
+      //     text: 'Se debe ingresar la clasificación de la huella antes.',
+      //     icon: 'warning',
+      //     timer: 1300,
+      //     showConfirmButton: false
+      //   });
+      // }
+    } else {
+      // TODO: Se cambiara, se va a mandar el tipo de imagen en lugar de la validacion
+      // if (inputFile.files[0].type.split('/')[1])
+      const tipo = inputFile.files[0].type.split('/')[1];
+      if (tipo !== 'jpg' && tipo !== 'jpeg') {
         return Swal.fire({
           title: 'Cuidado',
-          text: 'Se debe ingresar la clasificion de la huella antes.',
+          text: 'La extencion de la fotografía debe de ser .jpg',
           icon: 'warning',
+          timer: 1300,
+          showConfirmButton: false
         });
       }
-    } else {
       this.uo.additionalParameter = {
         claveFotografia: this.currentImage,
         ingresoId: this.ingreso.id,
         esHuella: 'foto',
       };
+
     }
     this.uploader.setOptions(this.uo);
     console.log(this.uo);
@@ -341,14 +375,22 @@ export class DactiloscopiaComponent implements OnInit {
 
   finishIngreso() {
     if (this.huella.imgCaraIzquierda && this.huella.imgCaraDerecho && this.huella.imgCaraFrente) {
-      Swal.fire({
-        title: 'Terminado',
-        text: 'Se ha completado el reguistro.',
-        icon: 'success',
-        timer: 1000,
-        showConfirmButton: false,
-      }).then(() => {
-        this.router.navigate(['dashboard/ingreso/lista-ingreso']);
+      this.isLoading = true;
+      this.ingresoService.finishIngreso(this.ingreso.id).subscribe((data: any) => {
+        this.isLoading = false;
+        console.log(data);
+        if (!data.error) {
+
+          Swal.fire({
+            title: 'Terminado',
+            text: 'Se ha completado el registro de dactiloscopia.',
+            icon: 'success',
+            timer: 1000,
+            showConfirmButton: false,
+          }).then(() => {
+            this.router.navigate(['dashboard/ingreso/caracteristicas']);
+          });
+        }
       });
     } else {
       Swal.fire({
@@ -357,6 +399,14 @@ export class DactiloscopiaComponent implements OnInit {
         icon: 'warning',
       });
     }
+  }
+
+  searchFingerprint(modal) {
+    this.modalService.open(modal, {size: 'xl', windowClass: 'modal-primary mt-12'});
+  }
+
+  openModalExtraPhotos(modal) {
+    this.modalService.open(modal, {size: 'xl', windowClass: 'modal-primary mt-12'});
   }
 }
 

@@ -1,62 +1,65 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule, Route} from '@angular/router';
-import {AuthGuard} from '@shared/helpers/auth.guard';
-import {roles as r} from '../shared/helpers/roles';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule, Route } from '@angular/router';
+import { AuthGuard } from '@shared/helpers/auth.guard';
+import { roles as r } from '../shared/helpers/roles';
 // App
-import {MainComponent} from './_main/main.component';
-import {DatosAnexosComponent} from '../datos-anexos/datos-anexos.component';
-import {MediaFiliacionComponent} from '@dashboard/media-filiacion/media-filiacion.component';
-import {IngresoComponent} from '../ingreso/ingreso.component';
-import {DactiloscapiaComponent} from '../dactiloscapia/dactiloscapia.component';
+import { MainComponent } from './_main/main.component';
+
+
+
 
 const routes: Routes = [
   {
     path: '', component: MainComponent,
     children: [
       {
-        path: 'mediafiliacion', component: MediaFiliacionComponent, data: {expectedRole: [r.test.role]}
-      },
-      {
-        path: 'datosAnexos', component: DatosAnexosComponent, canActivate: [AuthGuard], data: {expectedRole: [r.admin.role]}
-      },
-      {
-        path: 'ingreso2', component: IngresoComponent, canActivate: [AuthGuard], data: {expectedRole: [r.test.role]}
-      },
-      {
-        path: 'dactiloscopia', component: DactiloscapiaComponent, canActivate: [AuthGuard], data: {expectedRole: [r.test.role]}
-      },
-      {
         path: 'catalogo',
         loadChildren: './catalogos/catalogos.module#CatalogosModule',
         canActivate: [AuthGuard],
-        data: {expectedRole: [r.test.role, r.admin.role]}
+        data: { expectedRole: [r.test.role, r.admin.role] }
       },
       {
         path: 'ingreso',
         loadChildren: './ingreso/ingreso.module#IngresoModule',
         canActivate: [AuthGuard],
-        data: {expectedRole: [r.test.role, r.dactiloscopia.role]}
+        data: { expectedRole: [r.test.role, r.dactiloscopia.role] }
       },
       {
         path: 'bitacoras',
         loadChildren: './bitacoras/bitacoras.module#BitacorasModule',
         canActivate: [AuthGuard],
-        data: {expectedRole: [r.test.role]}
+        data: { expectedRole: [r.test.role] }
       },
       {
         path: 'servicio-social',
         loadChildren: './servicio-social/servicio-social.module#ServicioSocialModule',
         canActivate: [AuthGuard],
-        data: {expectedRole: [r.test.role, r.trabajoSocial.role]}
+        data: { expectedRole: [r.test.role, r.trabajoSocial.role] }
       },
       {
         path: 'archivo',
         loadChildren: './archivo/archivo.module#ArchivoModule',
         canActivate: [AuthGuard],
-        data: {expectedRole: [r.test.role]}
+        data: { expectedRole: [r.test.role] }
       },
-
-
+      {
+        path: 'comite-tecnico',
+        loadChildren: './comite-tecnico/comite-tecnico.module#ComiteTecnicoModule',
+        canActivate: [AuthGuard],
+        data: { expectedRole: [r.test.role, r.comiteTecnico.role, r.trabajoSocial.role] }
+      },
+      {
+        path: 'seguridad-custodia',
+        loadChildren: './seguridad-custodia/seguridad-custodia.module#SeguridadCustodiaModule',
+        canActivate: [AuthGuard],
+        data: { expectedRole: [r.test.role, r.seguridadCustodia.role] }
+      },
+      {
+        path: 'informatica',
+        loadChildren: './informatica/informatica.module#InformaticaModule',
+        canActivate: [AuthGuard],
+        data: { expectedRole: [r.test.role, r.site.role] }
+      },
     ]
   },
 

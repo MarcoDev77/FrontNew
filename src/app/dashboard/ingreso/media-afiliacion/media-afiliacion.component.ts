@@ -68,8 +68,8 @@ export class MediaAfiliacionComponent implements OnInit {
       console.log(data)
       if(data.caracteristicas){
       this.mediaFiliacion=data.caracteristicas;
-      this.validador=JSON.parse(data.caracteristicas.validador)
-      console.log(this.validador)
+   
+ 
       this.mediaFiliacionTerminada=this.formularioCompleto();
       }else{
 
@@ -77,14 +77,11 @@ export class MediaAfiliacionComponent implements OnInit {
     })
 
   }
-  public guardarMediaFiliacion(flag){
+  public guardarMediaFiliacion(){
 
     this.mediaFiliacion.imputado= {
         id:this.ingreso.id
     };
-    this.mediaFiliacion.posicion=flag;
-
-
       this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
         console.log(data)
           Swal.fire({
@@ -114,7 +111,7 @@ export class MediaAfiliacionComponent implements OnInit {
   }
 
   goToCaracteriticas() {
-    sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
-    this.router.navigate(['/dashboard/ingreso/caracteristicas']);
+    //sessionStorage.setItem('ingreso', JSON.stringify(this.ingreso));
+    this.router.navigate(['/dashboard/ingreso/lista-ingreso']);
   }
 }

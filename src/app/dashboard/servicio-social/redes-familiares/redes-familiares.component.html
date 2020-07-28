@@ -1,0 +1,46 @@
+<app-section-title icon="fa fa-address-book" title="REDES FAMILIARES"></app-section-title>
+<div class="row">
+    <div class="col text-right mb-3">
+        <button class="btn btn-success m-0 pull-right" (click)="openModal()" [ngbTooltip]="'Nuevo Registro'"><i
+                class="fa fa-plus fa-lg"></i></button>
+        <input type="text" class="form-control form-control-sm pull-right mr-2" style="max-width: 12rem" placeholder="Buscar">
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    Nombre
+                </th>
+                <th class="text-center">
+                    Parentesco
+                </th>
+
+                <th class="text-center" style="min-width: 5rem">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">Roberto Lopez Lopez</td>
+                <td class="text-center">Hermano</td>
+
+                <td class="text-center">
+                    <i class="fa fa-eye" (click)="openModal()"></i>
+                    <i class="fa fa-copy ml-3" placement="top" (click)="openModal()"></i>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="text-center">Juan Macedo Robles</td>
+                <td class="text-center">Tio</td>
+
+                <td class="text-center">
+                    <i class="fa fa-eye" (click)="openModal()"></i>
+                    <i class="fa fa-copy ml-3" placement="top" ></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

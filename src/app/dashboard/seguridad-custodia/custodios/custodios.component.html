@@ -1,0 +1,432 @@
+<app-section-title
+  title="Custodios"
+  icon="fa fa-hand-rock-o"
+></app-section-title>
+
+<div class="row">
+  <div class="col text-right mb-3">
+    <button
+      class="btn btn-success btn-sm m-0 pull-right"
+      (click)="openModal(formModal, { isNew: true })"
+      [ngbTooltip]="'Nuevo Registro'"
+      [disabled]="isLoading"
+    >
+      <i class="fa fa-plus fa-lg"></i>
+    </button>
+    <input
+      type="text"
+      class="form-control form-control-sm pull-right mr-2"
+      style="max-width: 12rem;"
+      [(ngModel)]="filter"
+      placeholder="Buscar"
+    />
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="text-center">
+          Foto
+        </th>
+        <th (click)="sort('numero')" class="text-center">
+          <span
+            *ngIf="key == 'numero'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          N. de Empleado
+        </th>
+        <th (click)="sort('nombre')" class="text-center">
+          <span
+            *ngIf="key == 'nombre'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Nombre
+        </th>
+        <th (click)="sort('paterno')" class="text-center">
+          <span
+            *ngIf="key == 'paterno'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          A. Paterno
+        </th>
+        <th (click)="sort('materno')" class="text-center">
+          <span
+            *ngIf="key == 'materno'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          A. Materno
+        </th>
+        <th class="text-center" style="min-width: 5rem;">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        id="{{ 'tr' + i }}"
+        *ngFor="
+          let item of custodios
+            | orderBy: key:reverse
+            | filter: filter
+            | paginate: { itemsPerPage: 5, currentPage: p };
+          let i = index
+        "
+        [class.active]="i == selectedRow"
+      >
+        <td class="text-center">
+          <div class="card-avatar">
+            <img
+              class="img"
+              width="50px"
+              (click)="clickInputFile(item, inputFile)"
+              src="{{
+                item.foto
+                  ? 'data:image/png;base64,' + item.foto
+                  : 'assets/img/no_image.png'
+              }}"
+            />
+          </div>
+        </td>
+        <td class="text-center">{{ item.numCustodio }}</td>
+        <td class="text-center">{{ item.nombre }}</td>
+        <td class="text-center">{{ item.apellidoPaterno }}</td>
+        <td class="text-center">{{ item.apellidoMaterno }}</td>
+        <td class="text-center">
+          <i
+            *ngIf="!item.estatus"
+            class="fa fa-toggle-off"
+            (click)="toggleStatus(item.id)"
+            placement="top"
+            ngbTooltip="Habilitar"
+          ></i>
+          <i
+            *ngIf="item.estatus"
+            class="fa fa-toggle-on"
+            (click)="toggleStatus(item.id)"
+            placement="top"
+            ngbTooltip="Deshabilitar"
+          ></i>
+          &nbsp;
+          <i
+            class="fa fa-pencil"
+            (click)="update(item, formModal)"
+            placement="top"
+            ngbTooltip="Editar"
+          ></i>
+          &nbsp;
+          <i
+            class="fa fa-briefcase"
+            (click)="seeCapacitaciones(capModal, item)"
+            placement="top"
+            ngbTooltip="Capacitaciones"
+          ></i>
+        </td>
+      </tr>
+
+      <tr *ngIf="custodios.length == 0">
+        <td colspan="6">
+          {{ isLoading ? "Cargando..." : "Sin registros..." }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center w-100">
+    <pagination-controls
+      autoHide="true"
+      responsive="true"
+      previousLabel=""
+      nextLabel=""
+      (pageChange)="switch($event)"
+    >
+    </pagination-controls>
+  </div>
+</div>
+
+<ng-template #formModal let-formModal>
+  <div class="modal-body pt-0 form-text text-muted">
+    <app-section-title
+      title="Custodios"
+      icon="fa fa-hand-rock-o"
+    ></app-section-title>
+    <form
+      class="form-horizontal"
+      name="form"
+      (ngSubmit)="f.form.valid && submit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="text-muted" for="">N. de Empleado</label>
+            <input
+              name="numCustodio"
+              [(ngModel)]="custodio.numCustodio"
+              #numCustodio="ngModel"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': f.submitted && numCustodio.invalid }"
+              type="text"
+              minlength="10"
+              maxlength="10"
+              pattern="^[0-9]*$"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="text-muted" for="">Nombre</label>
+            <input
+              name="nombre"
+              [(ngModel)]="custodio.nombre"
+              #nombre="ngModel"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid }"
+              type="text"
+              minlength="1"
+              maxlength="75"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="text-muted" for="">Apellido Paterno</label>
+            <input
+              name="apellidoPaterno"
+              [(ngModel)]="custodio.apellidoPaterno"
+              #apellidoPaterno="ngModel"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': f.submitted && apellidoPaterno.invalid
+              }"
+              type="text"
+              minlength="1"
+              maxlength="75"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="text-muted" for="">Apellido Materno</label>
+            <input
+              name="apellidoMaterno"
+              [(ngModel)]="custodio.apellidoMaterno"
+              #apellidoMaterno="ngModel"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': f.submitted && apellidoMaterno.invalid
+              }"
+              type="text"
+              minlength="1"
+              maxlength="75"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="text-muted" for="">Área</label>
+            <input
+              name="area"
+              [(ngModel)]="custodio.area"
+              #area="ngModel"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': f.submitted && area.invalid
+              }"
+              type="text"
+              minlength="1"
+              maxlength="75"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="text-muted" for="">Turno</label>
+            <input
+              name="turno"
+              [(ngModel)]="custodio.turno"
+              #turno="ngModel"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': f.submitted && turno.invalid
+              }"
+              type="text"
+              minlength="1"
+              maxlength="75"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="text-muted" for="">Horario</label>
+            <input
+              name="horario"
+              [(ngModel)]="custodio.horario"
+              #horario="ngModel"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': f.submitted && horario.invalid
+              }"
+              type="text"
+              minlength="1"
+              maxlength="75"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="text-muted" for="">Cuip</label>
+            <input
+              name="cuip"
+              [(ngModel)]="custodio.cuip"
+              #cuip="ngModel"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': f.submitted && cuip.invalid
+              }"
+              type="text"
+              minlength="20"
+              maxlength="20"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="custom-control custom-checkbox mt-4">
+            <input
+              name="cooperaDineroInternoP"
+              [(ngModel)]="custodio.formacionInicial"
+              type="checkbox"
+              class="custom-control-input"
+              id="formacionInicial"
+            />
+            <label class="custom-control-label" for="formacionInicial">
+              ¿Cuenta con formación inicial?
+            </label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="text-muted" for="">Nombramiento</label>
+            <select
+              name="nombramiento"
+              [(ngModel)]="custodio.nombramiento.id"
+              #nombramiento="ngModel"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': f.submitted && nombramiento.invalid
+              }"
+              required
+            >
+              <option
+                *ngFor="let nombramiento of nombramientos"
+                [value]="nombramiento.id"
+              >
+                {{ nombramiento.nombre }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-12 text-center text-sm-right">
+          <button
+            type="button"
+            (click)="formModal.close()"
+            class="btn btn-danger mr-3"
+          >
+            Cerrar
+          </button>
+          <button type="submit" [disabled]="isLoading" class="btn btn-success">
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </form>
+    <!-- {{ this.custodio | json }} -->
+  </div>
+</ng-template>
+
+<ng-template #capModal let-capModal>
+  <div class="modal-body pt-0">
+    <app-section-title
+      title="Capacitaciones"
+      icon="fa fa fa-briefcase"
+    ></app-section-title>
+    <br />
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="text-center">Capaciatación</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cap of capacitaciones">
+          <td class="text-center">
+            {{ cap.nombre }}
+          </td>
+          <td class="text-center">
+            <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
+            <input
+              *ngIf="!isLoading"
+              type="checkbox"
+              [checked]="cap.isChecked"
+              (click)="saveAsistencia(cap)"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="col-sm-12 text-center text-sm-right">
+      <button
+        type="button"
+        (click)="capModal.close()"
+        class="btn btn-danger mr-3"
+      >
+        Cerrar
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<input
+  #inputFile
+  style="display: none;"
+  accept="image/png, image/jpeg, image/jpg"
+  type="file"
+  class="form-control-file"
+  ng2FileSelect
+  aria-describedby="fileHelp"
+  [uploader]="uploader"
+  (change)="uploadPhoto(inputFile)"
+/>
