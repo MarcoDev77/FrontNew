@@ -13,17 +13,26 @@ export class RegistroVisitasComponent implements OnInit {
   public referencia: any
   public isLoading: boolean
   public codigoBarras: String
+  public time = new Date();
+  public timer;
+
   constructor(private SeguridadCustodiaService: SeguridadCustodiaService) { }
 
   ngOnInit() {
-    this.referencia= {}as any
+    this.referencia = {} as any
+    this.timer = setInterval(() => {
+      this.time = new Date();
+    }, 1000);
+  }
+  ngOnDestroy() {
+    clearInterval(this.timer);
   }
 
-  searchVisita(){
-    this.SeguridadCustodiaService.searchVisita(this.codigoBarras).subscribe((data:any)=>{
+  searchVisita() {
+    this.SeguridadCustodiaService.searchVisita(this.codigoBarras).subscribe((data: any) => {
       console.log(data)
-      if(data.referencia){
-        this.referencia=data.referencia
+      if (data.referencia) {
+        this.referencia = data.referencia
       }
       Swal.fire({
         title: data.error ? 'Error!' : 'Encontrado!',
@@ -35,14 +44,14 @@ export class RegistroVisitasComponent implements OnInit {
     })
   }
 
-  saveIngresoVisita(){
-    let model= {
+  saveIngresoVisita() {
+    let model = {
       referenciaId: this.referencia.id,
       codigoBarras: this.codigoBarras,
       numeroNinos: this.referencia.numeroNinos,
       tipoPase: this.referencia.tipoPase
     }
-    this.SeguridadCustodiaService.saveIngresoVisita(model).subscribe((data:any)=>{
+    this.SeguridadCustodiaService.saveIngresoVisita(model).subscribe((data: any) => {
       console.log(data)
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado!',
@@ -54,18 +63,18 @@ export class RegistroVisitasComponent implements OnInit {
     })
   }
 
-  saveSalidaVisita(){
-    let model= {
+  saveSalidaVisita() {
+    let model = {
       id: this.referencia.id,
       codigoBarras: this.codigoBarras,
-     
+
     }
-    this.SeguridadCustodiaService.saveSalidaVisita(model).subscribe((data:any)=>{
+    this.SeguridadCustodiaService.saveSalidaVisita(model).subscribe((data: any) => {
       console.log(data)
-      if(data.referencia&&data.error){
-        this.referencia=data.referencia
+      if (data.referencia && data.error) {
+        this.referencia = data.referencia
         console.log("entra")
-      }      
+      }
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado!',
         text: data.mensaje,
@@ -75,6 +84,6 @@ export class RegistroVisitasComponent implements OnInit {
       });
     })
   }
-  
+
 
 }
