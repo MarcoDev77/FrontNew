@@ -126,10 +126,10 @@ export class DactiloscopiaComponent implements OnInit {
       // TODO: Se cambiara, se va a mandar el tipo de imagen en lugar de la validacion
       // if (inputFile.files[0].type.split('/')[1])
       const tipo = inputFile.files[0].type.split('/')[1];
-      if (tipo !== 'jpg' && tipo !== 'jpeg') {
+      if (tipo !== 'jpg' && tipo !== 'jpeg' && tipo !== 'png' ) {
         return Swal.fire({
           title: 'Cuidado',
-          text: 'La extencion de la fotografía debe de ser .jpg',
+          text: 'La extencion de la fotografía debe de ser .jpg o .png',
           icon: 'warning',
           timer: 1300,
           showConfirmButton: false
