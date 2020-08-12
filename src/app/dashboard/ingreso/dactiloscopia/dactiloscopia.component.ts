@@ -111,8 +111,19 @@ export class DactiloscopiaComponent implements OnInit {
     this.uo.authTokenHeader = 'Authorization';
     this.uo.authToken = `Bearer ${authToken}`;
     if (esHuella === 'huella') {
+      const tipo = inputFile.files[0].type.split('/')[1];
+      if (tipo !== 'png' ) {
+        return Swal.fire({
+          title: 'Cuidado',
+          text: 'La extencion de la fotografía debe de ser .png',
+          icon: 'warning',
+          timer: 1300,
+          showConfirmButton: false
+        });
+      }
       this.uo.additionalParameter = this.chooseParameters(this.currentImage);
       this.uo.additionalParameter.esHuella = 'huella';
+      
       // if (!this.uo.additionalParameter.clasificacion) {
       //   return Swal.fire({
       //     title: 'Cuidado',
