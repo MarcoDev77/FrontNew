@@ -6,7 +6,8 @@ import { IngresoService } from '@shared/services/ingreso.service';
 import { Ingreso } from '@shared/models/Ingreso';
 import { Referencia } from '@shared/models/Referencia';
 import { Observable } from 'rxjs';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
+import {DatePipe} from '@angular/common';
 import { map } from 'rxjs/operators';
 import { FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { environment } from '@environment/environment';
@@ -49,6 +50,8 @@ export class ReferenciasComponent implements OnInit {
     private modalService: NgbModal,
     private ingresoService: IngresoService,
     private authenticationService: AuthenticationService,
+    private datePipe: DatePipe
+
     ) {
     this.isLoading = false;
     this.ingreso = {} as Ingreso;
@@ -113,6 +116,8 @@ export class ReferenciasComponent implements OnInit {
     this.referencia.imputado = {
       id: this.ingreso.id
     };
+    this.referencia.fechaNacimiento = this.datePipe.transform(this.referencia.fechaNacimiento, 'yyyy-MM-dd');
+
     console.log('referencia', this.referencia);
     this.ingresoService.saveReferencia(this.referencia).subscribe((data: any) => {
       if (!data.error) {
