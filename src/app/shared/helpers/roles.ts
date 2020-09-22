@@ -2,7 +2,7 @@ export const roles = {
   test: {
     role: 'ROLE_TEST',
     name: 'Prueba',
-    main: 'dactiloscopia'
+    main: 'dashboard/ingreso/lista-ingreso'
   },
   superadmin: {
     role: 'ROLE_SUPERADMINISTRADOR',
@@ -17,7 +17,7 @@ export const roles = {
   director: {
     role: 'ROLE_DIRECTOR',
     name: 'Director',
-    main: 'dactiloscopia'
+    main: 'dashboard/ingreso/lista-ingreso'
   },
   dactiloscopia: {
     role: 'ROLE_DACTILOSCOPIA',
@@ -27,7 +27,7 @@ export const roles = {
   juridico: {
     role: 'ROLE_JURIDICO',
     name: 'Consultor',
-    main: 'dactiloscopia'
+    main: 'dashboard/ingreso/lista-ingreso'
   },
   archivo: {
     role: 'ROLE_ARCHIVO',
@@ -49,7 +49,7 @@ export const roles = {
   }, direccionTecnica: {
     role: 'ROLE_DIRECCION_TECNICA',
     name: 'Consultor',
-    main: 'dactiloscopia'
+    main: 'dashboard/ingreso/lista-ingreso'
   }, site: {
     role: 'ROLE_SITE',
     name: 'Informática',
