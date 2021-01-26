@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
-import {environment} from '@environment/environment';
-import {HttpClient} from '@angular/common/http';
-import {ModalidadDelito} from '@shared/models/ModalidadDelito';
-import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
-import {Delito} from '@shared/models/Delito';
-import {TipoLibertad} from '@shared/models/TipoLibertdad';
-import {ClasificacionJuridica} from '@shared/models/ClasificacionJuridica';
-import {EnfermedadCronica} from '@shared/models/EnfermedadCronica';
-import {MotivoReubicacion} from '@shared/models/MotivoReubicacion';
-import {Dormitorio} from '@shared/models/Dormitorio';
-import {TipoActividad} from '@shared/models/TipoActividad';
-import {Actividad} from '@shared/models/Actividad';
+import { Injectable } from '@angular/core';
+import { environment } from '@environment/environment';
+import { HttpClient } from '@angular/common/http';
+import { ModalidadDelito } from '@shared/models/ModalidadDelito';
+import { CentroPenitenciario } from '@shared/models/CentroPenitenciario';
+import { Delito } from '@shared/models/Delito';
+import { TipoLibertad } from '@shared/models/TipoLibertdad';
+import { ClasificacionJuridica } from '@shared/models/ClasificacionJuridica';
+import { EnfermedadCronica } from '@shared/models/EnfermedadCronica';
+import { MotivoReubicacion } from '@shared/models/MotivoReubicacion';
+import { Dormitorio } from '@shared/models/Dormitorio';
+import { TipoActividad } from '@shared/models/TipoActividad';
+import { Actividad } from '@shared/models/Actividad';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,7 @@ export class CatalogosService {
     this.params = '';
   }
 
-// MODALIDAD DELITO
+  // MODALIDAD DELITO
   listModalidadDelito(idDelito) {
     return this.http.get(`${this.url}/api/listarModalidadesDelito?tipoDelitoId=${idDelito}`);
   }
@@ -50,7 +50,7 @@ export class CatalogosService {
     return this.http.get(`${this.url}/api/actualizarEstatusModalidadDelito?modalidadId=${id}`);
   }
 
-// CENTRO PENITENCIARIO
+  // CENTRO PENITENCIARIO
   listCentroPenitenciario() {
     return this.http.get(`${this.url}/api/listarCentrosPenitenciarios`);
   }
@@ -227,9 +227,9 @@ export class CatalogosService {
 
   //USUARIOS
   saveUsuario(model) {
-    let personal ={...model}
-    personal.user ={...model.user}
-    personal.user.roles=[{id: personal.user.roles.value}];
+    let personal = { ...model }
+    personal.user = { ...model.user }
+    personal.user.roles = [{ id: personal.user.roles.value }];
 
     return this.http.post(`${this.url}/api/registrarPersonal`, personal);
   }
@@ -245,7 +245,7 @@ export class CatalogosService {
 
   getParentescos = () => this.http.get(`${this.url}/api/listarParentescos`);
 
-  listDormitoriosAsignados=() =>this.http.get (`${this.url}/api/listarDormitoriosAsignados`)
+  listDormitoriosAsignados = () => this.http.get(`${this.url}/api/listarDormitoriosAsignados`)
 }
 
 

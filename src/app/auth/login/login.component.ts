@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AuthenticationService} from '@shared/services/authentication.service';
-import {User} from '@shared/models/User';
-import {first} from 'rxjs/operators';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {roles} from '@shared/helpers/roles';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '@shared/services/authentication.service';
+import { User } from '@shared/models/User';
+import { first } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { roles } from '@shared/helpers/roles';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   token: any;
   login = true;
   recover = true;
-  @ViewChild('tokenModal', {static: false}) public tokenModal: NgbModal;
+  @ViewChild('tokenModal', { static: false }) public tokenModal: NgbModal;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,18 +40,15 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     this.isLoading = true;
     this.authenticationService.login(this.user.username, this.user.password).pipe(first()).subscribe(user => {
-        this.isLoading = false;
-        if (user) {
-          this.redirectUser(user);
-        }
-      },
+      this.isLoading = false;
+      if (user) {
+        this.redirectUser(user);
+      }
+    },
       error => {
         alert('Acceso denegado!');
-        console.log(error);
         this.error = error;
         this.isLoading = false;
-      }, () => {
-        console.log('complete');
       });
   }
 

@@ -9,10 +9,21 @@
 ></app-finder-imputado>
 
 <div class="row">
+  <div class="col d-flex justify-content-end">
+    <button
+      (click)="editInfo(ingreso)"
+      [disabled]="!ingreso.folio"
+      *ngIf="ingreso.folio"
+      class="btn btn-success"
+    >
+      Editar Información
+    </button>
+  </div>
+</div>
+
+<div class="row">
   <div class="col md-9 mt-4 mb-2">
-    <h5 class="title-pink">
-      Información PPL
-    </h5>
+    <h5 class="title-pink">Información PPL</h5>
   </div>
 </div>
 
@@ -25,7 +36,7 @@
           : 'assets/img/no_image.png'
       }}"
       class="img"
-      style="max-height: 400px;"
+      style="max-height: 400px"
       alt="imagen ppl"
     />
   </div>

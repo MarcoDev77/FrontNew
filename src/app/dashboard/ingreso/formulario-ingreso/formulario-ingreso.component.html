@@ -240,13 +240,12 @@
           <label>Número control RNIP:</label>
           <input
             class="form-control shadows"
-            maxlength="10"
+            maxlength="15"
             minlength="1"
             name="numeroRenip"
             #numeroRenip="ngModel"
             [ngClass]="{ 'is-invalid': f.submitted && numeroRenip.invalid }"
             [(ngModel)]="ingreso.numeroControlRenip"
-            pattern="^[0-9]*$"
           />
         </div>
       </div>
@@ -715,7 +714,7 @@
     <div class="col-md-12 text-right">
       <button
         class="btn btn-success shadows"
-        style="width: 15rem;"
+        style="width: 15rem"
         type="submit"
       >
         Guardar
@@ -741,7 +740,7 @@
     <button
       (click)="goToSenasParticulares()"
       class="btn btn-success shadows"
-      style="width: 15rem;"
+      style="width: 15rem"
       type="submit"
     >
       Continuar
