@@ -44,12 +44,12 @@ export class CausaPenalIngresoComponent implements OnInit {
   constructor(private ingresoService: IngresoService, private modalService: NgbModal,
     private detector: ChangeDetectorRef, private catalogosService: CatalogosService,
     private datePipe: DatePipe
-    ) {
+  ) {
     this.causaPenal = {} as any;
     this.delito = {} as any;
     this.delitoUpdate = {} as any;
     this.tipoDelitoLista = [];
-    this.tipoProcesos=[];
+    this.tipoProcesos = [];
     // Table
     this.getTipoDelitos();
     this.setClickedRow = function (index) {
@@ -59,15 +59,12 @@ export class CausaPenalIngresoComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ID', this.ingresoId);
-    console.log("role", this.role)
     this.getData();
     this.getTipoProceso();
   }
 
   getData(personaId?) {
     this.ingresoService.listCausaPenal(this.personaId ? this.personaId : personaId).subscribe((data: any) => {
-      console.log(data);
       if (!data.error) {
         this.data = data.listaCausaPenal;
 
@@ -82,7 +79,6 @@ export class CausaPenalIngresoComponent implements OnInit {
 
   update(item: any) {
     this.causaPenal = item;
-    console.log(item)
     this.causaPenal.fechaPosibleCompurga = this.datePipe.transform(this.causaPenal.fechaPosibleCompurga, 'yyyy-MM-dd');
 
     this.toggleForm();
@@ -96,13 +92,11 @@ export class CausaPenalIngresoComponent implements OnInit {
   }
 
   seeRecursos(item, modal) {
-    console.log(item);
     this.causaPenal = item;
     this.modalService.open(modal, { size: 'xl', windowClass: 'modal-primary' });
   }
 
   delete(item: any) {
-    console.log(item);
     Swal.fire({
       title: '¿Estas seguro?',
       text: 'El estatus del registro cambiará.',
@@ -113,7 +107,6 @@ export class CausaPenalIngresoComponent implements OnInit {
     }).then(({ value }) => {
       if (value) {
         this.ingresoService.deleteCausaPenal(item.id).subscribe((data: any) => {
-          console.log('deleteCausaPenal', data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
@@ -154,7 +147,6 @@ export class CausaPenalIngresoComponent implements OnInit {
     }
     this.causaPenal = { ...this.causaPenal, imputado: { id: this.ingreso.id }, personaIngresada: { id: this.personaId } };
     this.ingresoService.saveCausaPenal(this.causaPenal).subscribe((data: any) => {
-      console.log('save carpeta', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -210,7 +202,7 @@ export class CausaPenalIngresoComponent implements OnInit {
     }
   }
 
-  //Delito 
+  //Delito
 
   search = (text$: Observable<string>) => {
     return text$.pipe(
@@ -232,10 +224,8 @@ export class CausaPenalIngresoComponent implements OnInit {
 
 
   saveDelito() {
-    console.log("save", this.delito)
 
     if (this.delito.idTipoDelito == null) {
-      console.log("null")
       let tipoDelito = {
         nombre: this.delito
       }
@@ -245,7 +235,6 @@ export class CausaPenalIngresoComponent implements OnInit {
       }
       this.delito = delitoNuevo;
     } else {
-      console.log("else");
 
       this.delito.tipoDelito = {
         id: this.delito.idTipoDelito
@@ -256,9 +245,7 @@ export class CausaPenalIngresoComponent implements OnInit {
       id: this.causaPenal.id
     }
 
-    console.log("almost save", this.delito)
     this.ingresoService.saveDelito(this.delito).subscribe((data: any) => {
-      console.log(data)
 
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
@@ -292,19 +279,17 @@ export class CausaPenalIngresoComponent implements OnInit {
     this.delito.nombre = delito.tipoDelito.nombre
     this.delito.juez = delito.juez;
     this.delitoUpdate = delito
-    console.log(this.delito)
   }
 
-  getTipoProceso(){
-    this.ingresoService.getTipoProceso().subscribe((data:any)=>{
-      this.tipoProcesos=data.tipoProceso;
+  getTipoProceso() {
+    this.ingresoService.getTipoProceso().subscribe((data: any) => {
+      this.tipoProcesos = data.tipoProceso;
     })
   }
 
   change($event: Event) {
-    console.log('event', $event);
   }
 
-  onEdit(event: any){}
-  viewHistory(modal?){}
+  onEdit(event: any) { }
+  viewHistory(modal?) { }
 }

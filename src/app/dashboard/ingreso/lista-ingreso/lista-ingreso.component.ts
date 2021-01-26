@@ -57,7 +57,6 @@ export class ListaIngresoComponent implements OnInit {
 
   getData() {
     this.ingresoService.listIngreso('listaTotal').subscribe((data: any) => {
-      console.log('getData', data.ingresos);
       this.data = data.ingresos;
     });
   }
@@ -70,7 +69,6 @@ export class ListaIngresoComponent implements OnInit {
     this.ingresoService.filterBusquedaListaIngresos(this.filterSearch, this.criteria).subscribe
       (
         (data: any) => {
-          console.log('getDataWithFilter', data);
           this.isLoading = false;
           Swal.fire({
             title: data.error ? 'Error!' : 'Busqueda',
@@ -92,10 +90,8 @@ export class ListaIngresoComponent implements OnInit {
             timer: 1000,
             showConfirmButton: false
           });
-          console.log(error);
         }
       );
-    console.log(this.filterSearch, this.criteria);
   }
 
   switch(e) {

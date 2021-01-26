@@ -16,14 +16,14 @@ export class TrabajoSocialComponent implements OnInit {
   public parentescos: any[]
   public file: any
 
-  constructor(private comiteTecnicoService: ComiteTecnicoService, private ingresoService:IngresoService
-    ,private modalService: NgbModal) {
-    this.generalidadesPPL= {} as any
-    this.generalidadesPPL.estadoCivil= {} as any
-    this.actividad= {} as any
-    this.actividad.parentesco={} as any
-    this.isLoading=false;
-    this.parentescos=[]
+  constructor(private comiteTecnicoService: ComiteTecnicoService, private ingresoService: IngresoService
+    , private modalService: NgbModal) {
+    this.generalidadesPPL = {} as any
+    this.generalidadesPPL.estadoCivil = {} as any
+    this.actividad = {} as any
+    this.actividad.parentesco = {} as any
+    this.isLoading = false;
+    this.parentescos = []
   }
 
   ngOnInit() {
@@ -31,40 +31,36 @@ export class TrabajoSocialComponent implements OnInit {
   }
 
 
-  searchImputado(){
-    this.comiteTecnicoService.getImputadoByFolioTrabajoSocial(this.generalidadesPPL.folio).subscribe((data:any)=>{
-      console.log(data);
-      if(!data.error){
-        this.generalidadesPPL=data.imputado;
-        this.actividad=data.imputado.actividades
-        if(!this.actividad.parentesco) {
-          this.actividad.parentesco={} as any
+  searchImputado() {
+    this.comiteTecnicoService.getImputadoByFolioTrabajoSocial(this.generalidadesPPL.folio).subscribe((data: any) => {
+      if (!data.error) {
+        this.generalidadesPPL = data.imputado;
+        this.actividad = data.imputado.actividades
+        if (!this.actividad.parentesco) {
+          this.actividad.parentesco = {} as any
         }
-        console.log(this.actividad)
       }
-        Swal.fire({
-          title: data.error ? 'Error!' : 'Busqueda',
-          text: data.mensaje,
-          icon: data.error ? 'error' : 'success',
-          timer: 1000,
-          showConfirmButton: false
-        });
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Busqueda',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1000,
+        showConfirmButton: false
+      });
     })
   }
 
 
 
-  getParentescos(){
-    this.ingresoService.getParentescos().subscribe((data: any)=>{
-      console.log(data)
-      this.parentescos=data.parentescos
+  getParentescos() {
+    this.ingresoService.getParentescos().subscribe((data: any) => {
+      this.parentescos = data.parentescos
     })
   }
 
-  saveActividad(){
-    this.actividad.imputado={id: this.generalidadesPPL.imputadoId}
-    this.comiteTecnicoService.saveActividadestrabajoSocial(this.actividad).subscribe((data:any)=>{
-      console.log(data)
+  saveActividad() {
+    this.actividad.imputado = { id: this.generalidadesPPL.imputadoId }
+    this.comiteTecnicoService.saveActividadestrabajoSocial(this.actividad).subscribe((data: any) => {
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -75,15 +71,13 @@ export class TrabajoSocialComponent implements OnInit {
     })
 
   }
-  change($event){}
+  change($event) { }
 
 
   generatePDF(modal) {
-    console.log('generatePDF');
     this.comiteTecnicoService.generatePDFTrabajoSocial(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
-      console.log('PDF', data);
       this.isLoading = false;
-      const file = new Blob([data], {type: 'application/*'});
+      const file = new Blob([data], { type: 'application/*' });
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadstart = ev => this.isLoading = true;
@@ -95,7 +89,7 @@ export class TrabajoSocialComponent implements OnInit {
         this.modalService.dismissAll();
         if (base64) {
           this.file = base64;
-          this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+          this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
         }
       };
       reader.onerror = () => {
@@ -110,7 +104,6 @@ export class TrabajoSocialComponent implements OnInit {
         this.modalService.dismissAll();
       };
     }, error => {
-      console.log(error);
       Swal.fire({
         title: 'Error',
         text: 'Error al generar el archivo',
@@ -135,7 +128,7 @@ class GeneralidadesPPL {
   sentencia: any;
   originario: any;
   listaDelitos: any;
-  ficha:any;
+  ficha: any;
   imputado: any;
 
 }
@@ -150,11 +143,11 @@ class Actividad {
   lugar: String
   observaciones: String;
   visitaIntima: String;
- diaVisitaIntima: String
+  diaVisitaIntima: String
   horarioVisitaIntima: String
- visitaFamiliar: String
- frecuencia: String
- diaVisitaFamiliar: String
+  visitaFamiliar: String
+  frecuencia: String
+  diaVisitaFamiliar: String
   parentesco: any
-  imputado:any;
+  imputado: any;
 }

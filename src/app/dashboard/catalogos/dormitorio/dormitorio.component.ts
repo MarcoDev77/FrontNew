@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Delito} from '@shared/models/Delito';
-import {CatalogosService} from '@shared/services/catalogos.service';
+import { Delito } from '@shared/models/Delito';
+import { CatalogosService } from '@shared/services/catalogos.service';
 import Swal from 'sweetalert2';
-import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
-import {Dormitorio} from '@shared/models/Dormitorio';
-import {EncrDecrService} from '@shared/helpers/encr-decr.service';
-import {Router} from '@angular/router';
+import { CentroPenitenciario } from '@shared/models/CentroPenitenciario';
+import { Dormitorio } from '@shared/models/Dormitorio';
+import { EncrDecrService } from '@shared/helpers/encr-decr.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dormitorio',
@@ -36,7 +36,7 @@ export class DormitorioComponent implements OnInit {
     this.dormitorio = {} as Dormitorio;
     this.centroPenitenciario = JSON.parse(this.kryptoService.get(sessionStorage.getItem('centroPenitenciario')));
 
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -49,7 +49,6 @@ export class DormitorioComponent implements OnInit {
     this.isLoading = true;
     this.catalogosService.listDormitorio(idCentro).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
@@ -64,7 +63,6 @@ export class DormitorioComponent implements OnInit {
         id: this.centroPenitenciario.id
       };
       this.catalogosService.saveDormitorio(this.dormitorio).subscribe((data: any) => {
-        console.log('ADD', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -110,7 +108,7 @@ export class DormitorioComponent implements OnInit {
 
   update(id, item) {
     this.isForm = true;
-    this.dormitorio = {...item};
+    this.dormitorio = { ...item };
 
     if (this.auxId && this.auxId !== id) {
       this.showTr();
@@ -171,10 +169,9 @@ export class DormitorioComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.catalogosService.changeStatusDormitorio(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,

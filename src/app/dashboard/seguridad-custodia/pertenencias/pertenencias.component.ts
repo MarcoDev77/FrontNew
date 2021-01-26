@@ -52,7 +52,6 @@ export class PertenenciasComponent implements OnInit {
     this.isLoading = true;
     this.seguridadCustodioService.getImputadosByRevision(this.revision.id).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('getData', data);
       if (!data.error) {
         this.imputadoList = data.imputado;
       }
@@ -96,7 +95,6 @@ export class PertenenciasComponent implements OnInit {
     if (this.validateFiels(array)) {
       this.objetoDecomisado.revision = { id: this.revision.id };
       this.objetoDecomisado.imputado = { id: this.currentImputado.id };
-      console.log('to Server', this.objetoDecomisado);
       this.seguridadCustodioService.saveObjetoRevision(this.objetoDecomisado).subscribe((data: any) => {
         this.cancel();
         Swal.fire({

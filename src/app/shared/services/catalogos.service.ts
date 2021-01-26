@@ -38,7 +38,6 @@ export class CatalogosService {
       this.data.id = null;
       this.data.estatus = true;
     }
-    console.log(this.data);
     return this.http.post(`${this.url}/api/registrarModalidadDelito`, this.data);
   }
 
@@ -57,7 +56,6 @@ export class CatalogosService {
 
   validAdminCentroPenitenciario(model) {
     this.data = model;
-    console.log('To server', this.data);
     return this.http.post(`${this.url}/api/registrarCentroPenitenciario`, this.data);
   }
 
@@ -73,7 +71,6 @@ export class CatalogosService {
       id: model.personal.areaSelect.value,
     };
     this.data = model;
-    console.log('To server', this.data);
     return this.http.post(`${this.url}/api/registrarCentroPenitenciario`, this.data);
   }
 
@@ -103,7 +100,6 @@ export class CatalogosService {
     model.idTipoDelito = model.idTipoDelito ? model.idTipoDelito : null;
     model.estatus = model.estatus ? model.estatus : true;
     this.data = model;
-    console.log('To server', this.data);
     return this.http.post(`${this.url}/api/registrarTipoDelito`, this.data);
   }
 
@@ -159,7 +155,6 @@ export class CatalogosService {
 
   saveMotivoReubicacion(model: MotivoReubicacion) {
     model.id = model.id ? model.id : null;
-    console.log('To server', model);
     return this.http.post(`${this.url}/api/registrarMotivoReubicacion`, model);
   }
 
@@ -175,12 +170,10 @@ export class CatalogosService {
   saveDormitorio(model: Dormitorio) {
     model.id = model.id ? model.id : null;
     model.temporal = model.temporal ? model.temporal : false;
-    console.log('To server', model);
     return this.http.post(`${this.url}/api/registrarDormitorio`, model);
   }
 
   changeStatusDormitorio(id) {
-    console.log('ID', id);
     return this.http.get(`${this.url}/api/actualizarEstatusDormitorio?dormitorioId=${id}`);
   }
 
@@ -191,7 +184,6 @@ export class CatalogosService {
 
   saveTipoActividad(model: TipoActividad) {
     model.id = model.id ? model.id : null;
-    console.log('To server', model);
     return this.http.post(`${this.url}/api/registrarTipoActividad`, model);
   }
 
@@ -206,7 +198,6 @@ export class CatalogosService {
 
   saveActividad(model: Actividad) {
     model.id = model.id ? model.id : null;
-    console.log('To server', model);
     return this.http.post(`${this.url}/api/registrarActividad`, model);
   }
 

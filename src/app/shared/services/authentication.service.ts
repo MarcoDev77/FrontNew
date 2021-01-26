@@ -53,7 +53,6 @@ export class AuthenticationService {
   }
 
   getCurrentPersonal() {
-    console.log("entras")
     return this.http.get(`${environment.apiUrl}/api/consultarInformacionPersonal`);
   }
 }

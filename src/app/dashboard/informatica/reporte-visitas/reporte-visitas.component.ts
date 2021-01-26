@@ -33,7 +33,6 @@ export class ReporteVisitasComponent implements OnInit {
     }
     this.isLoading = true;
     this.informaticaService.getVisitasImputado(ingreso.id).subscribe((data: any) => {
-      console.log('searchImputado', data);
       this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Búsqueda',
@@ -62,7 +61,6 @@ export class ReporteVisitasComponent implements OnInit {
         this.isLoading = false;
         this.showPreview(data, modal);
       }, error => {
-        console.log(error);
         this.isLoading = false;
       });
   }

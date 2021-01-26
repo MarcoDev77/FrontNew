@@ -45,12 +45,10 @@ export class PlanActividadesComponent implements OnInit {
 
 
   searchImputado(showMessage = true, ingreso?) {
-    console.log("ingreso",ingreso)
-     if (ingreso) {
+    if (ingreso) {
       this.generalidadesPPL.folio = ingreso.folio;
-    } 
+    }
     this.comiteTecnicoService.getImputadoByFolioPedagogia(this.generalidadesPPL.folio).subscribe((data: any) => {
-      console.log("Search",data);
       if (!data.error) {
         this.generalidadesPPL = data.imputado;
         this.antecedentes = data.imputado.antecedentesConsumo;
@@ -78,7 +76,6 @@ export class PlanActividadesComponent implements OnInit {
   saveAntecedente(array: any[]) {
     if (this.validateFiels(array)) {
       this.antecedente.imputado = { id: this.generalidadesPPL.imputadoId };
-      console.log('To server', this.antecedente);
       this.comiteTecnicoService.saveAntecedente(this.antecedente).subscribe((data: any) => {
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
@@ -125,7 +122,6 @@ export class PlanActividadesComponent implements OnInit {
     }).then(({ value }) => {
       if (value) {
         this.comiteTecnicoService.deleteAntecedente(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
@@ -146,7 +142,6 @@ export class PlanActividadesComponent implements OnInit {
   saveGrupo() {
     this.grupoCanaliza.imputado = { id: this.generalidadesPPL.imputadoId };
     this.comiteTecnicoService.saveGrupoCanaliza(this.grupoCanaliza).subscribe((data: any) => {
-      console.log(data)
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -228,9 +223,7 @@ export class PlanActividadesComponent implements OnInit {
 
 
   generatePDF(modal) {
-    console.log('generatePDF');
     this.comiteTecnicoService.generatePDFPlanActividades(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
-      console.log('PDF', data);
       this.isLoading = false;
       const file = new Blob([data], { type: 'application/*' });
       const reader = new FileReader();
@@ -259,7 +252,6 @@ export class PlanActividadesComponent implements OnInit {
         this.modalService.dismissAll();
       };
     }, error => {
-      console.log(error);
       Swal.fire({
         title: 'Error',
         text: 'Error al generar el archivo',

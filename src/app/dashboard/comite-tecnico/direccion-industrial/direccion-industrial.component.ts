@@ -41,7 +41,6 @@ export class DireccionIndustrialComponent implements OnInit {
     this.isLoading = true;
     this.comiteTecnicoService.getImputadoByFolio(this.generalidadesPPL.folio).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('data', data);
       if (showMessage) {
         Swal.fire({
           title: data.error ? 'Error!' : 'Busqueda',
@@ -71,7 +70,6 @@ export class DireccionIndustrialComponent implements OnInit {
         this.handleError();
       }
     }, error => {
-      console.log(error);
       this.isLoading = false;
       Swal.fire({
         title: 'Error!',
@@ -94,17 +92,14 @@ export class DireccionIndustrialComponent implements OnInit {
 
   searchImputado() {
     if (this.generalidadesPPL.folio.length >= 6) {
-      console.log('Entra');
       this.getData();
     }
   }
 
   submit() {
     this.isLoading = true;
-    console.log('Lista Actividades', this.actividades);
     this.comiteTecnicoService.savePlandeActividades(this.actividades).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('savePlandeActividades', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Actualización',
         text: data.mensaje,
@@ -113,7 +108,6 @@ export class DireccionIndustrialComponent implements OnInit {
         showConfirmButton: false
       });
     }, error => {
-      console.log(error);
       this.isLoading = false;
       Swal.fire({
         title: 'Error!',
@@ -143,10 +137,8 @@ export class DireccionIndustrialComponent implements OnInit {
     if (this.validateFiels(array)) {
       this.isLoading = true;
       this.experiencia.imputado = { id: this.generalidadesPPL.imputadoId };
-      console.log('To server', this.experiencia);
       this.comiteTecnicoService.saveExperienciaLaboral(this.experiencia).subscribe((data: any) => {
         this.isLoading = false;
-        console.log(data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -160,7 +152,6 @@ export class DireccionIndustrialComponent implements OnInit {
         }
       }, error => {
         this.isLoading = false;
-        console.log(error);
         Swal.fire({
           title: 'Error!',
           text: 'Error al guardar.',
@@ -185,7 +176,6 @@ export class DireccionIndustrialComponent implements OnInit {
         this.isLoading = true;
         this.comiteTecnicoService.deleteExperienciaLaboral(item.id).subscribe((data: any) => {
           this.isLoading = false;
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
@@ -200,7 +190,6 @@ export class DireccionIndustrialComponent implements OnInit {
           });
         }, error => {
           this.isLoading = false;
-          console.log(error);
           Swal.fire({
             title: 'Error!',
             text: 'No se pudo realizar el cambio',
@@ -214,10 +203,8 @@ export class DireccionIndustrialComponent implements OnInit {
   }
 
   generatePDF(modal) {
-    console.log('generatePDF');
     this.isLoading = true;
     this.comiteTecnicoService.generatePDFDireccionIndustrial(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
-      console.log('PDF', data);
       this.isLoading = false;
       const file = new Blob([data], { type: 'application/*' });
       const reader = new FileReader();
@@ -247,7 +234,6 @@ export class DireccionIndustrialComponent implements OnInit {
       };
     }, error => {
       this.isLoading = false;
-      console.log(error);
       Swal.fire({
         title: 'Error',
         text: 'Error al generar el archivo',

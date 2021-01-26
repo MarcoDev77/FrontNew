@@ -48,10 +48,8 @@ export class RevisionesComponent implements OnInit {
 
   getData() {
     this.seguridadCustodiaService.getRevisiones().subscribe((data: any) => {
-      console.log('getData', data);
       if (!data.error) {
         this.data = data.revisiones;
-        console.log('reviciones', this.data);
       }
     });
   }
@@ -60,9 +58,7 @@ export class RevisionesComponent implements OnInit {
     if (!this.validateFiels(array)) {
       return;
     }
-    console.log('toServer', this.revision);
     this.seguridadCustodiaService.saveRevision(this.revision).subscribe((data: any) => {
-      console.log('submit', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -137,7 +133,6 @@ export class RevisionesComponent implements OnInit {
   }
 
   seeImputados(item, modal) {
-    console.log(item);
     this.listImputados = [];
     this.revision = { ...item };
     this.isLoading = true;
@@ -146,7 +141,6 @@ export class RevisionesComponent implements OnInit {
       this.isLoading = false;
       if (!data.error) {
         this.listImputados = data.imputado;
-        console.log('list', this.listImputados);
       }
     });
   }

@@ -24,7 +24,6 @@ export class AuthGuard implements CanActivate {
     // this.authenticationService.getUser().subscribe(user => {
     //   const expectedRole = route.data.expectedRole;
     //   if (user) {
-    //     console.log('Can active', true, expectedRole);
     //     return true;
 
     // for (const item of expectedRole) {

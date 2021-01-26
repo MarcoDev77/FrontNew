@@ -45,7 +45,6 @@ export class SeguimientoTratamientoComponent implements OnInit {
         this.cleanForm();
       }
     }, error => {
-      console.log(error);
       this.cleanForm();
     });
   }
@@ -60,7 +59,6 @@ export class SeguimientoTratamientoComponent implements OnInit {
       this.isLoading = false;
       this.showPreview(data, modal);
     }, error => {
-      console.log(error);
       this.isLoading = false;
     });
   }

@@ -44,7 +44,6 @@ export class ReporteMedicoComponent implements OnInit {
     this.isLoading = true;
     this.resetUploaders();
     this.comiteTecnicoService.getImputadoByFolioGeneral(this.ingreso.folio).subscribe((data: any) => {
-      console.log('Data', data);
       this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Búsqueda',
@@ -68,7 +67,6 @@ export class ReporteMedicoComponent implements OnInit {
         showConfirmButton: false
       });
       this.isLoading = false;
-      console.log(error);
     });
   }
 
@@ -78,7 +76,6 @@ export class ReporteMedicoComponent implements OnInit {
         if (!data.error) {
           this.doc = data.documento;
           this.comentarios = data.documento.comentarios;
-          console.log('docs', this.doc);
         }
       });
   }
@@ -115,7 +112,6 @@ export class ReporteMedicoComponent implements OnInit {
       comentarios: this.comentarios,
       imputadoId: this.ingreso.imputado.id
     };
-    console.log(this.uo);
     this.uploaderMedico.setOptions(this.uo);
     this.uploaderMedico.onAfterAddingFile = (file) => {
       file.withCredentials = false;
@@ -145,7 +141,6 @@ export class ReporteMedicoComponent implements OnInit {
           timer: 1000,
           showConfirmButton: false
         });
-        console.log(error);
       });
   }
 
@@ -183,7 +178,6 @@ export class ReporteMedicoComponent implements OnInit {
     this.isLoading = false;
     input.value = null;
     const exit = JSON.parse(response);
-    console.log(response);
     Swal.fire({
       title: exit.error ? 'Error!' : 'Guardado',
       text: exit.mensaje,
@@ -199,7 +193,6 @@ export class ReporteMedicoComponent implements OnInit {
   onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders, input): any {
     this.isLoading = false;
     input.value = null;
-    console.log(response);
     const error = JSON.stringify(response); // error server response
     this.resetUploaders();
     Swal.fire({

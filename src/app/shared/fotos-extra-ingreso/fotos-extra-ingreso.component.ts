@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
-import {environment} from '@environment/environment';
+import { Component, Input, OnInit } from '@angular/core';
+import { FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import { environment } from '@environment/environment';
 import Swal from 'sweetalert2';
-import {AuthenticationService} from '@shared/services/authentication.service';
-import {IngresoService} from '@shared/services/ingreso.service';
+import { AuthenticationService } from '@shared/services/authentication.service';
+import { IngresoService } from '@shared/services/ingreso.service';
 
 @Component({
   selector: 'app-fotos-extra-ingreso',
@@ -23,7 +23,7 @@ export class FotosExtraIngresoComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, private ingresoService: IngresoService) {
     // Uploader
     this.url = environment.apiUrl;
-    this.uploader = new FileUploader({url: this.url + '/api/registrarHuellaDactilar', itemAlias: 'image'});
+    this.uploader = new FileUploader({ url: this.url + '/api/registrarHuellaDactilar', itemAlias: 'image' });
   }
 
   ngOnInit() {
@@ -34,7 +34,6 @@ export class FotosExtraIngresoComponent implements OnInit {
     this.isLoading = true;
     this.ingresoService.getForografiasImputado(this.ingresoId).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('getForografiasImputado', data);
       if (!data.error) {
         this.photos = data.fotografias;
       }
@@ -65,12 +64,10 @@ export class FotosExtraIngresoComponent implements OnInit {
     this.uploader.uploadAll();
     this.uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
     this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
-    console.log('se sube');
   }
 
   onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
     const exit = JSON.parse(response);
-    console.log(response);
     Swal.fire({
       title: exit.error ? 'Error!' : 'Guardado',
       text: exit.mensaje,
@@ -85,7 +82,6 @@ export class FotosExtraIngresoComponent implements OnInit {
   }
 
   onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
-    console.log(response);
     const error = JSON.stringify(response); // error server response
     this.uploader.progress = 0;
     this.uploader.clearQueue();

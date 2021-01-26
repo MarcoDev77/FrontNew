@@ -25,7 +25,6 @@ export class PertenenciasResultadoBusquedaComponent implements OnInit {
   }
 
   addImputado(item) {
-    console.log(item);
     const model = {
       imputado: { id: item.id },
       revision: { id: this.revisionId },

@@ -16,28 +16,25 @@ export class TransladoFederalComponent implements OnInit {
   public file: any
   constructor(
     private servicioSocialService: ServicioSocialService,
-    private modalService: NgbModal) 
-    {
-      this.ingreso={} as any
-      this.ingreso.nucleoFamiliar={} as any
-      this.traslado={} as any
-      this.isLoading= false;
-     }
+    private modalService: NgbModal) {
+    this.ingreso = {} as any
+    this.ingreso.nucleoFamiliar = {} as any
+    this.traslado = {} as any
+    this.isLoading = false;
+  }
 
   ngOnInit() {
   }
 
   searchImputado(ingreso?) {
-    console.log(ingreso)
     if (ingreso) {
       this.ingreso = { ...ingreso };
-    }  
+    }
     this.isLoading = true
     this.servicioSocialService.getInfoTrasladoFederal(this.ingreso.folio).subscribe((data: any) => {
-      console.log(data)
-      if(!data.error){
+      if (!data.error) {
         this.ingreso = data.imputado
-        this.traslado=data.imputado.trasladoFederal
+        this.traslado = data.imputado.trasladoFederal
       }
       Swal.fire({
         title: data.error ? 'Error!' : 'Resultados',
@@ -50,14 +47,12 @@ export class TransladoFederalComponent implements OnInit {
     })
   }
 
-  saveTrasladoFederal(){
-    this.isLoading=true
-    this.traslado.imputado={
+  saveTrasladoFederal() {
+    this.isLoading = true
+    this.traslado.imputado = {
       id: this.ingreso.imputadoId
     }
-    console.log(this.traslado)
-    this.servicioSocialService.saveTrasladofederal(this.traslado).subscribe((data: any)=>{
-      console.log(data)
+    this.servicioSocialService.saveTrasladofederal(this.traslado).subscribe((data: any) => {
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -69,13 +64,13 @@ export class TransladoFederalComponent implements OnInit {
     })
 
   }
-  
+
 
   cleanForm() {
-    this.ingreso={} as any
-    this.ingreso.nucleoFamiliar={} as any
-    this.traslado={} as any
-    this.isLoading= false;
+    this.ingreso = {} as any
+    this.ingreso.nucleoFamiliar = {} as any
+    this.traslado = {} as any
+    this.isLoading = false;
   }
 
   generatePDF(modal) {

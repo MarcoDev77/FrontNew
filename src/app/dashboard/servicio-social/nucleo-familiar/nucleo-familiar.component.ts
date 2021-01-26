@@ -35,11 +35,9 @@ export class NucleoFamiliarComponent implements OnInit {
   }
 
   searchImputado(imputado?) {
-    console.log(imputado);
 
     this.isLoading = true;
     this.servicioSocialService.getInfoNucleoFamiliar(this.ingreso.folio || imputado.folio).subscribe((data: any) => {
-      console.log('data', data);
       this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Resultados',
@@ -57,7 +55,6 @@ export class NucleoFamiliarComponent implements OnInit {
 
   handleErrorSearch(error?) {
     if (error) {
-      console.log(error);
     }
     Swal.fire({
       title: 'Error!',
@@ -81,9 +78,7 @@ export class NucleoFamiliarComponent implements OnInit {
   }
 
   submit() {
-    console.log('submit', this.nucleo);
     this.servicioSocialService.saveNucleoFamiliar(this.nucleo).subscribe((data: any) => {
-      console.log('Response', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Resultados',
         text: data.mensaje,
@@ -97,7 +92,6 @@ export class NucleoFamiliarComponent implements OnInit {
   genetatePDF(modal) {
     this.isLoading = true;
     this.servicioSocialService.generatePDFEstudioTrabajoSocialV2(this.imputado.id).subscribe((data: any) => {
-      console.log('preview', data);
       this.isLoading = false;
       this.showPreview(data, modal);
     }, error => {
@@ -109,7 +103,6 @@ export class NucleoFamiliarComponent implements OnInit {
         timer: 1000,
         showConfirmButton: false
       });
-      console.log(error);
 
     });
   }

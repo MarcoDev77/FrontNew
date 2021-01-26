@@ -33,7 +33,6 @@ export class OficioSancionesComponent implements OnInit {
     }
     this.isLoading = true;
     this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
-      console.log('Data', data);
       this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Busqueda',
@@ -50,7 +49,6 @@ export class OficioSancionesComponent implements OnInit {
       }
     }, error => {
       this.cleanForm();
-      console.log(error);
       Swal.fire({
         title: 'Error!',
         text: 'Error al realizar la busqueda',
@@ -80,7 +78,6 @@ export class OficioSancionesComponent implements OnInit {
   submit() {
     this.isLoading = true;
     this.oficio.imputado = { id: this.ingreso.imputado.id };
-    console.log('To server', this.oficio);
     this.servicioSocialService.saveOficioSanciones(this.oficio).subscribe((data: any) => {
       this.isLoading = false;
       Swal.fire({
@@ -95,7 +92,6 @@ export class OficioSancionesComponent implements OnInit {
 
   generatePDF(modal) {
     this.isLoading = true;
-    console.log('imputadoId', this.ingreso.imputado.id);
 
     this.servicioSocialService.generatePDFOficioDirectorGeneral(this.ingreso.imputado.id)
       .subscribe((data: any) => {

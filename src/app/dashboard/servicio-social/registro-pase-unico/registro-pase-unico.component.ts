@@ -24,9 +24,9 @@ export class RegistroPaseUnicoComponent implements OnInit {
   constructor(private servicioSocialService: ServicioSocialService, private catalogoService: CatalogosService) {
     this.isLoading = false
     this.isLoadingData = false
-    this.criteria={} as any
+    this.criteria = {} as any
     this.visitas = []
-    this.dormitorios=[]
+    this.dormitorios = []
 
   }
 
@@ -35,22 +35,20 @@ export class RegistroPaseUnicoComponent implements OnInit {
 
   }
 
-  getDormitorios(){
-    this.catalogoService.listDormitoriosAsignados().subscribe((data: any)=>{
-      if(data.dormitorios){
-        this.dormitorios= data.dormitorios
+  getDormitorios() {
+    this.catalogoService.listDormitoriosAsignados().subscribe((data: any) => {
+      if (data.dormitorios) {
+        this.dormitorios = data.dormitorios
       }
-      console.log(this.dormitorios)
     })
   }
 
   searchVisitas() {
     this.isLoadingData = true
-    
+
     this.servicioSocialService.searchByDate(this.criteria).subscribe((data: any) => {
-      console.log(data)
-      if(data.pases){
-        this.visitas=data.pases
+      if (data.pases) {
+        this.visitas = data.pases
         this.clearSearch()
       }
       this.isLoadingData = false
@@ -58,8 +56,8 @@ export class RegistroPaseUnicoComponent implements OnInit {
 
   }
   clearSearch() {
-    this.criteria={} as any
-   }
+    this.criteria = {} as any
+  }
   switch($event) { }
   sort(key) {
     if (key === this.key) {

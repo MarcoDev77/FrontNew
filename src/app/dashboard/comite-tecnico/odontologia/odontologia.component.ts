@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ComiteTecnicoService} from '@shared/services/comite-tecnico.service';
+import { Component, OnInit } from '@angular/core';
+import { ComiteTecnicoService } from '@shared/services/comite-tecnico.service';
 import Swal from 'sweetalert2';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-odontologia',
@@ -27,7 +27,6 @@ export class OdontologiaComponent implements OnInit {
     this.isLoading = true;
     this.comiteTecnicoService.getDataComiteOdontoligia(this.generalidades.folio).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Busqueda',
         text: data.mensaje,
@@ -46,7 +45,6 @@ export class OdontologiaComponent implements OnInit {
         this.handleError();
       }
     }, error => {
-      console.log(error);
       this.isLoading = false;
       Swal.fire({
         title: 'Error!',
@@ -61,7 +59,6 @@ export class OdontologiaComponent implements OnInit {
 
   searchImputado() {
     if (this.generalidades.folio.length >= 6) {
-      console.log('Entra');
       this.getData();
     }
   }
@@ -73,9 +70,8 @@ export class OdontologiaComponent implements OnInit {
   }
 
   submit() {
-    console.log('dd', this.historial);
     this.isLoading = true;
-    this.historial.imputado = {id: this.generalidades.imputadoId};
+    this.historial.imputado = { id: this.generalidades.imputadoId };
     this.comiteTecnicoService.saveComiteOdontolofia(this.historial).subscribe((data: any) => {
       this.isLoading = false;
       Swal.fire({
@@ -87,7 +83,6 @@ export class OdontologiaComponent implements OnInit {
       });
     }, error => {
       this.isLoading = false;
-      console.log(error);
       Swal.fire({
         title: 'Error!',
         text: 'Actualización fallida',
@@ -100,11 +95,9 @@ export class OdontologiaComponent implements OnInit {
 
   generatePDF(modal) {
     this.isLoading = true;
-    console.log('generatePDF');
     this.comiteTecnicoService.generatePDFOdontologia(this.generalidades.imputadoId).subscribe((data: any) => {
-      console.log('PDF', data);
       this.isLoading = false;
-      const file = new Blob([data], {type: 'application/*'});
+      const file = new Blob([data], { type: 'application/*' });
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadstart = ev => this.isLoading = true;
@@ -116,7 +109,7 @@ export class OdontologiaComponent implements OnInit {
         this.modalService.dismissAll();
         if (base64) {
           this.file = base64;
-          this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+          this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
         }
       };
       reader.onerror = () => {
@@ -132,7 +125,6 @@ export class OdontologiaComponent implements OnInit {
       };
     }, error => {
       this.isLoading = false;
-      console.log(error);
       Swal.fire({
         title: 'Error',
         text: 'Error al generar el archivo',

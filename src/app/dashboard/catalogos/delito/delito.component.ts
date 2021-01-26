@@ -1,10 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import {ModalidadDelito} from '@shared/models/ModalidadDelito';
-import {Delito} from '@shared/models/Delito';
-import {CatalogosService} from '@shared/services/catalogos.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
+import { ModalidadDelito } from '@shared/models/ModalidadDelito';
+import { Delito } from '@shared/models/Delito';
+import { CatalogosService } from '@shared/services/catalogos.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CentroPenitenciario } from '@shared/models/CentroPenitenciario';
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,12 +31,12 @@ export class DelitoComponent implements OnInit {
   public reverse = true;
   @Input() from;
 
-  constructor(private catalogosService: CatalogosService, private router:Router) {
+  constructor(private catalogosService: CatalogosService, private router: Router) {
     this.data = [];
     this.delito = {} as Delito;
     this.modalidadesDelito = [];
 
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -50,7 +50,6 @@ export class DelitoComponent implements OnInit {
     this.isLoading = true;
     this.catalogosService.listDelito().subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
@@ -64,7 +63,6 @@ export class DelitoComponent implements OnInit {
   submit(array) {
     if (this.validateFiels(array)) {
       this.catalogosService.saveDelito(this.delito).subscribe((data: any) => {
-        console.log('ADD', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -110,7 +108,7 @@ export class DelitoComponent implements OnInit {
 
   update(id, item) {
     this.isForm = true;
-    this.delito = {...item};
+    this.delito = { ...item };
 
 
     if (this.auxId && this.auxId !== id) {
@@ -165,7 +163,6 @@ export class DelitoComponent implements OnInit {
   }
 
   toggleStatus(item: any) {
-    console.log('delito', item);
     Swal.fire({
       title: '¿Estas seguro?',
       text: 'El estatus del registro cambiará.',
@@ -173,10 +170,9 @@ export class DelitoComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.catalogosService.deleteDelito(item.idTipoDelito).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,

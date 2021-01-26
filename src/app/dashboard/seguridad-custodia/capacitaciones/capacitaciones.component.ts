@@ -43,7 +43,6 @@ export class CapacitacionesComponent implements OnInit {
     this.seguridadCustodiaService.getCapacitaciones().subscribe((data: any) => {
       if (!data.error) {
         this.data = data.capacitaciones;
-        console.log('data', this.data);
       }
     });
   }
@@ -51,7 +50,6 @@ export class CapacitacionesComponent implements OnInit {
   submit(array) {
     if (this.validateFiels(array)) {
       this.seguridadCustodiaService.saveCapacitaciones(this.capacitacion).subscribe((data: any) => {
-        console.log('submit', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,

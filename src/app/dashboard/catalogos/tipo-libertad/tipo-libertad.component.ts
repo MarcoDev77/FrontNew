@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CatalogosService} from '@shared/services/catalogos.service';
-import {TipoLibertad} from '@shared/models/TipoLibertdad';
+import { CatalogosService } from '@shared/services/catalogos.service';
+import { TipoLibertad } from '@shared/models/TipoLibertdad';
 
 import Swal from 'sweetalert2';
 
@@ -32,10 +32,10 @@ export class TipoLibertadComponent implements OnInit {
     this.data = [];
     this.date = new Date();
     this.roles = [];
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
-   }
+  }
 
   ngOnInit() {
     this.getData();
@@ -48,7 +48,6 @@ export class TipoLibertadComponent implements OnInit {
     this.isLoading = true;
     this.catalogosService.listTipoLibertad().subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
@@ -60,7 +59,6 @@ export class TipoLibertadComponent implements OnInit {
   submit(array) {
     if (this.validateFiels(array)) {
       this.catalogosService.saveTipoLibertad(this.tipoLibertad).subscribe((data: any) => {
-        console.log('ADD', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -106,7 +104,7 @@ export class TipoLibertadComponent implements OnInit {
 
   update(id, item) {
     this.isForm = true;
-    this.tipoLibertad = {...item};
+    this.tipoLibertad = { ...item };
     // this.areaPericial.role = [{value: item.role, description: item.roleNombre}];
 
     if (this.auxId && this.auxId !== id) {
@@ -168,10 +166,9 @@ export class TipoLibertadComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.catalogosService.changeStatusTipoDelito(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,

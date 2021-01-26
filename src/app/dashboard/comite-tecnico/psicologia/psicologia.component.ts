@@ -11,22 +11,21 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class PsicologiaComponent implements OnInit {
   public generalidadesPPL: GeneralidadesPPL;
   public isLoading: boolean;
-  public file:any;
+  public file: any;
   constructor(private comiteTecnicoService: ComiteTecnicoService, private modalService: NgbModal) {
-    this.generalidadesPPL= {} as any;
-    this.generalidadesPPL.ficha= {} as any;
-    this.isLoading=false;
+    this.generalidadesPPL = {} as any;
+    this.generalidadesPPL.ficha = {} as any;
+    this.isLoading = false;
 
-   }
+  }
 
   ngOnInit() {
   }
 
-  searchImputado(){
-    this.comiteTecnicoService.getImputadoByFolioPsicologia(this.generalidadesPPL.folio).subscribe((data:any)=>{
-      console.log("getData",data)
-      if(!data.error){
-        this.generalidadesPPL=data.imputado
+  searchImputado() {
+    this.comiteTecnicoService.getImputadoByFolioPsicologia(this.generalidadesPPL.folio).subscribe((data: any) => {
+      if (!data.error) {
+        this.generalidadesPPL = data.imputado
       }
       Swal.fire({
         title: data.error ? 'Error!' : 'Busqueda',
@@ -38,12 +37,11 @@ export class PsicologiaComponent implements OnInit {
     })
   }
 
-  saveFicha(){
-    this.generalidadesPPL.ficha.imputado={
-      id:this.generalidadesPPL.imputadoId
+  saveFicha() {
+    this.generalidadesPPL.ficha.imputado = {
+      id: this.generalidadesPPL.imputadoId
     }
-    this.comiteTecnicoService.saveFichaPsicologica(this.generalidadesPPL.ficha).subscribe((data:any)=>{
-      console.log(data)
+    this.comiteTecnicoService.saveFichaPsicologica(this.generalidadesPPL.ficha).subscribe((data: any) => {
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -51,15 +49,13 @@ export class PsicologiaComponent implements OnInit {
         timer: 1300,
         showConfirmButton: false
       });
-    }) 
-  } 
-  
+    })
+  }
+
   generatePDF(modal) {
-    console.log('generatePDF');
     this.comiteTecnicoService.generatePDFPsicologia(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
-      console.log('PDF', data);
       this.isLoading = false;
-      const file = new Blob([data], {type: 'application/*'});
+      const file = new Blob([data], { type: 'application/*' });
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadstart = ev => this.isLoading = true;
@@ -71,7 +67,7 @@ export class PsicologiaComponent implements OnInit {
         this.modalService.dismissAll();
         if (base64) {
           this.file = base64;
-          this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+          this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
         }
       };
       reader.onerror = () => {
@@ -86,7 +82,6 @@ export class PsicologiaComponent implements OnInit {
         this.modalService.dismissAll();
       };
     }, error => {
-      console.log(error);
       Swal.fire({
         title: 'Error',
         text: 'Error al generar el archivo',
@@ -112,6 +107,6 @@ class GeneralidadesPPL {
   sentencia: any;
   originario: any;
   listaDelitos: any;
-  ficha:any
+  ficha: any
   imputado: any
 }

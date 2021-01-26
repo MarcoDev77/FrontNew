@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-bitacora-imputado-liberacion',
@@ -25,7 +25,7 @@ export class BitacoraImputadoLiberacionComponent implements OnInit {
     private modalService: NgbModal,
   ) {
 
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -65,12 +65,12 @@ export class BitacoraImputadoLiberacionComponent implements OnInit {
   }
 
   submit() {
-    console.log('>(');
+
   }
 
   seeDetails(item, modal) {
     this.isDetails = true;
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
 }

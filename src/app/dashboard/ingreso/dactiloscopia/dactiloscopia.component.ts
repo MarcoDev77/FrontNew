@@ -70,7 +70,6 @@ export class DactiloscopiaComponent implements OnInit {
       this.ingreso = data.ingreso;
       this.ingreso.imputado.mainName = this.ingreso.imputado.apodos.find(item => item.principal);
     }, error => {
-      console.log(error);
     });
   }
 
@@ -82,13 +81,11 @@ export class DactiloscopiaComponent implements OnInit {
       dactiloscopia.fotografias.forEach(item => this.setParameters(item));
       this.isLoadingData = false;
     }, error => {
-      console.log(error);
       this.isLoadingData = false;
     });
   }
 
   openFinder(input, name?) {
-    console.log(name);
     input.focus();
     input.click();
     this.currentImage = name;
@@ -384,7 +381,6 @@ export class DactiloscopiaComponent implements OnInit {
       this.isLoading = true;
       this.ingresoService.finishIngreso(this.ingreso.id).subscribe((data: any) => {
         this.isLoading = false;
-        console.log(data);
         if (!data.error) {
 
           Swal.fire({

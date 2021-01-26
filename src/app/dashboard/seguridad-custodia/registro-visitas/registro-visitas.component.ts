@@ -30,7 +30,6 @@ export class RegistroVisitasComponent implements OnInit {
 
   searchVisita() {
     this.SeguridadCustodiaService.searchVisita(this.codigoBarras).subscribe((data: any) => {
-      console.log(data)
       if (data.referencia) {
         this.referencia = data.referencia
       }
@@ -52,7 +51,6 @@ export class RegistroVisitasComponent implements OnInit {
       tipoPase: this.referencia.tipoPase
     }
     this.SeguridadCustodiaService.saveIngresoVisita(model).subscribe((data: any) => {
-      console.log(data)
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado!',
         text: data.mensaje,
@@ -70,10 +68,8 @@ export class RegistroVisitasComponent implements OnInit {
 
     }
     this.SeguridadCustodiaService.saveSalidaVisita(model).subscribe((data: any) => {
-      console.log(data)
       if (data.referencia && data.error) {
         this.referencia = data.referencia
-        console.log("entra")
       }
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado!',

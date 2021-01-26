@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClasificacionJuridica } from '@shared/models/ClasificacionJuridica';
-import {CatalogosService} from '@shared/services/catalogos.service';
+import { CatalogosService } from '@shared/services/catalogos.service';
 
 import Swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ export class ClasificacionJuridicaComponent implements OnInit {
   public selectedRow: Number;
   public setClickedRow: Function;
   public data: ClasificacionJuridica[];
-  public clasificacionJuridica : ClasificacionJuridica
+  public clasificacionJuridica: ClasificacionJuridica
   public roles: any;
 
 
@@ -34,7 +34,7 @@ export class ClasificacionJuridicaComponent implements OnInit {
     this.date = new Date();
     this.roles = [];
 
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -46,7 +46,6 @@ export class ClasificacionJuridicaComponent implements OnInit {
     this.isLoading = true;
     this.catalogosService.listClasificacionJuridica().subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
@@ -58,7 +57,6 @@ export class ClasificacionJuridicaComponent implements OnInit {
   submit(array) {
     if (this.validateFiels(array)) {
       this.catalogosService.saveClasificacionJuridica(this.clasificacionJuridica).subscribe((data: any) => {
-        console.log('ADD', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -104,7 +102,7 @@ export class ClasificacionJuridicaComponent implements OnInit {
 
   update(id, item) {
     this.isForm = true;
-    this.clasificacionJuridica = {...item};
+    this.clasificacionJuridica = { ...item };
     // this.areaPericial.role = [{value: item.role, description: item.roleNombre}];
 
     if (this.auxId && this.auxId !== id) {
@@ -166,10 +164,9 @@ export class ClasificacionJuridicaComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.catalogosService.changeStatusClasificacionJuridica(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,

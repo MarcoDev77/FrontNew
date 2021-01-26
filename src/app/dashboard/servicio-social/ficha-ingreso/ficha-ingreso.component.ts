@@ -27,7 +27,6 @@ export class FichaIngresoComponent implements OnInit {
     }
     this.isLoading = true
     this.servicioSocialService.getInfoFichaIngreso(this.ingreso.folio).subscribe((data: any) => {
-      console.log(data)
       this.ingreso = data.imputado
       this.ficha = data.imputado.fichaIngreso
       Swal.fire({
@@ -50,10 +49,7 @@ export class FichaIngresoComponent implements OnInit {
     this.ficha.imputado = {
       id: this.ingreso.imputadoId
     }
-
-    console.log(this.ficha)
     this.servicioSocialService.saveFichaIngreso(this.ficha).subscribe((data: any) => {
-      console.log(data)
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -68,7 +64,6 @@ export class FichaIngresoComponent implements OnInit {
   genetatePDF(modal) {
     this.isLoading = true;
     this.servicioSocialService.generatePDFFichaIngresoTrabajoSocialV2(this.ingreso.imputadoId).subscribe((data: any) => {
-      console.log('preview', data);
       this.isLoading = false;
       this.showPreview(data, modal);
     }, error => {
@@ -80,8 +75,6 @@ export class FichaIngresoComponent implements OnInit {
         timer: 1000,
         showConfirmButton: false
       });
-      console.log(error);
-
     });
   }
 

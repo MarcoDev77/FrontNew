@@ -56,7 +56,6 @@ export class CustodiosComponent implements OnInit {
   getData() {
     this.isLoading = true;
     this.serguridadCustodiaService.listCustodios().subscribe((data: any) => {
-      console.log('getData', data);
       this.isLoading = false;
       this.custodios = data.custodios;
     });
@@ -77,19 +76,15 @@ export class CustodiosComponent implements OnInit {
     })
     this.serguridadCustodiaService.getCapacitacionesByCustodio(custodio.id).subscribe((data2: any) => {
       this.isLoading = false;
-      console.log('asistio', data2.capacitaciones);
       for (const cap of this.capacitaciones) {
         for (const capCus of data2.capacitaciones) {
           if (cap.id === capCus.id) {
-            console.log('res', cap);
             cap.isChecked = true;
             break;
           }
         }
       }
-      console.log('total', this.capacitaciones);
     }, error => {
-      console.log(error);
       this.isLoading = false;
     });
   }
@@ -104,11 +99,9 @@ export class CustodiosComponent implements OnInit {
         id: capacitacion.id,
       },
     };
-    console.log(model);
 
     this.serguridadCustodiaService.saveAsistencia(model).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('saveAsistencia', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -120,7 +113,6 @@ export class CustodiosComponent implements OnInit {
         this.getCapacitacionesByCustodio(this.custodio);
       }
     }, error => {
-      console.log(error);
       this.isLoading = false;
     });
   }
@@ -128,7 +120,6 @@ export class CustodiosComponent implements OnInit {
   submit() {
     this.isLoading = true;
     this.serguridadCustodiaService.saveCustodio(this.custodio).subscribe((data: any) => {
-      console.log('submit', data);
       this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
@@ -202,7 +193,6 @@ export class CustodiosComponent implements OnInit {
       this.uploader.onBeforeUploadItem = (item) => {
         item.withCredentials = false;
       };
-      console.log('To server', this.uo);
       this.uploader.uploadAll();
       this.uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
       this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
@@ -212,7 +202,6 @@ export class CustodiosComponent implements OnInit {
 
   openModal(modal, config?: any) {
     if (config.isNew) {
-      console.log('is New');
       this.custodio = {} as Custodio;
       this.custodio.nombramiento = {};
       this.custodio.formacionInicial = false;
@@ -231,7 +220,6 @@ export class CustodiosComponent implements OnInit {
   onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
     this.isLoading = false;
     const exit = JSON.parse(response);
-    console.log(response);
     Swal.fire({
       title: exit.error ? 'Error!' : 'Guardado',
       text: exit.mensaje,
@@ -247,7 +235,6 @@ export class CustodiosComponent implements OnInit {
 
   onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
     this.isLoading = false;
-    console.log(response);
     const error = JSON.stringify(response); // error server response
     this.uploader.progress = 0;
     this.uploader.clearQueue();

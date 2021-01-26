@@ -53,7 +53,6 @@ export class ResultadosExamenesComponent implements OnInit {
       claveDocumento: clave,
       imputadoId: this.ingreso.imputado.id
     };
-    console.log(this.uo);
     uploader.setOptions(this.uo);
     uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
@@ -66,7 +65,6 @@ export class ResultadosExamenesComponent implements OnInit {
       this.onErrorItem(item, response, status, headers, input);
     uploader.onSuccessItem = (item, response, status, headers) =>
       this.onSuccessItem(item, response, status, headers, input);
-    console.log('end');
 
   }
 
@@ -74,7 +72,6 @@ export class ResultadosExamenesComponent implements OnInit {
     this.isLoading = true;
     this.resetUploaders();
     this.comiteTecnicoService.getImputadoByFolioGeneral(this.ingreso.folio).subscribe((data: any) => {
-      console.log('Data', data);
       this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Busqueda',
@@ -91,7 +88,6 @@ export class ResultadosExamenesComponent implements OnInit {
       }
     }, error => {
       this.isLoading = false;
-      console.log(error);
       Swal.fire({
         title: 'Error!',
         text: 'Error al realizar la busqueda',
@@ -103,7 +99,6 @@ export class ResultadosExamenesComponent implements OnInit {
   }
 
   searchDocuments(clave, modal) {
-    console.log(clave, modal);
     try {
       switch (clave) {
         case 'examen_medico':
@@ -132,7 +127,6 @@ export class ResultadosExamenesComponent implements OnInit {
           break;
       }
     } catch (error) {
-      console.log(error);
       this.isLoading = false;
       Swal.fire({
         title: 'Error!',
@@ -186,7 +180,6 @@ export class ResultadosExamenesComponent implements OnInit {
   // Uploader methods
   onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders, input: any): any {
     const exit = JSON.parse(response);
-    console.log(response);
     input.value = null;
     Swal.fire({
       title: exit.error ? 'Error!' : 'Guardado',
@@ -202,7 +195,6 @@ export class ResultadosExamenesComponent implements OnInit {
   onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders, input: any): any {
     this.isLoading = false;
     input.value = null;
-    console.log(response);
     const error = JSON.stringify(response); // error server response
     this.resetUploaders();
     Swal.fire({

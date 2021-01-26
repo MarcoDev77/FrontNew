@@ -41,7 +41,6 @@ export class BeneficioEstatalComponent implements OnInit {
     }
     this.isLoading = true
     this.servicioSocialService.getInfoBeneficioEstatal(this.ingreso.folio).subscribe((data: any) => {
-      console.log(data)
       if (!data.error) {
         this.ingreso = data.imputado
         if (data.beneficioEstatal != null) {
@@ -65,9 +64,7 @@ export class BeneficioEstatalComponent implements OnInit {
     this.beneficio.imputado = {
       id: this.ingreso.imputadoId
     }
-    console.log(this.beneficio)
     this.servicioSocialService.saveBeneficioEstatal(this.beneficio).subscribe((data: any) => {
-      console.log(data)
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,

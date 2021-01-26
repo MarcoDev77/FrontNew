@@ -37,7 +37,6 @@ export class NombramientoComponent implements OnInit {
 
   getData() {
     this.seguridadCustodiaService.listNombramientos().subscribe((data: any) => {
-      console.log(data)
       if (!data.error) {
         this.nombramientos = data.nombramiento
       }
@@ -45,7 +44,6 @@ export class NombramientoComponent implements OnInit {
   }
 
   saveNombramiento(array: any[]) {
-    console.log(array)
     if (this.validateFiels(array)) {
       this.seguridadCustodiaService.saveNombramiento(this.nombramiento).subscribe((data: any) => {
         Swal.fire({
@@ -74,7 +72,6 @@ export class NombramientoComponent implements OnInit {
     }).then(({ value }) => {
       if (value) {
         this.seguridadCustodiaService.cambiarStatusNombramiento(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
