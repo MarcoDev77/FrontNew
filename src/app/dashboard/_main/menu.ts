@@ -1,47 +1,6 @@
 import { roles as r } from '../../shared/helpers/roles';
 
 export const ROUTES: RouteInfo[] = [
-  // {
-  //   roles: [
-  //     r.test.role,
-  //     r.admin.role,
-  //   ],
-  //   path: '/dashboard',
-  //   title: 'INGRESOS',
-  //   type: 'sub',
-  //   icontype: 'fa fa-arrow-circle-o-right',
-  //   collapse: 'tables',
-  //   isCollapsed: true,
-  //   children: [
-  //     { path: 'ingreso', title: 'Formulario de ingreso', ab: 'FI' },
-  //     /* { path: 'datosAnexos', title: 'Señas particulares', ab: 'SP' }, */
-  //     { path: 'mediafiliacion', title: 'Características', ab: 'MF' },
-  //     { path: 'dactiloscopia', title: 'Dactiloscopia', ab: 'DP' },
-  //   ]
-  // },
-  // {
-  //   roles: [
-  //     r.consultor.role
-  //   ],
-  //   path: '/dashboard/denuncia',
-  //   title: 'JURIDICO',
-  //   type: 'sub',
-  //   icontype: 'now-ui-icons ui-1_zoom-bold',
-  //   collapse: 'tables',
-  //   isCollapsed: true,
-  //   children: [
-  //     { path: 'nuevas', title: 'FORMATOS', ab: 'FM' },
-  //   ]
-  // },
-  // {
-  //   roles: [
-  //     r.admin.role
-  //   ],
-  //   path: '/dashboard/expediente',
-  //   title: 'SERVICIO SOCIAL',
-  //   type: 'link',
-  //   icontype: 'now-ui-icons files_box'
-  // },
   {
     roles: [
       r.test.role,
@@ -191,6 +150,21 @@ export const ROUTES: RouteInfo[] = [
     roles: [
       r.test.role,
       r.site.role,
+    ],
+    path: '/dashboard',
+    title: 'SITE',
+    type: 'sub',
+    icontype: 'fa fa-laptop',
+    collapse: 'tables',
+    isCollapsed: false,
+    children: [
+      { path: '/ingreso', title: 'INGRESO', ab: 'IN' },
+      { path: '/informatica/personas-visitan', title: 'REPORTE VISITAS', ab: 'RV' },
+    ]
+  },
+  {
+    roles: [
+      r.informatica.role,
     ],
     path: '/dashboard',
     title: 'INFORMÁTICA',
