@@ -1,4 +1,4 @@
-import {Imputado} from '@shared/models/Imputado';
+import { Imputado } from '@shared/models/Imputado';
 
 export class Ingreso {
   id?: number;
@@ -16,5 +16,5 @@ export class Ingreso {
   registroTerminado: boolean;
   personaIngresada: any;
   municipioDomicilio: any;
-  
+  apodo: any;
 }

@@ -65,6 +65,7 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'fa fa-group',
     collapse: 'tables',
     children: [
+      { path: '/ingreso', title: 'INGRESO', ab: 'IN' },
       { path: 'servicio-social/ficha-ingreso', title: 'FICHA DE INGRESO', ab: 'FI' },
       { path: 'servicio-social/estudio-trabajo-social', title: 'ESTUDIO DE CLASIFICACIÓN', ab: 'EC' },
       { path: 'servicio-social/seguimiento', title: 'FORMATO DE AVANCE Y/O INFORME', ab: 'FAI' },
