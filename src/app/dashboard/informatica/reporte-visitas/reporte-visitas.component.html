@@ -12,7 +12,7 @@
   <div class="col d-flex justify-content-end">
     <button
       (click)="editInfo(ingreso)"
-      [disabled]="!ingreso.folio"
+      [disabled]="!ingreso?.id || isLoading"
       *ngIf="ingreso.folio"
       class="btn btn-success"
     >
@@ -240,6 +240,15 @@
 
 <div class="row">
   <div class="col-md-12">
+    <button
+      [disabled]="!ingreso?.id || isLoading"
+      type="button"
+      class="btn btn-success pull-right"
+      (click)="generateCedulaPDF(view)"
+    >
+      Cédula
+    </button>
+
     <button
       [disabled]="!ingreso?.id || isLoading"
       (click)="generatePDF(view)"

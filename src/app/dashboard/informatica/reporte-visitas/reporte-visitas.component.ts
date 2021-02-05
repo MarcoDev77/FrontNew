@@ -65,6 +65,17 @@ export class ReporteVisitasComponent implements OnInit {
       });
   }
 
+  generateCedulaPDF(modal) {
+    this.isLoading = true;
+    this.informaticaService.generarPdfCedulaInterno(this.ingreso.id)
+      .subscribe((data: any) => {
+        this.isLoading = false;
+        this.showPreview(data, modal);
+      }, error => {
+        this.isLoading = false;
+      });
+  }
+
   cleanForm() {
     this.ingreso = {};
     this.imputado = {};

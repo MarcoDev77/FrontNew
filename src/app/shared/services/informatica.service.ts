@@ -20,6 +20,10 @@ export class InformaticaService {
     const responseType = 'arraybuffer' as 'json';
     return this.http.get(`${this.url}/api/generarFormatoPdfReporteVisitaCredencial?imputadoId=${id}`, { responseType });
   }
+  generarPdfCedulaInterno = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfMergeCedulaIdentificacion?imputadoId=${id}`, { responseType });
+  }
 
   searchReferenciaPersonal = model => {
     if (model.codigoBarras) {
