@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   // apiUrl: 'http://64.227.4.101:8080/reinsercionapi',
-  apiUrl: 'https://57916bb4669a.ngrok.io',
+  apiUrl: 'http://189.254.86.10:8080/reinsercionapi',
 };

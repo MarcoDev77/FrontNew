@@ -28,8 +28,15 @@ export class RegistroVisitasComponent implements OnInit {
     clearInterval(this.timer);
   }
 
+  resetData() {
+    this.codigoBarras = "";
+    this.referencia = {};
+  }
+
   searchVisita() {
+    this.isLoading = true;
     this.SeguridadCustodiaService.searchVisita(this.codigoBarras).subscribe((data: any) => {
+      this.isLoading = false;
       if (data.referencia) {
         this.referencia = data.referencia
       }
@@ -40,10 +47,13 @@ export class RegistroVisitasComponent implements OnInit {
         timer: 1300,
         showConfirmButton: false
       });
+    }, () => {
+      this.isLoading = false;
     })
   }
 
   saveIngresoVisita() {
+    this.isLoading = true;
     let model = {
       referenciaId: this.referencia.id,
       codigoBarras: this.codigoBarras,
@@ -51,33 +61,40 @@ export class RegistroVisitasComponent implements OnInit {
       tipoPase: this.referencia.tipoPase
     }
     this.SeguridadCustodiaService.saveIngresoVisita(model).subscribe((data: any) => {
-      Swal.fire({
-        title: data.error ? 'Error!' : 'Guardado!',
-        text: data.mensaje,
-        icon: data.error ? 'error' : 'success',
-        timer: 1300,
-        showConfirmButton: false
-      });
-    })
-  }
-
-  saveSalidaVisita() {
-    let model = {
-      id: this.referencia.id,
-      codigoBarras: this.codigoBarras,
-
-    }
-    this.SeguridadCustodiaService.saveSalidaVisita(model).subscribe((data: any) => {
-      if (data.referencia && data.error) {
-        this.referencia = data.referencia
+      this.isLoading = false;
+      if (!data.error) {
+        this.resetData();
       }
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado!',
         text: data.mensaje,
         icon: data.error ? 'error' : 'success',
-        timer: 1300,
-        showConfirmButton: false
+        showConfirmButton: true
       });
+    }, () => {
+      this.isLoading = false;
+    })
+  }
+
+  saveSalidaVisita() {
+    this.isLoading = true;
+    let model = {
+      id: this.referencia.id,
+      codigoBarras: this.codigoBarras,
+    }
+    this.SeguridadCustodiaService.saveSalidaVisita(model).subscribe((data: any) => {
+      this.isLoading = false;
+      if (!data.error) {
+        this.resetData();
+      }
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado!',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        showConfirmButton: true
+      });
+    }, () => {
+      this.isLoading = false;
     })
   }
 
