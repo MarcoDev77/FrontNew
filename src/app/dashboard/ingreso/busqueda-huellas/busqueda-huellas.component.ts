@@ -22,7 +22,9 @@ export class BusquedaHuellasComponent {
   public uploader: FileUploader;
   public uo: FileUploaderOptions = {};
   public huella: any;
+  public oldRegister: any;
   public intervalId: any;
+  public isForm: boolean;
   public images: any[];
   public index: number;
   public finished: boolean;
@@ -50,6 +52,7 @@ export class BusquedaHuellasComponent {
       'assets/img/lopper/nueve.jpg',
     ];
     this.huella = {} as any;
+    this.oldRegister = {} as any;
     // Uploader
     this.url = environment.apiUrl;
     this.uploader = new FileUploader({ url: this.url + '/api/buscarPersonaIngresadaHuella', itemAlias: 'image' });
@@ -96,7 +99,9 @@ export class BusquedaHuellasComponent {
       return;
     }
   }
-
+  toggleForm() {
+    this.isForm = !this.isForm;
+  }
   onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
     this.finished = true;
     const data = JSON.parse(response);
@@ -105,7 +110,26 @@ export class BusquedaHuellasComponent {
     this.uploader.progress = 0;
     this.uploader.clearQueue();
   }
+  saveOldFolio(array) {
+      this.oldRegister = { ...this.oldRegister, fechaRegistro: new Date(this.oldRegister.fechaRegistro) };
+      this.ingresoService.saveOldFolio(this.oldRegister).subscribe((data: any) => {
+        Swal.fire({
+          title: data.error ? 'Error!' : 'Guardado',
+          text: data.mensaje,
+          icon: data.error ? 'error' : 'success',
+          timer: 1300,
+          showConfirmButton: false
+        });
+        if (!data.error) {
+          const ingreso = { id: data.imputadoId, folio: data.folioGenerado };
+          sessionStorage.setItem('ingreso', JSON.stringify(ingreso));
+          this.modalService.dismissAll();
+          this.router.navigate([`dashboard/ingreso/form-ingreso`]);
 
+        }
+      });
+
+  }
   uploadFile() {
     this.setupInterval();
     const authToken = this.authenticationService.getCurrentUser().access_token;

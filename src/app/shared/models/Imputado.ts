@@ -1,6 +1,7 @@
 export class Imputado {
   id?: number;
   curp: string;
+  fechaRegistro: any;
   fechaNacimiento: any;
   edadAparente: number;
   genero: string;

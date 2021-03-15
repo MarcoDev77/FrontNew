@@ -161,7 +161,7 @@
               <span *ngIf="item.estaAgotado" class="badge badge-warning">Agotado</span>
             </td>
             <td class="text-center">
-              <i class="fa fa-pencil" placement="top" ngbTooltip="Actiualizar" (click)="update(item)"></i> &nbsp;
+              <i class="fa fa-pencil" placement="top" ngbTooltip="Actualizar" (click)="update(item)"></i> &nbsp;
               <i class="fa fa-trash-o" placement="top" ngbTooltip="Eliminar" (click)="delete(item)"></i> &nbsp;
               <i *ngIf="!item.estaAgotado" class="fa fa-level-down" placement="top" ngbTooltip="Marcar como agotado" (click)="setAgotado(item)"></i>
             </td>

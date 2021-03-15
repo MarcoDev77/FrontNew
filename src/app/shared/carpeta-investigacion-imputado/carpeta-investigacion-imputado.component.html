@@ -46,7 +46,7 @@
                 <td class="text-center">{{item.fechaRegistro | date:'dd/MM/yy h:mm a'}}</td>
                 <td class="text-center">{{item.listaDelitos}}</td>
                 <td class="text-center">
-                    <i *ngIf="role === 'ARCHIVO'" class="fa fa-pencil" placement="top" ngbTooltip="Actiualizar" (click)="update(item)"></i> &nbsp;
+                    <i *ngIf="role === 'ARCHIVO'" class="fa fa-pencil" placement="top" ngbTooltip="Actualizar" (click)="update(item)"></i> &nbsp;
                     <i class="fa fa-trash" placement="top" ngbTooltip="Eliminar" (click)="delete(item)"></i> &nbsp;
                     <i class="fa fa-th-list" placement="top" ngbTooltip="Ver delitos" (click)="seeDelitosCarpeta(item,addDelitoModal)"></i> &nbsp;
                 </td>
@@ -76,7 +76,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Delito :</label>
-                        <input type="text" class="form-control shadows" placeholder="Delito" [(ngModel)]="delito"
+                        <input type="text" class="form-control shadows" placeholder="Delito" [(ngModel)]="delito.nombre"
                             [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter"
                             name="delitoNombre" />
 
