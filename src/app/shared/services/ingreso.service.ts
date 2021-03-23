@@ -50,6 +50,11 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/registrarApodo`, this.data);
   }
 
+  saveOldFolio(model) {
+    this.data = model;
+    return this.http.post(`${this.url}/api/generarRegistroAntiguoImputado`, this.data);
+  }
+
   seleccionarApodoPrincipal(id) {
     return this.http.get(`${this.url}/api/seleccionarApodoPrincipal?apodoId=${id}`);
   }

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { roles } from '@shared/helpers/roles';
 import { map } from 'rxjs/operators';
 import { CatalogosService } from '@shared/services/catalogos.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-carpeta-investigacion-imputado',
@@ -191,9 +192,10 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   //Delitos
 
   search = (text$: Observable<string>) => {
-    return text$.pipe(
+    const arrayDelitos = this.tipoDelitoLista.map(el => {return {nombre:el.nombre, idTipoDelito:el.idTipoDelito }} )
+    return  text$.pipe(
       map(term => term === '' ? []
-        : this.tipoDelitoLista.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+        :  arrayDelitos.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     )
   }
   formatter = (x: { nombre: string }) => x.nombre;
@@ -205,13 +207,11 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   getTipoDelitos() {
     this.catalogosService.listDelito().subscribe((data: any) => {
       this.tipoDelitoLista = data.delitos
+      console.log( this.tipoDelitoLista)
     })
   }
 
-
-  saveDelito() {
-
-    if (this.delito.idTipoDelito == null) {
+  /**  if (this.delito.idTipoDelito == null) {
       let tipoDelito = {
         nombre: this.delito
       }
@@ -227,9 +227,48 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
       }
       this.delito.id = this.delitoUpdate.id
     }
+     this.delito.carpetaInvestigacion = {
+      id: this.carpeta.id
+    }
+*/
+  saveDelito() {
+
+
+    if (this.delito.nombre.idTipoDelito == null && Object.keys(this.delitoUpdate).length === 0 ) {
+      console.log(this.delito.nombre)
+      const nombre  = this.delito.nombre
+
+      this.delito ={
+        nombre,
+        tipoDelito: {nombre}
+      }
+
+    }  else {
+      if ( this.delito.nombre.idTipoDelito  ) {
+        console.log(this.delito.idTipoDelito)
+        this.delito.idTipoDelito = this.delito.nombre.idTipoDelito
+        this.delito.tipoDelito = {
+            id: this.delito.nombre.idTipoDelito
+          }
+        this.delito.nombre = this.delito.nombre.nombre
+      } else {
+
+        this.delito.idTipoDelito = this.delitoUpdate.nombre.idTipoDelito
+        this.delito.tipoDelito = {
+            id: this.delitoUpdate.nombre.idTipoDelito,
+            nombre: this.delito.nombre
+          }
+          console.log(this.delitoUpdate)
+          console.log(this.delito)
+      }
+      this.delito.id = this.delitoUpdate.id
+    }
+
     this.delito.carpetaInvestigacion = {
       id: this.carpeta.id
     }
+
+
 
     this.ingresoService.saveDelito(this.delito).subscribe((data: any) => {
 
@@ -262,11 +301,9 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
 
   delitoEdit(delito) {
 
-    this.delito.id = delito.id
-    this.delito = delito
-    this.delito.nombre = delito.tipoDelito.nombre
-    this.delito.juez = delito.juez;
-    this.delitoUpdate = delito;
+    this.delito = {...delito}
+    this.delito.nombre = {nombre:delito.tipoDelito.nombre, idTipoDelito: delito.tipoDelito.id }
+    this.delitoUpdate = {...this.delito} ;
   }
 
   viewHistory(modal?) { }

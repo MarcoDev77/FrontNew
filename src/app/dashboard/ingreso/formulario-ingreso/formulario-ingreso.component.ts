@@ -91,16 +91,20 @@ export class FormularioIngresoComponent implements OnInit {
         this.arrayAlias = ingreso.imputado.apodos;
         this.arrayDatoDelito = ingreso.imputado.delitos;
         this.ingreso.imputado.fechaNacimiento = this.datePipe.transform(this.ingreso.imputado.fechaNacimiento, 'yyyy-MM-dd');
+
       } else {
         this.ingreso = ingreso;
         this.arrayAlias = ingreso.imputado.apodos;
       }
       this.ingreso.registroTerminado = ingreso.registroTerminado;
+      this.ingreso.imputado.fechaRegistro = this.datePipe.transform(this.ingreso.imputado.fechaRegistro, 'yyyy-MM-dd');
+
     });
   }
 
   submit() {
     this.ingreso.imputado = { ...this.ingreso.imputado, fechaNacimiento: new Date(this.ingreso.imputado.fechaNacimiento) };
+    this.ingreso.imputado = { ...this.ingreso.imputado, fechaRegistro: new Date(this.ingreso.imputado.fechaRegistro) };
     this.ingreso.imputado.edadAparente = Number(this.ingreso.imputado.edadAparente);
     this.ingreso.imputado.hablaIndigena = !!this.ingreso.imputado.hablaIndigena;
     this.ingreso.imputado.esIndigena = !!this.ingreso.imputado.esIndigena;
