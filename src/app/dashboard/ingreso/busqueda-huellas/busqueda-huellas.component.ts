@@ -110,7 +110,7 @@ export class BusquedaHuellasComponent {
     this.uploader.progress = 0;
     this.uploader.clearQueue();
   }
-  saveOldFolio(array) {
+  saveOldFolio() {
       this.oldRegister = { ...this.oldRegister, fechaRegistro: new Date(this.oldRegister.fechaRegistro) };
       this.ingresoService.saveOldFolio(this.oldRegister).subscribe((data: any) => {
         Swal.fire({

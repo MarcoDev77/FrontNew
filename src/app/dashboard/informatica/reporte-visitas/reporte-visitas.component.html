@@ -141,7 +141,7 @@
           type="text"
           disabled
           class="form-control"
-          value="{{ imputado.fechaIngreso }}"
+          value="{{ imputado.fechaIngreso | date: 'dd/MM/yy'}}"
         />
       </div>
       <div class="col-md-6">
@@ -162,16 +162,16 @@
           type="text"
           disabled
           class="form-control"
-          value="{{ imputado.calidadDelincuencia }}"
+          value="{{ imputado.calidadDeliciencial }}"
         />
       </div>
       <div class="col-md-4">
         <label>Fuero</label>
-        <input type="text" disabled class="form-control" value="" />
+        <input type="text" disabled class="form-control" value="{{ imputado.fuero }}" />
       </div>
       <div class="col-md-4">
         <label>Proceso</label>
-        <input type="text" disabled class="form-control" value="" />
+        <input type="text" disabled class="form-control" value="{{ imputado.proceso }}" />
       </div>
     </div>
 
