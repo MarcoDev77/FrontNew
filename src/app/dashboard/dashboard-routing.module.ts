@@ -60,6 +60,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { expectedRole: [r.test.role, r.site.role] }
       },
+      {
+        path: 'juridico',
+        loadChildren: './juridico/juridico.module#JuridicoModule',
+        canActivate: [AuthGuard],
+        data: { expectedRole: [r.test.role, r.site.role] }
+      },
     ]
   },
 

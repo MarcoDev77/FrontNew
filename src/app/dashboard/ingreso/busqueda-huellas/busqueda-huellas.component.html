@@ -10,11 +10,11 @@
   <form  *ngIf="isForm"  style="text-align: left;"  name="f" (ngSubmit)="saveOldFolio()" #f="ngForm" novalidate>
       <div class="row">
           <div class="col-md-4">
-              <div class="form-group" >
-                  <label >Folio :</label>
-                  <input type="text" class="form-control shadows" placeholder="folio" [(ngModel)]="oldRegister.folio"
-                        name="folio" required />
-              </div>
+            <div class="form-group" >
+                <label >Folio :</label>
+                <input type="text" class="form-control shadows" placeholder="folio" [(ngModel)]="oldRegister.folio"
+                      name="folio" required />
+            </div>
           </div>
           <div class="col-md-4">
             <div class="form-group shadows">
