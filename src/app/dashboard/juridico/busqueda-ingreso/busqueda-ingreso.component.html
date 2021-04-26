@@ -1,0 +1,476 @@
+<app-section-title
+  icon="fa fa-table"
+  title="Busqueda interno"
+></app-section-title>
+<app-finder-imputado
+  [isLoading]="isLoading"
+  (onSelectIngresoSearch)="searchImputado($event)"
+  (onClearSearch)="cleanForm()"
+></app-finder-imputado>
+
+<div class="row">
+  <div class="col md-9 mt-4 mb-2">
+    <h5 class="title-pink">Interno</h5>
+  </div>
+</div>
+
+<div class="row">
+<!--  <div class="col-md-4">
+    <img
+      src="{{
+        imputado?.fotoImputado
+          ? 'data:image/png;base64,' + imputado.fotoImputado
+          : 'assets/img/no_image.png'
+      }}"
+      class="img"
+      style="max-height: 400px"
+      alt="imagen ppl"
+    />
+  </div>-->
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-8">
+        <label>Nombre del PPL</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.nombre }}"
+        />
+      </div>
+      <div class="col-md-4">
+        <label>Alias</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.alias }}"
+        />
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <label>Fecha de Ingreso</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.fechaRegistro | date: 'MM/dd/yy'}}"
+        />
+      </div>
+      <div class="col-md-4">
+        <label>Hora de Ingreso</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.horaRegistro  }}"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col md-9 mt-4 mb-2">
+        <h5 class="title-pink">Datos Personales</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+
+        <label>País</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.paisNacimiento?.nombre }}"
+        />
+      </div>
+      <div class="col-md-4">
+        <label>Estado</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.estadoDomicilio?.nombre }}"
+        />
+      </div>
+      <div class="col-md-4">
+        <label>Municipio</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.municipioDomicilio }}"
+        />
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <label>Colonia</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.colonia }}"
+        />
+      </div>
+      <div class="col-md-2">
+        <label>C.P.</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.codigoPostal }}"
+        />
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-10">
+        <label>Calle</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.calleNumero }}"
+        />
+      </div>
+      <div class="col-md-2">
+        <label>Número</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.numeroDomicilio }}"
+        />
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-3">
+        <label>Nacionalidad</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.paisNacimiento?.nacionalidad }}"
+        />
+      </div>
+
+      <div class="col-md-3">
+        <label>País de Origen</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.paisNacimiento?.nombre }}"
+        />
+      </div>
+
+      <div class="col-md-3">
+        <label>Estado</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.estadoNacimiento?.nombre }}"
+        />
+      </div>
+
+      <div class="col-md-3">
+        <label>Municipio</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.municipioNacimiento }}"
+        />
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <label>Fecha de Nac.</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.fechaNacimiento | date: 'dd/MM/yy' }}"
+        />
+      </div>
+
+      <div class="col-md-4">
+        <label>Grado de Estudio</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.gradoEstudio }}"
+        />
+      </div>
+
+      <div class="col-md-4">
+        <label>Genero</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.genero }}"
+        />
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <label>Ocupación</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.ocupacion }}"
+        />
+      </div>
+
+      <div class="col-md-4">
+        <label>Religión</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.religion?.nombre }}"
+        />
+      </div>
+
+      <div class="col-md-4">
+        <label>Estado Civil</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.estadoCivil?.nombre }}"
+        />
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <label>Observación</label>
+        <textarea
+          class="form-control"
+          name="observacionIngreso"
+          cols="30"
+          rows="2"
+          [(ngModel)]="imputado.observacion"
+        >
+        </textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 text-right ">
+          <button type="submit" class="btn btn-success"
+          (click)="registrarObservacion()" >Guardar</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col md-9 mt-4 mb-2">
+        <h5 class="title-pink">Datos Jurídicos</h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <label>No de ingresos</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.numeroIngresos }}"
+        />
+      </div>
+      <div class="col-md-2">
+        <label>Número de ingreso</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.numeroIngresoActual }}"
+        />
+      </div>
+      <div class="col-md-4">
+        <label>Folio</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.folio }}"
+        />
+      </div>
+      <div class="col-md-4">
+        <label>N. de expediente</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.numeroExpediente }}"
+        />
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <label>Calidad de Delincuencial</label>
+        <input
+          type="text"
+          disabled
+          class="form-control"
+          value="{{ imputado.tipoIngreso }}"
+        />
+      </div>
+
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table shadows">
+          <thead>
+            <tr>
+              <th class="text-center">Causa Penal</th>
+              <th class="text-center">Delito</th>
+              <th class="text-center">Fuero</th>
+              <th class="text-center">Proceso</th>
+              <th class="text-center">Acción</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of imputado?.delitos  | paginate: { id: 'pagination2',  itemsPerPage: 5, currentPage: p };">
+              <td class="text-center">{{ item?.causaPenal?.nombre }}</td>
+              <td class="text-center">{{ item?.nombre }}</td>
+              <td class="text-center">{{ item?.tipoFuero }}</td>
+              <td class="text-center">{{ item?.datosJuridicosDelito?.proceso }}</td>
+              <td class="text-center">
+                <i
+                  class="fa fa-pencil-square-o"
+                  placement="top"
+                  ngbTooltip="Registrar"
+                  (click)="showModal(registrarJuridico,item)"
+                ></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center w-100">
+          <pagination-controls id="pagination2" autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="p = $event">    </pagination-controls>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<ng-template #registrarJuridico let-registrarJuridico>
+  <div class="modal-body text-center">
+    <form name="f" (ngSubmit)="submit()" #f="ngForm">
+
+      <div class="row">
+        <div class="col md-9 mt-4 mb-2">
+          <h5 class="title-pink">Baja de Interno</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group" >
+            <label>Fecha de libertad</label>
+            <input
+              type="date"
+              name="fechaEgreso"
+              class="form-control"
+              [(ngModel)]="bajaInterno.fechaEgreso"  required
+            />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group" >
+            <label>Hora de libertad</label>
+            <input   type="time" class="form-control"
+            name="horaEgreso"
+            [(ngModel)]="bajaInterno.horaEgreso "  required />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group" >
+            <label>Proceso</label>
+            <input
+              type="text"
+              name="proceso"
+              class="form-control"
+              [(ngModel)]="bajaInterno.proceso "   required
+            />
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group" >
+            <label>Juzgado</label>
+            <input
+              type="text"
+              name="juzgado"
+              class="form-control"
+              [(ngModel)]="bajaInterno.juzgado "
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group" >
+            <label>Nombre del Juez</label>
+            <input
+              type="text"
+              name="nombreJuez"
+              class="form-control"
+              [(ngModel)]="bajaInterno.nombreJuez"
+            />
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group" >
+            <label>Tipo de libertad</label>
+            <input
+              type="text"
+              name="tipoLibertad"
+              class="form-control"
+              [(ngModel)]="bajaInterno.tipoLibertad"  required
+            />
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group" >
+          <label>Observación</label>
+            <textarea
+              class="form-control"
+              name="observacionIngreso"
+              cols="20"
+              rows="3"
+              [(ngModel)]="bajaInterno.observacion "
+            >
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 text-right ">
+            <button type="submit" class="btn btn-success" >Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

@@ -86,10 +86,10 @@ export const ROUTES: RouteInfo[] = [
     path: '/dashboard',
     title: 'Archivo juridico',
     type: 'sub',
-    icontype: 'fa fa-folder',
+    icontype: 'fa fa-table',
     collapse: 'tables',
     children: [
-      { path: 'archivo/archivo', title: 'ARCHIVO', ab: 'AR' },
+      { path: 'busqueda-ingreso', title: 'Busqueda ingreso', ab: 'BI' },
     ],
   },
   {

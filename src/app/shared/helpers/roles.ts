@@ -26,8 +26,8 @@ export const roles = {
   },
   juridico: {
     role: 'ROLE_JURIDICO',
-    name: 'Consultor',
-    main: 'dactiloscopia'
+    name: 'Juridico',
+    main: 'dashboard/juridico/busqueda-ingreso'
   },
   archivo: {
     role: 'ROLE_ARCHIVO',
