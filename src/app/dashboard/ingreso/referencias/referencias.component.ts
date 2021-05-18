@@ -6,7 +6,8 @@ import { IngresoService } from '@shared/services/ingreso.service';
 import { Ingreso } from '@shared/models/Ingreso';
 import { Referencia } from '@shared/models/Referencia';
 import { Observable } from 'rxjs';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
+import { DatePipe } from '@angular/common';
 import { map } from 'rxjs/operators';
 import { FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { environment } from '@environment/environment';
@@ -43,13 +44,15 @@ export class ReferenciasComponent implements OnInit {
   public key = 'id'; // set default
   public reverse = true;
   public isForm: boolean;
-  public roles=[]
+  public roles = []
   constructor(private catalogosService: CatalogosService,
     private router: Router,
     private modalService: NgbModal,
     private ingresoService: IngresoService,
     private authenticationService: AuthenticationService,
-    ) {
+    private datePipe: DatePipe
+
+  ) {
     this.isLoading = false;
     this.ingreso = {} as Ingreso;
     this.paises = [];
@@ -58,13 +61,12 @@ export class ReferenciasComponent implements OnInit {
     this.data = [];
     this.referencia = {} as any;
     this.parentescos = [];
-    this.estadosCiviles=[];
-    this.referencia.estadoCivil= {} as any;
+    this.estadosCiviles = [];
+    this.referencia.estadoCivil = {} as any;
     this.referencia.parentesco = {} as any;
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
-    const user=authenticationService.getCurrentUser()
-    this.roles= user.roles;
-    console.log(this.roles)
+    const user = authenticationService.getCurrentUser()
+    this.roles = user.roles;
     if (this.ingreso) {
       this.listReferencias(this.ingreso.id);
     }
@@ -78,19 +80,17 @@ export class ReferenciasComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ingreso', this.ingreso);
     this.catalogosService.listPaises()
       .subscribe((data: any) => this.paises = data.paises);
-      this.getEstadosCiviles();
+    this.getEstadosCiviles();
 
     this.getEstado();
     this.getParentescos();
   }
 
-  getEstadosCiviles(){
-    this.catalogosService.listEstadosCiviles().subscribe((data:any)=>{
-      console.log(data);
-      this.estadosCiviles=data.estadosCiviles
+  getEstadosCiviles() {
+    this.catalogosService.listEstadosCiviles().subscribe((data: any) => {
+      this.estadosCiviles = data.estadosCiviles
     })
   }
 
@@ -104,7 +104,6 @@ export class ReferenciasComponent implements OnInit {
   listReferencias(id) {
     this.ingresoService.listRefencias(id).subscribe((data: any) => {
       this.data = data.referenciasPersonales;
-      console.log('data', this.data);
     });
   }
 
@@ -113,7 +112,7 @@ export class ReferenciasComponent implements OnInit {
     this.referencia.imputado = {
       id: this.ingreso.id
     };
-    console.log('referencia', this.referencia);
+    this.referencia.fechaNacimiento = this.datePipe.transform(this.referencia.fechaNacimiento, 'yyyy-MM-dd');
     this.ingresoService.saveReferencia(this.referencia).subscribe((data: any) => {
       if (!data.error) {
         this.referencia = {} as any;
@@ -148,18 +147,16 @@ export class ReferenciasComponent implements OnInit {
   showModal(modal, item?) {
     if (item) {
       this.referencia = item;
-      console.log(this.referencia);
     } else {
       this.referencia = {} as Referencia;
       this.referencia.parentesco = {} as any;
-      this.referencia.estadoCivil= {} as any;
+      this.referencia.estadoCivil = {} as any;
     }
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
   selectArrayTofilter(array) {
     this.arrayToFilter = array;
-    console.log(this.arrayToFilter);
   }
 
   search = (text$: Observable<string>) => {
@@ -175,12 +172,10 @@ export class ReferenciasComponent implements OnInit {
   getParentescos() {
     this.ingresoService.getParentescos().subscribe((data: any) => {
       this.parentescos = data.parentescos;
-      console.log(this.parentescos);
     });
   }
 
   async generatePaseUnico(item: any, modal) {
-    console.log('item', item);
     const steps: any[] = ['Ingrese el área'];
     const progressSteps: any[] = ['1'];
     let options = [];
@@ -235,9 +230,6 @@ export class ReferenciasComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).queue(steps);
 
-    console.log('result', result);
-
-
     if (result.dismiss) {
       return;
     }
@@ -257,16 +249,12 @@ export class ReferenciasComponent implements OnInit {
     };
 
     if (!item.mayorEdad) {
-      console.log('No es mayor de edad');
       model.nombreResponsable = options[result.value[2]];
     }
-
-    console.log('To server', model);
 
     this.ingresoService.savePaseProvisional(model).subscribe((data: any) => {
       this.showPreview(data, modal);
     }, error => {
-      console.log(error);
       Swal.fire({
         title: 'Error',
         text: 'Error al generar el archivo',
@@ -390,8 +378,6 @@ export class ReferenciasComponent implements OnInit {
     const observaciones = infantes[Number(childs.value)];
     infantes.pop();
 
-    console.log('ob', observaciones, 'onfantes', infantes);
-
     const model = {
       tipoPase: 'mensual',
       observaciones,
@@ -405,7 +391,6 @@ export class ReferenciasComponent implements OnInit {
     this.ingresoService.savePaseProvisional(model).subscribe((data: any) => {
       this.showPreview(data, modal);
     }, error => {
-      console.log(error);
       Swal.fire({
         title: 'Error',
         text: 'Error al generar el archivo',
@@ -456,14 +441,11 @@ export class ReferenciasComponent implements OnInit {
         'warning'
       );
     }
-
-    console.log('To server', this.pasePermanente);
     this.pasePermanente.referenciaPersonal = { id: this.referencia.id };
     this.ingresoService.generatePDFPasePermanente(this.pasePermanente).subscribe((data: any) => {
       this.modalService.dismissAll();
       this.showPreview(data, modal);
     }, error => {
-      console.log(error);
       Swal.fire({
         title: 'Error',
         text: 'Error al generar el archivo',
@@ -504,7 +486,6 @@ export class ReferenciasComponent implements OnInit {
 
   onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
     const exit = JSON.parse(response);
-    console.log(response);
     Swal.fire({
       title: exit.error ? 'Error!' : 'Guardado',
       text: exit.mensaje,
@@ -519,7 +500,6 @@ export class ReferenciasComponent implements OnInit {
   }
 
   onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
-    console.log(response);
     const error = JSON.stringify(response); // error server response
     this.uploader.progress = 0;
     this.uploader.clearQueue();
@@ -555,7 +535,7 @@ export class ReferenciasComponent implements OnInit {
     this.isForm = false;
   }
 
-  change($event){}
+  change($event) { }
 
 }
 

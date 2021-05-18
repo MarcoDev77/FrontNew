@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {CatalogosService} from '@shared/services/catalogos.service';
-import {ModalidadDelito} from '@shared/models/ModalidadDelito';
+import { Component, OnInit } from '@angular/core';
+import { CatalogosService } from '@shared/services/catalogos.service';
+import { ModalidadDelito } from '@shared/models/ModalidadDelito';
 import Swal from 'sweetalert2';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Delito } from '@shared/models/Delito';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modalidad-delito',
@@ -37,13 +37,12 @@ export class ModalidadDelitoComponent implements OnInit {
     this.date = new Date();
     this.roles = [];
 
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
 
-    this.delito=JSON.parse(sessionStorage.getItem('delito'));
-    console.log(this.delito)
-    this.modalidadDelito.tipoDelito={id:this.delito.idTipoDelito};
+    this.delito = JSON.parse(sessionStorage.getItem('delito'));
+    this.modalidadDelito.tipoDelito = { id: this.delito.idTipoDelito };
   }
 
   ngOnInit() {
@@ -61,7 +60,6 @@ export class ModalidadDelitoComponent implements OnInit {
     }).then(result => {
       if (result.value) {
         this.catalogosService.deleteModalidadDelito(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Eliminado',
             text: data.mensaje,
@@ -82,7 +80,6 @@ export class ModalidadDelitoComponent implements OnInit {
     this.isLoading = true;
     this.catalogosService.listModalidadDelito(this.delito.idTipoDelito).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
@@ -92,9 +89,8 @@ export class ModalidadDelitoComponent implements OnInit {
   }
   submit(array) {
     if (this.validateFiels(array)) {
-      this.modalidadDelito.tipoDelito = {id: this.delito.idTipoDelito};
+      this.modalidadDelito.tipoDelito = { id: this.delito.idTipoDelito };
       this.catalogosService.saveModalidadDelito(this.modalidadDelito).subscribe((data: any) => {
-        console.log('ADD', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -140,7 +136,7 @@ export class ModalidadDelitoComponent implements OnInit {
 
   update(id, item) {
     this.isForm = true;
-    this.modalidadDelito = {...item};
+    this.modalidadDelito = { ...item };
     // this.areaPericial.role = [{value: item.role, description: item.roleNombre}];
 
     if (this.auxId && this.auxId !== id) {
@@ -202,10 +198,9 @@ export class ModalidadDelitoComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.catalogosService.changeEstatusModalidadDelito(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,

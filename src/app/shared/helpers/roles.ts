@@ -21,13 +21,13 @@ export const roles = {
   },
   dactiloscopia: {
     role: 'ROLE_DACTILOSCOPIA',
-    name: 'Dactilocopia',
+    name: 'Dactiloscopia',
     main: 'dashboard/ingreso/lista-ingreso'
   },
   juridico: {
     role: 'ROLE_JURIDICO',
-    name: 'Consultor',
-    main: 'dactiloscopia'
+    name: 'Juridico',
+    main: 'dashboard/juridico/busqueda-ingreso'
   },
   archivo: {
     role: 'ROLE_ARCHIVO',
@@ -38,21 +38,25 @@ export const roles = {
     role: 'ROLE_TRABAJO_SOCIAL',
     name: 'Trabajo social',
     main: 'dashboard/servicio-social/ficha-ingreso'
-  }, seguridadCustodia: {
+  },
+  seguridadCustodia: {
     role: 'ROLE_SEGURIDAD_CUSTODIA',
     name: 'Seguridad y custodia',
     main: 'seguridad-custodia'
-  }, comiteTecnico: {
+  },
+  comiteTecnico: {
     role: 'ROLE_COMITE_TECNICO',
-    name: 'Comité tecnico',
+    name: 'Comité técnico',
     main: 'comite-tecnico'
-  }, direccionTecnica: {
+  },
+  direccionTecnica: {
     role: 'ROLE_DIRECCION_TECNICA',
     name: 'Consultor',
     main: 'dactiloscopia'
-  }, site: {
+  },
+  site: {
     role: 'ROLE_SITE',
-    name: 'Informática',
+    name: 'Site',
     main: 'informatica'
   },
   seguridadIngreso: {
@@ -60,5 +64,10 @@ export const roles = {
     name: 'Seguridad ingreso',
     main: 'seguridad-custodia/registro-visitas'
   },
+  informatica: {
+    role: 'ROLE_INFORMATICA',
+    name: 'Informática',
+    main: 'dashboard/ingreso/lista-ingreso'
+  }
 };
 

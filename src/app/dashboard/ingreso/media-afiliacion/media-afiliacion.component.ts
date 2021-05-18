@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Mediafiliacion} from '@shared/models/MediaFiliacion';
+import { Mediafiliacion } from '@shared/models/MediaFiliacion';
 import { IngresoService } from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
 import { Ingreso } from '@shared/models/Ingreso';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-media-afiliacion',
@@ -17,9 +17,9 @@ export class MediaAfiliacionComponent implements OnInit {
   peso: any;
   tez: any;
   obj: any;
-  public ingreso:Ingreso;
-  public mediaFiliacionTerminada:boolean
-  public validador=[false,false,false,false,false,false,false,false,false,false,false];
+  public ingreso: Ingreso;
+  public mediaFiliacionTerminada: boolean
+  public validador = [false, false, false, false, false, false, false, false, false, false, false];
   public mediaFiliacion: Mediafiliacion;
   constructor(private ingresoService: IngresoService, private router: Router) {
     this.complexion = '';
@@ -27,12 +27,12 @@ export class MediaAfiliacionComponent implements OnInit {
     this.peso = '';
     this.tez = '';
     this.obj = {} as any;
-    this.mediaFiliacion= {} as any;
+    this.mediaFiliacion = {} as any;
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
-    this.mediaFiliacionTerminada= false
-    this.mediaFiliacion.complexion="Atlética";
-    this.mediaFiliacion.estatura=1.7;
-    this.mediaFiliacion.peso=80;
+    this.mediaFiliacionTerminada = false
+    this.mediaFiliacion.complexion = "Atlética";
+    this.mediaFiliacion.estatura = 1.7;
+    this.mediaFiliacion.peso = 80;
 
   }
 
@@ -60,50 +60,44 @@ export class MediaAfiliacionComponent implements OnInit {
         break;
     }
   }
-  public getData(){
-    this.mediaFiliacion.imputado={
-      id:this.ingreso.id
+  public getData() {
+    this.mediaFiliacion.imputado = {
+      id: this.ingreso.id
     }
-     this.ingresoService.getMediafiliacion(this.mediaFiliacion.imputado.id).subscribe((data:any)=>{
-      console.log(data)
-      if(data.caracteristicas){
-      this.mediaFiliacion=data.caracteristicas;
-   
- 
-      this.mediaFiliacionTerminada=this.formularioCompleto();
-      }else{
-
+    this.ingresoService.getMediafiliacion(this.mediaFiliacion.imputado.id).subscribe((data: any) => {
+      if (data.caracteristicas) {
+        this.mediaFiliacion = data.caracteristicas;
+        this.mediaFiliacionTerminada = this.formularioCompleto();
       }
     })
 
   }
-  public guardarMediaFiliacion(){
+  public guardarMediaFiliacion() {
 
-    this.mediaFiliacion.imputado= {
-        id:this.ingreso.id
+    this.mediaFiliacion.imputado = {
+      id: this.ingreso.id
     };
-      this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
-        console.log(data)
-          Swal.fire({
-            title: data.error ? 'Error!' : 'Guardado',
-            text: data.mensaje,
-            icon: data.error ? 'error' : 'success',
-            timer: 1300,
-            showConfirmButton: false
-          });
-        if(!data.error){
-          this.mediaFiliacion.id=data.id;
-          this.getData()
+    this.ingresoService.saveMediaFiliacion(this.mediaFiliacion).subscribe((data: any) => {
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
+      if (!data.error) {
+        this.mediaFiliacion.id = data.id;
+        this.getData()
 
-        }
-      })
+      }
+    })
   }
 
 
 
-  public formularioCompleto(){
+  public formularioCompleto() {
     for (let i = 0; i < this.validador.length; i++) {
-      if(this.validador[i]==false){
+      if (this.validador[i] == false) {
         return false;
       }
     }

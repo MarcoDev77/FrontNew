@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {GeneralidadesPPL} from '@shared/models/GeneralidadesPPL';
-import {ComiteTecnicoService} from '@shared/services/comite-tecnico.service';
+import { Component, OnInit } from '@angular/core';
+import { GeneralidadesPPL } from '@shared/models/GeneralidadesPPL';
+import { ComiteTecnicoService } from '@shared/services/comite-tecnico.service';
 import Swal from 'sweetalert2';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-centro-escolar',
@@ -26,15 +26,13 @@ export class CentroEscolarComponent implements OnInit {
 
   searchImputado() {
     if (this.generalidadesPPL.folio.length >= 6) {
-      console.log('Entra');
       this.getData();
     }
   }
 
   submit() {
     this.isLoading = true;
-    this.actividades.imputado = {id: this.generalidadesPPL.imputadoId};
-    console.log('actividades', this.actividades);
+    this.actividades.imputado = { id: this.generalidadesPPL.imputadoId };
     this.comiteTecnicoService.saveActividadesEscolares(this.actividades).subscribe((data: any) => {
       this.isLoading = false;
       Swal.fire({
@@ -46,7 +44,6 @@ export class CentroEscolarComponent implements OnInit {
       });
     }, error => {
       this.isLoading = false;
-      console.log(error);
       Swal.fire({
         title: 'Error!',
         text: 'Actualización fallida',
@@ -61,7 +58,6 @@ export class CentroEscolarComponent implements OnInit {
     this.isLoading = true;
     this.comiteTecnicoService.getDataCentroEscolarbyFolio(this.generalidadesPPL.folio).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Busqueda',
         text: data.mensaje,
@@ -80,7 +76,6 @@ export class CentroEscolarComponent implements OnInit {
         this.handleError();
       }
     }, error => {
-      console.log(error);
       this.isLoading = false;
       Swal.fire({
         title: 'Error!',
@@ -100,12 +95,10 @@ export class CentroEscolarComponent implements OnInit {
   }
 
   generatePDF(modal) {
-    console.log('generatePDF');
     this.isLoading = true;
     this.comiteTecnicoService.generatePDFCentroEscolar(this.generalidadesPPL.imputadoId).subscribe((data: any) => {
-      console.log('PDF', data);
       this.isLoading = false;
-      const file = new Blob([data], {type: 'application/*'});
+      const file = new Blob([data], { type: 'application/*' });
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadstart = ev => this.isLoading = true;
@@ -117,7 +110,7 @@ export class CentroEscolarComponent implements OnInit {
         this.modalService.dismissAll();
         if (base64) {
           this.file = base64;
-          this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+          this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
         }
       };
       reader.onerror = () => {
@@ -133,7 +126,6 @@ export class CentroEscolarComponent implements OnInit {
       };
     }, error => {
       this.isLoading = false;
-      console.log(error);
       Swal.fire({
         title: 'Error',
         text: 'Error al generar el archivo',

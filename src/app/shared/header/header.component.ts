@@ -1,9 +1,11 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
-import {Location} from '@angular/common';
-import {Router} from '@angular/router';
-import {ROUTES} from '@dashboard/_main/menu';
-import {roles, roles as r} from '@shared/helpers/roles';
-import {AuthenticationService} from '@shared/services/authentication.service';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { ROUTES } from '@dashboard/_main/menu';
+import { roles, roles as r } from '@shared/helpers/roles';
+import { AuthenticationService } from '@shared/services/authentication.service';
+import { CatalogosService } from '@shared/services/catalogos.service';
+import { InformaticaService } from '@shared/services/informatica.service';
 
 @Component({
   selector: 'app-header',
@@ -25,34 +27,43 @@ export class HeaderComponent implements OnInit {
   public intevals: any[];
   public notficaciones: any[];
   public activeNotficaciones: number;
+  public centros: any[];
+  public isLoading = false;
+  public currentCentro: number;
 
   constructor(
     location: Location,
     private router: Router,
     private element: ElementRef,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private catalogoService: CatalogosService,
+    private informaticaService: InformaticaService
   ) {
     this.location = location;
     this.sidebarVisible = false;
     this.date = new Date();
     this.intevals = [];
     this.notficaciones = [];
+    this.centros = [];
   }
 
   ngOnInit() {
     this.getDate();
+    this.getCentros();
 
-   
-      this.currentUser = this.authenticationService.getCurrentUser(); 
-   
-      for (let [key, value] of Object.entries(roles)) {
-        if (this.currentUser && value.role === this.currentUser.roles[0]) {
-         
-          this.informationUser = {name: this.currentUser.nombre, role: value.name, foto: this.currentUser.foto}
-        
-        }
+
+    this.currentUser = this.authenticationService.getCurrentUser();
+
+
+    for (let [key, value] of Object.entries(roles)) {
+      if (this.currentUser && value.role === this.currentUser.roles[0]) {
+
+        this.informationUser = { name: this.currentUser.nombre, role: value.name, foto: this.currentUser.foto }
+
       }
-      this.getCurrentPersonal();
+    }
+
+    this.getCurrentPersonal();
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -94,13 +105,13 @@ export class HeaderComponent implements OnInit {
       if ($layer) {
         $layer.remove();
       }
-      setTimeout(function() {
+      setTimeout(function () {
         $toggle.classList.remove('toggled');
       }, 400);
 
       this.mobile_menu_visible = 0;
     } else {
-      setTimeout(function() {
+      setTimeout(function () {
         $toggle.classList.add('toggled');
       }, 430);
 
@@ -112,17 +123,17 @@ export class HeaderComponent implements OnInit {
         document.getElementsByTagName('body')[0].appendChild($layer);
       }
 
-      $layer.onclick = function() { //asign a function
+      $layer.onclick = function () { //asign a function
         html.classList.remove('nav-open');
         this.mobile_menu_visible = 0;
-        setTimeout(function() {
+        setTimeout(function () {
           $layer.remove();
           $toggle.classList.remove('toggled');
         }, 400);
-        const mainPanel = <HTMLElement> document.getElementsByClassName('main-panel')[0];
+        const mainPanel = <HTMLElement>document.getElementsByClassName('main-panel')[0];
 
         if (window.innerWidth < 991) {
-          setTimeout(function() {
+          setTimeout(function () {
             mainPanel.style.position = '';
           }, 500);
         }
@@ -135,10 +146,10 @@ export class HeaderComponent implements OnInit {
 
   sidebarOpen() {
     const toggleButton = this.toggleButton;
-    const mainPanel = <HTMLElement> document.getElementsByClassName('main-panel')[0];
+    const mainPanel = <HTMLElement>document.getElementsByClassName('main-panel')[0];
     const html = document.getElementsByTagName('html')[0];
 
-    setTimeout(function() {
+    setTimeout(function () {
       toggleButton.classList.add('toggled');
     }, 500);
 
@@ -150,7 +161,7 @@ export class HeaderComponent implements OnInit {
   sidebarClose() {
     const html = document.getElementsByTagName('html')[0];
     this.toggleButton.classList.remove('toggled');
-    const mainPanel = <HTMLElement> document.getElementsByClassName('main-panel')[0];
+    const mainPanel = <HTMLElement>document.getElementsByClassName('main-panel')[0];
 
     this.sidebarVisible = false;
     html.classList.remove('nav-open');
@@ -170,10 +181,28 @@ export class HeaderComponent implements OnInit {
     this.authenticationService.logout();
   }
 
-  getCurrentPersonal(){
-    this.authenticationService.getCurrentPersonal().subscribe((data:any)=>{
-      this.currentPersonal=data;
-      this.informationUser.name=this.currentPersonal.personal.nombre
+  getCurrentPersonal() {
+    if (this.currentUser.roles[0] === r.superadmin.role) return;
+    this.authenticationService.getCurrentPersonal().subscribe((data: any) => {
+      this.currentPersonal = data;
+      this.currentCentro = this.currentPersonal.personal.centroId;
+      this.informationUser.name = this.currentPersonal.personal.nombre
     })
+  }
+
+  getCentros() {
+    this.catalogoService.listCentroPenitenciario().subscribe((data: any) => {
+      if (data.error) return;
+      this.centros = data.centros;
+    })
+  }
+
+  changeCentro(id) {
+    if (this.currentUser.roles[0] === r.superadmin.role) return;
+    this.isLoading = true;
+    this.informaticaService.updateCentro(id).subscribe(() => {
+      this.isLoading = false;
+      location.reload();
+    });
   }
 }

@@ -1,12 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Delito} from '@shared/models/Delito';
-import {IngresoService} from '@shared/services/ingreso.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Delito } from '@shared/models/Delito';
+import { IngresoService } from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import {roles} from '@shared/helpers/roles';
-import {map} from 'rxjs/operators';
+import { roles } from '@shared/helpers/roles';
+import { map } from 'rxjs/operators';
 import { CatalogosService } from '@shared/services/catalogos.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-carpeta-investigacion-imputado',
@@ -28,7 +29,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
 
   public delito: any
   public tipoDelitoLista: any[];
-  public delitoUpdate:any
+  public delitoUpdate: any
 
   // Table
   public p;
@@ -41,7 +42,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   public setClickedRow: Function;
   public auxId: any;
 
-  constructor(private ingresoService: IngresoService, private modalService: NgbModal,private catalogosService: CatalogosService) {
+  constructor(private ingresoService: IngresoService, private modalService: NgbModal, private catalogosService: CatalogosService) {
     this.carpeta = {} as any;
     this.delito = {} as any;
     this.delitoUpdate = {} as any;
@@ -49,7 +50,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
     // Table
     this.getTipoDelitos();
 
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
     this.ingreso = JSON.parse(sessionStorage.getItem('ingreso'));
@@ -61,10 +62,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
 
   getData() {
     this.ingresoService.listCarpetasInvestigacion(this.personaId).subscribe((data: any) => {
-
-      console.log(data);
       if (!data.error) {
-        console.log(data)
         this.data = data.listaCarpeta;
       }
     });
@@ -76,12 +74,13 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   }
 
   update(item: any) {
-    this.carpeta = {...item};
+    this.carpeta = { ...item };
     this.toggleForm();
   }
 
-  seeDelitosCarpeta(item: any,modal) {
-    this.carpeta=item
+  seeDelitosCarpeta(item: any, modal) {
+    this.delito = {}
+    this.carpeta = item
     this.getDelitos()
 
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
@@ -89,7 +88,6 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   }
 
   delete(item: any) {
-    console.log(item);
     Swal.fire({
       title: '¿Estas seguro?',
       text: 'El estatus del registro cambiará.',
@@ -97,10 +95,9 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.ingresoService.deleteCarpetaInvestigacion(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
@@ -136,9 +133,8 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   }
 
   submit(array?) {
-    this.carpeta = {...this.carpeta, imputado: {id: this.ingresoId}, personaIngresada: { id: this.personaId}};
+    this.carpeta = { ...this.carpeta, imputado: { id: this.ingresoId }, personaIngresada: { id: this.personaId } };
     this.ingresoService.saveCarpetaInvestigacion(this.carpeta).subscribe((data: any) => {
-      console.log('save carpeta', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -196,66 +192,99 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
 
   //Delitos
 
-  search = (text$: Observable<string>) =>{
-    return text$.pipe(
+  search = (text$: Observable<string>) => {
+    const arrayDelitos = this.tipoDelitoLista.map(el => {return {nombre:el.nombre, idTipoDelito:el.idTipoDelito }} )
+    return  text$.pipe(
       map(term => term === '' ? []
-        : this.tipoDelitoLista.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+        :  arrayDelitos.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     )
   }
-  formatter = (x: {nombre: string}) => x.nombre;
+  formatter = (x: { nombre: string }) => x.nombre;
 
-  closeModal(){
+  closeModal() {
     this.modalService.dismissAll()
   }
 
   getTipoDelitos() {
     this.catalogosService.listDelito().subscribe((data: any) => {
-      this.tipoDelitoLista=data.delitos
+      this.tipoDelitoLista = data.delitos
+      console.log( this.tipoDelitoLista)
     })
   }
 
-
-  saveDelito() {
-     console.log("save",this.delito)
-    
-    if (this.delito.idTipoDelito==null) {
-      console.log("null")
-      let tipoDelito={
+  /**  if (this.delito.idTipoDelito == null) {
+      let tipoDelito = {
         nombre: this.delito
       }
-      let delitoNuevo={
+      let delitoNuevo = {
         nombre: this.delito,
         tipoDelito: tipoDelito
       }
-      this.delito=delitoNuevo;
+      this.delito = delitoNuevo;
     } else {
-      console.log("else");
-      
+
       this.delito.tipoDelito = {
         id: this.delito.idTipoDelito
       }
-      this.delito.id=this.delitoUpdate.id
+      this.delito.id = this.delitoUpdate.id
     }
+     this.delito.carpetaInvestigacion = {
+      id: this.carpeta.id
+    }
+*/
+  saveDelito() {
+
+
+    if (this.delito.nombre.idTipoDelito == null && Object.keys(this.delitoUpdate).length === 0 ) {
+      console.log(this.delito.nombre)
+      const nombre  = this.delito.nombre
+
+      this.delito ={
+        nombre,
+        tipoDelito: {nombre}
+      }
+
+    }  else {
+      if ( this.delito.nombre.idTipoDelito  ) {
+        console.log(this.delito.idTipoDelito)
+        this.delito.idTipoDelito = this.delito.nombre.idTipoDelito
+        this.delito.tipoDelito = {
+            id: this.delito.nombre.idTipoDelito
+          }
+        this.delito.nombre = this.delito.nombre.nombre
+      } else {
+
+        this.delito.idTipoDelito = this.delitoUpdate.nombre.idTipoDelito
+        this.delito.tipoDelito = {
+            id: this.delitoUpdate.nombre.idTipoDelito,
+            nombre: this.delito.nombre
+          }
+          console.log(this.delitoUpdate)
+          console.log(this.delito)
+      }
+      this.delito.id = this.delitoUpdate.id
+    }
+
     this.delito.carpetaInvestigacion = {
       id: this.carpeta.id
     }
 
-       console.log("almost save",this.delito)
-      this.ingresoService.saveDelito(this.delito).subscribe((data: any) => {
-        console.log(data)
 
-        Swal.fire({
-          title: data.error ? 'Error!' : 'Guardado',
-          text: data.mensaje,
-          icon: data.error ? 'error' : 'success',
-          timer: 1300,
-          showConfirmButton: false
-        });
-        this.delito={}
-        this.delitoUpdate={}
+
+    this.ingresoService.saveDelito(this.delito).subscribe((data: any) => {
+
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Guardado',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1300,
+        showConfirmButton: false
+      });
+      this.delito = {}
+      this.delitoUpdate = {}
       this.getDelitos()
-       this.getData()
-      })
+      this.getData()
+    })
 
   }
 
@@ -263,24 +292,47 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
     this.ingresoService.listDelitosByCarpetaInvestigacion(this.carpeta.id).subscribe((data: any) => {
       if (data.listaDelitos) {
         this.delitosData = data.listaDelitos
-      }else{
-        this.delitosData= []
+      } else {
+        this.delitosData = []
 
       }
     })
 
-    }
+  }
 
-    delitoEdit(delito) {
-      
-      this.delito.id = delito.id
-      this.delito = delito
-      this.delito.nombre=delito.tipoDelito.nombre
-      this.delito.juez = delito.juez;
-      this.delitoUpdate=delito
-      console.log(this.delito)
-    }
+  delitoEdit(delito) {
 
-    viewHistory(modal?){}
-    
+    this.delito = {...delito}
+    this.delito.nombre = {nombre:delito.tipoDelito.nombre, idTipoDelito: delito.tipoDelito.id }
+    this.delitoUpdate = {...this.delito} ;
+  }
+
+  deleteDelito(item: any) {
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: 'El delito sera eliminado.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then(({ value }) => {
+      if (value) {
+        this.ingresoService.deleteDelito(item.id).subscribe((data: any) => {
+          Swal.fire({
+            title: data.error ? 'Error!' : 'Elimiación exitosa.',
+            text: data.mensaje,
+            icon: data.error ? 'error' : 'success',
+            timer: 1300,
+            showConfirmButton: false
+          });
+          if (!data.error) {
+            this.getData();
+            this.getDelitos()
+          }
+        });
+      }
+    });
+  }
+  viewHistory(modal?) { }
+
 }

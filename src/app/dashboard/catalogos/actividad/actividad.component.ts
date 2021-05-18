@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {TipoActividad} from '@shared/models/TipoActividad';
-import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
-import {CatalogosService} from '@shared/services/catalogos.service';
-import {EncrDecrService} from '@shared/helpers/encr-decr.service';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { TipoActividad } from '@shared/models/TipoActividad';
+import { CentroPenitenciario } from '@shared/models/CentroPenitenciario';
+import { CatalogosService } from '@shared/services/catalogos.service';
+import { EncrDecrService } from '@shared/helpers/encr-decr.service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import {Actividad} from '@shared/models/Actividad';
+import { Actividad } from '@shared/models/Actividad';
 
 @Component({
   selector: 'app-actividad',
@@ -36,7 +36,7 @@ export class ActividadComponent implements OnInit {
     this.actividad = {} as Actividad;
     this.tipoActividad = JSON.parse(this.kryptoService.get(sessionStorage.getItem('tipoActividad')));
 
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -49,7 +49,6 @@ export class ActividadComponent implements OnInit {
     this.isLoading = true;
     this.catalogosService.listActividad(idCentro).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
@@ -64,7 +63,6 @@ export class ActividadComponent implements OnInit {
         id: this.tipoActividad.id
       };
       this.catalogosService.saveActividad(this.actividad).subscribe((data: any) => {
-        console.log('ADD', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -110,7 +108,7 @@ export class ActividadComponent implements OnInit {
 
   update(id, item) {
     this.isForm = true;
-    this.actividad = {...item};
+    this.actividad = { ...item };
 
     if (this.auxId && this.auxId !== id) {
       this.showTr();
@@ -171,10 +169,9 @@ export class ActividadComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.catalogosService.changeStatusActividad(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,

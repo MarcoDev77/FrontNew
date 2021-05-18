@@ -9,10 +9,21 @@
 ></app-finder-imputado>
 
 <div class="row">
+  <div class="col d-flex justify-content-end">
+    <button
+      (click)="editInfo(ingreso)"
+      [disabled]="!ingreso?.id || isLoading"
+      *ngIf="ingreso.folio"
+      class="btn btn-success"
+    >
+      Editar Información
+    </button>
+  </div>
+</div>
+
+<div class="row">
   <div class="col md-9 mt-4 mb-2">
-    <h5 class="title-pink">
-      Información PPL
-    </h5>
+    <h5 class="title-pink">Información PPL</h5>
   </div>
 </div>
 
@@ -25,7 +36,7 @@
           : 'assets/img/no_image.png'
       }}"
       class="img"
-      style="max-height: 400px;"
+      style="max-height: 400px"
       alt="imagen ppl"
     />
   </div>
@@ -130,7 +141,7 @@
           type="text"
           disabled
           class="form-control"
-          value="{{ imputado.fechaIngreso }}"
+          value="{{ imputado.fechaIngreso | date: 'dd/MM/yy'}}"
         />
       </div>
       <div class="col-md-6">
@@ -151,16 +162,16 @@
           type="text"
           disabled
           class="form-control"
-          value="{{ imputado.calidadDelincuencia }}"
+          value="{{ imputado.calidadDeliciencial }}"
         />
       </div>
       <div class="col-md-4">
         <label>Fuero</label>
-        <input type="text" disabled class="form-control" value="" />
+        <input type="text" disabled class="form-control" value="{{ imputado.fuero }}" />
       </div>
       <div class="col-md-4">
         <label>Proceso</label>
-        <input type="text" disabled class="form-control" value="" />
+        <input type="text" disabled class="form-control" value="{{ imputado.proceso }}" />
       </div>
     </div>
 
@@ -200,18 +211,20 @@
       </div>
       <div class="col-md-4">
         <label>Estatus Jurídico</label>
-        <input type="text" disabled class="form-control" value="" />
+        <input type="text" disabled class="form-control" value="{{ imputado.datosJuridicosImputado?.statusJuridico }}" />
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-4">
         <label>Fecha Libertad</label>
-        <input type="text" disabled class="form-control" value="" />
+        <input type="text" disabled class="form-control"
+        value="{{ imputado.datosJuridicosImputado?.fechaEgreso | date: 'dd/MM/yy'}}"  />
       </div>
       <div class="col-md-8">
         <label>Tipo Libertad</label>
-        <input type="text" disabled class="form-control" value="" />
+        <input type="text" disabled class="form-control"
+        value="{{ imputado.datosJuridicosImputado?.tipoLibertad  }}"  />
       </div>
     </div>
   </div>
@@ -229,6 +242,15 @@
 
 <div class="row">
   <div class="col-md-12">
+    <button
+      [disabled]="!ingreso?.id || isLoading"
+      type="button"
+      class="btn btn-success pull-right"
+      (click)="generateCedulaPDF(view)"
+    >
+      Cédula
+    </button>
+
     <button
       [disabled]="!ingreso?.id || isLoading"
       (click)="generatePDF(view)"

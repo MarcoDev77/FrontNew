@@ -37,7 +37,6 @@ export class EstudioSocioeconomicoComponent implements OnInit {
     this.isLoading = true;
     this.servicioSocialService.getEstudioSocioEconomico(this.ingreso.folio).subscribe((data: any) => {
       this.isLoading = false;
-      console.log(data)
       if (!data.error) {
         this.ingreso = data.imputado;
         this.estudio = data.imputado.estudioSocioeconomico;
@@ -72,10 +71,8 @@ export class EstudioSocioeconomicoComponent implements OnInit {
   saveEstudioSocioeconomico() {
     this.isLoading = true;
     this.estudio.imputado = { id: this.ingreso.imputadoId }
-    console.log("To server", this.estudio)
     this.servicioSocialService.saveEstudioSocioeconomico(this.estudio).subscribe((data: any) => {
       this.isLoading = false;
-      console.log(data)
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,

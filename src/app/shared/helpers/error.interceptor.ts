@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 // App
-import {AuthenticationService} from '../services/authentication.service';
-import {Router} from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -26,13 +26,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       if (err.status == 0 && this.error == false) {
         this.error = true;
 
-        alert('Error de conexion');
-        // swal({
-        //   title: 'Error de conexión!',
-        //   type: 'error',
-        //   //timer: 1300,
-        //   showConfirmButton: true
-        // });
+        alert('Error de conexión');
 
         setTimeout(() => {
           this.error = false;

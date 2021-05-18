@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
-import {environment} from '@environment/environment';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import { environment } from '@environment/environment';
 import Swal from 'sweetalert2';
-import {AuthenticationService} from '@shared/services/authentication.service';
-import {IngresoService} from '@shared/services/ingreso.service';
-import {Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from '@shared/services/authentication.service';
+import { IngresoService } from '@shared/services/ingreso.service';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-busqueda-huellas',
@@ -22,7 +22,9 @@ export class BusquedaHuellasComponent {
   public uploader: FileUploader;
   public uo: FileUploaderOptions = {};
   public huella: any;
+  public oldRegister: any;
   public intervalId: any;
+  public isForm: boolean;
   public images: any[];
   public index: number;
   public finished: boolean;
@@ -50,9 +52,10 @@ export class BusquedaHuellasComponent {
       'assets/img/lopper/nueve.jpg',
     ];
     this.huella = {} as any;
+    this.oldRegister = {} as any;
     // Uploader
     this.url = environment.apiUrl;
-    this.uploader = new FileUploader({url: this.url + '/api/buscarPersonaIngresadaHuella', itemAlias: 'image'});
+    this.uploader = new FileUploader({ url: this.url + '/api/buscarPersonaIngresadaHuella', itemAlias: 'image' });
     // Ver resultados anteriores
     if (location.href.includes('busqueda-huella') && JSON.parse(localStorage.getItem('results'))) {
       this.results = JSON.parse(localStorage.getItem('results'));
@@ -82,7 +85,6 @@ export class BusquedaHuellasComponent {
         this.index = null;
       }
     } else {
-      console.log('hay error');
       this.finished = false;
     }
     if (location.href.includes('lista-ingreso')) {
@@ -97,17 +99,37 @@ export class BusquedaHuellasComponent {
       return;
     }
   }
-
+  toggleForm() {
+    this.isForm = !this.isForm;
+  }
   onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
     this.finished = true;
     const data = JSON.parse(response);
-    console.log(data);
     this.clearIntetval();
     this.handleResults(data);
     this.uploader.progress = 0;
     this.uploader.clearQueue();
   }
+  saveOldFolio() {
+      this.oldRegister = { ...this.oldRegister, fechaRegistro: new Date(this.oldRegister.fechaRegistro) };
+      this.ingresoService.saveOldFolio(this.oldRegister).subscribe((data: any) => {
+        Swal.fire({
+          title: data.error ? 'Error!' : 'Guardado',
+          text: data.mensaje,
+          icon: data.error ? 'error' : 'success',
+          timer: 1300,
+          showConfirmButton: false
+        });
+        if (!data.error) {
+          const ingreso = { id: data.imputadoId, folio: data.folioGenerado };
+          sessionStorage.setItem('ingreso', JSON.stringify(ingreso));
+          this.modalService.dismissAll();
+          this.router.navigate([`dashboard/ingreso/form-ingreso`]);
 
+        }
+      });
+
+  }
   uploadFile() {
     this.setupInterval();
     const authToken = this.authenticationService.getCurrentUser().access_token;
@@ -115,7 +137,6 @@ export class BusquedaHuellasComponent {
     this.uo.authToken = `Bearer ${authToken}`;
     this.uo.additionalParameter = {};
     this.uploader.setOptions(this.uo);
-    console.log(this.uo);
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
@@ -128,7 +149,6 @@ export class BusquedaHuellasComponent {
   }
 
   onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
-    console.log(response);
     this.clearIntetval();
     const error = JSON.stringify(response); // error server response
     this.uploader.progress = 0;
@@ -144,19 +164,15 @@ export class BusquedaHuellasComponent {
   }
 
   handleAction(item?) {
-    console.log('entrea', this.action);
     this.modalService.dismissAll();
     switch (this.action) {
       case 'ADD':
-        console.log('se crea un nuevo ingreso para ese imputado', item);
         this.addIngresoToPersona(item.id);
         break;
       case 'CREATE':
-        console.log('Se crea nuevo registro de persoana');
         this.createPersona();
         break;
       case 'SEARCH':
-        console.log('Busqueda');
         this.seeHuellas(item);
         break;
       default:
@@ -172,10 +188,9 @@ export class BusquedaHuellasComponent {
       showCancelButton: true,
       confirmButtonText: 'Crear',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.ingresoService.generateFolio().subscribe((data: any) => {
-          console.log('generateFolio', data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Folio generado',
             text: data.mensaje,
@@ -184,7 +199,7 @@ export class BusquedaHuellasComponent {
             showConfirmButton: false
           }).then(() => {
             if (!data.error) {
-              const ingreso = {id: data.imputadoId, folio: data.folioGenerado};
+              const ingreso = { id: data.imputadoId, folio: data.folioGenerado };
               sessionStorage.setItem('ingreso', JSON.stringify(ingreso));
               this.router.navigate([`dashboard/ingreso/form-ingreso`]);
             }
@@ -202,10 +217,9 @@ export class BusquedaHuellasComponent {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.ingresoService.generateFolio(idPersona).subscribe((data: any) => {
-          console.log('generateFolio', data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Folio generado',
             text: data.mensaje,
@@ -214,7 +228,7 @@ export class BusquedaHuellasComponent {
             showConfirmButton: false
           }).then(() => {
             if (!data.error) {
-              const ingreso = {id: data.imputadoId, folio: data.folioGenerado};
+              const ingreso = { id: data.imputadoId, folio: data.folioGenerado };
               sessionStorage.setItem('ingreso', JSON.stringify(ingreso));
               this.router.navigate([`dashboard/ingreso/form-ingreso`]);
             }

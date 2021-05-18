@@ -46,7 +46,7 @@
                 <td class="text-center">{{item.fechaRegistro | date:'dd/MM/yy h:mm a'}}</td>
                 <td class="text-center">{{item.listaDelitos}}</td>
                 <td class="text-center">
-                    <i *ngIf="role === 'ARCHIVO'" class="fa fa-pencil" placement="top" ngbTooltip="Actiualizar" (click)="update(item)"></i> &nbsp;
+                    <i *ngIf="role === 'ARCHIVO'" class="fa fa-pencil" placement="top" ngbTooltip="Actualizar" (click)="update(item)"></i> &nbsp;
                     <i class="fa fa-trash" placement="top" ngbTooltip="Eliminar" (click)="delete(item)"></i> &nbsp;
                     <i class="fa fa-th-list" placement="top" ngbTooltip="Ver delitos" (click)="seeDelitosCarpeta(item,addDelitoModal)"></i> &nbsp;
                 </td>
@@ -76,7 +76,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Delito :</label>
-                        <input type="text" class="form-control shadows" placeholder="Delito" [(ngModel)]="delito"
+                        <input type="text" class="form-control shadows" placeholder="Delito" [(ngModel)]="delito.nombre"
                             [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter"
                             name="delitoNombre" />
 
@@ -94,7 +94,7 @@
             <div class="row">
                 <div class="col-sm-12 text-center text-sm-right">
                     <button type="button" (click)="closeModal()" class="btn btn-danger mr-3">Cerrar</button>
-                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button type="submit" [disabled]=" !delito.nombre?.length  && !(delito.nombre?.idTipoDelito > 0) "class="btn btn-success">Guardar</button>
                 </div>
             </div>
         </form>
@@ -120,8 +120,7 @@
                             <td class="text-center">{{item.tipoDelito.nombre}}</td>
                             <td *ngIf="role" class="text-center">{{item.juez}}</td>
                             <td class="text-center">
-                                <i class="fa fa-history" placement="top" (click)="viewHistory()" ngbTooltip="Ver Historial"></i> &nbsp;
-                                <i class="fa fa-cog" placement="top" (click)="delitoEdit(item)" ngbTooltip="Editar"></i>
+                                <i class="fa fa-trash" placement="top" (click)="deleteDelito(item)" ngbTooltip="Eliminar"></i>
                             </td>
                         </tr>
                         <tr *ngIf="delitosData.length == 0">

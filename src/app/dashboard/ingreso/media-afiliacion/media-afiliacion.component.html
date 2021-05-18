@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-5 mb-3">
+            <div class="col-lg-12 mb-3">
                 <div class="form-check form-check-radio form-check-inline pb-4 w-100">
                     <label style="margin-right: 2rem;margin-top: 0.3rem;"><i class="fa fa-eye pr-2"></i>Usa
                         anteojos:</label>
@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-7 mb-3">
+            <div class="col-lg-12 mb-3">
                 <div class="row">
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-4 w-100">
@@ -130,28 +130,32 @@
                         </label>
                         </div>
                     </div>
-
-                    <div class="col-12">
-                        <div class="form-check form-check-radio form-check-inline pb-4 w-100">
-                            <label style="margin-right: 2rem;margin-top: 0.3rem;margin-left: 5.6rem;">RH:</label>
-
-                            <label class="form-check-label media" [ngClass]="{ 'has-danger': fGeneral.submitted && sangreRH.invalid }">
-                                <input class="form-check-input" type="radio" [value]="'+'" name="sangreRH"
-                                    #sangreRH="ngModel" [(ngModel)]="mediaFiliacion.sangreRH" required>
-                                +
-                                <span class="form-check-sign"></span>
-                            </label>
-
-                            <label class="form-check-label media" [ngClass]="{ 'has-danger': fGeneral.submitted && sangreRH.invalid }">
-                                <input class="form-check-input" type="radio" [value]="'-'" name="sangreRH"
-                                    #sangreRH="ngModel" [(ngModel)]="mediaFiliacion.sangreRH" required>
-                                -
-                                <span class="form-check-sign"></span>
-                            </label>
-
-                        </div>
-                    </div>
                 </div>
+            </div>
+
+            <div class="col-lg-12 mb-3">
+              <div class="row">
+                <div class="col-12" >
+                  <div class="form-check form-check-radio form-check-inline pb-4 w-100">
+                      <label style="text-align: left;   margin-right: 2rem;margin-top: 0.3rem;margin-left: 5.6rem;">RH:</label>
+
+                      <label class="form-check-label media" [ngClass]="{ 'has-danger': fGeneral.submitted && sangreRH.invalid }">
+                          <input class="form-check-input" type="radio" [value]="'+'" name="sangreRH"
+                              #sangreRH="ngModel" [(ngModel)]="mediaFiliacion.sangreRH" required>
+                          +
+                          <span class="form-check-sign"></span>
+                      </label>
+
+                      <label class="form-check-label media" [ngClass]="{ 'has-danger': fGeneral.submitted && sangreRH.invalid }">
+                          <input class="form-check-input" type="radio" [value]="'-'" name="sangreRH"
+                              #sangreRH="ngModel" [(ngModel)]="mediaFiliacion.sangreRH" required>
+                          -
+                          <span class="form-check-sign"></span>
+                      </label>
+
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
 
@@ -267,14 +271,14 @@
                             <span class="form-check-sign"></span>
                         </label>
 
-                        <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCabello.submitted && colorCabello.invalid }">
+                        <label style="width: 10rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCabello.submitted && colorCabello.invalid }">
                             <input class="form-check-input" type="radio" [value]="'Castaño claro'" name="colorCabello"
                                 #colorCabello="ngModel" [(ngModel)]="mediaFiliacion.colorCabello">
                             Castaño claro
                             <span class="form-check-sign"></span>
                         </label>
 
-                        <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCabello.submitted && colorCabello.invalid }">
+                        <label style="width: 10rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCabello.submitted && colorCabello.invalid }">
                             <input class="form-check-input" type="radio" [value]="'Castaño oscuro'" name="colorCabello"
                                 #colorCabello="ngModel" [(ngModel)]="mediaFiliacion.colorCabello">
                             Castaño oscuro
@@ -399,7 +403,7 @@
                             <span class="form-check-sign"></span>
                         </label>
 
-                        <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCabello.submitted && cantidadCabello.invalid }">
+                        <label style="width: 10rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCabello.submitted && cantidadCabello.invalid }">
                             <input class="form-check-input" type="radio" [value]="'Rectangular'" name="implantacion"
                                 #implantacion="ngModel" [(ngModel)]="mediaFiliacion.implantacion">
                             Rectangular
@@ -465,7 +469,7 @@
                             <span class="form-check-sign"></span>
                         </label>
 
-                        <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fFrente.submitted && frenteInclinacion.invalid }">
+                        <label style="width: 10rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fFrente.submitted && frenteInclinacion.invalid }">
                             <input class="form-check-input" type="radio" [value]="'Intermedia'" name="frenteInclinacion"
                                 #frenteInclinacion="ngModel" [(ngModel)]="mediaFiliacion.frenteInclinacion" required>
                             Intermedia
@@ -479,7 +483,7 @@
                             <span class="form-check-sign"></span>
                         </label>
 
-                        <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fFrente.submitted && frenteInclinacion.invalid }">
+                        <label style="width: 10rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fFrente.submitted && frenteInclinacion.invalid }">
                             <input class="form-check-input" type="radio" [value]="'Prominente'" name="frenteInclinacion"
                                 #frenteInclinacion="ngModel" [(ngModel)]="mediaFiliacion.frenteInclinacion" required>
                             Prominente
@@ -585,14 +589,14 @@
                                 <span class="form-check-sign"></span>
                             </label>
 
-                        <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCejas.submitted && cejasForma.invalid }">
+                        <label style="width: 8rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCejas.submitted && cejasForma.invalid }">
                                 <input class="form-check-input" type="radio" [value]="'Rectilíneas'" name="cejasForma"
                                     #cejasForma="ngModel" [(ngModel)]="mediaFiliacion.cejasForma" required>
                                 Rectilíneas
                                 <span class="form-check-sign"></span>
                             </label>
 
-                        <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCejas.submitted && cejasForma.invalid }">
+                        <label style="width: 8rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fCejas.submitted && cejasForma.invalid }">
                                 <input class="form-check-input" type="radio" [value]="'Rectilíneas sinuosas'"
                                     name="cejasForma" #cejasForma="ngModel" [(ngModel)]="mediaFiliacion.cejasForma"
                                     required>
@@ -963,7 +967,7 @@
                                 <span class="form-check-sign"></span>
                             </label>
 
-                        <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fBoca.submitted && bocaComisuras.invalid }">
+                        <label style="width: 8rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fBoca.submitted && bocaComisuras.invalid }">
                                 <input class="form-check-input" type="radio" [value]="'Asimetricas'"
                                     name="bocaComisuras" #bocaComisuras="ngModel"
                                     [(ngModel)]="mediaFiliacion.bocaComisuras" required>
@@ -1049,7 +1053,7 @@
                 <div class="col-12">
                     <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                         <label style="margin-right: 3.0rem;margin-top: 0.3rem;">Prominencia:</label>
-                        <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fLabios.submitted && labiosProminencia.invalid }">
+                        <label style="width: 10rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fLabios.submitted && labiosProminencia.invalid }">
                                 <input class="form-check-input" type="radio" [value]="'Labio inferior'"
                                     name="labiosProminencia" #labiosProminencia="ngModel"
                                     [(ngModel)]="mediaFiliacion.labiosProminencia" required>
@@ -1057,7 +1061,7 @@
 
                                 <span class="form-check-sign"></span>
                             </label>
-                        <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fLabios.submitted && labiosProminencia.invalid }">
+                        <label style="width: 10rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fLabios.submitted && labiosProminencia.invalid }">
                                 <input class="form-check-input" type="radio" [value]="'Labio superior'"
                                     name="labiosProminencia" #labiosProminencia="ngModel"
                                     [(ngModel)]="mediaFiliacion.labiosProminencia" required>
@@ -1156,7 +1160,7 @@
 
                                 <span class="form-check-sign"></span>
                             </label>
-                        <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fMenton.submitted && mentonInclinacion.invalid }">
+                        <label style="width: 8rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fMenton.submitted && mentonInclinacion.invalid }">
                                 <input class="form-check-input" type="radio" [value]="'Prominente'"
                                     name="mentonInclinacion" #mentonInclinacion="ngModel"
                                     [(ngModel)]="mediaFiliacion.mentonInclinacion" required>
@@ -1340,7 +1344,7 @@
                                     Separado
                                     <span class="form-check-sign"></span>
                                 </label>
-                            <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && orejaHelixAdherencia.invalid }">
+                            <label style="width: 10rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && orejaHelixAdherencia.invalid }">
                                     <input class="form-check-input" type="radio" [value]="'Muy separado'"
                                         name="orejaHelixAdherencia" #orejaHelixAdherencia="ngModel"
                                         [(ngModel)]="mediaFiliacion.orejaHelixAdherencia" required>
@@ -1364,7 +1368,7 @@
                     <div class="col-12">
                         <div class="form-check form-check-radio form-check-inline pb-2 w-100" style="border-bottom: 1px solid #ccc8c8;">
                             <label style="margin-right: 2.5rem;margin-top: 0.3rem;">Contorno:</label>
-                            <label style="width: 8rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && lobuloContorno.invalid }">
+                            <label style="width: 9rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && lobuloContorno.invalid }">
                                     <input class="form-check-input" type="radio" [value]="'Descendiente'"
                                         name="lobuloContorno" #lobuloContorno="ngModel"
                                         [(ngModel)]="mediaFiliacion.lobuloContorno" required>
@@ -1387,7 +1391,7 @@
                                     <span class="form-check-sign"></span>
                                 </label>
 
-                            <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && lobuloContorno.invalid }">
+                            <label style="width: 8rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && lobuloContorno.invalid }">
                                     <input class="form-check-input" type="radio" [value]="'Intermedio'"
                                         name="lobuloContorno" #lobuloContorno="ngModel"
                                         [(ngModel)]="mediaFiliacion.lobuloContorno" required>
@@ -1474,7 +1478,7 @@
                                     Separado
                                     <span class="form-check-sign"></span>
                                 </label>
-                            <label style="width: 7rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && lobuloAdherencia.invalid }">
+                            <label style="width: 10rem;" class="form-check-label media" [ngClass]="{ 'has-danger': fOreja.submitted && lobuloAdherencia.invalid }">
                                     <input class="form-check-input" type="radio" [value]="'Muy separado'"
                                         name="lobuloAdherencia" #lobuloAdherencia="ngModel"
                                         [(ngModel)]="mediaFiliacion.lobuloAdherencia" required>

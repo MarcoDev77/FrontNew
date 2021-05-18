@@ -60,7 +60,6 @@ export class ControlEntrevistaComponent implements OnInit {
         this.entrevistas = [];
       }
     }, error => {
-      console.log(error);
       this.isLoading = false;
       this.ingreso = {} as Ingreso;
     });
@@ -74,7 +73,6 @@ export class ControlEntrevistaComponent implements OnInit {
 
   listEntrevistas(imputadoId) {
     this.servicioSocialService.getEntrevistasImputado(imputadoId).subscribe((data: any) => {
-      console.log('entrevistas', data);
       this.entrevistas = data.entrevistas;
     });
   }
@@ -96,7 +94,6 @@ export class ControlEntrevistaComponent implements OnInit {
           this.modalService.dismissAll();
         }
       }, error => {
-        console.log(error);
         Swal.fire({
           title: 'Error!',
           text: 'Error al guardar',
@@ -126,8 +123,6 @@ export class ControlEntrevistaComponent implements OnInit {
   validateFiels(array: any[]): boolean {
     let pass = true;
     for (const field of array) {
-      console.log(field);
-
       if (!field.valid) {
         pass = false;
         field.control.markAsTouched();

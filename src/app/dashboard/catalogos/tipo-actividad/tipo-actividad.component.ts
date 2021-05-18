@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Dormitorio} from '@shared/models/Dormitorio';
-import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
-import {CatalogosService} from '@shared/services/catalogos.service';
-import {EncrDecrService} from '@shared/helpers/encr-decr.service';
+import { Component, OnInit } from '@angular/core';
+import { Dormitorio } from '@shared/models/Dormitorio';
+import { CentroPenitenciario } from '@shared/models/CentroPenitenciario';
+import { CatalogosService } from '@shared/services/catalogos.service';
+import { EncrDecrService } from '@shared/helpers/encr-decr.service';
 import Swal from 'sweetalert2';
-import {TipoActividad} from '@shared/models/TipoActividad';
-import {Router} from '@angular/router';
+import { TipoActividad } from '@shared/models/TipoActividad';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tipo-actividad',
@@ -36,7 +36,7 @@ export class TipoActividadComponent implements OnInit {
     this.tipoActividad = {} as TipoActividad;
     this.centroPenitenciario = JSON.parse(this.kryptoService.get(sessionStorage.getItem('centroPenitenciario')));
 
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -49,7 +49,6 @@ export class TipoActividadComponent implements OnInit {
     this.isLoading = true;
     this.catalogosService.listTipoActividad(idCentro).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
@@ -64,7 +63,6 @@ export class TipoActividadComponent implements OnInit {
         id: this.centroPenitenciario.id
       };
       this.catalogosService.saveTipoActividad(this.tipoActividad).subscribe((data: any) => {
-        console.log('ADD', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -110,7 +108,7 @@ export class TipoActividadComponent implements OnInit {
 
   update(id, item) {
     this.isForm = true;
-    this.tipoActividad = {...item};
+    this.tipoActividad = { ...item };
 
     if (this.auxId && this.auxId !== id) {
       this.showTr();
@@ -171,10 +169,9 @@ export class TipoActividadComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.catalogosService.changeStatusTipoActividad(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,

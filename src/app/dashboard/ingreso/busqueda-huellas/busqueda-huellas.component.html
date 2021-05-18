@@ -1,11 +1,56 @@
 <app-section-title icon="fa fa-search" title="Búsqueda por huella"></app-section-title>
-<br>
+<div>
+  <div *ngIf="!isForm" class="col-md-10" style="text-align: left;">
+    <label style=" padding-right: 20px;" >Agregar folio antiguo</label>
+    <button class="btn btn-success btn-sm m-0" (click)="toggleForm()" >
+      Agregar
+    </button>
+  </div>
+  <br>
+  <form  *ngIf="isForm"  style="text-align: left;"  name="f" (ngSubmit)="saveOldFolio()" #f="ngForm" novalidate>
+      <div class="row">
+          <div class="col-md-4">
+            <div class="form-group" >
+                <label >Folio :</label>
+                <input type="text" class="form-control shadows" placeholder="folio" [(ngModel)]="oldRegister.folio"
+                      name="folio" required />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group shadows">
+              <label>Fecha de ingreso:</label>
+              <input
+                type="date"
+                class="form-control"
+                name="fechaRegistro"
+                #fechaRegistro="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && fechaRegistro.invalid }"
+                [(ngModel)]="oldRegister.fechaRegistro"
+                required
+              />
+            </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-2 text-center ">
+              <button type="submit" class="btn btn-success">Guardar</button>
+          </div>
+          <div class="col-sm-2 text-center">
+            <button class="btn btn-danger " (click)="toggleForm()">
+              Regresar
+            </button>
+          </div>
+      </div>
+  </form>
+</div>
+
 <div *ngIf="results && results.length > 0" class="row">
   <div class="col">
     <button (click)="clearResults()" class="btn btn-primary mr-10">Limpiar Resultados</button>
   </div>
 </div>
-<div *ngIf="!finished" class="text-center">
+
+<div *ngIf="!finished &&  !isForm" class="text-center  ">
   <img (click)="openFinder(inputFile)" width="200"
        src="{{index != null ? images[index]:'assets/img/no_image.png'}}"
        alt="frente" class="img-thumbnail huella shadows"><br>

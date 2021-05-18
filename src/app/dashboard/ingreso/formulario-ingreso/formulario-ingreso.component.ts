@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {CatalogosService} from '@shared/services/catalogos.service';
-import {Router} from '@angular/router';
-import {Ingreso} from '@shared/models/Ingreso';
-import {Imputado} from '@shared/models/Imputado';
-import {IngresoService} from '@shared/services/ingreso.service';
+import { Component, OnInit } from '@angular/core';
+import { CatalogosService } from '@shared/services/catalogos.service';
+import { Router } from '@angular/router';
+import { Ingreso } from '@shared/models/Ingreso';
+import { Imputado } from '@shared/models/Imputado';
+import { IngresoService } from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
-import {DatePipe} from '@angular/common';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Observable} from 'rxjs';
-import {debounceTime, map} from 'rxjs/operators';
-import {catchError, distinctUntilChanged, tap, switchMap} from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, tap, switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -20,6 +20,7 @@ import {catchError, distinctUntilChanged, tap, switchMap} from 'rxjs/operators';
 
 export class FormularioIngresoComponent implements OnInit {
   public model: any;
+  public p: any;
   public ingreso: Ingreso;
   public datoDelito: DatoDelito;
   public arrayDatoDelito: DatoDelito[] = [];
@@ -78,7 +79,6 @@ export class FormularioIngresoComponent implements OnInit {
   getEstado() {
     this.catalogosService.listEstados('mexico', null)
       .subscribe((data: any) => {
-        console.log('ESTADOS', data);
         this.estados = data.estados;
       });
   }
@@ -86,30 +86,30 @@ export class FormularioIngresoComponent implements OnInit {
 
   getIngreso(id) {
     this.ingresoService.getIngreso(id).subscribe((data: any) => {
-      console.log('new ingreso', data);
-      const {ingreso, error} = data;
-      console.log('GET ingreso', ingreso);
+      const { ingreso, error } = data;
       if (!ingreso.registroNuevo) {
         this.ingreso = ingreso;
         this.arrayAlias = ingreso.imputado.apodos;
         this.arrayDatoDelito = ingreso.imputado.delitos;
         this.ingreso.imputado.fechaNacimiento = this.datePipe.transform(this.ingreso.imputado.fechaNacimiento, 'yyyy-MM-dd');
+
       } else {
         this.ingreso = ingreso;
         this.arrayAlias = ingreso.imputado.apodos;
       }
       this.ingreso.registroTerminado = ingreso.registroTerminado;
+      this.ingreso.imputado.fechaRegistro = this.datePipe.transform(this.ingreso.imputado.fechaRegistro, 'yyyy-MM-dd');
+
     });
   }
 
   submit() {
-    console.log('submit', this.ingreso);
-    this.ingreso.imputado = {...this.ingreso.imputado, fechaNacimiento: new Date(this.ingreso.imputado.fechaNacimiento)};
+    this.ingreso.imputado = { ...this.ingreso.imputado, fechaNacimiento: new Date(this.ingreso.imputado.fechaNacimiento) };
+    this.ingreso.imputado = { ...this.ingreso.imputado, fechaRegistro: new Date(this.ingreso.imputado.fechaRegistro) };
     this.ingreso.imputado.edadAparente = Number(this.ingreso.imputado.edadAparente);
     this.ingreso.imputado.hablaIndigena = !!this.ingreso.imputado.hablaIndigena;
     this.ingreso.imputado.esIndigena = !!this.ingreso.imputado.esIndigena;
     this.ingresoService.saveIngreso(this.ingreso).subscribe((data: any) => {
-      console.log('saveIngreso', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -125,9 +125,8 @@ export class FormularioIngresoComponent implements OnInit {
 
   addAlias(array) {
     if (this.validateFiels(array)) {
-      this.alias.imputado = {id: this.ingreso.id};
+      this.alias.imputado = { id: this.ingreso.id };
       this.ingresoService.saveApodo(this.alias).subscribe((data: any) => {
-        console.log(data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -144,7 +143,6 @@ export class FormularioIngresoComponent implements OnInit {
 
   setPrincialAlias(item) {
     this.ingresoService.seleccionarApodoPrincipal(item.id).subscribe((data: any) => {
-      console.log(data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -171,7 +169,7 @@ export class FormularioIngresoComponent implements OnInit {
     }
     return pass;
   }
-  
+
   checkMainAlias(): boolean {
     for (const item of this.arrayAlias) {
       if (item.principal) {
@@ -194,18 +192,16 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   change($event: Event) {
-    console.log('event', $event);
   }
 
   openCatalogo(modal) {
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12', backdrop: 'static'}).result.then(() => {
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12', backdrop: 'static' }).result.then(() => {
       this.getCatalogos();
     });
   }
 
   selectArrayTofilter(array) {
     this.arrayToFilter = array;
-    console.log('Array To filter', this.arrayToFilter);
   }
 
   search = (text$: Observable<string>) => {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InformaticaService } from '@shared/services/informatica.service';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reporte-visitas',
@@ -18,6 +19,7 @@ export class ReporteVisitasComponent implements OnInit {
 
   constructor(
     private informaticaService: InformaticaService,
+    private router: Router,
     private modalService: NgbModal) {
     this.cleanForm();
   }
@@ -31,7 +33,6 @@ export class ReporteVisitasComponent implements OnInit {
     }
     this.isLoading = true;
     this.informaticaService.getVisitasImputado(ingreso.id).subscribe((data: any) => {
-      console.log('searchImputado', data);
       this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Búsqueda',
@@ -48,6 +49,11 @@ export class ReporteVisitasComponent implements OnInit {
     });
   }
 
+  editInfo(ingreso: any) {
+    sessionStorage.setItem('ingreso', JSON.stringify(ingreso));
+    this.router.navigate([`dashboard/ingreso/form-ingreso`]);
+  }
+
   generatePDF(modal) {
     this.isLoading = true;
     this.informaticaService.generatePDFFormatoPdfReporteVisitaCredencial(this.ingreso.id)
@@ -55,7 +61,17 @@ export class ReporteVisitasComponent implements OnInit {
         this.isLoading = false;
         this.showPreview(data, modal);
       }, error => {
-        console.log(error);
+        this.isLoading = false;
+      });
+  }
+
+  generateCedulaPDF(modal) {
+    this.isLoading = true;
+    this.informaticaService.generarPdfCedulaInterno(this.ingreso.id)
+      .subscribe((data: any) => {
+        this.isLoading = false;
+        this.showPreview(data, modal);
+      }, error => {
         this.isLoading = false;
       });
   }

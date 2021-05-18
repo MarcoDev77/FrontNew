@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-ingreso-navigation',
@@ -24,10 +24,10 @@ export class IngresoNavigationComponent implements OnInit {
   constructor() {
 
     this.steps = [
-      {name: 'Formulario de ingreso', path: '/dashboard/ingreso/form-ingreso'},
-      {name: 'Dactiloscopia', path: '/dashboard/ingreso/dactiloscopia'},
-      {name: 'Características', path: '/dashboard/ingreso/caracteristicas'},
-      {name: 'Señas particulares', path: '/dashboard/ingreso/media-afiliacion'},
+      { name: 'Formulario de ingreso', path: '/dashboard/ingreso/form-ingreso' },
+      { name: 'Dactiloscopia', path: '/dashboard/ingreso/dactiloscopia' },
+      { name: 'Características', path: '/dashboard/ingreso/caracteristicas' },
+      { name: 'Señas particulares', path: '/dashboard/ingreso/media-afiliacion' },
 
       // {name: 'Referencias'},
       // {name: 'Situación penal'},
@@ -35,7 +35,6 @@ export class IngresoNavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('FREEMENU', this.freeMenu);
   }
 
 }

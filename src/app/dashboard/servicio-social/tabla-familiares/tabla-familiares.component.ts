@@ -51,14 +51,12 @@ export class TablaFamiliaresComponent implements OnInit {
 
   getParentescos() {
     this.ingresoService.getParentescos().subscribe((data: any) => {
-      console.log(data)
       this.parentescos = data.parentescos
     })
   }
 
   getEstadosCiviles() {
     this.catalogosService.listEstadosCiviles().subscribe((data: any) => {
-      console.log(data);
       this.estadosCiviles = data.estadosCiviles
     })
   }
@@ -69,7 +67,6 @@ export class TablaFamiliaresComponent implements OnInit {
       nucleoId: this.nucleoId,
     }
     this.servicioSocialService.getMiembrosNucleoFamiliar(model).subscribe((data: any) => {
-      console.log(data)
       this.familiares = data.miembrosNucleo;
     })
   }
@@ -78,7 +75,6 @@ export class TablaFamiliaresComponent implements OnInit {
     this.familiar.nucleoFamiliar = { id: this.nucleoId };
     this.familiar.tipoNucleo = this.tipoNucleo;
     this.servicioSocialService.saveMiembroNucleoFamiliar(this.familiar).subscribe((data: any) => {
-      console.log(data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -104,7 +100,6 @@ export class TablaFamiliaresComponent implements OnInit {
     }).then(({ value }) => {
       if (value) {
         this.servicioSocialService.deleteMiembroNucleoFamiliar(item).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Eliminación exitoso.',
             text: data.mensaje,

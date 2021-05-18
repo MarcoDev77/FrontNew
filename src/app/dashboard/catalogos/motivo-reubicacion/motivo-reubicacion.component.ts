@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {TipoLibertad} from '@shared/models/TipoLibertdad';
-import {MotivoReubicacion} from '@shared/models/MotivoReubicacion';
-import {CatalogosService} from '@shared/services/catalogos.service';
+import { Component, OnInit } from '@angular/core';
+import { TipoLibertad } from '@shared/models/TipoLibertdad';
+import { MotivoReubicacion } from '@shared/models/MotivoReubicacion';
+import { CatalogosService } from '@shared/services/catalogos.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -31,7 +31,7 @@ export class MotivoReubicacionComponent implements OnInit {
   constructor(private catalogosService: CatalogosService) {
     this.data = [];
     this.motivoReubicacion = {} as MotivoReubicacion;
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -44,7 +44,6 @@ export class MotivoReubicacionComponent implements OnInit {
     this.isLoading = true;
     this.catalogosService.listMotivoReubicacion().subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
@@ -56,7 +55,6 @@ export class MotivoReubicacionComponent implements OnInit {
   submit(array) {
     if (this.validateFiels(array)) {
       this.catalogosService.saveMotivoReubicacion(this.motivoReubicacion).subscribe((data: any) => {
-        console.log('ADD', data);
         Swal.fire({
           title: data.error ? 'Error!' : 'Guardado',
           text: data.mensaje,
@@ -73,7 +71,7 @@ export class MotivoReubicacionComponent implements OnInit {
   }
   update(id, item) {
     this.isForm = true;
-    this.motivoReubicacion = {...item};
+    this.motivoReubicacion = { ...item };
     // this.areaPericial.role = [{value: item.role, description: item.roleNombre}];
 
     if (this.auxId && this.auxId !== id) {
@@ -163,10 +161,9 @@ export class MotivoReubicacionComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.catalogosService.changeStatusMotivoReubicacion(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,

@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 // App
-import {AuthenticationService} from '../services/authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
@@ -17,14 +17,13 @@ export class AuthGuard implements CanActivate {
     if (user) {
       return true;
     } else {
-      this.router.navigate(['/'], {queryParams: {returnUrl: state.url}});
+      this.router.navigate(['/'], { queryParams: { returnUrl: state.url } });
       return false;
     }
 
     // this.authenticationService.getUser().subscribe(user => {
     //   const expectedRole = route.data.expectedRole;
     //   if (user) {
-    //     console.log('Can active', true, expectedRole);
     //     return true;
 
     // for (const item of expectedRole) {

@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {CatalogosService} from '@shared/services/catalogos.service';
-import {ModalidadDelito} from '@shared/models/ModalidadDelito';
-import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { CatalogosService } from '@shared/services/catalogos.service';
+import { ModalidadDelito } from '@shared/models/ModalidadDelito';
+import { CentroPenitenciario } from '@shared/models/CentroPenitenciario';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
-import {Router} from '@angular/router';
-import {EncrDecrService} from '@shared/helpers/encr-decr.service';
-import {Personal} from '@shared/models/Personal';
-import {User} from '@shared/models/User';
+import { Router } from '@angular/router';
+import { EncrDecrService } from '@shared/helpers/encr-decr.service';
+import { Personal } from '@shared/models/Personal';
+import { User } from '@shared/models/User';
 
 @Component({
   selector: 'app-centro-penitenciario',
@@ -66,7 +66,6 @@ export class CentroPenitenciarioComponent implements OnInit {
     this.isLoading = true;
     this.catalogosService.listCentroPenitenciario().subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       if (data.error) {
         alert('Error ' + data.mensaje.toString());
       } else {
@@ -79,9 +78,8 @@ export class CentroPenitenciarioComponent implements OnInit {
     this.catalogosService.listTipoCentro().subscribe((data: any) => {
       if (data.tipoCentros) {
         for (const tipo of data.tipoCentros) {
-          this.tipoCentros = [...this.tipoCentros, {value: tipo.id, description: tipo.nombre}];
+          this.tipoCentros = [...this.tipoCentros, { value: tipo.id, description: tipo.nombre }];
         }
-        console.log('TIPO CENTROS', this.tipoCentros);
       }
     });
   }
@@ -91,33 +89,28 @@ export class CentroPenitenciarioComponent implements OnInit {
       if (data.estados) {
         this.estados = [];
         for (const estado of data.estados) {
-          this.estados = [...this.estados, {value: estado.id, description: estado.nombre}];
+          this.estados = [...this.estados, { value: estado.id, description: estado.nombre }];
         }
         this.estados = [...this.estados].sort();
-        console.log('ESTADOS', this.estados);
       }
     });
   }
 
   getMunicipios(region, idEstado) {
-    console.log(region, idEstado);
     this.catalogosService.listMunicipios(region, idEstado).subscribe((data: any) => {
-      console.log('Municipios', data);
       if (data.estados) {
         this.municipios = [];
         for (const municipio of data.estados) {
-          this.municipios = [...this.municipios, {value: municipio.id, description: municipio.nombre}];
+          this.municipios = [...this.municipios, { value: municipio.id, description: municipio.nombre }];
         }
-        console.log('Municipios', this.municipios);
       }
     });
   }
 
   getAreas() {
     this.catalogosService.listAreas().subscribe((data: any) => {
-      console.log('Areas', data);
       for (const area of data.areas) {
-        this.listAreas = [...this.listAreas, {value: area.id, description: area.nombre}];
+        this.listAreas = [...this.listAreas, { value: area.id, description: area.nombre }];
       }
     });
   }
@@ -129,17 +122,11 @@ export class CentroPenitenciarioComponent implements OnInit {
     if (!this.persona.areaSelect) {
       return Swal.fire('Atención', 'Tienes que selecionar el area del administrador.', 'warning');
     }
-    // this.catalogosService.validAdminCentroPenitenciario({}).subscribe((res: any) => {
-    //   console.log(res);
-    // });
-    // return console.log('submit', this.centroPenitenciario, 'personal', this.persona, 'user', this.user);
     const model = {
       ...this.centroPenitenciario,
-      personal: {...this.persona, ...this.user},
+      personal: { ...this.persona, ...this.user },
     };
-    console.log('Model', model);
     this.catalogosService.saveCentroPenitenciario(model).subscribe((data: any) => {
-      console.log(data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -171,20 +158,19 @@ export class CentroPenitenciarioComponent implements OnInit {
   add(modal) {
     this.centroPenitenciario = {} as CentroPenitenciario;
     this.persona = {} as Personal;
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
   update(item, modal) {
-    console.log(item);
-    this.centroPenitenciario = {...item};
-    this.persona = {...item.personal};
+    this.centroPenitenciario = { ...item };
+    this.persona = { ...item.personal };
     this.user.username = item.personal.username;
     this.user.password = item.personal.password;
-    this.centroPenitenciario.estadoSelect = [{value: item.municipio.estado.id, description: item.municipio.estado.nombre}];
-    this.centroPenitenciario.municipioSelect = [{value: item.municipio.id, description: item.municipio.nombre}];
-    this.centroPenitenciario.tipoCentroSelect = [{value: item.tipoCentro.id, description: item.tipoCentro.nombre}];
-    this.persona.areaSelect = [{value: item.personal.area.id , description: item.personal.area.nombre}];
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
+    this.centroPenitenciario.estadoSelect = [{ value: item.municipio.estado.id, description: item.municipio.estado.nombre }];
+    this.centroPenitenciario.municipioSelect = [{ value: item.municipio.id, description: item.municipio.nombre }];
+    this.centroPenitenciario.tipoCentroSelect = [{ value: item.tipoCentro.id, description: item.tipoCentro.nombre }];
+    this.persona.areaSelect = [{ value: item.personal.area.id, description: item.personal.area.nombre }];
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
   switch(e) {
@@ -199,10 +185,9 @@ export class CentroPenitenciarioComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.catalogosService.deleteCentroPenitenciario(item.id).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
@@ -223,7 +208,6 @@ export class CentroPenitenciarioComponent implements OnInit {
   onSelectEstado() {
     if (this.centroPenitenciario && this.centroPenitenciario.estadoSelect) {
       const estado = this.centroPenitenciario.estadoSelect;
-      console.log('isEstado', estado);
       this.getMunicipios('seleccionada', estado.value);
     }
   }

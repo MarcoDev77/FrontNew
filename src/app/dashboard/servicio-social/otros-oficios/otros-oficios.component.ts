@@ -51,7 +51,6 @@ export class OtrosOficiosComponent implements OnInit {
     this.isLoading = true;
     this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('data', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Resultados',
         text: data.mensaje,

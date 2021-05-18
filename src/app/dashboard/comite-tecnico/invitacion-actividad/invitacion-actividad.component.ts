@@ -15,7 +15,7 @@ export class InvitacionActividadComponent implements OnInit {
   public isLoading: boolean;
   public ingreso: Ingreso;
   public invitacion: Invitacion;
-  public file :any
+  public file: any
 
   constructor(
     private servicioSocialService: ServicioSocialService,
@@ -24,7 +24,7 @@ export class InvitacionActividadComponent implements OnInit {
   ) {
     this.isLoading = false
     this.ingreso = {} as any
-    this.invitacion= {} as any;
+    this.invitacion = {} as any;
   }
 
   ngOnInit() {
@@ -37,7 +37,6 @@ export class InvitacionActividadComponent implements OnInit {
     }
     this.isLoading = true;
     this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
-      console.log('Data', data);
       this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Búsqueda',
@@ -75,7 +74,7 @@ export class InvitacionActividadComponent implements OnInit {
 
   genetatePDF(modal) {
     this.isLoading = true;
-    this.invitacion.imputado={
+    this.invitacion.imputado = {
       id: this.ingreso.id
     }
     this.comiteTecnicoService.generatePDFInvitacionTaller(this.invitacion)
@@ -117,8 +116,8 @@ export class InvitacionActividadComponent implements OnInit {
 
 class Invitacion {
   taller: String
-  horario:String
-  duracion:String 
+  horario: String
+  duracion: String
   lugar: String
   inicia: String
   imputado: any

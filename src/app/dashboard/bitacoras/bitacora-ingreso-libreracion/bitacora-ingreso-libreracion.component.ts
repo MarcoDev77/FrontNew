@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {CentroPenitenciario} from '@shared/models/CentroPenitenciario';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { CentroPenitenciario } from '@shared/models/CentroPenitenciario';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-bitacora-ingreso-libreracion',
@@ -26,7 +26,7 @@ export class BitacoraIngresoLibreracionComponent implements OnInit {
     private modalService: NgbModal,
   ) {
 
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -66,11 +66,10 @@ export class BitacoraIngresoLibreracionComponent implements OnInit {
   }
 
   submit() {
-    console.log('>(');
   }
 
   seeDetails(item, modal) {
     this.isDetails = true;
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 }

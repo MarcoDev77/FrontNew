@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RecursoProbatorio} from '@shared/models/RecursoProbatorio';
-import {IngresoService} from '@shared/services/ingreso.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RecursoProbatorio } from '@shared/models/RecursoProbatorio';
+import { IngresoService } from '@shared/services/ingreso.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -29,7 +29,7 @@ export class RecursosProbatoriosComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private ingresoService: IngresoService) {
     this.recurso = {} as RecursoProbatorio;
     // Table
-    this.setClickedRow = function(index) {
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
   }
@@ -37,11 +37,11 @@ export class RecursosProbatoriosComponent implements OnInit {
   ngOnInit() {
     this.getData();
     this.initForm();
+    console.log(this.causaPenal);
   }
 
   getData() {
     this.ingresoService.listRecursos(this.causaPenal.id).subscribe((data: any) => {
-      console.log('Recursos.getData', data);
       if (!data.error) {
         this.listRecursos = data.recursos;
       }
@@ -49,10 +49,9 @@ export class RecursosProbatoriosComponent implements OnInit {
   }
 
   update(item) {
-    this.recurso = {...item};
-    console.log('ee', this.recurso);
+    this.recurso = { ...item };
     this.recurso.causaPenal = null;
-    this.formGroup.setValue({...this.recurso});
+    this.formGroup.setValue({ ...this.recurso });
     this.toggleForm();
   }
 
@@ -64,10 +63,9 @@ export class RecursosProbatoriosComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.ingresoService.deleteRecurso(item.id).subscribe((data: any) => {
-          console.log('delete', data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
@@ -91,10 +89,9 @@ export class RecursosProbatoriosComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'Cancelar'
-    }).then(({value}) => {
+    }).then(({ value }) => {
       if (value) {
         this.ingresoService.setRecursoAgotado(item.id).subscribe((data: any) => {
-          console.log('agotado', data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,
@@ -165,9 +162,7 @@ export class RecursosProbatoriosComponent implements OnInit {
   }
 
   resetForm() {
-    console.log('resetedform');
     this.recurso = new RecursoProbatorio();
-    console.log('ddd', this.recurso);
     this.formGroup.setValue(this.recurso);
   }
 
@@ -175,9 +170,8 @@ export class RecursosProbatoriosComponent implements OnInit {
     if (this.formGroup.invalid) {
       return;
     }
-    this.recurso = {...this.formGroup.value, causaPenal: {id: this.causaPenal.id}};
+    this.recurso = { ...this.formGroup.value, causaPenal: { id: this.causaPenal.id } };
     this.ingresoService.saveRecurso(this.recurso).subscribe((data: any) => {
-      console.log('Data', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,

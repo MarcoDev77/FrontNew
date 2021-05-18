@@ -1,11 +1,30 @@
-<app-section-title [goBack]="true" icon="fa fa-male" title="Datos referencia"></app-section-title>
+<app-section-title
+  [goBack]="true"
+  icon="fa fa-male"
+  title="Datos referencia"
+></app-section-title>
+<div class="row">
+  <div class="col offset-1">
+    <label>
+      <b>{{ ingreso.folio }}</b> {{ ingreso.apodo.nombre }}
+      {{ ingreso.apodo.apellidoPaterno }} {{ ingreso.apodo.apellidoMaterno }}
+    </label>
+  </div>
+</div>
 <div class="row">
   <div class="col text-right mb-3">
-    <button class="btn btn-success btn-sm m-0 pull-right" (click)="showModal(addModal)" [ngbTooltip]="'Nuevo Registro'">
+    <button
+      class="btn btn-success btn-sm m-0 pull-right"
+      (click)="showModal(addModal)"
+      [ngbTooltip]="'Nuevo Registro'"
+    >
       <i class="fa fa-plus fa-lg"></i>
     </button>
-    <button class="btn btn-primary m-0 btn-sm pull-right" (click)="generateControlVisitas(view)"
-      [ngbTooltip]="'Imprimir formato de control de visitas'">
+    <button
+      class="btn btn-primary m-0 btn-sm pull-right"
+      (click)="generateControlVisitas(view)"
+      [ngbTooltip]="'Imprimir formato de control de visitas'"
+    >
       <i class="fa fa-print"></i>
     </button>
   </div>
@@ -14,28 +33,35 @@
   <table class="table">
     <thead>
       <tr>
-        <th class="text-center">
-          Foto
-        </th>
-        <th class="text-center">
-          Nombre Completo
-        </th>
-        <th class="text-center">
-          Parentesco
-        </th>
+        <th class="text-center">Foto</th>
+        <th class="text-center">Nombre Completo</th>
+        <th class="text-center">Parentesco</th>
 
-        <th class="text-center" style="min-width: 5rem;">Acciones</th>
+        <th class="text-center" style="min-width: 5rem">Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+      <tr
+        *ngFor="
+          let item of data
+            | orderBy: key:reverse
+            | filter: filter
+            | paginate: { itemsPerPage: 5, currentPage: p };
+          let i = index
+        "
+      >
         <td class="text-center">
           <div class="card-avatar">
-            <img class="img" width="50px" (click)="clickInputFile(item, inputFile)" src="{{
+            <img
+              class="img"
+              width="50px"
+              (click)="clickInputFile(item, inputFile)"
+              src="{{
                 item.fotoPerfil
                   ? 'data:image/png;base64,' + item.fotoPerfil
                   : 'assets/img/no_image.png'
-              }}" />
+              }}"
+            />
           </div>
         </td>
         <td class="text-center">
@@ -44,18 +70,51 @@
         </td>
         <td class="text-center">{{ item.parentesco.nombre }}</td>
         <td class="text-center">
-          <i class="fa fa-eye" placement="top" ngbTooltip="Consultar detalles" (click)="showModal(addModal, item)"></i>
+          <i
+            class="fa fa-eye"
+            placement="top"
+            ngbTooltip="Consultar detalles"
+            (click)="showModal(addModal, item)"
+          ></i>
           &nbsp;
-          <i *ngIf="item.estaVivo&& roles[0]==='ROLE_SITE'"  class="fa fa-id-card-o" placement="top" ngbTooltip="Generar pase único"
-            (click)="generatePaseUnico(item, view)"></i>
+          <i
+            *ngIf="item.estaVivo && roles[0] === 'ROLE_TRABAJO_SOCIAL'"
+            class="fa fa-id-card-o"
+            placement="top"
+            ngbTooltip="Generar pase único"
+            (click)="generatePaseUnico(item, view)"
+          ></i>
           &nbsp;
-          <i *ngIf="item.estaVivo && item.esMayorEdad&&roles[0]==='ROLE_TRABAJO_SOCIAL'" class="fa fa-id-card" placement="top"
-            ngbTooltip="Generar pase mensual" (click)="generatePaseMensual(item, view)"></i>
+          <i
+            *ngIf="
+              item.estaVivo &&
+              item.esMayorEdad &&
+              roles[0] === 'ROLE_TRABAJO_SOCIAL'
+            "
+            class="fa fa-id-card"
+            placement="top"
+            ngbTooltip="Generar pase mensual"
+            (click)="generatePaseMensual(item, view)"
+          ></i>
           &nbsp;
-          <i *ngIf="item.estaVivo && item.esMayorEdad&&roles[0]==='ROLE_TRABAJO_SOCIAL'" class="fa fa-address-card" placement="top"
-            ngbTooltip="Generar pase permanente" (click)="showModalPasePermanente(item, pasePermanenteModal)"></i>&nbsp;
-          <i class="fa fa-times" (click)="deleteReferencia(item.id)" placement="top"
-            ngbTooltip="Eliminar referencia"></i>
+          <i
+            *ngIf="
+              item.estaVivo &&
+              item.esMayorEdad &&
+              roles[0] === 'ROLE_INFORMATICA'
+            "
+            class="fa fa-address-card"
+            placement="top"
+            ngbTooltip="Generar pase permanente"
+            (click)="showModalPasePermanente(item, pasePermanenteModal)"
+          ></i
+          >&nbsp;
+          <i
+            class="fa fa-times"
+            (click)="deleteReferencia(item.id)"
+            placement="top"
+            ngbTooltip="Eliminar referencia"
+          ></i>
         </td>
       </tr>
 
@@ -67,7 +126,13 @@
     </tbody>
   </table>
   <div class="text-center w-100">
-    <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
+    <pagination-controls
+      autoHide="true"
+      responsive="true"
+      previousLabel=""
+      nextLabel=""
+      (pageChange)="switch($event)"
+    >
     </pagination-controls>
   </div>
 </div>
@@ -78,39 +143,75 @@
       <h3>Referencia</h3>
     </div>
 
-    <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && saveReferencia()" #f="ngForm" novalidate>
+    <form
+      class="form-horizontal"
+      name="form"
+      (ngSubmit)="f.form.valid && saveReferencia()"
+      #f="ngForm"
+      novalidate
+    >
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Apellido paterno:</label>
-            <input type="text" class="form-control" name="apellidoPaterno" #apellidoPaterno="ngModel" [ngClass]="{
+            <input
+              type="text"
+              class="form-control"
+              name="apellidoPaterno"
+              #apellidoPaterno="ngModel"
+              [ngClass]="{
                 'is-invalid': f.submitted && apellidoPaterno.invalid
-              }" [(ngModel)]="referencia.apellidoPaterno" required />
+              }"
+              [(ngModel)]="referencia.apellidoPaterno"
+              required
+            />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Apellido materno:</label>
-            <input type="text" class="form-control" name="apellidoMaterno" #apellidoMaterno="ngModel" [ngClass]="{
+            <input
+              type="text"
+              class="form-control"
+              name="apellidoMaterno"
+              #apellidoMaterno="ngModel"
+              [ngClass]="{
                 'is-invalid': f.submitted && apellidoMaterno.invalid
-              }" [(ngModel)]="referencia.apellidoMaterno" required />
+              }"
+              [(ngModel)]="referencia.apellidoMaterno"
+              required
+            />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Nombre:</label>
-            <input type="text" class="form-control" name="nombre" #nombre="ngModel"
-              [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid }" [(ngModel)]="referencia.nombre" required />
+            <input
+              type="text"
+              class="form-control"
+              name="nombre"
+              #nombre="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid }"
+              [(ngModel)]="referencia.nombre"
+              required
+            />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Genero:</label>
-            <select class="form-control" name="genero" #genero="ngModel" [(ngModel)]="referencia.genero">
-              <option [value]="undefined" disabled hidden>Seleccione genero</option>
+            <select
+              class="form-control"
+              name="genero"
+              #genero="ngModel"
+              [(ngModel)]="referencia.genero"
+            >
+              <option [value]="undefined" disabled hidden>
+                Seleccione genero
+              </option>
               <option value="Masculino">Masculino</option>
               <option value="Femenino">Femenino</option>
             </select>
@@ -122,9 +223,14 @@
             <label for="">Parentesco:</label>
             <!--   <input  type="text" class="form-control" name="parentesco" #parentesco="ngModel"
               [(ngModel)]="referencia.parentesco"> -->
-            <select class="form-control shadows" name="parentesco" [(ngModel)]="referencia.parentesco.id">
+            <select
+              class="form-control shadows"
+              name="parentesco"
+              [(ngModel)]="referencia.parentesco.id"
+            >
               <option *ngFor="let item of parentescos" [value]="item.id">
-                {{ item.nombre }}</option>
+                {{ item.nombre }}
+              </option>
             </select>
           </div>
         </div>
@@ -132,25 +238,44 @@
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Ocupación:</label>
-            <input type="text" class="form-control" name="ocupacion" #ocupacion="ngModel"
-              [(ngModel)]="referencia.ocupacion" />
+            <input
+              type="text"
+              class="form-control"
+              name="ocupacion"
+              #ocupacion="ngModel"
+              [(ngModel)]="referencia.ocupacion"
+            />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Teléfono:</label>
-            <input type="tel" class="form-control" name="telefono" #telefono="ngModel" [(ngModel)]="referencia.telefono"
-              maxlength="10" pattern="^[0-9]*$" />
+            <input
+              type="tel"
+              class="form-control"
+              name="telefono"
+              #telefono="ngModel"
+              [(ngModel)]="referencia.telefono"
+              maxlength="10"
+              pattern="^[0-9]*$"
+            />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">País de nacimiento:</label>
-            <input type="text" class="form-control" [(ngModel)]="referencia.paisNacimiento"
-              (focus)="selectArrayTofilter(paises)" [ngbTypeahead]="search" [resultTemplate]="rt"
-              [inputFormatter]="formatter" name="paisNacimiento" />
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="referencia.paisNacimiento"
+              (focus)="selectArrayTofilter(paises)"
+              [ngbTypeahead]="search"
+              [resultTemplate]="rt"
+              [inputFormatter]="formatter"
+              name="paisNacimiento"
+            />
           </div>
         </div>
 
@@ -158,14 +283,16 @@
           <div class="form-group">
             <label for="">Fecha de nacimiento:</label>
             <input
-            type="date"
-            class="form-control"
-            name="fechaNacimiento"
-            (change)="change($event)"
-            #fechaNacimiento="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && fechaNacimiento.invalid }"
-            [(ngModel)]="referencia.fechaNacimiento"
-            required
+              type="date"
+              class="form-control"
+              name="fechaNacimiento"
+              (change)="change($event)"
+              #fechaNacimiento="ngModel"
+              [ngClass]="{
+                'is-invalid': f.submitted && fechaNacimiento.invalid
+              }"
+              [(ngModel)]="referencia.fechaNacimiento"
+              required
             />
           </div>
         </div>
@@ -173,8 +300,15 @@
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Situación actual:</label>
-            <select class="form-control" name="estaVivo" #estaVivo="ngModel" [(ngModel)]="referencia.estaVivo">
-              <option [value]="undefined" disabled hidden>Seleccione situación actual</option>
+            <select
+              class="form-control"
+              name="estaVivo"
+              #estaVivo="ngModel"
+              [(ngModel)]="referencia.estaVivo"
+            >
+              <option [value]="undefined" disabled hidden>
+                Seleccione situación actual
+              </option>
               <option [ngValue]="true">Vivo</option>
               <option [ngValue]="false">Finado</option>
             </select>
@@ -184,8 +318,14 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="">Estado civil:</label>
-            <select class="form-control shadows" name="estadoCivil"  [(ngModel)]="referencia.estadoCivil.id">
-              <option *ngFor="let item of estadosCiviles" [value]="item.id"> {{item.nombre}}</option>
+            <select
+              class="form-control shadows"
+              name="estadoCivil"
+              [(ngModel)]="referencia.estadoCivil.id"
+            >
+              <option *ngFor="let item of estadosCiviles" [value]="item.id">
+                {{ item.nombre }}
+              </option>
             </select>
           </div>
         </div>
@@ -202,66 +342,113 @@
           </div>
         </div>
 
-
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Calle:</label>
-            <input type="text" class="form-control" name="calleNumero" #calleNumero="ngModel"
-              [(ngModel)]="referencia.calleNumero" />
+            <input
+              type="text"
+              class="form-control"
+              name="calleNumero"
+              #calleNumero="ngModel"
+              [(ngModel)]="referencia.calleNumero"
+            />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Número:</label>
-            <input type="text" class="form-control" name="numeroDomicilio" #numeroDomicilio="ngModel"
-              [(ngModel)]="referencia.numeroDomicilio" />
+            <input
+              type="text"
+              class="form-control"
+              name="numeroDomicilio"
+              #numeroDomicilio="ngModel"
+              [(ngModel)]="referencia.numeroDomicilio"
+            />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Colonia:</label>
-            <input type="text" class="form-control" name="colonia" #colonia="ngModel"
-              [(ngModel)]="referencia.colonia" />
+            <input
+              type="text"
+              class="form-control"
+              name="colonia"
+              #colonia="ngModel"
+              [(ngModel)]="referencia.colonia"
+            />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Código postal:</label>
-            <input type="text" class="form-control" name="codigoPostal" maxlength="5" #codigoPostal="ngModel"
-              [(ngModel)]="referencia.codigoPostal" pattern="^[0-9]*$" />
+            <input
+              type="text"
+              class="form-control"
+              name="codigoPostal"
+              maxlength="5"
+              #codigoPostal="ngModel"
+              [(ngModel)]="referencia.codigoPostal"
+              pattern="^[0-9]*$"
+            />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Entidad federativa:</label>
-            <input type="text" class="form-control" [(ngModel)]="referencia.estado" [ngbTypeahead]="search"
-              (focus)="selectArrayTofilter(estados)" [resultTemplate]="rt" [inputFormatter]="formatter" name="estado" />
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="referencia.estado"
+              [ngbTypeahead]="search"
+              (focus)="selectArrayTofilter(estados)"
+              [resultTemplate]="rt"
+              [inputFormatter]="formatter"
+              name="estado"
+            />
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Municipio o delegación:</label>
-            <input type="text" class="form-control" name="municipio" #municipio="ngModel"
-              [(ngModel)]="referencia.municipio" />
+            <input
+              type="text"
+              class="form-control"
+              name="municipio"
+              #municipio="ngModel"
+              [(ngModel)]="referencia.municipio"
+            />
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <label for="">Personas dependientes de el/ella:</label>
-            <input type="number" min="0" class="form-control" name="numeroDependientes" #numeroDependientes="ngModel"
-              [(ngModel)]="referencia.numeroDependientes" />
+            <input
+              type="number"
+              min="0"
+              class="form-control"
+              name="numeroDependientes"
+              #numeroDependientes="ngModel"
+              [(ngModel)]="referencia.numeroDependientes"
+            />
           </div>
         </div>
         <div class="col-sm-4">
           <div class="custom-control custom-checkbox mt-4">
-            <input type="checkbox" class="custom-control-input" id="customCheck1" name="extranjero"
-              [(ngModel)]="referencia.extranjero" />
-            <label class="custom-control-label" for="customCheck1">¿Esta en el extranjero?</label>
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck1"
+              name="extranjero"
+              [(ngModel)]="referencia.extranjero"
+            />
+            <label class="custom-control-label" for="customCheck1"
+              >¿Esta en el extranjero?</label
+            >
           </div>
         </div>
 
@@ -275,22 +462,40 @@
 
         <div class="form-group ml-4" *ngIf="referencia.extranjero">
           <label for="">Lada internacional:</label>
-          <input type="tel" class="form-control" name="lada" #lada="ngModel" [(ngModel)]="referencia.lada" maxlength="3"
-            pattern="^[0-9]*$" />
+          <input
+            type="tel"
+            class="form-control"
+            name="lada"
+            #lada="ngModel"
+            [(ngModel)]="referencia.lada"
+            maxlength="3"
+            pattern="^[0-9]*$"
+          />
         </div>
 
         <div class="col-md-12">
           <div class="form-group">
             <label for="">Observaciones:</label>
-            <textarea class="form-control" name="observaciones" id="" cols="30" rows="5" maxlength="60" [(ngModel)]="referencia.observaciones"></textarea>
+            <textarea
+              class="form-control"
+              name="observaciones"
+              id=""
+              cols="30"
+              rows="5"
+              maxlength="60"
+              [(ngModel)]="referencia.observaciones"
+            ></textarea>
           </div>
         </div>
-
       </div>
 
       <div class="row">
         <div class="col-sm-4 offset-8">
-          <button type="button" (click)="closeModal()" class="btn btn-danger mr-3">
+          <button
+            type="button"
+            (click)="closeModal()"
+            class="btn btn-danger mr-3"
+          >
             Cerrar
           </button>
           <button type="submit" class="float-right btn btn-success">
@@ -308,31 +513,61 @@
 
 <ng-template #view let-view>
   <div class="modal-body text-center pt-0">
-    <i (click)="view.dismiss()" style="
+    <i
+      (click)="view.dismiss()"
+      style="
         cursor: pointer;
         position: absolute;
         right: 1%;
         top: 1%;
         font-size: 20px;
-      " class="fa fa-times-circle"></i>
-    <app-web-viewer [file]="file" [name]="'acta-de-entrevista'"></app-web-viewer>
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'acta-de-entrevista'"
+    ></app-web-viewer>
   </div>
 </ng-template>
-<input #inputFile style="display: none;" accept="image/png, image/jpeg, image/jpg" type="file" class="form-control-file"
-  ng2FileSelect aria-describedby="fileHelp" [uploader]="uploader" (change)="uploadReferencePhoto(inputFile)" />
+<input
+  #inputFile
+  style="display: none"
+  accept="image/png, image/jpeg, image/jpg"
+  type="file"
+  class="form-control-file"
+  ng2FileSelect
+  aria-describedby="fileHelp"
+  [uploader]="uploader"
+  (change)="uploadReferencePhoto(inputFile)"
+/>
 
 <ng-template #pasePermanenteModal let-pasePermanenteModal>
   <div class="modal-body form-text text-muted pt-0">
-    <app-section-title icon="fa fa-address-card" title="Pase permanente"></app-section-title>
-    <form name="formPasePermanente" (ngSubmit)="formPasePermanente.form.valid && generatePasePermanente(view)"
-      #formPasePermanente="ngForm" novalidate>
+    <app-section-title
+      icon="fa fa-address-card"
+      title="Pase permanente"
+    ></app-section-title>
+    <form
+      name="formPasePermanente"
+      (ngSubmit)="formPasePermanente.form.valid && generatePasePermanente(view)"
+      #formPasePermanente="ngForm"
+      novalidate
+    >
       <div class="row">
         <div class="col-4">
           <div class="form-group">
             <label>Tipo de pase</label>
-            <select [(ngModel)]="pasePermanente.tipoPase" #tipoPase="ngModel" class="form-control" [ngClass]="{
+            <select
+              [(ngModel)]="pasePermanente.tipoPase"
+              #tipoPase="ngModel"
+              class="form-control"
+              [ngClass]="{
                 'is-invalid': formPasePermanente.submitted && tipoPase.invalid
-              }" name="tipo" required>
+              }"
+              name="tipo"
+              required
+            >
               <option value="individual">Individual</option>
               <option value="colectivo">Colectivo</option>
             </select>
@@ -340,24 +575,45 @@
         </div>
         <div class="col-8">
           <label>Horario de visita</label>
-          <input [(ngModel)]="pasePermanente.horarioVisita" #horarioVisita="ngModel" name="horarioVisita" type="text"
-            minlength="1" maxlength="50" class="form-control" [ngClass]="{
+          <input
+            [(ngModel)]="pasePermanente.horarioVisita"
+            #horarioVisita="ngModel"
+            name="horarioVisita"
+            type="text"
+            minlength="1"
+            maxlength="50"
+            class="form-control"
+            [ngClass]="{
               'is-invalid':
                 formPasePermanente.submitted && horarioVisita.invalid
-            }" required />
+            }"
+            required
+          />
         </div>
         <div class="col-12">
           <label>Observaciones</label>
-          <input [(ngModel)]="pasePermanente.observaciones" name="observaciones" type="text" class="form-control" />
+          <input
+            [(ngModel)]="pasePermanente.observaciones"
+            name="observaciones"
+            type="text"
+            class="form-control"
+          />
         </div>
         <div *ngIf="pasePermanente.tipoPase === 'colectivo'" class="col-4">
-          <button type="button" (click)="showFormModal()" [disabled]="pasePermanente?.menores.length >= 5"
-            class="btn btn-info btn-sm shadows">
+          <button
+            type="button"
+            (click)="showFormModal()"
+            [disabled]="pasePermanente?.menores.length >= 5"
+            class="btn btn-info btn-sm shadows"
+          >
             Agregar menor
           </button>
         </div>
       </div>
-      <table *ngIf="pasePermanente.tipoPase === 'colectivo'" class="table table-hover">
+      <table
+        *ngIf="pasePermanente.tipoPase === 'colectivo'"
+        class="table table-hover"
+      >
         <thead>
           <tr>
             <th scope="col">Nombre</th>
@@ -370,54 +626,98 @@
         <tbody>
           <tr id="table-form" *ngIf="isForm">
             <td class="text-center">
-              <input name="nombre" type="text" class="form-control" [(ngModel)]="menor.nombre" #nombre="ngModel"
-                [ngClass]="{ 'is-invalid': nombre.touched && nombre.invalid }" maxlength="60" required />
+              <input
+                name="nombre"
+                type="text"
+                class="form-control"
+                [(ngModel)]="menor.nombre"
+                #nombre="ngModel"
+                [ngClass]="{ 'is-invalid': nombre.touched && nombre.invalid }"
+                maxlength="60"
+                required
+              />
             </td>
             <td class="text-center">
-              <input name="apellidoPaterno" type="text" class="form-control" [(ngModel)]="menor.apellidoPaterno"
-                #apellidoPaterno="ngModel" [ngClass]="{
+              <input
+                name="apellidoPaterno"
+                type="text"
+                class="form-control"
+                [(ngModel)]="menor.apellidoPaterno"
+                #apellidoPaterno="ngModel"
+                [ngClass]="{
                   'is-invalid':
                     apellidoPaterno.touched && apellidoPaterno.invalid
-                }" maxlength="60" required />
+                }"
+                maxlength="60"
+                required
+              />
             </td>
             <td class="text-center">
-              <input name="apellidoMaterno" type="text" class="form-control" [(ngModel)]="menor.apellidoMaterno"
-                #apellidoMaterno="ngModel" [ngClass]="{
+              <input
+                name="apellidoMaterno"
+                type="text"
+                class="form-control"
+                [(ngModel)]="menor.apellidoMaterno"
+                #apellidoMaterno="ngModel"
+                [ngClass]="{
                   'is-invalid':
                     apellidoMaterno.touched && apellidoMaterno.invalid
-                }" maxlength="60" required />
+                }"
+                maxlength="60"
+                required
+              />
             </td>
 
             <td class="text-center">
-              <input name="fechaNacimiento" type="date" class="form-control"
-                         (change)="change($event)"
-                         #fechaNacimiento="ngModel"
-              [(ngModel)]="menor.fechaNacimiento"
-                 [ngClass]="{
+              <input
+                name="fechaNacimiento"
+                type="date"
+                class="form-control"
+                (change)="change($event)"
+                #fechaNacimiento="ngModel"
+                [(ngModel)]="menor.fechaNacimiento"
+                [ngClass]="{
                   'is-invalid':
                     fechaNacimiento.touched && fechaNacimiento.invalid
-                }" required />
+                }"
+                required
+              />
             </td>
 
             <td class="text-center">
-              <i class="fa fa-times mr-3" placement="top" ngbTooltip="Cancelar" (click)="cancel()"></i>
-              <i class="fa fa-check" placement="top" ngbTooltip="Guardar" (click)="
+              <i
+                class="fa fa-times mr-3"
+                placement="top"
+                ngbTooltip="Cancelar"
+                (click)="cancel()"
+              ></i>
+              <i
+                class="fa fa-check"
+                placement="top"
+                ngbTooltip="Guardar"
+                (click)="
                   addMenorPasePermanente([
                     nombre,
                     apellidoMaterno,
                     apellidoPaterno,
                     fechaNacimiento
                   ])
-                "></i>
+                "
+              ></i>
             </td>
           </tr>
-          <tr id="{{ 'tr' + i }}" *ngFor="
+          <tr
+            id="{{ 'tr' + i }}"
+            *ngFor="
               let item of pasePermanente.menores
                 | orderBy: key:reverse
                 | filter: filter
                 | paginate: { itemsPerPage: 5, currentPage: p };
               let i = index
-            " (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+            "
+            (click)="setClickedRow(i)"
+            [class.active]="i == selectedRow"
+          >
             <td class="text-center">{{ item.nombre }}</td>
             <td class="text-center">{{ item.apellidoPaterno }}</td>
             <td class="text-center">{{ item.apellidoMaterno }}</td>
@@ -425,15 +725,23 @@
               {{ item.fechaNacimiento | date: "dd/MM/yy" }}
             </td>
             <td class="text-center">
-              <i (click)="deleteMenorPasePermanente(item)" placement="top" ngbTooltip="Eliminar"
-                class="fa fa-trash-o"></i>
+              <i
+                (click)="deleteMenorPasePermanente(item)"
+                placement="top"
+                ngbTooltip="Eliminar"
+                class="fa fa-trash-o"
+              ></i>
             </td>
           </tr>
         </tbody>
       </table>
       <div class="row">
         <div class="col-sm-4 offset-8">
-          <button type="button" (click)="closeModal()" class="btn btn-danger mr-3">
+          <button
+            type="button"
+            (click)="closeModal()"
+            class="btn btn-danger mr-3"
+          >
             Cerrar
           </button>
           <button type="submit" class="float-right btn btn-success">

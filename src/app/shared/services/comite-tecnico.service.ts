@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {environment} from '@environment/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '@environment/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +11,16 @@ export class ComiteTecnicoService {
   constructor(private http: HttpClient) {
     this.url = environment.apiUrl;
   }
- 
+
   getImputadoByFolio = folio => this.http.get(`${this.url}/api/listarImputadoPorFolio?folioImputado=${folio}`);
 
   savePlandeActividades = model => {
-    console.log('To server.savePlandeActividades', model);
     return this.http.post(`${this.url}/api/registrarPlanActividades`, model);
   };
 
   generatePDFDireccionIndustrial = id => {
     const responseType = 'arraybuffer' as 'json';
-    return this.http.get(`${this.url}/api/generarFormatoPdfComiteTecnico?imputadoId=${id}`, {responseType});
+    return this.http.get(`${this.url}/api/generarFormatoPdfComiteTecnico?imputadoId=${id}`, { responseType });
   }
 
   saveExperienciaLaboral = model => this.http.post(`${this.url}/api/registrarExperienciaLAboral`, model);
@@ -30,24 +29,21 @@ export class ComiteTecnicoService {
 
   getImputadoByFolioPsicologia = folio => this.http.get(`${this.url}/api/listarImputadoPsicologia?folioImputado=${folio}`);
 
-  getImputadoByFolioTrabajoSocial= folio => this.http.get(`${this.url}/api/listarImputadoTrabajoSocial?folioImputado=${folio}`);
+  getImputadoByFolioTrabajoSocial = folio => this.http.get(`${this.url}/api/listarImputadoTrabajoSocial?folioImputado=${folio}`);
 
-  getImputadoByFolioPedagogia= folio => this.http.get(`${this.url}/api/listarImputadoPedagogia?folioImputado=${folio}`);
+  getImputadoByFolioPedagogia = folio => this.http.get(`${this.url}/api/listarImputadoPedagogia?folioImputado=${folio}`);
 
   saveFichaPsicologica = model => {
-    console.log('To server.savePlandeActividades', model);
     return this.http.post(`${this.url}/api/registrarFicha`, model);
   };
 
-  saveAntecedente=model=>{
-    console.log('To server.saveAntecedente', model);
+  saveAntecedente = model => {
     return this.http.post(`${this.url}/api/registrarAntecedentesConsumo`, model);
   }
 
   deleteAntecedente = id => this.http.delete(`${this.url}/api/eliminarAntecedentesConsumo?idAntecedente=${id}`);
 
-  saveGrupoCanaliza= model=>{
-    console.log('To server.grupoCanaliza', model);
+  saveGrupoCanaliza = model => {
     return this.http.post(`${this.url}/api/registrarGrupoCanaliza`, model);
   }
 
@@ -58,7 +54,7 @@ export class ComiteTecnicoService {
 
   generatePDFCentroEscolar = id => {
     const responseType = 'arraybuffer' as 'json';
-    return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadCentroEscolar?imputadoId=${id}`, {responseType});
+    return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadCentroEscolar?imputadoId=${id}`, { responseType });
   };
 
   getComiteDeportes = folio => this.http.get(`${this.url}/api/listarImputadoPorFolioDeportivo?folioImputado=${folio}`);
@@ -67,7 +63,7 @@ export class ComiteTecnicoService {
 
   generatePDFDeportes = id => {
     const responseType = 'arraybuffer' as 'json';
-    return this.http.get(`${this.url}/api/generarFormatoPdfEncuestaDeportiva?imputadoId=${id}`, {responseType});
+    return this.http.get(`${this.url}/api/generarFormatoPdfEncuestaDeportiva?imputadoId=${id}`, { responseType });
   };
 
   getDataComiteOdontoligia = folio => this.http.get(`${this.url}/api/listarImputadoPorFolioOdontologica?folioImputado=${folio}`);
@@ -76,37 +72,36 @@ export class ComiteTecnicoService {
 
   generatePDFOdontologia = id => {
     const responseType = 'arraybuffer' as 'json';
-    return this.http.get(`${this.url}/api/generarFormatoPdfHistoriaClinicaOdontologica?imputadoId=${id}`, {responseType});
+    return this.http.get(`${this.url}/api/generarFormatoPdfHistoriaClinicaOdontologica?imputadoId=${id}`, { responseType });
   };
 
 
   generatePDFPlanActividades = id => {
     const responseType = 'arraybuffer' as 'json';
-    return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadPedagogia?imputadoId=${id}`, {responseType});
+    return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadPedagogia?imputadoId=${id}`, { responseType });
   };
 
   generatePDFPsicologia = id => {
     const responseType = 'arraybuffer' as 'json';
-    return this.http.get(`${this.url}/api/generarFormatoPdfFichaPsicologia?imputadoId=${id}`, {responseType});
+    return this.http.get(`${this.url}/api/generarFormatoPdfFichaPsicologia?imputadoId=${id}`, { responseType });
   };
 
   getImputadoByFolioGeneral = folio => this.http.get(`${this.url}/api/buscarImputadoFolio?folioImputado=${folio}`);
 
   buscarDocumentoResultadoExamen = (id, clave) => {
     const responseType = 'arraybuffer' as 'json';
-    return this.http.get(`${this.url}/api/buscarDocumentoResultadoExamen?imputadoId=${id}&claveDocumento=${clave}`, {responseType});
+    return this.http.get(`${this.url}/api/buscarDocumentoResultadoExamen?imputadoId=${id}&claveDocumento=${clave}`, { responseType });
   }
 
-  saveActividadestrabajoSocial =model =>{
-    console.log('To server.trabajoSocial', model);
+  saveActividadestrabajoSocial = model => {
     return this.http.post(`${this.url}/api/registrarActividadesTrabajo`, model);
   }
 
   generatePDFTrabajoSocial = id => {
     const responseType = 'arraybuffer' as 'json';
-    return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadTrabajoSocial?imputadoId=${id}`, {responseType});
+    return this.http.get(`${this.url}/api/generarFormatoPdfPlanActividadTrabajoSocial?imputadoId=${id}`, { responseType });
   };
-  
+
   checkDocumentsResultadosImputado = id =>
     this.http.get(`${this.url}/api/listarDocumentosResultadoImputado?imputadoId=${id}`);
 
@@ -115,21 +110,20 @@ export class ComiteTecnicoService {
       `${this.url}/api/consultarDatosDocumentoGuardado?claveDocumento=${clave}&imputadoId=${id}`
     );
 
-    generatePDFDocumentoGuardado = (clave, id) => {
-      const responseType = 'arraybuffer' as 'json';
-      return this.http.get(
-        `${this.url}/api/buscarDocumentoGuardado?claveDocumento=${clave}&imputadoId=${id}`,
-        {responseType}
-      );
-    };
+  generatePDFDocumentoGuardado = (clave, id) => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(
+      `${this.url}/api/buscarDocumentoGuardado?claveDocumento=${clave}&imputadoId=${id}`,
+      { responseType }
+    );
+  };
 
 
-  generatePDFInvitacionTaller= model=> {
+  generatePDFInvitacionTaller = model => {
     const responseType = 'arraybuffer' as 'json';
     return this.http.post(
-      `${this.url}/api/registrarInvitacionTaller`,model,
-      {responseType}
+      `${this.url}/api/registrarInvitacionTaller`, model,
+      { responseType }
     );
   };
 }
-  

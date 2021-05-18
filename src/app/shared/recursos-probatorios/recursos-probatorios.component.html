@@ -16,8 +16,8 @@
 
           <div class="col-md-4">
             <div class="form-group text-left">
-              <label>Nombre</label>
-              <input formControlName="nombre" class="form-control" type="text" placeholder="Nombre"
+              <label>Nombre del Juez</label>
+              <input formControlName="nombre" class="form-control" type="text" placeholder="Nombre del Juez"
                      [class.is-invalid]="isValidControl('nombre')">
             </div>
           </div>
@@ -50,7 +50,7 @@
 
           <div class="col-md-4">
             <div class="form-group text-left">
-              <label>Dia(s) de Penalidad</label>
+              <label>Día(s) de Penalidad</label>
               <input formControlName="penalidadDia" class="form-control" type="number" placeholder="Dia(s) de Penalidad"
                      [class.is-invalid]="isValidControl('penalidadDia')">
             </div>
@@ -111,7 +111,7 @@
             <th (click)="sort('clave')" class="text-center">
               <span *ngIf="key == 'clave'" class="fa"
                     [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span>
-              Nombre
+              Nombre del Juez
             </th>
             <th (click)="sort('fecha')" class="text-center">
               <span *ngIf="key == 'fecha'" class="fa"
@@ -161,7 +161,7 @@
               <span *ngIf="item.estaAgotado" class="badge badge-warning">Agotado</span>
             </td>
             <td class="text-center">
-              <i class="fa fa-pencil" placement="top" ngbTooltip="Actiualizar" (click)="update(item)"></i> &nbsp;
+              <i class="fa fa-pencil" placement="top" ngbTooltip="Actualizar" (click)="update(item)"></i> &nbsp;
               <i class="fa fa-trash-o" placement="top" ngbTooltip="Eliminar" (click)="delete(item)"></i> &nbsp;
               <i *ngIf="!item.estaAgotado" class="fa fa-level-down" placement="top" ngbTooltip="Marcar como agotado" (click)="setAgotado(item)"></i>
             </td>

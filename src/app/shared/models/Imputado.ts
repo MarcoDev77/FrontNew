@@ -1,6 +1,7 @@
 export class Imputado {
   id?: number;
   curp: string;
+  fechaRegistro: any;
   fechaNacimiento: any;
   edadAparente: number;
   genero: string;
@@ -28,6 +29,7 @@ export class Imputado {
   apodos: any[];
   delitos: any[];
   mainName: any;
+  datosJuridicos: any;
   finadoPadre: boolean;
   finadoMadre: boolean;
   // Lugar Nacimirnto

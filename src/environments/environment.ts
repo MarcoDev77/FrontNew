@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://6c68a476.ngrok.io',
+  apiUrl: 'http://fb36ba238a3b.ngrok.io',
   // ttp://167.172.158.44:8080/reinsercionapi/nameEndPoint
 };
 

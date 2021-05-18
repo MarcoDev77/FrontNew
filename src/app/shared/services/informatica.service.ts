@@ -14,33 +14,39 @@ export class InformaticaService {
 
   getVisitasImputado = (id) => this.http.get(`${this.url}/api/visitasImputado?idImputado=${id}`);
 
+  updateCentro = (centroId) => this.http.post(`${this.url}/api/actualizarCentroInformatica`, { centroId });
+
   generatePDFFormatoPdfReporteVisitaCredencial = id => {
     const responseType = 'arraybuffer' as 'json';
     return this.http.get(`${this.url}/api/generarFormatoPdfReporteVisitaCredencial?imputadoId=${id}`, { responseType });
   }
+  generarPdfCedulaInterno = id => {
+    const responseType = 'arraybuffer' as 'json';
+    return this.http.get(`${this.url}/api/generarFormatoPdfMergeCedulaIdentificacion?imputadoId=${id}`, { responseType });
+  }
 
-  searchReferenciaPersonal= model=>{
-    if(model.codigoBarras){
+  searchReferenciaPersonal = model => {
+    if (model.codigoBarras) {
       return this.http.get(`${this.url}/api/buscarReferenciasPersonalesCodigo?codigoBarras=${model.codigoBarras}`)
-    }else{
+    } else {
       return this.http.get(`${this.url}/api/buscarPplReferenciasNombre?nombre=${model.nombre}&apellidoPaterno=${model.apellidoPaterno}&apellidoMaterno=${model.apellidoMaterno}&tipoBusqueda=${model.tipoBusqueda}`)
     }
   }
-  
-  saveRestriccion=model=>{
-    if(model.tipo=='imputado'){
-      return this.http.post(`${this.url}/api/registrarRestriccionVisita`,model)
-    }else{
-      return this.http.post(`${this.url}/api/registrarRestriccionVisitaReferencia`,model)
+
+  saveRestriccion = model => {
+    if (model.tipo == 'imputado') {
+      return this.http.post(`${this.url}/api/registrarRestriccionVisita`, model)
+    } else {
+      return this.http.post(`${this.url}/api/registrarRestriccionVisitaReferencia`, model)
     }
   }
 
-  deleteRestriccion(id,tipo){
-    if(tipo=="imputado"){
-      return     this.http.get(`${this.url}/api/eliminarRestriccionVisitaImputado?restriccionId=${id}`)
+  deleteRestriccion(id, tipo) {
+    if (tipo == "imputado") {
+      return this.http.get(`${this.url}/api/eliminarRestriccionVisitaImputado?restriccionId=${id}`)
 
-    }else{
-      return     this.http.get(`${this.url}/api/eliminarRestriccionVisitaReferencia?restriccionId=${id}`)
+    } else {
+      return this.http.get(`${this.url}/api/eliminarRestriccionVisitaReferencia?restriccionId=${id}`)
 
     }
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {BitacoraService} from '@shared/services/bitacora.service';
-import {Router} from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BitacoraService } from '@shared/services/bitacora.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bitacora-ingreso',
@@ -35,10 +35,10 @@ export class BitacoraIngresoComponent implements OnInit {
   }
 
   getData() {
-      this.bitacoraService.listBitacoraIngreso(this.max, this.offset).subscribe((data: any) => {
-        console.log('getData', data);
-        this.data = data.ingresos;
-      });
+    this.bitacoraService.listBitacoraIngreso(this.max, this.offset).subscribe((data: any) => {
+
+      this.data = data.ingresos;
+    });
   }
 
   nextPage() {
@@ -52,11 +52,11 @@ export class BitacoraIngresoComponent implements OnInit {
   }
 
   add(modal) {
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
   openSearchModal(modal) {
-    this.modalService.open(modal, {size: 'xl', windowClass: 'modal-primary mt-12'});
+    this.modalService.open(modal, { size: 'xl', windowClass: 'modal-primary mt-12' });
   }
 
   goToFormularioIngreso() {
@@ -66,7 +66,6 @@ export class BitacoraIngresoComponent implements OnInit {
   }
 
   seeDetails(item) {
-    console.log('seeDetails', item);
     this.ingreso = item;
   }
 

@@ -40,7 +40,6 @@ export class EstudioTrabajoSocialComponent implements OnInit {
     }
     this.isLoading = true;
     this.servicioSocialService.getImputadoByFolio(this.ingreso.folio).subscribe((data: any) => {
-      console.log('Data', data);
       this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Búsqueda',
@@ -89,10 +88,8 @@ export class EstudioTrabajoSocialComponent implements OnInit {
   }
 
   getClasificacion() {
-    console.log('To server getClasificacion', this.ingreso.folio);
 
     this.servicioSocialService.getEstudioClasificion(this.ingreso.folio).subscribe((data: any) => {
-      console.log('Clasificacion', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Búsqueda',
         text: data.mensaje,
@@ -109,7 +106,6 @@ export class EstudioTrabajoSocialComponent implements OnInit {
   }
   submit() {
     this.isLoading = true;
-    console.log('To server', this.estudio);
     this.estudio.imputado = { id: this.ingreso.imputado.id };
     this.servicioSocialService.saveEstudioClasificacion(this.estudio).subscribe((data: any) => {
       this.isLoading = false;

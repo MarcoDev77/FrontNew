@@ -31,7 +31,6 @@ export class FinderImputadoComponent implements OnInit {
         this.isLoadingSearchFolio = false;
         if (!data.error) {
           this.listIngreso = [...this.listIngreso, ...data.ingresos];
-          console.log('listIngreso', this.listIngreso);
         }
       });
     this.seguridadCustodioService.filterBusquedaListaIngresos('nombre', this.criteria)
@@ -39,7 +38,6 @@ export class FinderImputadoComponent implements OnInit {
         this.isLoadingSearchName = false;
         if (!data.error) {
           this.listIngreso = [...this.listIngreso, ...data.ingresos];
-          console.log('listIngreso', this.listIngreso);
         }
       });
   }

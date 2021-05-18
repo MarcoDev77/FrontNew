@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
-import {environment} from '@environment/environment';
-import {AuthenticationService} from '@shared/services/authentication.service';
+import { Component, OnInit } from '@angular/core';
+import { FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import { environment } from '@environment/environment';
+import { AuthenticationService } from '@shared/services/authentication.service';
 import Swal from 'sweetalert2';
-import {Ingreso} from '@shared/models/Ingreso';
-import {IngresoService} from '@shared/services/ingreso.service';
-import {Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Ingreso } from '@shared/models/Ingreso';
+import { IngresoService } from '@shared/services/ingreso.service';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dactiloscopia',
@@ -55,8 +55,8 @@ export class DactiloscopiaComponent implements OnInit {
     this.isLoading = false;
     // Uploader
     this.url = environment.apiUrl;
-    this.uploader = new FileUploader({url: this.url + '/api/registrarHuellaDactilar', itemAlias: 'image'});
-    this.uploader2 = new FileUploader({url: this.url + '/api/registrarFotografiaImputado', itemAlias: 'image'});
+    this.uploader = new FileUploader({ url: this.url + '/api/registrarHuellaDactilar', itemAlias: 'image' });
+    this.uploader2 = new FileUploader({ url: this.url + '/api/registrarFotografiaImputado', itemAlias: 'image' });
   }
 
   ngOnInit() {
@@ -69,30 +69,23 @@ export class DactiloscopiaComponent implements OnInit {
     this.ingresoService.getIngreso(id).subscribe((data: any) => {
       this.ingreso = data.ingreso;
       this.ingreso.imputado.mainName = this.ingreso.imputado.apodos.find(item => item.principal);
-      console.log('INGRESO', this.ingreso);
-      // this.isLoadingData = false;
-      // El que pone la variable 'this.isLoadingData' es el metodo 'getDactiloscopia'
     }, error => {
-      console.log(error);
     });
   }
 
   getDactiloscopia() {
     this.isLoadingData = true;
     this.ingresoService.getDactiloscopia(this.ingreso.id).subscribe((data: any) => {
-      console.log('info', data);
-      const {dactiloscopia} = data;
+      const { dactiloscopia } = data;
       dactiloscopia.huellasDactilares.forEach(item => this.setParameters(item));
       dactiloscopia.fotografias.forEach(item => this.setParameters(item));
       this.isLoadingData = false;
     }, error => {
-      console.log(error);
       this.isLoadingData = false;
     });
   }
 
   openFinder(input, name?) {
-    console.log(name);
     input.focus();
     input.click();
     this.currentImage = name;
@@ -100,7 +93,7 @@ export class DactiloscopiaComponent implements OnInit {
 
   uploadFile(inputFile?) {
     if (!inputFile.files[0]) {
-      return console.log('esta vacio');
+      return;
     }
     let esHuella = 'huella';
     if (this.currentImage === this.nameImages.perfilFrente || this.currentImage === this.nameImages.perfilIzquierdo ||
@@ -111,8 +104,19 @@ export class DactiloscopiaComponent implements OnInit {
     this.uo.authTokenHeader = 'Authorization';
     this.uo.authToken = `Bearer ${authToken}`;
     if (esHuella === 'huella') {
+      const tipo = inputFile.files[0].type.split('/')[1];
+      if (tipo !== 'png') {
+        return Swal.fire({
+          title: 'Cuidado',
+          text: 'La extencion de la fotografía debe de ser .png',
+          icon: 'warning',
+          timer: 1300,
+          showConfirmButton: false
+        });
+      }
       this.uo.additionalParameter = this.chooseParameters(this.currentImage);
       this.uo.additionalParameter.esHuella = 'huella';
+
       // if (!this.uo.additionalParameter.clasificacion) {
       //   return Swal.fire({
       //     title: 'Cuidado',
@@ -126,10 +130,10 @@ export class DactiloscopiaComponent implements OnInit {
       // TODO: Se cambiara, se va a mandar el tipo de imagen en lugar de la validacion
       // if (inputFile.files[0].type.split('/')[1])
       const tipo = inputFile.files[0].type.split('/')[1];
-      if (tipo !== 'jpg' && tipo !== 'jpeg') {
+      if (tipo !== 'jpg' && tipo !== 'jpeg' && tipo !== 'png') {
         return Swal.fire({
           title: 'Cuidado',
-          text: 'La extencion de la fotografía debe de ser .jpg',
+          text: 'La extencion de la fotografía debe de ser .jpg o .png',
           icon: 'warning',
           timer: 1300,
           showConfirmButton: false
@@ -143,7 +147,6 @@ export class DactiloscopiaComponent implements OnInit {
 
     }
     this.uploader.setOptions(this.uo);
-    console.log(this.uo);
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
@@ -159,7 +162,6 @@ export class DactiloscopiaComponent implements OnInit {
 
   onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
     const exit = JSON.parse(response);
-    console.log(response);
     this.setImage(this.currentUploadImage, exit.imagen64);
     this.currentUploadImage = '';
     Swal.fire({
@@ -172,10 +174,10 @@ export class DactiloscopiaComponent implements OnInit {
     });
     this.uploader.progress = 0;
     this.uploader.clearQueue();
+    this.resetInputfile();
   }
 
   onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
-    console.log(response);
     this.currentUploadImage = '';
     const error = JSON.stringify(response); // error server response
     this.uploader.progress = 0;
@@ -187,6 +189,7 @@ export class DactiloscopiaComponent implements OnInit {
       timer: 1500,
       showConfirmButton: false
     });
+    this.resetInputfile();
   }
 
   chooseParameters(name): any {
@@ -253,9 +256,9 @@ export class DactiloscopiaComponent implements OnInit {
         };
         break;
       default:
-        data = {error: true};
+        data = { error: true };
     }
-    return {...data, nombreHuella: name, ingresoId: this.ingreso.id};
+    return { ...data, nombreHuella: name, ingresoId: this.ingreso.id };
   }
 
   setParameters(item) {
@@ -276,53 +279,53 @@ export class DactiloscopiaComponent implements OnInit {
       switch (item.claveHuella) {
         case this.nameImages.pulgarDerecho.toLowerCase():
           this.huella.imgPulgar = item.imagen64;
-          this.huella.clasificacionPulgar = item.clasificacion;
-          this.huella.subclasificacionPulgar = item.subclasificacion;
+          this.huella.clasificacionPulgar = item.clasificacion || "";
+          this.huella.subclasificacionPulgar = item.subclasificacion || "";
           break;
         case this.nameImages.pulgarIzquierdo.toLowerCase():
           this.huella.imgPulgar2 = item.imagen64;
-          this.huella.clasificacionPulgar2 = item.clasificacion;
-          this.huella.subclasificacionPulgar2 = item.subclasificacion;
+          this.huella.clasificacionPulgar2 = item.clasificacion || "";
+          this.huella.subclasificacionPulgar2 = item.subclasificacion || "";
           break;
         case this.nameImages.indiceDerecho.toLowerCase():
           this.huella.imgIndice = item.imagen64;
-          this.huella.clasificacionIndice = item.clasificacion;
-          this.huella.subclasificacionIndice = item.subclasificacion;
+          this.huella.clasificacionIndice = item.clasificacion || "";
+          this.huella.subclasificacionIndice = item.subclasificacion || "";
           break;
         case this.nameImages.indiceIzquierdo.toLowerCase():
           this.huella.imgIndice2 = item.imagen64;
-          this.huella.clasificacionIndice2 = item.clasificacion;
-          this.huella.subclasificacionIndice2 = item.subclasificacion;
+          this.huella.clasificacionIndice2 = item.clasificacion || "";
+          this.huella.subclasificacionIndice2 = item.subclasificacion || "";
           break;
         case this.nameImages.medioDerecho.toLowerCase():
           this.huella.imgMedio = item.imagen64;
-          this.huella.clasificacionMedio = item.clasificacion;
-          this.huella.subclasificacionMedio = item.subclasificacion;
+          this.huella.clasificacionMedio = item.clasificacion || "";
+          this.huella.subclasificacionMedio = item.subclasificacion || "";
           break;
         case this.nameImages.medioIzquierdo.toLowerCase():
           this.huella.imgMedio2 = item.imagen64;
-          this.huella.clasificacionMedio2 = item.clasificacion;
-          this.huella.subclasificacionMedio2 = item.subclasificacion;
+          this.huella.clasificacionMedio2 = item.clasificacion || "";
+          this.huella.subclasificacionMedio2 = item.subclasificacion || "";
           break;
         case this.nameImages.anularDerecho.toLowerCase():
           this.huella.imgAnular = item.imagen64;
-          this.huella.clasificacionAnular = item.clasificacion;
-          this.huella.subclasificacionAnular = item.subclasificacion;
+          this.huella.clasificacionAnular = item.clasificacion || "";
+          this.huella.subclasificacionAnular = item.subclasificacion || "";
           break;
         case this.nameImages.anularIzquierdo.toLowerCase():
           this.huella.imgAnular2 = item.imagen64;
-          this.huella.clasificacionAnular2 = item.clasificacion;
-          this.huella.subclasificacionAnular2 = item.subclasificacion;
+          this.huella.clasificacionAnular2 = item.clasificacion || "";
+          this.huella.subclasificacionAnular2 = item.subclasificacion || "";
           break;
         case this.nameImages.meniqueDerecho.toLowerCase():
           this.huella.imgMenique = item.imagen64;
-          this.huella.clasificacionMenique = item.clasificacion;
-          this.huella.subclasificacionMenique = item.subclasificacion;
+          this.huella.clasificacionMenique = item.clasificacion || "";
+          this.huella.subclasificacionMenique = item.subclasificacion || "";
           break;
         case this.nameImages.meniqueIzquierdo.toLowerCase():
           this.huella.imgMenique2 = item.imagen64;
-          this.huella.clasificacionMenique2 = item.clasificacion;
-          this.huella.subclasificacionMenique2 = item.subclasificacion;
+          this.huella.clasificacionMenique2 = item.clasificacion || "";
+          this.huella.subclasificacionMenique2 = item.subclasificacion || "";
           break;
       }
     }
@@ -378,7 +381,6 @@ export class DactiloscopiaComponent implements OnInit {
       this.isLoading = true;
       this.ingresoService.finishIngreso(this.ingreso.id).subscribe((data: any) => {
         this.isLoading = false;
-        console.log(data);
         if (!data.error) {
 
           Swal.fire({
@@ -402,11 +404,15 @@ export class DactiloscopiaComponent implements OnInit {
   }
 
   searchFingerprint(modal) {
-    this.modalService.open(modal, {size: 'xl', windowClass: 'modal-primary mt-12'});
+    this.modalService.open(modal, { size: 'xl', windowClass: 'modal-primary mt-12' });
   }
 
   openModalExtraPhotos(modal) {
-    this.modalService.open(modal, {size: 'xl', windowClass: 'modal-primary mt-12'});
+    this.modalService.open(modal, { size: 'xl', windowClass: 'modal-primary mt-12' });
+  }
+
+  resetInputfile() {
+    document.querySelector('#inputFile')['value'] = "";
   }
 }
 

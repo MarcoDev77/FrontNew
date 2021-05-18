@@ -1,120 +1,238 @@
-<app-section-title icon="fa fa-sign-in" title="Lista ingresos"></app-section-title>
+<app-section-title
+  icon="fa fa-sign-in"
+  title="Lista ingresos"
+></app-section-title>
 <div class="row">
   <div class="col text-right mb-3">
-    <button class="btn btn-success btn-sm m-0 pull-right" (click)="showModalConfirmFolio(searchModal)"
-            [ngbTooltip]="'Nuevo Registro'"><i
-      class="fa fa-plus fa-lg"></i></button>
+    <button
+      class="btn btn-success btn-sm m-0 pull-right"
+      (click)="showModalConfirmFolio(searchModal)"
+      [ngbTooltip]="'Nuevo Registro'"
+    >
+      <i class="fa fa-plus fa-lg"></i>
+    </button>
 
     <div class="input-group">
-      <i *ngIf="!filterSearch" ngbTooltip="Aplicar busqueda avanzada" (click)="search(formModal)"
-         class="fa fa-filter fa-2x"></i>
-      &nbsp;
-      &nbsp;
+      <i
+        *ngIf="!filterSearch"
+        ngbTooltip="Aplicar busqueda avanzada"
+        (click)="search(formModal)"
+        class="fa fa-filter fa-2x"
+      ></i>
+      &nbsp; &nbsp;
       <div class="input-group-prepend">
-        <span class="input-group-text" (click)="getDataWithFilter()"><i class="fa fa-search"></i></span>
+        <span class="input-group-text" (click)="getDataWithFilter()"
+          ><i class="fa fa-search"></i
+        ></span>
       </div>
       <form name="filterSearch" (ngSubmit)="getDataWithFilter()">
-        <input type="text" required maxlength="100" [(ngModel)]="criteria" name="criteria"
-               [disabled]="!filterSearch || isLoading || filterSearch === 'imputado' || filterSearch === 'ingreso'"
-               class="form-control pull-right mr-2"
-               placeholder="Buscar " style="max-width: 12rem">
+        <input
+          type="text"
+          required
+          maxlength="100"
+          [(ngModel)]="criteria"
+          name="criteria"
+          [disabled]="
+            !filterSearch ||
+            isLoading ||
+            filterSearch === 'imputado' ||
+            filterSearch === 'ingreso'
+          "
+          class="form-control pull-right mr-2"
+          placeholder="Buscar "
+          style="max-width: 12rem"
+        />
       </form>
-      &nbsp;
-      &nbsp;
-      &nbsp;
+      &nbsp; &nbsp; &nbsp;
       <span *ngIf="filterSearch" class="text-center mr-10">
-        <i class="fa fa-filter fa-2x" ngbTooltip="Cambiar busqueda avanzada" (click)="search(formModal)"></i>
-        Filtro: <b>{{filterSearch | uppercase}}</b>
+        <i
+          class="fa fa-filter fa-2x"
+          ngbTooltip="Cambiar busqueda avanzada"
+          (click)="search(formModal)"
+        ></i>
+        Filtro: <b>{{ filterSearch | uppercase }}</b>
       </span>
     </div>
-
-
   </div>
 </div>
 <div class="table-responsive">
   <table class="table">
     <thead>
-    <tr>
-      <th (click)="sort('folio')" class="text-center">
-        <span *ngIf="key == 'folio'" class="fa"
-              [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Folio
-      </th>
-      <th (click)="sort('nombre')" class="text-center">
-        <span *ngIf="key == 'nombre'" class="fa"
-              [ngClass]="{'fa-chevron-circle-down':reverse, 'fa-chevron-circle-up':!reverse}"></span> Nombre Completo
-      </th>
-      <th (click)="sort('expediente')" class="text-center">
-        <span *ngIf="key == 'expediente'" class="fa"
-              [ngClass]="{'fa-chevron-circle-down': reverse, 'fa-chevron-circle-up': !reverse}"></span> Número de
-        Expediente
-      </th>
-      <th (click)="sort('tipo')" class="text-center">
-        <span *ngIf="key == 'tipo'" class="fa"
-              [ngClass]="{'fa-chevron-circle-down': reverse, 'fa-chevron-circle-up': !reverse}"></span> Tipo de ingreso
-      </th>
-      <th class="text-center" style="min-width: 5rem">Acciones</th>
-    </tr>
+      <tr>
+        <th (click)="sort('folio')" class="text-center">
+          <span
+            *ngIf="key == 'folio'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Folio
+        </th>
+        <th (click)="sort('nombre')" class="text-center">
+          <span
+            *ngIf="key == 'nombre'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Nombre Completo
+        </th>
+        <th (click)="sort('expediente')" class="text-center">
+          <span
+            *ngIf="key == 'expediente'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Número de Expediente
+        </th>
+        <th (click)="sort('tipo')" class="text-center">
+          <span
+            *ngIf="key == 'tipo'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Tipo de ingreso
+        </th>
+        <th class="text-center" style="min-width: 5rem">Acciones</th>
+      </tr>
     </thead>
     <tbody>
-    <tr
-      *ngFor="let item of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
-      (click)="setClickedRow(i)" [class.active]="i == selectedRow">
-      <td class="text-center">{{item.folio}}</td>
-      <td *ngIf="item.apodo"
-          class="text-center">{{item.apodo.nombre}} {{item.apodo.apellidoPaterno}} {{item.apodo.apellidoMaterno}}</td>
-      <td *ngIf="!item.apodo" class="text-center">Registro Incompleto</td>
-      <td class="text-center">{{item.numeroExpediente}}</td>
-      <td class="text-center">{{item.tipoIngreso}}</td>
-      <td class="text-center">
-        <i class="fa fa-eye" placement="top" ngbTooltip="Consultar Ingreso" (click)="goTo('form-ingreso', item)"></i>
-        &nbsp;
-        <i *ngIf="roles[0]==='ROLE_TRABAJO_SOCIAL'||roles[0]==='ROLE_DACTILOSCOPIA'" class="fa fa-male" placement="top" ngbTooltip="Referencias" (click)="goTo('referencias', item)"></i> &nbsp;
-        <i class="fa fa-pencil-square-o" placement="top" ngbTooltip="Situación Jurídica"
-           (click)="goTo('situacion-juridica', item)"></i>&nbsp;
-      </td>
-    </tr>
+      <tr
+        *ngFor="
+          let item of data
+            | orderBy: key:reverse
+            | filter: filter
+            | paginate: { itemsPerPage: 5, currentPage: p };
+          let i = index
+        "
+        (click)="setClickedRow(i)"
+        [class.active]="i == selectedRow"
+      >
+        <td class="text-center">{{ item.folio }}</td>
+        <td *ngIf="item.apodo" class="text-center">
+          {{ item.apodo.nombre }} {{ item.apodo.apellidoPaterno }}
+          {{ item.apodo.apellidoMaterno }}
+        </td>
+        <td *ngIf="!item.apodo" class="text-center">Registro Incompleto</td>
+        <td class="text-center">{{ item.numeroExpediente }}</td>
+        <td class="text-center">{{ item.tipoIngreso }}</td>
+        <td class="text-center">
+          <i
+            class="fa fa-eye"
+            placement="top"
+            ngbTooltip="Consultar Ingreso"
+            (click)="goTo('form-ingreso', item)"
+          ></i>
+          &nbsp;
+          <i
+            *ngIf="
+              roles[0] === 'ROLE_SITE' ||
+              roles[0] === 'ROLE_DACTILOSCOPIA' ||
+              roles[0] === 'ROLE_INFORMATICA' ||
+              roles[0] === 'ROLE_TRABAJO_SOCIAL'
+            "
+            class="fa fa-male"
+            placement="top"
+            ngbTooltip="Referencias"
+            (click)="goTo('referencias', item)"
+          ></i>
+          &nbsp;
+          <i
+            class="fa fa-pencil-square-o"
+            placement="top"
+            ngbTooltip="Situación Jurídica"
+            (click)="goTo('situacion-juridica', item)"
+          ></i
+          >&nbsp;
+        </td>
+      </tr>
 
-    <tr *ngIf="data.length == 0">
-      <td colspan="6">{{isLoading ? 'Cargando...' : 'Sin registros...'}}</td>
-    </tr>
+      <tr *ngIf="data.length == 0">
+        <td colspan="6">
+          {{ isLoading ? "Cargando..." : "Sin registros..." }}
+        </td>
+      </tr>
     </tbody>
   </table>
   <div class="text-center w-100">
-    <pagination-controls autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="switch($event)">
+    <pagination-controls
+      autoHide="true"
+      responsive="true"
+      previousLabel=""
+      nextLabel=""
+      (pageChange)="switch($event)"
+    >
     </pagination-controls>
   </div>
 </div>
 <ng-template #formModal let-formModal>
   <div class="modal-body text-center">
     <h3>Búsqueda avanzada</h3>
-    <br>
+    <br />
     <form class="form-horizontal" name="form" #f="ngForm">
-      <h6>Búsqueda por ... {{filterSearch | uppercase}} <i *ngIf="filterSearch" ngbTooltip="Quitar filtro de búqueda"
-                                                           (click)="selectFilterSearch('')" class="fa fa-remove"></i>
+      <h6>
+        Búsqueda por ... {{ filterSearch | uppercase }}
+        <i
+          *ngIf="filterSearch"
+          ngbTooltip="Quitar filtro de búqueda"
+          (click)="selectFilterSearch('')"
+          class="fa fa-remove"
+        ></i>
       </h6>
       <div class="row">
         <div class="col-md-12">
-
           <div class="custom-control custom-radio custom-control-inline">
-            <input (click)="selectFilterSearch('nombre')" [checked]="filterSearch === 'nombre'" type="radio"
-                   class="custom-control-input" id="centro" name="nombre">
+            <input
+              (click)="selectFilterSearch('nombre')"
+              [checked]="filterSearch === 'nombre'"
+              type="radio"
+              class="custom-control-input"
+              id="centro"
+              name="nombre"
+            />
             <label class="custom-control-label" for="centro">Nombre</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
-            <input (click)="selectFilterSearch('folio')" [checked]="filterSearch === 'folio'" type="radio"
-                   class="custom-control-input" id="folio" name="folio">
+            <input
+              (click)="selectFilterSearch('folio')"
+              [checked]="filterSearch === 'folio'"
+              type="radio"
+              class="custom-control-input"
+              id="folio"
+              name="folio"
+            />
             <label class="custom-control-label" for="folio">Folio</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
-            <input (click)="selectFilterSearch('imputado')" [checked]="filterSearch === 'imputado'" type="radio"
-                   class="custom-control-input" id="imputado"
-                   name="imputado">
+            <input
+              (click)="selectFilterSearch('imputado')"
+              [checked]="filterSearch === 'imputado'"
+              type="radio"
+              class="custom-control-input"
+              id="imputado"
+              name="imputado"
+            />
             <label class="custom-control-label" for="imputado">Imputados</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
-            <input (click)="selectFilterSearch('ingreso')" [checked]="filterSearch === 'ingreso'" type="radio"
-                   class="custom-control-input" id="ingreso"
-                   name="ingreso">
+            <input
+              (click)="selectFilterSearch('ingreso')"
+              [checked]="filterSearch === 'ingreso'"
+              type="radio"
+              class="custom-control-input"
+              id="ingreso"
+              name="ingreso"
+            />
             <label class="custom-control-label" for="ingreso">Ingresos</label>
           </div>
         </div>
@@ -122,7 +240,13 @@
 
       <div class="row">
         <div class="col-sm-12 text-center text-sm-right">
-          <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cerrar</button>
+          <button
+            type="button"
+            (click)="formModal.close()"
+            class="btn btn-danger mr-3"
+          >
+            Cerrar
+          </button>
         </div>
       </div>
     </form>
@@ -132,31 +256,37 @@
 <ng-template #formModal2 let-formModal>
   <div class="modal-body text-center">
     <h3>Formatos</h3>
-    <br>
+    <br />
     <form class="form-horizontal" name="form" #f="ngForm">
-
       <div class="row">
-
         <div class="col-sm-1"></div>
-        <div class="col-sm-4 card  box-shadow">
+        <div class="col-sm-4 card box-shadow">
           <div class="card-body">
             <p class="card-text">Descripción del formato.</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Vista Previa</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Descargar</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  Vista Previa
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  Descargar
+                </button>
               </div>
             </div>
           </div>
         </div>
         <div class="col-sm-2"></div>
-        <div class="col-sm-4 card  box-shadow">
+        <div class="col-sm-4 card box-shadow">
           <div class="card-body">
             <p class="card-text">Descripción del formato.</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Vista Previa</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Descargar</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  Vista Previa
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  Descargar
+                </button>
               </div>
             </div>
           </div>
@@ -166,7 +296,13 @@
 
       <div class="row">
         <div class="col-sm-12 text-center text-sm-right">
-          <button type="button" (click)="formModal.close()" class="btn btn-danger mr-3">Cancelar</button>
+          <button
+            type="button"
+            (click)="formModal.close()"
+            class="btn btn-danger mr-3"
+          >
+            Cancelar
+          </button>
           <button type="submit" class="btn btn-success">Aceptar</button>
         </div>
       </div>

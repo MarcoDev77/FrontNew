@@ -16,13 +16,13 @@ export class RestriccionVisitasComponent implements OnInit {
   public criteria: any
   public criteriaPPL: any
   public p: any
-  public tipo:String
-  public persona:any 
+  public tipo: String
+  public persona: any
   constructor(private InformaticaService: InformaticaService, private modalService: NgbModal) {
     this.criteria = {} as any
     this.criteriaPPL = {} as any
-    this.persona= {}as any
-    this.restriccion={} as any
+    this.persona = {} as any
+    this.restriccion = {} as any
     this.data = []
     this.dataPPL = []
     this.isLoading = false
@@ -32,26 +32,24 @@ export class RestriccionVisitasComponent implements OnInit {
   }
 
   searchReferencia(tipo, showModal) {
-    this.data=[]
-    this.dataPPL=[]
+    this.data = []
+    this.dataPPL = []
     let model
     if (tipo == 'ppl') {
-      this.criteriaPPL.tipoBusqueda= tipo
+      this.criteriaPPL.tipoBusqueda = tipo
       model = this.criteriaPPL
     } else {
-      this.criteria.tipoBusqueda=tipo
-      model= this.criteria
+      this.criteria.tipoBusqueda = tipo
+      model = this.criteria
     }
-    console.log(model)
     this.InformaticaService.searchReferenciaPersonal(model).subscribe((data: any) => {
-      console.log(data)
       if (data.referenciasPersonales && tipo == "referencia") {
         this.data = data.referenciasPersonales
       }
       if (data.registros && tipo == "ppl") {
         this.dataPPL = data.registros
       }
-      if(showModal){
+      if (showModal) {
         Swal.fire({
           title: data.error ? 'Error!' : 'Busqueda terminada!',
           text: data.mensaje,
@@ -60,26 +58,22 @@ export class RestriccionVisitasComponent implements OnInit {
           showConfirmButton: false
         });
       }
-     
-      //this.resetForm()
     })
 
   }
 
   saveRestriccion() {
-    if(this.tipo=="imputado"){
-      this.restriccion.imputado={
+    if (this.tipo == "imputado") {
+      this.restriccion.imputado = {
         id: this.persona.id
       }
-    }else{
-      this.restriccion.referenciaPersonal={
+    } else {
+      this.restriccion.referenciaPersonal = {
         id: this.persona.id
       }
     }
-    this.restriccion.tipo=this.tipo
-    console.log(this.restriccion)
-    this.InformaticaService.saveRestriccion(this.restriccion).subscribe((data: any)=>{
-      console.log(data)
+    this.restriccion.tipo = this.tipo;
+    this.InformaticaService.saveRestriccion(this.restriccion).subscribe((data: any) => {
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado!',
         text: data.mensaje,
@@ -91,13 +85,12 @@ export class RestriccionVisitasComponent implements OnInit {
       this.modalService.dismissAll()
 
     })
-   
+
   }
 
-  deleteRestriccion(item,tipo){
-    this.tipo=tipo
-    this.InformaticaService.deleteRestriccion(item.restriccionVisita.id,tipo).subscribe((data: any)=>{
-      console.log(data)
+  deleteRestriccion(item, tipo) {
+    this.tipo = tipo
+    this.InformaticaService.deleteRestriccion(item.restriccionVisita.id, tipo).subscribe((data: any) => {
       Swal.fire({
         title: data.error ? 'Error!' : 'Busqueda terminada!',
         text: data.mensaje,
@@ -105,32 +98,31 @@ export class RestriccionVisitasComponent implements OnInit {
         timer: 1300,
         showConfirmButton: false
       });
-      this.reloadData()      
+      this.reloadData()
     })
   }
-  reloadData(){
-    if(this.tipo==="imputado"){
-      this.searchReferencia('ppl',false)
-    }else{
-      console.log("entra al else")
-      this.searchReferencia('referencia',false)
+  reloadData() {
+    if (this.tipo === "imputado") {
+      this.searchReferencia('ppl', false)
+    } else {
+      this.searchReferencia('referencia', false)
     }
   }
-  openModal(modal,tipo,item) {
-    this.tipo=tipo
-    this.persona=item
-    if(item.restriccionVisita){
-      this.restriccion=item.restriccionVisita
+  openModal(modal, tipo, item) {
+    this.tipo = tipo
+    this.persona = item
+    if (item.restriccionVisita) {
+      this.restriccion = item.restriccionVisita
     }
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
-  resetForm(){
-    this.restriccion={}as any
-    this.tipo=''
-    this.persona={} as any
-    this.criteria={} as any
-    this.criteriaPPL={} as any
+  resetForm() {
+    this.restriccion = {} as any
+    this.tipo = ''
+    this.persona = {} as any
+    this.criteria = {} as any
+    this.criteriaPPL = {} as any
   }
 }
 
@@ -140,5 +132,5 @@ class Restriccion {
   comentario: String
   imputado?: any
   referenciaPersonal?: any
-  tipo?:String
+  tipo?: String
 }

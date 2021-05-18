@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {BitacoraService} from '@shared/services/bitacora.service';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BitacoraService } from '@shared/services/bitacora.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bitacora-ingreso',
@@ -37,7 +37,6 @@ export class BitacoraIngresoImputadoComponent implements OnInit {
 
   getData() {
     this.bitacoraService.listBitacoraIngresoImputado(this.max, this.offset).subscribe((data: any) => {
-      console.log('getData', data);
       this.data = data.ingresos;
     });
   }
@@ -53,15 +52,14 @@ export class BitacoraIngresoImputadoComponent implements OnInit {
   }
 
   add(modal) {
-    this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary mt-12'});
+    this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
   openSearchModal(modal) {
-    this.modalService.open(modal, {size: 'xl', windowClass: 'modal-primary mt-12'});
+    this.modalService.open(modal, { size: 'xl', windowClass: 'modal-primary mt-12' });
   }
 
   seeDetails(item) {
-    console.log('seeDetails', item);
     this.ingreso = item;
   }
 

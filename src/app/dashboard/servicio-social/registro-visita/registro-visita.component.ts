@@ -59,7 +59,6 @@ export class RegistroVisitaComponent implements OnInit {
         this.cleanForm();
       }
     }, error => {
-      console.log(error);
       this.cleanForm();
     });
   }
@@ -72,14 +71,12 @@ export class RegistroVisitaComponent implements OnInit {
 
   getVisitas() {
     this.servicioSocialService.getVisitas(this.ingreso.imputado.id).subscribe((data: any) => {
-      console.log('visitas', data);
       this.visitas = data.visitas;
     });
   }
 
   getReferencias() {
     this.servicioSocialService.listRefencias(this.ingreso.imputado.id).subscribe((data: any) => {
-      console.log('referemcias', data);
       if (data.error) {
         this.referencias = [];
         return;
@@ -91,9 +88,7 @@ export class RegistroVisitaComponent implements OnInit {
   saveVisita() {
     this.isLoading = true;
     this.visita.numeroInfantes = Number(this.visita.numeroInfantes);
-    console.log('To server', this.visita);
     this.servicioSocialService.saveVisitas(this.visita).subscribe((data: any) => {
-      console.log('submit', data);
       this.isLoading = false;
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
@@ -104,8 +99,6 @@ export class RegistroVisitaComponent implements OnInit {
       });
       if (!data.error) {
         this.modalService.dismissAll();
-        console.log('this', this);
-
         this.getVisitas();
       }
     });
@@ -122,7 +115,6 @@ export class RegistroVisitaComponent implements OnInit {
     }).then(({ value }) => {
       if (value) {
         this.servicioSocialService.marcarHoraSalidaVisita(visitaId).subscribe((data: any) => {
-          console.log(data);
           Swal.fire({
             title: data.error ? 'Error!' : 'Cambio exitoso.',
             text: data.mensaje,

@@ -24,9 +24,9 @@ export class UsuarioComponent implements OnInit {
   public setClickedRow: Function;
 
   public rolesLista: any[];
-  public areas: any [];
+  public areas: any[];
   public rolSelected: any;
-  public areaSelected:any
+  public areaSelected: any
   public currentUser: any;
 
   public persona: Personal;
@@ -38,8 +38,8 @@ export class UsuarioComponent implements OnInit {
     this.rolesLista = [];
     this.areas = [];
     this.persona = {} as any;
-    this.user = {}as any
-    this.setClickedRow = function(index) {
+    this.user = {} as any
+    this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
 
@@ -53,11 +53,9 @@ export class UsuarioComponent implements OnInit {
 
   getData() {
     this.catalogosService.listUsuarios().subscribe((data: any) => {
-      console.log('getData', data);
       if (data.listPersonal) {
         this.data = data.listPersonal;
       }
-      console.log(this.data);
     });
   }
 
@@ -79,40 +77,38 @@ export class UsuarioComponent implements OnInit {
   }
 
   savePersonal() {
-    console.log('Save');
-    ///console.log(this.user);
-   
-    if(this.areaSelected){
-    this.persona.area={id:this.areaSelected.value}
+
+    if (this.areaSelected) {
+      this.persona.area = { id: this.areaSelected.value }
     }
-    this.persona.user=this.user;
-      
-    
+    this.persona.user = this.user;
+
+
     this.catalogosService.saveUsuario(this.persona).subscribe((data: any) => {
-      
+
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
         icon: data.error ? 'error' : 'success',
         timer: 1300,
         showConfirmButton: false
-      }).then(()=>{
+      }).then(() => {
         //
-        if(!data.error){
+        if (!data.error) {
           this.getData()
           this.modalService.dismissAll();
-          this.persona= {} as any;
-          this.user= {} as any
+          this.persona = {} as any;
+          this.user = {} as any
         }
       })
-      
 
-    }); 
+
+    });
   }
   openModal(modal) {
-    this.persona= {} as any;
-    this.user= {} as any;
-    this.tituloModal="Registrar usuario"
+    this.persona = {} as any;
+    this.user = {} as any;
+    this.tituloModal = "Registrar usuario"
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
 
@@ -122,33 +118,30 @@ export class UsuarioComponent implements OnInit {
 
   listRoles() {
     this.catalogosService.listRoles().subscribe((data: any) => {
-      this.rolesLista=[]
-      console.log(this.user)
+      this.rolesLista = []
       data.roles.forEach(role => {
-        this.rolesLista.push({value: role.id, description: role.authority});
+        this.rolesLista.push({ value: role.id, description: role.authority });
       });
     });
   }
 
   listAreas() {
-    
+
     this.catalogosService.listAreas().subscribe((data: any) => {
-      this.areas=[]
+      this.areas = []
       data.areas.forEach(area => {
-        this.areas.push({value: area.id, description: area.nombre});
+        this.areas.push({ value: area.id, description: area.nombre });
       });
     });
   }
 
-  togglePersonal(id, tipo, status){
-    let model={
-      id:id,
-      tipoCambio:tipo,
-      status:status
+  togglePersonal(id, tipo, status) {
+    let model = {
+      id: id,
+      tipoCambio: tipo,
+      status: status
     }
-    console.log(model)
     this.catalogosService.toggleUsuario(model).subscribe((data: any) => {
-      console.log(data)
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,
@@ -160,22 +153,17 @@ export class UsuarioComponent implements OnInit {
     })
   }
 
-  updateUsuario(item,modal){
-    //this.persona=item;
-    console.log("item",item.user.roles)
- 
-    this.user=item.user; 
-    this.persona=item
-    this.areaSelected={value:item.area.id, description:item.area.nombre}
-  //  this.persona.area={value:item.area.id, description:item.area.nombre}
-    console.log("user",item.user)
-    
-    this.user.roles={value: this.user.roles[0].id,description:this.user.roles[0].authority};
-    this.tituloModal="Modificar usuario";
-    console.log(this.persona)
+  updateUsuario(item, modal) {
+
+    this.user = item.user;
+    this.persona = item
+    this.areaSelected = { value: item.area.id, description: item.area.nombre }
+
+    this.user.roles = { value: this.user.roles[0].id, description: this.user.roles[0].authority };
+    this.tituloModal = "Modificar usuario";
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
     this.getData();
   }
 
- 
+
 }

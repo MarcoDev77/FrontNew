@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Ingreso} from '@shared/models/Ingreso';
-import {IngresoService} from '@shared/services/ingreso.service';
-import {Caracteristica} from '@shared/models/Caracteristica';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Imputado} from '@shared/models/Imputado';
+import { Component, OnInit } from '@angular/core';
+import { Ingreso } from '@shared/models/Ingreso';
+import { IngresoService } from '@shared/services/ingreso.service';
+import { Caracteristica } from '@shared/models/Caracteristica';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Imputado } from '@shared/models/Imputado';
 import Swal from 'sweetalert2';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-caracteristicas',
@@ -37,15 +37,13 @@ export class CaracteristicasComponent implements OnInit {
 
   getData(id) {
     this.ingresoService.listCaracteristicas(id).subscribe((data: any) => {
-      console.log(data);
       this.caracteristicas = data.senasParticulares;
     });
   }
 
   find(modal, label?) {
-    this.modalService.open(modal, { windowClass: 'modal-primary'});
+    this.modalService.open(modal, { windowClass: 'modal-primary' });
     this.ingresoService.getCaracteristica(label, this.ingreso.id).subscribe((data: any) => {
-      console.log('DATA', data);
       this.caracteristica = data.senaParticular;
       this.caracteristica.clave = label;
     });
@@ -55,7 +53,6 @@ export class CaracteristicasComponent implements OnInit {
     if (!this.validateFiels(array)) {
       return;
     }
-    console.log('carateristica', this.caracteristica);
     if (this.caracteristica.descripcion.length > 255) {
       Swal.fire({
         title: 'Atención',
@@ -68,7 +65,6 @@ export class CaracteristicasComponent implements OnInit {
     this.caracteristica.imputado = {} as Imputado;
     this.caracteristica.imputado.id = this.ingreso.id;
     this.ingresoService.saveCaracteritica(this.caracteristica).subscribe((data: any) => {
-      console.log(data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
         text: data.mensaje,

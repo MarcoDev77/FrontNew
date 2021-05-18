@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ComiteTecnicoService} from '@shared/services/comite-tecnico.service';
+import { Component, OnInit } from '@angular/core';
+import { ComiteTecnicoService } from '@shared/services/comite-tecnico.service';
 import Swal from 'sweetalert2';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-deportes',
@@ -25,7 +25,6 @@ export class DeportesComponent implements OnInit {
 
   searchImputado() {
     if (this.generalidades.folio.length >= 6) {
-      console.log('Entra');
       this.getData();
     }
   }
@@ -34,7 +33,6 @@ export class DeportesComponent implements OnInit {
     this.isLoading = true;
     this.comiteTecnicoService.getComiteDeportes(this.generalidades.folio).subscribe((data: any) => {
       this.isLoading = false;
-      console.log('DATA', data);
       Swal.fire({
         title: data.error ? 'Error!' : 'Busqueda',
         text: data.mensaje,
@@ -53,7 +51,6 @@ export class DeportesComponent implements OnInit {
         this.handleError();
       }
     }, error => {
-      console.log(error);
       this.isLoading = false;
       Swal.fire({
         title: 'Error!',
@@ -74,8 +71,7 @@ export class DeportesComponent implements OnInit {
 
   submit() {
     this.isLoading = true;
-    console.log('info', this.informacionDeportiva);
-    this.informacionDeportiva.imputado = {id: this.generalidades.imputadoId};
+    this.informacionDeportiva.imputado = { id: this.generalidades.imputadoId };
     this.comiteTecnicoService.saveComiteDeporte(this.informacionDeportiva).subscribe((data: any) => {
       this.isLoading = false;
       Swal.fire({
@@ -86,7 +82,6 @@ export class DeportesComponent implements OnInit {
         showConfirmButton: false
       });
     }, error => {
-      console.log(error);
       this.isLoading = false;
       Swal.fire({
         title: 'Error!',
@@ -99,12 +94,10 @@ export class DeportesComponent implements OnInit {
   }
 
   generatePDF(modal) {
-    console.log('generatePDF');
     this.isLoading = true;
     this.comiteTecnicoService.generatePDFDeportes(this.generalidades.imputadoId).subscribe((data: any) => {
-      console.log('PDF', data);
       this.isLoading = false;
-      const file = new Blob([data], {type: 'application/*'});
+      const file = new Blob([data], { type: 'application/*' });
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadstart = ev => this.isLoading = true;
@@ -116,7 +109,7 @@ export class DeportesComponent implements OnInit {
         this.modalService.dismissAll();
         if (base64) {
           this.file = base64;
-          this.modalService.open(modal, {size: 'lg', windowClass: 'modal-primary'});
+          this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
         }
       };
       reader.onerror = () => {
@@ -131,7 +124,6 @@ export class DeportesComponent implements OnInit {
         this.modalService.dismissAll();
       };
     }, error => {
-      console.log(error);
       this.isLoading = false;
       Swal.fire({
         title: 'Error',
