@@ -156,6 +156,10 @@ export class IngresoService {
     return this.http.delete(`${this.url}/api/bajaLogicaCarpetaInvestigacion?id=${carpetaId}`);
   }
 
+  deleteDelito = delitoId => {
+    return this.http.get(`${this.url}/api/eliminarDelitoCausaPenal?delitoId=${delitoId}`);
+  }
+
   listCausaPenal = id => this.http.get(`${this.url}/api/listarCausaPenalPorImputado?personaIngresadaId=${id}`);
 
   saveCausaPenal = model => {

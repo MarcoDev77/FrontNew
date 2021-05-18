@@ -29,6 +29,7 @@ export class Imputado {
   apodos: any[];
   delitos: any[];
   mainName: any;
+  datosJuridicos: any;
   finadoPadre: boolean;
   finadoMadre: boolean;
   // Lugar Nacimirnto

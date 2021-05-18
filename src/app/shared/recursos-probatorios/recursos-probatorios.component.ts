@@ -37,6 +37,7 @@ export class RecursosProbatoriosComponent implements OnInit {
   ngOnInit() {
     this.getData();
     this.initForm();
+    console.log(this.causaPenal);
   }
 
   getData() {

@@ -20,6 +20,7 @@ import { catchError, distinctUntilChanged, tap, switchMap } from 'rxjs/operators
 
 export class FormularioIngresoComponent implements OnInit {
   public model: any;
+  public p: any;
   public ingreso: Ingreso;
   public datoDelito: DatoDelito;
   public arrayDatoDelito: DatoDelito[] = [];
