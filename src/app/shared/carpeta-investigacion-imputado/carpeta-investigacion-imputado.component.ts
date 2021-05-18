@@ -79,6 +79,7 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
   }
 
   seeDelitosCarpeta(item: any, modal) {
+    this.delito = {}
     this.carpeta = item
     this.getDelitos()
 
@@ -306,6 +307,32 @@ export class CarpetaInvestigacionImputadoComponent implements OnInit {
     this.delitoUpdate = {...this.delito} ;
   }
 
+  deleteDelito(item: any) {
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: 'El delito sera eliminado.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then(({ value }) => {
+      if (value) {
+        this.ingresoService.deleteDelito(item.id).subscribe((data: any) => {
+          Swal.fire({
+            title: data.error ? 'Error!' : 'Elimiación exitosa.',
+            text: data.mensaje,
+            icon: data.error ? 'error' : 'success',
+            timer: 1300,
+            showConfirmButton: false
+          });
+          if (!data.error) {
+            this.getData();
+            this.getDelitos()
+          }
+        });
+      }
+    });
+  }
   viewHistory(modal?) { }
 
 }

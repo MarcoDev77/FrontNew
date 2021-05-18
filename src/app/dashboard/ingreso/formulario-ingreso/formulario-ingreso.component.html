@@ -216,22 +216,33 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label>Tipo de ingreso:</label>
-          <select
-            ngbTooltip="Tipo de ingreso"
+          <label>Fuero</label>
+          <!--<input
             class="form-control shadows"
-            name="tipoIngreso"
-            #tipoIngreso="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && tipoIngreso.invalid }"
-            [(ngModel)]="ingreso.tipoIngreso"
+            minlength="1"
+            name="tipoFuero"
+            #tipoFuero="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && tipoFuero.invalid }"
+            [(ngModel)]="ingreso.imputado.tipoFuero"
+            maxlength="50"
+          />-->
+          <select
+            ngbTooltip="Fuero"
+            class="form-control shadows"
+            name="tipoFuero"
+            #tipoFuero="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && tipoFuero.invalid }"
+            [(ngModel)]="ingreso.imputado.tipoFuero"
             required
           >
-            <option [value]="undefined" disabled hidden>Tipo de ingreso</option>
-            <option value="Primo delincuente">Primo delincuente</option>
-            <option value="Reincidente">Reincidente</option>
+            <option [value]="undefined" disabled hidden>Fuero</option>
+            <option value="Comun">Común</option>
+            <option value="Federal">Federal</option>
+            <option value="Militar">Militar</option>
           </select>
         </div>
       </div>
+
       <div class="col-md-4">
         <div class="form-group shadows">
           <label>Fecha de ingreso:</label>
@@ -262,19 +273,51 @@
           />
         </div>
       </div>
-
       <div class="col-md-4">
         <div class="form-group">
-          <label>Fuero</label>
-          <input
+          <label>Tipo de ingreso:</label>
+          <select
+            ngbTooltip="Tipo de ingreso"
             class="form-control shadows"
-            minlength="1"
-            name="tipoFuero"
-            #tipoFuero="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && tipoFuero.invalid }"
-            [(ngModel)]="ingreso.imputado.tipoFuero"
-            maxlength="50"
-          />
+            name="tipoIngreso"
+            #tipoIngreso="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && tipoIngreso.invalid }"
+            [(ngModel)]="ingreso.tipoIngreso"
+            required
+          >
+            <option [value]="undefined" disabled hidden>Tipo de ingreso</option>
+            <option value="Primo delincuente">Primo delincuente</option>
+            <option value="Reincidente">Reincidente</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table shadows" *ngIf="ingreso.tipoIngreso === 'Reincidente'">
+          <thead>
+            <tr>
+              <th class="text-center">Fecha y Hora de libertad</th>
+              <th class="text-center">Tipo de Libertad</th>
+              <th class="text-center">Nombre del Juez</th>
+              <th class="text-center">Juzgado</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of ingreso.imputado?.datosJuridicos  | paginate: { id: 'pagination2',  itemsPerPage: 5, currentPage: p };">
+              <td class="text-center">{{ item?.fechaEgreso }}</td>
+              <td class="text-center">{{ item?.tipoLibertad }}</td>
+              <td class="text-center">{{ item?.nombreJuez }}</td>
+              <td class="text-center">{{ item?.juzgado }}</td>
+
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center w-100">
+          <pagination-controls id="pagination2" autoHide="true" responsive="true" previousLabel="" nextLabel="" (pageChange)="p = $event">    </pagination-controls>
         </div>
       </div>
     </div>

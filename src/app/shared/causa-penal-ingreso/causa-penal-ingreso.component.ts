@@ -85,6 +85,7 @@ export class CausaPenalIngresoComponent implements OnInit {
   }
 
   seeDelitosCausa(item: any, modal) {
+    this.delito = {}
     this.causaPenal = item
     this.getDelitos()
 
@@ -288,6 +289,33 @@ export class CausaPenalIngresoComponent implements OnInit {
   }
 
   change($event: Event) {
+  }
+
+  deleteDelito(item: any) {
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: 'El delito sera eliminado.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then(({ value }) => {
+      if (value) {
+        this.ingresoService.deleteDelito(item.id).subscribe((data: any) => {
+          Swal.fire({
+            title: data.error ? 'Error!' : 'Elimiación exitosa.',
+            text: data.mensaje,
+            icon: data.error ? 'error' : 'success',
+            timer: 1300,
+            showConfirmButton: false
+          });
+          if (!data.error) {
+            this.getData();
+            this.getDelitos()
+          }
+        });
+      }
+    });
   }
 
   onEdit(event: any) { }

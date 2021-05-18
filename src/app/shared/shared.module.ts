@@ -49,6 +49,7 @@ const COMPONENTS = [
   LoaderComponent,
   CausaPenalIngresoComponent,
   DelitoIngresoComponent,
+  RecursosProbatoriosComponent,
   CarpetaInvestigacionImputadoComponent,
 ];
 

@@ -17,6 +17,7 @@ export class BusquedaIngresoComponent implements OnInit {
   public bajaInterno: any;
   public observacionImputado: any;
   public p: any;
+  public causaPenal: any;
   constructor(
     private juridicoService: JuridicoService,
     private router: Router,
@@ -25,6 +26,7 @@ export class BusquedaIngresoComponent implements OnInit {
     this.cleanForm();
     this.bajaInterno = {} as any;
     this.observacionImputado = {} as any;
+    this.causaPenal = {} as any;
   }
 
   ngOnInit() {
@@ -55,19 +57,19 @@ export class BusquedaIngresoComponent implements OnInit {
     this.imputado = {};
     this.bajaInterno = {};
   }
-  showModal(modal,item) {
-    //this.bajaInterno.fechaLibertad ={ ... this.bajaInterno.fechaLibertad, fechaRegistro: new Date(this.oldRegister.fechaRegistro) }; item.datosJuridicosImputado.fechaLibertad
-    this.bajaInterno.id = item.datosJuridicosDelito.id
-    this.bajaInterno.fechaEgreso =  this.datePipe.transform( item.datosJuridicosDelito.fechaEgreso, 'yyyy-MM-dd');
-    this.bajaInterno.horaEgreso = this.datePipe.transform( item.datosJuridicosDelito.fechaEgreso,'HH:mm');
+  showModal(modal) {
+    this.bajaInterno.fechaEgreso =this.datePipe.transform(this.imputado.datosJuridicosImputado.fechaEgreso,'yyyy-MM-dd');
+    this.bajaInterno.horaEgreso =this.datePipe.transform(this.imputado.datosJuridicosImputado.fechaEgreso,'HH:mm'); 
+    this.bajaInterno.imputadoId = this.imputado.id
+    this.bajaInterno.id = this.imputado.datosJuridicosImputado.id
 
 
-    this.bajaInterno.tipoLibertad = item.datosJuridicosDelito.tipoLibertad
-    this.bajaInterno.juzgado = item.datosJuridicosDelito.juzgado
-    this.bajaInterno.nombreJuez = item.datosJuridicosDelito.nombreJuez
-    this.bajaInterno.proceso = item.datosJuridicosDelito.proceso
-    this.bajaInterno.observacion = item.datosJuridicosDelito.observacion
-    this.bajaInterno.delitoId = item.id
+    this.bajaInterno.tipoLibertad = this.imputado.datosJuridicosImputado.tipoLibertad
+    this.bajaInterno.juzgado = this.imputado.datosJuridicosImputado.juzgado
+    this.bajaInterno.nombreJuez = this.imputado.datosJuridicosImputado.nombreJuez
+    this.bajaInterno.proceso = this.imputado.datosJuridicosImputado.proceso
+    this.bajaInterno.observacion = this.imputado.datosJuridicosImputado.observacion
+     
 
     console.log(this.bajaInterno)
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
@@ -107,5 +109,10 @@ export class BusquedaIngresoComponent implements OnInit {
         this.searchImputado(this.ingreso);
       }
     });
+  }
+
+  seeRecursos(item, modal) {
+    this.causaPenal = item;
+    this.modalService.open(modal, { size: 'xl', windowClass: 'modal-primary' });
   }
 }

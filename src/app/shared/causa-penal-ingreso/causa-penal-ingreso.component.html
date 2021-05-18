@@ -167,8 +167,7 @@
                 <td class="text-center">
                     <i class="fa fa-pencil" placement="top" ngbTooltip="Actualizar" (click)="update(item)"></i> &nbsp;
                     <i class="fa fa-trash" placement="top" ngbTooltip="Eliminar" (click)="delete(item)"></i> &nbsp;
-                    <i class="fa fa-cubes" placement="top" ngbTooltip="Recursos"
-                        (click)="seeRecursos(item, delitoModal)"></i> &nbsp;
+
                     <i class="fa fa-th-list" placement="top" ngbTooltip="Ver delitos"
                         (click)="seeDelitosCausa(item, addDelitoModal)"></i> &nbsp;
                 </td>
@@ -192,9 +191,7 @@
         <div class="col-md-12 text-center">
             <h3>Delitos</h3>
         </div>
-        <!--         <app-delito-ingreso [personaId]="personaId" [refresh]="getData" [causaPenalId]="causaPenal.id"></app-delito-ingreso>
 
- -->
         <form name="f" (ngSubmit)="f.form.valid && saveDelito()" #f="ngForm" novalidate>
             <div class="row">
                 <div class="col-md-12">
@@ -203,7 +200,6 @@
                         <input type="text" class="form-control shadows" placeholder="Delito" [(ngModel)]="delito"
                             [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter"
                             name="delitoNombre" />
-
                     </div>
                 </div>
                 <div class="col-md-12" *ngIf="role === ROLE_ARCHIVO">
@@ -218,7 +214,7 @@
             <div class="row">
                 <div class="col-sm-12 text-center text-sm-right">
                     <button type="button" (click)="closeModal()" class="btn btn-danger mr-3">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button type="submit"  [disabled]=" !delito.length  && !(delito?.idTipoDelito > 0) " class="btn btn-success">Guardar</button>
                 </div>
             </div>
         </form>
@@ -244,8 +240,7 @@
                             <td class="text-center">{{item.tipoDelito.nombre}}</td>
                             <td *ngIf="role" class="text-center">{{item.juez}}</td>
                             <td class="text-center">
-                                <i class="fa fa-history" placement="top" (click)="viewHistory()" ngbTooltip="Ver Historial"></i> &nbsp;
-                                <i class="fa fa-cog" placement="top" (click)="delitoEdit(item)" ngbTooltip="Editar"></i>
+                                 <i class="fa fa-trash" placement="top" (click)="deleteDelito(item)" ngbTooltip="Eliminar"></i>
                             </td>
                         </tr>
                         <tr *ngIf="delitosData.length == 0">
