@@ -12,6 +12,7 @@ import { AuthenticationService } from '@shared/services/authentication.service';
   styleUrls: ['./lista-ingreso.component.scss']
 })
 export class ListaIngresoComponent implements OnInit {
+
   public data: Ingreso[];
   public isLoading = false;
   public filterSearch = '';
@@ -22,6 +23,7 @@ export class ListaIngresoComponent implements OnInit {
   public filter;
   public key = 'id'; // set default
   public reverse = true;
+  public itemsPerPage = 10;
 
   public selectedRow: number;
   public setClickedRow: Function;
@@ -57,6 +59,7 @@ export class ListaIngresoComponent implements OnInit {
 
   getData() {
     this.ingresoService.listIngreso('listaTotal').subscribe((data: any) => {
+      console.log("data->",data);
       this.data = data.ingresos;
     });
   }
@@ -101,7 +104,7 @@ export class ListaIngresoComponent implements OnInit {
   sort(key) {
     if (key === this.key) {
       this.reverse = !this.reverse;
-      if (this.reverse === false) {
+      if (!this.reverse) {
         this.key = 'id';
         this.reverse = true;
       }

@@ -25,9 +25,13 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     const user = this.authenticationService.getCurrentUser();
+    console.log(user);
     const userRoles = user.roles;
-    console.table(userRoles);
     const items = ROUTES.filter(menuItem => menuItem);
+
+    console.log(items);
+
+
     for (const item of items) {
       if (item.roles && item.roles.includes('ALL')) {
         this.menuItems.push(item);

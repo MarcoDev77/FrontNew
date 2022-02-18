@@ -103,6 +103,17 @@
           ></span>
           Tipo de ingreso
         </th>
+        <th (click)="sort('fechaIngreso')" class="text-center">
+          <span
+            *ngIf="key == 'fechaIngreso'"
+            class="fa"
+            [ngClass]="{
+              'fa-chevron-circle-down': reverse,
+              'fa-chevron-circle-up': !reverse
+            }"
+          ></span>
+          Fecha de ingreso
+        </th>
         <th class="text-center" style="min-width: 5rem">Acciones</th>
       </tr>
     </thead>
@@ -112,7 +123,7 @@
           let item of data
             | orderBy: key:reverse
             | filter: filter
-            | paginate: { itemsPerPage: 5, currentPage: p };
+            | paginate: { itemsPerPage: itemsPerPage, currentPage: p };
           let i = index
         "
         (click)="setClickedRow(i)"
@@ -126,6 +137,7 @@
         <td *ngIf="!item.apodo" class="text-center">Registro Incompleto</td>
         <td class="text-center">{{ item.numeroExpediente }}</td>
         <td class="text-center">{{ item.tipoIngreso }}</td>
+        <td class="text-center">{{ item.fechaRegistro | date:'dd/MM/yyyy' }}</td>
         <td class="text-center">
           <i
             class="fa fa-eye"
@@ -164,15 +176,24 @@
       </tr>
     </tbody>
   </table>
-  <div class="text-center w-100">
-    <pagination-controls
+
+  <div class="row w-100 justify-content-end">
+    <div class="col-auto">
+      <pagination-controls
       autoHide="true"
       responsive="true"
       previousLabel=""
       nextLabel=""
       (pageChange)="switch($event)"
-    >
-    </pagination-controls>
+    ></pagination-controls>
+    </div>
+    <div class="col-auto">
+      <select class="form-control" [(ngModel)]="itemsPerPage">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+      </select>
+    </div>
   </div>
 </div>
 <ng-template #formModal let-formModal>
