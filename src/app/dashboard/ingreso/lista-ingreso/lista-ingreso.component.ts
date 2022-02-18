@@ -36,22 +36,22 @@ export class ListaIngresoComponent implements OnInit {
     };
   }
 
-  selectFilterSearch(filterName) {
-    // Si filterName esta vacio se limpian las variables de busqueda (filterSearch y criteria)
-    // y se hace la peticion getData
-    if (!filterName) {
-      this.filterSearch = '';
-      this.criteria = '';
-      this.getData();
-    } else {
-      this.filterSearch = filterName;
-      // Si filterSearch es imputado o ingreso se hace la busqueda al instante
-      if (this.filterSearch === 'ingreso' || this.filterSearch === 'imputado') {
-        this.getDataWithFilter();
-      }
-    }
-    this.modalService.dismissAll();
-  }
+  // selectFilterSearch(filterName) {
+  //   // Si filterName esta vacio se limpian las variables de busqueda (filterSearch y criteria)
+  //   // y se hace la peticion getData
+  //   if (!filterName) {
+  //     this.filterSearch = '';
+  //     this.criteria = '';
+  //     this.getData();
+  //   } else {
+  //     this.filterSearch = filterName;
+  //     // Si filterSearch es imputado o ingreso se hace la busqueda al instante
+  //     if (this.filterSearch === 'ingreso' || this.filterSearch === 'imputado') {
+  //       this.getDataWithFilter();
+  //     }
+  //   }
+  //   this.modalService.dismissAll();
+  // }
 
   ngOnInit() {
     this.getData();
@@ -59,7 +59,7 @@ export class ListaIngresoComponent implements OnInit {
 
   getData() {
     this.ingresoService.listIngreso('listaTotal').subscribe((data: any) => {
-      console.log("data->",data);
+      console.log("data->", data);
       this.data = data.ingresos;
     });
   }
@@ -69,32 +69,29 @@ export class ListaIngresoComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    this.ingresoService.filterBusquedaListaIngresos(this.filterSearch, this.criteria).subscribe
-      (
-        (data: any) => {
-          this.isLoading = false;
-          Swal.fire({
-            title: data.error ? 'Error!' : 'Busqueda',
-            text: data.mensaje,
-            icon: data.error ? 'error' : 'success',
-            timer: 1000,
-            showConfirmButton: false
-          });
-          if (!data.error) {
-            this.data = data.ingresos;
-          }
-        },
-        error => {
-          this.isLoading = false;
-          Swal.fire({
-            title: 'Error!',
-            text: 'Consulta fallida',
-            icon: 'error',
-            timer: 1000,
-            showConfirmButton: false
-          });
-        }
-      );
+    this.ingresoService.filterBusquedaListaIngresos(this.criteria).subscribe((data: any) => {
+      this.isLoading = false;
+      Swal.fire({
+        title: data.error ? 'Error!' : 'Busqueda',
+        text: data.mensaje,
+        icon: data.error ? 'error' : 'success',
+        timer: 1000,
+        showConfirmButton: false
+      });
+      if (!data.error) {
+        this.data = data.ingresos;
+      }
+    }, (error) => {
+        this.isLoading = false;
+        Swal.fire({
+          title: 'Error!',
+          text: 'Consulta fallida',
+          icon: 'error',
+          timer: 1000,
+          showConfirmButton: false
+        });
+      }
+    );
   }
 
   switch(e) {
