@@ -126,6 +126,8 @@ export class CentroPenitenciarioComponent implements OnInit {
       ...this.centroPenitenciario,
       personal: { ...this.persona, ...this.user },
     };
+    console.log("model",model);
+    
     this.catalogosService.saveCentroPenitenciario(model).subscribe((data: any) => {
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
