@@ -21,6 +21,8 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
+    return true;
+
     // this.authenticationService.getUser().subscribe(user => {
     //   const expectedRole = route.data.expectedRole;
     //   if (user) {

@@ -6,12 +6,13 @@ import { IngresoService } from '@shared/services/ingreso.service';
 import { Ingreso } from '@shared/models/Ingreso';
 import { Referencia } from '@shared/models/Referencia';
 import { Observable } from 'rxjs';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
 import { map } from 'rxjs/operators';
 import { FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { environment } from '@environment/environment';
 import { AuthenticationService } from '@shared/services/authentication.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-referencias',
@@ -45,13 +46,16 @@ export class ReferenciasComponent implements OnInit {
   public reverse = true;
   public isForm: boolean;
   public roles = []
+
+  form: FormGroup;
+
   constructor(private catalogosService: CatalogosService,
     private router: Router,
     private modalService: NgbModal,
     private ingresoService: IngresoService,
     private authenticationService: AuthenticationService,
-    private datePipe: DatePipe
-
+    private datePipe: DatePipe,
+    private _formBuilder: FormBuilder
   ) {
     this.isLoading = false;
     this.ingreso = {} as Ingreso;
@@ -77,6 +81,10 @@ export class ReferenciasComponent implements OnInit {
     this.setClickedRow = function (index) {
       this.selectedRow = this.selectedRow === index ? -1 : index;
     };
+
+    // this.form = this._formBuilder.group({
+
+    // });
   }
 
   ngOnInit() {
@@ -547,4 +555,5 @@ class PasePermanente {
   fechaNacimiento: string;
   menores: any[];
   observaciones: string;
+  numeroIdentificacion?: string;
 }

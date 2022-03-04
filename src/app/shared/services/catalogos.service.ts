@@ -227,6 +227,8 @@ export class CatalogosService {
 
   listUsuarios = () => this.http.get(`${this.url}/api/listPersonal`);
 
+  
+
   toggleUsuario(model) {
     return this.http.put(`${this.url}/api/statusPersonal`, model);
   }

@@ -54,6 +54,7 @@ export class UsuarioComponent implements OnInit {
   getData() {
     this.catalogosService.listUsuarios().subscribe((data: any) => {
       if (data.listPersonal) {
+        console.log(data);
         this.data = data.listPersonal;
       }
     });

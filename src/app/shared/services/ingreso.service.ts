@@ -188,9 +188,10 @@ export class IngresoService {
 
   getTipoProceso = () => this.http.get(`${this.url}/api/listaTipoProceso`);
 
-  filterBusquedaListaIngresos = (filter, criteria) =>
-    this.http.get(`${this.url}/api/busquedaConfiltro?filtro=${filter}&criterio=${criteria}`);
-
+  filterBusquedaListaIngresos(criteria) {
+    return this.http.get(`${this.url}/api/busquedaConfiltro?criterio=${criteria}`);
+    // this.http.get(`${this.url}/api/busquedaConfiltro?filtro=${filter}&criterio=${criteria}`);
+  }
 
   getParentescos = () => this.http.get(`${this.url}/api/listarParentescos`);
 
@@ -205,12 +206,10 @@ export class IngresoService {
   }
 
   generatePDFPasePermanente = (model) => {
+    console.log(model);
+    
     const responseType = 'arraybuffer' as 'json';
     return this.http.post(`${this.url}/api/registrarPasePermanente`, model, { responseType });
   }
 
 }
-
-
-
-
