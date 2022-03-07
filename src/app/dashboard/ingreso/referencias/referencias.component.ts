@@ -555,5 +555,5 @@ class PasePermanente {
   fechaNacimiento: string;
   menores: any[];
   observaciones: string;
-  numeroIdentificacion?: string;
+  numeroIdentificacion: string;
 }

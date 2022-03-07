@@ -196,6 +196,8 @@ export class IngresoService {
   getParentescos = () => this.http.get(`${this.url}/api/listarParentescos`);
 
   savePaseProvisional = (model) => {
+    console.log(model);
+    
     const responseType = 'arraybuffer' as 'json';
     return this.http.post(`${this.url}/api/registrarPaseProvisional`, model, { responseType });
   }
