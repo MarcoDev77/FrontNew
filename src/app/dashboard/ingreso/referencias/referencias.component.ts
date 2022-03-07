@@ -450,6 +450,7 @@ export class ReferenciasComponent implements OnInit {
       );
     }
     this.pasePermanente.referenciaPersonal = { id: this.referencia.id };
+    console.log("this.pasePermanente", this.pasePermanente);
     this.ingresoService.generatePDFPasePermanente(this.pasePermanente).subscribe((data: any) => {
       this.modalService.dismissAll();
       this.showPreview(data, modal);
