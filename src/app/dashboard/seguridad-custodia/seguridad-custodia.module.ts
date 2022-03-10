@@ -12,7 +12,7 @@ import { CapacitacionesPaseListaComponent } from './capacitaciones-pase-lista/ca
 import { PertenenciasComponent } from './pertenencias/pertenencias.component';
 import { RevisionesComponent } from './revisiones/revisiones.component';
 import { PertenenciasResultadoBusquedaComponent } from './pertenencias-resultado-busqueda/pertenencias-resultado-busqueda.component';
-import {FileUploadModule} from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 import { RegistroVisitasComponent } from './registro-visitas/registro-visitas.component';
 
 
@@ -26,16 +26,14 @@ import { RegistroVisitasComponent } from './registro-visitas/registro-visitas.co
     PertenenciasComponent,
     RevisionesComponent,
     PertenenciasResultadoBusquedaComponent,
-    RegistroVisitasComponent
   ],
-    imports: [
-        CommonModule,
-        CommonModule,
-        SeguridadCustodiaRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        SharedModule,
-        FileUploadModule,
-    ]
+  imports: [
+    CommonModule,
+    SeguridadCustodiaRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    FileUploadModule,
+  ]
 })
 export class SeguridadCustodiaModule { }

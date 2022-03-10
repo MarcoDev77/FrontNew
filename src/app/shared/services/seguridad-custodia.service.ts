@@ -63,11 +63,13 @@ export class SeguridadCustodiaService {
     const responseType = 'arraybuffer' as 'json';
     return this.http.get(`${this.url}/api/generarFormatoPdfReporteDecomiso?revisionId=${id}`, { responseType });
   }
-  searchVisita= codigoPostal=> this.http.get(`${this.url}/api/buscarReferenciaCodigoBarras?codigoBarras=${codigoPostal}`)
+  searchVisita(codigoPostal: string) {
+    return this.http.get(`${this.url}/api/buscarReferenciaCodigoBarras?codigoBarras=${codigoPostal}`);
+  }
 
-  saveIngresoVisita = model =>  this.http.post(`${this.url}/api/registrarIngresoVisita`, model);
+  saveIngresoVisita = model => this.http.post(`${this.url}/api/registrarIngresoVisita`, model);
 
-  saveSalidaVisita = model =>  this.http.get(`${this.url}/api/registrarSalidaVisita?referenciaId=${model.id}&codigoBarras=${model.codigoBarras}`);
+  saveSalidaVisita = model => this.http.get(`${this.url}/api/registrarSalidaVisita?referenciaId=${model.id}&codigoBarras=${model.codigoBarras}`);
 
 
 }

@@ -20,7 +20,7 @@ const routes: Routes = [
       { path: 'custodios', component: CustodiosComponent },
       { path: 'revisiones', component: RevisionesComponent },
       { path: 'revisiones-pertenencias', component: PertenenciasComponent },
-      { path: 'registro-visitas', component: RegistroVisitasComponent }
+      { path: 'registro-visitas', loadChildren: () => import("./registro-visitas/registro-visitas.module").then(m => m.RegistroVisitasModule) }
     ]
   },
 ];
