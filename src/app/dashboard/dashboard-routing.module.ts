@@ -50,7 +50,7 @@ const routes: Routes = [
       },
       {
         path: 'seguridad-custodia',
-        loadChildren: './seguridad-custodia/seguridad-custodia.module#SeguridadCustodiaModule',
+        loadChildren: () => import("./seguridad-custodia/seguridad-custodia.module").then(m => m.SeguridadCustodiaModule),
         canActivate: [AuthGuard],
         data: { expectedRole: [r.test.role, r.seguridadCustodia.role] }
       },
