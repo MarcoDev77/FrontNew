@@ -25,6 +25,9 @@ export class ListaIngresoComponent implements OnInit {
   public reverse = true;
   public itemsPerPage = 10;
 
+  // FilePreview
+  public file: any;
+
   public selectedRow: number;
   public setClickedRow: Function;
   constructor(private router: Router, private ingresoService: IngresoService, private modalService: NgbModal, private authenticationService: AuthenticationService) {
@@ -82,15 +85,15 @@ export class ListaIngresoComponent implements OnInit {
         this.data = data.ingresos;
       }
     }, (error) => {
-        this.isLoading = false;
-        Swal.fire({
-          title: 'Error!',
-          text: 'Consulta fallida',
-          icon: 'error',
-          timer: 1000,
-          showConfirmButton: false
-        });
-      }
+      this.isLoading = false;
+      Swal.fire({
+        title: 'Error!',
+        text: 'Consulta fallida',
+        icon: 'error',
+        timer: 1000,
+        showConfirmButton: false
+      });
+    }
     );
   }
 
@@ -127,5 +130,33 @@ export class ListaIngresoComponent implements OnInit {
 
   showModalConfirmFolio(modal) {
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
+  }
+
+  generatePDF(modal, id: number) {
+    this.isLoading = true;
+    this.ingresoService.getVisitasPplReport(id).subscribe((data: any) => {
+      this.blobToPdf(data, "Reporte de visitas");
+    }, error => {
+      this.isLoading = false;
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al generar el archivo',
+        icon: 'error',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    });
+  }
+
+  blobToPdf(data, name: string) {
+    //conversión de binario a un archivo pdf
+    const binaryData = [];
+    binaryData.push(data);
+    const filePath = window.URL.createObjectURL(new Blob(binaryData, { type: "application/pdf" }));
+    const downloadLink = document.createElement("a");
+    downloadLink.href = filePath;
+    downloadLink.setAttribute("download", name);
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
   }
 }

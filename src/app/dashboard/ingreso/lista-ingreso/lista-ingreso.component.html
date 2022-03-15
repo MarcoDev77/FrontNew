@@ -7,7 +7,8 @@
           <i class="fa fa-search"></i>
         </span>
       </div>
-      <input type="text" class="form-control" placeholder="Buscar"  aria-describedby="basic-addon1" [(ngModel)]="criteria" [disabled]="isLoading" (keyup.enter)="getDataWithFilter()">
+      <input type="text" class="form-control" placeholder="Buscar" aria-describedby="basic-addon1"
+        [(ngModel)]="criteria" [disabled]="isLoading" (keyup.enter)="getDataWithFilter()">
     </div>
   </div>
 
@@ -106,8 +107,8 @@
               roles[0] === 'ROLE_TRABAJO_SOCIAL'
             " class="fa fa-male" placement="top" ngbTooltip="Referencias" (click)="goTo('referencias', item)"></i>
           &nbsp;
-          <i class="fa fa-pencil-square-o" placement="top" ngbTooltip="Situación Jurídica"
-            (click)="goTo('situacion-juridica', item)"></i>&nbsp;
+          <i class="fa fa-pencil-square-o" placement="top" ngbTooltip="Situación Jurídica" (click)="goTo('situacion-juridica', item)"></i>&nbsp;
+          <i class="fa fa-file-o" ngbTooltip="Reporte de visitas" (click)="generatePDF(view, item.id)" *ngIf="roles[0] === 'ROLE_INFORMATICA'"></i>
         </td>
       </tr>
 
@@ -237,5 +238,25 @@
 <ng-template #searchModal let-searchModal>
   <div class="modal-body text-center">
     <app-busqueda-huellas from="LISTA_INGRESO"></app-busqueda-huellas>
+  </div>
+</ng-template>
+
+<ng-template #view let-view>
+  <div class="modal-body text-center pt-0">
+    <i
+      (click)="view.dismiss()"
+      style="
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        font-size: 20px;
+      "
+      class="fa fa-times-circle"
+    ></i>
+    <app-web-viewer
+      [file]="file"
+      [name]="'acta-de-entrevista'"
+    ></app-web-viewer>
   </div>
 </ng-template>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '@environment/environment';
 import { Ingreso } from '@shared/models/Ingreso';
 import { Mediafiliacion } from '@shared/models/MediaFiliacion';
@@ -12,6 +12,8 @@ export class IngresoService {
   params: string;
 
   public url: string;
+
+  headers: HttpHeaders;
 
   constructor(private http: HttpClient) {
     this.url = environment.apiUrl;
@@ -212,4 +214,12 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/registrarPasePermanente`, model, { responseType });
   }
 
+  getVisitasPplReport(id: number) {
+    console.log("data", { id });
+
+    this.headers = new HttpHeaders();
+    this.headers = this.headers.set('Accept', 'application/pdf');
+
+    return this.http.post(`${this.url}/api/visitasPPL`, { id }, { headers: this.headers, responseType: "blob" });
+  }
 }
