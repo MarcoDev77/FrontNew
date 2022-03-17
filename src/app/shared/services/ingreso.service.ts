@@ -222,4 +222,8 @@ export class IngresoService {
 
     return this.http.post(`${this.url}/api/visitasPPL`, { id }, { headers: this.headers, responseType: "blob" });
   }
+
+  getPasePermanenteData(id: number) {
+    return this.http.post(`${this.url}/api/pasePermanente/find`, { id });
+  }
 }
