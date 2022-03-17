@@ -83,7 +83,7 @@ export class ReferenciasComponent implements OnInit {
     };
 
     // this.form = this._formBuilder.group({
-      
+
     // });
   }
 
@@ -388,6 +388,7 @@ export class ReferenciasComponent implements OnInit {
 
     const model = {
       tipoPase: 'mensual',
+      tipoIdentificacion: "",
       observaciones,
       nombreVisitante: `${item.nombre} ${item.apellidoPaterno} ${item.apellidoMaterno}`,
       parentesco: item.parentesco,
@@ -420,11 +421,17 @@ export class ReferenciasComponent implements OnInit {
   }
 
   showModalPasePermanente(item, modal) {
+    console.log({ item, modal });
     this.pasePermanente = {} as PasePermanente;
     this.pasePermanente.menores = [];
     this.menor = {};
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary' });
     this.referencia = item;
+
+    this.ingresoService.getPasePermanenteData(item.id).subscribe((response: any) => {
+      console.log(response);
+      this.pasePermanente = response.data;
+    });
   }
 
   addMenorPasePermanente(inputs: any[]) {
@@ -551,6 +558,7 @@ export class ReferenciasComponent implements OnInit {
 class PasePermanente {
   id: number;
   tipoPase: string;
+  tipoIdentificacion: string;
   horarioVisita: string;
   referenciaPersonal: any;
   fechaNacimiento: string;

@@ -339,23 +339,30 @@
     <form name="formPasePermanente" (ngSubmit)="formPasePermanente.form.valid && generatePasePermanente(view)"
       #formPasePermanente="ngForm" novalidate>
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
           <div class="form-group">
             <label>Tipo de pase</label>
             <select [(ngModel)]="pasePermanente.tipoPase" #tipoPase="ngModel" class="form-control" [ngClass]="{ 'is-invalid': formPasePermanente.submitted && tipoPase.invalid }" name="tipo" required>
               <option value="individual">Individual</option>
               <option value="colectivo">Colectivo</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label>Tipo de identificación</label>
+            <select [(ngModel)]="pasePermanente.tipoIdentificacion" #tipoPase="ngModel" class="form-control" [ngClass]="{ 'is-invalid': formPasePermanente.submitted && tipoPase.invalid }" name="identificacion" required>
               <option value="INE">INE</option>
               <option value="Pasaporte">Pasaporte</option>
               <option value="Licencia">Licencia</option>
             </select>
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <label>Numero de identidicación</label>
           <input [(ngModel)]="pasePermanente.numeroIdentificacion" name="numeroIdentificacion" type="text" class="form-control" required />
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <label>Horario de visita</label>
           <input [(ngModel)]="pasePermanente.horarioVisita" #horarioVisita="ngModel" name="horarioVisita" type="text" minlength="1" maxlength="50" class="form-control" [ngClass]="{ 'is-invalid': formPasePermanente.submitted && horarioVisita.invalid }" required />
         </div>
