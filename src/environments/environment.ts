@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   //apiUrl: 'http://localhost:8080'
-  apiUrl: 'http://138.68.17.161:8080/reinsercionapi',
+ apiUrl: 'http://138.68.17.161:8080/reinsercionapi',
   // ttp://167.172.158.44:8080/reinsercionapi/nameEndPoint
 };
 

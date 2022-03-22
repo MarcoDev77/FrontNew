@@ -429,8 +429,14 @@ export class ReferenciasComponent implements OnInit {
     this.referencia = item;
 
     this.ingresoService.getPasePermanenteData(item.id).subscribe((response: any) => {
-      console.log(response);
-      this.pasePermanente = response.data;
+      if(!response.error) {
+        if(response.data.menores) {
+          response.data.menores = JSON.parse(response.data.menores);
+        }
+
+        this.pasePermanente = response.data;
+        console.log(this.pasePermanente);
+      }
     });
   }
 
