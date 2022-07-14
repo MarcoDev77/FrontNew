@@ -190,8 +190,8 @@ export class IngresoService {
 
   getTipoProceso = () => this.http.get(`${this.url}/api/listaTipoProceso`);
 
-  filterBusquedaListaIngresos(criteria) {
-    return this.http.get(`${this.url}/api/busquedaConfiltro?criterio=${criteria}`);
+  filterBusquedaListaIngresos(criteria, centro) {
+    return this.http.get(`${this.url}/api/busquedaConfiltro?centro=${centro}&criterio=${criteria}`);
     // this.http.get(`${this.url}/api/busquedaConfiltro?filtro=${filter}&criterio=${criteria}`);
   }
 
@@ -199,7 +199,7 @@ export class IngresoService {
 
   savePaseProvisional = (model) => {
     console.log("savePaseProvisional");
-    
+
     const responseType = 'arraybuffer' as 'json';
     return this.http.post(`${this.url}/api/registrarPaseProvisional`, model, { responseType });
   }
@@ -209,7 +209,7 @@ export class IngresoService {
     return this.http.get(`${this.url}/api/generarFormatoPdfHojaControlVisita?imputadoId=${id}`, { responseType });
   }
 
-  generatePDFPasePermanente = (model) => {    
+  generatePDFPasePermanente = (model) => {
     const responseType = 'arraybuffer' as 'json';
     return this.http.post(`${this.url}/api/registrarPasePermanente`, model, { responseType });
   }
@@ -223,7 +223,16 @@ export class IngresoService {
     return this.http.post(`${this.url}/api/visitasPPL`, { id }, { headers: this.headers, responseType: "blob" });
   }
 
+  getVisitasPPL(body: any) {
+    console.log(body);
+    this.headers = new HttpHeaders();
+    this.headers = this.headers.set('Accept', 'application/pdf');
+
+    return this.http.post(`${this.url}/api/visitas`, body, { headers: this.headers, responseType: "blob" });
+  }
+
   getPasePermanenteData(id: number) {
     return this.http.post(`${this.url}/api/pasePermanente/find`, { id });
   }
+
 }

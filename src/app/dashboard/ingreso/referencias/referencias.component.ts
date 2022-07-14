@@ -111,6 +111,7 @@ export class ReferenciasComponent implements OnInit {
 
   listReferencias(id) {
     this.ingresoService.listRefencias(id).subscribe((data: any) => {
+      console.log(data);
       this.data = data.referenciasPersonales;
     });
   }
@@ -429,6 +430,7 @@ export class ReferenciasComponent implements OnInit {
     this.referencia = item;
 
     this.ingresoService.getPasePermanenteData(item.id).subscribe((response: any) => {
+      console.log(response);
       if(!response.error) {
         if(response.data.menores) {
           response.data.menores = JSON.parse(response.data.menores);
@@ -570,5 +572,5 @@ class PasePermanente {
   fechaNacimiento: string;
   menores: any[];
   observaciones: string;
-  numeroIdentificacion: string;
+  identificacionNumero: string;
 }

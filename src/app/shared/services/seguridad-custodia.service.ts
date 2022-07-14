@@ -26,7 +26,7 @@ export class SeguridadCustodiaService {
   saveCapacitaciones = model => this.http.post(`${this.url}/api/registrarCapacitacion`, model);
 
   changeStatusCapacitaciones = id =>
-    this.http.delete(`${this.url}/api/actualizarEstatusCapacitacion?capacitacionId=${id}`);
+    this.http.delete(`${this.url}/api/actualizarEstatusCapacitacion?capacitacionId=${id}`)
 
   saveCustodio = model => this.http.post(`${this.url}/api/registrarCustodio`, model);
 
@@ -46,7 +46,7 @@ export class SeguridadCustodiaService {
 
   saveImputadoOnRevision = model => this.http.post(`${this.url}/api/registarImputadoRevision`, model);
 
-  getImputadosByRevision = id => this.http.get(`${this.url}/api/listarImputadosRevision?revisionId=${id}`);;
+  getImputadosByRevision = id => this.http.get(`${this.url}/api/listarImputadosRevision?revisionId=${id}`);
 
   getObjetosRevision = (revisionId, imputadoId) => this.http.get(
     `${this.url}/api/listarObjetosDecomisados?revisionId=${revisionId}&imputadoId=${imputadoId}`
@@ -69,6 +69,7 @@ export class SeguridadCustodiaService {
 
   saveIngresoVisita = model => this.http.post(`${this.url}/api/registrarIngresoVisita`, model);
 
+  // tslint:disable-next-line:max-line-length
   saveSalidaVisita = model => this.http.get(`${this.url}/api/registrarSalidaVisita?referenciaId=${model.id}&codigoBarras=${model.codigoBarras}`);
 
 

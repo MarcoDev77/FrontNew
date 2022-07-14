@@ -52,6 +52,10 @@ export class AuthenticationService {
     this.router.navigate(['/']);
   }
 
+  getCentroName(id: number){
+    return this.http.post(`${environment.apiUrl}/api/centro/find`, {id});
+  }
+
   getCurrentPersonal() {
     return this.http.get(`${environment.apiUrl}/api/consultarInformacionPersonal`);
   }

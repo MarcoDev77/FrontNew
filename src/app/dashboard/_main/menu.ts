@@ -174,8 +174,8 @@ export const ROUTES: RouteInfo[] = [
     collapse: 'tables',
     isCollapsed: false,
     children: [
-      { path: '/ingreso', title: 'BÚSQUEDA', ab: 'IN' },
-      { path: '/informatica/personas-visitan', title: 'REPORTE VISITAS', ab: 'RV' },
+      { path: '/ingreso', title: 'LISTA DE INGRESO', ab: 'IN' },
+      { path: '/informatica/personas-visitan', title: 'BÚSQUEDA', ab: 'RV' },
       { path: '/informatica/restriccion-visitas', title: 'RESTRICCIÓN DE VISITAS', ab: 'RNV' },
 
     ]

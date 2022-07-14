@@ -8,7 +8,7 @@
     <div class="form-group">
       <label for="codigoBarras">Código de barras:</label>
       <input type="text" name="codigoBarras" id="codigoBarras" class="form-control" [(ngModel)]="codigoBarras"
-        (keyup.enter)="searchVisita()" />
+        (keyup.enter)="searchVisita()" >
     </div>
   </div>
   <div class="col-md-4 mt-2 pt-2">
@@ -19,11 +19,11 @@
 </div>
 <div *ngIf="referencia.tipoPase == 'credencial' || referencia.tipoPase == 'pase'" class="row">
   <div class="col-md-4 text-center">
-    <img src="{{
+    <img alt='' src="{{
         referencia.fotoPerfil
           ? 'data:image/png;base64,' + referencia.fotoPerfil
           : 'assets/img/no_image.png'
-      }}" />
+      }}" >
   </div>
   <div class="col-md-4">
     <div class="form-group">
@@ -42,17 +42,32 @@
       <p>{{ referencia?.edad }}</p>
     </div>
     <div class="form-group">
-      <label for="">Folio de imputado:</label>
-      <p>{{ referencia?.noControlPpl }}</p>
+      <label>Nombre del imputado:</label>
+      <p>{{ referencia?.imputado }}</p>
     </div>
   </div>
 
   <div *ngIf="referencia.fechaEntrada == null" class="col-md-4">
-    <ul class="list-group">
+<!--    <ul class="list-group">
       <li class="list-group-item" *ngFor="let menor of menores; let i = index;" (click)="menor.selected = !menor.selected; menor.selected ? menoresSelected.push(i) : menoresSelected.splice(i, 1);" [ngClass]="{'bg-light': menor.selected}">
         {{menor.nombre}} {{menor.apellidoPaterno}} {{menor.apellidoMaterno}}
       </li>
-    </ul>
+    </ul>-->
+    <div class="ml-3">
+      <div *ngFor="let menor of menores; let i = index;" class="label-size">
+        <input
+          [value]="menor.nombre+' '+menor.apellidoPaterno+' '+menor.apellidoMaterno"
+          [checked]="menor.selected"
+          (change)="onChangeMinor($event)"
+          name="menoresCheckbox"
+          type="checkbox"
+          class="form-check-input">
+        <label style="font-size: 16px!important;"
+        >{{menor.nombre}} {{menor.apellidoPaterno}} {{menor.apellidoMaterno}}</label
+        >
+      </div>
+
+    </div>
 
     <div class="form-group text-center">
       <button class="btn btn-success" type="submit" [disabled]="isLoading" (click)="saveIngresoVisita()">
@@ -61,7 +76,11 @@
     </div>
   </div>
 
-  <div *ngIf="referencia.fechaEntrada != null" class="col-md-4">
+
+
+
+    <div *ngIf="referencia.fechaEntrada != null" class="col-md-4">
+      <p>Menores: {{ referencia?.menoresEntrada }}</p>
     <div class="form-group">
       <label for="">Fecha de entrada:</label>
       <p>{{ referencia?.fechaEntrada | date: "shortDate" }}</p>

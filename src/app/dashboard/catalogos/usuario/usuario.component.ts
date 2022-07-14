@@ -84,8 +84,9 @@ export class UsuarioComponent implements OnInit {
     }
     this.persona.user = this.user;
 
-
+    console.log(this.persona);
     this.catalogosService.saveUsuario(this.persona).subscribe((data: any) => {
+
 
       Swal.fire({
         title: data.error ? 'Error!' : 'Guardado',
@@ -155,9 +156,9 @@ export class UsuarioComponent implements OnInit {
   }
 
   updateUsuario(item, modal) {
-
+    console.log(item);
     this.user = item.user;
-    this.persona = item
+    this.persona = item;
     this.areaSelected = { value: item.area.id, description: item.area.nombre }
 
     this.user.roles = { value: this.user.roles[0].id, description: this.user.roles[0].authority };

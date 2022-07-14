@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RootComponent } from './_root/root.component';
 import {SharedModule} from '@shared/shared.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IngresoRoutingModule} from '@dashboard/ingreso/ingreso-routing.module';
 import { FormularioIngresoComponent } from './formulario-ingreso/formulario-ingreso.component';
 import { ListaIngresoComponent } from './lista-ingreso/lista-ingreso.component';
@@ -41,6 +41,7 @@ import { BusquedaHuellasDetalleComponent } from './busqueda-huellas-detalle/busq
         IngresoRoutingModule,
         FileUploadModule,
         CatalogosModule,
+        ReactiveFormsModule,
     ]
 })
 export class IngresoModule { }

@@ -26,12 +26,11 @@
     <div
       class="collapse navbar-collapse justify-content-end"
       id="collapse"
-      [ngbCollapse]="!isCollapsed"
-    >
+      [ngbCollapse]="!isCollapsed">
+      <div *ngIf="currentUser.roles[0]=='ROLE_SEGURIDAD_INGRESO'" class="mr-5 mt-2">
+        <h4 style="color:black!important;" class="mr-3">{{centroName}}</h4>
+      </div>
       <ul class="navbar-nav">
-        {{
-          currentUser.roles[0]
-        }}
         <select
           *ngIf="
             currentUser.roles[0] === 'ROLE_INFORMATICA' ||

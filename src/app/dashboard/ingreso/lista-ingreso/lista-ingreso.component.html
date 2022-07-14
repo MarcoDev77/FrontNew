@@ -9,6 +9,16 @@
       </div>
       <input type="text" class="form-control" placeholder="Buscar" aria-describedby="basic-addon1"
         [(ngModel)]="criteria" [disabled]="isLoading" (keyup.enter)="getDataWithFilter()">
+      <div class="ml-5 mt-2" *ngIf="roles[0]==='ROLE_INFORMATICA'">
+        <input
+          [(ngModel)]="centro"
+          name="menoresCheckbox"
+          type="checkbox"
+          class="form-check-input">
+        <label style="font-size: 16px!important;"
+        >Buscar en todos los centros</label
+        >
+      </div>
     </div>
   </div>
 
@@ -102,13 +112,14 @@
           &nbsp;
           <i *ngIf="
               roles[0] === 'ROLE_SITE' ||
-              roles[0] === 'ROLE_DACTILOSCOPIA' ||
               roles[0] === 'ROLE_INFORMATICA' ||
               roles[0] === 'ROLE_TRABAJO_SOCIAL'
             " class="fa fa-male" placement="top" ngbTooltip="Referencias" (click)="goTo('referencias', item)"></i>
           &nbsp;
           <i class="fa fa-pencil-square-o" placement="top" ngbTooltip="Situación Jurídica" (click)="goTo('situacion-juridica', item)"></i>&nbsp;
           <i class="fa fa-file-o" ngbTooltip="Reporte de visitas" (click)="generatePDF(view, item.id)" *ngIf="roles[0] === 'ROLE_INFORMATICA'"></i>
+
+          <i class="fa fa-calendar ml-2" ngbTooltip="Reporte de visitas por fecha" (click)="showModalVisitas(visitasModal, item.id)" *ngIf="roles[0] === 'ROLE_INFORMATICA'"></i>
         </td>
       </tr>
 
@@ -181,6 +192,47 @@
     </form>
   </div>
 </ng-template> -->
+
+<ng-template #visitasModal>
+  <div class="modal-body text-center w-100 " data-backdrop="static" >
+    <form [formGroup]="form" (ngSubmit)="save()" autocomplete="off">
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <h5 class="text-center"><strong>Informe de Visitas por Interno</strong></h5>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Fecha de inicio:</label>
+            <input type="date" class="form-control" name="fechaInicio" formControlName="fechaInicio">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Fecha de Fin:</label>
+            <input type="date" class="form-control" name="fechaFin" formControlName="fechaFin">
+          </div>
+        </div>
+        <div class="ml-3 custom-control custom-checkbox">
+          <input
+            formControlName="menores"
+            name="finadoPadre"
+            type="checkbox"
+            class="custom-control-input"
+            id="finadoPadre">
+          <label class="custom-control-label" for="finadoPadre"
+          >Mostrar menores</label
+          >
+        </div>
+        <div class="col-md-12 text-right">
+          <div>
+            <button class="btn btn-danger mr-2" (click)="closeModal()">Cerrar</button>
+            <button class="btn btn-success" [disabled]="form.invalid">Generar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
 
 <ng-template #formModal2 let-formModal>
   <div class="modal-body text-center">

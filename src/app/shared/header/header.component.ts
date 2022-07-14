@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
   public centros: any[];
   public isLoading = false;
   public currentCentro: number;
+  public centroName: string;
 
   constructor(
     location: Location,
@@ -183,11 +184,17 @@ export class HeaderComponent implements OnInit {
 
   getCurrentPersonal() {
     if (this.currentUser.roles[0] === r.superadmin.role) return;
+
     this.authenticationService.getCurrentPersonal().subscribe((data: any) => {
       this.currentPersonal = data;
       this.currentCentro = this.currentPersonal.personal.centroId;
-      this.informationUser.name = this.currentPersonal.personal.nombre
-    })
+      this.informationUser.name = this.currentPersonal.personal.nombre;
+      this.authenticationService.getCentroName(this.currentCentro).subscribe((data: any) =>{
+        console.log(data);
+        this.centroName = data.data.nombre;
+      });
+    });
+
   }
 
   getCentros() {

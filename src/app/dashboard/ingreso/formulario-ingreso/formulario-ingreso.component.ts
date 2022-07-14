@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { catchError, distinctUntilChanged, tap, switchMap } from 'rxjs/operators';
+import {AuthenticationService} from '@shared/services/authentication.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ import { catchError, distinctUntilChanged, tap, switchMap } from 'rxjs/operators
 })
 
 export class FormularioIngresoComponent implements OnInit {
+  public currentUser: any;
   public model: any;
   public p: any;
   public ingreso: Ingreso;
@@ -41,6 +43,7 @@ export class FormularioIngresoComponent implements OnInit {
   public searchFailed = false;
 
   constructor(
+    private authenticationService: AuthenticationService,
     private catalogosService: CatalogosService,
     private router: Router,
     private modalService: NgbModal,
@@ -59,6 +62,7 @@ export class FormularioIngresoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = this.authenticationService.getCurrentUser();
     this.getCatalogos();
   }
 
@@ -100,6 +104,7 @@ export class FormularioIngresoComponent implements OnInit {
       this.ingreso.registroTerminado = ingreso.registroTerminado;
       this.ingreso.imputado.fechaRegistro = this.datePipe.transform(this.ingreso.imputado.fechaRegistro, 'yyyy-MM-dd');
 
+      console.log(this.ingreso);
     });
   }
 

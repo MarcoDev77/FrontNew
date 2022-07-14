@@ -5,6 +5,7 @@ import { IngresoService } from '@shared/services/ingreso.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { AuthenticationService } from '@shared/services/authentication.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-lista-ingreso',
@@ -12,12 +13,14 @@ import { AuthenticationService } from '@shared/services/authentication.service';
   styleUrls: ['./lista-ingreso.component.scss']
 })
 export class ListaIngresoComponent implements OnInit {
+  form: FormGroup;
 
+  private idVisitaImputdao = 0;
   public data: Ingreso[];
   public isLoading = false;
   public filterSearch = '';
   public criteria = '';
-  public roles = []
+  public roles = [];
   // Table attributes
   public p;
   public filter;
@@ -30,7 +33,17 @@ export class ListaIngresoComponent implements OnInit {
 
   public selectedRow: number;
   public setClickedRow: Function;
-  constructor(private router: Router, private ingresoService: IngresoService, private modalService: NgbModal, private authenticationService: AuthenticationService) {
+
+  public centro = false;
+  // tslint:disable-next-line:variable-name
+  constructor(private _formBuilder: FormBuilder, private router: Router, private ingresoService: IngresoService, private modalService: NgbModal, private authenticationService: AuthenticationService) {
+    this.form = this._formBuilder.group({
+      id: [0],
+      menores: [false],
+      fechaInicio: ['', [Validators.required]],
+      fechaFin: ['', [Validators.required]],
+
+    });
     this.data = [];
     const user = this.authenticationService.getCurrentUser()
     this.roles = user.roles;
@@ -57,7 +70,8 @@ export class ListaIngresoComponent implements OnInit {
   // }
 
   ngOnInit() {
-    this.getData();
+    // this.getData();
+    this.getDataWithFilter();
   }
 
   getData() {
@@ -68,19 +82,22 @@ export class ListaIngresoComponent implements OnInit {
   }
 
   getDataWithFilter() {
+    console.log(this.centro);
+    console.log(this.criteria);
     if (this.isLoading) {
       return;
     }
     this.isLoading = true;
-    this.ingresoService.filterBusquedaListaIngresos(this.criteria).subscribe((data: any) => {
+    this.ingresoService.filterBusquedaListaIngresos(this.criteria, this.centro).subscribe((data: any) => {
+        console.log(data);
       this.isLoading = false;
-      Swal.fire({
+/*      Swal.fire({
         title: data.error ? 'Error!' : 'Busqueda',
         text: data.mensaje,
         icon: data.error ? 'error' : 'success',
         timer: 1000,
         showConfirmButton: false
-      });
+      });*/
       if (!data.error) {
         this.data = data.ingresos;
       }
@@ -131,6 +148,11 @@ export class ListaIngresoComponent implements OnInit {
   showModalConfirmFolio(modal) {
     this.modalService.open(modal, { size: 'lg', windowClass: 'modal-primary mt-12' });
   }
+  showModalVisitas(modal, id) {
+    console.log(id);
+    this.idVisitaImputdao = id;
+    this.modalService.open(modal) ;
+  }
 
   generatePDF(modal, id: number) {
     this.isLoading = true;
@@ -138,14 +160,14 @@ export class ListaIngresoComponent implements OnInit {
       this.blobToPdf(data, "Reporte de visitas");
     }, error => {
       this.isLoading = false;
-      Swal.fire({
-        title: 'Error',
-        text: 'Error al generar el archivo',
-        icon: 'error',
-        timer: 1500,
-        showConfirmButton: false
-      });
+    Swal.fire({
+      title: 'Error',
+      text: 'Error al generar el archivo',
+      icon: 'error',
+      timer: 1500,
+      showConfirmButton: false
     });
+  });
   }
 
   blobToPdf(data, name: string) {
@@ -158,5 +180,32 @@ export class ListaIngresoComponent implements OnInit {
     downloadLink.setAttribute("download", name);
     document.body.appendChild(downloadLink);
     downloadLink.click();
+  }
+
+  closeModal() {
+    this.form.reset();
+    this.modalService.dismissAll();
+  }
+
+  save() {
+    this.form.controls.id.setValue(this.idVisitaImputdao);
+    console.log(this.form.value);
+    this.isLoading = true;
+    if (this.form.value.menores == null) {
+      this.form.controls.menores.setValue(false);
+    }
+    this.ingresoService.getVisitasPPL(this.form.value).subscribe((data: any) => {
+      this.blobToPdf(data, 'REPORTE_VISITAS');
+    }, error => {
+      this.isLoading = false;
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al generar el archivo',
+        icon: 'error',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    });
+    this.closeModal();
   }
 }
